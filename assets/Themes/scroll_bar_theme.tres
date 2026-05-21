@@ -1,0 +1,14 @@
+[gd_resource type="Theme" format=3 uid="uid://dkopxykqxg6jl"]
+
+[ext_resource type="StyleBox" uid="uid://daurgoe8xio6l" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture.tres" id="1_jhf7y"]
+[ext_resource type="StyleBox" uid="uid://kccdhpqrwauq" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture_Highlight.tres" id="2_fpbpd"]
+[ext_resource type="StyleBox" uid="uid://i5caf4i4s7ob" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture_Pressed.tres" id="3_rwi2k"]
+[ext_resource type="StyleBox" uid="uid://cyxcweatpwetw" path="res://assets/Themes/ScollBar/scroll_bar_style_box_texture.tres" id="4_fpbpd"]
+
+[resource]
+VScrollBar/constants/padding_left = 12
+VScrollBar/constants/padding_right = 12
+VScrollBar/styles/grabber = ExtResource("1_jhf7y")
+VScrollBar/styles/grabber_highlight = ExtResource("2_fpbpd")
+VScrollBar/styles/grabber_pressed = ExtResource("3_rwi2k")
+VScrollBar/styles/scroll = ExtResource("4_fpbpd")

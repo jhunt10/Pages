@@ -1,12 +1,12 @@
-#@tool
 class_name CombatLogController
-extends Control
+extends BoxContainer
 
 static var Instance:CombatLogController
 
+@export var min_button:TextureButton
+@export var max_button:TextureButton
 @export var entries_container:BoxContainer
 @export var scroll_container:ScrollContainer
-@export var back_patch:BackPatchContainer
 @export var prefab_separator:HSeparator
 @export var prefab_text_box:RichTextLabel
 
@@ -26,7 +26,18 @@ func _ready() -> void:
 		return
 	prefab_separator.hide()
 	prefab_text_box.hide()
+	min_button.pressed.connect(_on_min)
+	max_button.pressed.connect(_on_max)
 
+func _on_min():
+	min_button.hide()
+	max_button.show()
+	scroll_container.hide()
+
+func _on_max():
+	max_button.hide()
+	min_button.show()
+	scroll_container.show()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

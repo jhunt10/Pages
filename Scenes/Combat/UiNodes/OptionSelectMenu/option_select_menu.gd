@@ -6,8 +6,9 @@ signal menu_closed()
 @export var titile_label:Label
 @export var options_container:VBoxContainer
 @export var premade_option_button:OptionSelectButton
+@export var close_button:TextureButton
 @export var cancel_button:Button
-@export var menu_container:BackPatchContainer
+@export var confrim_button:Button
 
 var _selecting_key:String
 var _options_to_show:Array
@@ -19,6 +20,7 @@ var _on_all_options_selected:Callable
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cancel_button.pressed.connect(self.clear_and_hide)
+	close_button.pressed.connect(self.clear_and_hide)
 	premade_option_button.hide()
 
 ## Set a list of OnQueOptionsData to be selected one at a time

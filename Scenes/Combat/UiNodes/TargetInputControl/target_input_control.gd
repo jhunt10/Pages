@@ -1,11 +1,14 @@
 class_name TargetInputControl
 extends Control
 
+signal confirmed
+signal canceled
 
-@export var button:Button
+@export var close_button:TextureButton
+@export var comfirm_button:Button
+@export var cancel_button:Button
 @export var title_label:Label
 @export var target_type_label:Label
-@export var button_label:Label
 @export var unknown_icon_texture:Texture2D
 
 @export var actor_portrait:TextureRect
@@ -24,22 +27,23 @@ extends Control
 
 var target_type:TargetParameters.TargetTypes
 
-
-# Not using signals because UI_States pop in and out. Binding might get messy
-var on_pressed_func
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	page_details.hide()
-	button.pressed.connect(_on_button_pressed)
+	close_button.pressed.connect(_on_cancel_or_close_buttons)
+	cancel_button.pressed.connect(_on_cancel_or_close_buttons)
+	comfirm_button.pressed.connect(_on_confirm_button)
 	page_icon.mouse_entered.connect(show_hover_box)
 	page_icon.mouse_exited.connect(hide_hover_box)
-	pass # Replace with function body.
 
+func _on_cancel_or_close_buttons():
+	canceled.emit()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass
+func _on_confirm_button():
+	confirmed.emit()
+
+func set_confirm_enabled(val:bool):
+	comfirm_button.disabled = !val
 
 func set_title_text(text):
 	title_label.text = text
@@ -82,13 +86,6 @@ func set_actor(actor:BaseActor):
 	y_label.text = ""
 	x_label.add_theme_color_override("font_color", Color.BLACK)
 	y_label.add_theme_color_override("font_color", Color.BLACK)
-
-func set_button_text(text):
-	button_label.text = text
-
-func _on_button_pressed():
-	if on_pressed_func:
-		on_pressed_func.call()
 
 func set_target_coord(coord:Vector2i):
 	if TargetParameters.ActorTargetTypes.has(target_type):

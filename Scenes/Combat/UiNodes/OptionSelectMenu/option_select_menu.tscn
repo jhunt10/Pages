@@ -1,18 +1,19 @@
-[gd_scene load_steps=12 format=3 uid="uid://dqruidykupjgt"]
+[gd_scene format=3 uid="uid://dqruidykupjgt"]
 
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.gd" id="1_pglih"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_x6t3p"]
-[ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="3_57kdw"]
-[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="4_uqdwh"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/ItemSelectionInput/item_selection_button.gd" id="5_b66pi"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_button.gd" id="5_tb60f"]
+[ext_resource type="Script" uid="uid://ctx2on6yyumfe" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.gd" id="1_pglih"]
+[ext_resource type="Script" uid="uid://caiqkp6jfhxj7" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_button.gd" id="5_tb60f"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="6_k6fh0"]
 [ext_resource type="Texture2D" uid="uid://d041ymvcqbc8f" path="res://notes/TemplatePageIcon.png" id="7_k3rnn"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="8_axjxe"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="9_8tr2b"]
-[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="10_c4jt8"]
+[ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="7_tshun"]
+[ext_resource type="Script" uid="uid://d0usmsabrnabv" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="8_axjxe"]
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="8_ru2nv"]
+[ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="9_3dfbb"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="9_8tr2b"]
+[ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="10_7ttvr"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="11_mvdb4"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="12_6bkn7"]
 
-[node name="OptionSelectMenu" type="Control" node_paths=PackedStringArray("titile_label", "options_container", "premade_option_button", "cancel_button", "menu_container")]
+[node name="OptionSelectMenu" type="Control" unique_id=585481039 node_paths=PackedStringArray("titile_label", "options_container", "premade_option_button", "close_button", "cancel_button", "confrim_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,52 +21,99 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pglih")
-titile_label = NodePath("BackPatchContainer/BoxContainer/HBoxContainer/TitleLabel")
-options_container = NodePath("BackPatchContainer/BoxContainer/ScrollContainer/OptionEntriesContainer")
-premade_option_button = NodePath("BackPatchContainer/BoxContainer/OptionButton")
-cancel_button = NodePath("BackPatchContainer/BoxContainer/Cancel Button/Button")
-menu_container = NodePath("BackPatchContainer")
+titile_label = NodePath("CenterContainer/PanelContainer2/VBoxContainer/HBoxContainer/TitleLabel")
+options_container = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ScrollContainer/OptionEntriesContainer")
+premade_option_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/OptionButton")
+close_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/Control/CloseButton")
+cancel_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer/CancelButton")
+confrim_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer/OkButton")
 
-[node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(352, 585)
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1948466789]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="CenterContainer" unique_id=1084273047]
 layout_mode = 2
-offset_left = 400.0
-offset_top = 31.0
-offset_right = 752.0
-offset_bottom = 616.0
-script = ExtResource("2_x6t3p")
-background = NodePath("NinePatchRect")
-inner_container = NodePath("BoxContainer")
-margin_override = 16
-center_in_parent = true
+theme = ExtResource("8_ru2nv")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer2" unique_id=1257019059]
 layout_mode = 2
-texture = ExtResource("3_57kdw")
-patch_margin_left = 48
-patch_margin_top = 48
-patch_margin_right = 48
-patch_margin_bottom = 48
+theme_override_constants/separation = 8
 
-[node name="BoxContainer" type="BoxContainer" parent="BackPatchContainer"]
-layout_mode = 2
-vertical = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="BackPatchContainer/BoxContainer"]
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=743819323]
+custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="BackPatchContainer/BoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer2/VBoxContainer/Control" unique_id=995437799]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("8_ru2nv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../on_que_select.sub"
+
+[node name="CloseButton" type="TextureButton" parent="CenterContainer/PanelContainer2/VBoxContainer/Control" unique_id=286590093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("9_3dfbb")
+texture_pressed = ExtResource("10_7ttvr")
+
+[node name="InfoButton" type="TextureButton" parent="CenterContainer/PanelContainer2/VBoxContainer/Control" unique_id=1295525169]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("11_mvdb4")
+texture_pressed = ExtResource("12_6bkn7")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=648494714]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=1918063555]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_uqdwh")
-theme_override_font_sizes/font_size = 32
-text = "Select Item"
-horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="BackPatchContainer/BoxContainer"]
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=922555838]
+custom_minimum_size = Vector2(290, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("7_tshun")
+theme_override_font_sizes/font_size = 19
+text = "Please select the Item you would like to use with this Page."
+horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="OptionButton" type="Control" parent="BackPatchContainer/BoxContainer" node_paths=PackedStringArray("icon", "button", "highlight")]
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer2/VBoxContainer/HBoxContainer" unique_id=1497742788]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OptionButton" type="Control" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=296672739 node_paths=PackedStringArray("icon", "button", "highlight")]
+visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 script = ExtResource("5_tb60f")
@@ -73,7 +121,7 @@ icon = NodePath("Icon")
 button = NodePath("Button")
 highlight = NodePath("Highlight")
 
-[node name="Highlight" type="TextureRect" parent="BackPatchContainer/BoxContainer/OptionButton"]
+[node name="Highlight" type="TextureRect" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionButton" unique_id=1199463224]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,12 +130,12 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_k6fh0")
 
-[node name="Icon" type="TextureRect" parent="BackPatchContainer/BoxContainer/OptionButton"]
+[node name="Icon" type="TextureRect" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionButton" unique_id=866327932]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 texture = ExtResource("7_k3rnn")
 
-[node name="FitScaleLabel" type="Control" parent="BackPatchContainer/BoxContainer/OptionButton" node_paths=PackedStringArray("label")]
+[node name="FitScaleLabel" type="Control" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionButton" unique_id=1401221403 node_paths=PackedStringArray("label")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +148,7 @@ script = ExtResource("8_axjxe")
 label = NodePath("Label")
 text = "Item Name"
 
-[node name="Label" type="Label" parent="BackPatchContainer/BoxContainer/OptionButton/FitScaleLabel"]
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionButton/FitScaleLabel" unique_id=1720658262]
 layout_mode = 0
 offset_top = 12.0
 offset_right = 172.0
@@ -111,7 +159,7 @@ theme_override_font_sizes/font_size = 32
 text = "Item Name"
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="BackPatchContainer/BoxContainer/OptionButton"]
+[node name="Button" type="Button" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionButton" unique_id=1280471569]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -120,53 +168,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScrollContainer" type="ScrollContainer" parent="BackPatchContainer/BoxContainer"]
-custom_minimum_size = Vector2(0, 400)
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=1603475413]
+custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
+theme = ExtResource("8_ru2nv")
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
 
-[node name="OptionEntriesContainer" type="VBoxContainer" parent="BackPatchContainer/BoxContainer/ScrollContainer"]
+[node name="OptionEntriesContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer2/VBoxContainer/ScrollContainer" unique_id=828116783]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 
-[node name="Cancel Button" type="Control" parent="BackPatchContainer/BoxContainer" node_paths=PackedStringArray("button")]
-custom_minimum_size = Vector2(320, 36)
+[node name="ButtonsContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=1299773834]
 layout_mode = 2
-script = ExtResource("5_b66pi")
-button = NodePath("Button")
 
-[node name="Label" type="Label" parent="BackPatchContainer/BoxContainer/Cancel Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=1405469559]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource("4_uqdwh")
-theme_override_colors/font_color = Color(0.49, 0.39788, 0.3724, 1)
-theme_override_font_sizes/font_size = 24
-text = "Cancel"
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BackPatchContainer/BoxContainer/Cancel Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("10_c4jt8")
-patch_margin_left = 6
-patch_margin_top = 6
-patch_margin_right = 6
-patch_margin_bottom = 6
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=2061223208]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="BackPatchContainer/BoxContainer/Cancel Button"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CancelButton" type="Button" parent="CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=2142163461]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("8_ru2nv")
+text = " Cancel "
+
+[node name="OkButton" type="Button" parent="CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=848218759]
+visible = false
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("8_ru2nv")
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=1453275349]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2

@@ -1,18 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://dpswy5pmd4wu2"]
+[gd_scene format=3 uid="uid://dpswy5pmd4wu2"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/MapSelectionMenu/map_selecction_menu.gd" id="1_loaak"]
+[ext_resource type="Script" uid="uid://dp0oprf6kloly" path="res://Scenes/Menus/MapSelectionMenu/map_selecction_menu.gd" id="1_loaak"]
 [ext_resource type="Texture2D" uid="uid://bwbvifw2c8wlg" path="res://Scenes/Menus/CampMenu/PaperBackground.png" id="2_r5e1x"]
 [ext_resource type="Texture2D" uid="uid://dj3aoohuok4yc" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Big_128_36.png" id="3_dsrjw"]
-[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="4_52n4i"]
-[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="5_bf76b"]
-[ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="6_xysw0"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="4_52n4i"]
+[ext_resource type="Script" uid="uid://dd5xsv3bqcqi2" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="6_xysw0"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="7_bpxch"]
 [ext_resource type="Texture2D" uid="uid://dfs8kxj1rmlga" path="res://Scenes/Menus/MapSelectionMenu/_T_Icon.png" id="8_xqq87"]
 [ext_resource type="Texture2D" uid="uid://baeij3edhokkp" path="res://Scenes/Menus/CampMenu/PrettyPictures/DefaultCampPic.png" id="9_1d1qs"]
 [ext_resource type="Texture2D" uid="uid://cfdd8rgr4n8dd" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_BigFrame_128_36.png" id="10_cmrsr"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="10_tuxgv"]
 [ext_resource type="Texture2D" uid="uid://cejqf0u2igwvw" path="res://assets/Sprites/UI/BackPatches/FancyButtonPatch_64_18.png" id="11_wlare"]
 
-[node name="MapSelectionMenu" type="Control" node_paths=PackedStringArray("premade_option_button", "option_button_container", "description_box", "map_preview_image", "back_button", "explore_button", "color_div")]
+[node name="MapSelectionMenu" type="Control" unique_id=1799839543 node_paths=PackedStringArray("premade_option_button", "option_button_container", "description_box", "map_preview_image", "back_button", "explore_button", "color_div")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +29,7 @@ back_button = NodePath("TitileContainer/BackButton")
 explore_button = NodePath("ExplortButtonBackground/ExploreButton")
 color_div = NodePath("OptionsContainer/ScrollContainer/MainOptionsContainer/ColorDivControl")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1468144420]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,7 +43,7 @@ patch_margin_top = 9
 patch_margin_right = 9
 patch_margin_bottom = 9
 
-[node name="TitileContainer" type="HBoxContainer" parent="."]
+[node name="TitileContainer" type="HBoxContainer" parent="." unique_id=1422760433]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -54,21 +54,21 @@ offset_bottom = 48.0
 grow_horizontal = 2
 theme_override_constants/separation = 2
 
-[node name="TextureRect" type="TextureRect" parent="TitileContainer"]
+[node name="TextureRect" type="TextureRect" parent="TitileContainer" unique_id=1887233168]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(28, 32)
 layout_mode = 2
 texture = ExtResource("8_xqq87")
 stretch_mode = 5
 
-[node name="TitleLabel" type="Label" parent="TitileContainer"]
+[node name="TitleLabel" type="Label" parent="TitileContainer" unique_id=74098351]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_52n4i")
 theme_override_font_sizes/font_size = 32
 text = "he hero returns to..."
 
-[node name="BackButton" type="Control" parent="TitileContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+[node name="BackButton" type="Control" parent="TitileContainer" unique_id=1708278531 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(96, 48)
 layout_mode = 2
 script = ExtResource("6_xysw0")
@@ -78,7 +78,7 @@ highlight = NodePath("TextureRect")
 label = NodePath("TitleLabel")
 text = "Back"
 
-[node name="TextureRect" type="TextureRect" parent="TitileContainer/BackButton"]
+[node name="TextureRect" type="TextureRect" parent="TitileContainer/BackButton" unique_id=394411350]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -87,7 +87,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_bpxch")
 
-[node name="TitleLabel" type="Label" parent="TitileContainer/BackButton"]
+[node name="TitleLabel" type="Label" parent="TitileContainer/BackButton" unique_id=2085980807]
 layout_mode = 0
 offset_right = 120.0
 offset_bottom = 60.0
@@ -96,7 +96,7 @@ theme = ExtResource("4_52n4i")
 theme_override_font_sizes/font_size = 48
 text = "Back"
 
-[node name="ColorRect" type="ColorRect" parent="TitileContainer/BackButton/TitleLabel"]
+[node name="ColorRect" type="ColorRect" parent="TitileContainer/BackButton/TitleLabel" unique_id=1490480418]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = -1
@@ -108,7 +108,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
-[node name="Button" type="Button" parent="TitileContainer/BackButton"]
+[node name="Button" type="Button" parent="TitileContainer/BackButton" unique_id=1931560875]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -119,7 +119,7 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PreviewImageContainer" type="Control" parent="."]
+[node name="PreviewImageContainer" type="Control" parent="." unique_id=1952873580]
 clip_contents = true
 layout_mode = 1
 anchor_right = 0.5
@@ -130,7 +130,7 @@ offset_right = -4.0
 offset_bottom = -4.0
 grow_vertical = 2
 
-[node name="PrettyPictureRect" type="TextureRect" parent="PreviewImageContainer"]
+[node name="PrettyPictureRect" type="TextureRect" parent="PreviewImageContainer" unique_id=2064703591]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,7 +141,7 @@ texture = ExtResource("9_1d1qs")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="PictureBackground" type="NinePatchRect" parent="PreviewImageContainer"]
+[node name="PictureBackground" type="NinePatchRect" parent="PreviewImageContainer" unique_id=1921059001]
 custom_minimum_size = Vector2(0, 180)
 layout_mode = 1
 anchors_preset = 15
@@ -158,7 +158,7 @@ patch_margin_bottom = 36
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="TextBoxBackground" type="NinePatchRect" parent="."]
+[node name="TextBoxBackground" type="NinePatchRect" parent="." unique_id=738930313]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.7
@@ -179,7 +179,7 @@ patch_margin_bottom = 36
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="RichTextLabel" type="RichTextLabel" parent="TextBoxBackground"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TextBoxBackground" unique_id=260332347]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -194,7 +194,7 @@ theme = ExtResource("4_52n4i")
 theme_override_font_sizes/normal_font_size = 32
 text = "What shall our hero do next?"
 
-[node name="OptionsContainer" type="NinePatchRect" parent="."]
+[node name="OptionsContainer" type="NinePatchRect" parent="." unique_id=1493247793]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -215,21 +215,7 @@ patch_margin_bottom = 36
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="ScrollBar" parent="OptionsContainer" node_paths=PackedStringArray("scroll_container") instance=ExtResource("5_bf76b")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 0
-grow_vertical = 2
-scroll_container = NodePath("../ScrollContainer")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="OptionsContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="OptionsContainer" unique_id=661669244]
 clip_contents = false
 layout_mode = 1
 anchors_preset = -1
@@ -237,17 +223,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = 16.0
-offset_right = -48.0
+offset_right = -16.0
 offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("10_tuxgv")
 
-[node name="MainOptionsContainer" type="VBoxContainer" parent="OptionsContainer/ScrollContainer"]
+[node name="MainOptionsContainer" type="VBoxContainer" parent="OptionsContainer/ScrollContainer" unique_id=1334582506]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MapOptionButton" type="Control" parent="OptionsContainer/ScrollContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+[node name="MapOptionButton" type="Control" parent="OptionsContainer/ScrollContainer/MainOptionsContainer" unique_id=1623258019 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
 script = ExtResource("6_xysw0")
@@ -257,7 +244,7 @@ highlight = NodePath("TextureRect")
 label = NodePath("TitleLabel")
 text = "Map Option"
 
-[node name="TextureRect" type="TextureRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton"]
+[node name="TextureRect" type="TextureRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton" unique_id=2099556019]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -266,7 +253,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_bpxch")
 
-[node name="TitleLabel" type="Label" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton"]
+[node name="TitleLabel" type="Label" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton" unique_id=211139612]
 layout_mode = 0
 offset_right = 276.0
 offset_bottom = 60.0
@@ -276,7 +263,7 @@ theme_override_font_sizes/font_size = 48
 text = "           ?????????            "
 horizontal_alignment = 1
 
-[node name="ColorRect" type="ColorRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton/TitleLabel"]
+[node name="ColorRect" type="ColorRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton/TitleLabel" unique_id=926819806]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = -1
@@ -288,7 +275,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
-[node name="Button" type="Button" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton"]
+[node name="Button" type="Button" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/MapOptionButton" unique_id=1556329400]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -299,18 +286,18 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorDivControl" type="Control" parent="OptionsContainer/ScrollContainer/MainOptionsContainer"]
+[node name="ColorDivControl" type="Control" parent="OptionsContainer/ScrollContainer/MainOptionsContainer" unique_id=1271479157]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/ColorDivControl"]
+[node name="ColorRect" type="ColorRect" parent="OptionsContainer/ScrollContainer/MainOptionsContainer/ColorDivControl" unique_id=443867760]
 custom_minimum_size = Vector2(545, 4)
-layout_mode = 2
+layout_mode = 0
 offset_left = -8.0
 offset_right = 492.0
 offset_bottom = 4.0
 color = Color(0.470588, 0, 0, 1)
 
-[node name="ExplortButtonBackground" type="NinePatchRect" parent="."]
+[node name="ExplortButtonBackground" type="NinePatchRect" parent="." unique_id=302573132]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -331,7 +318,7 @@ patch_margin_bottom = 18
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="ExploreButton" type="Control" parent="ExplortButtonBackground" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+[node name="ExploreButton" type="Control" parent="ExplortButtonBackground" unique_id=532048123 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(96, 48)
 layout_mode = 1
 anchors_preset = 15
@@ -347,7 +334,7 @@ label = NodePath("TitleLabel")
 text = "Explore"
 center_x = true
 
-[node name="TextureRect" type="TextureRect" parent="ExplortButtonBackground/ExploreButton"]
+[node name="TextureRect" type="TextureRect" parent="ExplortButtonBackground/ExploreButton" unique_id=2093907471]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -356,7 +343,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_bpxch")
 
-[node name="TitleLabel" type="Label" parent="ExplortButtonBackground/ExploreButton"]
+[node name="TitleLabel" type="Label" parent="ExplortButtonBackground/ExploreButton" unique_id=1260985981]
 layout_mode = 0
 offset_left = 179.0
 offset_top = 24.0
@@ -366,7 +353,7 @@ theme = ExtResource("4_52n4i")
 theme_override_font_sizes/font_size = 48
 text = "Explore"
 
-[node name="ColorRect" type="ColorRect" parent="ExplortButtonBackground/ExploreButton/TitleLabel"]
+[node name="ColorRect" type="ColorRect" parent="ExplortButtonBackground/ExploreButton/TitleLabel" unique_id=406981689]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = -1
@@ -378,7 +365,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
-[node name="Button" type="Button" parent="ExplortButtonBackground/ExploreButton"]
+[node name="Button" type="Button" parent="ExplortButtonBackground/ExploreButton" unique_id=268422341]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

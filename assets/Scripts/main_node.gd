@@ -75,6 +75,14 @@ func start_game():
 	#combat_scene.camera.canvas_layer.add_child(dialog)
 	##open_camp_menu()
 
+func create_confirm_popup(title:String, message:String, on_confirm:Callable, on_cancel:Callable, parent_control:Control = null):
+	var confirm_box:ConfirmPopupBox = load("res://Scenes/Menus/ConfirmPopupBox/confirm_popup_box.tscn").instantiate()
+	confirm_box.set_confirm_data(title, message, on_confirm, on_cancel)
+	if parent_control:
+		parent_control.add_child(confirm_box)
+	else:
+		self.add_child(confirm_box)
+
 func open_save_menu():
 	var save_scene:SaveLoadMenu = load("res://Scenes/Menus/SaveLoadMenu/save_load_menu.tscn").instantiate()
 	save_scene.save_mode = true
@@ -153,7 +161,7 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 		#actor = ActorLibrary.create_actor("TestActor", {})
 	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
 	charsheet.scale_control.scale = Vector2(1, 1)
-	charsheet.scale_control.scale = Vector2(1.25,1.25)
+	#charsheet.scale_control.scale = Vector2(1.25,1.25)
 	if parent_node:
 		parent_node.add_child(charsheet)
 	else:

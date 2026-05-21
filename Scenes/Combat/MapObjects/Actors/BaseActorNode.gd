@@ -429,3 +429,24 @@ func set_path_arrow_pos(pos:MapPos):
 	if pos.dir == 1: path_arrow.set_rotation_degrees(90) 
 	if pos.dir == 2: path_arrow.set_rotation_degrees(180) 
 	if pos.dir == 3: path_arrow.set_rotation_degrees(270) 
+
+##############################
+##		Get Positions
+##############################
+func get_screen_position()->Vector2:
+	return self.get_global_transform_with_canvas().get_origin()
+
+func get_top_of_head_screen_position()->Vector2:
+	var trans = actor_sprite.get_global_transform_with_canvas()
+	var sprite_bounds = actor_sprite.get_sprite_bounds()
+	var sprite_center = actor_sprite.get_sprite_center()
+	var top_offset = (sprite_center.y) - (sprite_bounds.size.y / 2)
+	var trans2 = trans.translated_local(Vector2(0, top_offset))
+	return trans2.origin
+	
+	
+	
+	
+	
+	
+	

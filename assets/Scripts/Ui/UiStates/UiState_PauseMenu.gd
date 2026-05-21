@@ -12,7 +12,7 @@ func start_state():
 	#if not CombatUiControl.Instance.visible:
 		#CombatUiControl.Instance.show()
 	if _logging: print("Start UiState: PauseMenu")
-	
+	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Pause")
 	CombatRootControl.pause_combat()
 	CombatUiControl.Instance.pause_menu.visible = true
 	pass

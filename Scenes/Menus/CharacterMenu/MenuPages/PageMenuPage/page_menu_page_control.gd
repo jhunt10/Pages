@@ -8,8 +8,9 @@ extends BaseCharacterSubMenu
 @export var premade_page_set:PageSlotSetContainer
 @export var sets_container:VBoxContainer
 @export var premade_page_button:PageSlotButton
+@export var left_padding:Separator
+@export var scroll_container:ScrollContainer
 @export var slot_width:int 
-@export var scroll_bar:CustScrollBar
 
 
 @export var name_label:Label
@@ -25,20 +26,24 @@ func _ready() -> void:
 	#premade_sub_container.visible = false
 	premade_page_set.hide()
 	#title_label._size_dirty = true
+	var scroll_bar = scroll_container.get_v_scroll_bar()
+	scroll_bar.visibility_changed.connect(_on_scroll_visibility_change)
+
+func _on_scroll_visibility_change():
+	var scroll_bar = scroll_container.get_v_scroll_bar()
+	if scroll_bar.visible:
+		left_padding.hide()
+	else:
+		left_padding.show()
 
 func get_item_holder()->BaseItemHolder:
 	if _actor:
 		return _actor.pages
 	return null
 
-func show_menu_page():
-	super()
-	scroll_bar.calc_bar_size()
-
 func sync():
 	if _actor:
 		name_label.text = _actor.get_display_name()
-		level_label.text = "TEST"#str(int(_actor.stats.get_stat(StatHelper.Level, 0)))
 		exp_bar.set_actor(_actor)
 	super()
 

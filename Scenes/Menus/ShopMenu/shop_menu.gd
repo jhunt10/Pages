@@ -6,12 +6,12 @@ enum SpeakerSubjects {Greeting, Buying, Selling, ConfirmBuy, BuySuccess, BuyCanc
 
 @export var dialog_box:DialogBox
 @export var item_menu_controller:ShopItemMenuController
-@export var scroll_bar:CustScrollBar
 @export var details_card_spawn_point:Control
 @export var confirm_popup:ShopConfirmPopUp
 @export var buy_button:Button
 @export var sell_button:Button
 @export var close_button:Button
+@export var scroll_container:ScrollContainer
 
 var _current_details_card
 var _state:States
@@ -36,8 +36,6 @@ func _ready() -> void:
 func _on_load_screen_gone():
 	load_greeting()
 
-func _process(_delta: float) -> void:
-	scroll_bar.calc_bar_size()
 
 func close_menu():
 	MainRootNode.Instance.open_camp_menu()
@@ -109,7 +107,7 @@ func get_shop_data()->Dictionary:
 	}
 
 func _on_catagory_selected(sub_list:ShopSubItemList):
-	scroll_bar.scroll_container.ensure_control_visible(sub_list)
+	scroll_container.ensure_control_visible(sub_list)
 
 func _on_item_button_pressed(item_key):
 	if _state == States.Buy:

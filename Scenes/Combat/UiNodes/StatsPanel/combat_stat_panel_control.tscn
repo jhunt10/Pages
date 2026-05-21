@@ -1,63 +1,60 @@
-[gd_scene load_steps=13 format=3 uid="uid://cyakkk5i1nreg"]
+[gd_scene format=3 uid="uid://cyakkk5i1nreg"]
 
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_panel_control.gd" id="1_mnhn6"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_or0gt"]
+[ext_resource type="Script" uid="uid://cgkbv5u6jva1a" path="res://Scenes/Combat/UiNodes/StatsPanel/stat_panel_control.gd" id="1_mnhn6"]
+[ext_resource type="Theme" uid="uid://qsca7lvb1a68" path="res://assets/Themes/ComputerPanels/combat_panel_theme.tres" id="2_dqj7t"]
+[ext_resource type="Texture2D" uid="uid://dc5wy6j8a4hu3" path="res://assets/Themes/CombatUi/PortraitRect.png" id="3_3xrn2"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="3_mbhkk"]
 [ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="4_lfhmk"]
 [ext_resource type="PackedScene" uid="uid://cjfwi0pnjh7y6" path="res://Scenes/Combat/UiNodes/StatsPanel/health_bar_control.tscn" id="5_iao52"]
 [ext_resource type="Texture2D" uid="uid://dj6l261cuh2hj" path="res://Scenes/Combat/UiNodes/StatsPanel/BuffBackground.png" id="7_ow4ab"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_xlcc4"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_icon_control.gd" id="8_6sy3m"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="7_xlcc4"]
+[ext_resource type="Script" uid="uid://ci77vt452i6uk" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_icon_control.gd" id="8_6sy3m"]
 [ext_resource type="Texture2D" uid="uid://c56f4fi1dxjyo" path="res://Scenes/Combat/UiNodes/StatsPanel/BaneBackground.png" id="8_ayfcx"]
 [ext_resource type="Texture2D" uid="uid://cmqlh7kaay8qg" path="res://Scenes/Combat/UiNodes/StatsPanel/EffectBackground.png" id="9_ejl1u"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_description_box.gd" id="10_7hami"]
-[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="11_ptagv"]
+[ext_resource type="Script" uid="uid://qi376y8t3rep" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_description_box.gd" id="10_7hami"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="11_ptagv"]
 
-[node name="StatPanelControl" type="VBoxContainer" node_paths=PackedStringArray("button", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon", "npc_index_label")]
+[node name="StatPanelControl" type="VBoxContainer" unique_id=2045825563 node_paths=PackedStringArray("panel", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon", "npc_index_label")]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 1
 script = ExtResource("1_mnhn6")
-button = NodePath("BackPatchContainer/Button")
-portrait_texture_rect = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect")
-main_container = NodePath("BackPatchContainer/VBoxContainer")
-health_bar = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthBarControl")
-bars_container = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer")
+panel = NodePath("PanelContainer")
+portrait_texture_rect = NodePath("PanelContainer/VBoxContainer/HBoxContainer/TextureRect/PortaitTextureRect")
+main_container = NodePath("PanelContainer/VBoxContainer")
+health_bar = NodePath("PanelContainer/VBoxContainer/HBoxContainer/StatBarContainer/HealthBarControl")
+bars_container = NodePath("PanelContainer/VBoxContainer/HBoxContainer/StatBarContainer")
 effect_icon_box = NodePath("IconBoxContainer")
 premade_effect_icon = NodePath("EffectIconControl")
-npc_index_label = NodePath("BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect/IndexLabel")
+npc_index_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/TextureRect/PortaitTextureRect/IndexLabel")
 
-[node name="BackPatchContainer" type="Container" parent="." node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(176, 44)
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1523677901]
 layout_mode = 2
-script = ExtResource("2_or0gt")
-background = NodePath("Background")
-inner_container = NodePath("VBoxContainer")
-margin_override = 6
+theme = ExtResource("2_dqj7t")
 
-[node name="Background" type="NinePatchRect" parent="BackPatchContainer"]
-layout_mode = 2
-texture = ExtResource("3_mbhkk")
-region_rect = Rect2(0, 0, 64, 64)
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
-
-[node name="VBoxContainer" type="VBoxContainer" parent="BackPatchContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=2018149375]
 layout_mode = 2
 theme_override_constants/separation = 8
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BackPatchContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1964061772]
 layout_mode = 2
 
-[node name="PortaitTextureRect" type="TextureRect" parent="BackPatchContainer/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=752403629]
+layout_mode = 2
+texture = ExtResource("3_3xrn2")
+
+[node name="PortaitTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/TextureRect" unique_id=47937761]
 custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 33.0
+offset_bottom = 33.0
 texture = ExtResource("4_lfhmk")
-stretch_mode = 2
+stretch_mode = 4
 
-[node name="IndexLabel" type="Label" parent="BackPatchContainer/VBoxContainer/HBoxContainer/PortaitTextureRect"]
+[node name="IndexLabel" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer/TextureRect/PortaitTextureRect" unique_id=2133830059]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,18 +70,17 @@ text = "A"
 horizontal_alignment = 2
 vertical_alignment = 2
 
-[node name="StatBarContainer" type="VBoxContainer" parent="BackPatchContainer/VBoxContainer/HBoxContainer"]
+[node name="StatBarContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1270747933]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
+alignment = 1
 
-[node name="HealthBarControl" parent="BackPatchContainer/VBoxContainer/HBoxContainer/StatBarContainer" instance=ExtResource("5_iao52")]
+[node name="HealthBarControl" parent="PanelContainer/VBoxContainer/HBoxContainer/StatBarContainer" unique_id=659917079 instance=ExtResource("5_iao52")]
 layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
 
-[node name="Button" type="Button" parent="BackPatchContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-
-[node name="EffectIconControl" type="Control" parent="." node_paths=PackedStringArray("background", "effect_icon", "count_label", "description_box")]
+[node name="EffectIconControl" type="Control" parent="." unique_id=1209957324 node_paths=PackedStringArray("background", "effect_icon", "count_label", "description_box")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -97,7 +93,7 @@ description_box = NodePath("Icon/DescriptionBox")
 buff_background_texture = ExtResource("7_ow4ab")
 bane_background_texture = ExtResource("8_ayfcx")
 
-[node name="Background" type="TextureRect" parent="EffectIconControl"]
+[node name="Background" type="TextureRect" parent="EffectIconControl" unique_id=1586539548]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -107,7 +103,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("9_ejl1u")
 
-[node name="Icon" type="TextureRect" parent="EffectIconControl"]
+[node name="Icon" type="TextureRect" parent="EffectIconControl" unique_id=809284842]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -118,11 +114,11 @@ grow_vertical = 2
 texture = ExtResource("9_ejl1u")
 expand_mode = 1
 
-[node name="DescriptionBox" type="Container" parent="EffectIconControl/Icon" node_paths=PackedStringArray("name_label", "duration_label", "duration_container", "duration_type_label", "description_label", "background", "inner_container")]
+[node name="DescriptionBox" type="Container" parent="EffectIconControl/Icon" unique_id=729008095 node_paths=PackedStringArray("name_label", "duration_label", "duration_container", "duration_type_label", "description_label", "background", "inner_container")]
 visible = false
 z_index = 25
 custom_minimum_size = Vector2(199, 79)
-layout_mode = 2
+layout_mode = 0
 offset_top = 34.0
 offset_right = 199.0
 offset_bottom = 113.0
@@ -135,7 +131,7 @@ description_label = NodePath("BoxContainer/RichTextLabel")
 background = NodePath("Background")
 inner_container = NodePath("BoxContainer")
 
-[node name="Background" type="NinePatchRect" parent="EffectIconControl/Icon/DescriptionBox"]
+[node name="Background" type="NinePatchRect" parent="EffectIconControl/Icon/DescriptionBox" unique_id=891048667]
 layout_mode = 2
 texture = ExtResource("3_mbhkk")
 region_rect = Rect2(0, 0, 64, 64)
@@ -144,38 +140,38 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="BoxContainer" type="BoxContainer" parent="EffectIconControl/Icon/DescriptionBox"]
+[node name="BoxContainer" type="BoxContainer" parent="EffectIconControl/Icon/DescriptionBox" unique_id=664100966]
 layout_mode = 2
 vertical = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer" unique_id=742586770]
 layout_mode = 2
 
-[node name="NameLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+[node name="NameLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer" unique_id=2114221932]
 layout_mode = 2
 theme = ExtResource("11_ptagv")
 text = "Buff Name"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer" unique_id=1839779741]
 layout_mode = 2
 
-[node name="SpacerLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer"]
+[node name="SpacerLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer" unique_id=702880216]
 layout_mode = 2
 theme = ExtResource("11_ptagv")
 text = ":  "
 
-[node name="DurationLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer"]
+[node name="DurationLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer" unique_id=1376135088]
 layout_mode = 2
 theme = ExtResource("11_ptagv")
 text = "XX"
 
-[node name="DurationTypeLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer"]
+[node name="DurationTypeLabel" type="Label" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer/HBoxContainer/HBoxContainer" unique_id=575080125]
 custom_minimum_size = Vector2(19, 17)
 layout_mode = 2
 theme = ExtResource("11_ptagv")
 text = "Turns"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="EffectIconControl/Icon/DescriptionBox/BoxContainer" unique_id=1193032635]
 custom_minimum_size = Vector2(152, 0)
 layout_mode = 2
 theme = ExtResource("11_ptagv")
@@ -183,7 +179,7 @@ theme_override_font_sizes/normal_font_size = 16
 text = "Buff Effect Description Deal"
 fit_content = true
 
-[node name="Label" type="Label" parent="EffectIconControl"]
+[node name="Label" type="Label" parent="EffectIconControl" unique_id=1352400344]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 1
 z_as_relative = false
@@ -207,5 +203,5 @@ horizontal_alignment = 2
 vertical_alignment = 2
 justification_flags = 128
 
-[node name="IconBoxContainer" type="HBoxContainer" parent="."]
+[node name="IconBoxContainer" type="HBoxContainer" parent="." unique_id=1000595864]
 layout_mode = 2

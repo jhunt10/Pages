@@ -1,12 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c20lud2px2apo"]
+[gd_scene format=3 uid="uid://c20lud2px2apo"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/supplies_menu_item_slot_button.gd" id="1_celf4"]
+[ext_resource type="Script" uid="uid://7myby4q4qaak" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/supplies_menu_item_slot_button.gd" id="1_celf4"]
 [ext_resource type="Texture2D" uid="uid://cp5akpqbgypog" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/BagItemSlotBackground_Single.png" id="2_utipe"]
 [ext_resource type="Texture2D" uid="uid://bol6kpkqd31hg" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/BagItemSlotBackground_Top.png" id="3_mtufn"]
 [ext_resource type="Texture2D" uid="uid://vu3ywikrdx3o" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/BagItemSlotBackground_Middle.png" id="4_wa24k"]
 [ext_resource type="Texture2D" uid="uid://djsuny4df1lpu" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/BagItemSlotBackground_Bottom.png" id="5_yvs8d"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="6_av3tb"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_38v7b"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="7_38v7b"]
 
 [node name="SuppliesItemSlotButton" type="Control" node_paths=PackedStringArray("highlight", "background", "label", "button", "highlight_background_rect", "item_icon_rect", "default_icon_rect")]
 custom_minimum_size = Vector2(128, 36)

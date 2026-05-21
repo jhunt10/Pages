@@ -7,11 +7,11 @@ var camera:MoveableCamera2D:
 
 @export var game_over_screen:GameOverScreen
 @export var victory_screen:GameVictoryScreen
-@export var menu_container:CenterContainer
 @export var menu_button:TextureButton 
 @export var book_button:TextureButton 
 @export var pause_menu:PauseMenuControl 
-
+@export var actor_pointer:ActorPointerControl
+@export var active_combat_control:Control
 @export var target_input_display:TargetInputControl
 @export var player_stats_panels_container:BoxContainer
 @export var que_input:QueInputControl
@@ -20,7 +20,7 @@ var que_display:QueInputDisplayControl:
 		if que_input:
 			return que_input.que_display_control
 		return null
-@export var que_collection_display:QueCollectionControl
+@export var combat_control_panel:CombatControlPanel
 @export var stats_collection_display:StatCollectionDisplayControl
 @export var option_select_menu:OptionSelectMenu
 @export var drop_message_control:DropMessageControl
@@ -39,8 +39,9 @@ func _ready() -> void:
 		#self.queue_free()
 		#return
 	Instance = self
-	menu_button.pressed.connect(_on_menu_pressed)
-	book_button.pressed.connect(_on_book_pressed)
+	if combat_control_panel:
+		combat_control_panel.menu_button_pressed.connect(_on_menu_pressed)
+		combat_control_panel.book_button_pressed.connect(_on_book_pressed)
 	target_input_display.hide()
 	game_over_screen.hide()
 	victory_screen.hide()
@@ -67,7 +68,7 @@ func build_player_stats_panels():
 		var new_panel:StatPanelControl = load("res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn").instantiate()
 		new_panel.set_actor(actor)
 		player_stats_panels_container.add_child(new_panel)
-		new_panel.button.pressed.connect(on_player_stat_clicked.bind(index))
+		new_panel.pressed.connect(on_player_stat_clicked.bind(index))
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -120,8 +121,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				#var mouse_pos = 
 		
 func _on_menu_pressed():
-	ui_state_controller.set_ui_state(UiStateController.UiStates.PauseMenu)
+	if not ui_state_controller.current_ui_state is UiState_PauseMenu:
+		ui_state_controller.set_ui_state(UiStateController.UiStates.PauseMenu)
 
 func _on_book_pressed():
-	ui_state_controller.set_ui_state(UiStateController.UiStates.CharacterSheet)
+	# Ui States can only go one level deep. So opening book when combat is paused will delete combat state.
+	if not ui_state_controller.current_ui_state is UiState_PauseMenu:
+		ui_state_controller.set_ui_state(UiStateController.UiStates.CharacterSheet)
 	

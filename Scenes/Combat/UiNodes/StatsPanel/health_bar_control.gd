@@ -50,17 +50,21 @@ func set_actor(actor:BaseActor):
 		_sync()
 	_actor.stats.health_changed.connect(_sync)
 	#_actor.turn_ended.connect(on_turn_end)
-	CombatRootControl.Instance.QueController.end_of_turn.connect(on_turn_end)
+	CombatRootControl.Instance.QueController.end_of_turn_post_actors.connect(on_turn_end)
 	
 func _process(delta: float) -> void:
 	if !full_bar or !_actor:
 		return
 	
 	if not _hold_for_change:
-		animate_bars_changing(delta)
+		if _change_timer > 0:
+			_change_timer -= delta
+		if _change_timer <= 0:
+			animate_bars_changing(delta)
 
 func on_turn_end():
 	_hold_for_change = false
+	_change_timer = change_delay
 
 func animate_bars_changing(delta:float):
 	var _current_value = _actor.stats.current_health

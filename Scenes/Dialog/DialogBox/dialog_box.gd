@@ -17,7 +17,6 @@ signal question_answered(choice:String)
 @export var speaker_container:VBoxContainer
 @export var speaker_portrait:TextureRect
 @export var speaker_label:Label
-@export var scroll_bar:CustScrollBar
 @export var entry_contaier:VBoxContainer
 @export var scroll_contaier:ScrollContainer
 
@@ -128,8 +127,6 @@ func _handle_entry(entry_data:Dictionary, raw_delta, remaining_delta)->bool:
 				if child == hidden_text_edit: continue
 				if child == premade_compound_label: continue
 				child.queue_free()
-		scroll_bar.calc_bar_size()
-		scroll_bar.hide()
 		_delay_timer = -1
 		return true
 		
@@ -422,12 +419,10 @@ func _handle_special_command(command:String):
 
 func _update_scrolling():
 	if entry_contaier.size.y > scroll_contaier.size.y:
-		scroll_bar.show()
-		scroll_contaier.scroll_vertical = entry_contaier.size.y - scroll_contaier.size.y
-		scroll_bar.calc_bar_size()
-		scroll_bar.set_scroll_bar_percent(100)
+		scroll_contaier.scroll_vertical = floori(entry_contaier.size.y - scroll_contaier.size.y)
+		#var scroll_bar = scroll_contaier.get_v_scroll_bar()
+		#scroll_bar.set_scroll_bar_percent(100)
 	else:
-		scroll_bar.hide()
 		scroll_contaier.scroll_vertical = 0
 
 var _selected_question_key

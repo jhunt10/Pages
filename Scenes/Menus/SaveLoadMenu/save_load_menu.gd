@@ -9,7 +9,6 @@ const NEW_SAVE_KEY = "@@NEW_SAVE@@"
 
 @export var scale_control:Control
 @export var close_button:Button
-@export var scroll_bar:CustScrollBar
 @export var menu_title_label:Label
 @export var premade_save_slot:SaveSlotContainer
 @export var save_slot_new:SaveSlotContainer
@@ -172,7 +171,6 @@ func read_existing_saves():
 		if save_name == NEW_SAVE_KEY:
 			continue
 		create_save_slot_container(save_name, _cached_save_meta_data[save_name])
-	scroll_bar.calc_bar_size()
 
 func create_save_slot_container(save_id:String, save_data:Dictionary):
 	var save_date = save_data.get("SaveDate", "")

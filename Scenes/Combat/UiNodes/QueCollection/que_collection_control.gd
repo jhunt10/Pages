@@ -1,7 +1,11 @@
 class_name QueCollectionControl
-extends BackPatchContainer
+extends VBoxContainer
+
+@export var max_ques_to_display:int = 8
+
 
 @export var ques_container:Container
+@export var ques_scroll_container:ScrollContainer
 @export var color_bar:ColorRect
 @export var premade_que_container:QueCollection_QueDisplayContainer
 
@@ -11,24 +15,23 @@ var _show_ai:bool = false
 
 var _ques:Dictionary = {}
 
+var _que_display_container_hight = 40
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	super()
 	if Engine.is_editor_hint(): return
-	color_bar.hide()
+	#color_bar.hide()
 	premade_que_container.hide()
 	CombatRootControl.QueController.que_ordering_changed.connect(_build_que_displays)
 	CombatRootControl.QueController.que_marked_as_dead.connect(on_que_death)
 	CombatRootControl.QueController.start_of_frame.connect(_on_frame_start)
-	CombatRootControl.QueController.end_of_round.connect(color_bar.hide)
+	CombatRootControl.QueController.end_of_round.connect(_on_round_end)
 	if toggle_ai_sloots_button:
 		toggle_ai_sloots_button.pressed.connect(_toggle_ai_display)
+	_que_display_container_hight = premade_que_container.size.y
 	_build_que_displays()
-	pass # Replace with function body.
 
-func _process(delta: float) -> void:
-	super(delta)
-
+	
 func _toggle_ai_display():
 	_show_ai = !_show_ai
 	for que:QueCollection_QueDisplayContainer in _ques:
@@ -61,6 +64,8 @@ func _build_que_displays():
 	
 	for old_que in old_ques.values():
 		old_que.queue_free()
+	
+	ques_scroll_container.custom_minimum_size.y = (_que_display_container_hight * mini(_ques.size(), max_ques_to_display)) + 6
 
 func on_que_death(que_id:String):
 	var que_display = _ques.get(que_id, null)
@@ -72,16 +77,21 @@ func _on_frame_start():
 	if _ques.size() == 0:
 		return
 	# set bar position
-	if !color_bar.visible:
-		color_bar.show()
-	var first_que:QueCollection_QueDisplayContainer  = _ques.values()[0]
-	var icon_width = first_que._slots[0].size.x
-	var gap = first_que.slots_container.get_theme_constant('separation')
-	var start_x = first_que.slots_container.position.x
+	#if !color_bar.visible:
+		#color_bar.show()
+	#var first_que:QueCollection_QueDisplayContainer  = _ques.values()[0]
+	#var icon_width = first_que._slots[0].size.x
+	#var gap = first_que.slots_container.get_theme_constant('separation')
+	#var start_x = first_que.slots_container.position.x
 	#var end_x = first_que.slots_container.position.x + (first_que.slots_container.get_children().size() * (icon_width + gap)) - gap
-	var x = start_x
-	x += (icon_width + gap) * CombatRootControl.Instance.QueController.action_index
-	x += (icon_width+gap) * CombatRootControl.Instance.QueController.sub_action_index / ActionQueController.FRAMES_PER_ACTION
+	
+	#var x = start_x
+	#x += (icon_width + gap) * CombatRootControl.Instance.QueController.action_index
+	#x += (icon_width+gap) * CombatRootControl.Instance.QueController.sub_action_index / ActionQueController.FRAMES_PER_ACTION
 	#print("QueQueBar: S|W|G: %s|%s|%s   Frame|Turn: %s|%s   X: %s " %[start_x, icon_width, gap, CombatRootControl.Instance.QueController.sub_action_index, CombatRootControl.Instance.QueController.action_index, x])
-	color_bar.position = Vector2i(x, inner_container.position.y)
-	color_bar.size.y = inner_container.size.y
+	#color_bar.position = Vector2i(x, inner_container.position.y)
+	#color_bar.size.y = inner_container.size.y
+
+func _on_round_end():
+	#color_bar.hide()
+	pass

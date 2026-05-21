@@ -1,13 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bjatwk3wdws0y"]
+[gd_scene format=3 uid="uid://bjatwk3wdws0y"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/supplies_menu_page_control.gd" id="1_vicjx"]
+[ext_resource type="Script" uid="uid://yyj30i7etd7p" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/supplies_menu_page_control.gd" id="1_vicjx"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_xbv06"]
 [ext_resource type="Texture2D" uid="uid://e0f7tq3irfca" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/OldSprites/TtitleBackground.png" id="3_rlvdq"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="5_46bmm"]
-[ext_resource type="Script" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/sub_bag_container.gd" id="6_ilfwf"]
-[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="9_7rh0g"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="5_46bmm"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="6_66o2j"]
+[ext_resource type="Script" uid="uid://7sypq2t3ieqx" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/sub_bag_container.gd" id="6_ilfwf"]
 
-[node name="BagPage" type="Control" node_paths=PackedStringArray("name_label", "bag_icon", "premade_sub_container", "sub_container", "scroll_bar")]
+[node name="BagPage" type="Control" unique_id=640078913 node_paths=PackedStringArray("name_label", "bag_icon", "premade_sub_container", "sub_container")]
 custom_minimum_size = Vector2(280, 395)
 layout_mode = 3
 anchors_preset = 0
@@ -18,9 +18,8 @@ name_label = NodePath("VBoxContainer/TitleRect/NameLabel")
 bag_icon = NodePath("VBoxContainer/TitleRect/IconRect")
 premade_sub_container = NodePath("VBoxContainer/SubBagContainer")
 sub_container = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/VBoxContainer")
-scroll_bar = NodePath("VBoxContainer/HBoxContainer/ScrollBar")
 
-[node name="Background" type="NinePatchRect" parent="."]
+[node name="Background" type="NinePatchRect" parent="." unique_id=1952518474]
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -38,7 +37,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background" unique_id=318759290]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -50,13 +49,13 @@ offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/VBoxContainer" unique_id=1093017612]
 layout_mode = 2
 
-[node name="FlowContainer" type="FlowContainer" parent="Background/VBoxContainer/VBoxContainer"]
+[node name="FlowContainer" type="FlowContainer" parent="Background/VBoxContainer/VBoxContainer" unique_id=1650884456]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1780633913]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -64,18 +63,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleRect" type="TextureRect" parent="VBoxContainer"]
+[node name="TitleRect" type="TextureRect" parent="VBoxContainer" unique_id=1404158556]
 layout_mode = 2
 texture = ExtResource("3_rlvdq")
 
-[node name="IconRect" type="TextureRect" parent="VBoxContainer/TitleRect"]
+[node name="IconRect" type="TextureRect" parent="VBoxContainer/TitleRect" unique_id=670542114]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_top = 1.0
 offset_right = 64.0
 offset_bottom = 65.0
 
-[node name="NameLabel" type="Label" parent="VBoxContainer/TitleRect"]
+[node name="NameLabel" type="Label" parent="VBoxContainer/TitleRect" unique_id=841484878]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -89,14 +88,14 @@ text = "Book Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SubBagContainer" type="VBoxContainer" parent="VBoxContainer" node_paths=PackedStringArray("title_label")]
+[node name="SubBagContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=787792717 node_paths=PackedStringArray("title_label")]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("6_ilfwf")
 title_label = NodePath("Label")
 
-[node name="Label" type="Label" parent="VBoxContainer/SubBagContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/SubBagContainer" unique_id=1996139343]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("5_46bmm")
@@ -104,20 +103,16 @@ theme_override_font_sizes/font_size = 24
 text = "Class Pages"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=535312402]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer" unique_id=1808422353]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("6_66o2j")
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer" unique_id=1270535261]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="ScrollBar" parent="VBoxContainer/HBoxContainer" node_paths=PackedStringArray("scroll_container") instance=ExtResource("9_7rh0g")]
-layout_mode = 2
-scroll_container = NodePath("../ScrollContainer")

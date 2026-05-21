@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0oob60ijrf8"]
+[gd_scene format=3 uid="uid://d0oob60ijrf8"]
 
-[ext_resource type="Script" path="res://Scenes/Dialog/DialogTextInput/dialog_text_input.gd" id="1_hlrp0"]
+[ext_resource type="Script" uid="uid://cem4c3qcaki0c" path="res://Scenes/Dialog/DialogTextInput/dialog_text_input.gd" id="1_hlrp0"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="2_hpjmc"]
-[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="3_nn4wx"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="3_nn4wx"]
 [ext_resource type="Texture2D" uid="uid://dul8y1l1gw420" path="res://assets/Sprites/UI/BackPatches/Patch_32_8_Dark.png" id="4_du7mv"]
-[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="5_pdewl"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="5_pdewl"]
 
 [node name="DialogTextInputControl" type="Control" node_paths=PackedStringArray("card_patch", "box_container", "title_label", "line_edit", "confirm_button")]
 layout_mode = 3

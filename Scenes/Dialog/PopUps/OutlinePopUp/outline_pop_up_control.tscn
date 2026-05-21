@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://d34va3btgyawv"]
+[gd_scene format=3 uid="uid://d34va3btgyawv"]
 
-[ext_resource type="Script" path="res://Scenes/Dialog/PopUps/outline_pop_up_control.gd" id="1_wnjes"]
+[ext_resource type="Script" uid="uid://0j26cuctosxy" path="res://Scenes/Dialog/PopUps/outline_pop_up_control.gd" id="1_wnjes"]
 [ext_resource type="Texture2D" uid="uid://co50bgo6jm2hv" path="res://Scenes/Dialog/PopUps/OutlinePopUp/FancyOutline_BackPatch_Big_128_36.png" id="2_rbmo7"]
 [ext_resource type="Texture2D" uid="uid://bjn5twwdgt6k4" path="res://Scenes/Dialog/PopUps/OutlinePopUp/SolidLinePatch_64_8.png" id="2_v1lpo"]
 [ext_resource type="Texture2D" uid="uid://cdx22n82nog8i" path="res://Scenes/Dialog/PopUps/OutlinePopUp/DottedPatch_64_8.png" id="2_vmoqd"]
 [ext_resource type="Texture2D" uid="uid://brs3cugoogpf0" path="res://Scenes/Dialog/PopUps/OutlinePopUp/FancyOutlineShadowed_BackPatch_Big_128_36.png" id="3_j0htr"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="5_l71lp"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="5_l71lp"]
 
 [node name="OutlinePopUpControl" type="Control" node_paths=PackedStringArray("outline_patch", "shadow_rect_left", "shadow_rect_right", "shadow_rect_top", "shadow_rect_bot", "click_label", "button")]
 layout_mode = 3

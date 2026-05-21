@@ -14,7 +14,9 @@ static func _get_on_que_options(_parent_action:PageItemAction, _subaction_data:D
 		var queed_item = turn_data.on_que_data.get("SelectedItemId", "")
 		if queed_item:
 			queued_items.append(queed_item)
-	var options = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", [], [], [])
+	# TODO: Translation
+	var selection_description = _subaction_data.get("SelectionDesc", "Please select the Item you would like to use with this Page.")
+	var options = OnQueOptionsData.new("SelectedItemId", selection_description, [], [], [])
 	var item_tag_filter = _subaction_data.get("ItemTagFilter", {})
 	for item:BaseItem in items:
 		options.options_vals.append(item.Id)

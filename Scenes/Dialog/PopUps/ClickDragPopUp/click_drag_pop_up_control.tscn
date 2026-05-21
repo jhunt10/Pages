@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://8k6sk7jgh2s8"]
+[gd_scene format=3 uid="uid://8k6sk7jgh2s8"]
 
-[ext_resource type="Script" path="res://Scenes/Dialog/PopUps/ClickDragPopUp/click_drag_pop_up_control.gd" id="1_x02y6"]
+[ext_resource type="Script" uid="uid://bsof6tueewiw" path="res://Scenes/Dialog/PopUps/ClickDragPopUp/click_drag_pop_up_control.gd" id="1_x02y6"]
 [ext_resource type="Texture2D" uid="uid://cdx22n82nog8i" path="res://Scenes/Dialog/PopUps/OutlinePopUp/DottedPatch_64_8.png" id="2_7juwr"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_tya8c"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="3_tya8c"]
 
 [node name="ClickDragPopUpControl" type="Control" node_paths=PackedStringArray("click_control", "click_outline_patch", "drag_control", "drag_outline_patch", "click_button")]
 layout_mode = 3

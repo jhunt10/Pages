@@ -3,7 +3,10 @@ extends VBoxContainer
 
 const BoxPadding:int = 4
 
+signal pressed
+
 @export var button:Button
+@export var panel:PanelContainer
 @export var portrait_texture_rect:TextureRect
 @export var main_container:VBoxContainer
 @export var health_bar:HealthBarControl
@@ -18,7 +21,16 @@ var _stat_bars:Dictionary = {}
 var _resize:bool = true
 
 func _ready() -> void:
+	panel.gui_input.connect(on_mouse_clicked)
 	premade_effect_icon.visible = false
+
+func _on_press():
+	pressed.emit()
+
+
+func on_mouse_clicked(event: InputEvent):
+	if event is InputEventMouse and event.is_action_pressed("mouse_left"):
+		pressed.emit()
 
 func set_actor(act:BaseActor):
 	if !act:
@@ -49,10 +61,10 @@ func set_actor(act:BaseActor):
 	
 func _process(_delta: float) -> void:
 	if _resize:
-		self.size = Vector2i(main_container.size.x + (2*BoxPadding),
-							bars_container.size.y + (2*BoxPadding))
-		main_container.position = Vector2i(BoxPadding, BoxPadding)
-		_resize = false
+		#self.size = Vector2i(main_container.size.x + (2*BoxPadding),
+							#bars_container.size.y + (2*BoxPadding))
+		#main_container.position = Vector2i(BoxPadding, BoxPadding)
+		#_resize = false
 		sync(false)
 	
 func sync(_double_sync = true):

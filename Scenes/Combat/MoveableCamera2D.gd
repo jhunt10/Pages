@@ -30,7 +30,7 @@ var auto_pan_min_velocity:float = 100
 var max_camera_bounds:Rect2i
 
 # For ignoring scrolling
-@export var message_box:Control
+@export var no_scroll_nodes:Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -223,13 +223,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		var mouse_event = event as InputEventMouseButton
 		
 		var can_scroll = true
-		if message_box:
-			var mouse_pos = message_box.back_patch.get_local_mouse_position()
-			var no_touch = message_box.back_patch.get_global_rect()
-			no_touch.position.x = 0
-			no_touch.position.y = 0
-			if no_touch.has_point(mouse_pos):
-				can_scroll = false
+		for node_path in no_scroll_nodes:
+			if node_path is NodePath:
+				var node = self.get_node(node_path)
+				var mouse_pos = node.get_local_mouse_position()
+				var no_touch = node.get_global_rect()
+				no_touch.position.x = 0
+				no_touch.position.y = 0
+				if no_touch.has_point(mouse_pos):
+					can_scroll = false
 		if can_scroll:
 			var new_zoom = self.zoom
 			if mouse_event.button_index == MOUSE_BUTTON_WHEEL_UP:

@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://bf7gt3clx8nnj" path="res://Scenes/Menus/SaveLoadMenu/save_load_menu.gd" id="1_gp8dy"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="1_v5dju"]
-[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="2_1xa6p"]
 [ext_resource type="Texture2D" uid="uid://7x0clyrtcupf" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18.png" id="3_cirb2"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_6ghyw"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="4_6ghyw"]
 [ext_resource type="Texture2D" uid="uid://baeij3edhokkp" path="res://Scenes/Menus/CampMenu/PrettyPictures/DefaultCampPic.png" id="5_gsdij"]
 [ext_resource type="Script" uid="uid://ce6hti2va5v0x" path="res://Scenes/Menus/SaveLoadMenu/save_slot_container.gd" id="5_yc8rx"]
 [ext_resource type="Texture2D" uid="uid://yx5nqpwtvayg" path="res://Scenes/Menus/SaveLoadMenu/Highlight_Patch_32_6.png" id="6_5sm3v"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="6_bhh8v"]
 [ext_resource type="Texture2D" uid="uid://cdy53ml2tuvc8" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Frame_64_18.png" id="6_k47kv"]
 [ext_resource type="Texture2D" uid="uid://dj76get1aahli" path="res://Scenes/Menus/SaveLoadMenu/Button_Patch_32_6.png" id="7_iovtk"]
 [ext_resource type="Script" uid="uid://b3kacb6lxmhbs" path="res://Scenes/Menus/SaveLoadMenu/party_container.gd" id="10_vurx7"]
@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 	pass
 "
 
-[node name="SaveLoadMenu" type="Control" unique_id=671566036 node_paths=PackedStringArray("scale_control", "close_button", "scroll_bar", "menu_title_label", "premade_save_slot", "save_slot_new", "slots_container", "sel_save_name_label", "sel_pretty_pic", "sel_save_details_container", "sel_save_date_label", "sel_save_loaction_label", "sel_runtime_label", "sel_party_container", "message_box", "save_popup", "save_button", "delete_button", "confirm_box")]
+[node name="SaveLoadMenu" type="Control" unique_id=671566036 node_paths=PackedStringArray("scale_control", "close_button", "menu_title_label", "premade_save_slot", "save_slot_new", "slots_container", "sel_save_name_label", "sel_pretty_pic", "sel_save_details_container", "sel_save_date_label", "sel_save_loaction_label", "sel_runtime_label", "sel_party_container", "message_box", "save_popup", "save_button", "delete_button", "confirm_box")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -48,7 +48,6 @@ grow_vertical = 2
 script = ExtResource("1_gp8dy")
 scale_control = NodePath("ScaleControl")
 close_button = NodePath("ScaleControl/TabsControl/ExitTabButton/Button")
-scroll_bar = NodePath("ScaleControl/ScrollBar")
 menu_title_label = NodePath("ScaleControl/TitlePatchRect/HBoxContainer/MenuTitleLabel")
 premade_save_slot = NodePath("ScaleControl/ScrollContainer/VBoxContainer/PreMade_SaveSlotContainer")
 save_slot_new = NodePath("ScaleControl/ScrollContainer/VBoxContainer/NewSaveSlotContainer")
@@ -98,20 +97,6 @@ offset_right = 600.0
 offset_bottom = 420.0
 texture = ExtResource("1_v5dju")
 
-[node name="ScrollBar" parent="ScaleControl" unique_id=1166698441 node_paths=PackedStringArray("scroll_container") instance=ExtResource("2_1xa6p")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -58.0
-offset_top = 64.0
-offset_right = -26.0
-offset_bottom = -24.0
-grow_horizontal = 0
-grow_vertical = 2
-scroll_container = NodePath("../ScrollContainer")
-
 [node name="TitlePatchRect" type="NinePatchRect" parent="ScaleControl" unique_id=1041443296]
 layout_mode = 1
 anchors_preset = -1
@@ -160,12 +145,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 16.0
 offset_top = 60.0
-offset_right = -60.0
+offset_right = -32.0
 offset_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("6_bhh8v")
 horizontal_scroll_mode = 3
-vertical_scroll_mode = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/ScrollContainer" unique_id=1071818407]
 layout_mode = 2

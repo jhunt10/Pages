@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://b0jbpbh83bmd5"]
+
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="1_p5blv"]
+[ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="2_31i8w"]
+[ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="3_0nyxt"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="3_f7sut"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="5_3suls"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1084273047]
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("1_p5blv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1257019059]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=743819323]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Control" unique_id=995437799]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("1_p5blv")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../select_target.sub"
+
+[node name="CloseButton" type="TextureButton" parent="VBoxContainer/Control" unique_id=286590093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_31i8w")
+texture_pressed = ExtResource("3_0nyxt")
+
+[node name="InfoButton" type="TextureButton" parent="VBoxContainer/Control" unique_id=1295525169]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_f7sut")
+texture_pressed = ExtResource("5_3suls")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=280832836]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_p5blv")
+text = "Some message goes here
+line
+line
+line
+line"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1299773834]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ButtonsContainer" unique_id=1405469559]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=2142163461]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_p5blv")
+text = " Cancel "
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/ButtonsContainer" unique_id=2061223208]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OkButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=848218759]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_p5blv")
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/ButtonsContainer" unique_id=1453275349]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3

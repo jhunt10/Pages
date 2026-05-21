@@ -5,7 +5,6 @@ extends BaseCharacterSubMenu
 @export var bag_icon:TextureRect
 @export var premade_sub_container:SubBagContainer
 @export var sub_container:VBoxContainer
-@export var scroll_bar:CustScrollBar
 var _current_bag_item_id
 var _sub_containers:Dictionary
 

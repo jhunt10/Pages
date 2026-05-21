@@ -28,6 +28,7 @@ signal end_of_frame_with_state(game_state:GameStateData)
 # End of current Turn
 signal end_of_turn()
 signal end_of_turn_with_state(game_state:GameStateData)
+signal end_of_turn_post_actors()
 # End of current Round (before ques and execution_data have been cleared) 
 signal end_of_round()
 signal end_of_round_with_state(game_state:GameStateData)
@@ -135,6 +136,7 @@ func _on_turn_start(game_state):
 func _on_turn_end(game_state):
 	end_of_turn.emit()
 	end_of_turn_with_state.emit(game_state)
+	end_of_turn_post_actors.emit()
 	# Emit end of turn for actors
 	for que_id in _que_order:
 		var que:ActionQue = _action_ques[que_id]

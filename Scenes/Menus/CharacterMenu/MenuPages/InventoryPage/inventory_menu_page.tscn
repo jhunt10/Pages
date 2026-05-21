@@ -2,11 +2,10 @@
 
 [ext_resource type="Script" uid="uid://c6in7lwioqwgc" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_menu_page_control.gd" id="1_3t8c6"]
 [ext_resource type="Texture2D" uid="uid://gxk1dw0hkyuj" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/InvBoxBackground_working.png" id="2_q55l7"]
-[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="3_aijvf"]
 [ext_resource type="Texture2D" uid="uid://3ncohf5a6kf7" path="res://Scenes/Menus/CharacterMenu/HoleBackground.png" id="4_1et20"]
 [ext_resource type="Texture2D" uid="uid://w8cgm1tj35ld" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/HoleOutline.png" id="5_ramtd"]
 [ext_resource type="Script" uid="uid://cd3ac65edv4yi" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/sub_group_container.gd" id="6_6nx76"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="7_xu5ex"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="7_xu5ex"]
 [ext_resource type="Script" uid="uid://drrhjolj6cet8" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_item_button_control.gd" id="8_q22wh"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="9_qf2fl"]
 [ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="10_pf2fr"]
@@ -17,8 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="15_4btnv"]
 [ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="16_7ntf8"]
 [ext_resource type="Script" uid="uid://d0usmsabrnabv" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="17_go085"]
-[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="18_330nc"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="18_330nc"]
 [ext_resource type="Script" uid="uid://2nyf6hw42mrd" path="res://Scenes/UiNodes/loaded_option_button.gd" id="18_e142l"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="20_7fju7"]
 
 [node name="InventoryMenuPage" type="Control" unique_id=764217251 node_paths=PackedStringArray("loading_message_container", "scroll_container", "items_container", "scroll_bar", "inventory_box_highlight", "filter_option_button", "premade_inventory_sub_group", "premade_item_button")]
 custom_minimum_size = Vector2(280, 395)
@@ -33,7 +33,7 @@ max_button_size = Vector2i(96, 96)
 loading_message_container = NodePath("BoxBackground/LoadingContainer")
 scroll_container = NodePath("BoxBackground/ScrollContainer")
 items_container = NodePath("BoxBackground/ScrollContainer/VBoxContainer")
-scroll_bar = NodePath("ScrollBar")
+scroll_bar = NodePath("VScrollBar")
 inventory_box_highlight = NodePath("BoxBackground/NinePatchRect")
 filter_option_button = NodePath("FilterOptionButton")
 premade_inventory_sub_group = NodePath("BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer")
@@ -55,19 +55,6 @@ patch_margin_left = 38
 patch_margin_top = 38
 patch_margin_right = 54
 patch_margin_bottom = 38
-
-[node name="ScrollBar" parent="." unique_id=84804916 node_paths=PackedStringArray("scroll_container") instance=ExtResource("3_aijvf")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 16.0
-offset_right = 0.0
-offset_bottom = -16.0
-grow_horizontal = 0
-grow_vertical = 2
-scroll_container = NodePath("../BoxBackground/ScrollContainer")
 
 [node name="BoxBackground" type="NinePatchRect" parent="." unique_id=1801271355]
 layout_mode = 1
@@ -115,6 +102,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("20_7fju7")
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
@@ -304,3 +292,15 @@ offset_bottom = 45.0
 text_overrun_behavior = 3
 fit_to_longest_item = false
 script = ExtResource("18_e142l")
+
+[node name="VScrollBar" type="VScrollBar" parent="." unique_id=1305943512]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = 17.0
+offset_right = -4.0
+offset_bottom = -16.0
+theme = ExtResource("20_7fju7")

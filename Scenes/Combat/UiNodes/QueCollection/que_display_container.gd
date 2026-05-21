@@ -1,5 +1,5 @@
 class_name QueCollection_QueDisplayContainer
-extends BoxContainer
+extends PanelContainer
 
 const LOGGING = false
 const PADDING = 8
@@ -20,6 +20,7 @@ var _actor:BaseActor
 var _slots = []
 var movement_preview_pos:MapPos
 var _delayed_init = false
+var mouse_inside
 
 func _ready():
 	if Engine.is_editor_hint():
@@ -29,12 +30,26 @@ func _ready():
 	CombatRootControl.QueController.start_of_turn.connect(_set_action_highlight)
 	CombatRootControl.QueController.end_of_round.connect(hide_all_highlights)
 	
+	self.mouse_entered.connect(_on_mouse_enter)
+	self.mouse_exited.connect(_on_mouse_exit)
+	self.gui_input.connect(_on_mouse_clicked)
+	
 	if _delayed_init:
 		portrait.texture = _actor.sprite.get_portrait_sprite()
 		npc_index_label.text = _actor.get_npc_index_str()
 		_build_slots()
 		_sync_que()
-		
+
+func _on_mouse_enter():
+	CombatRootControl.Instance.ui_control.actor_pointer.set_pointing_to_actor(_actor)
+	
+func _on_mouse_exit():
+	CombatRootControl.Instance.ui_control.actor_pointer.clear_pointing_to_actor(_actor)
+
+func _on_mouse_clicked(event: InputEvent):
+	if event is InputEventMouse and event.is_action_pressed("mouse_left"):
+		CombatRootControl.Instance.camera.start_auto_pan_to_actor(_actor)
+
 func _set_action_highlight():
 	var turn_index = CombatRootControl.QueController.action_index
 	for index in range(_slots.size()):

@@ -2,7 +2,6 @@ class_name SkillTreePageControl
 extends Control
 
 @export var character_menu:CharacterMenuControl
-@export var scroll_bar:CustScrollBar
 @export var background_control:Control
 @export var tree_container:BoxContainer
 @export var row_prefab:HBoxContainer
@@ -81,7 +80,6 @@ func set_actor(actor):
 	tree_built = true
 	sync_skill_nodes_states()
 	background_control.queue_redraw()
-	scroll_bar._delay_size_calc = true
 
 func sync_skill_nodes_states():
 	var points_to_spend:int = _actor.stats.get_stat(StatHelper.Level, 0)
@@ -89,7 +87,6 @@ func sync_skill_nodes_states():
 	total_points_label.text = str(points_to_spend)
 	var remaining_points:int = points_to_spend - spent_points
 	unspent_points_label.text = str(remaining_points)
-	scroll_bar.calc_bar_size()
 	max_unlocked_y_index = 0
 	var y_index = 0
 	for row in tree_data:

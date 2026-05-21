@@ -2,8 +2,9 @@
 
 [ext_resource type="Script" uid="uid://bwbq5042qi6w6" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stats_page_control.gd" id="1_7pask"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu/MenuPages/outline.png" id="2_2jj8r"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="2_gcvot"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="3_ieev3"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="4_uc0ya"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="4_uc0ya"]
 [ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="5_ywkw4"]
 [ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="6_bwjw5"]
 [ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="7_bclrn"]
@@ -31,9 +32,8 @@
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="31_kpb2n"]
 [ext_resource type="Script" uid="uid://jx07xbd35ygl" path="res://Scenes/Menus/CharacterMenu/full_stat_display_control.gd" id="31_uk8cv"]
 [ext_resource type="Script" uid="uid://b0fnr4p62cac2" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_entry_container.gd" id="32_6xe5g"]
-[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="33_u8ay1"]
 
-[node name="StatsPage" type="Control" unique_id=1347648210 node_paths=PackedStringArray("resistance_container", "strength_label", "agility_label", "intelligence_label", "wisdom_label", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "health_stat_label", "mag_atk_label", "phys_atk_label", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "other_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "block_chance_label", "block_mod_label", "awareness_display", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label", "full_stat_display", "scroll_bar")]
+[node name="StatsPage" type="Control" unique_id=1347648210 node_paths=PackedStringArray("resistance_container", "strength_label", "agility_label", "intelligence_label", "wisdom_label", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "health_stat_label", "mag_atk_label", "phys_atk_label", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "other_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "block_chance_label", "block_mod_label", "awareness_display", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label", "full_stat_display")]
 custom_minimum_size = Vector2(292, 384)
 layout_mode = 3
 anchors_preset = 0
@@ -74,7 +74,6 @@ block_front_chance_label = NodePath("HBoxContainer/ScrollContainer/StatsMainCont
 block_flank_chance_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2/FlankValLabel")
 block_back_chance_label = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2/BackValLabel")
 full_stat_display = NodePath("HBoxContainer/ScrollContainer/StatsMainContainer/FullStatDisplayControl")
-scroll_bar = NodePath("HBoxContainer/StatsScrollBar")
 
 [node name="ContainerControl" type="Control" parent="." unique_id=1226752738]
 layout_mode = 1
@@ -97,8 +96,8 @@ grow_vertical = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer" unique_id=52614578]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("2_gcvot")
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
 
 [node name="StatsMainContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer" unique_id=728909143]
 layout_mode = 2
@@ -1249,9 +1248,3 @@ visible = false
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
-
-[node name="StatsScrollBar" parent="HBoxContainer" unique_id=1654215878 node_paths=PackedStringArray("scroll_container") instance=ExtResource("33_u8ay1")]
-visible = false
-layout_mode = 2
-scroll_container = NodePath("../ScrollContainer")
-debug_name = "Pages"

@@ -27,6 +27,7 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	
 func start_state():
 	if _logging: print("Start UiState: Targeting")
+	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Targeting")
 	var game_state = CombatRootControl.Instance.GameState
 	var selectable_spots = selection_data.get_selectable_coords()
 	if selectable_spots.size() == 0:
@@ -37,8 +38,9 @@ func start_state():
 	#if wait_for_confirm:
 	target_input_display.visible = true
 	target_input_display.set_target_type(selection_data.target_params.target_type, allow_lockon)
-	target_input_display.set_button_text("Skip")
-	target_input_display.on_pressed_func = ui_button_pressed
+	target_input_display.set_confirm_enabled(false)
+	target_input_display.confirmed.connect(_on_confirmed)
+	target_input_display.canceled.connect(_on_canceled)
 	
 	_target_display_key = target_area_dislay_node.build_from_target_selection_data(selection_data, true)
 	target_area_dislay_node.hide_area_effect(_target_display_key)
@@ -69,7 +71,10 @@ func end_state():
 	CombatRootControl.Instance.GridCursor.lock_position = false
 	target_area_dislay_node.clear_display(_target_display_key)
 	target_input_display.visible = false
-	target_input_display.on_pressed_func = null
+	if target_input_display.confirmed.is_connected(_on_confirmed):
+		target_input_display.confirmed.disconnect(_on_confirmed)
+	if target_input_display.canceled.is_connected(_on_canceled):
+		target_input_display.canceled.disconnect(_on_canceled)
 	var actor_node = CombatRootControl.get_actor_node(selection_data.focused_actor.Id)
 	actor_node.reset_path_arrow()
 	actor_node.hide_path_arrow()
@@ -113,7 +118,7 @@ func clear_target(coord:Vector2i):
 	is_waiting_for_confirm = false
 	waiting_selection = null
 	target_area_dislay_node.hide_area_effect(_target_display_key)
-	target_input_display.set_button_text("Skip")
+	target_input_display.set_confirm_enabled(false)
 	target_input_display.set_invalid_target_coord(coord)
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
 	CombatRootControl.Instance.GridCursor.position = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(coord)
@@ -126,7 +131,7 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 		is_waiting_for_confirm = true
 		waiting_selection = coord
 		target_area_dislay_node.set_area_effect_coor(_target_display_key, coord)
-		target_input_display.set_button_text("Confirm")
+		target_input_display.set_confirm_enabled(true)
 		target_input_display.set_target_coord(coord)
 		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
 		CombatRootControl.Instance.GridCursor.position = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(coord)
@@ -158,11 +163,14 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 	# Resume Round
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 
-func ui_button_pressed():
+func _on_confirmed():
 	if _logging: print("Confrim button pressed")
 	if not is_waiting_for_confirm:
-		selection_data.focused_actor.Que.fail_turn()
-		CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+		_on_canceled()
 	elif waiting_selection != null:
 		select_target(waiting_selection, true)
+
+func _on_canceled():
+	selection_data.focused_actor.Que.fail_turn()
+	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
 	

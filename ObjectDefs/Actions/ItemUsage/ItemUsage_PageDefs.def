@@ -179,6 +179,13 @@
 				"Action"
 			]
 		},
+		"ActionData":{
+			"SubActions": {
+				"SpawnItemMissile": {
+					"SelectionDesc": "Select a Bomb to throw."
+				}
+			}
+		},
 		"_DefVersion": "1"
 	},
 	"ThrowPotionPage": {
@@ -204,6 +211,13 @@
 			"ItemType": "Page",
 			"Rarity": "Common",
 			"Value": 200.0
+		},
+		"ActionData":{
+			"SubActions": {
+				"SpawnItemMissile": {
+					"SelectionDesc": "Select a Potion to throw."
+				}
+			}
 		},
 		"_DefVersion": "1"
 	},
@@ -234,6 +248,7 @@
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_UseItem.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 0.0,
+					"SelectionDesc": "Select a Potion to drink.",
 					"ItemTagFilter": {
 						"RequireAllTags": [
 							"Drinkable"

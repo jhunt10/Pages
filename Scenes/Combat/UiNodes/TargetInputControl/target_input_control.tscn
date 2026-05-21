@@ -1,0 +1,317 @@
+[gd_scene format=3 uid="uid://dom8hfmbknird"]
+
+[ext_resource type="Script" uid="uid://bvacfny0by1gt" path="res://Scenes/Combat/UiNodes/TargetInputControl/target_input_control.gd" id="1_85nmn"]
+[ext_resource type="Texture2D" uid="uid://coojsfckia2jk" path="res://Scenes/Combat/UiNodes/QueDisplay/UnknownPageSlotIcon.png" id="2_0vu5r"]
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="3_u1hsq"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="4_2u8af"]
+[ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="4_25h16"]
+[ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="5_prhg0"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="6_kh6rr"]
+[ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="6_prhg0"]
+[ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="7_kh6rr"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="7_nkl30"]
+[ext_resource type="Texture2D" uid="uid://cr1m3llr0pgtd" path="res://Scenes/Combat/UiNodes/QueDisplay/EmptySlotBackground.png" id="8_nkl30"]
+[ext_resource type="PackedScene" uid="uid://br08s3uioxwuh" path="res://Scenes/Combat/UiNodes/QueInput/page_details_hover_box.tscn" id="9_58415"]
+[ext_resource type="Texture2D" uid="uid://ds06ojwvkmeit" path="res://Scenes/Combat/UiNodes/TargetInputControl/ArrowIcon.png" id="10_534j1"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="11_eq70b"]
+
+[node name="TargetInputControl" type="Control" unique_id=1327304093 node_paths=PackedStringArray("close_button", "comfirm_button", "cancel_button", "title_label", "target_type_label", "actor_portrait", "page_icon", "page_details", "lock_on_container", "lock_on_box", "target_icon", "target_icon_container", "target_npc_index_label", "spot_container", "x_label", "y_label")]
+layout_mode = 3
+anchor_top = 0.7
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_85nmn")
+close_button = NodePath("CenterContainer/PanelContainer/VBoxContainer/Control/CloseButton")
+comfirm_button = NodePath("CenterContainer/PanelContainer/VBoxContainer/ButtonsContainer/OkButton")
+cancel_button = NodePath("CenterContainer/PanelContainer/VBoxContainer/ButtonsContainer/CancelButton")
+title_label = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/TitleLabel")
+target_type_label = NodePath("CenterContainer/PanelContainer/VBoxContainer/HBoxContainer/TargetTypeLabel")
+unknown_icon_texture = ExtResource("2_0vu5r")
+actor_portrait = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/PortraitBackground/PortraitTextureRect")
+page_icon = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/PageBackground/PageTextureRect")
+page_details = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/PageBackground/PageDetailsHoverBox")
+lock_on_container = NodePath("CenterContainer/PanelContainer/VBoxContainer/TargetLockContainer")
+lock_on_box = NodePath("CenterContainer/PanelContainer/VBoxContainer/TargetLockContainer/CheckBox")
+target_icon = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/TargetBackground/TargetTextureRect")
+target_icon_container = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/TargetBackground")
+target_npc_index_label = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/TargetBackground/TargetTextureRect/IndexLabel")
+spot_container = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer")
+x_label = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer/XLablesContainer/XValueLabel")
+y_label = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer/YLabelsContainer/YValueLabel")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=940688891]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=1084273047]
+layout_mode = 2
+theme = ExtResource("3_u1hsq")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer" unique_id=1257019059]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=743819323]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/Control" unique_id=995437799]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("3_u1hsq")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../select_target.sub"
+
+[node name="CloseButton" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/Control" unique_id=286590093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_25h16")
+texture_pressed = ExtResource("5_prhg0")
+
+[node name="InfoButton" type="TextureButton" parent="CenterContainer/PanelContainer/VBoxContainer/Control" unique_id=1295525169]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("6_kh6rr")
+texture_pressed = ExtResource("7_nkl30")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1994570990]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1583267456]
+layout_mode = 2
+theme = ExtResource("4_2u8af")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "Select Target "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TargetTypeLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=840742444]
+layout_mode = 2
+theme = ExtResource("4_2u8af")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 18
+text = "Actor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IconsContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1825898753]
+layout_mode = 2
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer" unique_id=607773496]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PortraitBackground" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer" unique_id=394161823]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_prhg0")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="PortraitTextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/PortraitBackground" unique_id=501136711]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_kh6rr")
+expand_mode = 1
+
+[node name="PageBackground" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer" unique_id=717014911]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("8_nkl30")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="PageTextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/PageBackground" unique_id=215771800]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0vu5r")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="PageDetailsHoverBox" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/PageBackground" unique_id=442619466 instance=ExtResource("9_58415")]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = -6.0
+offset_right = 20.0
+offset_bottom = -6.0
+
+[node name="ArrowTextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer" unique_id=690237682]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("10_534j1")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="SpotTargetContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer" unique_id=2072402035]
+visible = false
+layout_mode = 2
+
+[node name="XLablesContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer" unique_id=580201422]
+layout_mode = 2
+
+[node name="XTitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer/XLablesContainer" unique_id=1848631139]
+layout_mode = 2
+theme = ExtResource("11_eq70b")
+text = "X:"
+
+[node name="XValueLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer/XLablesContainer" unique_id=251130387]
+layout_mode = 2
+theme = ExtResource("11_eq70b")
+text = "-20"
+
+[node name="YLabelsContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer" unique_id=1423815211]
+layout_mode = 2
+
+[node name="YTitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer/YLabelsContainer" unique_id=543065736]
+layout_mode = 2
+theme = ExtResource("11_eq70b")
+text = "Y:"
+
+[node name="YValueLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer/YLabelsContainer" unique_id=1398335402]
+layout_mode = 2
+theme = ExtResource("11_eq70b")
+text = "-20"
+
+[node name="TargetBackground" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer" unique_id=324479268]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_prhg0")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="TargetTextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/TargetBackground" unique_id=2099718026]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_0vu5r")
+expand_mode = 1
+
+[node name="IndexLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer/TargetBackground/TargetTextureRect" unique_id=1870558612]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_eq70b")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "A"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/IconsContainer" unique_id=1512318130]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TargetLockContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1726862481]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterContainer/PanelContainer/VBoxContainer/TargetLockContainer" unique_id=101814363]
+layout_mode = 2
+theme = ExtResource("4_2u8af")
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 18
+text = "Lock On:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="CenterContainer/PanelContainer/VBoxContainer/TargetLockContainer" unique_id=1398118327]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=482265358]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1299773834]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=1405469559]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=2142163461]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_u1hsq")
+text = " Cancel "
+
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=2061223208]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OkButton" type="Button" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=848218759]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_u1hsq")
+disabled = true
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="CenterContainer/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=1453275349]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3

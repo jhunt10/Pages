@@ -1,39 +1,40 @@
-[gd_scene load_steps=33 format=3 uid="uid://b7sc1vi5e6w5h"]
+[gd_scene format=3 uid="uid://b7sc1vi5e6w5h"]
 
 [ext_resource type="Texture2D" uid="uid://dipsfxmqeutav" path="res://Scenes/Menus/ShopMenu/wood_background.png" id="1_4e3a3"]
-[ext_resource type="Script" path="res://Scenes/Menus/ShopMenu/shop_menu.gd" id="1_fpa2r"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="5_5483j"]
-[ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_options_container.gd" id="6_l23p1"]
-[ext_resource type="Script" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="7_36qs6"]
+[ext_resource type="Script" uid="uid://cixiohcv7dwl6" path="res://Scenes/Menus/ShopMenu/shop_menu.gd" id="1_fpa2r"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="5_5483j"]
+[ext_resource type="Script" uid="uid://dc0cxrnjk6x50" path="res://Scenes/Menus/CampMenu/camp_options_container.gd" id="6_l23p1"]
+[ext_resource type="Script" uid="uid://dd5xsv3bqcqi2" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="7_36qs6"]
 [ext_resource type="Texture2D" uid="uid://c2vu13v8elej6" path="res://Scenes/Menus/ShopMenu/wood_frame_Black_Patch_124_16.png" id="8_6e5du"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="8_g50yr"]
 [ext_resource type="Texture2D" uid="uid://dter0pgnswchk" path="res://Scenes/Menus/CampMenu/_B_Icon.png" id="9_sbhuk"]
-[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="12_1n31n"]
-[ext_resource type="Script" path="res://Scenes/Menus/ShopMenu/item_menu_container.gd" id="13_3e5hi"]
-[ext_resource type="Script" path="res://Scenes/Menus/ShopMenu/shop_sub_item_list.gd" id="13_3hu0s"]
+[ext_resource type="Theme" uid="uid://dkopxykqxg6jl" path="res://assets/Themes/scroll_bar_theme.tres" id="10_frlib"]
+[ext_resource type="Script" uid="uid://ro5drlf0sksf" path="res://Scenes/Menus/ShopMenu/item_menu_container.gd" id="13_3e5hi"]
+[ext_resource type="Script" uid="uid://xyu1g77mc4c5" path="res://Scenes/Menus/ShopMenu/shop_sub_item_list.gd" id="13_3hu0s"]
 [ext_resource type="Texture2D" uid="uid://c6e4ut3id7itv" path="res://Scenes/Menus/ShopMenu/PlusIcon.png" id="14_txdto"]
 [ext_resource type="Texture2D" uid="uid://crfa2hjirevj7" path="res://Scenes/Menus/ShopMenu/MinusIcon.png" id="15_dwkrx"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="15_mutf0"]
+[ext_resource type="Script" uid="uid://d0usmsabrnabv" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="15_mutf0"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="16_3hl53"]
 [ext_resource type="Texture2D" uid="uid://c2rmvgu5ib0nq" path="res://ObjectDefs/Actions/ItemUsage/Sprites/Potion_Icon.png" id="17_loymo"]
 [ext_resource type="Texture2D" uid="uid://7x0clyrtcupf" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18.png" id="18_f0yo1"]
-[ext_resource type="Script" path="res://Scenes/Menus/ShopMenu/shop_item_button.gd" id="18_k1elq"]
+[ext_resource type="Script" uid="uid://bdohnvf6mphft" path="res://Scenes/Menus/ShopMenu/shop_item_button.gd" id="18_k1elq"]
 [ext_resource type="Texture2D" uid="uid://d378fa2vw8581" path="res://Scenes/Menus/ShopMenu/CartImage.png" id="19_o7uny"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="20_dh8yi"]
 [ext_resource type="Texture2D" uid="uid://d1s1wxwcdcvcn" path="res://Scenes/Menus/ShopMenu/wood_frame_Patch_124_16.png" id="20_qejys"]
 [ext_resource type="PackedScene" uid="uid://cyi7xhb25f7cs" path="res://Scenes/Dialog/DialogBox/speech_dialog_block.tscn" id="21_26ugd"]
 [ext_resource type="Texture2D" uid="uid://b4bl1mmlrrq12" path="res://notes/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png" id="22_lwtp0"]
 [ext_resource type="PackedScene" uid="uid://btr6wpgyitqc0" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.tscn" id="23_gkgvs"]
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="24_8rhkl"]
-[ext_resource type="Script" path="res://Scenes/Menus/money_display.gd" id="24_n7d8d"]
+[ext_resource type="Script" uid="uid://b4elt5djt05pg" path="res://Scenes/Menus/money_display.gd" id="24_n7d8d"]
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="31_l4e0d"]
-[ext_resource type="Script" path="res://Scenes/Menus/ShopMenu/confirm_pop_up.gd" id="32_jcrhb"]
-[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="32_sa4l8"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="33_5t8yh"]
-[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="34_pcliu"]
+[ext_resource type="Script" uid="uid://tq3vjc1cw5qi" path="res://Scenes/Menus/ShopMenu/confirm_pop_up.gd" id="32_jcrhb"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="32_sa4l8"]
+[ext_resource type="Script" uid="uid://cxlvn68pxork" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="33_5t8yh"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="34_pcliu"]
 [ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="35_uh67f"]
 [ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_sb2uy"]
 
-[node name="ShopMenu" type="Control" node_paths=PackedStringArray("dialog_box", "item_menu_controller", "scroll_bar", "details_card_spawn_point", "confirm_popup", "buy_button", "sell_button", "close_button")]
+[node name="ShopMenu" type="Control" unique_id=1448878564 node_paths=PackedStringArray("dialog_box", "item_menu_controller", "details_card_spawn_point", "confirm_popup", "buy_button", "sell_button", "close_button", "scroll_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,14 +44,14 @@ grow_vertical = 2
 script = ExtResource("1_fpa2r")
 dialog_box = NodePath("DialogControl")
 item_menu_controller = NodePath("ItemMenuContainer")
-scroll_bar = NodePath("ItemMenuContainer/ScrollBar")
 details_card_spawn_point = NodePath("DetaiolCardSpawnPoint")
 confirm_popup = NodePath("ConfirmPopUp")
 buy_button = NodePath("CampOptionsContainer/MainOptionsContainer/BuyOptionButton/Button")
 sell_button = NodePath("CampOptionsContainer/MainOptionsContainer/SellOptionButton/Button")
 close_button = NodePath("CampOptionsContainer/MainOptionsContainer/BackOptionButton/ToCampButton")
+scroll_container = NodePath("ItemMenuContainer/ScrollContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=59159010]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -61,7 +62,7 @@ texture = ExtResource("1_4e3a3")
 region_rect = Rect2(10, 29, 551, 293)
 patch_margin_right = 9
 
-[node name="CampOptionsContainer" type="NinePatchRect" parent="."]
+[node name="CampOptionsContainer" type="NinePatchRect" parent="." unique_id=1987636487]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.65
@@ -80,7 +81,7 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="MainOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer"]
+[node name="MainOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer" unique_id=1921306014]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -93,7 +94,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("6_l23p1")
 
-[node name="BuyOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+[node name="BuyOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" unique_id=1447075731 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 script = ExtResource("7_36qs6")
@@ -103,7 +104,7 @@ highlight = NodePath("TextureRect")
 label = NodePath("TitleLabel")
 text = " Buy"
 
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/BuyOptionButton"]
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/BuyOptionButton" unique_id=841410773]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,7 +113,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_g50yr")
 
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/BuyOptionButton"]
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/BuyOptionButton" unique_id=245530209]
 layout_mode = 0
 offset_right = 114.0
 offset_bottom = 60.0
@@ -121,7 +122,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = " Buy"
 
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/BuyOptionButton/TitleLabel"]
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/BuyOptionButton/TitleLabel" unique_id=2059106001]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = -1
@@ -132,7 +133,7 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/BuyOptionButton"]
+[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/BuyOptionButton" unique_id=933020406]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -143,7 +144,7 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SellOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+[node name="SellOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" unique_id=132334267 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 script = ExtResource("7_36qs6")
@@ -153,7 +154,7 @@ highlight = NodePath("TextureRect")
 label = NodePath("TitleLabel")
 text = " Sell "
 
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/SellOptionButton"]
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/SellOptionButton" unique_id=328885948]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -164,7 +165,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_g50yr")
 
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/SellOptionButton"]
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/SellOptionButton" unique_id=1495197166]
 layout_mode = 0
 offset_right = 108.0
 offset_bottom = 60.0
@@ -173,7 +174,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = " Sell "
 
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/SellOptionButton/TitleLabel"]
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/SellOptionButton/TitleLabel" unique_id=1745835648]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = -1
@@ -184,7 +185,7 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/SellOptionButton"]
+[node name="Button" type="Button" parent="CampOptionsContainer/MainOptionsContainer/SellOptionButton" unique_id=1155424096]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -195,7 +196,7 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BackOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+[node name="BackOptionButton" type="Control" parent="CampOptionsContainer/MainOptionsContainer" unique_id=503630978 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 script = ExtResource("7_36qs6")
@@ -205,7 +206,7 @@ highlight = NodePath("TextureRect")
 label = NodePath("TitleLabel")
 text = " Back"
 
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/BackOptionButton"]
+[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/MainOptionsContainer/BackOptionButton" unique_id=49208565]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -216,7 +217,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_g50yr")
 
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/BackOptionButton"]
+[node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/BackOptionButton" unique_id=834275685]
 layout_mode = 0
 offset_right = 144.0
 offset_bottom = 60.0
@@ -225,7 +226,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = " Back"
 
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/BackOptionButton/TitleLabel"]
+[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/MainOptionsContainer/BackOptionButton/TitleLabel" unique_id=215528613]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = -1
@@ -236,7 +237,7 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ToCampButton" type="Button" parent="CampOptionsContainer/MainOptionsContainer/BackOptionButton"]
+[node name="ToCampButton" type="Button" parent="CampOptionsContainer/MainOptionsContainer/BackOptionButton" unique_id=198948138]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -247,312 +248,7 @@ offset_bottom = 12.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SystemOptionsContainer" type="VBoxContainer" parent="CampOptionsContainer"]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("6_l23p1")
-
-[node name="HSeparator" type="HSeparator" parent="CampOptionsContainer/SystemOptionsContainer"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Sys_QuitOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-script = ExtResource("7_36qs6")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "Quit"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -4.5
-offset_right = 32.0
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_g50yr")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_top = 30.0
-offset_right = 96.0
-offset_bottom = 90.0
-scale = Vector2(1e-05, 1e-05)
-theme = ExtResource("5_5483j")
-theme_override_font_sizes/font_size = 48
-text = "Quit"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_QuitOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sys_DebugOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-script = ExtResource("7_36qs6")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "Debug"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -4.5
-offset_right = 32.0
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_g50yr")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_top = 30.0
-offset_right = 150.0
-offset_bottom = 90.0
-scale = Vector2(1e-05, 1e-05)
-theme = ExtResource("5_5483j")
-theme_override_font_sizes/font_size = 48
-text = "Debug"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_DebugOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sys_LoadOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-script = ExtResource("7_36qs6")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "Load"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -4.5
-offset_right = 32.0
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_g50yr")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_top = 30.0
-offset_right = 120.0
-offset_bottom = 90.0
-scale = Vector2(1e-05, 1e-05)
-theme = ExtResource("5_5483j")
-theme_override_font_sizes/font_size = 48
-text = "Load"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_LoadOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sys_SaveOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-script = ExtResource("7_36qs6")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "Save"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -4.5
-offset_right = 32.0
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_g50yr")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_top = 30.0
-offset_right = 120.0
-offset_bottom = 90.0
-scale = Vector2(1e-05, 1e-05)
-theme = ExtResource("5_5483j")
-theme_override_font_sizes/font_size = 48
-text = "Save"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_SaveOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Sys_BackOptionButton" type="Control" parent="CampOptionsContainer/SystemOptionsContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
-custom_minimum_size = Vector2(0, 60)
-layout_mode = 2
-script = ExtResource("7_36qs6")
-button = NodePath("Button")
-under_line = NodePath("TitleLabel/ColorRect")
-highlight = NodePath("TextureRect")
-label = NodePath("TitleLabel")
-text = "Back"
-
-[node name="TextureRect" type="TextureRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -32.0
-offset_top = -4.5
-offset_right = 32.0
-offset_bottom = 4.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_g50yr")
-
-[node name="TitleLabel" type="Label" parent="CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton"]
-self_modulate = Color(0.498039, 0, 0, 1)
-layout_mode = 0
-offset_top = 30.0
-offset_right = 120.0
-offset_bottom = 90.0
-scale = Vector2(1e-05, 1e-05)
-theme = ExtResource("5_5483j")
-theme_override_font_sizes/font_size = 48
-text = "Back"
-
-[node name="ColorRect" type="ColorRect" parent="CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton/TitleLabel"]
-custom_minimum_size = Vector2(0, 3)
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.498039, 0, 0, 1)
-
-[node name="Button" type="Button" parent="CampOptionsContainer/SystemOptionsContainer/Sys_BackOptionButton"]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 4.0
-offset_bottom = 12.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemMenuContainer" type="NinePatchRect" parent="." node_paths=PackedStringArray("entries_container", "premade_sub_item_list", "back_button")]
-visible = false
+[node name="ItemMenuContainer" type="NinePatchRect" parent="." unique_id=591750129 node_paths=PackedStringArray("scroll_container", "entries_container", "premade_sub_item_list", "back_button", "scroll_bar")]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.65
@@ -571,25 +267,13 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 script = ExtResource("13_3e5hi")
+scroll_container = NodePath("ScrollContainer")
 entries_container = NodePath("ScrollContainer/VBoxContainer")
 premade_sub_item_list = NodePath("ScrollContainer/VBoxContainer/ShopSubItemList")
 back_button = NodePath("BackOptionButton/ItemListBackButton")
+scroll_bar = NodePath("VScrollBar")
 
-[node name="ScrollBar" parent="ItemMenuContainer" node_paths=PackedStringArray("scroll_container") instance=ExtResource("12_1n31n")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = 24.0
-offset_right = -16.0
-offset_bottom = -24.0
-grow_horizontal = 0
-grow_vertical = 2
-scroll_container = NodePath("../ScrollContainer")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="ItemMenuContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ItemMenuContainer" unique_id=972520096]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -598,14 +282,15 @@ offset_left = 18.0
 offset_top = 18.0
 offset_right = -49.6
 offset_bottom = -80.0
+theme = ExtResource("10_frlib")
 horizontal_scroll_mode = 3
 vertical_scroll_mode = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ItemMenuContainer/ScrollContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ItemMenuContainer/ScrollContainer" unique_id=349793378]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ShopSubItemList" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer" node_paths=PackedStringArray("title_button", "title_h_box", "symbole_texture_rect", "title_label", "entries_v_box", "premade_item_button")]
+[node name="ShopSubItemList" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer" unique_id=218204356 node_paths=PackedStringArray("title_button", "title_h_box", "symbole_texture_rect", "title_label", "entries_v_box", "premade_item_button")]
 clip_contents = true
 custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
@@ -625,7 +310,7 @@ title_label = NodePath("SubTitleContainer/FitScaleLabel")
 entries_v_box = NodePath("SubItemsContainer")
 premade_item_button = NodePath("SubItemsContainer/ShopItemButton")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList" unique_id=536091588]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -638,7 +323,7 @@ patch_margin_top = 18
 patch_margin_right = 18
 patch_margin_bottom = 18
 
-[node name="SubTitleContainer" type="HBoxContainer" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList"]
+[node name="SubTitleContainer" type="HBoxContainer" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList" unique_id=61493820]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -647,14 +332,14 @@ offset_right = -8.0
 offset_bottom = 60.0
 grow_horizontal = 2
 
-[node name="TextureRect" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubTitleContainer"]
+[node name="TextureRect" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubTitleContainer" unique_id=93763244]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("15_dwkrx")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="FitScaleLabel" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubTitleContainer" node_paths=PackedStringArray("label")]
+[node name="FitScaleLabel" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubTitleContainer" unique_id=501895979 node_paths=PackedStringArray("label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -663,7 +348,7 @@ label = NodePath("Label")
 text = "Pages"
 center_x = true
 
-[node name="Label" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubTitleContainer/FitScaleLabel"]
+[node name="Label" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubTitleContainer/FitScaleLabel" unique_id=1730543267]
 layout_mode = 0
 offset_left = 52.0
 offset_top = 10.0
@@ -674,7 +359,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "Pages"
 
-[node name="SubItemsContainer" type="VBoxContainer" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList"]
+[node name="SubItemsContainer" type="VBoxContainer" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList" unique_id=1373868830]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -682,7 +367,7 @@ anchor_bottom = 1.0
 offset_top = 60.0
 grow_horizontal = 2
 
-[node name="ShopItemButton" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer" node_paths=PackedStringArray("item_background", "item_icon", "item_label", "price_label", "button")]
+[node name="ShopItemButton" type="Control" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer" unique_id=744607331 node_paths=PackedStringArray("item_background", "item_icon", "item_label", "price_label", "button")]
 custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
 script = ExtResource("18_k1elq")
@@ -692,7 +377,7 @@ item_label = NodePath("HBoxContainer/Label")
 price_label = NodePath("HBoxContainer/Label3")
 button = NodePath("ItemButton")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton" unique_id=387478804]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -702,14 +387,14 @@ offset_right = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer" unique_id=125795716]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("16_3hl53")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer/TextureRect"]
+[node name="TextureRect" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer/TextureRect" unique_id=449475396]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -720,7 +405,7 @@ texture = ExtResource("17_loymo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
+[node name="Label" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer" unique_id=2144656001]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("5_5483j")
@@ -729,7 +414,7 @@ theme_override_font_sizes/font_size = 24
 text = "Battle Axe"
 clip_text = true
 
-[node name="Label2" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
+[node name="Label2" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer" unique_id=1721145874]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -739,7 +424,7 @@ theme_override_font_sizes/font_size = 24
 text = ".........................."
 clip_text = true
 
-[node name="TextureRect2" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer" unique_id=1705320552]
 custom_minimum_size = Vector2(18, 20)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -747,14 +432,14 @@ size_flags_vertical = 4
 texture = ExtResource("24_8rhkl")
 stretch_mode = 2
 
-[node name="Label3" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer"]
+[node name="Label3" type="Label" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton/HBoxContainer" unique_id=1218505473]
 layout_mode = 2
 theme = ExtResource("5_5483j")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 24
 text = "50"
 
-[node name="ItemButton" type="Button" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton"]
+[node name="ItemButton" type="Button" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList/SubItemsContainer/ShopItemButton" unique_id=98945530]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -763,7 +448,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CatagoryButton" type="Button" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList"]
+[node name="CatagoryButton" type="Button" parent="ItemMenuContainer/ScrollContainer/VBoxContainer/ShopSubItemList" unique_id=199652123]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 1
@@ -772,7 +457,7 @@ anchor_right = 1.0
 offset_bottom = 8.0
 grow_horizontal = 2
 
-[node name="BackOptionButton" type="Control" parent="ItemMenuContainer" node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
+[node name="BackOptionButton" type="Control" parent="ItemMenuContainer" unique_id=1214337851 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 1
 anchors_preset = 2
@@ -790,7 +475,7 @@ highlight = NodePath("TextureRect")
 label = NodePath("TitleLabel")
 text = " Back"
 
-[node name="TextureRect" type="TextureRect" parent="ItemMenuContainer/BackOptionButton"]
+[node name="TextureRect" type="TextureRect" parent="ItemMenuContainer/BackOptionButton" unique_id=532460055]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -802,7 +487,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_g50yr")
 
-[node name="TitleLabel" type="Label" parent="ItemMenuContainer/BackOptionButton"]
+[node name="TitleLabel" type="Label" parent="ItemMenuContainer/BackOptionButton" unique_id=1955567672]
 layout_mode = 1
 offset_right = 144.0
 offset_bottom = 60.0
@@ -811,7 +496,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 48
 text = " Back"
 
-[node name="ColorRect" type="ColorRect" parent="ItemMenuContainer/BackOptionButton/TitleLabel"]
+[node name="ColorRect" type="ColorRect" parent="ItemMenuContainer/BackOptionButton/TitleLabel" unique_id=2136700108]
 custom_minimum_size = Vector2(0, 3)
 layout_mode = 1
 anchors_preset = -1
@@ -823,7 +508,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.498039, 0, 0, 1)
 
-[node name="ItemListBackButton" type="Button" parent="ItemMenuContainer/BackOptionButton"]
+[node name="ItemListBackButton" type="Button" parent="ItemMenuContainer/BackOptionButton" unique_id=374156503]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -835,7 +520,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 
-[node name="TitleContainer" type="HBoxContainer" parent="."]
+[node name="VScrollBar" type="VScrollBar" parent="ItemMenuContainer" unique_id=124305665]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = 18.0
+offset_right = -18.0
+offset_bottom = -18.0
+theme = ExtResource("20_dh8yi")
+
+[node name="TitleContainer" type="HBoxContainer" parent="." unique_id=1510437582]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -846,31 +543,31 @@ offset_bottom = 40.0
 grow_horizontal = 2
 theme_override_constants/separation = 2
 
-[node name="TextureRect" type="TextureRect" parent="TitleContainer"]
+[node name="TextureRect" type="TextureRect" parent="TitleContainer" unique_id=184922791]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(28, 32)
 layout_mode = 2
 texture = ExtResource("9_sbhuk")
 stretch_mode = 4
 
-[node name="TitleLabel" type="Label" parent="TitleContainer"]
+[node name="TitleLabel" type="Label" parent="TitleContainer" unique_id=2037838144]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 32
 text = "ack at the Shop..."
 
-[node name="VSeparator" type="VSeparator" parent="TitleContainer"]
+[node name="VSeparator" type="VSeparator" parent="TitleContainer" unique_id=826315947]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MoneyContainer" type="HBoxContainer" parent="TitleContainer" node_paths=PackedStringArray("label")]
+[node name="MoneyContainer" type="HBoxContainer" parent="TitleContainer" unique_id=1929144794 node_paths=PackedStringArray("label")]
 layout_mode = 2
 script = ExtResource("24_n7d8d")
 label = NodePath("TitleLabel")
 
-[node name="TitleLabel2" type="Label" parent="TitleContainer/MoneyContainer"]
+[node name="TitleLabel2" type="Label" parent="TitleContainer/MoneyContainer" unique_id=1322446812]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -878,20 +575,20 @@ theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 32
 text = "100"
 
-[node name="TextureRect" type="TextureRect" parent="TitleContainer/MoneyContainer"]
+[node name="TextureRect" type="TextureRect" parent="TitleContainer/MoneyContainer" unique_id=136420233]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(28, 32)
 layout_mode = 2
 texture = ExtResource("24_8rhkl")
 
-[node name="TitleLabel" type="Label" parent="TitleContainer/MoneyContainer"]
+[node name="TitleLabel" type="Label" parent="TitleContainer/MoneyContainer" unique_id=916350366]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 32
 text = "100"
 
-[node name="PrettyPictureControl" type="Control" parent="."]
+[node name="PrettyPictureControl" type="Control" parent="." unique_id=1334863323]
 clip_contents = true
 layout_mode = 1
 anchor_right = 0.65
@@ -902,7 +599,7 @@ offset_right = -4.0
 offset_bottom = -4.0
 grow_vertical = 2
 
-[node name="PrettyPictureRect" type="TextureRect" parent="PrettyPictureControl"]
+[node name="PrettyPictureRect" type="TextureRect" parent="PrettyPictureControl" unique_id=944595744]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -913,7 +610,7 @@ texture = ExtResource("19_o7uny")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="PictureBackground" type="NinePatchRect" parent="PrettyPictureControl"]
+[node name="PictureBackground" type="NinePatchRect" parent="PrettyPictureControl" unique_id=1686398570]
 custom_minimum_size = Vector2(0, 180)
 layout_mode = 1
 anchors_preset = 15
@@ -930,7 +627,7 @@ patch_margin_bottom = 16
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="DialogControl" parent="." instance=ExtResource("21_26ugd")]
+[node name="DialogControl" parent="." unique_id=539102470 instance=ExtResource("21_26ugd")]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.7
@@ -944,7 +641,7 @@ grow_horizontal = 2
 grow_vertical = 0
 unknown_speaker_port = ExtResource("22_lwtp0")
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="DialogControl"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="DialogControl" unique_id=892983645]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -957,7 +654,7 @@ patch_margin_top = 48
 patch_margin_right = 48
 patch_margin_bottom = 48
 
-[node name="DetaiolCardSpawnPoint" type="Control" parent="."]
+[node name="DetaiolCardSpawnPoint" type="Control" parent="." unique_id=280638178]
 clip_contents = true
 custom_minimum_size = Vector2(300, 260)
 anchors_preset = 0
@@ -968,14 +665,15 @@ offset_bottom = 445.0
 scale = Vector2(1.5, 1.5)
 mouse_filter = 1
 
-[node name="ItemDetailsCard" parent="DetaiolCardSpawnPoint" instance=ExtResource("23_gkgvs")]
+[node name="ItemDetailsCard" parent="DetaiolCardSpawnPoint" unique_id=1504310930 instance=ExtResource("23_gkgvs")]
 visible = false
+layout_mode = 0
 offset_bottom = 379.0
 showing = true
 state = 2
 grow_timer = 0.5
 
-[node name="ConfirmPopUp" type="NinePatchRect" parent="." node_paths=PackedStringArray("title_label", "item_background", "item_icon", "item_label", "price_label", "count_label", "total_label", "money_label", "after_label", "cancel_button", "confirm_button")]
+[node name="ConfirmPopUp" type="NinePatchRect" parent="." unique_id=1587672757 node_paths=PackedStringArray("title_label", "item_background", "item_icon", "item_label", "price_label", "count_label", "total_label", "money_label", "after_label", "cancel_button", "confirm_button")]
 visible = false
 layout_mode = 0
 offset_left = 365.0
@@ -1000,7 +698,7 @@ after_label = NodePath("VBoxContainer/HBoxContainer4/AfterLabel")
 cancel_button = NodePath("VBoxContainer/HBoxContainer/CancelButton")
 confirm_button = NodePath("VBoxContainer/HBoxContainer/ConfirmButton")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmPopUp"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ConfirmPopUp" unique_id=1906527390]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -1012,24 +710,24 @@ offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="ConfirmPopUp/VBoxContainer"]
+[node name="Label" type="Label" parent="ConfirmPopUp/VBoxContainer" unique_id=433858132]
 layout_mode = 2
 theme = ExtResource("32_sa4l8")
 theme_override_font_sizes/font_size = 34
 text = "Purchase"
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer" unique_id=1119545699]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer2"]
+[node name="TextureRect" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer2" unique_id=21174693]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("16_3hl53")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TextureRect" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer2/TextureRect"]
+[node name="TextureRect" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer2/TextureRect" unique_id=1916319283]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1040,7 +738,7 @@ texture = ExtResource("17_loymo")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="FitScaleLabel" type="Control" parent="ConfirmPopUp/VBoxContainer/HBoxContainer2" node_paths=PackedStringArray("label")]
+[node name="FitScaleLabel" type="Control" parent="ConfirmPopUp/VBoxContainer/HBoxContainer2" unique_id=179912609 node_paths=PackedStringArray("label")]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1049,8 +747,8 @@ label = NodePath("Label2")
 text = "Battle Axe of Something"
 center_x = true
 
-[node name="Label2" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer2/FitScaleLabel"]
-layout_mode = 2
+[node name="Label2" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer2/FitScaleLabel" unique_id=1074691537]
+layout_mode = 0
 offset_left = 32.0
 offset_top = 1.0
 offset_right = 329.0
@@ -1060,42 +758,42 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Battle Axe of Something"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer" unique_id=374363800]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="VSeparator" type="VSeparator" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=2065040233]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=1864139336]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(28, 32)
 layout_mode = 2
 texture = ExtResource("24_8rhkl")
 
-[node name="CostLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="CostLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=1165244121]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 32
 text = "100"
 
-[node name="XLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="XLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=2136770692]
 layout_mode = 2
 theme = ExtResource("32_sa4l8")
 theme_override_font_sizes/font_size = 34
 text = "x"
 horizontal_alignment = 1
 
-[node name="CountLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="CountLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=1637072177]
 layout_mode = 2
 theme = ExtResource("32_sa4l8")
 theme_override_font_sizes/font_size = 34
 text = "3"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="Label4" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=816870560]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("32_sa4l8")
@@ -1103,13 +801,13 @@ theme_override_font_sizes/font_size = 34
 text = "="
 horizontal_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="TextureRect2" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=885452846]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(28, 32)
 layout_mode = 2
 texture = ExtResource("24_8rhkl")
 
-[node name="PlusMinusLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="PlusMinusLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=1688778399]
 visible = false
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
@@ -1117,45 +815,45 @@ theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 32
 text = "-"
 
-[node name="TotalLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="TotalLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=268034921]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 32
 text = "100"
 
-[node name="VSeparator2" type="VSeparator" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3"]
+[node name="VSeparator2" type="VSeparator" parent="ConfirmPopUp/VBoxContainer/HBoxContainer3" unique_id=1300142087]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorRect" type="ColorRect" parent="ConfirmPopUp/VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="ConfirmPopUp/VBoxContainer" unique_id=465391665]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0, 0, 0, 1)
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer" unique_id=339230017]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4"]
+[node name="VSeparator" type="VSeparator" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4" unique_id=1420352613]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TextureRect" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4"]
+[node name="TextureRect" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4" unique_id=51422667]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(28, 32)
 layout_mode = 2
 texture = ExtResource("24_8rhkl")
 
-[node name="CurrentMoneyLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4"]
+[node name="CurrentMoneyLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4" unique_id=364161734]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 32
 text = "100"
 
-[node name="Label4" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4"]
+[node name="Label4" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4" unique_id=1520974120]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("32_sa4l8")
@@ -1163,28 +861,28 @@ theme_override_font_sizes/font_size = 34
 text = "=>"
 horizontal_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4"]
+[node name="TextureRect2" type="TextureRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4" unique_id=1890332830]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(28, 32)
 layout_mode = 2
 texture = ExtResource("24_8rhkl")
 
-[node name="AfterLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4"]
+[node name="AfterLabel" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4" unique_id=997442790]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("5_5483j")
 theme_override_font_sizes/font_size = 32
 text = "100"
 
-[node name="VSeparator2" type="VSeparator" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4"]
+[node name="VSeparator2" type="VSeparator" parent="ConfirmPopUp/VBoxContainer/HBoxContainer4" unique_id=954898262]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ConfirmPopUp/VBoxContainer" unique_id=2065384810]
 layout_mode = 2
 
-[node name="CancelButton" type="Control" parent="ConfirmPopUp/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("label", "background", "button")]
+[node name="CancelButton" type="Control" parent="ConfirmPopUp/VBoxContainer/HBoxContainer" unique_id=103169547 node_paths=PackedStringArray("label", "background", "button")]
 custom_minimum_size = Vector2(64, 48)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1196,7 +894,7 @@ text = "Cancel"
 default_texture = ExtResource("35_uh67f")
 pressed_texture = ExtResource("36_sb2uy")
 
-[node name="Label" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/CancelButton"]
+[node name="Label" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/CancelButton" unique_id=903687023]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1211,7 +909,7 @@ text = "Cancel"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/CancelButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/CancelButton" unique_id=95228907]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1224,7 +922,7 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="Button" type="Button" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/CancelButton"]
+[node name="Button" type="Button" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/CancelButton" unique_id=343839283]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1233,7 +931,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ConfirmButton" type="Control" parent="ConfirmPopUp/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("label", "background", "button")]
+[node name="ConfirmButton" type="Control" parent="ConfirmPopUp/VBoxContainer/HBoxContainer" unique_id=889056815 node_paths=PackedStringArray("label", "background", "button")]
 custom_minimum_size = Vector2(64, 48)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -1245,7 +943,7 @@ text = "Buy"
 default_texture = ExtResource("35_uh67f")
 pressed_texture = ExtResource("36_sb2uy")
 
-[node name="Label" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/ConfirmButton"]
+[node name="Label" type="Label" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/ConfirmButton" unique_id=2013268121]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1260,7 +958,7 @@ text = "Buy"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/ConfirmButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/ConfirmButton" unique_id=823365483]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1273,7 +971,7 @@ patch_margin_top = 6
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="Button" type="Button" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/ConfirmButton"]
+[node name="Button" type="Button" parent="ConfirmPopUp/VBoxContainer/HBoxContainer/ConfirmButton" unique_id=1385658913]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15

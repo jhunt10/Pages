@@ -1,0 +1,13 @@
+[gd_resource type="Theme" format=3 uid="uid://qsca7lvb1a68"]
+
+[ext_resource type="Texture2D" uid="uid://cru4jfeef7juf" path="res://assets/Themes/CombatUi/FF7_Boarder.png" id="1_6v2fa"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dqj7t"]
+texture = ExtResource("1_6v2fa")
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+
+[resource]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_dqj7t")

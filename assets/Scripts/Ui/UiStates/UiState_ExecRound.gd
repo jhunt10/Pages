@@ -11,6 +11,7 @@ var _round_ended
 
 func start_state():
 	if _logging: print("Start UiState: Exec Round")
+	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Executing")
 	if CombatRootControl.is_paused:
 		CombatRootControl.resume_combat()
 	else:

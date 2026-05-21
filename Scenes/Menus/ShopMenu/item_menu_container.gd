@@ -5,9 +5,11 @@ signal back_button_pressed()
 signal catagory_selected(sub_list)
 signal item_button_pressed(item_key:String)
 
+@export var scroll_container:ScrollContainer
 @export var entries_container:VBoxContainer
 @export var premade_sub_item_list:ShopSubItemList
 @export var back_button:Button
+@export var scroll_bar:VScrollBar
 
 var _catagory_sub_lists:Dictionary = {}
 var _last_selected_catagory
@@ -15,6 +17,7 @@ var _last_selected_catagory
 func _ready() -> void:
 	premade_sub_item_list.hide()
 	back_button.pressed.connect(back_button_pressed.emit)
+	scroll_bar.share(scroll_container.get_v_scroll_bar())
 
 func set_data(data:Dictionary):
 	for old_cat in _catagory_sub_lists.keys():

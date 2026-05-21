@@ -9,6 +9,8 @@ var selection_context:String = "Pages"
 #signal mouse_enter_item(context, item_key, index)
 #signal mouse_exit_item(context, item_key, index)
 
+
+
 #signal item_button_down(item:BaseItem, button:InventoryItemButton)
 #signal item_button_hover(item:BaseItem)
 #signal item_button_hover_end
@@ -19,7 +21,7 @@ var selection_context:String = "Pages"
 #@export var tab_bar:TabBar
 @export var scroll_container:ScrollContainer
 @export var items_container:Container
-@export var scroll_bar:CustScrollBar
+@export var scroll_bar:VScrollBar
 @export var inventory_box_highlight:NinePatchRect
 @export var filter_option_button:LoadedOptionButton
 
@@ -60,7 +62,7 @@ func _ready() -> void:
 	inventory_box_highlight.hide()
 	scroll_container.mouse_entered.connect(on_mouse_enter_inventory_box)
 	scroll_container.mouse_exited.connect(on_mouse_exit_inventory_box)
-
+	scroll_bar.share(scroll_container.get_v_scroll_bar())
 var tick_count = 10
 
 func _process(delta: float) -> void:
@@ -137,14 +139,13 @@ func build_item_slots():
 	# Remove and resort Item Groups
 	for sub_group_key in _item_groups.keys():
 		items_container.remove_child(_item_groups[sub_group_key])
-	print("Item Groups:")
+	#print("Item Groups:")
 	for sub_group_key in get_sorted_sub_group_keys():
 		print(sub_group_key)
 		if _item_groups.keys().has(sub_group_key):
 			items_container.add_child(_item_groups[sub_group_key])
-	print("\n\n")
+	#print("\n\n")
 	#await get_tree().process_frame
-	scroll_bar.calc_bar_size()
 	loading_message_container.hide()
 	_refilter()
 	rebuild_on_next_scync = false
@@ -320,7 +321,6 @@ func _refilter():
 		else:
 			group.hide()
 	await get_tree().process_frame
-	scroll_bar.calc_bar_size()
 	#filter_option_button.load_options()
 
 func should_group_be_visible(group_key:String, _group:InventorySubGroupContainer, cur_title:String)->bool:

@@ -1,24 +1,25 @@
-[gd_scene load_steps=18 format=3 uid="uid://6dlh0wlnsedb"]
+[gd_scene format=3 uid="uid://6dlh0wlnsedb"]
 
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_input_control.gd" id="1_bqb47"]
+[ext_resource type="Script" uid="uid://det2cwlt2plqh" path="res://Scenes/Combat/UiNodes/QueInput/que_input_control.gd" id="1_bqb47"]
 [ext_resource type="Texture2D" uid="uid://clb0p8uenqo8c" path="res://Scenes/Combat/UiNodes/QueInput/PopUpButton.png" id="2_7xk62"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_ir7m8"]
+[ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_ir7m8"]
 [ext_resource type="Texture2D" uid="uid://cdot2t5117n5f" path="res://Scenes/Combat/UiNodes/QueInput/ScrollPatch.png" id="3_2484v"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/stat_button_control.gd" id="3_pfyt3"]
+[ext_resource type="Script" uid="uid://cq6m3nqwuwegl" path="res://Scenes/Combat/UiNodes/QueInput/stat_button_control.gd" id="3_pfyt3"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="3_pw6b0"]
-[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="3_u12om"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="3_u12om"]
 [ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="4_ffoob"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/que_input_display_control.gd" id="5_w4kvs"]
+[ext_resource type="Theme" uid="uid://qsca7lvb1a68" path="res://assets/Themes/ComputerPanels/combat_panel_theme.tres" id="4_x65h1"]
+[ext_resource type="Texture2D" uid="uid://dc5wy6j8a4hu3" path="res://assets/Themes/CombatUi/PortraitRect.png" id="5_5lmue"]
+[ext_resource type="Script" uid="uid://dqg11n12xylaj" path="res://Scenes/Combat/UiNodes/QueInput/que_input_display_control.gd" id="5_w4kvs"]
 [ext_resource type="PackedScene" uid="uid://cpy0gmuoekexl" path="res://Scenes/Combat/UiNodes/QueInput/que_input_button_control.tscn" id="6_ua6n5"]
 [ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="7_g8caj"]
-[ext_resource type="Texture2D" uid="uid://e71sf31qf71e" path="res://Scenes/Combat/UiNodes/QueDisplay/QueDisplayBackground.png" id="11_quda2"]
 [ext_resource type="PackedScene" uid="uid://br08s3uioxwuh" path="res://Scenes/Combat/UiNodes/QueInput/page_details_hover_box.tscn" id="17_oh6yv"]
-[ext_resource type="Script" path="res://Scenes/Combat/UiNodes/QueInput/QueDisplayButton.gd" id="18_8nhhy"]
+[ext_resource type="Script" uid="uid://hyby6lsrd4fj" path="res://Scenes/Combat/UiNodes/QueInput/QueDisplayButton.gd" id="18_8nhhy"]
 [ext_resource type="Texture2D" uid="uid://cr1m3llr0pgtd" path="res://Scenes/Combat/UiNodes/QueDisplay/EmptySlotBackground.png" id="19_d7qpq"]
 [ext_resource type="Texture2D" uid="uid://dq2fpuokt1s5r" path="res://Scenes/Combat/UiNodes/QueDisplay/SlotBackground.png" id="19_gjejj"]
 [ext_resource type="Texture2D" uid="uid://bu1v4w3d6hau" path="res://Scenes/Combat/UiNodes/QueDisplay/FilledSlotBackground.png" id="20_k35kq"]
 
-[node name="QueInputControl" type="Control" node_paths=PackedStringArray("_fill_button", "nodes_container", "que_display_control", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "page_Selection_container", "hover_box")]
+[node name="QueInputControl" type="Control" unique_id=353439882 node_paths=PackedStringArray("_fill_button", "nodes_container", "que_display_control", "back_patch", "main_container", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "page_Selection_container", "hover_box")]
 custom_minimum_size = Vector2(124, 0)
 layout_mode = 3
 anchors_preset = 12
@@ -31,7 +32,7 @@ script = ExtResource("1_bqb47")
 showing = true
 _fill_button = NodePath("VBoxContainer/QueInputBackPatchContainer/Background/FillQueButton")
 nodes_container = NodePath("VBoxContainer")
-que_display_control = NodePath("VBoxContainer/QueDisplayControl")
+que_display_control = NodePath("VBoxContainer/QueInputPanelContainer")
 back_patch = NodePath("VBoxContainer/QueInputBackPatchContainer")
 main_container = NodePath("VBoxContainer/QueInputBackPatchContainer/HBoxContainer")
 page_button_prefab = NodePath("VBoxContainer/QueInputBackPatchContainer/HBoxContainer/HBoxContainer/QueInputButtonControl")
@@ -43,23 +44,23 @@ page_Selection_container = NodePath("VBoxContainer/PageSelectionContainer")
 hover_box = NodePath("PageDetailsHoverBox")
 state = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1740103642]
 layout_mode = 0
-offset_left = 661.0
+offset_left = 656.0
 offset_top = -172.0
-offset_right = 781.0
-offset_bottom = 68.0
+offset_right = 778.0
+offset_bottom = 69.0
 
-[node name="TopPadding" type="Control" parent="VBoxContainer"]
+[node name="TopPadding" type="Control" parent="VBoxContainer" unique_id=610299941]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="PageSelectionContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="PageSelectionContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=698237966]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/PageSelectionContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/PageSelectionContainer" unique_id=1254978548]
 custom_minimum_size = Vector2(200, 32)
 layout_mode = 2
 size_flags_vertical = 4
@@ -69,7 +70,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="VBoxContainer/PageSelectionContainer/NinePatchRect"]
+[node name="Label" type="Label" parent="VBoxContainer/PageSelectionContainer/NinePatchRect" unique_id=605712713]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,14 +82,14 @@ text = "Select Page to Reload"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/PageSelectionContainer"]
+[node name="Button" type="Button" parent="VBoxContainer/PageSelectionContainer" unique_id=1930667406]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(200, 64)
 layout_mode = 2
 text = "Confirm"
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer/PageSelectionContainer/Button"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="VBoxContainer/PageSelectionContainer/Button" unique_id=1657928696]
 custom_minimum_size = Vector2(200, 32)
 layout_mode = 1
 anchors_preset = 15
@@ -102,7 +103,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="VBoxContainer/PageSelectionContainer/Button/NinePatchRect2"]
+[node name="Label" type="Label" parent="VBoxContainer/PageSelectionContainer/Button/NinePatchRect2" unique_id=1632683789]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,42 +116,45 @@ text = "Cancel"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="QueDisplayControl" type="Container" parent="VBoxContainer" node_paths=PackedStringArray("portrait", "main_container", "premade_que_button", "slots_container", "background", "inner_container")]
-custom_minimum_size = Vector2(120, 64)
+[node name="QueInputPanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=2059864122 node_paths=PackedStringArray("portrait", "premade_que_button", "slots_container")]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("4_x65h1")
 script = ExtResource("5_w4kvs")
-portrait = NodePath("HBoxContainer/PortraitTextureRect")
-main_container = NodePath("HBoxContainer")
+portrait = NodePath("HBoxContainer/PortraitFrameTextureRect/PortraitTextureRect")
 premade_que_button = NodePath("HBoxContainer/SlotsContainer/QueDisplayButton")
 slots_container = NodePath("HBoxContainer/SlotsContainer")
-background = NodePath("Background")
-inner_container = NodePath("HBoxContainer")
-margin_override = 8
 
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/QueDisplayControl"]
-layout_mode = 2
-texture = ExtResource("11_quda2")
-patch_margin_left = 61
-patch_margin_top = 32
-patch_margin_right = 12
-patch_margin_bottom = 32
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QueDisplayControl"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QueInputPanelContainer" unique_id=1422349211]
 layout_mode = 2
 
-[node name="PortraitTextureRect" type="TextureRect" parent="VBoxContainer/QueDisplayControl/HBoxContainer"]
+[node name="PortraitFrameTextureRect" type="TextureRect" parent="VBoxContainer/QueInputPanelContainer/HBoxContainer" unique_id=1113817428]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
+texture = ExtResource("5_5lmue")
+
+[node name="PortraitTextureRect" type="TextureRect" parent="VBoxContainer/QueInputPanelContainer/HBoxContainer/PortraitFrameTextureRect" unique_id=1362110404]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("7_g8caj")
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/QueDisplayControl/HBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer/QueInputPanelContainer/HBoxContainer" unique_id=1502470082]
 layout_mode = 2
 
-[node name="SlotsContainer" type="HBoxContainer" parent="VBoxContainer/QueDisplayControl/HBoxContainer"]
+[node name="SlotsContainer" type="HBoxContainer" parent="VBoxContainer/QueInputPanelContainer/HBoxContainer" unique_id=861645763]
 layout_mode = 2
 theme_override_constants/separation = 5
 
-[node name="QueDisplayButton" type="Control" parent="VBoxContainer/QueDisplayControl/HBoxContainer/SlotsContainer" node_paths=PackedStringArray("background", "page_icon", "button")]
+[node name="QueDisplayButton" type="Control" parent="VBoxContainer/QueInputPanelContainer/HBoxContainer/SlotsContainer" unique_id=576866188 node_paths=PackedStringArray("background", "page_icon", "button")]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 script = ExtResource("18_8nhhy")
@@ -161,7 +165,7 @@ empty_background_texture = ExtResource("19_d7qpq")
 gap_background_texture = ExtResource("19_gjejj")
 filled_background_texture = ExtResource("20_k35kq")
 
-[node name="Background" type="TextureRect" parent="VBoxContainer/QueDisplayControl/HBoxContainer/SlotsContainer/QueDisplayButton"]
+[node name="Background" type="TextureRect" parent="VBoxContainer/QueInputPanelContainer/HBoxContainer/SlotsContainer/QueDisplayButton" unique_id=833246297]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -170,7 +174,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("19_d7qpq")
 
-[node name="PageIcon" type="TextureRect" parent="VBoxContainer/QueDisplayControl/HBoxContainer/SlotsContainer/QueDisplayButton"]
+[node name="PageIcon" type="TextureRect" parent="VBoxContainer/QueInputPanelContainer/HBoxContainer/SlotsContainer/QueDisplayButton" unique_id=1652536824]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -179,7 +183,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/QueDisplayControl/HBoxContainer/SlotsContainer/QueDisplayButton"]
+[node name="Button" type="Button" parent="VBoxContainer/QueInputPanelContainer/HBoxContainer/SlotsContainer/QueDisplayButton" unique_id=2088136801]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -188,7 +192,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="QueInputBackPatchContainer" type="Container" parent="VBoxContainer" node_paths=PackedStringArray("background", "inner_container")]
+[node name="QueInputBackPatchContainer" type="Container" parent="VBoxContainer" unique_id=902089309 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(108, 80)
 layout_mode = 2
 script = ExtResource("2_ir7m8")
@@ -196,10 +200,10 @@ background = NodePath("Background")
 inner_container = NodePath("HBoxContainer")
 sides_padding = 14
 
-[node name="Control" type="Control" parent="VBoxContainer/QueInputBackPatchContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/QueInputBackPatchContainer" unique_id=1558744919]
 layout_mode = 2
 
-[node name="SideStatButtonControl" type="Control" parent="VBoxContainer/QueInputBackPatchContainer/Control" node_paths=PackedStringArray("button_texture", "button", "label")]
+[node name="SideStatButtonControl" type="Control" parent="VBoxContainer/QueInputBackPatchContainer/Control" unique_id=1920982644 node_paths=PackedStringArray("button_texture", "button", "label")]
 show_behind_parent = true
 clip_contents = true
 layout_mode = 1
@@ -217,13 +221,13 @@ button_texture = NodePath("TextureRect")
 button = NodePath("TextureRect/Button")
 label = NodePath("TextureRect/Label")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/QueInputBackPatchContainer/Control/SideStatButtonControl"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/QueInputBackPatchContainer/Control/SideStatButtonControl" unique_id=1759169054]
 layout_mode = 0
 offset_left = -128.0
 offset_bottom = 64.0
 texture = ExtResource("2_7xk62")
 
-[node name="Label" type="Label" parent="VBoxContainer/QueInputBackPatchContainer/Control/SideStatButtonControl/TextureRect"]
+[node name="Label" type="Label" parent="VBoxContainer/QueInputBackPatchContainer/Control/SideStatButtonControl/TextureRect" unique_id=350697152]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -236,7 +240,7 @@ text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/QueInputBackPatchContainer/Control/SideStatButtonControl/TextureRect"]
+[node name="Button" type="Button" parent="VBoxContainer/QueInputBackPatchContainer/Control/SideStatButtonControl/TextureRect" unique_id=309533519]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -245,7 +249,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TopStatButtonControl" type="Control" parent="VBoxContainer/QueInputBackPatchContainer/Control" node_paths=PackedStringArray("button_texture", "button", "label")]
+[node name="TopStatButtonControl" type="Control" parent="VBoxContainer/QueInputBackPatchContainer/Control" unique_id=362248667 node_paths=PackedStringArray("button_texture", "button", "label")]
 clip_contents = true
 layout_mode = 1
 anchors_preset = 1
@@ -263,14 +267,14 @@ button_texture = NodePath("TextureRect")
 button = NodePath("TextureRect/Button")
 label = NodePath("TextureRect/Label")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl" unique_id=1843327076]
 layout_mode = 0
 offset_top = 64.0
 offset_right = 128.0
 offset_bottom = 128.0
 texture = ExtResource("2_7xk62")
 
-[node name="Label" type="Label" parent="VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl/TextureRect"]
+[node name="Label" type="Label" parent="VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl/TextureRect" unique_id=1415186451]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -283,7 +287,7 @@ text = "Start"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl/TextureRect"]
+[node name="Button" type="Button" parent="VBoxContainer/QueInputBackPatchContainer/Control/TopStatButtonControl/TextureRect" unique_id=1553264595]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -292,7 +296,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="NinePatchRect" parent="VBoxContainer/QueInputBackPatchContainer"]
+[node name="Background" type="NinePatchRect" parent="VBoxContainer/QueInputBackPatchContainer" unique_id=468201823]
 layout_mode = 2
 texture = ExtResource("3_2484v")
 patch_margin_left = 21
@@ -300,7 +304,7 @@ patch_margin_top = 8
 patch_margin_right = 21
 patch_margin_bottom = 8
 
-[node name="FillQueButton" type="Button" parent="VBoxContainer/QueInputBackPatchContainer/Background"]
+[node name="FillQueButton" type="Button" parent="VBoxContainer/QueInputBackPatchContainer/Background" unique_id=247272302]
 layout_mode = 0
 offset_left = 270.0
 offset_top = -63.0
@@ -308,27 +312,28 @@ offset_right = 309.0
 offset_bottom = -32.0
 text = " Fill "
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QueInputBackPatchContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QueInputBackPatchContainer" unique_id=1630360398]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QueInputBackPatchContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/QueInputBackPatchContainer/HBoxContainer" unique_id=550841808]
 layout_mode = 2
 
-[node name="QueInputButtonControl" parent="VBoxContainer/QueInputBackPatchContainer/HBoxContainer/HBoxContainer" instance=ExtResource("6_ua6n5")]
+[node name="QueInputButtonControl" parent="VBoxContainer/QueInputBackPatchContainer/HBoxContainer/HBoxContainer" unique_id=1388769299 instance=ExtResource("6_ua6n5")]
 layout_mode = 2
 
-[node name="BottomPadding" type="Control" parent="VBoxContainer"]
+[node name="BottomPadding" type="Control" parent="VBoxContainer" unique_id=1412286705]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer"]
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer" unique_id=1742528292]
 visible = false
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 
-[node name="PageDetailsHoverBox" parent="." instance=ExtResource("17_oh6yv")]
+[node name="PageDetailsHoverBox" parent="." unique_id=1626675331 instance=ExtResource("17_oh6yv")]
 visible = false
+layout_mode = 0
 offset_left = 760.0
 offset_top = -96.0
 offset_right = 760.0

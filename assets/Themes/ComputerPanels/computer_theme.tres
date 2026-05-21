@@ -1,0 +1,59 @@
+[gd_resource type="Theme" format=3 uid="uid://bnlswrbqh03wx"]
+
+[ext_resource type="Texture2D" uid="uid://c767ujv5e36ky" path="res://assets/Themes/ComputerPanels/computer_panel_64.png" id="1_bvv6c"]
+[ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="1_hgpg3"]
+[ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="1_n5fhl"]
+[ext_resource type="StyleBox" uid="uid://dc0c1uqu7guxm" path="res://assets/Themes/ComputerPanels/button_normal_box_texture.tres" id="2_wrtmc"]
+[ext_resource type="StyleBox" uid="uid://dqbqmnmbl322s" path="res://assets/Themes/ComputerPanels/button_pressed_style_box_texture.tres" id="3_poog3"]
+[ext_resource type="Texture2D" uid="uid://cand1e8p22oc8" path="res://assets/Themes/ComputerPanels/SubPanel.png" id="6_b4sav"]
+[ext_resource type="Texture2D" uid="uid://c4x3fv2vsivjy" path="res://assets/Themes/ComputerPanels/UpButton.png" id="6_ofvv7"]
+[ext_resource type="Texture2D" uid="uid://bi4glc8xexhqi" path="res://assets/Themes/ComputerPanels/DownButton.png" id="7_8p0co"]
+[ext_resource type="StyleBox" uid="uid://nwem0n16pjsc" path="res://assets/Themes/ComputerPanels/scroll_grabber_style_box_texture.tres" id="8_8p0co"]
+[ext_resource type="StyleBox" uid="uid://bk3gh5mr8n3ec" path="res://assets/Themes/ComputerPanels/scroll_style_box_flat.tres" id="9_b4sav"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hgpg3"]
+texture = ExtResource("1_bvv6c")
+texture_margin_left = 4.0
+texture_margin_top = 24.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_njnvc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_njnvc"]
+texture = ExtResource("6_b4sav")
+texture_margin_left = 2.0
+texture_margin_top = 2.0
+texture_margin_right = 2.0
+texture_margin_bottom = 2.0
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_disabled_color = Color(0.23753911, 0.23753914, 0.23753911, 0.7529412)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("1_n5fhl")
+Button/styles/disabled = ExtResource("2_wrtmc")
+Button/styles/hover = ExtResource("2_wrtmc")
+Button/styles/hover_pressed = ExtResource("3_poog3")
+Button/styles/normal = ExtResource("2_wrtmc")
+Button/styles/pressed = ExtResource("3_poog3")
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/fonts/font = ExtResource("1_hgpg3")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_hgpg3")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/fonts/normal_font = ExtResource("1_n5fhl")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_njnvc")
+ScrollContainer/styles/panel = SubResource("StyleBoxTexture_njnvc")
+VScrollBar/icons/decrement = ExtResource("6_ofvv7")
+VScrollBar/icons/decrement_highlight = ExtResource("6_ofvv7")
+VScrollBar/icons/decrement_pressed = ExtResource("6_ofvv7")
+VScrollBar/icons/increment = ExtResource("7_8p0co")
+VScrollBar/icons/increment_highlight = ExtResource("7_8p0co")
+VScrollBar/icons/increment_pressed = ExtResource("7_8p0co")
+VScrollBar/styles/grabber = ExtResource("8_8p0co")
+VScrollBar/styles/grabber_highlight = ExtResource("8_8p0co")
+VScrollBar/styles/grabber_pressed = ExtResource("8_8p0co")
+VScrollBar/styles/scroll = ExtResource("9_b4sav")
+VScrollBar/styles/scroll_focus = ExtResource("9_b4sav")

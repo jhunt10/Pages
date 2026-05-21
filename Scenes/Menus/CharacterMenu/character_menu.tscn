@@ -13,17 +13,17 @@
 [ext_resource type="PackedScene" uid="uid://cbexkor24ce0h" path="res://Scenes/Menus/CharacterMenu/MenuPages/EquipmentMenu/equipment_menu_page.tscn" id="9_bofun"]
 [ext_resource type="PackedScene" uid="uid://c4bhs27nmviba" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/pages_menu_page.tscn" id="10_porhc"]
 [ext_resource type="PackedScene" uid="uid://bjatwk3wdws0y" path="res://Scenes/Menus/CharacterMenu/MenuPages/SuppliesMenuPage/supplies_menu_page.tscn" id="11_j5k8v"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="12_dy5pv"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="12_dy5pv"]
 [ext_resource type="Script" uid="uid://c8jheyrbbjxrh" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="12_yj8n3"]
 [ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="13_0dekw"]
 [ext_resource type="Shader" uid="uid://sw8mtlu7l6dr" path="res://Scenes/Menus/CharacterMenu/character_menu.gdshader" id="19_5ikvh"]
 [ext_resource type="Script" uid="uid://ioyd3nus0jpi" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/level_up_page_control.gd" id="20_dw0jf"]
 [ext_resource type="PackedScene" uid="uid://bivhm6cnkig2b" path="res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stats_menu_page.tscn" id="20_wjece"]
-[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://Scenes/Themes/standard_theme_red.tres" id="21_dpoq2"]
+[ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="21_dpoq2"]
 [ext_resource type="PackedScene" uid="uid://dbtugo1kq2imi" path="res://Scenes/Menus/CharacterMenu/MenuPages/InventoryPage/inventory_menu_page.tscn" id="21_yal5w"]
 [ext_resource type="Script" uid="uid://y2gsag3g4cxg" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_menu_page_control.gd" id="22_culn7"]
 [ext_resource type="Script" uid="uid://cojte77dvgldq" path="res://Scenes/Menus/LevelUpMenu/levelup_stat_input_container.gd" id="23_06psp"]
-[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="23_wu165"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="23_wu165"]
 [ext_resource type="Script" uid="uid://enj81pt6wtmr" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_background_control.gd" id="24_m2tnw"]
 [ext_resource type="Script" uid="uid://dndbsj4mjc6m6" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/skill_tree_node.gd" id="24_nm3km"]
 [ext_resource type="Texture2D" uid="uid://6wag0sjdov42" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/LevelUpStatButton.png" id="24_sivxw"]
@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" uid="uid://r7e0y5yv45uc" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/SkillNodeOutline.png" id="26_e6msw"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="26_p4ux6"]
 [ext_resource type="Texture2D" uid="uid://ucfwf1adg5vt" path="res://Scenes/Menus/CharacterMenu/MenuPages/SkillTreeMenuPage/LevelUpStatButton_Disabled.png" id="26_ss4i1"]
-[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="27_twb55"]
 [ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="29_pcs3j"]
 [ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="30_uaf37"]
 [ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="31_5ge4g"]
@@ -1658,17 +1657,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StatsPage" parent="ScaleControl/RightPageControl" unique_id=124354155 node_paths=PackedStringArray("parent_character_menu") instance=ExtResource("20_wjece")]
+visible = false
 layout_mode = 0
 parent_character_menu = NodePath("../../..")
 
-[node name="SkillTreePageControl" type="Control" parent="ScaleControl/RightPageControl" unique_id=434607673 node_paths=PackedStringArray("character_menu", "scroll_bar", "background_control", "tree_container", "row_prefab", "grid_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
-visible = false
+[node name="SkillTreePageControl" type="Control" parent="ScaleControl/RightPageControl" unique_id=434607673 node_paths=PackedStringArray("character_menu", "background_control", "tree_container", "row_prefab", "grid_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
 anchors_preset = 0
 offset_right = 292.0
 offset_bottom = 384.0
 script = ExtResource("22_culn7")
 character_menu = NodePath("../../..")
-scroll_bar = NodePath("VBoxContainer/HBoxContainer/ScrollBar")
 background_control = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/BackgroundControl")
 tree_container = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer")
 row_prefab = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/Row")
@@ -2053,7 +2051,7 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
+vertical_scroll_mode = 2
 
 [node name="Control" type="Control" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=77640485]
 layout_mode = 2
@@ -2125,13 +2123,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="ScrollBar" parent="ScaleControl/RightPageControl/SkillTreePageControl/VBoxContainer/HBoxContainer" unique_id=2058042467 node_paths=PackedStringArray("scroll_container") instance=ExtResource("27_twb55")]
-visible = false
-layout_mode = 2
-always_show = true
-scroll_container = NodePath("../ScrollContainer")
-debug_name = "SkillTree"
 
 [node name="MouseOverControl" type="Control" parent="ScaleControl" unique_id=180263801 node_paths=PackedStringArray("drag_item_background", "drag_item_icon")]
 visible = false

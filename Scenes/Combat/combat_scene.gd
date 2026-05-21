@@ -77,9 +77,9 @@ func _ready() -> void:
 	
 	map_background.set_map(MapController)
 	
-	if dialog_controller:
-		ui_control.hide()
-		MapController.grid_tile_map.hide()
+	#if dialog_controller:
+		#ui_control.hide()
+		#MapController.grid_tile_map.hide()
 	#
 	#MapController._build_terrain()
 	for actor:BaseActor in GameState._actors.values():
@@ -397,7 +397,7 @@ static func resume_combat():
 	
 
 func _on_combat_screen_blackout():
-	ui_control.show()
+	ui_control.active_combat_control.show()
 	MapController.grid_tile_map.show()
 	ui_control.build_player_stats_panels()
 

@@ -1,14 +1,11 @@
 class_name QueInputDisplayControl
-extends BackPatchContainer
+extends PanelContainer
 
 const PADDING = 8
 
 @export var portrait:TextureRect
-@export var main_container:HBoxContainer
 @export var premade_que_button:QueDisplayButton
 @export var slots_container:HBoxContainer
-#@onready var que_path_arrow:Sprite2D = $QuePathArrow
-
 @export var show_preview_movement:bool
 @export var show_gaps:bool
 
@@ -19,7 +16,6 @@ var _slot_buttons = []
 var _real_slots = []
 var movement_preview_pos:MapPos
 var _target_display_key
-var _resize:bool = false
 var _delayed_init = false
 
 func _ready():
@@ -32,12 +28,6 @@ func _ready():
 		portrait.texture = _actor.sprite.get_portrait_sprite()
 		_build_slots()
 		_sync()
-	
-func _process(_delta: float) -> void:
-	if _resize:
-		self.size = Vector2i(main_container.size.x + (2 * PADDING),
-							main_container.size.y + (2 * PADDING))
-		_resize = false
 
 func _sync():
 	_sync_icons()
@@ -90,7 +80,6 @@ func _build_slots():
 		_slot_buttons.append(new_button)
 		if not is_gap:
 			_real_slots.append(new_button)
-	_resize = true
 	_sync_icons()
 
 func _sync_icons():

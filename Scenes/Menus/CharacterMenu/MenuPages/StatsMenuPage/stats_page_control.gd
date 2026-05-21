@@ -1,13 +1,6 @@
 class_name StatsPageControl
 extends Control
 
-#@export var premade_stat_entry:StatEntryContainer
-#@export var entry_container:Container
-#@export var scroll_bar:CustScrollBar
-
-#@export var block_evade_display:BlockEvadeStatEntry
-#@export var attack_stats_display:AttackStatsDisplayControl
-
 @export var parent_character_menu:CharacterMenuControl
 @export var resistance_container:ResistancesContainer
 
@@ -54,7 +47,6 @@ extends Control
 @export var block_back_chance_label:Label
 
 @export var full_stat_display:FullStatDisplayControl
-@export var scroll_bar:CustScrollBar
 
 func _ready() -> void:
 	speed_stat_label.mouse_over_parent = self
@@ -172,5 +164,4 @@ func sync():
 	block_back_chance_label.text = str(val)
 	
 	resistance_container.set_values(actor)
-	scroll_bar.calc_bar_size()
 	

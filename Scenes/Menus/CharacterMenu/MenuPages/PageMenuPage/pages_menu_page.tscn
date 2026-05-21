@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b27uqjmkuqgau" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/page_menu_page_control.gd" id="1_1k8ki"]
 [ext_resource type="Texture2D" uid="uid://mpwjrtfjnbth" path="res://Scenes/Menus/CharacterMenu/BookBackground.png" id="2_24rjq"]
-[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://Scenes/Themes/standard_theme.tres" id="3_2qajg"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="3_2qajg"]
 [ext_resource type="Texture2D" uid="uid://hoqi8xx27lqn" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/Sprites/TitlePageFrame.png" id="4_00pl2"]
 [ext_resource type="Texture2D" uid="uid://ijuqwfxfdvsh" path="res://Scenes/UiNodes/ExpBar/AttributesIcon_SpriteSheetpdn.png" id="6_8o3fe"]
 [ext_resource type="PackedScene" uid="uid://dugyf6csi731x" path="res://Scenes/Menus/CharacterMenu/MenuPages/PageMenuPage/HDotScrollBar/h_dot_scroll_bar_control.tscn" id="7_f7tj7"]
@@ -15,9 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="10_7slgj"]
 [ext_resource type="Texture2D" uid="uid://b1cxya7rtggyh" path="res://assets/Sprites/UI/CharacterEdit/EditIcon.png" id="10_wy4fh"]
 [ext_resource type="Texture2D" uid="uid://cg1yo6bhpalea" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot.png" id="11_ip8im"]
-[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://Scenes/Themes/readable_theme.tres" id="11_xguv4"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="11_xguv4"]
 [ext_resource type="Texture2D" uid="uid://byq6wa2xqa1mt" path="res://ObjectDefs/Actions/CommonActions/BasicMovement/Sprites/MoveForward.png" id="12_xhx26"]
-[ext_resource type="PackedScene" uid="uid://bpvy87uagttpr" path="res://Scenes/UiNodes/ScollBar/scroll_bar.tscn" id="14_n2oik"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="16_r42l2"]
 
 [sub_resource type="Animation" id="Animation_h263m"]
 length = 0.001
@@ -87,7 +87,7 @@ _data = {
 &"waiting": SubResource("Animation_j1ppp")
 }
 
-[node name="PagePage" type="Control" unique_id=591439860 node_paths=PackedStringArray("title_label", "title_page_button", "action_input_preview", "premade_page_set", "sets_container", "premade_page_button", "scroll_bar", "name_label", "level_label", "exp_bar")]
+[node name="PagePage" type="Control" unique_id=591439860 node_paths=PackedStringArray("title_label", "title_page_button", "action_input_preview", "premade_page_set", "sets_container", "premade_page_button", "left_padding", "scroll_container", "name_label", "level_label", "exp_bar")]
 custom_minimum_size = Vector2(292, 395)
 layout_mode = 3
 anchors_preset = 0
@@ -100,8 +100,9 @@ action_input_preview = NodePath("VBoxContainer/ActionInputPreview")
 premade_page_set = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/SlotSetsContainer/PageSlotSetContainer")
 sets_container = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/SlotSetsContainer")
 premade_page_button = NodePath("VBoxContainer/HBoxContainer/ScrollContainer/SlotSetsContainer/PageSlotSetContainer/FlowContainer/PageSlotButton")
+left_padding = NodePath("VBoxContainer/HBoxContainer/LeftPadSeparator")
+scroll_container = NodePath("VBoxContainer/HBoxContainer/ScrollContainer")
 slot_width = 4
-scroll_bar = NodePath("VBoxContainer/HBoxContainer/PagesScrollBar")
 name_label = NodePath("VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer/NameLabel")
 level_label = NodePath("VBoxContainer/TitleContainer/VBoxContainer/TitleNameContainer/LevelLabel")
 exp_bar = NodePath("VBoxContainer/TitleContainer/VBoxContainer/XpBarContainer/ExpBar")
@@ -359,7 +360,8 @@ color = Color(0.470588, 0, 0, 1)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer" unique_id=1984344487]
+[node name="LeftPadSeparator" type="VSeparator" parent="VBoxContainer/HBoxContainer" unique_id=1984344487]
+visible = false
 modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(14, 0)
 layout_mode = 2
@@ -367,8 +369,8 @@ layout_mode = 2
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer" unique_id=1760165957]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("16_r42l2")
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 3
 
 [node name="SlotSetsContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer" unique_id=1525330293]
 layout_mode = 2
@@ -398,13 +400,6 @@ theme_override_constants/v_separation = 0
 
 [node name="PageSlotButton" parent="VBoxContainer/HBoxContainer/ScrollContainer/SlotSetsContainer/PageSlotSetContainer/FlowContainer" unique_id=1340559407 instance=ExtResource("8_ey4v2")]
 layout_mode = 2
-
-[node name="PagesScrollBar" parent="VBoxContainer/HBoxContainer" unique_id=419258069 node_paths=PackedStringArray("scroll_container", "opposite_spacer") instance=ExtResource("14_n2oik")]
-visible = false
-layout_mode = 2
-scroll_container = NodePath("../ScrollContainer")
-debug_name = "Pages"
-opposite_spacer = NodePath("../VSeparator")
 
 [node name="HDotScrollBarControl" parent="VBoxContainer" unique_id=805718855 instance=ExtResource("7_f7tj7")]
 visible = false
