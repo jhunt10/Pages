@@ -360,6 +360,7 @@ npc_index_label = NodePath("QueContainer/PortrateBackgroundTextureRect/PortraitT
 layout_mode = 2
 
 [node name="PortrateBackgroundTextureRect" type="TextureRect" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer" unique_id=816562318]
+custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
 texture = ExtResource("18_we17c")
 expand_mode = 2
@@ -393,7 +394,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -2.0
+offset_top = -1.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -401,6 +403,8 @@ theme = ExtResource("14_pakc7")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("10_0m67q")
+theme_override_font_sizes/font_size = 13
 text = "A"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -408,6 +412,7 @@ vertical_alignment = 2
 [node name="PageSlotPrefab" type="Control" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer" unique_id=126426519 node_paths=PackedStringArray("background", "gap_icon", "_page_icon", "highlight", "dead_icon", "unknown_icon")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+size_flags_vertical = 4
 mouse_filter = 1
 script = ExtResource("20_tpii5")
 background = NodePath("PageSlot")

@@ -153,7 +153,7 @@ script = ExtResource("8_8l3el")
 game_over_screen = NodePath("../EndScreensControl/GameOverScreen")
 victory_screen = NodePath("../EndScreensControl/GameVictoryScreen")
 pause_menu = NodePath("../PauseMenuControl")
-actor_pointer = NodePath("ActorPointerControl")
+actor_pointer = NodePath("../ActorPointerControl")
 active_combat_control = NodePath("ActiveCombatControl")
 target_input_display = NodePath("../TargetInputControl")
 player_stats_panels_container = NodePath("ActiveCombatControl/PlayerStatPanelsContainer")
@@ -420,22 +420,6 @@ offset_top = 8.0
 offset_right = -8.0
 grow_horizontal = 0
 
-[node name="ActorPointerControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=957088050 node_paths=PackedStringArray("sprite")]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("43_4pyrd")
-sprite = NodePath("Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorPointerControl" unique_id=1683779774]
-visible = false
-texture = ExtResource("44_8qg5x")
-offset = Vector2(0, -28)
-
 [node name="ActiveCombatControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=1385019995]
 layout_mode = 1
 anchors_preset = 15
@@ -672,6 +656,22 @@ expand_mode = 1
 layout_mode = 2
 theme = ExtResource("27_3mvka")
 text = "Item Name +1"
+
+[node name="ActorPointerControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=957088050 node_paths=PackedStringArray("sprite")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("43_4pyrd")
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="MoveableCamera2D/CanvasLayer/ActorPointerControl" unique_id=1683779774]
+visible = false
+texture = ExtResource("44_8qg5x")
+offset = Vector2(0, -28)
 
 [node name="EndScreensControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=823660565]
 visible = false

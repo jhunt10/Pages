@@ -38,7 +38,6 @@ signal page_special_selected(action_key:String)
 	set(val):
 		state = val
 		if nodes_container:
-			print(self.get_parent().size)
 			nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
 			if state == States.Hidden:
 				nodes_container.position.y = 0

@@ -41,6 +41,24 @@ func set_team_data(data):
 	team_data = data.duplicate()
 
 func add_actor(actor:BaseActor):
+	if _actors.keys().has(actor.Id):
+		return
+	# Set Team Index
+	if not actor.is_player:
+		var match_count = 0
+		var this_name = actor.get_raw_display_name()
+		var first_match_actor:BaseActor = null
+		for other_actor:BaseActor in _actors.values():
+			if this_name == other_actor.get_raw_display_name():
+				match_count += 1
+				if first_match_actor == null:
+					first_match_actor = other_actor
+		# If this is "B" we need to set "A"
+		if match_count == 1:
+			first_match_actor.enemy_npc_index = 0
+		if match_count >= 1:
+			actor.enemy_npc_index = match_count
+			
 	_actors[actor.Id] = actor
 
 func get_actor(actor_id:String, allow_dead:bool=false, error_if_null:bool=true)->BaseActor:

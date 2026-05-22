@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://br08s3uioxwuh" path="res://Scenes/Combat/UiNodes/QueInput/page_details_hover_box.tscn" id="9_58415"]
 [ext_resource type="Texture2D" uid="uid://ds06ojwvkmeit" path="res://Scenes/Combat/UiNodes/TargetInputControl/ArrowIcon.png" id="10_534j1"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="11_eq70b"]
+[ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="14_u1hsq"]
 
 [node name="TargetInputControl" type="Control" unique_id=1327304093 node_paths=PackedStringArray("close_button", "comfirm_button", "cancel_button", "title_label", "target_type_label", "actor_portrait", "page_icon", "page_details", "lock_on_container", "lock_on_box", "target_icon", "target_icon_container", "target_npc_index_label", "spot_container", "x_label", "y_label")]
 layout_mode = 3
@@ -252,6 +253,7 @@ theme = ExtResource("11_eq70b")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("14_u1hsq")
 text = "A"
 horizontal_alignment = 2
 vertical_alignment = 2
@@ -277,6 +279,7 @@ vertical_alignment = 1
 
 [node name="CheckBox" type="CheckBox" parent="CenterContainer/PanelContainer/VBoxContainer/TargetLockContainer" unique_id=1398118327]
 layout_mode = 2
+flat = true
 
 [node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=482265358]
 self_modulate = Color(1, 1, 1, 0)

@@ -97,6 +97,7 @@ func _cache_after_loading_def():
 var alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
 func get_npc_index_str()->String:
+	#return str(enemy_npc_index)
 	if enemy_npc_index >= 0:
 		return alphabet[enemy_npc_index]
 	else:
@@ -108,6 +109,9 @@ func get_node_scene_path()->String:
 		actor_node_path = self.get_load_path().path_join(actor_node_path)
 	return actor_node_path
 	
+func get_raw_display_name()->String:
+	var dets = get_object_details()
+	return dets.get("DisplayName", _id)
 
 func get_display_name()->String:
 	var dis_name = super()

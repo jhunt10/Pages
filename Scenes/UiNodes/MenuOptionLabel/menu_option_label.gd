@@ -6,7 +6,6 @@ signal pressed
 
 @export var disabled:bool:
 	set(val):
-		print("test")
 		disabled = val
 		if disabled:
 			self.add_theme_color_override('font_color', disabled_color)

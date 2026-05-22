@@ -5,6 +5,8 @@
 [ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="1_n5fhl"]
 [ext_resource type="StyleBox" uid="uid://dc0c1uqu7guxm" path="res://assets/Themes/ComputerPanels/button_normal_box_texture.tres" id="2_wrtmc"]
 [ext_resource type="StyleBox" uid="uid://dqbqmnmbl322s" path="res://assets/Themes/ComputerPanels/button_pressed_style_box_texture.tres" id="3_poog3"]
+[ext_resource type="Texture2D" uid="uid://7vrrhhsdvlte" path="res://assets/Themes/ComputerPanels/CheckBox_Checked.png" id="4_1rxgi"]
+[ext_resource type="Texture2D" uid="uid://cjgm5oet5wm7l" path="res://assets/Themes/ComputerPanels/CheckBox_UnChecked.png" id="5_rq213"]
 [ext_resource type="Texture2D" uid="uid://cand1e8p22oc8" path="res://assets/Themes/ComputerPanels/SubPanel.png" id="6_b4sav"]
 [ext_resource type="Texture2D" uid="uid://c4x3fv2vsivjy" path="res://assets/Themes/ComputerPanels/UpButton.png" id="6_ofvv7"]
 [ext_resource type="Texture2D" uid="uid://bi4glc8xexhqi" path="res://assets/Themes/ComputerPanels/DownButton.png" id="7_8p0co"]
@@ -39,6 +41,8 @@ Button/styles/hover = ExtResource("2_wrtmc")
 Button/styles/hover_pressed = ExtResource("3_poog3")
 Button/styles/normal = ExtResource("2_wrtmc")
 Button/styles/pressed = ExtResource("3_poog3")
+CheckBox/icons/checked = ExtResource("4_1rxgi")
+CheckBox/icons/unchecked = ExtResource("5_rq213")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/fonts/font = ExtResource("1_hgpg3")
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_hgpg3")

@@ -34,7 +34,6 @@ func _process(delta: float) -> void:
 		var total_frames:float = ActionQueController.FRAMES_PER_ACTION * CombatRootControl.Instance.QueController.max_que_size
 		var cur_frame:float = (turn_index * ActionQueController.FRAMES_PER_ACTION) + frame_index
 		var progress:float = (cur_frame / total_frames) * 100.0
-		print(progress)
 		round_progress_bar.value = progress
 
 func _on_min_button():
