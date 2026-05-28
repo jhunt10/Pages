@@ -101,6 +101,10 @@ grow_horizontal = 0
 texture_normal = ExtResource("6_kh6rr")
 texture_pressed = ExtResource("7_nkl30")
 
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=482265358]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1994570990]
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -281,7 +285,7 @@ vertical_alignment = 1
 layout_mode = 2
 flat = true
 
-[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=482265358]
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/VBoxContainer" unique_id=1304150982]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
