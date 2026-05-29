@@ -19,3 +19,11 @@ func remove_held_actor(actor:BaseActor):
 	if actor.parent_carrier_actor_id == self.Id:
 		actor.parent_carrier_actor_id = null
 	
+
+func get_action_key_list()->Array:
+	var list = super()
+	for child:BaseActor in _held_actors.values():
+		for sub_key in child.get_action_key_list():
+			if not list.has(sub_key):
+				list.append(sub_key)
+	return list

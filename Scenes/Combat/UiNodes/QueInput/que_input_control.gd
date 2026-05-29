@@ -1,8 +1,8 @@
-@tool
 class_name QueInputControl
-extends Control
+extends BoxContainer
 
 const PADDING = 8
+const MAX_INPUT_BUTTON_WIDTH = 8
 enum States {Hidden, Growing, Showing, Shrinking}
 
 signal page_special_selected(action_key:String)
@@ -19,30 +19,31 @@ signal page_special_selected(action_key:String)
 
 @export var _fill_button:Button
 			
-@export var nodes_container:Control
+#@export var nodes_container:Control
 @export var que_display_control:QueInputDisplayControl
 #@export var que_display_patch:BackPatchContainer
 #@export var on_que_options_menu:OptionSelectMenu
-@export var back_patch:BackPatchContainer
-@export var main_container:HBoxContainer 
+#@export var back_patch:BackPatchContainer
+#@export var main_container:HBoxContainer 
 @export var page_button_prefab:QueInputButtonControl
 @export var start_label:Label
 @export var side_start_button:QueInput_StartButton
 @export var top_start_button:QueInput_StartButton
 @export var slide_speed:float = 100
 @export var page_Selection_container:HBoxContainer
+@export var input_buttons_container:GridContainer
 
 @export var hover_box:QuePageHoverBox
 
 @export var state:States:
 	set(val):
 		state = val
-		if nodes_container:
-			nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
-			if state == States.Hidden:
-				nodes_container.position.y = 0
-			if state == States.Showing:
-				nodes_container.position.y = -(back_patch.size.y + que_display_control.size.y + 16)
+		#if nodes_container:
+			#nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
+			#if state == States.Hidden:
+				#nodes_container.position.y = 0
+			#if state == States.Showing:
+				#nodes_container.position.y = -(back_patch.size.y + que_display_control.size.y + 16)
 
 var _actor:BaseActor
 var _page_buttons:Dictionary = {} 
@@ -102,7 +103,7 @@ func show_start_button():
 		if not player.Que.is_ready():
 			all_ready = false
 	var que_display_size = que_display_control.size.x
-	var self_size = back_patch.size.x #+ (back_patch.sides_padding * 2)
+	var self_size = self.size.x # back_patch.size.x #+ (back_patch.sides_padding * 2)
 	var use_top = (top_start_button.size.x < self_size - que_display_size)
 	#printerr("SelfSize: %s | DisSize: %s | UseTop: %s" % [self_size, que_display_size, use_top])
 	if use_top:
@@ -123,23 +124,23 @@ func show_start_button():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
-	nodes_container.size.x = back_patch.size.x
-	if state == States.Growing:
-		var y_size = back_patch.size.y + que_display_control.size.y + 16
-		var move = delta * slide_speed
-		if nodes_container.position.y - move < 0 - y_size:
-			state = States.Showing
-		else:
-			nodes_container.position.y -= move
-	if state == States.Shrinking:
-		var move = delta * slide_speed
-		if nodes_container.position.y + move > 0:
-			state = States.Hidden
-			if page_Selection_container.visible:
-				page_Selection_container.hide()
-		else:
-			nodes_container.position.y += move
+	#nodes_container.position.x = (self.get_parent().size.x / 2) - (back_patch.size.x / 2)
+	#nodes_container.size.x = back_patch.size.x
+	#if state == States.Growing:
+		#var y_size = back_patch.size.y + que_display_control.size.y + 16
+		#var move = delta * slide_speed
+		#if nodes_container.position.y - move < 0 - y_size:
+			#state = States.Showing
+		#else:
+			#nodes_container.position.y -= move
+	#if state == States.Shrinking:
+		#var move = delta * slide_speed
+		#if nodes_container.position.y + move > 0:
+			#state = States.Hidden
+			#if page_Selection_container.visible:
+				#page_Selection_container.hide()
+		#else:
+			#nodes_container.position.y += move
 		
 	#var hight = self.size.y
 	#var box_hight = back_patch.size.y + que_display_control.size.y
@@ -187,7 +188,7 @@ func _build_buttons():
 			continue
 		var new_button:QueInputButtonControl = page_button_prefab.duplicate()
 		new_button.name = "PageSlot" + str(index)
-		page_button_prefab.get_parent().add_child(new_button)
+		input_buttons_container.add_child(new_button)
 		new_button.visible = true
 		new_button.set_page(_actor, action)
 		#if action == null:
@@ -202,6 +203,7 @@ func _build_buttons():
 		
 		_page_buttons[action_key] = new_button
 		index += 1
+	input_buttons_container.columns = min(MAX_INPUT_BUTTON_WIDTH, action_keys.size())
 	_on_que_change()
 	
 	#self.size = Vector2i(main_container.size.x + (2 * PADDING),
