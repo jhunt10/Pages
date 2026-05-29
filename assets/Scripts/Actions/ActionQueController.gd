@@ -272,6 +272,9 @@ func _cleanup_dead_ques():
 	if _dead_ques.size() == 0:
 		return
 	for dead_que_id in _dead_ques:
+		var dead_que = _action_ques.get(dead_que_id, null)
+		if dead_que:
+			dead_que.clear_que()
 		_action_ques.erase(dead_que_id)
 	_dead_ques.clear()
 	_organize_ques()

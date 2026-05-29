@@ -37,6 +37,7 @@
 [ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="30_emljn"]
 [ext_resource type="Script" uid="uid://cpghrmast4q1u" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_control.gd" id="31_i5f6p"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="31_rn36e"]
+[ext_resource type="Script" uid="uid://bnnh4visyvlla" path="res://Scenes/Combat/deploy_panel_container.gd" id="31_vkko7"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="32_h43dd"]
 [ext_resource type="Texture2D" uid="uid://bau63162pa376" path="res://ObjectDefs/ClassDefs/Soldier/Actors/Sprites/SoldierIcon.png" id="33_0bnqe"]
@@ -165,6 +166,7 @@ drop_message_control = NodePath("../DropMessageControl")
 actor_placer_control = NodePath("ActorPlacerControl")
 
 [node name="ActorPlacerControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=1888912106 node_paths=PackedStringArray("placed_actor_label", "min_max_actor_label", "confirm_button_label", "confirm_button", "actor_buttons_container", "premade_actor_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -298,9 +300,9 @@ layout_mode = 2
 [node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorPlacerControl/VBoxContainer/BottomPanelControl" unique_id=122173889 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(224, 124)
 layout_mode = 0
-offset_left = 59.0
+offset_left = -112.0
 offset_top = 2.0
-offset_right = 283.0
+offset_right = 112.0
 offset_bottom = 126.0
 script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
@@ -585,6 +587,26 @@ bbcode_enabled = true
 text = "Someone did something to someone else and it had some kind of effect."
 fit_content = true
 scroll_active = false
+
+[node name="PanelContainer" type="PanelContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl" unique_id=1725856935 node_paths=PackedStringArray("buttons_container", "premade_button")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+script = ExtResource("31_vkko7")
+buttons_container = NodePath("VBoxContainer")
+premade_button = NodePath("VBoxContainer/Button")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl/PanelContainer" unique_id=896121258]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl/PanelContainer/VBoxContainer" unique_id=371887974]
+layout_mode = 2
+text = "Deploy 1"
 
 [node name="TargetInputControl" parent="MoveableCamera2D/CanvasLayer" unique_id=1327304093 instance=ExtResource("27_4pyrd")]
 

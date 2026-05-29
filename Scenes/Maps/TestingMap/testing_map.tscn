@@ -1334,6 +1334,17 @@ team_key = "Decor"
 facing = 2
 map_coor = Vector2i(9, 6)
 
+[node name="SpwanNode_TestTarget_Warded2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1258382622]
+modulate = Color(0.152941, 1, 1, 1)
+position = Vector2(240, 240)
+texture = ExtResource("10_361jm")
+script = ExtResource("11_vji11")
+spawn_actor_key = "Player"
+team_key = "Players"
+is_player = true
+facing = 2
+map_coor = Vector2i(7, 7)
+
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=393105718]
 visible = false
 self_modulate = Color(1, 0.1, 0, 1)

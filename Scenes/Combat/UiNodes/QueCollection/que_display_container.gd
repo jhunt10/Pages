@@ -49,6 +49,8 @@ func _on_mouse_exit():
 func _on_mouse_clicked(event: InputEvent):
 	if event is InputEventMouse and event.is_action_pressed("mouse_left"):
 		CombatRootControl.Instance.camera.start_auto_pan_to_actor(_actor)
+		if _actor.is_player:
+			CombatRootControl.Instance.set_current_player_actor(_actor)
 
 func _set_action_highlight():
 	var turn_index = CombatRootControl.QueController.action_index

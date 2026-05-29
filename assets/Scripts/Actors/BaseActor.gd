@@ -63,6 +63,8 @@ var is_player:bool:
 		return StoryState._party_actor_ids.has(self.Id)
 var is_dead:bool = false
 
+var parent_carrier_actor_id
+
 func _init(key:String, load_path:String, def:Dictionary, id:String, data:Dictionary) -> void:
 	super(key, load_path, def, id, data)
 	spawn_map_layer = _def.get('SpawnOnMapLayer', 0)

@@ -61,12 +61,15 @@ func build_player_stats_panels():
 	
 	for actor in CombatRootControl.list_player_actors():
 		var index = CombatRootControl.get_player_index_of_actor(actor)
+		var panel:StatPanelControl = null
 		if actor_ids_to_stat_panels.keys().has(actor.Id):
-			continue
-		var new_panel:StatPanelControl = load("res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn").instantiate()
-		new_panel.set_actor(actor)
-		player_stats_panels_container.add_child(new_panel)
-		new_panel.pressed.connect(on_player_stat_clicked.bind(index))
+			panel = actor_ids_to_stat_panels[actor.Id]
+		else:
+			panel = load("res://Scenes/Combat/UiNodes/StatsPanel/combat_stat_panel_control.tscn").instantiate()
+			panel.set_actor(actor)
+			player_stats_panels_container.add_child(panel)
+			panel.pressed.connect(on_player_stat_clicked.bind(index))
+		panel.visible = CombatRootControl.Instance.is_deployed(actor)
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

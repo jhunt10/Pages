@@ -340,7 +340,7 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		# Only Actor Key was provided
 		elif actor_key != '':
 			if actor_key.begins_with("Player"):
-				continue # This shouldn't happen? Maybe in scripted scenes?
+				new_actor = StoryState.get_party_actor_by_index(0)
 			else:
 				# Spawn Enemy NPC
 				new_actor = ActorLibrary.create_actor(actor_key, {})
@@ -348,7 +348,13 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		loading_actor_progressed.emit(total_count, index)
 		if new_actor:
 			new_actor.TeamKey = team_key
-			add_actor(new_actor, actor_pos)
+			add_actor(new_actor, actor_pos, new_actor.is_player)
+			
+			if actor_key.begins_with("Player"):
+				for party_actor in StoryState.list_party_actors():
+					if party_actor.Id == new_actor.Id:
+						continue
+					add_carried_actor(party_actor, new_actor)
 					#var display_name = new_actor.get_display_name()
 					#if not npcs_to_name.keys().has(display_name):
 						#npcs_to_name[display_name] = []
@@ -446,13 +452,43 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false, play_spawn_ani
 	
 	# Add to player list if player
 	if is_player and not _player_actor_ids.has(actor.Id):
-			_player_actor_ids.append(actor.Id)
+		_player_actor_ids.append(actor.Id)
 	
 	if combat_started:
 		actor.on_combat_start()
 	
 	if play_spawn_animation:
 		actor_node.start_spawn_animation()
+
+func add_carried_actor(actor:BaseActor, carrier:CarrierActor):
+	if not actor:
+		return
+	if GameState._actors.keys().has(actor.Id):
+		printerr("Actor '%s' already added" % [actor.Id])
+		return
+	# TODO: Need Better to support multi player
+	var is_player = true
+	if is_player:
+		actor.TeamKey = "Players"
+	print("Adding Actor %s with TeamKey: %s" % [actor.Id, actor.TeamKey])
+	
+	actor.spawn_position = GameState.get_actor_pos(carrier)
+	
+	var actor_node = MapController.get_or_create_actor_node(actor, null)
+	MapController.reparent_actor_node_to_actor_tile_map(actor_node)
+	
+	# Add actor to GameState and set position
+	GameState.add_actor(actor)
+	carrier.add_held_actor(actor)
+	#QueController.add_action_que(actor.Que)
+	#GameState.set_actor_pos(actor, pos)
+	
+	# Add to player list if player
+	if is_player and not _player_actor_ids.has(actor.Id):
+		_player_actor_ids.append(actor.Id)
+	
+	if combat_started:
+		actor.on_combat_start()
 	
 
 func add_item(item:BaseItem, pos:MapPos):
@@ -602,11 +638,15 @@ static func list_player_actor_ids()->Array:
 			out_list.append(actor.Id)
 	return out_list
 
-static func list_player_actors()->Array:
+static func list_player_actors(include_un_deployed:bool=true)->Array:
 	var out_list = []
 	for id in list_player_actor_ids():
 		var actor = ActorLibrary.get_actor(id)
-		out_list.append(actor)
+		if actor is CarrierActor:
+			out_list.push_front(actor)
+		else:
+			if include_un_deployed or Instance.is_deployed(actor):
+				out_list.append(actor)
 	return out_list
 
 func get_current_player_index()->int:
@@ -615,7 +655,14 @@ func get_current_player_index()->int:
 func get_current_player_actor()->BaseActor:
 	return get_player_actor(_current_player_index)
 
-func set_player_index(index:int, move_camera:bool=true):
+func set_current_player_actor(actor, move_camera:bool=true):
+	var actor_id = actor
+	if actor is BaseActor:
+		actor_id = actor.Id
+	var index = _player_actor_ids.find(actor_id)
+	set_player_index(index, move_camera)
+
+func set_player_index(index, move_camera:bool=true):
 	if index >= 0 and index < _player_actor_ids.size():
 		_current_player_index = index
 		ui_control.set_player_actor_index(_current_player_index)
@@ -635,8 +682,51 @@ func get_next_player_index(use_index:int=-1)->int:
 	if use_index < 0:
 		use_index = _current_player_index
 	var next_index = (use_index + 1) % _player_actor_ids.size()
-	#var extra_check = 0
-	#while StoryState.get_player_id(next_index) == null and extra_check < 4:
-		#extra_check += 1
-		#next_index = (next_index + 1) % 4
+	if next_index == 0:
+		return next_index
+	## Skip undeployed
+	elif not is_deployed(_player_actor_ids[next_index]):
+		return get_next_player_index(next_index)
 	return next_index
+
+func is_deployed(actor)->bool:
+	var check_actor = actor
+	if actor is String:
+		check_actor = GameState.get_actor(actor)
+	if check_actor:
+		return check_actor.parent_carrier_actor_id == null
+	return false
+
+func deploy_actor(actor, pos:MapPos):
+	var deploying_actor = actor
+	if actor is String:
+		deploying_actor = GameState.get_actor(actor)
+	var carrier_actor_id = deploying_actor.parent_carrier_actor_id
+	var carrier_actor = GameState.get_actor(carrier_actor_id)
+	if !carrier_actor:
+		printerr("CombatRootControl.deploy_actor: Carrier Actor '%s' not found." % [carrier_actor_id])
+		return
+	if not GameState.map_data.is_spot_open(pos):
+		printerr("CombatRootControl.deploy_actor: Invalid MapPosition '%s'." % [pos])
+		return
+	GameState.set_actor_pos(actor, pos)
+	var actor_node = get_actor_node(actor)
+	actor_node.visible = true
+	QueController.add_action_que(actor.Que)
+	carrier_actor.remove_held_actor(actor)
+	ui_control.build_player_stats_panels()
+
+func merge_actors(actor, carrier):
+	var deployed_actor = actor
+	if deployed_actor is String:
+		deployed_actor = GameState.get_actor(actor)
+	var carrier_actor = carrier
+	if carrier_actor is String:
+		carrier_actor = GameState.get_actor(carrier)
+	GameState.remove_actor_from_map(deployed_actor)
+	var actor_node = get_actor_node(actor)
+	actor_node.visible = false
+	QueController.remove_action_que(actor.Que)
+	carrier_actor.add_held_actor(deployed_actor)
+	ui_control.build_player_stats_panels()
+	

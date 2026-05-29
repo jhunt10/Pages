@@ -98,7 +98,7 @@ func show_start_button():
 	if supress_start:
 		return
 	var all_ready = true
-	for player:BaseActor in CombatRootControl.list_player_actors():
+	for player:BaseActor in CombatRootControl.list_player_actors(false):
 		if not player.Que.is_ready():
 			all_ready = false
 	var que_display_size = que_display_control.size.x
@@ -298,15 +298,22 @@ func _page_button_pressed(_index, key_name):
 	#on_que_options_menu.visible = false
 
 func _start_button_pressed():
-	var current_index = CombatRootControl.Instance.get_current_player_index() 
-	for offset in range(CombatRootControl.list_player_actors().size()):
-		var next_index = CombatRootControl.Instance.get_next_player_index(current_index + offset)
-		var next_player = CombatRootControl.Instance.get_player_actor(next_index)
-		if not next_player.Que.is_ready():
-			CombatRootControl.Instance.set_player_index(next_index)
+	#var current_index = CombatRootControl.Instance.get_current_player_index() 
+	for player_actor:BaseActor in CombatRootControl.list_player_actors(false):
+		if not player_actor.Que.is_ready() and CombatRootControl.Instance.is_deployed(player_actor):
+			CombatRootControl.Instance.set_current_player_actor(player_actor)
 			hide_start_button()
 			return
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+	
+			
+	#for offset in range(CombatRootControl.list_player_actors(false).size()):
+		#var next_index = CombatRootControl.Instance.get_next_player_index(current_index + offset)
+		#var next_player = CombatRootControl.Instance.get_player_actor(next_index)
+		#if CombatRootControl.Instance.is_deployed(next_player) and not next_player.Que.is_ready():
+			#CombatRootControl.Instance.set_player_index(next_index)
+			#return
+	
 
 func _round_start():
 	hide_start_button()

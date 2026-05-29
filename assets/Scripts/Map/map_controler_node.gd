@@ -45,6 +45,8 @@ func _ready() -> void:
 	CombatRootControl.QueController.end_of_frame.connect(_sync_positions)
 	if phase_marker_maps_holder:
 		phase_marker_maps_holder.hide()
+	if player_spawn_area_tile_map:
+		player_spawn_area_tile_map.hide() 
 
 func get_map_rect()->Rect2i:
 	if ground_tile_map:
@@ -116,10 +118,13 @@ func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool
 	var new_node:BaseActorNode = load(actor_node_path).instantiate()
 	actor_nodes[actor.Id] = new_node
 	actor_tile_map.add_child(new_node)
-	new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
 	new_node.set_actor(actor)
-	new_node.set_map_pos(map_pos)
-	new_node.visible = !wait_to_show
+	if map_pos:
+		new_node.position = actor_tile_map.map_to_local(map_pos.to_vector2i())
+		new_node.set_map_pos(map_pos)
+		new_node.visible = !wait_to_show
+	else:
+		new_node.visible = false
 	new_node.tree_exiting.connect(_on_actor_node_leave_tree.bind(actor.Id))
 	if LOGGING: print("MapControllerNode: Created Actor Node: %s" % [actor.Id])
 	return new_node
