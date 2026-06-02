@@ -316,6 +316,16 @@ func finish_move_animation():
 	actor_sprite.frame_coords.x = 0
 	current_body_animation_action = null
 
+# Only clears current animation and offset. Does not clear scripted moves
+func cancel_move_animation():
+	if not is_animated_moveing:
+		return
+	body_animation.stop()
+	actor_sprite.frame_coords.x = 0
+	current_body_animation_action = null
+	actor_motion_node.position = Vector2.ZERO
+	is_moving = false
+
 func add_modulate(color:Color):
 	offset_node.modulate = color
 

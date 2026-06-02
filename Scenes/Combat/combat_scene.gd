@@ -631,11 +631,9 @@ func list_actors_by_order()->Array:
 
 static func list_player_actor_ids()->Array:
 	var out_list = []
-	for que_id in CombatRootControl.Instance.QueController._que_order:
-		var que:ActionQue = CombatRootControl.Instance.QueController._action_ques[que_id]
-		var actor = que.actor
-		if _player_actor_ids.has(actor.Id):
-			out_list.append(actor.Id)
+	for actor_id in StoryState.list_party_actors_ids():
+		if Instance.GameState._actors.has(actor_id):
+			out_list.append(actor_id)
 	return out_list
 
 static func list_player_actors(include_un_deployed:bool=true)->Array:
@@ -712,8 +710,8 @@ func deploy_actor(actor, pos:MapPos):
 	GameState.set_actor_pos(actor, pos)
 	var actor_node = get_actor_node(actor)
 	actor_node.visible = true
-	QueController.add_action_que(actor.Que)
-	carrier_actor.remove_held_actor(actor)
+	QueController.add_action_que(deploying_actor.Que)
+	carrier_actor.remove_held_actor(deploying_actor)
 	ui_control.build_player_stats_panels()
 
 func merge_actors(actor, carrier):
@@ -723,10 +721,14 @@ func merge_actors(actor, carrier):
 	var carrier_actor = carrier
 	if carrier_actor is String:
 		carrier_actor = GameState.get_actor(carrier)
+	var deployed_node = get_actor_node(deployed_actor)
+	deployed_node.cancel_move_animation()
 	GameState.remove_actor_from_map(deployed_actor)
 	var actor_node = get_actor_node(actor)
 	actor_node.visible = false
 	QueController.remove_action_que(actor.Que)
 	carrier_actor.add_held_actor(deployed_actor)
 	ui_control.build_player_stats_panels()
+	if deployed_actor == get_current_player_actor():
+		set_current_player_actor(carrier, true)
 	

@@ -73,6 +73,20 @@ static func get_vect_in_dir(center, direction:int)->Vector2i:
 			return Vector2i(center.x-1, center.y)
 	return Vector2i(center.x, center.y)
 
+static func get_direction_between_spots(start_pos, end_pos)->MapPos.Directions:
+	var x_diff = start_pos.x - end_pos.x
+	var y_diff = start_pos.y - end_pos.y
+	if abs(x_diff) > abs(y_diff):
+		if x_diff < 0:
+			return MapPos.Directions.East
+		else:
+			return MapPos.Directions.West
+	else:
+		if y_diff < 0:
+			return MapPos.Directions.South
+		else:
+			return MapPos.Directions.North
+
 static func can_actor_enter_spot(actor:BaseActor, pos:MapPos, game_state:GameStateData):
 	
 	return game_state.is_spot_open(pos)

@@ -5,7 +5,7 @@ const BoxPadding:int = 4
 
 signal pressed
 
-@export var button:Button
+@export var deploy_button:Button
 @export var panel:PanelContainer
 @export var portrait_texture_rect:TextureRect
 @export var main_container:VBoxContainer
@@ -58,7 +58,15 @@ func set_actor(act:BaseActor):
 	_build_stat_bars()
 	if is_node_ready():
 		_sync_values()
-	
+
+func set_is_deployed(is_deployed):
+	if is_deployed:
+		deploy_button.hide()
+		health_bar.show()
+	else:
+		deploy_button.show()
+		health_bar.hide()
+
 func _process(_delta: float) -> void:
 	if _resize:
 		#self.size = Vector2i(main_container.size.x + (2*BoxPadding),

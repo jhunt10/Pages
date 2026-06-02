@@ -69,7 +69,8 @@ func build_player_stats_panels():
 			panel.set_actor(actor)
 			player_stats_panels_container.add_child(panel)
 			panel.pressed.connect(on_player_stat_clicked.bind(index))
-		panel.visible = CombatRootControl.Instance.is_deployed(actor)
+			panel.deploy_button.pressed.connect(on_deployment.bind(actor.Id))
+		panel.set_is_deployed(CombatRootControl.Instance.is_deployed(actor))
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -78,6 +79,12 @@ func _process(delta: float) -> void:
 
 func on_player_stat_clicked(index):
 	CombatRootControl.Instance.set_player_index(index)
+
+func on_deployment(actor_id):
+	var ui_state_data = {
+		"DeployingActor" = actor_id
+	}
+	ui_state_controller.set_ui_state(UiStateController.UiStates.DeployActor, ui_state_data)
 
 # Should only be called by CombatRootControl
 func set_player_actor_index(index):

@@ -109,7 +109,10 @@ func _on_actor_button_pressed(actor_id):
 	actor_selected.emit(actor_id)
 
 func put_actor_in_spot(actor_id, spot, is_valid:bool = true):
-	var actor_node:BaseActorNode = _actor_id_to_actor_node.get(actor_id)
+	var actor = ActorLibrary.get_actor(actor_id)
+	var actor_node:BaseActorNode = CombatRootControl.Instance.MapController.get_or_create_actor_node(actor, MapPos.Vector2i(spot))
+	if not actor_node:
+		return
 	actor_node.reparent(_spawn_tile_map)
 	if actor_node:
 		actor_node.position = _spawn_tile_map.map_to_local(spot)

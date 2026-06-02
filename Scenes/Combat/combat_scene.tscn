@@ -166,7 +166,6 @@ drop_message_control = NodePath("../DropMessageControl")
 actor_placer_control = NodePath("ActorPlacerControl")
 
 [node name="ActorPlacerControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=1888912106 node_paths=PackedStringArray("placed_actor_label", "min_max_actor_label", "confirm_button_label", "confirm_button", "actor_buttons_container", "premade_actor_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -300,9 +299,9 @@ layout_mode = 2
 [node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorPlacerControl/VBoxContainer/BottomPanelControl" unique_id=122173889 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(224, 124)
 layout_mode = 0
-offset_left = -112.0
+offset_left = 59.0
 offset_top = 2.0
-offset_right = 112.0
+offset_right = 283.0
 offset_bottom = 126.0
 script = ExtResource("29_vvabq")
 background = NodePath("NinePatchRect")
@@ -477,7 +476,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl" unique_id=1877056674 instance=ExtResource("14_atc5n")]
-custom_minimum_size = Vector2(0, 0)
 layout_mode = 1
 anchors_preset = -1
 slide_speed = 500.0

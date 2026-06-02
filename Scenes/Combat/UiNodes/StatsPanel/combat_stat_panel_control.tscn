@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="3_mbhkk"]
 [ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="4_lfhmk"]
 [ext_resource type="PackedScene" uid="uid://cjfwi0pnjh7y6" path="res://Scenes/Combat/UiNodes/StatsPanel/health_bar_control.tscn" id="5_iao52"]
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="7_3xrn2"]
 [ext_resource type="Texture2D" uid="uid://dj6l261cuh2hj" path="res://Scenes/Combat/UiNodes/StatsPanel/BuffBackground.png" id="7_ow4ab"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="7_xlcc4"]
 [ext_resource type="Script" uid="uid://ci77vt452i6uk" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_icon_control.gd" id="8_6sy3m"]
@@ -14,11 +15,12 @@
 [ext_resource type="Script" uid="uid://qi376y8t3rep" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_description_box.gd" id="10_7hami"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="11_ptagv"]
 
-[node name="StatPanelControl" type="VBoxContainer" unique_id=2045825563 node_paths=PackedStringArray("panel", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon", "npc_index_label")]
+[node name="StatPanelControl" type="VBoxContainer" unique_id=2045825563 node_paths=PackedStringArray("deploy_button", "panel", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon", "npc_index_label")]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 1
 script = ExtResource("1_mnhn6")
+deploy_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/StatBarContainer/Button")
 panel = NodePath("PanelContainer")
 portrait_texture_rect = NodePath("PanelContainer/VBoxContainer/HBoxContainer/TextureRect/PortaitTextureRect")
 main_container = NodePath("PanelContainer/VBoxContainer")
@@ -76,9 +78,16 @@ layout_mode = 2
 alignment = 1
 
 [node name="HealthBarControl" parent="PanelContainer/VBoxContainer/HBoxContainer/StatBarContainer" unique_id=659917079 instance=ExtResource("5_iao52")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/StatBarContainer" unique_id=1837770866]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("7_3xrn2")
+text = "Deploy"
 
 [node name="EffectIconControl" type="Control" parent="." unique_id=1209957324 node_paths=PackedStringArray("background", "effect_icon", "count_label", "description_box")]
 custom_minimum_size = Vector2(32, 32)
