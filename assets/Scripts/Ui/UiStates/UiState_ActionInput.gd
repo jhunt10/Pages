@@ -28,20 +28,13 @@ func end_state():
 
 func handle_input(event):
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed:
-		var mouse_spot = CombatRootControl.Instance.GridCursor.current_spot
-		
-		## Show Character Sheet on clicking an actor
-		var mouse_over_actors = CombatRootControl.Instance.GameState.get_actors_at_pos(mouse_spot)
-		if mouse_over_actors.size() > 0:
-			for actor:BaseActor in mouse_over_actors:
-				if actor.is_player:
-					var index = CombatRootControl.get_player_index_of_actor(actor)
-					if index >= 0:
-						CombatRootControl.Instance.set_player_index(index)
-			#var actor:BaseActor = mouse_over_actors[0]
-			#ui_controller.set_ui_state(UiStateController.UiStates.CharacterSheet, {"ActorId":actor.Id})
-			#
-			#MainRootNode.Instance.open_character_sheet(actor)
-			#var charsheet = load("res://Scenes/character_edit_control.tscn").instantiate()
-			#CombatUiControl.Instance.add_child(charsheet)
-			#charsheet.set_actor(actor)
+		if (event as InputEventMouseButton).button_index == 1:
+			## Select player actor on click
+			var mouse_spot = CombatRootControl.Instance.GridCursor.current_spot
+			var mouse_over_actors = CombatRootControl.Instance.GameState.get_actors_at_pos(mouse_spot)
+			if mouse_over_actors.size() > 0:
+				for actor:BaseActor in mouse_over_actors:
+					if actor.is_player:
+						var index = CombatRootControl.get_player_index_of_actor(actor)
+						if index >= 0:
+							CombatRootControl.Instance.set_player_index(index)

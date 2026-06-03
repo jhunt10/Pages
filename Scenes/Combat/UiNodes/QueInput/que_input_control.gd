@@ -306,7 +306,7 @@ func _start_button_pressed():
 			CombatRootControl.Instance.set_current_player_actor(player_actor)
 			hide_start_button()
 			return
-	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound, {}, true)
 	
 			
 	#for offset in range(CombatRootControl.list_player_actors(false).size()):

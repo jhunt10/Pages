@@ -19,7 +19,7 @@ func _on_create():
 		#_dialog_controller.hide()
 		CombatRootControl.QueController.end_of_round.connect(on_round_finish)
 		if condition_key != "PlayingCombat":
-			CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+			CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound, {}, true)
 		return
 
 func on_round_finish():

@@ -36,4 +36,4 @@ func end_state():
 	
 func _on_round_end():
 	_round_ended = true
-	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput, {}, true)

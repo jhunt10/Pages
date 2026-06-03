@@ -28,12 +28,12 @@ func handle_input(event:InputEvent):
 	if current_ui_state:
 		current_ui_state.handle_input(event)
 
-func set_ui_state(state:UiStates, args:Dictionary={}, clear_stack:bool=true):
+func set_ui_state(state:UiStates, args:Dictionary={}, clear_stack:bool=false):
 	print("Setting UI State: %s" %[UiStates.keys()[int(state)]])
 	var path = _state_scripts[state]
 	set_ui_state_from_path(path, args, clear_stack)
 
-func set_ui_state_from_path(path, args, clear_stack:bool=true):
+func set_ui_state_from_path(path, args, clear_stack:bool=false):
 	if clear_stack:
 		state_stack.clear()
 	if current_ui_state:

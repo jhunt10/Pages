@@ -41,7 +41,7 @@ func _process(delta: float) -> void:
 			start_combat_timer -= delta
 			if start_combat_timer <= 0:
 				AiHandler.build_action_ques(true)
-				CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+				CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound, {}, true)
 				
 	if que_controller.execution_state == ActionQueController.ActionStates.Running:
 		if que_controller.sub_action_index == 0 or que_controller.sub_action_index == ActionQueController.FRAMES_PER_ACTION -1:

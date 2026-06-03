@@ -247,7 +247,7 @@ func start_phase(phase_key):
 		"Combat":
 			if not combat_started:
 				start_combat_animation()
-			CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+			CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput, {}, true)
 		"Dialog":
 			var dialog_data = phase_data.get("DialogData")
 			dialog_controller.load_dialog_data(dialog_data)

@@ -161,7 +161,7 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 		var lock_target = target_input_display.lock_on_box.button_pressed
 		CombatRootControl.Instance.last_target_records[selection_data.focused_actor.Id] = {"ActorId": actors[0].Id, "LockOn": lock_target}
 	# Resume Round
-	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+	CombatUiControl.ui_state_controller.back_to_last_state()
 
 func _on_confirmed():
 	if _logging: print("Confrim button pressed")
@@ -172,5 +172,5 @@ func _on_confirmed():
 
 func _on_canceled():
 	selection_data.focused_actor.Que.fail_turn()
-	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+	CombatUiControl.ui_state_controller.back_to_last_state()
 	
