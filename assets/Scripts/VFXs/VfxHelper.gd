@@ -22,6 +22,9 @@ static func create_flash_text(actor_or_holder, value, flash_text_type:BaseFlashT
 	_create_vfx_on_holder(vfx_holder, "FlashTextVfx", flash_text_data)
 
 static func add_chained_flash_text(parent_vfx:BaseVfxNode, value, flash_text_type:BaseFlashTextVfxNode.FlashTextType):
+	if not parent_vfx:
+		printerr("Attempted to add flash text to Null Parent Vfx")
+		return
 	var vfx_holder = parent_vfx.vfx_holder
 	if not vfx_holder:
 		return null

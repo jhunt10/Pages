@@ -23,6 +23,7 @@ var que_display:QueInputDisplayControl:
 @export var option_select_menu:OptionSelectMenu
 @export var drop_message_control:DropMessageControl
 @export var actor_placer_control:ActorPlacerControl
+@export var actor_deploy_control:ActorDeploymentControl
 
 
 static var Instance:CombatUiControl
@@ -43,6 +44,8 @@ func _ready() -> void:
 	target_input_display.hide()
 	game_over_screen.hide()
 	victory_screen.hide()
+	actor_placer_control.hide()
+	actor_deploy_control.hide()
 
 #func do_test():
 	#var current_actor_id = stat_panel_control.actor.Id

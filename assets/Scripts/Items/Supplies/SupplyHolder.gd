@@ -23,6 +23,9 @@ func _get_innate_slots_data()->Array:
 
 func consume_item(item_id:String, delete=true):
 	if !_raw_item_slots.has(item_id):
+		if _actor is CarrierActor:
+			for sub_actor:BaseActor in _actor.list_held_actors():
+				sub_actor.items.consume_item(item_id, delete)
 		return
 	remove_item(item_id, false)
 	var item = ItemLibrary.get_item(item_id, false)

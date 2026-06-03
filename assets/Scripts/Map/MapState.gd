@@ -124,7 +124,10 @@ func get_actors_at_pos(pos, layer=null, include_dead:bool=false)->Array:
 func get_actor_pos(actor)->MapPos:
 	if actor is BaseActor:
 		actor = actor.Id
-	return _actor_pos_cache.get(actor, null)
+	var pos = _actor_pos_cache.get(actor, null)
+	if pos:
+		return pos.duplicate()
+	return null
 
 func get_actor_layer(actor:BaseActor)->MapLayers:
 	var pos = get_actor_pos(actor)

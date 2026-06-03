@@ -41,12 +41,9 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
 func _get_effect_que_options(actor:BaseActor, selection_key:String, effect_filters:Array)->OnQueOptionsData:
-	var options = OnQueOptionsData.new(selection_key, "Select Effect:", [], [], [])
+	var options = OnQueOptionsData.new(selection_key, "Select Effect:")
 	for effect:BaseEffect in actor.effects.list_effects():
 		var effect_tags = effect.get_tags()
 		var is_valid =  TagHelper.filters_accept_tags(effect_filters, effect_tags)
-		options.options_vals.append(effect.Id)
-		options.option_texts.append(effect.get_display_name())
-		options.option_icons.append(effect.get_small_icon())
-		options.disable_options.append(not is_valid)
+		options.append_option(effect.Id, effect.get_display_name(), effect.get_small_icon(), not is_valid)
 	return options

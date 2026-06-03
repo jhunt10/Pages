@@ -55,7 +55,6 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 		moving_actor.effects.trigger_before_actor_moved(actor_pos, new_pos, {"MoveType":move_type}, game_state)
 	
 	# Get actor in same z layer as where we are going
-	printerr(new_pos)
 	var occupying_actors:Array = game_state.get_actors_at_pos(Vector2i(new_pos.x, new_pos.y))
 	var blocking_actor:BaseActor = null
 	if LOGGING: print("\t%s occupying_actors found" % [occupying_actors.size()])

@@ -25,7 +25,9 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
 func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
-	#var example = OnQueOptionsData.new("SelectedItemId", "Select Item to use:", _actor.items._items.keys())
+	#var example = OnQueOptionsData.new("SelectedItemId", "Select Item to use:")
+	# for some_thing in list:
+	#	example.append_option(key, text, icon, disabled)
 	return []
 
 ## Execute this sub_action. Returns true if the sub_action was successful. If false is returned, no further sub_actions will be executed this turn.

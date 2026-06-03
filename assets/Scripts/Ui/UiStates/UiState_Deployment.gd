@@ -9,8 +9,7 @@ var wait_for_confirm:bool = true
 var is_waiting_for_confirm:bool = false
 var waiting_selection
 
-var actor_placer_control:ActorPlacerControl
-var spawn_area:Array#[Vector2i] 
+var spawn_area:Array
 var actor_positions:Dictionary = {}
 var carrier_actor:CarrierActor
 var state:States
@@ -24,10 +23,6 @@ func _get_debug_name()->String:
 	
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
-	actor_placer_control = CombatRootControl.Instance.ui_control.actor_placer_control
-	actor_placer_control.actor_selected.connect(_on_actor_selected)
-	actor_placer_control.confirm_pressed.connect(_on_placement_confirmed)
-	actor_placer_control._spawn_tile_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
 	deploying_actor_id = args.get("DeployingActor")
 	if deploying_actor_id:
 		state = States.Placing
@@ -55,22 +50,22 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 		CombatRootControl.Instance.add_actor(ActorLibrary.get_actor(deploying_actor_id), center, true, false)
 		deploying_actor_node = CombatRootControl.get_actor_node(deploying_actor_id)
 	deploying_actor_node.set_facing_dir(MapPos.Directions.South)
-	#deploying_actor_node.reparent(spawn_map)
 
 func start_state():
-	if _logging: print("Start UiState: PlaceActors")
+	if _logging: print("Start UiState: DeployingActor")
 	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Spawning")
 	spawn_map.clear()
-	var center = CombatRootControl.Instance.GameState.get_actor_pos(carrier_actor)
 	for coor in spawn_area:
 		spawn_map.set_cell(coor, 0, Vector2i(0,3))
 	spawn_map.show()
 	CombatRootControl.Instance.ui_control.active_combat_control.hide()
+	CombatRootControl.Instance.ui_control.actor_deploy_control.show()
+	if not CombatRootControl.Instance.ui_control.actor_deploy_control.cancled.is_connected(_on_canceled):
+		CombatRootControl.Instance.ui_control.actor_deploy_control.cancled.connect(_on_canceled)
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingActor)
 	
 func end_state():
-	if _logging: print("End UiState: PlaceActors")
-	actor_placer_control.hide()
+	if _logging: print("End UiState: DeployingActor")
 	CombatRootControl.Instance.MapController.player_spawn_area_tile_map.hide()
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
 	
@@ -88,15 +83,12 @@ func handle_input(event):
 				_mouse_button_down_in_spot(spot)
 			else:
 				_mouse_button_up_in_spot(spot)
-		elif mouse_button_event.button_index == 2:
-			var actor_id = _get_actor_id_placed_in_spot(spot)
-			if actor_id != '':
-				actor_positions.erase(actor_id)
-				actor_placer_control.unplace_actor(actor_id)
-				actor_placer_control.set_placed_actor_count(actor_positions.size())
 
 func ui_button_pressed():
 	if _logging: print("Confrim button pressed")
+
+func _on_canceled():
+	CombatRootControl.Instance.ui_control.ui_state_controller.back_to_last_state()
 
 func _on_actor_selected(actor_id):
 	deploying_actor_id = actor_id
@@ -112,7 +104,6 @@ func _mouse_moved_into_spot(spot):
 			deploying_actor_node.show()
 		else:
 			deploying_actor_node.hide()
-		#actor_placer_control.put_actor_in_spot(deploying_actor_id, spot, is_spot_valid)
 	
 	elif state == States.Dragging:
 		var dir = MapPos.Directions.North
@@ -130,7 +121,6 @@ func _mouse_moved_into_spot(spot):
 				dir = MapPos.Directions.North
 		actor_positions[deploying_actor_id].dir = dir
 		deploying_actor_node.set_facing_dir(dir)
-		#actor_placer_control.set_actor_rotation(deploying_actor_id, dir)
 		if x_diff == 0 and y_diff == 0:
 			CombatRootControl.Instance.GridCursor.lock_position = true
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.PlacingDragCenter)
@@ -148,29 +138,21 @@ func _mouse_button_down_in_spot(spot):
 	if state == States.Placing:
 		if _is_spot_valid(spot):
 			mouse_down_spot = spot
-			actor_positions[deploying_actor_id] = MapPos.new(mouse_down_spot.x, mouse_down_spot.y, 0, MapPos.Directions.South)
-			#actor_placer_control.put_actor_in_spot(deploying_actor_id, mouse_down_spot)
+			actor_positions[deploying_actor_id] = MapPos.new(
+				mouse_down_spot.x, 
+				mouse_down_spot.y, 
+				0, 
+				MapPos.Directions.South)
 			state = States.Dragging
 			CombatRootControl.Instance.camera.freeze_camera()
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.PlacingDragCenter)
 			CombatRootControl.Instance.GridCursor.lock_position = true
-	if state == States.Waiting:
-		var actor_id = _get_actor_id_placed_in_spot(spot)
-		if actor_id != '':
-			actor_placer_control._on_actor_button_pressed(actor_id)
 
-
-func _mouse_button_up_in_spot(spot):
+func _mouse_button_up_in_spot(_spot):
 	CombatRootControl.Instance.camera.unfreeze_camera()
 	CombatRootControl.Instance.GridCursor.lock_position = false
 	if state == States.Dragging:
 		deploy_actor()
-		#actor_placer_control.darken_actor(deploying_actor_id)
-		#deploying_actor_id = ''
-		#mouse_down_spot = null
-		#state = States.Waiting
-		#actor_placer_control.finish_placing()
-		#actor_placer_control.set_placed_actor_count(actor_positions.size())
 
 func deploy_actor():
 	var deploy_pos = actor_positions[deploying_actor_id]
@@ -196,7 +178,7 @@ func deploy_actor():
 			"End": true
 		})
 	actor_node.que_scripted_movement(scripted_moves)
-	CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
+	CombatRootControl.Instance.ui_control.ui_state_controller.back_to_last_state()
 
 func _get_actor_id_placed_in_spot(spot)->String:
 	for actor_id in actor_positions.keys():
@@ -212,15 +194,3 @@ func _is_spot_valid(spot):
 	if occ_act != '' and occ_act != deploying_actor_id:
 		return false
 	return true
-
-func _on_placement_confirmed():
-	# TODO: Cleanup unplaced actor nodes
-	for actor_id in actor_positions.keys():
-		var actor = ActorLibrary.get_actor(actor_id)
-		var pos = actor_positions[actor_id]
-		CombatRootControl.Instance.add_actor(actor, pos, true)
-		actor.on_combat_start()
-	#CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput)
-	#CombatRootControl.Instance.start_combat_animation()
-	CombatRootControl.Instance.start_next_phase()
-	

@@ -12,8 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="10_7ttvr"]
 [ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="11_mvdb4"]
 [ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="12_6bkn7"]
+[ext_resource type="Script" uid="uid://bj7jkk160o6ut" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_divider.gd" id="13_1y6kt"]
 
-[node name="OptionSelectMenu" type="Control" unique_id=585481039 node_paths=PackedStringArray("titile_label", "options_container", "premade_option_button", "close_button", "cancel_button", "confrim_button")]
+[node name="OptionSelectMenu" type="Control" unique_id=585481039 node_paths=PackedStringArray("titile_label", "options_container", "premade_option_button", "premade_option_divider", "close_button", "cancel_button", "confrim_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,6 +25,7 @@ script = ExtResource("1_pglih")
 titile_label = NodePath("CenterContainer/PanelContainer2/VBoxContainer/HBoxContainer/TitleLabel")
 options_container = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ScrollContainer/OptionEntriesContainer")
 premade_option_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/OptionButton")
+premade_option_divider = NodePath("CenterContainer/PanelContainer2/VBoxContainer/OptionDivider")
 close_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/Control/CloseButton")
 cancel_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer/CancelButton")
 confrim_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer/OkButton")
@@ -113,7 +115,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="OptionButton" type="Control" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=296672739 node_paths=PackedStringArray("icon", "button", "highlight")]
-visible = false
 custom_minimum_size = Vector2(320, 64)
 layout_mode = 2
 script = ExtResource("5_tb60f")
@@ -168,6 +169,30 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="OptionDivider" type="BoxContainer" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=641652869 node_paths=PackedStringArray("label")]
+layout_mode = 2
+script = ExtResource("13_1y6kt")
+label = NodePath("Label")
+
+[node name="Label2" type="Label" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionDivider" unique_id=613283437]
+layout_mode = 2
+text = " "
+
+[node name="Label" type="Label" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionDivider" unique_id=1453436844]
+layout_mode = 2
+text = "Divider"
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionDivider" unique_id=1550326821]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0, 0, 0, 1)
+
+[node name="Label3" type="Label" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionDivider" unique_id=1924298214]
+layout_mode = 2
+text = " "
+
 [node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=1603475413]
 custom_minimum_size = Vector2(0, 240)
 layout_mode = 2
@@ -178,6 +203,7 @@ vertical_scroll_mode = 2
 [node name="OptionEntriesContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer2/VBoxContainer/ScrollContainer" unique_id=828116783]
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="ButtonsContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=1299773834]
 layout_mode = 2

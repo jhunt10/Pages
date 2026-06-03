@@ -11,7 +11,11 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
 func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
-	var option = OnQueOptionsData.new("DevMoveDir", "Direction", ["North", "South", "East", "West"],["North", "South", "East", "West"])
+	var option = OnQueOptionsData.new("DevMoveDir", "Direction")
+	option.append_option("North")
+	option.append_option("East")
+	option.append_option("South")
+	option.append_option("West")
 	return [option]
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,

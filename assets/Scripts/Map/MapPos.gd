@@ -60,3 +60,7 @@ func apply_relative_pos(other_pos:MapPos)->MapPos:
 	var offset = MapHelper.rotate_relative_pos(other_pos, self.dir)
 	var new_rot = (self.dir + other_pos.dir + 4) % 4
 	return MapPos.new(self.x + offset.x, self.y + offset.y, self.z, new_rot)
+
+func duplicate()->MapPos:
+	return MapPos.new(x, y, z, dir)
+	

@@ -11,12 +11,10 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
 func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
-	var options = OnQueOptionsData.new("SelectedDamageKey", "Select Effect:", [], [], [])
+	var options = OnQueOptionsData.new("SelectedDamageKey", "Select Effect:")
 	
 	for damage_type in DamageEvent.DamageTypes.keys():
-		options.options_vals.append(damage_type)
-		options.option_texts.append(damage_type)
-		options.option_icons.append(DamageHelper.get_damage_icon(damage_type))
+		options.append_option(damage_type, damage_type, DamageHelper.get_damage_icon(damage_type))
 	return [options]
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
