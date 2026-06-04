@@ -31,7 +31,7 @@ func set_action(index:int, actor:BaseActor, action:PageItemAction):
 	if action and not is_gap:
 		page_icon.visible = true
 		background.texture = filled_background_texture
-		page_icon.texture = action.get_qued_icon(index, actor)
+		page_icon.texture = action.get_qued_icon(index, actor.Que)
 	else:
 		if is_gap:
 			background.texture = gap_background_texture

@@ -77,7 +77,7 @@ func set_actor(actor:BaseActor):
 	var page = actor.Que.get_action_for_turn(turn)
 	
 	actor_portrait.texture = actor.sprite.get_portrait_sprite()
-	page_icon.texture = page.get_large_page_icon(actor)
+	page_icon.texture = page.get_large_page_icon()
 	page_details.set_action(actor, page)
 	# Clear target portrait
 	target_icon.texture = unknown_icon_texture

@@ -34,7 +34,7 @@ func set_action(index:int, actor:BaseActor, action:PageItemAction):
 		#print("QueMiniSlotIcon: Setting Action: %s | %s" % [action.ActionKey, index])
 		acttion_key = action.ActionKey
 		_page_icon.show()
-		_page_icon.texture = action.get_qued_icon(index, actor)
+		_page_icon.texture = action.get_qued_icon(index, actor.Que)
 	else:
 		#print("QueMiniSlotIcon: Setting Action: 'NULL' | %s" % [index])
 		acttion_key = 'Null'

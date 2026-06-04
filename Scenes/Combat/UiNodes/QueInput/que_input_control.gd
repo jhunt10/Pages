@@ -178,14 +178,22 @@ func _build_buttons():
 			but.queue_free()
 		_page_buttons.clear()
 	var index = 0
-	var action_keys = _actor.get_action_key_list()
-	for action_key in action_keys:
-		if action_key == null:
+	var known_keys = []
+	for action:PageItemAction in _actor.get_action_list():
+		
+		#if action_key == null:
+			#continue
+		#var action = ItemLibrary.get_item(action_key)
+		#if !action:
+			#printerr("que_input_control._build_buttons: Failed to find Action '%s'." % [action_key])
+			#continue
+			
+		var action_key = action.ItemKey
+		var action_id = action.Id
+		if known_keys.has(action_key) and not action.is_duplicated_when_merged():
 			continue
-		var action = ItemLibrary.get_item(action_key)
-		if !action:
-			printerr("que_input_control._build_buttons: Failed to find Action '%s'." % [action_key])
-			continue
+		known_keys.append(action_key)
+			
 		var new_button:QueInputButtonControl = page_button_prefab.duplicate()
 		new_button.name = "PageSlot" + str(index)
 		input_buttons_container.add_child(new_button)
@@ -196,14 +204,14 @@ func _build_buttons():
 		#else:
 			#new_button.get_child(0).texture = action.get_large_page_icon(_actor)
 		if not MainRootNode.is_mobile:
-			new_button.button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_key))
-			new_button.button.mouse_exited.connect(_mouse_exited_page_button.bind(index, action_key))
-		new_button.button.pressed.connect(_page_button_pressed.bind(index, action_key))
+			new_button.button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_id))
+			new_button.button.mouse_exited.connect(_mouse_exited_page_button.bind(index, action_id))
+		new_button.button.pressed.connect(_page_button_pressed.bind(index, action_id))
 		#new_button.selection_button.pressed.connect(_on_page_special_selected.bind(action_key))
 		
 		_page_buttons[action_key] = new_button
 		index += 1
-	input_buttons_container.columns = min(MAX_INPUT_BUTTON_WIDTH, action_keys.size())
+	input_buttons_container.columns = min(MAX_INPUT_BUTTON_WIDTH, index)
 	_on_que_change()
 	
 	#self.size = Vector2i(main_container.size.x + (2 * PADDING),
@@ -283,7 +291,8 @@ func _page_button_pressed(_index, key_name):
 		page_special_selected.emit(key_name)
 		hide_page_selection()
 		return
-	var action:PageItemAction = _actor.pages.get_action_page(key_name)
+	print("DCX: PageButtonPressed: " + key_name)
+	var action:PageItemAction = _actor.get_action_page(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
 	if on_que_options and on_que_options.size() > 0:
 		CombatUiControl.Instance.ui_state_controller.open_options_menu(_actor, "OnQueOption", on_que_options, action.ActionKey)

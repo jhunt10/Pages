@@ -15,7 +15,7 @@ func set_actor(actor:BaseActor):
 	var slot_count = 0
 	for action:PageItemAction in actor.pages.list_actions():
 		var new_icon = premade_page_icon.duplicate()
-		new_icon.get_child(0).texture = action.get_small_page_icon(actor)
+		new_icon.get_child(0).texture = action.get_small_page_icon()
 		new_icon.show()
 		self.add_child(new_icon)
 		slot_count += 1

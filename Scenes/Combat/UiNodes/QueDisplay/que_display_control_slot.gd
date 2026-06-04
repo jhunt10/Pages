@@ -28,7 +28,7 @@ func set_is_gap(val:bool):
 func set_action(index:int, actor:BaseActor, action:PageItemAction):
 	if action and not is_gap:
 		icon.visible = true
-		icon.texture = action.get_qued_icon(index, actor)
+		icon.texture = action.get_qued_icon(index, actor.Que)
 	else:
 		icon.visible = false
 		icon.texture = null

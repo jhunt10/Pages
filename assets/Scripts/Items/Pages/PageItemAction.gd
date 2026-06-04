@@ -132,15 +132,20 @@ func sort_subacts_ascending(a, b):
 ########################
 ##    Icons  Data     ##
 ########################
-func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
+
+func get_qued_icon(turn_index:int, que:ActionQue, override_actor:BaseActor =  null)->Texture2D:
+	# If qued by a Carrier Actor, we need to use thier QueExecData
 	if action_data.get("Preview", {}).get("UseDynamicIcons", false):
-		var turn_data = actor.Que.QueExecData.get_data_for_turn(turn_index)
+		var turn_data = que.QueExecData.get_data_for_turn(turn_index)
 		var icon = turn_data.on_que_data.get("OverrideQueIcon", null)
 		if icon:
 			return icon
+	var use_actor = override_actor
+	if use_actor == null and has_holding_actor():
+		use_actor = get_holding_actor()
 	var equip_slot = action_data.get("Preview", {}).get("UseEquipmentIcon", null)
 	if equip_slot:
-		var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
+		var equipments = use_actor.equipment.get_equipt_items_of_slot_type(equip_slot)
 		if equipments.size() > 0:
 			var equipment:BaseEquipmentItem = equipments[0]
 			var overlay_sprite = action_data.get("Preview", {}).get("OverlaySprite", '')
@@ -148,16 +153,27 @@ func get_qued_icon(turn_index:int, actor:BaseActor =  null)->Texture2D:
 				return SpriteCache.get_item_overlay_sprite(equipment, get_load_path().path_join(overlay_sprite))
 			else:
 				return equipment.get_small_icon()
-	return get_small_page_icon(actor)
+	return get_small_page_icon(use_actor)
+
+# Should Page be duplicated in the ActionQueInput when merged players have multiple copies
+# Naive Actions like "Move XXX" should not be duplicated
+# Actor specific Actions like "Weapon Attack" should be duplicated
+func is_duplicated_when_merged()->bool:
+	if action_data.get("Preview", {}).get("UseEquipmentIcon", null) != null:
+		return true
+	return false
 
 func use_equipment_icon()->bool:
 	return action_data.get("Preview", {}).get("UseEquipmentIcon", null) != null
 
-func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
-	if actor:
+func  get_small_page_icon(override_actor:BaseActor = null)->Texture2D:
+	var use_actor = override_actor
+	if use_actor == null and has_holding_actor():
+		use_actor = get_holding_actor()
+	if use_actor:
 		var equip_slot = action_data.get("Preview", {}).get("UseEquipmentIcon", null)
 		if equip_slot:
-			var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
+			var equipments = use_actor.equipment.get_equipt_items_of_slot_type(equip_slot)
 			if equipments.size() > 0:
 				var equipment:BaseEquipmentItem = equipments[0]
 				var overlay_sprite = action_data.get("Preview", {}).get("OverlaySprite", '')
@@ -167,11 +183,14 @@ func  get_small_page_icon(actor:BaseActor = null)->Texture2D:
 					return equipment.get_large_icon()
 	return get_small_icon()
 
-func  get_large_page_icon(actor:BaseActor = null)->Texture2D:
-	if actor:
+func  get_large_page_icon(override_actor:BaseActor = null)->Texture2D:
+	var use_actor = override_actor
+	if use_actor == null and has_holding_actor():
+		use_actor = get_holding_actor()
+	if use_actor:
 		var equip_slot = action_data.get("Preview", {}).get("UseEquipmentIcon", null)
 		if equip_slot:
-			var equipments = actor.equipment.get_equipt_items_of_slot_type(equip_slot)
+			var equipments = use_actor.equipment.get_equipt_items_of_slot_type(equip_slot)
 			if equipments.size() > 0:
 				var equipment:BaseEquipmentItem = equipments[0]
 				var overlay_sprite = action_data.get("Preview", {}).get("OverlaySprite", '')

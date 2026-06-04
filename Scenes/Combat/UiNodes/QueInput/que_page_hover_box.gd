@@ -38,8 +38,8 @@ func _process(_delta: float) -> void:
 
 func set_action(actor:BaseActor, page_item:BasePageItem):
 	var action = page_item as PageItemAction
-	if actor.pages.has_action(action.ActionKey):
-		action = actor.pages.get_action_page(action.ActionKey)
+	#if actor.pages.has_action(action.ActionKey):
+		#action = actor.pages.get_action_page(action.ActionKey)
 	var title = action.get_display_name()
 	title_label.text = title
 	title_label._size_dirty = true

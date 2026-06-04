@@ -20,6 +20,15 @@ func remove_held_actor(actor:BaseActor):
 		actor.parent_carrier_actor_id = null
 	
 
+# Used by Que Input Control
+func get_action_list()->Array:
+	var list = super()
+	for child:BaseActor in _held_actors.values():
+		for sub_action in child.get_action_list():
+			if not list.has(sub_action):
+				list.append(sub_action)
+	return list
+
 func get_action_key_list()->Array:
 	var list = super()
 	for child:BaseActor in _held_actors.values():
