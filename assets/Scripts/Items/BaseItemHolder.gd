@@ -152,7 +152,8 @@ func _build_slots_list():
 		
 		# No old Slot Set Data (happens durring loading)
 		if slot_set_key == "Unset":
-			_raw_item_slots[old_slot_set_sub_index] = item_id
+			if _raw_item_slots.size() > old_slot_set_sub_index:
+				_raw_item_slots[old_slot_set_sub_index] = item_id
 			continue
 			
 		
