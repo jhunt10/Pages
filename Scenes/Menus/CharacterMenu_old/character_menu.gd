@@ -24,6 +24,7 @@ signal closed
 @export var details_card_spawn_point:Control
 @export var mouse_control:CharacterMenuMouseControl
 @export var inventory_option_button:OptionButton
+@export var skill_tree_control:SkillTreePageControl
 
 var _current_details_card:ItemDetailsCard
 
@@ -92,10 +93,17 @@ func set_actor(actor:BaseActor):
 	_actor.bag_items_changed.connect(_sync)
 	_actor.page_list_changed.connect(_sync)
 	_sync()
+	skill_tree_control.set_actor(_actor)
 
 func _on_inventory_option_select(index:int):
-	var option = inventory_option_button.get_item_text(index)
-	inventory_container.set_character_menu_context(option)
+	if index < 3:
+		var option = inventory_option_button.get_item_text(index)
+		inventory_container.set_character_menu_context(option)
+		inventory_container.show()
+		skill_tree_control.hide()
+	if index == 3:
+		inventory_container.hide()
+		skill_tree_control.show()
 
 func _sync():
 	name_panel.sync(_actor)
@@ -127,7 +135,8 @@ func _on_close():
 	closed.emit()
 
 func _on_tab_change(index:int):
-	inventory_option_button.select(index)
+	if inventory_option_button.selected != 3:
+		inventory_option_button.select(index)
 	match index:
 		0:
 			inventory_container.set_character_menu_context("Page")

@@ -120,9 +120,9 @@ func get_raw_display_name()->String:
 func get_display_name()->String:
 	var dis_name = super()
 	if pages:
-		var title_page:BasePageItem = pages.get_item_in_slot(0)
-		if title_page:
-			dis_name = title_page.get_display_name()
+		var title = get_title()
+		if title:
+			dis_name = title
 	if enemy_npc_index >= 0:
 		dis_name += " " + alphabet[enemy_npc_index]
 	return dis_name

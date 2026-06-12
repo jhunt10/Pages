@@ -1,7 +1,7 @@
 class_name SkillTreePageControl
 extends Control
 
-@export var character_menu:CharacterMenuControl
+@export var character_menu:CharacterMenu
 @export var background_control:Control
 @export var tree_container:BoxContainer
 @export var row_prefab:HBoxContainer
