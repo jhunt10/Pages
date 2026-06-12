@@ -56,7 +56,10 @@ func load_save_data(data:Array):
 			_raw_item_slots.append(null)
 			continue
 		var item_id = item_data.get('Id')
-		var item_key = item_data.get('ObjectKey')
+		var item_key:String = item_data.get('ObjectKey')
+		# Hack to support old dev saves
+		if item_key.contains("Title"):
+			continue
 		var new_item = ItemLibrary.get_or_create_item(item_id, item_key, item_data)
 		if new_item:
 			_raw_item_slots.append(new_item.Id)
@@ -234,7 +237,7 @@ func get_slot_set_data(key:String)->Dictionary:
 	return {}
 
 func get_slot_set_data_for_index(index:int):
-	if index < 0 or index > _raw_item_slots.size():
+	if index < 0 or index >= _raw_item_slots.size():
 		return {}
 	var index_data = _raw_to_slot_set_mapping[index]
 	return _item_slot_sets_datas[index_data['SlotSetIndex']]

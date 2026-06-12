@@ -363,7 +363,7 @@ func get_offhand_weapon()->BaseWeaponEquipment:
 		return item as BaseWeaponEquipment
 	return null
 
-func get_filtered_weapons(weapon_filter)->Array:
+func get_filtered_weapons(weapon_filter:Dictionary)->Array:
 	var out_arr = []
 	var include_classes = weapon_filter.get("LimitClasses", [])
 	if include_classes.size() == 0:

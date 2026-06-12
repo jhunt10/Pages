@@ -52,6 +52,8 @@ var actor_data:Dictionary:
 var TeamKey : String
 var enemy_npc_index:int = -1
 
+var title_page:PageItemTitle
+
 var spawn_map_layer
 
 var use_ai:bool: 
@@ -131,11 +133,16 @@ func get_faction_key()->String:
 	return actor_data.get("Faction", "NO_FACTION")
 
 func get_title()->String:
-	if pages:
-		var title_page = pages.get_title_page()
-		if title_page:
-			return title_page.get_title_key()
+	var title_page = get_title_page()
+	if title_page:
+		return title_page.get_title_key()
 	return get_display_name()
+
+func get_title_page()->PageItemTitle:
+	if !title_page:
+		var title_key = actor_data.get("TitleKey")
+		title_page = ItemLibrary.create_item(title_key, {})
+	return title_page
 
 func _get_object_specific_tags()->Array:
 	var tag_list = []
@@ -237,6 +244,12 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 	
 	if holder == pages:
 		page_list_changed.emit()
+	
+	if holder == equipment:
+		equipment_changed.emit()
+	
+	if holder == items:
+		bag_items_changed.emit()
 	
 	if rebuild_sprite:
 		sprite._build_sprite_sheet()
@@ -472,7 +485,10 @@ func get_unarmed_attack_weapon_animation():
 ## When one of "Melee" or "Ranged" is included, the other will be excluded. 
 ## When neither are included, Offhand will only be added if Range/Melee matches MainHand
 ## When one of "Main" or "Off" is included, the other will be excluded. 
-func get_weapon_damage_datas(weapon_filter)->Dictionary:
+func get_weapon_damage_datas(weapon_filter:Dictionary={})->Dictionary:
+	if weapon_filter.size() == 0:
+		weapon_filter = { "FallbackToUnarmed": true, "IncludeSlots": ["Primary", "OffHand"], "LimitRangeMelee": "MatchPrimary" }
+
 	var out_dict = {}
 	var weapons = equipment.get_filtered_weapons(weapon_filter)
 	# No weapons found

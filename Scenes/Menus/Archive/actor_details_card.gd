@@ -92,7 +92,7 @@ func set_actor(actor:BaseActor):
 	pot_label.set_stat_values(actor)
 	pro_label.set_stat_values(actor)
 	
-	var title_page = actor.pages.get_title_page()
+	var title_page = actor.get_title_page()
 	if title_page:
 		description_box.set_page_item(title_page, actor)
 	else:

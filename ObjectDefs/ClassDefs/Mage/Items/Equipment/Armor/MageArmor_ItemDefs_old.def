@@ -1,0 +1,137 @@
+{
+	"OldMageArmor": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A common design of robes worn by many new mages. Old, but still works.",
+			"DisplayName": "Old Red Robes",
+			"LargeIcon": "Sprites/RedRobes.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/RedRobes.png",
+			"SnippetDesc": "A mage's old Robes.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Body"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "LightWard",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 2.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Body",
+			"Requirments": {
+				"ReqStats": {
+					"Intelligence": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/RedRobes_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"OldMageBoots": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A common design of shoes worn by many new mages. Old, but still works.",
+			"DisplayName": "Old Red Shoes",
+			"LargeIcon": "Sprites/RedBoots.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/RedBoots.png",
+			"SnippetDesc": "A mage's old Shoes.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Feet"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "LightWard",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 2.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Feet",
+			"Requirments": {
+				"ReqStats": {
+					"Intelligence": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/RedBoots_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"OldMageHelmet": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseApparelEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A common design of hat worn by many new mages. Old, but still works.",
+			"DisplayName": "Old Hat",
+			"LargeIcon": "Sprites/RedHat.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/RedHat.png",
+			"SnippetDesc": "A mage's old Helmet.",
+			"Tags": [
+				"Equipment",
+				"Apparel",
+				"Head"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Apparel"
+			]
+		},
+		"ApparelData": {
+			"ApparelClass": "LightWard",
+			"ProvidedArmor": 0.0,
+			"ProvidedWard": 2.0,
+			"StatMods": {
+
+			}
+		},
+		"EquipmentData": {
+			"EquipSlot": "Head",
+			"Requirments": {
+				"ReqStats": {
+					"Intelligence": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/RedHat_SpriteSheet.png"
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	}
+}

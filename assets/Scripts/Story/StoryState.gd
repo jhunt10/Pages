@@ -36,7 +36,7 @@ func add_actor_to_party(actor)->BaseActor:
 		add_encounter_with_actor(actor)
 		
 		# Add class pages
-		var title = actor.pages.get_title_page().get_display_name()
+		var title = actor.get_title_page().get_display_name()
 		set_unlocked_skill_for_actor(actor, [])
 		#var has_pages = []
 		#for party_actor:BaseActor in list_party_actors():
@@ -86,7 +86,7 @@ func get_player_color(actor)->Color:
 	if actor is String:
 		actor = ActorLibrary.get_actor(actor)
 	
-	var title = actor.pages.get_title_page()
+	var title = actor.get_title_page()
 	if title:
 		return title.get_player_color()
 	#if index == 0: return Color.BLUE

@@ -21,9 +21,6 @@
 		"EquipmentData": {
 			"EquipSlot": "Weapon",
 			"Requirments": {
-				"ReqStats": {
-					"Strength": 10.0
-				}
 			},
 			"StatMods": {
 				"AttackBonus": {
@@ -77,6 +74,58 @@
 				"Rotation": 0.0,
 				"WeaponAnimation": "Swing"
 			}
+		},
+		"_DefVersion": "1"
+	},
+	"OldShield": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
+		"#ObjDetails": {
+			"Description": "Standard issue shield provided by The Military. Old, but still works.",
+			"DisplayName": "Old Shield",
+			"LargeIcon": "Sprites/OldShield.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/OldShield.png",
+			"SnippetDesc": "A soldier's old Shield.",
+			"Tags": [
+				"Equipment",
+				"OffHand",
+				"Shield"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Tool",
+				"Shield"
+			]
+		},
+		"EquipmentData": {
+			"EquipSlot": "OffHand",
+			"Requirments": {
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/OldShield_SpriteSheet.png"
+			},
+			"StatMods": {
+				"ArmorBonus": {
+					"ModType": "Add",
+					"StatName": "Armor",
+					"Value": 5.0
+				},
+				"StatMod1": {
+					"ModType": "Set",
+					"StatName": "BlockChance",
+					"Value": 45.0
+				},
+				"StatMod2": {
+					"ModType": "Set",
+					"StatName": "BlockMod",
+					"Value": 0.5
+				}
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
 		},
 		"_DefVersion": "1"
 	}

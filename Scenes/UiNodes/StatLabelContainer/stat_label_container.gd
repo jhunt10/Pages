@@ -40,6 +40,9 @@ func set_stat_values(actor:BaseActor):
 	#_build_stat_mod_list()
 
 func load_icon():
+	if !icon:
+		_icon_loaded = true
+		return
 	var icon_texture = StatHelper.get_stat_icon(stat_name)
 	if icon_texture:
 		self.icon.texture = icon_texture
@@ -51,7 +54,7 @@ func load_icon():
 func _on_mouse_enter():
 	if not _actor:
 		return
-	mod_list_control = load("res://Scenes/Menus/CharacterMenu/MenuPages/StatsMenuPage/stat_mod_list_control.tscn").instantiate()
+	mod_list_control = load("res://Scenes/Menus/CharacterMenu_old/MenuPages/StatsMenuPage/stat_mod_list_control.tscn").instantiate()
 	if mod_list_control:
 		if mouse_over_parent:
 			mouse_over_parent.add_child(mod_list_control)

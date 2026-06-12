@@ -15,15 +15,7 @@ func _init(actor) -> void:
 
 func _get_innate_slots_data()->Array:
 	if LOGGING: print("--Page Slots Loading" )
-	var out_list = [{
-		"Key":"TitlePage",
-		"DisplayName":"Title Page",
-		"Count": 1,
-		"NeverEmpty": true,
-		"FilterData":{
-			"RequiredTags":"Title"
-		}
-	}]
+	var out_list = []
 	var page_book_item:BaseQueEquipment = _actor.equipment.get_que_equipment()
 	if page_book_item:
 		cached_page_book_item_id = page_book_item.Id

@@ -1,0 +1,17 @@
+[gd_resource type="Theme" format=3 uid="uid://cg4cnbceql6tl"]
+
+[ext_resource type="Texture2D" uid="uid://7x0clyrtcupf" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18.png" id="1_1it3x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ex38c"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_1it3x")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+texture_margin_bottom = 18.0
+
+[resource]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_ex38c")

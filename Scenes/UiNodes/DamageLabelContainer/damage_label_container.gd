@@ -77,6 +77,8 @@ enum DamageTypes {
 
 @export var attack_scale:float
 
+@export var display_name_label:Label
+
 @export var atk_power_and_scale_container:Container
 @export var atk_power_label:Label
 @export var plus_minus_label:Label
@@ -126,7 +128,11 @@ func _on_mouse_exit():
 	popup_container.hide()
 
 func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1):
-	
+	if damage_data.has("DisplayName"):
+		display_name_label.text = damage_data.get("DisplayName")
+		display_name_label.show()
+	else:
+		display_name_label.hide()
 	if damage_data.get("ActorlessWeapon", false):
 		attack_scale = damage_data.get("AtkPwrScale", 1)
 		atk_stat_icon.hide()

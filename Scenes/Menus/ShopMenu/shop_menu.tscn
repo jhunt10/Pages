@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dc0cxrnjk6x50" path="res://Scenes/Menus/CampMenu/camp_options_container.gd" id="6_l23p1"]
 [ext_resource type="Script" uid="uid://dd5xsv3bqcqi2" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="7_36qs6"]
 [ext_resource type="Texture2D" uid="uid://c2vu13v8elej6" path="res://Scenes/Menus/ShopMenu/wood_frame_Black_Patch_124_16.png" id="8_6e5du"]
-[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu/MenuPages/SlotHighlight.png" id="8_g50yr"]
+[ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/SlotHighlight.png" id="8_g50yr"]
 [ext_resource type="Texture2D" uid="uid://dter0pgnswchk" path="res://Scenes/Menus/CampMenu/_B_Icon.png" id="9_sbhuk"]
 [ext_resource type="Theme" uid="uid://dkopxykqxg6jl" path="res://assets/Themes/scroll_bar_theme.tres" id="10_frlib"]
 [ext_resource type="Script" uid="uid://ro5drlf0sksf" path="res://Scenes/Menus/ShopMenu/item_menu_container.gd" id="13_3e5hi"]
@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://d1s1wxwcdcvcn" path="res://Scenes/Menus/ShopMenu/wood_frame_Patch_124_16.png" id="20_qejys"]
 [ext_resource type="PackedScene" uid="uid://cyi7xhb25f7cs" path="res://Scenes/Dialog/DialogBox/speech_dialog_block.tscn" id="21_26ugd"]
 [ext_resource type="Texture2D" uid="uid://b4bl1mmlrrq12" path="res://notes/NPCs/FishMerch/Portraits/FishMerch_Sleeping.png" id="22_lwtp0"]
-[ext_resource type="PackedScene" uid="uid://btr6wpgyitqc0" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.tscn" id="23_gkgvs"]
+[ext_resource type="PackedScene" uid="uid://btr6wpgyitqc0" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/item_details_card.tscn" id="23_gkgvs"]
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="24_8rhkl"]
 [ext_resource type="Script" uid="uid://b4elt5djt05pg" path="res://Scenes/Menus/money_display.gd" id="24_n7d8d"]
 [ext_resource type="Texture2D" uid="uid://cgrlfobidw8xl" path="res://assets/Sprites/UI/BackPatches/PaperPatch_Bigger_276x192_48.png" id="31_l4e0d"]
@@ -31,8 +31,8 @@
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="32_sa4l8"]
 [ext_resource type="Script" uid="uid://cxlvn68pxork" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="33_5t8yh"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="34_pcliu"]
-[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="35_uh67f"]
-[ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_sb2uy"]
+[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="35_uh67f"]
+[ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_sb2uy"]
 
 [node name="ShopMenu" type="Control" unique_id=1448878564 node_paths=PackedStringArray("dialog_box", "item_menu_controller", "details_card_spawn_point", "confirm_popup", "buy_button", "sell_button", "close_button", "scroll_container")]
 layout_mode = 3

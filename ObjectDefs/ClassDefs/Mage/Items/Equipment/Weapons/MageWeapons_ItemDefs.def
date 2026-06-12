@@ -91,5 +91,50 @@
 			}
 		},
 		"_DefVersion": "1"
+	},
+	"OldMageOrb": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseToolEquipment.gd",
+		"#ObjDetails": {
+			"Description": "A common tool used by many new mages for focusing magic. Old, but still works.",
+			"DisplayName": "Old Orb",
+			"LargeIcon": "Sprites/OldOrb.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/OldOrb.png",
+			"SnippetDesc": "A mage's old focusing Orb.",
+			"Tags": [
+				"Equipment",
+				"OffHand",
+				"Focus"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Tool",
+				"Focus"
+			]
+		},
+		"EquipmentData": {
+			"EquipSlot": "OffHand",
+			"Requirments": {
+				"ReqStats": {
+					"Intelligence": 10.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/OldOrb_SpriteSheet.png"
+			},
+			"StatMods": {
+				"IntelligenceBonus": {
+					"ModType": "Add",
+					"StatName": "MagAttack",
+					"Value": 5.0
+				}
+			}
+		},
+		"ItemData": {
+			"Rarity": "Mundane",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
 	}
 }

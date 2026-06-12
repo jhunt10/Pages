@@ -328,6 +328,7 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 				var override_data = damage_data.duplicate()
 				override_data.erase("WeaponFilter")
 				var weapon_damage_datas = actor.get_weapon_damage_datas(weapon_filter)
+				print(weapon_filter)
 				for weapon_damage_key in weapon_damage_datas.keys():
 					var sub_key = key + ":" + weapon_damage_key
 					out_dict[sub_key] = BaseLoadObjectLibrary._merge_defs(damage_data, weapon_damage_datas[weapon_damage_key])

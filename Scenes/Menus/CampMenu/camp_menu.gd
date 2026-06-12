@@ -112,12 +112,13 @@ func _on_explore_button():
 	MainRootNode.Instance.open_map_selection_menu()
 
 func _on_prepare_button():
-	if character_menu and CharacterMenuControl.Instance != null:
-		character_menu.show_menu()
-	else:
-		character_menu = MainRootNode.Instance.open_character_sheet()
-	if not character_menu.menu_closed.is_connected(on_char_menu_closed):
-		character_menu.menu_closed.connect(on_char_menu_closed)
+	MainRootNode.Instance.open_character_sheet()
+	#if character_menu and CharacterMenuControl.Instance != null:
+		#character_menu.show_menu()
+	#else:
+		#character_menu = 
+	#if not character_menu.menu_closed.is_connected(on_char_menu_closed):
+		#character_menu.menu_closed.connect(on_char_menu_closed)
 
 func on_char_menu_closed():
 	check_levels()

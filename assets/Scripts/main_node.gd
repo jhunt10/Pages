@@ -154,19 +154,19 @@ func open_shop_menu():
 	#self.add_child(new_scene)
 	#current_scene = new_scene
 
-func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMenuControl:
+func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMenu:
 	var actor = _actor
 	if not actor:
 		actor = StoryState.get_party_actor_by_index(0)
 		#actor = ActorLibrary.create_actor("TestActor", {})
-	var charsheet:CharacterMenuControl = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
-	charsheet.scale_control.scale = Vector2(1, 1)
+	var charsheet:CharacterMenu = load("res://Scenes/Menus/CharacterMenu/character_menu.tscn").instantiate()
+	#charsheet.scale_control.scale = Vector2(1, 1)
 	#charsheet.scale_control.scale = Vector2(1.25,1.25)
 	if parent_node:
 		parent_node.add_child(charsheet)
 	else:
 		self.add_child(charsheet)
-	charsheet.show_menu()
+	#charsheet.show_menu()
 	return charsheet
 
 func open_page_menu(actor:BaseActor):

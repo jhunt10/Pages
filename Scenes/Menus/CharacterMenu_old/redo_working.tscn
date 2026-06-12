@@ -1,0 +1,2287 @@
+[gd_scene format=3 uid="uid://bsblfxvgqua1w"]
+
+[ext_resource type="Script" uid="uid://bfo0lxleq45cd" path="res://Scenes/Menus/CharacterMenu_old/character_menu.gd" id="1_4ftua"]
+[ext_resource type="Texture2D" uid="uid://deporx1o1xrvj" path="res://Scenes/Menus/CharacterMenu_old/BookBackground2.png" id="1_x3pb4"]
+[ext_resource type="Texture2D" uid="uid://cdy53ml2tuvc8" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_Frame_64_18.png" id="2_1afo6"]
+[ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://Scenes/Menus/CharacterMenu/Equipment/Sprites/BookSlot.png" id="4_2msfp"]
+[ext_resource type="Texture2D" uid="uid://co33b1qq2uef7" path="res://Scenes/Menus/CharacterMenu/Equipment/Sprites/BagSlot.png" id="5_vojk1"]
+[ext_resource type="Texture2D" uid="uid://puhp53n8k1h8" path="res://Scenes/Menus/CharacterMenu/Equipment/Sprites/TrinketSlot.png" id="6_61gdx"]
+[ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://Scenes/Menus/CharacterMenu/Equipment/Sprites/MainHandSlot.png" id="7_pfjkv"]
+[ext_resource type="Texture2D" uid="uid://dwliocipx40sq" path="res://Scenes/Menus/CharacterMenu/Equipment/Sprites/OffHandSlot.png" id="8_jvdxs"]
+[ext_resource type="PackedScene" uid="uid://uo60871y6t54" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn" id="11_1srqh"]
+[ext_resource type="Texture2D" uid="uid://cx5xeyhkwqh0s" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/MageIcon.png" id="12_visa2"]
+[ext_resource type="Theme" uid="uid://cg4cnbceql6tl" path="res://assets/Themes/fancy_panel_theme.tres" id="13_4ftua"]
+[ext_resource type="PackedScene" uid="uid://dbtugo1kq2imi" path="res://Scenes/Menus/CharacterMenu/InventoryPage/inventory_menu_page.tscn" id="13_bulkp"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="14_tarkt"]
+[ext_resource type="Texture2D" uid="uid://ijuqwfxfdvsh" path="res://Scenes/UiNodes/ExpBar/AttributesIcon_SpriteSheetpdn.png" id="15_j5yrx"]
+[ext_resource type="Script" uid="uid://bhlv7ecy1qahk" path="res://Scenes/UiNodes/ExpBar/exp_bar_control.gd" id="16_wqdjy"]
+[ext_resource type="Texture2D" uid="uid://lv3xit0yhvj2" path="res://Scenes/UiNodes/ExpBar/ExpBar.png" id="17_3nq5o"]
+[ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="18_t2ffo"]
+[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="19_1084u"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="20_brc4x"]
+[ext_resource type="Script" uid="uid://dye1dlsmf7k3t" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.gd" id="21_ynpcx"]
+[ext_resource type="Texture2D" uid="uid://cll1c22bgo2p6" path="res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png" id="22_fevku"]
+[ext_resource type="Theme" uid="uid://ctxg1le8v42tl" path="res://assets/Themes/stat_label_theme.tres" id="23_ngva1"]
+[ext_resource type="Texture2D" uid="uid://m0ss0tg7qqou" path="res://assets/Sprites/UI/SymbolIcons/MassSymbol.png" id="24_fdd4s"]
+[ext_resource type="Texture2D" uid="uid://v6mrr2dref31" path="res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png" id="25_50fa8"]
+[ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png" id="26_32j24"]
+[ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="27_1bb4d"]
+[ext_resource type="Texture2D" uid="uid://br058igskmkwd" path="res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png" id="28_4w0wa"]
+[ext_resource type="Texture2D" uid="uid://bscty2yddkv5l" path="res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png" id="30_6b8rs"]
+[ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="31_dtu3i"]
+[ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="32_psgrp"]
+[ext_resource type="Texture2D" uid="uid://uarxllb74uai" path="res://assets/Sprites/UI/SymbolIcons/EvasionSymbol.png" id="33_7vikl"]
+[ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="33_tarkt"]
+[ext_resource type="Texture2D" uid="uid://cl7v6htwim8aw" path="res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png" id="34_4r35n"]
+[ext_resource type="Texture2D" uid="uid://7x0clyrtcupf" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18.png" id="34_j5yrx"]
+[ext_resource type="Texture2D" uid="uid://seyoqmlx4o78" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot_highlight.png" id="35_3rh04"]
+[ext_resource type="Texture2D" uid="uid://30ow80fhsx2f" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18_tab_tab.png" id="35_wqdjy"]
+[ext_resource type="Texture2D" uid="uid://byq6wa2xqa1mt" path="res://ObjectDefs/Actions/CommonActions/BasicMovement/Sprites/MoveForward.png" id="36_l5ruo"]
+[ext_resource type="PackedScene" uid="uid://b6a64dt8gveex" path="res://Scenes/Menus/CharacterMenu/Pages/page_menu_item_slot_button.tscn" id="37_3nq5o"]
+[ext_resource type="PackedScene" uid="uid://c20lud2px2apo" path="res://Scenes/Menus/CharacterMenu/Supplies/supplies_menu_item_slot_button.tscn" id="38_t2ffo"]
+[ext_resource type="Script" uid="uid://bwbq5042qi6w6" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/StatsMenuPage/stats_page_control.gd" id="40_65lhm"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="41_r5alx"]
+[ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/outline.png" id="42_88tgh"]
+[ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="43_2w8mi"]
+[ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="44_vbjkw"]
+[ext_resource type="Texture2D" uid="uid://doywp1shkpnmd" path="res://assets/Sprites/UI/SymbolIcons/_I_Symbole.png" id="45_ovsk6"]
+[ext_resource type="Texture2D" uid="uid://ci3qbej0djsng" path="res://assets/Sprites/UI/SymbolIcons/_W_Symbole.png" id="46_b5xi0"]
+[ext_resource type="PackedScene" uid="uid://ybkww8wk3awm" path="res://Scenes/UiNodes/StatLabelContainer/stat_label_container.tscn" id="47_ktcyg"]
+[ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="48_n5ek0"]
+[ext_resource type="Texture2D" uid="uid://dgxwfm0wf7rhw" path="res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png" id="49_grqrs"]
+[ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="50_mjvjl"]
+[ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="51_vfqqk"]
+[ext_resource type="Texture2D" uid="uid://clebb0eitse2k" path="res://assets/Sprites/UI/SymbolIcons/ProtectionSymbol.png" id="52_tcl4i"]
+[ext_resource type="PackedScene" uid="uid://bd7k0s02cumgn" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_awarness_display.tscn" id="53_6po8x"]
+[ext_resource type="Texture2D" uid="uid://d0pn1i5o4fqj5" path="res://assets/Sprites/UI/SymbolIcons/AwarenessSymbol.png" id="54_g8yx0"]
+[ext_resource type="Script" uid="uid://jx07xbd35ygl" path="res://Scenes/Menus/CharacterMenu_old/full_stat_display_control.gd" id="55_hpkfd"]
+[ext_resource type="Script" uid="uid://b0fnr4p62cac2" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/StatsMenuPage/stat_entry_container.gd" id="56_ujcya"]
+[ext_resource type="Script" uid="uid://2dqdth8xwfg3" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/StatsMenuPage/resistances_container.gd" id="57_ba5vy"]
+[ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="58_63yif"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j63nq"]
+texture = ExtResource("1_x3pb4")
+texture_margin_left = 36.0
+texture_margin_top = 16.0
+texture_margin_right = 36.0
+texture_margin_bottom = 40.0
+
+[sub_resource type="Theme" id="Theme_1gq45"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_j63nq")
+
+[sub_resource type="Animation" id="Animation_h263m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3a6i4"]
+resource_name = "flashing_animation"
+length = 1.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.23517e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_j1ppp"]
+resource_name = "waiting"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lb0f8"]
+_data = {
+&"RESET": SubResource("Animation_h263m"),
+&"flashing_animation": SubResource("Animation_3a6i4"),
+&"waiting": SubResource("Animation_j1ppp")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1084u"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("34_j5yrx")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+texture_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_brc4x"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+texture = ExtResource("35_wqdjy")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ynpcx"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+texture = ExtResource("35_wqdjy")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+
+[sub_resource type="Theme" id="Theme_fevku"]
+TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_unselected_color = Color(0.49803922, 0, 0, 1)
+TabContainer/fonts/font = ExtResource("33_tarkt")
+TabContainer/styles/panel = SubResource("StyleBoxTexture_1084u")
+TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_brc4x")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_ynpcx")
+
+[node name="CharacterMenu" type="Control" unique_id=2018728110]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4ftua")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=113629347]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CenterContainer" unique_id=951231591]
+layout_mode = 2
+theme = SubResource("Theme_1gq45")
+
+[node name="TwoPagesContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer" unique_id=2032856908]
+custom_minimum_size = Vector2(0, 512)
+layout_mode = 2
+
+[node name="LeftPageContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer" unique_id=228522046]
+layout_mode = 2
+vertical = true
+
+[node name="ActorPreivewContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer" unique_id=1793992885]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Name-PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=893596779]
+layout_mode = 2
+theme = ExtResource("13_4ftua")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer" unique_id=853459007]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer" unique_id=289876764]
+layout_mode = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=861013707]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+theme_override_font_sizes/font_size = 20
+text = "Character Name"
+
+[node name="LevelLabel2" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=508592017]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+theme_override_font_sizes/font_size = 20
+text = " "
+
+[node name="LevelLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=903417953]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+theme_override_font_sizes/font_size = 20
+text = "99"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer" unique_id=1141884939]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="LevelUpControl" type="Control" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=141050992]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl" unique_id=98504408]
+position = Vector2(26, -6)
+texture = ExtResource("15_j5yrx")
+hframes = 5
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D" unique_id=1342729916]
+libraries/ = SubResource("AnimationLibrary_lb0f8")
+
+[node name="Button" type="Button" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D" unique_id=1321975852]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=142543547]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExpBar" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1554772003 node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button", "level_up_button_animation")]
+z_index = 2
+custom_minimum_size = Vector2(176, 13)
+layout_mode = 2
+script = ExtResource("16_wqdjy")
+full_rect = NodePath("FullRect")
+color_rect = NodePath("ColorRect")
+level_label = NodePath("../../HBoxContainer/LevelLabel")
+mouse_over_control = NodePath("Control/BackPatchContainer")
+current_exp_label = NodePath("Control/BackPatchContainer/BoxContainer/CurentLabel")
+max_exp_label = NodePath("Control/BackPatchContainer/BoxContainer/NexrLevelLabel")
+percent_full = 0.5
+level_up_button_control = NodePath("../LevelUpControl")
+level_up_button = NodePath("../LevelUpControl/Sprite2D/Button")
+level_up_button_animation = NodePath("../LevelUpControl/Sprite2D/AnimationPlayer")
+
+[node name="FullRect" type="Control" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1971472075]
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 4.0
+offset_right = 168.0
+offset_bottom = 9.0
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1561030256]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 87.5
+offset_bottom = 9.0
+mouse_filter = 2
+color = Color(0, 1, 1, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1182153665]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("17_3nq5o")
+
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1504335772]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BackPatchContainer" type="Container" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control" unique_id=404662575 node_paths=PackedStringArray("background", "inner_container")]
+visible = false
+z_index = 1
+custom_minimum_size = Vector2(126, 32)
+layout_mode = 0
+offset_left = 25.0
+offset_right = 151.0
+offset_bottom = 32.0
+script = ExtResource("18_t2ffo")
+background = NodePath("NinePatchRect")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+center_in_parent = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer" unique_id=670675703]
+layout_mode = 2
+texture = ExtResource("19_1084u")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="BoxContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer" unique_id=1320603808]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="CurentLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1582122292]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("20_brc4x")
+text = "100"
+vertical_alignment = 2
+
+[node name="SlashLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1536635527]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("20_brc4x")
+text = " / "
+vertical_alignment = 2
+
+[node name="NexrLevelLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=713255937]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("20_brc4x")
+text = "1000"
+vertical_alignment = 2
+
+[node name="ExpLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1978152426]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme = ExtResource("20_brc4x")
+text = " Exp"
+vertical_alignment = 2
+
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=215875117]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=808050233]
+layout_mode = 2
+
+[node name="Stats-PanelContainer" type="PanelContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer" unique_id=106545721]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("13_4ftua")
+
+[node name="BoxContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer" unique_id=896625520]
+layout_mode = 2
+alignment = 1
+vertical = true
+
+[node name="BaseStats" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer" unique_id=979039758]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+vertical = true
+
+[node name="StatContainer-PPR" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=1070955256 node_paths=PackedStringArray("icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "PPR"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-PPR" unique_id=2042751531]
+layout_mode = 2
+texture = ExtResource("26_32j24")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-PPR" unique_id=699083076]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-Health" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=1568802761 node_paths=PackedStringArray("icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "MaxHealth"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Health" unique_id=1289949508]
+layout_mode = 2
+texture = ExtResource("22_fevku")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Health" unique_id=1737936165]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-Atk" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=2069378739 node_paths=PackedStringArray("icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Attack"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Atk" unique_id=648976515]
+layout_mode = 2
+texture = ExtResource("27_1bb4d")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Atk" unique_id=1358902060]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-Armor" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=686104635 node_paths=PackedStringArray("icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Armor"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Armor" unique_id=1976801063]
+layout_mode = 2
+texture = ExtResource("31_dtu3i")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Armor" unique_id=1997286673]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-Ward" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=1789731590 node_paths=PackedStringArray("icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Ward"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Ward" unique_id=265499000]
+layout_mode = 2
+texture = ExtResource("32_psgrp")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Ward" unique_id=1478484914]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-Mass" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=2028188355 node_paths=PackedStringArray("icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Mass"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Mass" unique_id=130943133]
+layout_mode = 2
+texture = ExtResource("24_fdd4s")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Mass" unique_id=1352135702]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-Speed" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=1406406839 node_paths=PackedStringArray("icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Speed"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Speed" unique_id=2140659339]
+layout_mode = 2
+texture = ExtResource("25_50fa8")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Speed" unique_id=2140638318]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-Acc" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=1314481448 node_paths=PackedStringArray("icon", "value_label")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "BarMax:Health"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Acc" unique_id=2135907432]
+layout_mode = 2
+texture = ExtResource("28_4w0wa")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Acc" unique_id=246750823]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-Evasion" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=856772027 node_paths=PackedStringArray("icon", "value_label")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "BarMax:Health"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Evasion" unique_id=1269504630]
+layout_mode = 2
+texture = ExtResource("33_7vikl")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-Evasion" unique_id=441304305]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="StatContainer-CritMod" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats" unique_id=1848218783 node_paths=PackedStringArray("icon", "value_label")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "BarMax:Health"
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-CritMod" unique_id=220201249]
+layout_mode = 2
+texture = ExtResource("30_6b8rs")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/BoxContainer/BaseStats/StatContainer-CritMod" unique_id=1092019932]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "000"
+horizontal_alignment = 1
+
+[node name="Character-VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer" unique_id=53276164]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer" unique_id=112745799]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer" unique_id=957808465]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=541121276]
+layout_mode = 2
+texture = ExtResource("2_1afo6")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/TextureRect" unique_id=1207279408]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_visa2")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=1380220792]
+layout_mode = 2
+texture = ExtResource("2_1afo6")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/TextureRect2" unique_id=1968361548]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_2msfp")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=2099577042]
+layout_mode = 2
+texture = ExtResource("2_1afo6")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/TextureRect3" unique_id=2132249975]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_vojk1")
+stretch_mode = 5
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer" unique_id=17540647]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/CenterContainer" unique_id=375474259]
+custom_minimum_size = Vector2(64, 156)
+layout_mode = 2
+
+[node name="ActorNode" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("11_1srqh")]
+position = Vector2(32, 120)
+scale = Vector2(4, 4)
+
+[node name="GridContainer2" type="GridContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer" unique_id=1802600153]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="TextureRect6" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=272758001]
+layout_mode = 2
+texture = ExtResource("2_1afo6")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/TextureRect6" unique_id=1520835855]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_61gdx")
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=1315316717]
+layout_mode = 2
+texture = ExtResource("2_1afo6")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/TextureRect4" unique_id=113158205]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_pfjkv")
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=663638183]
+layout_mode = 2
+texture = ExtResource("2_1afo6")
+stretch_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/TextureRect5" unique_id=84137159]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_jvdxs")
+stretch_mode = 5
+
+[node name="StatLabel3" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer" unique_id=498843188]
+visible = false
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("23_ngva1")
+text = "Items"
+
+[node name="FlowContainer2" type="FlowContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer" unique_id=1303359602]
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+
+[node name="PageIcon" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=131688195]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon" unique_id=773957621]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1669554154]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon2" unique_id=649326935]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon3" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1627361944]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon3" unique_id=671009525]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon4" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=129022853]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon4" unique_id=113076182]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon5" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1454007077]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon5" unique_id=1209131537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon6" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=789860174]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon6" unique_id=58696411]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon7" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1997772962]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon7" unique_id=200335877]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon8" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1964830107]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon8" unique_id=356426842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon9" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1360680129]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon9" unique_id=328228180]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon10" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1871500959]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon10" unique_id=610043976]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon11" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=898024743]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon11" unique_id=159432809]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon12" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=177665759]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon12" unique_id=1070114478]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon13" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1727881327]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon13" unique_id=1696457350]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon14" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=621214669]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon14" unique_id=266913370]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon15" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=459346390]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon15" unique_id=402295865]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="PageIcon16" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2" unique_id=1923964726]
+layout_mode = 2
+texture = ExtResource("35_3rh04")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/FlowContainer2/PageIcon16" unique_id=1916841838]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("36_l5ruo")
+
+[node name="TabContainer" type="TabContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=428877836]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_fevku")
+current_tab = 2
+
+[node name="Pages" type="ScrollContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1886249644]
+visible = false
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme = ExtResource("41_r5alx")
+horizontal_scroll_mode = 0
+metadata/_tab_index = 0
+
+[node name="FlowContainer" type="FlowContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages" unique_id=299630581]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/h_separation = 0
+
+[node name="PageSlotButton" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/FlowContainer" unique_id=480625180 instance=ExtResource("37_3nq5o")]
+layout_mode = 2
+
+[node name="PageSlotButton5" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/FlowContainer" unique_id=1111242708 instance=ExtResource("37_3nq5o")]
+layout_mode = 2
+
+[node name="PageSlotButton2" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/FlowContainer" unique_id=579234089 instance=ExtResource("37_3nq5o")]
+layout_mode = 2
+
+[node name="PageSlotButton3" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/FlowContainer" unique_id=1942485557 instance=ExtResource("37_3nq5o")]
+layout_mode = 2
+
+[node name="PageSlotButton4" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/FlowContainer" unique_id=1514853148 instance=ExtResource("37_3nq5o")]
+layout_mode = 2
+
+[node name="PageSlotButton6" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/FlowContainer" unique_id=2043896963 instance=ExtResource("37_3nq5o")]
+layout_mode = 2
+
+[node name="Suplies" type="ScrollContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1618710617]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies" unique_id=994099262]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SuppliesItemSlotButton" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies/VBoxContainer" unique_id=422641774 instance=ExtResource("38_t2ffo")]
+layout_mode = 2
+
+[node name="Stats" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1817043243]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer" unique_id=1169016472]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+
+[node name="RightPageContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer" unique_id=1223729951]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+vertical = true
+
+[node name="InventoryMenuPage" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=764217251 instance=ExtResource("13_bulkp")]
+visible = false
+custom_minimum_size = Vector2(280, 384)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StatsPage" type="Control" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1347648210 node_paths=PackedStringArray("resistance_container", "strength_label", "agility_label", "intelligence_label", "wisdom_label", "speed_stat_label", "mass_stat_label", "ppr_stat_label", "health_stat_label", "mag_atk_label", "phys_atk_label", "accuracy_stat_label", "potency_stat_label", "range_display", "main_hand_damage_label", "other_hand_damage_label", "crit_mod_label", "crit_chance_label", "armor_label", "ward_label", "evasion_stat_label", "protection_stat_label", "awareness_stat_label", "block_chance_label", "block_mod_label", "awareness_display", "evade_front_chance_label", "evade_flank_chance_label", "evade_back_chance_label", "block_front_chance_label", "block_flank_chance_label", "block_back_chance_label", "full_stat_display")]
+visible = false
+custom_minimum_size = Vector2(292, 384)
+layout_mode = 2
+mouse_filter = 1
+script = ExtResource("40_65lhm")
+resistance_container = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer")
+strength_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/StatLabel")
+agility_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/StatLabel")
+intelligence_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/StatLabel")
+wisdom_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/StatLabel")
+speed_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer")
+mass_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer")
+ppr_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer")
+health_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/HealthContainer")
+mag_atk_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer")
+phys_atk_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer")
+accuracy_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer")
+potency_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer")
+range_display = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/VBoxContainer/MiniRangeDisplay")
+main_hand_damage_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/MainHandDamageContainer")
+other_hand_damage_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/OtherHandDamageContainer2")
+crit_mod_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer/ModValLabel")
+crit_chance_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer/ChanceLabel")
+armor_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer")
+ward_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer")
+evasion_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer")
+protection_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer")
+awareness_stat_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer")
+block_chance_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer")
+block_mod_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer")
+awareness_display = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/MiniAwarnessDisplay")
+evade_front_chance_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow/FrontValLabel")
+evade_flank_chance_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow/FlankValLabel")
+evade_back_chance_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow/BackValLabel")
+block_front_chance_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2/FrontValLabel")
+block_flank_chance_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2/FlankValLabel")
+block_back_chance_label = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2/BackValLabel")
+full_stat_display = NodePath("../HBoxContainer2/ScrollContainer/StatsMainContainer/FullStatDisplayControl")
+
+[node name="ContainerControl" type="Control" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/StatsPage" unique_id=1226752738]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 12.0
+offset_top = 5.0
+offset_right = -12.0
+offset_bottom = 390.0
+grow_horizontal = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/StatsPage" unique_id=1337523120]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1670851876]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2" unique_id=52614578]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("41_r5alx")
+horizontal_scroll_mode = 0
+
+[node name="StatsMainContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer" unique_id=728909143]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="AttributesDisplay" type="Control" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=1044188229]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+
+[node name="Background" type="NinePatchRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay" unique_id=1231600784]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("42_88tgh")
+region_rect = Rect2(0, 0, 64, 65)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 19
+
+[node name="BoxContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay" unique_id=297561367]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="StrengthContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=1411834750]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer" unique_id=585086676]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/HBoxContainer" unique_id=281196596]
+layout_mode = 2
+texture = ExtResource("43_2w8mi")
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer/HBoxContainer" unique_id=1190298924]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("14_tarkt")
+text = "tr"
+vertical_alignment = 2
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/StrengthContainer" unique_id=228178561]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=630804920]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="AgilityContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=957611055]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer" unique_id=595397529]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/HBoxContainer" unique_id=668977898]
+layout_mode = 2
+texture = ExtResource("44_vbjkw")
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer/HBoxContainer" unique_id=706954272]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("14_tarkt")
+text = "gi"
+vertical_alignment = 2
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/AgilityContainer" unique_id=1993728475]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=484975641]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="IntillegenceContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=1952350455]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer" unique_id=1359096603]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/HBoxContainer" unique_id=373473822]
+layout_mode = 2
+texture = ExtResource("45_ovsk6")
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer/HBoxContainer" unique_id=1126406147]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("14_tarkt")
+text = "nt"
+vertical_alignment = 2
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/IntillegenceContainer" unique_id=1021516405]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=215759958]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="WisdomContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer" unique_id=2091752278]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer" unique_id=1872614451]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/HBoxContainer" unique_id=510721117]
+layout_mode = 2
+texture = ExtResource("46_b5xi0")
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer/HBoxContainer" unique_id=352491085]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("14_tarkt")
+text = "is"
+vertical_alignment = 2
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AttributesDisplay/BoxContainer/WisdomContainer" unique_id=982034662]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=361808242]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MiscStatsContainer" type="Container" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=294878050 node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(12, 44)
+layout_mode = 2
+script = ExtResource("18_t2ffo")
+background = NodePath("Background")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer" unique_id=1743094542]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("42_88tgh")
+region_rect = Rect2(0, 0, 64, 65)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 19
+
+[node name="BoxContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer" unique_id=99795344]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+vertical = true
+
+[node name="SpeedMassContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer" unique_id=1671149741]
+layout_mode = 2
+alignment = 1
+
+[node name="HealthContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=1607887786 instance=ExtResource("47_ktcyg")]
+layout_mode = 2
+stat_name = "HealthMax"
+
+[node name="ColorRect3" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=323269228]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MassContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=598710385 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Mass"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer" unique_id=603755407]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Wgt:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer" unique_id=913303233]
+layout_mode = 2
+texture = ExtResource("24_fdd4s")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/MassContainer" unique_id=720616495]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=1121533614]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="SpeedContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=218527169 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Speed"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer" unique_id=253149556]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Spd: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer" unique_id=935162394]
+layout_mode = 2
+texture = ExtResource("25_50fa8")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/SpeedContainer" unique_id=570132533]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=1944562221]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="PPRContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer" unique_id=714420256 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "PPR"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer" unique_id=1505047228]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "PPR: "
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer" unique_id=784191217]
+layout_mode = 2
+texture = ExtResource("26_32j24")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/MiscStatsContainer/BoxContainer/SpeedMassContainer/PPRContainer" unique_id=1001659793]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=1507469970]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator3" type="HSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=729985188]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AtkStatsContainer" type="Container" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=2060048474 node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(12, 136)
+layout_mode = 2
+script = ExtResource("18_t2ffo")
+background = NodePath("Background")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer" unique_id=1270453437]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("42_88tgh")
+region_rect = Rect2(0, 0, 64, 65)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 19
+
+[node name="BoxContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer" unique_id=1360929085]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+vertical = true
+
+[node name="PhyMagDamageContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer" unique_id=1861878650]
+layout_mode = 2
+alignment = 1
+
+[node name="PhyAtkContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=1853253830 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "PhyAttack"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer" unique_id=469940869]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Phy:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer" unique_id=706270716]
+layout_mode = 2
+texture = ExtResource("27_1bb4d")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PhyAtkContainer" unique_id=1428316632]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="AccurcyContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=1159729627 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Accuracy"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer" unique_id=1601742238]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Acc:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer" unique_id=262673664]
+layout_mode = 2
+texture = ExtResource("28_4w0wa")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/AccurcyContainer" unique_id=1759297135]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=1943309029]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MagAttackContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=804144136 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "MagAttack"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer" unique_id=1226906927]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Mag:"
+horizontal_alignment = 2
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer" unique_id=1014323240]
+layout_mode = 2
+texture = ExtResource("48_n5ek0")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/MagAttackContainer" unique_id=1838373315]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="PotencyContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer" unique_id=40479609 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Potency"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer" unique_id=645132170]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Pot:"
+horizontal_alignment = 2
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer" unique_id=1033911544]
+layout_mode = 2
+texture = ExtResource("49_grqrs")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/PhyMagDamageContainer/PotencyContainer" unique_id=1776162618]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="AccPotContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer" unique_id=1304113244]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRect2" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer" unique_id=438793703]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="RangeDamageContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer" unique_id=1700816642]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer" unique_id=1019536389]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="MiniRangeDisplay" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/VBoxContainer" unique_id=1000866062 instance=ExtResource("50_mjvjl")]
+layout_mode = 2
+
+[node name="DamageDatasContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer" unique_id=1447929818]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="CritContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" unique_id=1387890438]
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=40577158]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Crit: "
+horizontal_alignment = 2
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=417202842]
+layout_mode = 2
+texture = ExtResource("30_6b8rs")
+
+[node name="ChanceLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=464262445]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "50%"
+horizontal_alignment = 1
+
+[node name="DividerLabel2" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=586922355]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_tarkt")
+text = "="
+horizontal_alignment = 1
+
+[node name="PhyAttackIcon" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=1296787232]
+layout_mode = 2
+texture = ExtResource("27_1bb4d")
+
+[node name="DividerLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=1508119316]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "x"
+horizontal_alignment = 1
+
+[node name="ModValLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=656083320]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "1.5"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer/CritContainer" unique_id=483723964]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect13" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" unique_id=946142534]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MainHandDamageContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" unique_id=1464827987 instance=ExtResource("51_vfqqk")]
+layout_mode = 2
+
+[node name="OtherHandDamageContainer2" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/AtkStatsContainer/BoxContainer/RangeDamageContainer/DamageDatasContainer" unique_id=1721206262 instance=ExtResource("51_vfqqk")]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=1685892709]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DefStatsContainer" type="Container" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=634852278 node_paths=PackedStringArray("background", "inner_container")]
+custom_minimum_size = Vector2(12, 118)
+layout_mode = 2
+script = ExtResource("18_t2ffo")
+background = NodePath("Background")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer" unique_id=794537904]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("42_88tgh")
+region_rect = Rect2(0, 0, 64, 65)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 19
+
+[node name="BoxContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer" unique_id=1067089442]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+vertical = true
+
+[node name="ArmorWardContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=477977815]
+layout_mode = 2
+alignment = 1
+
+[node name="ArmorContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=2053394587 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Armor"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer" unique_id=620463252]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Amr:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer" unique_id=793674586]
+layout_mode = 2
+texture = ExtResource("31_dtu3i")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ArmorContainer" unique_id=536934348]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="EvasionContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=1083308771 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Evasion"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer" unique_id=686626010]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Evd:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer" unique_id=1582733765]
+layout_mode = 2
+texture = ExtResource("33_7vikl")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/EvasionContainer" unique_id=1430204266]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=71106974]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="WardContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=189660896 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Ward"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer" unique_id=2140723564]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Wrd:"
+horizontal_alignment = 2
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer" unique_id=1394662360]
+layout_mode = 2
+texture = ExtResource("32_psgrp")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/WardContainer" unique_id=73213657]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ProtectionContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer" unique_id=174277452 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Protection"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer" unique_id=813896708]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Pro:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer" unique_id=979638487]
+layout_mode = 2
+texture = ExtResource("52_tcl4i")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/ArmorWardContainer/ProtectionContainer" unique_id=1952982472]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="ColorRect3" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=99792126]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="BlockContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=903307784]
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=559448927]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=751976123]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Block: "
+horizontal_alignment = 2
+
+[node name="BlockChanceContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=893336204 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "BlockChance"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer" unique_id=763512493]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Pro:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer" unique_id=958731138]
+layout_mode = 2
+texture = ExtResource("34_4r35n")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer" unique_id=1906312624]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="DividerLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockChanceContainer" unique_id=1187647771]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "%"
+horizontal_alignment = 1
+
+[node name="DividerLabel2" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=1455462821]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_tarkt")
+text = "="
+horizontal_alignment = 1
+
+[node name="BlockModContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=331697762 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "BlockMod"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=886570504]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Pro:"
+horizontal_alignment = 1
+
+[node name="PhyAttackIcon" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=723289129]
+layout_mode = 2
+texture = ExtResource("27_1bb4d")
+
+[node name="DividerLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=36617442]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "x"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=881344855]
+visible = false
+layout_mode = 2
+texture = ExtResource("34_4r35n")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer/BlockModContainer" unique_id=242475652]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "000"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/BlockContainer" unique_id=892638596]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRect12" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=2129510110]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="MainContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer" unique_id=1211351212]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+alignment = 1
+
+[node name="MiniAwarnessDisplay" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer" unique_id=1785431654 instance=ExtResource("53_6po8x")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+update = false
+
+[node name="EvadeBlockGrid" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer" unique_id=177208080]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+
+[node name="AwarenessChancesContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid" unique_id=1007611462]
+layout_mode = 2
+alignment = 2
+
+[node name="AwarenessContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer" unique_id=807825572 node_paths=PackedStringArray("name_label", "icon", "value_label")]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("21_ynpcx")
+stat_name = "Awareness"
+name_label = NodePath("NameLabel")
+icon = NodePath("IconRect")
+value_label = NodePath("StatLabel")
+force_to_int = true
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer" unique_id=735422366]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Awr:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer" unique_id=1675380817]
+layout_mode = 2
+texture = ExtResource("54_g8yx0")
+
+[node name="StatLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer/AwarenessContainer" unique_id=893768607]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "1"
+horizontal_alignment = 1
+
+[node name="ChanceTitleLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/AwarenessChancesContainer" unique_id=594060526]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_tarkt")
+text = "Fwd / Flk / Bck"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid" unique_id=1277764452]
+layout_mode = 2
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/VBoxContainer" unique_id=790660484]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="EvadeRow" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid" unique_id=635078547]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="EvasionLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1157486136]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Evs:"
+horizontal_alignment = 1
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1298349767]
+layout_mode = 2
+texture = ExtResource("33_7vikl")
+
+[node name="FrontValLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1831109022]
+self_modulate = Color(0, 0.392157, 0, 1)
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "50%"
+horizontal_alignment = 1
+
+[node name="FlankValLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1943354511]
+self_modulate = Color(0.639216, 0.407843, 0, 1)
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "25%"
+horizontal_alignment = 1
+
+[node name="BackValLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow" unique_id=1386178358]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "--%"
+horizontal_alignment = 1
+
+[node name="EvadeRow2" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid" unique_id=641336647]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="EvasionLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=773111308]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Blk:"
+horizontal_alignment = 2
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=2019488674]
+layout_mode = 2
+texture = ExtResource("34_4r35n")
+
+[node name="FrontValLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=1789542249]
+self_modulate = Color(0, 0.392157, 0, 1)
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "50%"
+horizontal_alignment = 1
+
+[node name="FlankValLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=1516716994]
+self_modulate = Color(0.639216, 0.407843, 0, 1)
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "25%"
+horizontal_alignment = 1
+
+[node name="BackValLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/DefStatsContainer/BoxContainer/MainContainer/EvadeBlockGrid/EvadeRow2" unique_id=1511461984]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "--%"
+horizontal_alignment = 1
+
+[node name="FullStatDisplayControl" type="Control" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=1238669236 node_paths=PackedStringArray("entries_container", "premade_entry")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("55_hpkfd")
+entries_container = NodePath("VBoxContainer")
+premade_entry = NodePath("VBoxContainer/StatEntryContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/FullStatDisplayControl" unique_id=616934805]
+layout_mode = 0
+offset_top = -4.0
+offset_right = 48.0
+offset_bottom = 16.0
+
+[node name="StatEntryContainer" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer" unique_id=932289498]
+layout_mode = 2
+script = ExtResource("56_ujcya")
+
+[node name="StatNameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer/StatEntryContainer" unique_id=558248893]
+visible = false
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("14_tarkt")
+text = "STAT_NAME"
+
+[node name="StatLabelContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/FullStatDisplayControl/VBoxContainer/StatEntryContainer" unique_id=25653629 node_paths=PackedStringArray("mouse_over_parent") instance=ExtResource("47_ktcyg")]
+layout_mode = 2
+mouse_over_parent = NodePath("../../..")
+
+[node name="ResistancesContainer" type="Container" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer" unique_id=864090102 node_paths=PackedStringArray("entries_contaienr", "premade_resistance_label", "background", "inner_container")]
+custom_minimum_size = Vector2(12, 44)
+layout_mode = 2
+script = ExtResource("57_ba5vy")
+entries_contaienr = NodePath("BoxContainer")
+premade_resistance_label = NodePath("BoxContainer/ResistanceLabel")
+background = NodePath("Background")
+inner_container = NodePath("BoxContainer")
+margin_override = 6
+force_fill_x = true
+
+[node name="Background" type="NinePatchRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer" unique_id=458574351]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("42_88tgh")
+region_rect = Rect2(0, 0, 64, 65)
+patch_margin_left = 18
+patch_margin_top = 18
+patch_margin_right = 18
+patch_margin_bottom = 19
+
+[node name="BoxContainer" type="BoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer" unique_id=2019639175]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+vertical = true
+
+[node name="ResistanceLabel" type="HBoxContainer" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer" unique_id=1899819679]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=1241525038]
+layout_mode = 2
+texture = ExtResource("58_63yif")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=464958910]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "Fire"
+horizontal_alignment = 1
+
+[node name="SepLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=2141055080]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = ":"
+horizontal_alignment = 1
+
+[node name="ValueLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=354075207]
+self_modulate = Color(0.498039, 0, 0, 1)
+custom_minimum_size = Vector2(34, 0)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "100"
+horizontal_alignment = 1
+
+[node name="PercentLabel" type="Label" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer/ResistanceLabel" unique_id=806636201]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("14_tarkt")
+text = "%"
+horizontal_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="CenterContainer/PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer2/ScrollContainer/StatsMainContainer/ResistancesContainer/BoxContainer" unique_id=1529775770]
+visible = false
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
