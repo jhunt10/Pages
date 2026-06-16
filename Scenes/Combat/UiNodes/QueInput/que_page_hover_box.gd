@@ -46,13 +46,13 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 	description_box.set_page_item(action, actor)
 	
 	
-	if action.get_tags().has("Attack") or action.has_ammo(actor):
+	if action.get_tags().has("Attack") or action.has_ammo():
 		# Ammo
-		if action.has_ammo(actor):
+		if action.has_ammo():
 			cost_container.set_data(action, actor)
 			cost_container.show()
 			if current_ammo_label:
-				current_ammo_label.text = str(actor.Que.get_page_ammo_current_uses(action.ActionKey))
+				current_ammo_label.text = str(action.get_ammo_current())
 		else:
 			cost_container.hide()
 		

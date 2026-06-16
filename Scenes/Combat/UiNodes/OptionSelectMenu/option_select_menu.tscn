@@ -115,7 +115,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="OptionButton" type="Control" parent="CenterContainer/PanelContainer2/VBoxContainer" unique_id=296672739 node_paths=PackedStringArray("icon", "button", "highlight")]
-custom_minimum_size = Vector2(320, 64)
+custom_minimum_size = Vector2(320, 32)
 layout_mode = 2
 script = ExtResource("5_tb60f")
 icon = NodePath("Icon")
@@ -132,7 +132,7 @@ grow_vertical = 2
 texture = ExtResource("6_k6fh0")
 
 [node name="Icon" type="TextureRect" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionButton" unique_id=866327932]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 0
 texture = ExtResource("7_k3rnn")
 
@@ -141,7 +141,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 64.0
+offset_left = 32.0
+offset_right = -32.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -151,9 +152,9 @@ text = "Item Name"
 
 [node name="Label" type="Label" parent="CenterContainer/PanelContainer2/VBoxContainer/OptionButton/FitScaleLabel" unique_id=1720658262]
 layout_mode = 0
-offset_top = 12.0
 offset_right = 172.0
-offset_bottom = 52.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
 theme = ExtResource("9_8tr2b")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32

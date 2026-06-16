@@ -11,11 +11,13 @@ signal page_special_selected(action_key:String)
 	set(val):
 		showing = val
 		if val:
-			if state == States.Hidden or state == States.Shrinking:
-				state = States.Growing
+			self.show()
+			#if state == States.Hidden or state == States.Shrinking:
+				#state = States.Growing
 		else:
-			if state == States.Showing or state == States.Growing:
-				state = States.Shrinking
+			self.hide()
+			#if state == States.Showing or state == States.Growing:
+				#state = States.Shrinking
 
 @export var _fill_button:Button
 			
@@ -158,11 +160,11 @@ func _process(delta: float) -> void:
 
 func set_actor(actor:BaseActor):
 	if _actor:
-		#_actor.pages.items_changed.disconnect(_build_buttons)
+		_actor.page_list_changed.disconnect(_build_buttons)
 		_actor.Que.action_que_changed.disconnect(_on_que_change)
 		_actor.Que.ammo_changed.disconnect(_on_ammo_change)
 	_actor = actor
-	#_actor.pages.items_changed.connect(_build_buttons)
+	_actor.page_list_changed.connect(_build_buttons)
 	_actor.Que.action_que_changed.connect(_on_que_change)
 	_actor.Que.ammo_changed.connect(_on_ammo_change)
 	hover_box.hide()
@@ -209,7 +211,7 @@ func _build_buttons():
 		new_button.button.pressed.connect(_page_button_pressed.bind(index, action_id))
 		#new_button.selection_button.pressed.connect(_on_page_special_selected.bind(action_key))
 		
-		_page_buttons[action_key] = new_button
+		_page_buttons[action_id] = new_button
 		index += 1
 	input_buttons_container.columns = min(MAX_INPUT_BUTTON_WIDTH, index)
 	_on_que_change()
@@ -335,10 +337,11 @@ func _round_ends():
 	#hide_start_button()
 	pass
 
-func _on_ammo_change(page_key):
-	if _page_buttons.has(page_key):
-		var button:QueInputButtonControl = _page_buttons[page_key]
-		button.ammo_display.current_val = _actor.Que.get_page_ammo_current_value(page_key)
+func _on_ammo_change(page_id):
+	if _page_buttons.has(page_id):
+		var button:QueInputButtonControl = _page_buttons[page_id]
+		var page:PageItemAction = ItemLibrary.get_item(page_id)
+		button.ammo_display.current_val = floori(page.get_ammo_current())
 	pass
 
 func hide_page_selection():
@@ -347,14 +350,14 @@ func hide_page_selection():
 		button.modulate = Color.WHITE
 	selecetion_mode = false
 
-func show_page_selection(action_keys:Array):
-	for action_key in _page_buttons.keys():
-		var button:QueInputButtonControl = _page_buttons[action_key]
-		if action_keys.has(action_key):
+func show_page_selection(action_ids:Array):
+	for page_id in _page_buttons.keys():
+		var button:QueInputButtonControl = _page_buttons[page_id]
+		if action_ids.has(page_id):
 			button.selection_display.show()
 		else:
 			button.selection_display.hide()
-			button.modulate = Color.LIGHT_GRAY
+			button.modulate = Color.DARK_SLATE_GRAY
 	selecetion_mode = true
 	page_Selection_container.show()
 	que_display_control.hide()

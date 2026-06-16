@@ -30,56 +30,22 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"_StatMods": {
-				"AccuracyScale": {
-					"DepStatName": "Agility",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "Accuracy",
-					"Value": 1.0
-				},
-				"EvasionScale": {
-					"DepStatName": "Agility",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "Evasion",
-					"Value": 0.1
-				},
-				"HealthScale": {
-					"DepStatName": "Strength",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "HealthMax",
-					"Value": 5.0
-				},
-				"MagAttackScale": {
-					"DepStatName": "Intelligence",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "MagAttack",
-					"Value": 0.5
-				},
-				"PhyAttackScale": {
-					"DepStatName": "Strength",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "PhyAttack",
-					"Value": 0.5
-				},
-				"PotencyScale": {
-					"DepStatName": "Intelligence",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "Potency",
-					"Value": 0.1
-				},
-				"ProtectionScale": {
-					"DepStatName": "Wisdom",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "Protection",
-					"Value": 0.1
-				}
+			"Stats": {
+				"Level": 1,
+				"PPR": 0,
+				"Attack": 0,
+				"HealthMax": 100,
+				"Armor": 0,
+				"Ward": 30,
+				"Speed": 50,
+				"Mass": 50,
+				"Accuracy": 85,
+				"AggroMod": 1.0,
+				"CrashPower": 20,
+				"CritChance": 5,
+				"CritMod": 1.5,
+				"Evasion": 1,
+				"Resistance:Light": 150
 			}
 		},
 		"PassiveData": {
@@ -87,9 +53,24 @@
 		},
 		"_DefVersion": "1"
 	},
-	"MageTitlePage": {
+	"#BaseLivingTitlePage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
 		"!ParentKey": "#BaseTitlePage",
+		"#ObjDetails": {
+			"Description": "Base Player Title Page",
+			"DisplayName": "Base Player Title",
+			"SnippetDesc": "Base Player Title"
+		},
+		"PageData": {
+			"Stats": {
+				"Resistance:Light": 150
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"MageTitlePage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+		"!ParentKey": "#BaseLivingTitlePage",
 		"#ObjDetails": {
 			"Description": "An Intelligent caster educated by The Collage. Mages focus Magic Spell Pages but lack Defense.",
 			"DisplayName": "Mage",
@@ -121,28 +102,23 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "Mage",
-			"_StatMods": {
-				"HealthScale": {
-					"DepStatName": "Strength",
+			"SpriteData":{
+				"SpriteSheet": "Sprites/MageTitle_SpriteSheet.png"
+			},
+			"MergedStatMods":{
+				"PhyAttackBonus": {
 					"DisplayName": "Mage",
-					"ModType": "AddStat",
-					"StatName": "HealthMax",
-					"Value": 1.0
-				},
-				"MagAttackScale": {
-					"DepStatName": "Intelligence",
-					"DisplayName": "Mage",
-					"ModType": "AddStat",
-					"StatName": "MagAttack",
-					"Value": 1.0
-				},
-				"PotencyScale": {
-					"DepStatName": "Intelligence",
-					"DisplayName": "Mage",
-					"ModType": "AddStat",
-					"StatName": "Potency",
-					"Value": 0.5
+					"ModType": "Add",
+					"StatName": "PhyAttack",
+					"Value": 10
 				}
+			},
+			"Stats": {
+				"HealthMax": 100,
+				"Armor": 0,
+				"Ward": 30,
+				"Speed": 50,
+				"Mass": 50
 			},
 			"TitleColor": "FF0000"
 		},
@@ -153,7 +129,7 @@
 	},
 	"PriestTitlePage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-		"!ParentKey": "#BaseTitlePage",
+		"!ParentKey": "#BaseLivingTitlePage",
 		"#ObjDetails": {
 			"Description": "A Wise believer edified by The Church. Priest focus Support and Ward Defense.",
 			"DisplayName": "Priest",
@@ -185,35 +161,23 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "Priest",
-			"_StatMods": {
-				"MagAttackScale": {
-					"DepStatName": "Intelligence",
+			"SpriteData":{
+				"SpriteSheet": "Sprites/PriestTitle_SpriteSheet.png"
+			},
+			"MergedStatMods":{
+				"PhyAttackBonus": {
 					"DisplayName": "Priest",
-					"ModType": "AddStat",
-					"StatName": "MagAttack",
-					"Value": 0.5
-				},
-				"MagAttackScale2": {
-					"DepStatName": "Wisdom",
-					"DisplayName": "Priest",
-					"ModType": "AddStat",
-					"StatName": "MagAttack",
-					"Value": 0.5
-				},
-				"PotencyScale": {
-					"DepStatName": "Intelligence",
-					"DisplayName": "Priest",
-					"ModType": "AddStat",
-					"StatName": "Potency",
-					"Value": 0.5
-				},
-				"ProtectionScale": {
-					"DepStatName": "Wisdom",
-					"DisplayName": "Priest",
-					"ModType": "AddStat",
-					"StatName": "Protection",
-					"Value": 0.5
+					"ModType": "Add",
+					"StatName": "Ward",
+					"Value": 10
 				}
+			},
+			"Stats": {
+				"HealthMax": 150,
+				"Armor": 30,
+				"Ward": 40,
+				"Speed": 60,
+				"Mass": 80
 			},
 			"TitleColor": "FFFF00"
 		},
@@ -224,7 +188,7 @@
 	},
 	"RogueTitlePage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-		"!ParentKey": "#BaseTitlePage",
+		"!ParentKey": "#BaseLivingTitlePage",
 		"#ObjDetails": {
 			"Description": "An Agile agent employed by The Guild. Rogues focus on Physical Attack and Evasion Defense.",
 			"DisplayName": "Rogue",
@@ -256,35 +220,23 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "Rogue",
-			"_StatMods": {
-				"EvasionScale": {
-					"DepStatName": "Agility",
+			"SpriteData":{
+				"SpriteSheet": "Sprites/RogueTitle_SpriteSheet.png"
+			},
+			"MergedStatMods":{
+				"PhyAttackBonus": {
 					"DisplayName": "Rogue",
-					"ModType": "AddStat",
-					"StatName": "Evasion",
-					"Value": 0.5
-				},
-				"HealthScale": {
-					"DepStatName": "Strength",
-					"DisplayName": "Rogue",
-					"ModType": "AddStat",
-					"StatName": "HealthMax",
-					"Value": 3.0
-				},
-				"PhyAttackScale": {
-					"DepStatName": "Strength",
-					"DisplayName": "Rogue",
-					"ModType": "AddStat",
-					"StatName": "PhyAttack",
-					"Value": 0.5
-				},
-				"PhyAttackScale2": {
-					"DepStatName": "Agility",
-					"DisplayName": "Rogue",
-					"ModType": "AddStat",
-					"StatName": "PhyAttack",
-					"Value": 0.5
+					"ModType": "Add",
+					"StatName": "PPR",
+					"Value": 1
 				}
+			},
+			"Stats": {
+				"HealthMax": 130,
+				"Armor": 20,
+				"Ward": 10,
+				"Speed": 80,
+				"Mass": 60
 			},
 			"TitleColor": "00FF00"
 		},
@@ -295,7 +247,7 @@
 	},
 	"SoldierTitlePage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-		"!ParentKey": "#BaseTitlePage",
+		"!ParentKey": "#BaseLivingTitlePage",
 		"#ObjDetails": {
 			"Description": "A Strong fighter trained by The Military. Soldiers focus on Armor and basic Weapon Attacks.",
 			"DisplayName": "Soldier",
@@ -327,34 +279,12 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "Soldier",
-			"_StatMods": {
-				"ArmorScale": {
-					"DisplayName": "Soldier",
-					"ModType": "Scale",
-					"StatName": "Armor",
-					"Value": 1.2
-				},
-				"HealthScale": {
-					"DepStatName": "Strength",
-					"DisplayName": "Soldier",
-					"ModType": "AddStat",
-					"StatName": "HealthMax",
-					"Value": 8.0
-				},
-				"MassScale": {
-					"DepStatName": "Strength",
-					"DisplayName": "Soldier",
-					"ModType": "AddStat",
-					"StatName": "Mass",
-					"Value": 0.1
-				},
-				"PhyAttackScale": {
-					"DepStatName": "Strength",
-					"DisplayName": "Soldier",
-					"ModType": "AddStat",
-					"StatName": "PhyAttack",
-					"Value": 1.0
-				}
+			"Stats": {
+				"HealthMax": 180,
+				"Armor": 50,
+				"Ward": 20,
+				"Speed": 40,
+				"Mass": 100
 			},
 			"TitleColor": "0000FF"
 		},

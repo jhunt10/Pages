@@ -155,7 +155,7 @@ value = 1.0
 layout_mode = 2
 text = "Add Item"
 
-[node name="DefDataMenu" type="Control" parent="." unique_id=1153891294 node_paths=PackedStringArray("instance_selector_button", "def_box", "data_box", "stats_box")]
+[node name="DefDataMenu" type="Control" parent="." unique_id=1153891294 node_paths=PackedStringArray("instance_selector_button", "def_box", "data_box", "tags_box", "stats_box")]
 anchors_preset = 0
 offset_left = 300.0
 offset_right = 340.0
@@ -164,6 +164,7 @@ script = ExtResource("6_4bb3b")
 instance_selector_button = NodePath("BackPatch/BoxContainer/HBoxContainer/LoadedOptionButton")
 def_box = NodePath("BackPatch/BoxContainer/TabContainer/Def")
 data_box = NodePath("BackPatch/BoxContainer/TabContainer/Data")
+tags_box = NodePath("BackPatch/BoxContainer/TabContainer/Tags")
 stats_box = NodePath("BackPatch/BoxContainer/TabContainer/Stats")
 
 [node name="BackPatch" type="Container" parent="DefDataMenu" unique_id=182450090 node_paths=PackedStringArray("background", "inner_container")]
@@ -216,7 +217,7 @@ text = "X"
 [node name="TabContainer" type="TabContainer" parent="DefDataMenu/BackPatch/BoxContainer" unique_id=1084662893]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 2
+current_tab = 3
 
 [node name="Def" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer" unique_id=477382622]
 visible = false
@@ -232,13 +233,20 @@ layout_mode = 2
 autowrap_mode = 0
 metadata/_tab_index = 1
 
+[node name="Tags" type="RichTextLabel" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer" unique_id=1759533994]
+visible = false
+custom_minimum_size = Vector2(400, 275)
+layout_mode = 2
+autowrap_mode = 0
+metadata/_tab_index = 2
+
 [node name="Stats" type="Control" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer" unique_id=1375560420 node_paths=PackedStringArray("entries_container", "premade_entry")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("7_0vmvo")
 entries_container = NodePath("ScrollContainer/VBoxContainer")
 premade_entry = NodePath("ScrollContainer/VBoxContainer/StatEntryContainer")
-metadata/_tab_index = 2
+metadata/_tab_index = 3
 
 [node name="NinePatchRect" type="NinePatchRect" parent="DefDataMenu/BackPatch/BoxContainer/TabContainer/Stats" unique_id=1351593711]
 layout_mode = 1

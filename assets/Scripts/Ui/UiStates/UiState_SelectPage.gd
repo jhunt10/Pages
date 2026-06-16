@@ -28,13 +28,13 @@ func start_state():
 		#CombatUiControl.ui_state_controller.back_to_last_state()
 	#
 
-func on_page_selected(action_key):
+func on_page_selected(action_id):
 	# TODO: Want class to be generic, can't call back to SubAct_Reload because it shouldn't exist any more
-	print("Page Selected: " + action_key)
+	print("Page Selected: " + action_id)
 	var que_input = CombatRootControl.Instance.ui_control.que_input
 	que_input.page_special_selected.disconnect(on_page_selected)
 	var actor = que_input._actor
-	actor.Que.fill_page_ammo(action_key)
+	actor.fill_page_ammo(action_id)
 	CombatUiControl.ui_state_controller.back_to_last_state()
 	
 	

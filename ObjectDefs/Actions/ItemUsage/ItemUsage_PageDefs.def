@@ -141,7 +141,10 @@
 				"ReloadPage": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/ItemUsage/SubAct_ReloadPage.gd",
 					"#FrameIndex": 0.0,
-					"#SubIndex": 0.0
+					"#SubIndex": 0.0,
+					"ItemTagFilter":{
+						"RequireAllTags":["Ammo"]
+					}
 				}
 			}
 		},

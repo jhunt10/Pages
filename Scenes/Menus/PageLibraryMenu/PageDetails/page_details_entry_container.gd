@@ -61,7 +61,7 @@ func _load_full_details():
 	thing_tags = page.get_tags()
 	tag_box.set_tags(thing_tags)
 	# Ammo
-	if page and page is PageItemAction and page.has_ammo(null):
+	if page and page is PageItemAction and page.has_ammo():
 		ammo_label.set_data(page, null)
 		ammo_label.show()
 	else:

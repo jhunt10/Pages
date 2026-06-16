@@ -249,10 +249,10 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	
 	_cached_mods.clear()
 	
-	_base_stats = _actor.get_load_val("Stats")
+	_base_stats = _actor.get_raw_base_stats()
+	
+	# MinStats - being used to set Slimes awareness to 5, but I don't remember why
 	var min_stats = {}
-	if _base_stats.keys().has("AttributeLevels"):
-		_base_stats.erase("AttributeLevels")
 	for stat_name:String in _base_stats.keys():
 		if stat_name.begins_with("MinStat:"):
 			var real_stat_name = stat_name.trim_prefix("MinStat:")
@@ -264,15 +264,18 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	var set_stats = {}
 	var key_depends_on_vals = {}
 	
-	var mods_list = _actor.effects.get_stat_mods()
-	mods_list.append_array(_temp_stat_mods.values())
+	var mods_list = _temp_stat_mods.values()
+	mods_list.append_array(_actor.effects.get_stat_mods())
 	mods_list.append_array(_actor.equipment.get_passive_stat_mods())
 	mods_list.append_array(_actor.pages.get_passive_stat_mods())
 	
+	# Get mods from carried actors
+	if _actor is CarrierActor:
+		for sub_actor:BaseActor in _actor.list_held_actors():
+			mods_list.append_array(sub_actor.get_stat_mods_granted_to_carrier())
+	
 	for mod:BaseStatMod in mods_list:
 		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
-		
-		#
 		if not agg_mods.keys().has(mod.stat_name): # Add stat name to agg mods
 			agg_mods[mod.stat_name] = {}
 		if not agg_mods[mod.stat_name].keys().has(mod.mod_type): # Add mod type to agg mods
@@ -287,10 +290,8 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 				printerr("StatHolder._calc_cache_stats: Multiple 'Set' mods found on stat '%s'." % [mod.stat_name])
 			set_stats[mod.stat_name] = mod.value
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
-			#var display_name = "=" + str(mod.value) + " " + mod.display_name
 		elif mod.mod_type	 == BaseStatMod.ModTypes.Add:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
-			#var display_name = "+" + str(mod.value) + " " + mod.display_name
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
 			var dep_stat_name = mod.dep_stat_name
 			if key_depends_on_vals.has(dep_stat_name) and key_depends_on_vals[dep_stat_name].has(mod.stat_name):
@@ -302,10 +303,8 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 				key_depends_on_vals[mod.stat_name].append(dep_stat_name)
 				
 			agg_mods[mod.stat_name][mod.mod_type].append({"DepStat": dep_stat_name, "Scale": mod.value})
-			#var display_name = "+" + str(dep_stat_name) + "x" + str(mod.value) + " " + mod.display_name
 		else:
 			agg_mods[mod.stat_name][mod.mod_type].append(mod.value)
-			#var display_name = "x" + str(mod.value) + " " + mod.display_name
 	
 	# Add a Set 0 Stat mod for modded stats that don't appear in Base Stats
 	for mod_stat_name in agg_mods.keys():
@@ -336,30 +335,6 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	# Add current health to temp stats
 	if health_before_caching is int:
 		temp_stats[StatHelper.HealthCurrent] = health_before_caching
-	# Add Armor and Ward from equipment
-	var apparel_stats = _actor.equipment.get_total_apparel_stats()
-	temp_stats['Armor'] = temp_stats.get('Armor', 0) + apparel_stats['Armor']
-	temp_stats['Ward'] = temp_stats.get('Ward', 0) + apparel_stats['Ward']
-	var armor_fake_mod = BaseStatMod.new(_actor.Id, "Armor", str(apparel_stats['Armor'])+" from Apparel", 
-			BaseStatMod.ModTypes.FalseMod,apparel_stats['Armor'],null)
-	var ward_fake_mod = BaseStatMod.new(_actor.Id, "Ward", str(apparel_stats['Ward'])+" from Apparel", 
-			BaseStatMod.ModTypes.FalseMod,apparel_stats['Ward'],null)
-	if not _cached_mods.keys().has("Armor"):
-		_cached_mods['Armor'] = []
-	if not _cached_mods.keys().has("Ward"):
-		_cached_mods['Ward'] = []
-	(_cached_mods['Armor'] as Array).push_front(armor_fake_mod)
-	(_cached_mods['Ward'] as Array).push_front(ward_fake_mod)
-	
-	
-	## Add current values for bar stats
-	#for stat_name:String in temp_stats.keys():
-		#if stat_name.begins_with("BarStat:") and _cached_stats.keys().has(stat_name):
-				#temp_stats[stat_name] = _cached_stats.get(stat_name, 0)
-		#elif stat_name.begins_with("BarMax:"):
-			#var bar_stat_name = stat_name.replace("BarMax:","BarStat:")
-			#if not temp_stats.keys().has(bar_stat_name):
-				#temp_stats[bar_stat_name] = _cached_stats.get(bar_stat_name, temp_stats[stat_name])
 	
 	_cached_stats.clear()
 	var safety_limit = 10

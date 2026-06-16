@@ -58,9 +58,6 @@ func _build_sprite_sheet():
 	else:
 		sprite_path =_actor.get_load_path().path_join(sprite_sheet_file).trim_suffix(".png")
 	
-	#var old_version = sprite_sheet_file.ends_with(".png")
-	#var sprite_path = ''
-	#if old_version:
 	var body_texture:Texture2D = SpriteCache.get_sprite(sprite_path+".png", true)
 	if !body_texture:
 		printerr("Failed to find boday texture: %s" % [sprite_path])
@@ -151,6 +148,10 @@ func _get_draw_ordered_equipment()->Array:
 	for page:BasePageItem in _actor.pages.list_items():
 		if page.has_spite_sheet():
 			out_list.append(page)
+	if _actor is CarrierActor:
+		for held_actor:BaseActor in _actor.list_held_actors():
+			var title = held_actor.get_title_page()
+			out_list.append(title)
 	return out_list
 
 func get_black_and_white_portrait()->Texture2D:

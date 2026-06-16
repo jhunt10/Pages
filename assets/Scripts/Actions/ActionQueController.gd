@@ -305,7 +305,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 	var turn_data = que.QueExecData.TurnDataList[que.turn_to_que_index(turn_index)]
 	 
 	if subaction_index == 0:
-		if action.has_ammo(que.actor) and not que.can_pay_page_ammo(action.ActionKey):
+		if action.has_ammo() and not action.can_pay_ammo_cost():
 			VfxHelper.create_flash_text(que.actor, "AMMO", BaseFlashTextVfxNode.FlashTextType.NoAmmo)
 			que.fail_turn()
 			return
@@ -400,7 +400,8 @@ func _on_actor_stat_change(actor:BaseActor):
 
 func _organize_ques():
 	_sort_ques_by_speed()
-	_calc_turn_padding()
+	if execution_state != ActionStates.Running:
+		_calc_turn_padding()
 	que_ordering_changed.emit()
 	pass
 

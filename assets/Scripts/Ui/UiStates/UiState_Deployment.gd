@@ -41,10 +41,20 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	else:
 		spawn_area = []
 		var center_vec = center.to_vector2i()
-		spawn_area.append(center_vec + Vector2i(0,1))
-		spawn_area.append(center_vec + Vector2i(0,-1))
-		spawn_area.append(center_vec + Vector2i(1,0))
-		spawn_area.append(center_vec + Vector2i(-1,0))
+		var spawn_spot = center_vec + Vector2i(0,1)
+		if CombatRootControl.Instance.GameState.is_spot_open(spawn_spot):
+			spawn_area.append(spawn_spot)
+		spawn_spot = center_vec + Vector2i(0,-1)
+		if CombatRootControl.Instance.GameState.is_spot_open(spawn_spot):
+			spawn_area.append(spawn_spot)
+		
+		spawn_spot = center_vec + Vector2i(1,0)
+		if CombatRootControl.Instance.GameState.is_spot_open(spawn_spot):
+			spawn_area.append(spawn_spot)
+		
+		spawn_spot = center_vec + Vector2i(-1,0)
+		if CombatRootControl.Instance.GameState.is_spot_open(spawn_spot):
+			spawn_area.append(spawn_spot)
 	
 	if !deploying_actor_node:
 		CombatRootControl.Instance.add_actor(ActorLibrary.get_actor(deploying_actor_id), center, true, false)

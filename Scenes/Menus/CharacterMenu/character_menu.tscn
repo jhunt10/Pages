@@ -34,12 +34,18 @@
 [ext_resource type="Texture2D" uid="uid://f5dyomv4wwn1" path="res://assets/Sprites/UI/SymbolIcons/InvalidEquipmentIcon.png" id="32_0r1b3"]
 [ext_resource type="Texture2D" uid="uid://wu75tejgoo7m" path="res://Scenes/Menus/CharacterMenu/Equipment/Sprites/BookSlot.png" id="32_656xf"]
 [ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="33_xee8u"]
+[ext_resource type="Script" uid="uid://bac0ku4t8d1d0" path="res://Scenes/Menus/CharacterMenu/carrier_control.gd" id="34_djw0b"]
 [ext_resource type="Texture2D" uid="uid://7x0clyrtcupf" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18.png" id="34_i0ocu"]
+[ext_resource type="Texture2D" uid="uid://seyoqmlx4o78" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot_highlight.png" id="35_hu50l"]
 [ext_resource type="Texture2D" uid="uid://30ow80fhsx2f" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18_tab_tab.png" id="35_rrh11"]
 [ext_resource type="Texture2D" uid="uid://cll1c22bgo2p6" path="res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png" id="36_5awhv"]
+[ext_resource type="Texture2D" uid="uid://crkmao7mrw884" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/RogueIcon.png" id="36_sxp7b"]
 [ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="36_xueyn"]
 [ext_resource type="PackedScene" uid="uid://b6a64dt8gveex" path="res://Scenes/Menus/CharacterMenu/Pages/page_menu_item_slot_button.tscn" id="37_cdohk"]
+[ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="37_q1lsx"]
+[ext_resource type="Texture2D" uid="uid://q6vde2mfu8cc" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/PriestIcon.png" id="38_l4r3y"]
 [ext_resource type="PackedScene" uid="uid://dbtugo1kq2imi" path="res://Scenes/Menus/CharacterMenu/InventoryPage/inventory_menu_page.tscn" id="39_0run8"]
+[ext_resource type="Texture2D" uid="uid://cx5xeyhkwqh0s" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/MageIcon.png" id="39_8e5eg"]
 [ext_resource type="Script" uid="uid://brxn8f3qrvytb" path="res://Scenes/Menus/CharacterMenu/Pages/pages_tab_container.gd" id="40_s1b61"]
 [ext_resource type="Script" uid="uid://g4hey4jtg4xn" path="res://Scenes/Menus/CharacterMenu/Pages/page_menu_item_slot_set_container.gd" id="41_djw0b"]
 [ext_resource type="Script" uid="uid://dbkovdm8rvofd" path="res://Scenes/Menus/CharacterMenu/Supplies/suplies_tab.gd" id="43_hu50l"]
@@ -188,7 +194,7 @@ TabContainer/styles/tab_hovered = SubResource("StyleBoxTexture_hvqxb")
 TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_brc4x")
 TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_ynpcx")
 
-[node name="CharacterMenu" type="Control" unique_id=2018728110 node_paths=PackedStringArray("name_panel", "stats_panel", "actor_sprite", "equipment_control", "tab_container", "page_tab", "bag_tab", "stats_tab", "inventory_container", "close_button", "previous_character_button", "next_character_button", "details_card_spawn_point", "mouse_control", "inventory_option_button", "skill_tree_control")]
+[node name="CharacterMenu" type="Control" unique_id=2018728110 node_paths=PackedStringArray("name_panel", "stats_panel", "actor_sprite", "equipment_control", "title_slot_button", "tab_container", "page_tab", "bag_tab", "stats_tab", "carrier_control", "inventory_container", "close_button", "previous_character_button", "next_character_button", "details_card_spawn_point", "mouse_control", "inventory_option_button", "skill_tree_control")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -198,12 +204,14 @@ grow_vertical = 2
 script = ExtResource("1_dowqg")
 name_panel = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer")
 stats_panel = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer")
-actor_sprite = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/CenterContainer/Control/ActorNode")
+actor_sprite = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control/ActorNode")
 equipment_control = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer")
+title_slot_button = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton")
 tab_container = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer")
 page_tab = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages")
 bag_tab = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies")
 stats_tab = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats")
+carrier_control = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl")
 inventory_container = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/InventoryMenuPage")
 close_button = NodePath("CenterContainer/HBoxContainer/VBoxContainer/Button3")
 previous_character_button = NodePath("CenterContainer/HBoxContainer/Button")
@@ -1040,15 +1048,137 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer" unique_id=17540647]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer" unique_id=1757579934]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/CenterContainer" unique_id=375474259]
+[node name="CarrierControl" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1313591486 node_paths=PackedStringArray("rogue_button", "priest_button", "mage_button", "rogue_x_icon", "priest_x_icon", "mage_x_icon")]
+visible = false
+layout_mode = 2
+alignment = 1
+script = ExtResource("34_djw0b")
+rogue_button = NodePath("RogueButtonControl/R-TextureButton")
+priest_button = NodePath("PriestButton/P-TextureButton")
+mage_button = NodePath("MageButton/M-TextureButton")
+rogue_x_icon = NodePath("RogueButtonControl/R-TextureButton/TextureRect2")
+priest_x_icon = NodePath("PriestButton/P-TextureButton/TextureRect2")
+mage_x_icon = NodePath("MageButton/M-TextureButton/TextureRect2")
+
+[node name="RogueButtonControl" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=999999395]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="R-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl" unique_id=276209151]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("35_hu50l")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1184210147]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("36_sxp7b")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1299390484]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("37_q1lsx")
+stretch_mode = 3
+
+[node name="PriestButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=788866875]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="P-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton" unique_id=64812729]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("35_hu50l")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=176357187]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("38_l4r3y")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=3147858]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("37_q1lsx")
+stretch_mode = 3
+
+[node name="MageButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=101432861]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="M-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton" unique_id=1330534418]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("35_hu50l")
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=1871687308]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("39_8e5eg")
+
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=397441036]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("37_q1lsx")
+stretch_mode = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=17540647]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer" unique_id=375474259]
 custom_minimum_size = Vector2(64, 156)
 layout_mode = 2
 
-[node name="ActorNode" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("27_jq4bi")]
+[node name="ActorNode" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("27_jq4bi")]
 position = Vector2(32, 120)
 scale = Vector2(4, 4)
 

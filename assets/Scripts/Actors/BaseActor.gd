@@ -119,10 +119,9 @@ func get_raw_display_name()->String:
 
 func get_display_name()->String:
 	var dis_name = super()
-	if pages:
-		var title = get_title()
-		if title:
-			dis_name = title
+	var title = get_title()
+	if title:
+		dis_name = title
 	if enemy_npc_index >= 0:
 		dis_name += " " + alphabet[enemy_npc_index]
 	return dis_name
@@ -136,13 +135,28 @@ func get_title()->String:
 	var title_page = get_title_page()
 	if title_page:
 		return title_page.get_title_key()
-	return get_display_name()
+	return ""
 
 func get_title_page()->PageItemTitle:
+	# TODO: Dumb init load hack
 	if !title_page:
 		var title_key = actor_data.get("TitleKey")
+		if !title_key:
+			printerr("No Title Key found for Actor: %s" % [self.Id])
+			return null
 		title_page = ItemLibrary.create_item(title_key, {})
 	return title_page
+
+func get_raw_base_stats()->Dictionary:
+	var title_page = get_title_page()
+	if title_page:
+		return title_page.get_base_stats()
+	return self.get_load_val("Stats", {})
+	
+
+func get_stat_mods_granted_to_carrier():
+	var title_page = get_title_page()
+	return title_page.get_merged_carrier_stat_mods()
 
 func _get_object_specific_tags()->Array:
 	var tag_list = []
@@ -236,7 +250,7 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 	validate_itemholders()
 	
 	stats.recache_stats(false)
-	Que.rechache_page_ammo()
+	#Que.rechache_page_ammo()
 	self.dirty_tags()
 	
 	if rechache_action_mods:
@@ -263,7 +277,7 @@ func validate_itemholders():
 	for invalid_item:BaseItem in pages.list_invalid_items():
 		if invalid_item.get_item_slots_mods().size() > 0:
 			printerr("We have a problem.")
-	Que.dirty_ammo_mods()
+	#Que.dirty_ammo_mods()
 	self.dirty_tags()
 
 ## Called by ItemHolders when they build slot sets.
@@ -367,7 +381,7 @@ func _build_spawn_items(item_list:Array, holder:BaseItemHolder):
 
 func clean_state():
 	self.is_dead = false
-	Que.fill_page_ammo()
+	fill_page_ammo()
 	stats.prep_for_combat()
 
 func on_combat_start():
@@ -424,6 +438,10 @@ func can_act()->bool:
 	if stats.get_stat('Frozen', -1) > 0:
 		return false
 	return true
+
+# Overriden by Carrier Actor
+func fill_page_ammo(action_id:String=''):
+	pages.fill_page_ammo(action_id)
 
 # Used by Que Input Control
 func get_action_list()->Array:

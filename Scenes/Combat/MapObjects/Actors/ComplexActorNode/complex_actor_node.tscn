@@ -338,6 +338,9 @@ offset_bottom = 14.0
 visible = false
 texture = ExtResource("14_6kv2p")
 
+[node name="PathArrow" type="Sprite2D" parent="." unique_id=1091028451]
+texture = ExtResource("14_38ite")
+
 [node name="ActorMotionNode" type="Node2D" parent="." unique_id=804905565]
 use_parent_material = true
 
@@ -382,11 +385,6 @@ libraries/move_walk_back = ExtResource("7_7k4lr")
 libraries/move_walk_forward = ExtResource("8_h2r8d")
 libraries/move_walk_left = ExtResource("9_h7joc")
 libraries/move_walk_right = ExtResource("10_88tvj")
-
-[node name="PathArrow" type="Sprite2D" parent="." unique_id=1091028451]
-visible = false
-z_index = 8
-texture = ExtResource("14_38ite")
 
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="." unique_id=222670343]
 libraries/ = SubResource("AnimationLibrary_eolao")

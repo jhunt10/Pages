@@ -4,6 +4,7 @@ extends Control
 @export var instance_selector_button:LoadedOptionButton
 @export var def_box:RichTextLabel
 @export var data_box:RichTextLabel
+@export var tags_box:RichTextLabel
 @export var stats_box:FullStatDisplayControl
 
 var inst_to_lib_mapping:Dictionary = {}
@@ -28,9 +29,12 @@ func on_instance_selected(_index):
 func set_object(thing):
 	def_box.text = format_dict_to_string(thing._def)
 	data_box.text = format_dict_to_string(thing._data)
-	
 	if thing is BaseActor:
 		stats_box.set_actor(thing)
+		var tags = ""
+		for tag in thing.get_tags():
+			tags += tag + "\n"
+		tags_box.text = tags
 		
 
 func get_load_options()->Array:

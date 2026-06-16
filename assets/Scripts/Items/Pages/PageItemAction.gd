@@ -3,6 +3,8 @@ extends BasePageItem
 
 const SUB_ACTIONS_PER_ACTION = 24
 
+signal ammo_changed
+
 var action_data:Dictionary:
 	get:
 		return get_load_val("ActionData", {})
@@ -13,6 +15,8 @@ var ActionKey:String:
 var _target_params:Dictionary
 var _init_data:Dictionary
 var _action_mods_cache:Dictionary
+
+var _current_ammo:float = 0
 
 func get_tagable_id(): return ActionKey
 
@@ -345,15 +349,52 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 			out_dict[key]['PreviewCount'] = preview_damage_counts[key]
 	return out_dict
 
-func has_ammo(_actor:BaseActor=null):
-	var ammo_data = action_data.get("AmmoData", null)
-	return ammo_data and ammo_data.size() > 0
+########################
+##    Icons  Data     ##
+########################
 
-func get_ammo_data():
+func _get_ammo_data():
 	var ammo_data = action_data.get("AmmoData", null)
 	if ammo_data:
 		ammo_data['AmmoKey'] = self._key
 	return ammo_data
+
+func has_ammo():
+	var ammo_data = _get_ammo_data()
+	return ammo_data and ammo_data.size() > 0
+
+func get_ammo_type()->AmmoItem.AmmoTypes:
+	var ammo_data = _get_ammo_data()
+	if not ammo_data:
+		return AmmoItem.AmmoTypes.Limit
+	var val = AmmoItem.AmmoTypes[ammo_data['AmmoType']]
+	if val :
+		return val
+	return AmmoItem.AmmoTypes.None
+
+func get_ammo_max():
+	var ammo_data = _get_ammo_data()
+	return ammo_data.get("Clip", 0)
+
+func get_ammo_cost_per_use():
+	var ammo_data = _get_ammo_data()
+	return ammo_data.get("Cost", 0)
+
+func get_ammo_current():
+	return _current_ammo
+
+func refill_ammo():
+	_current_ammo = get_ammo_max()
+	ammo_changed.emit()
+
+func can_pay_ammo_cost()->bool:
+	var cost = get_ammo_cost_per_use()
+	return  cost <= _current_ammo
+
+func pay_ammo_cost():
+	var cost = get_ammo_cost_per_use()
+	_current_ammo = max(0, _current_ammo - cost)
+	ammo_changed.emit()
 		
 
 func get_on_que_options(actor:BaseActor, game_state:GameStateData):

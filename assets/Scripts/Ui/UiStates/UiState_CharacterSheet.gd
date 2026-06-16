@@ -5,7 +5,7 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	var actor = CombatRootControl.Instance.get_current_player_actor()
 	var menu:CharacterMenu = MainRootNode.Instance.open_character_sheet(actor, CombatUiControl.Instance.camera.canvas_layer)
-	menu.closed.pressed.connect(on_menu_closed)
+	menu.closed.connect(on_menu_closed)
 	
 	
 

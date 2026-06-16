@@ -172,3 +172,9 @@ func _on_item_removed(item_id:String, _supressing_signals:bool):
 		_actor.effects.remove_effect(effect)
 		item_id_to_effect_id.erase(item_id)
 	_cache_action_mods()
+
+
+func fill_page_ammo(action_id:String=''):
+	for page:PageItemAction in list_actions():
+		if (action_id == '' or action_id == page.Id) and page.has_ammo():
+			page.refill_ammo()

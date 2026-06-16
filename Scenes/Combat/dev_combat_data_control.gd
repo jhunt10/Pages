@@ -68,7 +68,7 @@ func _fill_ammo():
 			continue
 		var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
 		if actor:
-			actor.Que.fill_page_ammo()
+			actor.pages.fill_page_ammo()
 			
 func _toggle_auto_play():
 	auto_play = !auto_play

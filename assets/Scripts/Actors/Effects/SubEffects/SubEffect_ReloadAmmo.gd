@@ -23,4 +23,4 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:Bas
 	if not action_key:
 		printerr("Refill Ammo: No Action Key found.")
 		return
-	actor.Que.fill_page_ammo(action_key)
+	actor.pages.fill_page_ammo(action_key)

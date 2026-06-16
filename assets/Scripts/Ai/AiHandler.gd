@@ -154,8 +154,8 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 			printerr('AiHandler._get_actor_action_options_data: Non-Action Page found: %s' % [action_key])
 			continue
 		var action = item as PageItemAction
-		if action.has_ammo(actor):
-			if not actor.Que.can_pay_page_ammo(action_key):
+		if action.has_ammo():
+			if not action.can_pay_ammo_cost():
 				continue
 		if action.has_preview_move_offset():
 			data['Moves'].append(action_key)

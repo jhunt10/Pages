@@ -10,10 +10,12 @@ signal closed
 @export var stats_panel:StatsPanelContainer
 @export var actor_sprite:BaseActorNode
 @export var equipment_control:CharacterMenu_EquipmentControl
+@export var title_slot_button:EquipmentSlotButton
 @export var tab_container:TabContainer
 @export var page_tab:CharacterMenu_PagesTab
 @export var bag_tab:CharacterMenu_SuppliesTab
 @export var stats_tab:CharacterMenu_StatsTab
+@export var carrier_control:CarrierControl
 
 
 @export var inventory_container:InventoryMenuPageControl
@@ -72,6 +74,7 @@ func _ready() -> void:
 	bag_tab.mouse_enter_item.connect(on_mouse_enter_slot)
 	bag_tab.mouse_exit_item.connect(on_mouse_exit_slot)
 	
+	title_slot_button.button.pressed.connect(_on_title_button_pressed)
 	equipment_control.item_button_down.connect(on_item_button_down)
 	equipment_control.item_button_up.connect(on_item_button_up)
 	equipment_control.mouse_enter_item.connect(on_mouse_enter_slot)
@@ -114,6 +117,7 @@ func _sync():
 	bag_tab.sync()
 	inventory_container.sync()
 	stats_tab.sync(_actor)
+	carrier_control.sync(_actor)
 
 func _process(_delta: float) -> void:
 	# Delay loading Inventory
@@ -155,6 +159,10 @@ func _on_previous_actor_pressed():
 	current_party_actor_index = (party_size + current_party_actor_index - 1) % party_size
 	var next_actor = StoryState.get_party_actor_by_index(current_party_actor_index)
 	set_actor(next_actor)
+
+func _on_title_button_pressed():
+	var title = _actor.get_title_page()
+	create_details_card(title, "", false, true)
 
 func context_to_page_control(context):
 	if context == "Equipment":

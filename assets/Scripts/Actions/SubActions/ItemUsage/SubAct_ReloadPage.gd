@@ -11,7 +11,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
 				game_state:GameStateData, actor:BaseActor)->bool:
-	var turn_data = metadata.get_data_for_turn(game_state.current_turn_index)
+	var turn_data = metadata.get_current_turn_data()
 	if turn_data.data_cache.has("ReloadDone"):
 		return Success
 	var item_id = turn_data.on_que_data.get("SelectedItemId")
@@ -28,9 +28,9 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		return Failed
 	var ammo_type = (ammo_item as AmmoItem).get_ammo_type()
 	var page_that_use_ammo = []
-	for action:PageItemAction in actor.pages.list_actions():
+	for action:PageItemAction in actor.get_action_list():
 		if action.has_ammo() and ammo_item.can_reload_page(actor, action):
-			page_that_use_ammo.append(action.ActionKey)
+			page_that_use_ammo.append(action.Id)
 	if page_that_use_ammo.size() == 0:
 		printerr("SubAct_ReloadPage: No pages could use Ammo '%s'" % [item_id])
 		return Failed

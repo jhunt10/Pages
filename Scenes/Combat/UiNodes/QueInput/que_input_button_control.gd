@@ -34,6 +34,7 @@ func set_page(actor:BaseActor, action:PageItemAction):
 	if !action.has_ammo():
 		ammo_display.hide()
 	else:
-		ammo_display.set_ammo_data(actor, action.ActionKey)
-		var ammo_val = actor.Que.get_page_ammo_current_value(action.ActionKey)
+		ammo_display.set_ammo_data(action)
+		var ammo_val = action.get_ammo_current()
 		ammo_display.current_val = ammo_val
+		ammo_display.show()

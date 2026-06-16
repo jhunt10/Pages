@@ -15,8 +15,8 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 
 func do_thing(parent_action:PageItemAction, _subaction_data:Dictionary, _que_exe_data:QueExecutionData,
 				_game_state:GameStateData, actor:BaseActor)->bool:
-	if not actor.Que.can_pay_page_ammo(parent_action.ActionKey):
+	if not parent_action.can_pay_ammo_cost():
 		VfxHelper.create_flash_text(actor, "AMMO", BaseFlashTextVfxNode.FlashTextType.NoAmmo)
 		return Failed
-	actor.Que.try_consume_page_ammo(parent_action.ActionKey)
+	parent_action.pay_ammo_cost()
 	return Success
