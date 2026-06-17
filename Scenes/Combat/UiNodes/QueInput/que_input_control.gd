@@ -6,6 +6,7 @@ const MAX_INPUT_BUTTON_WIDTH = 8
 enum States {Hidden, Growing, Showing, Shrinking}
 
 signal page_special_selected(action_key:String)
+signal page_selection_closed
 
 @export var showing:bool:
 	set(val):
@@ -32,8 +33,11 @@ signal page_special_selected(action_key:String)
 @export var side_start_button:QueInput_StartButton
 @export var top_start_button:QueInput_StartButton
 @export var slide_speed:float = 100
-@export var page_Selection_container:HBoxContainer
 @export var input_buttons_container:GridContainer
+
+@export var page_selection_container:Container
+@export var page_selection_container_cancel_button:Button
+@export var page_selection_container_close_button:TextureButton
 
 @export var hover_box:QuePageHoverBox
 
@@ -73,9 +77,12 @@ func _ready() -> void:
 	top_start_button.button.disabled = true
 	page_button_prefab.visible = false
 	#on_que_options_menu.visible = false
-	page_Selection_container.hide()
+	page_selection_container.hide()
 	_fill_button.pressed.connect(_fill_que_with_wait)
 	hover_box.hide()
+	page_selection_container_cancel_button.pressed.connect(_on_page_selection_cancle_pressed)
+	page_selection_container_close_button.pressed.connect(_on_page_selection_cancle_pressed)
+	
 
 func _fill_que_with_wait():
 	var wait = ItemLibrary.get_item("Wait")
@@ -349,15 +356,21 @@ func hide_page_selection():
 		button.selection_display.hide()
 		button.modulate = Color.WHITE
 	selecetion_mode = false
+	page_selection_container.hide()
 
 func show_page_selection(action_ids:Array):
+	var grey_out_color = Color(0.5,0.5,0.5, 0.7)
 	for page_id in _page_buttons.keys():
 		var button:QueInputButtonControl = _page_buttons[page_id]
 		if action_ids.has(page_id):
 			button.selection_display.show()
 		else:
 			button.selection_display.hide()
-			button.modulate = Color.DARK_SLATE_GRAY
+			button.modulate = grey_out_color
 	selecetion_mode = true
-	page_Selection_container.show()
+	page_selection_container.show()
 	que_display_control.hide()
+
+func _on_page_selection_cancle_pressed():
+	hide_page_selection()
+	page_selection_closed.emit()

@@ -2,13 +2,15 @@ class_name BaseUiState
 extends GDScript
 
 var ui_controller:UiStateController
+var _args:Dictionary
 var _logging:bool = false
 
 func _get_debug_name()->String: 
 	return "Unset"
 
-func _init(controler:UiStateController, _args:Dictionary) -> void:
+func _init(controler:UiStateController, args:Dictionary) -> void:
 	ui_controller = controler
+	self._args = args
 
 func start_state():
 	if _logging: print ("Started BaseUiState")

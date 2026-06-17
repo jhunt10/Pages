@@ -4,7 +4,7 @@ extends BaseSupplyItem
 enum AmmoTypes {None, Gen, Phy, Mag, Abn, Limit}
 
 func get_ammo_type()->AmmoTypes:
-	return AmmoTypes.get(get_load_val("AmmoData", {}).get("AmmoType", "Gen"))
+	return AmmoTypes.get(get_load_val("SuppliesData", {}).get("AmmoType", "None"))
 
 func can_reload_page(actor:BaseActor, action:PageItemAction)->bool:
 	if not action.has_ammo():

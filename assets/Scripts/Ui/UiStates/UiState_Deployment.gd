@@ -76,6 +76,7 @@ func start_state():
 	
 func end_state():
 	if _logging: print("End UiState: DeployingActor")
+	CombatRootControl.Instance.ui_control.actor_deploy_control.hide()
 	CombatRootControl.Instance.MapController.player_spawn_area_tile_map.hide()
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
 	

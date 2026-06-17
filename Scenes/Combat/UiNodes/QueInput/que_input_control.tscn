@@ -4,22 +4,25 @@
 [ext_resource type="Texture2D" uid="uid://clb0p8uenqo8c" path="res://Scenes/Combat/UiNodes/QueInput/PopUpButton.png" id="2_7xk62"]
 [ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="2_ir7m8"]
 [ext_resource type="Texture2D" uid="uid://cdot2t5117n5f" path="res://Scenes/Combat/UiNodes/QueInput/ScrollPatch.png" id="3_2484v"]
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="3_g6164"]
 [ext_resource type="Script" uid="uid://cq6m3nqwuwegl" path="res://Scenes/Combat/UiNodes/QueInput/stat_button_control.gd" id="3_pfyt3"]
-[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="3_pw6b0"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="3_u12om"]
-[ext_resource type="Theme" uid="uid://by8t8e4s2str7" path="res://Scenes/VFXs/SpeachBubble/speach_bubble_theme.tres" id="4_ffoob"]
+[ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="4_80cou"]
 [ext_resource type="Theme" uid="uid://qsca7lvb1a68" path="res://assets/Themes/ComputerPanels/combat_panel_theme.tres" id="4_x65h1"]
+[ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="5_0sc2f"]
 [ext_resource type="Texture2D" uid="uid://dc5wy6j8a4hu3" path="res://assets/Themes/CombatUi/PortraitRect.png" id="5_5lmue"]
 [ext_resource type="Script" uid="uid://dqg11n12xylaj" path="res://Scenes/Combat/UiNodes/QueInput/que_input_display_control.gd" id="5_w4kvs"]
 [ext_resource type="PackedScene" uid="uid://cpy0gmuoekexl" path="res://Scenes/Combat/UiNodes/QueInput/que_input_button_control.tscn" id="6_ua6n5"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="6_v0fls"]
 [ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="7_g8caj"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="7_ux3ah"]
 [ext_resource type="PackedScene" uid="uid://br08s3uioxwuh" path="res://Scenes/Combat/UiNodes/QueInput/page_details_hover_box.tscn" id="17_oh6yv"]
 [ext_resource type="Script" uid="uid://hyby6lsrd4fj" path="res://Scenes/Combat/UiNodes/QueInput/QueDisplayButton.gd" id="18_8nhhy"]
 [ext_resource type="Texture2D" uid="uid://cr1m3llr0pgtd" path="res://Scenes/Combat/UiNodes/QueDisplay/EmptySlotBackground.png" id="19_d7qpq"]
 [ext_resource type="Texture2D" uid="uid://dq2fpuokt1s5r" path="res://Scenes/Combat/UiNodes/QueDisplay/SlotBackground.png" id="19_gjejj"]
 [ext_resource type="Texture2D" uid="uid://bu1v4w3d6hau" path="res://Scenes/Combat/UiNodes/QueDisplay/FilledSlotBackground.png" id="20_k35kq"]
 
-[node name="BoxContainer" type="BoxContainer" unique_id=1976729749 node_paths=PackedStringArray("_fill_button", "que_display_control", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "page_Selection_container", "input_buttons_container", "hover_box")]
+[node name="BoxContainer" type="BoxContainer" unique_id=1976729749 node_paths=PackedStringArray("_fill_button", "que_display_control", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "input_buttons_container", "page_selection_container", "page_selection_container_cancel_button", "page_selection_container_close_button", "hover_box")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -40,74 +43,107 @@ page_button_prefab = NodePath("QueInputBackPatchContainer/HBoxContainerA/HBoxCon
 start_label = NodePath("QueInputBackPatchContainer/Control/SideStatButtonControl/TextureRect/Label")
 side_start_button = NodePath("QueInputBackPatchContainer/Control/SideStatButtonControl")
 top_start_button = NodePath("QueInputBackPatchContainer/Control/TopStatButtonControl")
-page_Selection_container = NodePath("PageSelectionContainer")
 input_buttons_container = NodePath("QueInputBackPatchContainer/HBoxContainerA/GridContainer")
+page_selection_container = NodePath("PageSelectionContainer")
+page_selection_container_cancel_button = NodePath("PageSelectionContainer/VBoxContainer/ButtonsContainer/CancelButton")
+page_selection_container_close_button = NodePath("PageSelectionContainer/VBoxContainer/Control/CloseButton")
 hover_box = NodePath("PageDetailsHoverBox")
 
 [node name="PageDetailsHoverBox" parent="." unique_id=1626675331 instance=ExtResource("17_oh6yv")]
 visible = false
 layout_mode = 2
 
-[node name="PageSelectionContainer" type="HBoxContainer" parent="." unique_id=698237966]
-visible = false
+[node name="PageSelectionContainer" type="PanelContainer" parent="." unique_id=1084273047]
 layout_mode = 2
-alignment = 1
+size_flags_horizontal = 4
+theme = ExtResource("3_g6164")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PageSelectionContainer" unique_id=1254978548]
-custom_minimum_size = Vector2(200, 32)
+[node name="VBoxContainer" type="VBoxContainer" parent="PageSelectionContainer" unique_id=1257019059]
 layout_mode = 2
-size_flags_vertical = 4
-texture = ExtResource("3_pw6b0")
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="PageSelectionContainer/NinePatchRect" unique_id=605712713]
+[node name="Control" type="Control" parent="PageSelectionContainer/VBoxContainer" unique_id=743819323]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PageSelectionContainer/VBoxContainer/Control" unique_id=995437799]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_ffoob")
-text = "Select Page to Reload"
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("3_g6164")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../reload_page.sub"
+
+[node name="CloseButton" type="TextureButton" parent="PageSelectionContainer/VBoxContainer/Control" unique_id=286590093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_80cou")
+texture_pressed = ExtResource("5_0sc2f")
+
+[node name="InfoButton" type="TextureButton" parent="PageSelectionContainer/VBoxContainer/Control" unique_id=1295525169]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("6_v0fls")
+texture_pressed = ExtResource("7_ux3ah")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="PageSelectionContainer/VBoxContainer" unique_id=280832836]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_g6164")
+text = "Select Page to Realod."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="PageSelectionContainer" unique_id=1930667406]
-visible = false
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(200, 64)
+[node name="ButtonsContainer" type="HBoxContainer" parent="PageSelectionContainer/VBoxContainer" unique_id=1299773834]
 layout_mode = 2
-text = "Confirm"
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="PageSelectionContainer/Button" unique_id=1657928696]
-custom_minimum_size = Vector2(200, 32)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_pw6b0")
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
+[node name="VSeparator" type="VSeparator" parent="PageSelectionContainer/VBoxContainer/ButtonsContainer" unique_id=1405469559]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="PageSelectionContainer/Button/NinePatchRect2" unique_id=1632683789]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("4_ffoob")
-theme_override_font_sizes/font_size = 32
-text = "Cancel"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="VSeparator2" type="VSeparator" parent="PageSelectionContainer/VBoxContainer/ButtonsContainer" unique_id=2061223208]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VSeparator4" type="VSeparator" parent="PageSelectionContainer/VBoxContainer/ButtonsContainer" unique_id=1879712573]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="PageSelectionContainer/VBoxContainer/ButtonsContainer" unique_id=2142163461]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("3_g6164")
+text = " Cancel "
+
+[node name="VSeparator3" type="VSeparator" parent="PageSelectionContainer/VBoxContainer/ButtonsContainer" unique_id=1453275349]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="QueInputPanelContainer" type="PanelContainer" parent="." unique_id=2059864122 node_paths=PackedStringArray("portrait", "premade_que_button", "slots_container")]
 layout_mode = 2

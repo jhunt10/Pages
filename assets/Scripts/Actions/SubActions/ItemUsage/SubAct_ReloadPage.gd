@@ -26,7 +26,6 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	if not (ammo_item is AmmoItem):
 		printerr("SubAct_ReloadPage: Ammo '%s' is not AmmoItem." % [item_id])
 		return Failed
-	var ammo_type = (ammo_item as AmmoItem).get_ammo_type()
 	var page_that_use_ammo = []
 	for action:PageItemAction in actor.get_action_list():
 		if action.has_ammo() and ammo_item.can_reload_page(actor, action):
@@ -34,11 +33,11 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 	if page_that_use_ammo.size() == 0:
 		printerr("SubAct_ReloadPage: No pages could use Ammo '%s'" % [item_id])
 		return Failed
-	actor.items.consume_item(item_id)
 	CombatRootControl.pause_combat()
 	CombatUiControl.ui_state_controller.set_ui_state_from_path(
 		"res://assets/Scripts/Ui/UiStates/UiState_SelectPage.gd",
 	{
+		"ConsumeItemId": item_id,
 		"SelectablePages": page_that_use_ammo,
 		"PlayerActorIndex": CombatRootControl.get_player_index_of_actor(actor)
 	})

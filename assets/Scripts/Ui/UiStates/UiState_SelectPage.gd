@@ -20,6 +20,7 @@ func start_state():
 	que_input.showing = true
 	que_input.show_page_selection(_selectable_action_keys)
 	que_input.page_special_selected.connect(on_page_selected)
+	que_input.page_selection_closed.connect(on_page_select_canceled)
 	#var game_state = CombatRootControl.Instance.GameState
 	#var selectable_spots = selection_data.get_selectable_coords()
 	#if selectable_spots.size() == 0:
@@ -32,16 +33,20 @@ func on_page_selected(action_id):
 	# TODO: Want class to be generic, can't call back to SubAct_Reload because it shouldn't exist any more
 	print("Page Selected: " + action_id)
 	var que_input = CombatRootControl.Instance.ui_control.que_input
-	que_input.page_special_selected.disconnect(on_page_selected)
 	var actor = que_input._actor
 	actor.fill_page_ammo(action_id)
+	if _args.has("ConsumeItemId"):
+		var item_id = _args['ConsumeItemId']
+		actor.items.consume_item(item_id)
+	CombatUiControl.ui_state_controller.back_to_last_state()
+
+func on_page_select_canceled():
 	CombatUiControl.ui_state_controller.back_to_last_state()
 	
-	
 func end_state():
-	pass
+	var que_input = CombatRootControl.Instance.ui_control.que_input
+	if que_input.page_special_selected.is_connected(on_page_selected):
+		que_input.page_special_selected.disconnect(on_page_selected)
+	if que_input.page_selection_closed.is_connected(on_page_select_canceled):
+		que_input.page_selection_closed.disconnect(on_page_select_canceled)
 	
-func handle_input(event):
-	pass
-
-	#CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
