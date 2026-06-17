@@ -130,7 +130,9 @@ func _sync():
 		_last_display_bar_value = new_val
 		_target_display_bar_width = _vals_to_bar_size(new_val, max_2)
 		colored_value_bar.size.x = _target_display_bar_width
+		colored_value_bar.size.y = self.size.y
 		dark_value_bar.size.x = _target_display_bar_width
+		dark_value_bar.size.y = self.size.y
 		been_synced = true
 		return
 	

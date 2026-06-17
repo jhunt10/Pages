@@ -1,6 +1,6 @@
 class_name UiStateController
 
-enum UiStates {ActionInput, ExecRound, PauseMenu, CharacterSheet, PlaceActors, DeployActor}
+enum UiStates {ActionInput, ExecRound, PauseMenu, CharacterSheet, PlaceActors, DeployActor, EndScreen}
 
 var _state_scripts = {
 	UiStates.ActionInput: "res://assets/Scripts/Ui/UiStates/UiState_ActionInput.gd",
@@ -8,7 +8,8 @@ var _state_scripts = {
 	UiStates.PauseMenu: "res://assets/Scripts/Ui/UiStates/UiState_PauseMenu.gd",
 	UiStates.CharacterSheet: "res://assets/Scripts/Ui/UiStates/UiState_CharacterSheet.gd",
 	UiStates.PlaceActors: "res://assets/Scripts/Ui/UiStates/UiState_PlaceActors.gd",
-	UiStates.DeployActor: "res://assets/Scripts/Ui/UiStates/UiState_Deployment.gd"
+	UiStates.DeployActor: "res://assets/Scripts/Ui/UiStates/UiState_Deployment.gd",
+	UiStates.EndScreen: "res://assets/Scripts/Ui/UiStates/UiState_EndScreen.gd"
 }
 
 var current_ui_state:BaseUiState

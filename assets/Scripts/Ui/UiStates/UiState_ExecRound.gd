@@ -16,7 +16,7 @@ func start_state():
 		CombatRootControl.resume_combat()
 	else:
 		CombatRootControl.Instance.QueController.start_or_resume_execution()
-	CombatRootControl.QueController.end_of_round.connect(_on_round_end)
+	CombatRootControl.QueController.after_round.connect(_on_round_end)
 	CombatRootControl.Instance.ui_control.que_input.showing = false
 	CombatRootControl.Instance.ui_control.que_input.hide_start_button()
 	
@@ -30,10 +30,11 @@ func update(_delta:float):
 func end_state():
 	if not _round_ended:
 		CombatRootControl.pause_combat()
-	CombatRootControl.QueController.end_of_round.disconnect(_on_round_end)
+	CombatRootControl.QueController.after_round.disconnect(_on_round_end)
 	CombatRootControl.Instance.camera.clear_following_actor()
 	pass
 	
 func _on_round_end():
 	_round_ended = true
-	ui_controller.set_ui_state(UiStateController.UiStates.ActionInput, {}, true)
+	if not CombatRootControl.Instance.check_end_conditions():
+		ui_controller.set_ui_state(UiStateController.UiStates.ActionInput, {}, true)

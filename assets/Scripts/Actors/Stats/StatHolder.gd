@@ -264,6 +264,9 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	var health_before_caching = null
 	if _cached_stats.keys().has(StatHelper.HealthCurrent):
 		health_before_caching = _cached_stats[StatHelper.HealthCurrent]
+	var xp_before_caching = null
+	if _cached_stats.keys().has(StatHelper.Experience):
+		xp_before_caching = _cached_stats[StatHelper.Experience]
 	
 	_cached_mods.clear()
 	
@@ -368,6 +371,8 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	# Add current health to temp stats
 	if health_before_caching is int:
 		temp_stats[StatHelper.HealthCurrent] = health_before_caching
+	if xp_before_caching is int:
+		temp_stats[StatHelper.Experience] = xp_before_caching
 	
 	_cached_stats.clear()
 	var safety_limit = 10

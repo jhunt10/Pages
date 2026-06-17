@@ -362,19 +362,23 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 ########################
 
 func _get_ammo_data():
-	var ammo_data = action_data.get("AmmoData", null)
-	if ammo_data:
-		ammo_data['AmmoKey'] = self._key
+	var ammo_data = action_data.get("AmmoData", 
+	{
+		"AmmoType": "None",
+		"Clip": 0,
+		"Cost": 0
+	})
+	ammo_data['AmmoKey'] = self._key # size() is checked later in has_ammo
 	return ammo_data
 
-func has_ammo():
+func has_ammo()->bool:
+	if not action_data.has("AmmoData"):
+		return false
 	var ammo_data = _get_ammo_data()
-	return ammo_data and ammo_data.size() > 0
+	return ammo_data['AmmoType'] != "None"
 
 func get_ammo_type()->AmmoItem.AmmoTypes:
 	var ammo_data = _get_ammo_data()
-	if not ammo_data:
-		return AmmoItem.AmmoTypes.Limit
 	var val = AmmoItem.AmmoTypes[ammo_data['AmmoType']]
 	if val :
 		return val

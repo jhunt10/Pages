@@ -145,7 +145,6 @@ func load_init_state(sub_scene_data:Dictionary):
 	GameState.set_team_data(combat_map_data.get("TeamData", {}))
 	# Build Action Que Controller
 	QueController = ActionQueController.new()
-	QueController.end_of_round.connect(check_end_conditions)
 	
 	## Build Actors from Map Data
 	#_player_actor_ids.clear()
@@ -210,13 +209,13 @@ func get_current_phase_data()->Dictionary:
 func start_phase(phase_key):
 	if phase_key.to_lower() == "end":
 		combat_finished = true
-		ui_control.victory_screen.show_game_result()
+		ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.EndScreen, {})
 		return
 	var phase_datas = combat_map_data.get("PhaseDatas", {})
 	if not phase_datas.keys().has(phase_key):
 		printerr("CombatScene.start_phase: Unknown Phase Key: %s" % [phase_key])
 		combat_finished = true
-		ui_control.victory_screen.show_game_result()
+		ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.EndScreen, {})
 		return
 	_current_phase_key = phase_key
 	
@@ -539,10 +538,12 @@ func remove_zone(zone):
 	GameState.delete_zone(zone.Id)
 	MapController.delete_zone_node(zone)
 
-func check_end_conditions():
+# Called from UiState_ExecRound
+# Returns true if UiState changes
+func check_end_conditions()->bool:
 	
 	if supress_win_conditions:
-		return
+		return false
 	
 	var living_actor_by_team = {}
 	var party_ids = StoryState.list_party_actors_ids()
@@ -556,6 +557,7 @@ func check_end_conditions():
 	# All Players dead, Game Over
 	if living_actor_by_team["Players"] == 0:
 		trigger_end_condition(false)
+		return true
 
 	var combat_condition = get_current_phase_data().get("CombatCondition")
 	var condition_key = combat_condition
@@ -564,7 +566,7 @@ func check_end_conditions():
 	elif combat_condition is Dictionary:
 		condition_key =  combat_condition.get("ConditionKey")
 	if condition_key == "Endless":
-		return
+		return false
 	if condition_key == "KillAll":
 		var any_alive = false
 		for team_key in living_actor_by_team.keys():
@@ -574,21 +576,23 @@ func check_end_conditions():
 				any_alive = true
 		if not any_alive:
 			start_next_phase()
+			return true
 	elif condition_key == "KillTeam":
 		var team_key = str(combat_condition.get("EnemyTeamKey"))
 		var keys = living_actor_by_team.keys()
 		if not keys.has(team_key):
 			printerr("CombatScene.check_end_conditions KillTeam: No team found with index %s." % [team_key])
 			start_next_phase()
-			return
+			return true
 		if living_actor_by_team[team_key] == 0:
 			start_next_phase()
+			return true
 	elif condition_key == "Exit":
 		var exit_coor = combat_condition.get("ExitCoor")
 		if not exit_coor is Array or not exit_coor.size() == 2:
 			printerr("CombatScene.check_end_conditions Exit: invalid ExitCoor '%s'." % [exit_coor])
 			start_next_phase()
-			return
+			return true
 		var player_on_exit = false
 		for actor:BaseActor in GameState.list_actors(false):
 			if actor.is_player:
@@ -598,12 +602,14 @@ func check_end_conditions():
 					break
 		if player_on_exit:
 			start_next_phase()
+			return true
+	return false
 		
 
 func trigger_end_condition(victory:bool):
 	combat_finished = true
 	if victory:
-		ui_control.victory_screen.show_game_result()
+		ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.EndScreen, {})
 	else:
 		ui_control.game_over_screen.show()
 

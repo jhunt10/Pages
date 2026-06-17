@@ -263,12 +263,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Name-PanelContainer" type="PanelContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=893596779 node_paths=PackedStringArray("name_label", "level_label")]
+[node name="Name-PanelContainer" type="PanelContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=893596779 node_paths=PackedStringArray("name_label", "level_label", "xp_bar")]
 layout_mode = 2
 theme = ExtResource("3_iofuq")
 script = ExtResource("4_iofuq")
 name_label = NodePath("VBoxContainer/HBoxContainer/NameLabel")
 level_label = NodePath("VBoxContainer/HBoxContainer/LevelLabel")
+xp_bar = NodePath("VBoxContainer/HBoxContainer2/ExpBar")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer" unique_id=853459007]
 layout_mode = 2
@@ -1621,7 +1622,7 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "Accuracy"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../..")
+mouse_over_parent = NodePath("../../../../../../../../../../StatMouesOverPopUpControl")
 
 [node name="NameLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Accuracy" unique_id=1615382927]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -1669,7 +1670,7 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "CritChance"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../..")
+mouse_over_parent = NodePath("../../../../../../../../../../StatMouesOverPopUpControl")
 
 [node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritChc" unique_id=1662380700]
 layout_mode = 2
@@ -1703,7 +1704,7 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "CritMod"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../..")
+mouse_over_parent = NodePath("../../../../../../../../../../StatMouesOverPopUpControl")
 
 [node name="DividerLabel2" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=1993053796]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -1790,7 +1791,7 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "Evasion"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../..")
+mouse_over_parent = NodePath("../../../../../../../../../../StatMouesOverPopUpControl")
 
 [node name="NameLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Evasion" unique_id=1400962504]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -1832,7 +1833,7 @@ script = ExtResource("11_d0duj")
 stat_name = "BlockChance"
 value_label = NodePath("StatLabel")
 force_to_int = true
-mouse_over_parent = NodePath("../../..")
+mouse_over_parent = NodePath("../../../../../../../../../../StatMouesOverPopUpControl")
 
 [node name="NameLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/StatContainer-BlockChc" unique_id=1616163243]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -1873,7 +1874,7 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "BlockMod"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../..")
+mouse_over_parent = NodePath("../../../../../../../../../../StatMouesOverPopUpControl")
 
 [node name="DividerLabel2" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/StatContainer-BlockMod" unique_id=1396743415]
 self_modulate = Color(0.498039, 0, 0, 1)
@@ -2481,6 +2482,9 @@ text = "Exit"
 layout_mode = 2
 size_flags_vertical = 3
 text = "Next"
+
+[node name="StatMouesOverPopUpControl" type="Control" parent="CenterContainer" unique_id=1836556036]
+layout_mode = 2
 
 [node name="DetailsCardSpawnPoint" type="Control" parent="." unique_id=894226572]
 custom_minimum_size = Vector2(300, 340)

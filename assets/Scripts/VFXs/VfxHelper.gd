@@ -157,7 +157,11 @@ static func create_vfs_for_attack_event(attack_event:AttackEvent, game_state:Gam
 static func create_vfx_for_sub_attack_event(attack_event:AttackEvent, game_state:GameStateData, sub_attack_event:AttackSubEvent, override_source_actor:BaseActor = null):
 	var attack_vfx_key = attack_event.attack_details.get("AttackVfxKey")
 	var attack_vfx_data = attack_event.attack_details.get("AttackVfxData", {})
-	var defender:BaseActor = game_state.get_actor(sub_attack_event.defending_actor_id)
+	var defender:BaseActor = game_state.get_actor(sub_attack_event.defending_actor_id, true)
+	
+	if !defender:
+		printerr("VfxHelper.create_vfx_for_sub_attack_event: No defender actor found with id '%s'." % [sub_attack_event.defending_actor_id])
+		return
 	
 	var attacker = game_state.get_actor(attack_event.attacker_id)
 	var source_actor:BaseActor = attacker

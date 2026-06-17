@@ -54,7 +54,7 @@ func redraw_bar():
 	var count = clip_val / max(cost_val, 1)
 	if self.get_child_count() != count +1:
 		for child in self.get_children():
-			if not child == premade_bar:
+			if not child == premade_bar and not child.is_queued_for_deletion():
 				child.queue_free()
 		bar_parts = []
 		#var total_size = self.custom_minimum_size.y

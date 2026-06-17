@@ -303,6 +303,9 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_3o8la")
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b7trf"]
+animation = &"DamageAnimations/death_effect"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i0x7p"]
 animation = &"DamageAnimations/evade_animation"
 
@@ -327,19 +330,32 @@ animation = &"RESET"
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5km5r"]
+advance_mode = 2
 advance_condition = &"Damage"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jwynx"]
 switch_mode = 2
 advance_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_px2my"]
+advance_mode = 2
+advance_condition = &"Dead"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_w5iv7"]
+priority = 2
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Dead"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_w5iv7"]
+states/DamageAnimations_death_effect/node = SubResource("AnimationNodeAnimation_b7trf")
+states/DamageAnimations_death_effect/position = Vector2(627, 198)
 states/DodgeAndShake/node = SubResource("AnimationNodeBlendSpace2D_b7trf")
 states/DodgeAndShake/position = Vector2(438, 115)
 states/RESET/node = SubResource("AnimationNodeAnimation_px2my")
 states/RESET/position = Vector2(433, 236)
 states/Start/position = Vector2(178, 153)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_ti2jm"), "RESET", "DodgeAndShake", SubResource("AnimationNodeStateMachineTransition_5km5r"), "DodgeAndShake", "RESET", SubResource("AnimationNodeStateMachineTransition_jwynx")]
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_ti2jm"), "RESET", "DodgeAndShake", SubResource("AnimationNodeStateMachineTransition_5km5r"), "DodgeAndShake", "RESET", SubResource("AnimationNodeStateMachineTransition_jwynx"), "DodgeAndShake", "DamageAnimations_death_effect", SubResource("AnimationNodeStateMachineTransition_px2my"), "RESET", "DamageAnimations_death_effect", SubResource("AnimationNodeStateMachineTransition_w5iv7")]
 
 [node name="SimpleActorNode" type="Node2D" unique_id=994540300 node_paths=PackedStringArray("vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 script = ExtResource("1_bln3d")
@@ -405,7 +421,9 @@ position = Vector2(-16, -16)
 tile_set = SubResource("TileSet_yydd4")
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=939852353]
+active = false
 tree_root = SubResource("AnimationNodeStateMachine_w5iv7")
 anim_player = NodePath("../DamageAnimationPlayer")
 parameters/conditions/Damage = false
+parameters/conditions/Dead = false
 parameters/DodgeAndShake/blend_position = Vector2(1, 1)

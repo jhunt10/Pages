@@ -173,6 +173,8 @@ static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseAc
 		if not game_state.are_enemies(actor, enemy):
 			continue
 		var enemy_pos = game_state.get_actor_pos(enemy)
+		if !enemy_pos:
+			continue
 		#var path = path_to_target(actor, actor_pos, enemy_pos, game_state)
 		#var dist = path.get('Moves', []).size()
 		var dist = abs(actor_pos.x - enemy_pos.x) + abs(actor_pos.y - enemy_pos.y)

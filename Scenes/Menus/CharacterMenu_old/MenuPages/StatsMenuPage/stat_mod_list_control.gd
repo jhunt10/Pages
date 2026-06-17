@@ -4,6 +4,7 @@ extends Control
 @export var container:VBoxContainer
 @export var name_label:Label
 @export var mods_label:Label
+@export var divider:ColorRect
 
 
 func set_mod_list(stat_name:String, list:Array):
@@ -16,3 +17,4 @@ func set_mod_list(stat_name:String, list:Array):
 			new_label.show()
 	else:
 		mods_label.hide()
+		divider.hide()

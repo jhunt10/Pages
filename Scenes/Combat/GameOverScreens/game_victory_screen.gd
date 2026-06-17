@@ -84,7 +84,7 @@ func collect_dropped_items():
 	var total_exp = 0
 	var bounty_money = 0
 	for actor:BaseActor in actors:
-		if actor.is_dead and actor.is_player:
+		if actor.is_dead and not actor.is_player:
 			var enemy_val = actor.actor_data.get("MoneyValue", 0)
 			bounty_money += enemy_val
 			var exp_val = actor.actor_data.get("ExpValue", 0)
@@ -92,12 +92,12 @@ func collect_dropped_items():
 			if exp_val > 0: #Only count enemies that give xp (not Decor)
 				enemy_count += 1
 			
-	enemies_label.text = str(enemy_count)
+	enemies_label.text = str(int(enemy_count))
 	rounds_label.text = str(CombatRootControl.QueController.round_counter)
-	money_label.text = "$"+str(bounty_money)
+	money_label.text = "$"+str(int(bounty_money))
 	StoryState.add_money(bounty_money)
 	
-	exp_label.text = str(total_exp)
+	exp_label.text = str(int(total_exp))
 	for actor:BaseActor in CombatRootControl.list_player_actors():
 		if actor:
 			actor.stats.add_experiance(total_exp)
@@ -113,6 +113,7 @@ func collect_dropped_items():
 			new_line.get_child(4).text = str(items_datas['Page'][item_name]['Count'])
 			pickup_pages_container.add_child(new_line)
 			new_line.show()
+		pickup_pages_container.show()
 
 	if not items_datas.has("default"):
 		pickup_items_container.hide()
@@ -124,3 +125,4 @@ func collect_dropped_items():
 			new_line.get_child(4).text = str(items_datas['default'][item_name]['Count'])
 			pickup_items_container.add_child(new_line)
 			new_line.show()
+		pickup_items_container.show()

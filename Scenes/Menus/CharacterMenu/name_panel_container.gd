@@ -3,7 +3,9 @@ extends PanelContainer
 
 @export var name_label:Label
 @export var level_label:Label
+@export var xp_bar:ExpBarControl
 
 func sync(actor:BaseActor):
 	name_label.text = actor.get_display_name()
 	level_label.text = str(int(actor.stats.get_stat(StatHelper.Level)))
+	xp_bar.set_actor(actor)

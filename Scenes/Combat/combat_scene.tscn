@@ -830,7 +830,6 @@ texture = ExtResource("44_8qg5x")
 offset = Vector2(0, -28)
 
 [node name="EndScreensControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=823660565]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -840,6 +839,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="GameOverScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/EndScreensControl" unique_id=1573481010 node_paths=PackedStringArray("to_camp_button", "main_menu_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

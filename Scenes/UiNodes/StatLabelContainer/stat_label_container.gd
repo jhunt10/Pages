@@ -61,7 +61,7 @@ func _on_mouse_enter():
 	if mod_list_control:
 		if mouse_over_parent:
 			mouse_over_parent.add_child(mod_list_control)
-			mod_list_control.global_position = self.global_position
+			mod_list_control.global_position = self.get_global_mouse_position()
 		else:
 			self.add_child(mod_list_control)
 		var mods = _actor.stats.get_mod_names_for_stat(stat_name)
