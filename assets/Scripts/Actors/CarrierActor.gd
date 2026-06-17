@@ -9,11 +9,15 @@ func list_held_actor_ids()->Array:
 func list_held_actors()->Array:
 	return _held_actors.values()
 
+func is_holding_actor(actor:BaseActor):
+	return _held_actors.keys().has(actor.Id)
+
 func add_held_actor(actor:BaseActor):
 	if _held_actors.keys().has(actor.Id):
 		return # Already Added
 	_held_actors[actor.Id] = actor
 	actor.parent_carrier_actor_id = self.Id
+	actor.page_list_changed.connect(self.page_list_changed.emit)
 	sprite._build_sprite_sheet()
 	stats.recache_stats()
 	self.page_list_changed.emit()
@@ -22,6 +26,7 @@ func remove_held_actor(actor:BaseActor):
 	if not _held_actors.keys().has(actor.Id):
 		return # Already Added
 	_held_actors.erase(actor.Id)
+	actor.page_list_changed.disconnect(self.page_list_changed.emit)
 	if actor.parent_carrier_actor_id == self.Id:
 		actor.parent_carrier_actor_id = null
 	sprite._build_sprite_sheet()

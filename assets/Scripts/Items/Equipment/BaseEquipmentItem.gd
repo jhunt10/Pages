@@ -31,3 +31,10 @@ func get_tags_added_to_actor()->Array:
 ## Returns what sub data has Mods
 func get_data_containing_mods()->Dictionary:
 	return equipment_data
+
+
+func get_passive_stat_mods()->Array:
+	var out_list = super()
+	for val in out_list:
+		val.meta_data["FromEquipment"] = true
+	return out_list

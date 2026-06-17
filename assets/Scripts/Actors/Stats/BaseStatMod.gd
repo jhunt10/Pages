@@ -6,6 +6,7 @@ var display_name:String
 var mod_type:ModTypes
 var value
 var dep_stat_name:String
+var meta_data:Dictionary = {}
 
  # For AttackMods
 var source_faction:int

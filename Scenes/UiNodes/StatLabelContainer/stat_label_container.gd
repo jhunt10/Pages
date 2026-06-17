@@ -37,8 +37,8 @@ func set_stat_values(actor:BaseActor):
 		percent_value.text = "%2.3f" % [DamageHelper.calc_armor_reduction(current_value)]
 	if not _icon_loaded:
 		load_icon()
-	var stat_mods = actor.stats.get_mod_names_for_stat(stat_name)
-	if stat_mods.size() > 0:
+	#var stat_mods = actor.stats.get_mod_names_for_stat(stat_name)
+	if actor.stats.get_non_setting_mod_count(stat_name) > 0:
 		value_label.text = value_label.text + "*"
 	#_build_stat_mod_list()
 

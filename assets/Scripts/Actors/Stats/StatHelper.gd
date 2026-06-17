@@ -33,6 +33,7 @@ const Crash = "Push"
 const PPR = "PPR"
 const PhyAttack = "PhyAttack"
 const MagAttack = "MagAttack"
+const Attack = "Attack"
 const Armor = "Armor"
 const Ward = "Ward"
 const Awareness = "Awareness"
@@ -59,6 +60,7 @@ const stat_abbrs:Dictionary = {
 	HealthMax: "Max HP",
 	PhyAttack: "PHY ATK",
 	MagAttack: "MAG ATK",
+	Attack: "ATK",
 	Strength: "STR",
 	Agility: "AGL",
 	Intelligence: "INT",
@@ -84,6 +86,7 @@ const stat_icon_paths:Dictionary = {
 	_HealthStat: "res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png",
 	HealthCurrent: "res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png",
 	HealthMax: "res://assets/Sprites/UI/SymbolIcons/HealthSymbol.png",
+	Attack: "res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png",
 	PhyAttack: "res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png",
 	MagAttack: "res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png",
 	Strength: "res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png",

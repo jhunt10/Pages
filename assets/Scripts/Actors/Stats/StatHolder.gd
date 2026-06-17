@@ -63,16 +63,25 @@ func recache_stats(should_emit_signal:bool=true):
 	_calc_cache_stats(should_emit_signal)
 
 func has_stat(stat_name:String)->bool:
+	# TODO: MagPhy Hack
+	if stat_name == "MagAttack" or stat_name == "PhyAttack":
+		stat_name = "Attack"
 	if _stats_dirty:
 		_calc_cache_stats()
 	return _cached_stats.has(stat_name)
 
 func get_stat(stat_name:String, default:float=0):
+	# TODO: MagPhy Hack
+	if stat_name == "MagAttack" or stat_name == "PhyAttack":
+		stat_name = "Attack"
 	if _stats_dirty:
 		_calc_cache_stats()
 	return _cached_stats.get(stat_name, default)
 
 func get_base_stat(stat_name:String, default:int=0):
+	# TODO: MagPhy Hack
+	if stat_name == "MagAttack" or stat_name == "PhyAttack":
+		stat_name = "Attack"
 	return _base_stats.get(stat_name, default)
 
 func get_leveled_attribute(stat_name:String):
@@ -88,6 +97,15 @@ func base_damge_from_stat(stat_name):
 	var base_stat_val = get_stat(stat_name)
 	return base_stat_val
 
+# Returns count of non setting or equipment mods
+# for determining if stat is being modded (mainly for ui)
+func get_non_setting_mod_count(stat_name)->int:
+	var count = 0
+	for mod:BaseStatMod in _cached_mods.get(stat_name, []):
+		if mod.mod_type	 != BaseStatMod.ModTypes.Set and not mod.meta_data.get("FromEquipment", false):
+			count += 1
+	return count
+
 func get_mod_names_for_stat(stat_name:String)->Array:
 	var out_list = []
 	for mod:BaseStatMod in _cached_mods.get(stat_name, []):
@@ -98,7 +116,7 @@ func get_mod_names_for_stat(stat_name:String)->Array:
 			display_mod_value = roundi(raw_mod_value)
 		var display_name = ''
 		if mod.mod_type	 == BaseStatMod.ModTypes.Set:
-			display_name = "=" + str(display_mod_value) + " " + mod.display_name
+			display_name = mod.display_name + " = " + str(display_mod_value)
 		elif mod.mod_type	 == BaseStatMod.ModTypes.Add:
 			display_name = "+" + str(display_mod_value) + " " + mod.display_name
 		elif mod.mod_type == BaseStatMod.ModTypes.AddStat:
@@ -249,7 +267,18 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	
 	_cached_mods.clear()
 	
-	_base_stats = _actor.get_raw_base_stats()
+	
+	# TODO: MagPhy Hack
+	# _base_stats = _actor.get_raw_base_stats()
+	var temp_base = _actor.get_raw_base_stats()
+	_base_stats.clear()
+	for stat_name in temp_base.keys():
+		var val = temp_base[stat_name]
+		if stat_name == "MagAttack" or stat_name == "PhyAttack":
+			_base_stats["Attack"] = max(val, temp_base.get("MagAttack", 0), temp_base.get("PhyAttack", 0))
+		else:
+			_base_stats[stat_name] = val
+	# Hack Ends
 	
 	# MinStats - being used to set Slimes awareness to 5, but I don't remember why
 	var min_stats = {}
@@ -276,13 +305,17 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	
 	for mod:BaseStatMod in mods_list:
 		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
+		
+		# TODO: MagPhy Hack
+		if mod.stat_name == "MagAttack" or mod.stat_name == "PhyAttack":
+			mod.stat_name = "Attack"
+			
 		if not agg_mods.keys().has(mod.stat_name): # Add stat name to agg mods
 			agg_mods[mod.stat_name] = {}
 		if not agg_mods[mod.stat_name].keys().has(mod.mod_type): # Add mod type to agg mods
 			agg_mods[mod.stat_name][mod.mod_type] = []
 		if not _cached_mods.keys().has(mod.stat_name): # Add stat name to mod list
 			_cached_mods[mod.stat_name] = []
-		
 		
 		_cached_mods[mod.stat_name].append(mod)
 		if mod.mod_type	 == BaseStatMod.ModTypes.Set:

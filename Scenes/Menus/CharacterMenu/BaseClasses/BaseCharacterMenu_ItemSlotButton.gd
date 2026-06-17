@@ -47,8 +47,8 @@ func set_item(actor:BaseActor, holder:BaseItemHolder, item:BaseItem):
 			else:
 				var cant_use_reason = item.get_cant_use_reasons(actor)
 				var cant_use_string = ItemHelper.cant_equip_reasons_to_string(cant_use_reason)
-				if cant_use_string.begins_with('Req:'):
-					cant_use_string = "No Reason"
+				#if cant_use_string.begins_with('Req:'):
+					#cant_use_string = "No Reason"
 				valid_state_label.text = cant_use_string
 
 

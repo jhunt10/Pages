@@ -325,13 +325,21 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 	var preview_damage_counts = preview_data.get("PreviewDamageCounts", {})
 	for key in damage_keys:
 		var damage_data = action_data.get("DamageDatas", {}).get(key, {}).duplicate(true)
+		# Weapon Damage Data
 		if damage_data.has("WeaponFilter"):
-			if actor:
+			var page_owner_actor = self.get_holding_actor()
+			var use_actor = actor
+			if use_actor == null:
+				use_actor = page_owner_actor
+			elif use_actor != page_owner_actor and use_actor is CarrierActor: 
+				if (use_actor as CarrierActor).is_holding_actor(page_owner_actor):
+					use_actor = page_owner_actor
+			if use_actor:
 				damage_data['ActorlessWeapon'] = false
 				var weapon_filter = damage_data['WeaponFilter']
 				var override_data = damage_data.duplicate()
 				override_data.erase("WeaponFilter")
-				var weapon_damage_datas = actor.get_weapon_damage_datas(weapon_filter)
+				var weapon_damage_datas = use_actor.get_weapon_damage_datas(weapon_filter)
 				print(weapon_filter)
 				for weapon_damage_key in weapon_damage_datas.keys():
 					var sub_key = key + ":" + weapon_damage_key
