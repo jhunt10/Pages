@@ -22,7 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dq2fpuokt1s5r" path="res://Scenes/Combat/UiNodes/QueDisplay/SlotBackground.png" id="19_gjejj"]
 [ext_resource type="Texture2D" uid="uid://bu1v4w3d6hau" path="res://Scenes/Combat/UiNodes/QueDisplay/FilledSlotBackground.png" id="20_k35kq"]
 
-[node name="BoxContainer" type="BoxContainer" unique_id=1976729749 node_paths=PackedStringArray("_fill_button", "que_display_control", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "input_buttons_container", "page_selection_container", "page_selection_container_cancel_button", "page_selection_container_close_button", "hover_box")]
+[node name="QueInputControl" type="BoxContainer" unique_id=1976729749 node_paths=PackedStringArray("_fill_button", "que_display_control", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "input_buttons_container", "page_selection_container", "page_selection_container_cancel_button", "page_selection_container_close_button", "hover_box")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -47,13 +47,18 @@ input_buttons_container = NodePath("QueInputBackPatchContainer/HBoxContainerA/Gr
 page_selection_container = NodePath("PageSelectionContainer")
 page_selection_container_cancel_button = NodePath("PageSelectionContainer/VBoxContainer/ButtonsContainer/CancelButton")
 page_selection_container_close_button = NodePath("PageSelectionContainer/VBoxContainer/Control/CloseButton")
-hover_box = NodePath("PageDetailsHoverBox")
+hover_box = NodePath("Control/PageDetailsHoverBox")
 
-[node name="PageDetailsHoverBox" parent="." unique_id=1626675331 instance=ExtResource("17_oh6yv")]
-visible = false
+[node name="Control" type="Control" parent="." unique_id=2014690861]
 layout_mode = 2
 
+[node name="PageDetailsHoverBox" parent="Control" unique_id=1626675331 instance=ExtResource("17_oh6yv")]
+visible = false
+layout_mode = 0
+offset_right = 124.0
+
 [node name="PageSelectionContainer" type="PanelContainer" parent="." unique_id=1084273047]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_g6164")

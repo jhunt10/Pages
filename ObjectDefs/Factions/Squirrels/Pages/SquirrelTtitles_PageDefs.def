@@ -33,14 +33,22 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"StatMods": {
-				"PhyAttackScale": {
-					"DepStatName": "Strength",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "PhyAttack",
-					"Value": 1.0
-				}
+			"Stats": {
+				"Level": 1,
+				"PPR": 4,
+				"Attack": 8,
+				"HealthMax": 22,
+				"Armor": 0,
+				"Ward": 0,
+				"Speed": 80,
+				"Mass": 30,
+				"Accuracy": 90,
+				"AggroMod": 1.0,
+				"CrashPower": 20,
+				"CritChance": 5,
+				"CritMod": 1.5,
+				"Evasion": 5,
+				"Resistance:Light": 150
 			}
 		},
 		"PassiveData": {
@@ -82,8 +90,22 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"StatMods": {
-
+			"Stats": {
+				"Level": 1,
+				"PPR": 3,
+				"Attack": 15,
+				"HealthMax": 20,
+				"Armor": 0,
+				"Ward": 30,
+				"Speed": 50,
+				"Mass": 30,
+				"Accuracy": 90,
+				"AggroMod": 1.0,
+				"CrashPower": 20,
+				"CritChance": 5,
+				"CritMod": 1.5,
+				"Evasion": 3,
+				"Resistance:Light": 150
 			}
 		},
 		"PassiveData": {
@@ -126,8 +148,22 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"StatMods": {
-
+			"Stats": {
+				"Level": 1,
+				"PPR": 4,
+				"Attack": 8,
+				"HealthMax": 22,
+				"Armor": 30,
+				"Ward": 0,
+				"Speed": 30,
+				"Mass": 50,
+				"Accuracy": 90,
+				"AggroMod": 1.0,
+				"CrashPower": 20,
+				"CritChance": 5,
+				"CritMod": 1.5,
+				"Evasion": 1,
+				"Resistance:Light": 150
 			}
 		},
 		"PassiveData": {

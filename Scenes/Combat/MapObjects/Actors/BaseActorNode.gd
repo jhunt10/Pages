@@ -96,10 +96,6 @@ func set_actor(actor:BaseActor):
 	
 	actor_sprite.texture = Actor.sprite.get_body_sprite()
 
-#Called when actor is added to combat_scene
-func prep_for_combat():
-	pass
-
 ###############################
 ##		Positioning
 ##############################

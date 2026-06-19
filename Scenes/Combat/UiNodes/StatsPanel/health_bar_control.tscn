@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="4_gx0kf"]
 
 [node name="HealthBarControl" type="Control" unique_id=1006432764 node_paths=PackedStringArray("full_bar", "bar_holder", "dark_value_bar", "colored_value_bar", "blink_value_bar", "left_label", "mid_label", "right_label")]
-custom_minimum_size = Vector2(128, 24)
+custom_minimum_size = Vector2(128, 34)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_q5jf8")
@@ -48,7 +48,7 @@ visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 128.0
-offset_bottom = 24.0
+offset_bottom = 34.0
 texture = ExtResource("3_qdbmy")
 region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 8
@@ -60,7 +60,7 @@ patch_margin_bottom = 8
 modulate = Color(0.374139, 0.374139, 0.374139, 1)
 layout_mode = 0
 offset_right = 128.0
-offset_bottom = 24.0
+offset_bottom = 34.0
 texture = ExtResource("3_qdbmy")
 region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 8
@@ -71,7 +71,7 @@ patch_margin_bottom = 8
 [node name="ColorValueRect" type="NinePatchRect" parent="BarHolder" unique_id=167284956]
 layout_mode = 0
 offset_right = 128.0
-offset_bottom = 24.0
+offset_bottom = 34.0
 texture = ExtResource("3_qdbmy")
 region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 8

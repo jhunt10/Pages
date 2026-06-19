@@ -131,6 +131,14 @@ func get_faction_key()->String:
 		return "Player"
 	return actor_data.get("Faction", "NO_FACTION")
 
+func is_being_carried()->bool:
+	return parent_carrier_actor_id != null
+
+func get_carrier_actor()->CarrierActor:
+	if is_being_carried():
+		return ActorLibrary.get_actor(parent_carrier_actor_id)
+	return null
+
 func get_title()->String:
 	var title_page = get_title_page()
 	if title_page:
@@ -151,7 +159,7 @@ func get_raw_base_stats()->Dictionary:
 	var title_page = get_title_page()
 	if title_page:
 		return title_page.get_base_stats()
-	return self.get_load_val("Stats", {})
+	return {}#self.get_load_val("Stats", {})
 	
 
 func get_stat_mods_granted_to_carrier():
@@ -382,7 +390,7 @@ func _build_spawn_items(item_list:Array, holder:BaseItemHolder):
 func clean_state():
 	self.is_dead = false
 	fill_page_ammo()
-	stats.prep_for_combat()
+	stats.reset_health()
 
 func on_combat_start():
 	clean_state()

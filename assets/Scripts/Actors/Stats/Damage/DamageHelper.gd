@@ -130,11 +130,23 @@ static func roll_for_damage(
 	# 5) Apply DamageType Resistances
 	# 5) Resolve Crit and Block
 	
+	
 	# Calc raw damage
 	var max_power = float(damage_event.attack_power + damage_event.attack_power_range) / 100.0
 	var min_power = float(damage_event.attack_power - damage_event.attack_power_range) / 100.0
 	damage_event.applied_power = randf_range(min_power, max_power) * damage_event.attack_power_scale
 	
+	#var min_test = 99
+	#var max_test = -99
+	#var sum = 0
+	#for i in range(10000):
+		#var test_val = randf_range(min_power, max_power+0.1)
+		#min_test = min(test_val, min_test)
+		#max_test = max(test_val, max_test)
+		#sum += test_val
+		##printerr(test_val)
+	#print("Min: %s | Max: %s | Avg: %s" %[min_test, max_test, sum/10000])
+		
 	# Get Damage Resistance
 	damage_event.defender_resistance = defender.stats.get_damage_resistance(damage_event.damage_type)
 	var resistance_reduction = 1.0 - (float(damage_event.defender_resistance) / 100.0)
@@ -171,7 +183,7 @@ static func roll_for_damage(
 	working_damage = working_damage * resistance_reduction
 	damage_event.damage_after_resistance = working_damage
 	
-	damage_event.final_damage = working_damage
+	damage_event.final_damage = round(working_damage)
 	return damage_event
 
 static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, source_tag_chain:SourceTagChain, game_state:GameStateData)->bool:

@@ -232,6 +232,7 @@ func _on_que_change():
 		return
 	clear_preview_display()
 	show_last_qued_target_area()
+	resync_ammo_pages()
 	if _actor.Que.is_ready():# or CombatRootControl.QueController.SHORTCUT_QUE:
 		show_start_button()
 	else:
@@ -343,6 +344,14 @@ func _round_ends():
 	que_display_control.show()
 	#hide_start_button()
 	pass
+
+func resync_ammo_pages():
+	for page_id in _page_buttons.keys():
+		var button:QueInputButtonControl = _page_buttons[page_id]
+		var page:PageItemAction = ItemLibrary.get_item(page_id)
+		if page.has_ammo():
+			button.ammo_display.current_val = floori(page.get_ammo_current())
+	
 
 func _on_ammo_change(page_id):
 	if _page_buttons.has(page_id):

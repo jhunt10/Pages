@@ -191,4 +191,4 @@ func _vals_to_bar_size(val:int, max_val:int):
 	var full_bar_size = full_bar.size.x
 	if full_bar_size == 0:
 		full_bar_size = 128
-	return max(min_bar_size, full_bar_size * val / max_val)
+	return max(min_bar_size, full_bar_size * val / max(max_val, 1))

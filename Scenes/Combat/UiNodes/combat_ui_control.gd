@@ -90,8 +90,7 @@ func on_deployment(actor_id):
 	ui_state_controller.set_ui_state(UiStateController.UiStates.DeployActor, ui_state_data)
 
 # Should only be called by CombatRootControl
-func set_player_actor_index(index):
-	var player_actor = CombatRootControl.Instance.get_player_actor(index)
+func set_player_actor(player_actor):
 	if player_actor:
 		que_input.set_actor(player_actor)
 

@@ -28,6 +28,7 @@
 				"Squirrel_PageBook": 1.0,
 				"Squirrely_PassivePage": 1.0
 			},
+			"TitleKey": "BaseSquirrel_TitlePage",
 			"ExpValue": 40.0,
 			"Faction": "Squirrels",
 			"MoneyValue": 15.0
@@ -59,7 +60,6 @@
 		"SpawnItemArr": [],
 		"SpawnPageArr": [
 			"BaseSquirrel_TitlePage",
-			"Squirrely_PassivePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
@@ -76,19 +76,6 @@
 		],
 		"SpriteSheet": "Sprites/Squirrel_SpriteSheet.png",
 		"Stats": {
-			"Agility": 5.0,
-			"Armor": 0.0,
-			"Evasion": 20.0,
-			"HealthMax": 12.0,
-			"Intelligence": 3.0,
-			"MagAttack": 0.0,
-			"Mass": 5.0,
-			"PPR": 4.0,
-			"PhyAttack": 0.0,
-			"Speed": 25.0,
-			"Strength": 5.0,
-			"Ward": 0.0,
-			"Wisdom": 3.0
 		},
 		"_DefVersion": "1"
 	},
@@ -120,6 +107,7 @@
 				"SquirrelMagic_PassivePage": 1.0,
 				"Squirrel_PageBook": 1.0
 			},
+			"TitleKey": "SquirrelMag_TitlePage",
 			"ExpValue": 40.0,
 			"MoneyValue": 15.0
 		},
@@ -139,7 +127,6 @@
 		"SpawnItemArr": [],
 		"SpawnPageArr": [
 			"SquirrelMag_TitlePage",
-			"SquirrelMagic_PassivePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
@@ -148,19 +135,6 @@
 		],
 		"SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png",
 		"Stats": {
-			"Agility": 4.0,
-			"Armor": 0.0,
-			"Evasion": 10.0,
-			"HealthMax": 12.0,
-			"Intelligence": 6.0,
-			"MagAttack": 0.0,
-			"Mass": 4.0,
-			"PPR": 3.0,
-			"PhyAttack": 0.0,
-			"Speed": 25.0,
-			"Strength": 3.0,
-			"Ward": 10.0,
-			"Wisdom": 5.0
 		},
 		"_DefVersion": "1"
 	},
@@ -191,6 +165,7 @@
 				"SquirrelArmor_PassivePage": 1.0,
 				"Squirrel_PageBook": 1.0
 			},
+			"TitleKey": "SquirrelPhy_TitlePage",
 			"ExpValue": 40.0,
 			"MoneyValue": 15.0
 		},
@@ -209,7 +184,6 @@
 		"SpawnItemArr": [],
 		"SpawnPageArr": [
 			"SquirrelPhy_TitlePage",
-			"SquirrelArmor_PassivePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
@@ -217,19 +191,6 @@
 		],
 		"SpriteSheet": "Sprites/Squirrior_SpriteSheet.png",
 		"Stats": {
-			"Agility": 3.0,
-			"Armor": 20.0,
-			"Evasion": 0.0,
-			"HealthMax": 10.0,
-			"Intelligence": 3.0,
-			"MagAttack": 0.0,
-			"Mass": 6.0,
-			"PPR": 3.0,
-			"PhyAttack": 8.0,
-			"Speed": 15.0,
-			"Strength": 5.0,
-			"Ward": 0.0,
-			"Wisdom": 3.0
 		},
 		"_DefVersion": "1"
 	}

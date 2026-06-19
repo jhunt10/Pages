@@ -88,10 +88,6 @@ func _on_action_failed():
 	super()
 	cancel_weapon_animations()
 
-#Called when actor is added to combat_scene
-func prep_for_combat():
-	show_hide_tomb_stone()
-
 func show_hide_tomb_stone():
 	if tombstone_sprite and Actor.is_player:
 		if self.is_dieing and damage_animation_player.is_playing():

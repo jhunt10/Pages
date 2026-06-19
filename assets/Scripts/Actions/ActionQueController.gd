@@ -174,8 +174,6 @@ func get_active_action_ques()->Array:
 # Add an action que to the controller
 var _to_add_actor_ques = []
 func add_action_que(new_que:ActionQue, delay_if_running:bool=true):
-	#TODO: Remvoe Hack
-	SHORTCUT_QUE = true
 	if _action_ques.has(new_que.Id):
 		return
 	if delay_if_running and execution_state != ActionStates.Waiting:

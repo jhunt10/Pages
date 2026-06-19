@@ -80,12 +80,17 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	var aggroed_actor_id = actor.aggro.get_current_aggroed_actor_id()
 	var current_pos = game_state.get_actor_pos(actor)
 	var options = _get_actor_action_options_data(actor)
-	for attack_key in options['Attacks']:
-		var item = ItemLibrary.get_item(attack_key)
+	for attack_id in options['Attacks']:
+		var item = ItemLibrary.get_item(attack_id)
 		if not item is PageItemAction:
-			printerr('AiHandler._choose_page_for_actor: Non-Action Page found: %s' % [attack_key])
+			printerr('AiHandler._choose_page_for_actor: Non-Action Page found: %s' % [attack_id])
 			continue
 		var attack_action = item as PageItemAction
+		if attack_action.has_ammo():
+			if not attack_action.can_pay_ammo_cost():
+				continue
+			if not actor.Que.will_have_ammo(attack_action):
+				continue
 		# Get potential targets for attack Action
 		var attack_params =  attack_action.get_preview_target_params(actor)
 		var potential_targets = TargetingHelper.get_potential_target_actor_ids(attack_params, actor, game_state, [], current_pos) 
@@ -139,29 +144,22 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	return wait_action
 
 static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
+	if cached_move_sets.has(actor.Id):
+		return cached_move_sets[actor.Id]
 	var data = {
 		"Moves":[],
 		"Attacks":[]
 	}
-	#if cached_move_sets.has(actor.ActorKey):
-		#return cached_move_sets[actor.ActorKey]
-	var action_list = actor.get_action_key_list()
-	for action_key in action_list:
-		var item = ItemLibrary.get_item(action_key)
-		if not item:
+	var action_list = actor.get_action_list()
+	for action:PageItemAction in action_list:
+		if not action is PageItemAction:
+			printerr('AiHandler._get_actor_action_options_data: Non-Action Page found: %s' % [action.Id])
 			continue
-		if not item is PageItemAction:
-			printerr('AiHandler._get_actor_action_options_data: Non-Action Page found: %s' % [action_key])
-			continue
-		var action = item as PageItemAction
-		if action.has_ammo():
-			if not action.can_pay_ammo_cost():
-				continue
 		if action.has_preview_move_offset():
-			data['Moves'].append(action_key)
+			data['Moves'].append(action.Id)
 		if action.get_tags().has("Attack"):
-			data['Attacks'].append(action_key)
-	cached_move_sets[actor.ActorKey] = data
+			data['Attacks'].append(action.Id)
+	cached_move_sets[actor.Id] = data
 	return data
 
 

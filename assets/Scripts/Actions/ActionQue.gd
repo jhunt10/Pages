@@ -10,16 +10,6 @@ var actor:BaseActor
 var real_que : Array = []
 var _cached_max_que_size:int = -1
 
-# Keyed off ActionKey, contains:
-#		"Cost": per use
-#		"Clip": max value
-#		"Value": Current Value of Clip
-#		"AmmoType": AmmoItem.AmmoType
-#		"FreeChance": Chance to not consume ammo
-#		"PreviewUses": Number of times it's qued
-var _page_ammo_datas:Dictionary = {}
-var _ammo_mod_dirty:bool=true
-
 ## Mapping from turn index to real_que index to account for padding
 # Positive numbers denote real_que index offset by 1	Example: 3 padded to 6 [1,-1,2,-2,3,-3]
 # Negative numbers represent padded slots and point back to last real_que index
@@ -108,7 +98,18 @@ func que_action(action:PageItemAction, data:Dictionary={}):
 		real_que.append(action.Id)
 		QueExecData.que_data(data)
 		action_que_changed.emit()
-		
+		action.ammo_changed.emit()
+
+func count_qued_page_uses(page:PageItemAction)->int:
+	return real_que.count(page.Id)
+
+# Check if Page will have ammo if qued again
+func will_have_ammo(page:PageItemAction)->bool:
+	var qued_count = count_qued_page_uses(page)
+	if qued_count >= page.get_ammo_remaining_uses():
+		return false
+	return true
+
 func clear_que(supress_signals:bool=false):
 	real_que.clear()
 	if not supress_signals:
@@ -116,9 +117,7 @@ func clear_que(supress_signals:bool=false):
 	QueExecData.clear()
 
 func delete_at_index(index):
-	if index < 0:
-		return
-	if index < real_que.size():
+	if index >= 0 and index < real_que.size():
 		real_que.remove_at(index)
 		QueExecData.TurnDataList.remove_at(index)
 		action_que_changed.emit()

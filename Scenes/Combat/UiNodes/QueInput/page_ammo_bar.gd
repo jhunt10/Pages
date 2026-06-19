@@ -11,7 +11,11 @@ extends Container
 @export var ammo_type:AmmoItem.AmmoTypes:
 	set(val):
 		ammo_type = val
-		redraw_bar()
+		if val == AmmoItem.AmmoTypes.None:
+			self.hide()
+		else:
+			redraw_bar()
+			self.show()
 @export var gen_ammo_color:Color
 @export var phy_ammo_color:Color
 @export var mag_ammo_color:Color
@@ -46,6 +50,8 @@ func _sync():
 	redraw_bar()
 
 func redraw_bar():
+	if !_action:
+		return
 	#printerr("Sync Ammo Bar: %s / %s || %s " % [cost_val, clip_val, current_val])
 	if not premade_bar:
 		return
@@ -96,30 +102,42 @@ func redraw_bar():
 			#remainder_bar.show()
 			#self.add_child(remainder_bar)
 			#bar_parts.append(remainder_bar)
+	
+	var qued_count = 0
+	var remaining_uses = 0
+	if _action:
+		remaining_uses = _action.get_ammo_remaining_uses()
+		var actor = _action.get_holding_actor()
+		if actor.is_being_carried():
+			actor = actor.get_carrier_actor()
+		if actor:
+			qued_count = actor.Que.count_qued_page_uses(_action)
+	
+	var bar_color = abn_ammo_color
+	match ammo_type:
+		AmmoItem.AmmoTypes.Gen: bar_color = gen_ammo_color
+		AmmoItem.AmmoTypes.Mag: bar_color = mag_ammo_color
+		AmmoItem.AmmoTypes.Phy: bar_color = phy_ammo_color
+		AmmoItem.AmmoTypes.Abn: bar_color = abn_ammo_color
+	
 	var temp_val = current_val
 	for index in range(bar_parts.size()):
 		var reverse_index = bar_parts.size() - index - 1
-		if temp_val < cost_val:
+		if index >= remaining_uses:
 			bar_parts[reverse_index].modulate = empty_color
+		elif index >= remaining_uses - qued_count:
+			bar_parts[reverse_index].modulate = bar_color
+			bar_parts[reverse_index].modulate = Color.GRAY
 		else:
-			if ammo_type == AmmoItem.AmmoTypes.Gen:
-				bar_parts[reverse_index].modulate = gen_ammo_color
-			elif ammo_type == AmmoItem.AmmoTypes.Mag:
-				bar_parts[reverse_index].modulate = mag_ammo_color
-			elif ammo_type == AmmoItem.AmmoTypes.Phy:
-				bar_parts[reverse_index].modulate = phy_ammo_color
-			elif ammo_type == AmmoItem.AmmoTypes.Abn:
-				bar_parts[reverse_index].modulate = abn_ammo_color
-			else:
-				bar_parts[reverse_index].modulate = abn_ammo_color
+			bar_parts[reverse_index].modulate = bar_color
 		temp_val -= cost_val
 
 
 var bar_parts = []
 
 func set_ammo_data(action:PageItemAction):
-	if _action:
-		_action.ammo_changed.disconnect(_sync)
+	#if _action:
+		#_action.ammo_changed.disconnect(_sync)
 	_action = action
-	_action.ammo_changed.connect(_sync)
+	#_action.ammo_changed.connect(_sync)
 	_sync()

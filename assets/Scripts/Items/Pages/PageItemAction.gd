@@ -395,6 +395,12 @@ func get_ammo_cost_per_use():
 func get_ammo_current():
 	return _current_ammo
 
+func get_ammo_remaining_uses()->int:
+	var ammo_data = _get_ammo_data()
+	var cost = ammo_data.get("Cost", 0)
+	var remaining = floori(_current_ammo / cost)
+	return remaining
+
 func refill_ammo():
 	_current_ammo = get_ammo_max()
 	ammo_changed.emit()

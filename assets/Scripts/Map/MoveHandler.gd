@@ -70,7 +70,8 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 			printerr("!!!Simulated Push!!!")
 		
 		# Merge
-		if not simulated and (blocking_actor is CarrierActor or moving_actor is CarrierActor):
+		if (not simulated and (blocking_actor is CarrierActor or moving_actor is CarrierActor) 
+			and (blocking_actor.is_player and moving_actor.is_player)):
 			var carrier:CarrierActor = null
 			var deployable:BaseActor = null
 			if blocking_actor is CarrierActor:

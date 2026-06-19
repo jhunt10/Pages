@@ -83,6 +83,7 @@ func _ready() -> void:
 	
 	for actor:BaseActor in GameState._actors.values():
 		actor.on_combat_start()
+	
 	camera.cach_camera_bounds()
 
 func _process(delta: float) -> void:
@@ -276,17 +277,7 @@ func start_next_phase():
 	var phase_data = get_current_phase_data()
 	var next_key = phase_data.get("NextPhase")
 	start_phase(next_key)
-		
 
-#func pre_load_actors_for_phases():
-	## Make Nodes for each player actor, but hide them until they are placed
-	#for player_actor:BaseActor in StoryState.list_party_actors():
-		#if not player_actor:
-			#continue
-		#var player_actor_node = MapController.get_or_create_actor_node(player_actor, MapPos.new(0,0,0,0), true)
-		##player_actor_node.prep_for_combat()
-		#player_actor_node.hide()
-	#
 var _cached_markers = {}
 func get_pos_marker(marker_name)->MapPos:
 	if _cached_markers.has(marker_name):
@@ -446,7 +437,8 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false, play_spawn_ani
 	
 	# Add actor to GameState and set position
 	GameState.add_actor(actor)
-	QueController.add_action_que(actor.Que)
+	if actor.Que.get_max_que_size() > 0:
+		QueController.add_action_que(actor.Que)
 	GameState.set_actor_pos(actor, pos)
 	
 	# Add to player list if player
@@ -617,6 +609,7 @@ func cleanup_combat():
 	for actor:BaseActor in GameState.list_actors(true):
 		actor.effects.on_combat_end(GameState)
 		if actor.is_player:
+			actor.clean_state()
 			actor.effects.purge_combat_efffects()
 			actor.Que.clear_que(true)
 		else:
@@ -668,11 +661,16 @@ func set_current_player_actor(actor, move_camera:bool=true):
 
 func set_player_index(index, move_camera:bool=true):
 	if index >= 0 and index < _player_actor_ids.size():
+		var actor = get_player_actor(index)
 		_current_player_index = index
-		ui_control.set_player_actor_index(_current_player_index)
+		ui_control.set_player_actor(actor)
 		if move_camera:
-			var actor = get_player_actor(index)
 			camera.start_auto_pan_to_actor(actor, true)
+# Only for debugging
+func set_non_player_actor(actor, move_camera:bool=true):
+	ui_control.set_player_actor(actor)
+	if move_camera:
+		camera.start_auto_pan_to_actor(actor, true)
 
 
 func get_player_actor(index:int = _current_player_index)->BaseActor:

@@ -184,7 +184,7 @@ func apply_level_up(new_level:int, remaining_exp:int, add_att_levels:Dictionary)
 		attribute_levels[attribute] = add_att_levels.get(attribute)
 	recache_stats()
 
-func prep_for_combat():
+func reset_health():
 	var max_hp = max_health
 	_cached_stats[StatHelper.HealthCurrent] = max_hp
 
