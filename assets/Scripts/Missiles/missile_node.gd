@@ -66,5 +66,5 @@ func on_missile_reach_target():
 		missile_effect_node.animation.play("fade_out")
 		missile_effect_node.animation.animation_finished.connect(_on_impact_effect_finished)
 
-func _on_impact_effect_finished():
+func _on_impact_effect_finished(_animation_name):
 	self.queue_free()

@@ -162,6 +162,7 @@ func _sync():
 	# Dark bar never animates going up, it jumps to highest value
 	if _last_display_bar_value < new_val:
 		dark_value_bar.size.x = _target_display_bar_width
+		colored_value_bar.size.x = _target_display_bar_width
 	
 	_last_synced_value = new_val
 	_hold_for_change = true
