@@ -2002,13 +2002,13 @@ popup/item_3/text = "Skill Tree"
 popup/item_3/id = 3
 
 [node name="InventoryMenuPage" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=764217251 instance=ExtResource("39_0run8")]
+visible = false
 custom_minimum_size = Vector2(280, 384)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SkillTreePageControl" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=2093387313 node_paths=PackedStringArray("character_menu", "background_control", "tree_container", "row_prefab", "grid_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("52_s1b61")

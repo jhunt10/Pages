@@ -19,15 +19,13 @@
 		"ActorData": {
 			"DropItemsSet": {
 				"": 10.0,
-				"BanditAxe": 5.0,
-				"BanditHeavyArmor_BodyApparel": 5.0,
-				"BanditHeavyArmor_HeadApparel": 5.0,
-				"BanditHeavyArmor_LegApparel": 5.0,
-				"Bandit_PageBook": 1.0,
+				"BanditAxe": 10.0,
+				"Bandit_PageBook": 10.0,
 				"HealthPotionM": 5.0,
 				"HealthPotionS": 10.0,
 				"Money:10": 10.0
 			},
+			"TitleKey": "BanditBase_TitlePage",
 			"ExpValue": 60.0,
 			"Faction": "Bandits",
 			"MoneyValue": 15.0
@@ -35,9 +33,6 @@
 		"SpawnEquipmentArr": [
 			"Bandit_PageBook",
 			"OldBag_ItemBag",
-			"BanditHeavyArmor_HeadApparel",
-			"BanditHeavyArmor_BodyApparel",
-			"BanditHeavyArmor_LegApparel",
 			"BanditAxe"
 		],
 		"SpawnItemArr": [
@@ -45,7 +40,6 @@
 			"HealthPotionM"
 		],
 		"SpawnPageArr": [
-			"BanditBase_TitlePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
@@ -54,13 +48,6 @@
 			"ReloadPage"
 		],
 		"SpriteSheet": "Sprites/Bandit_SpriteSheet",
-		"Stats": {
-			"Agility": 7.0,
-			"HealthMax": 50.0,
-			"Intelligence": 5.0,
-			"Strength": 8.0,
-			"Wisdom": 5.0
-		},
 		"PortraitRect": [
 			12.0,
 			22.0,
@@ -88,12 +75,11 @@
 		},
 		"ActorData": {
 			"DropItemsSet": {
-				"": 10.0,
-				"BanditCaptainHelmet_HeadApparel": 5.0,
-				"Bandit_PageBook": 1.0,
+				"Bandit_PageBook": 5.0,
 				"BigMalma": 5.0,
-				"Money:10": 50.0
+				"Money:100": 10.0
 			},
+			"TitleKey": "BanditCaptain_TitlePage",
 			"ExpValue": 60.0,
 			"Faction": "Bandits",
 			"MoneyValue": 15.0
@@ -101,9 +87,6 @@
 		"SpawnEquipmentArr": [
 			"Bandit_PageBook",
 			"OldBag_ItemBag",
-			"BanditCaptainHelmet_HeadApparel",
-			"BanditHeavyArmor_BodyApparel",
-			"BanditHeavyArmor_LegApparel",
 			"BigMalma"
 		],
 		"SpawnItemArr": [
@@ -111,7 +94,6 @@
 			"HealthPotionM"
 		],
 		"SpawnPageArr": [
-			"BanditCaptain_TitlePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
@@ -119,13 +101,7 @@
 			"UsePotionSelf",
 			"ReloadPage"
 		],
-		"SpriteSheet": "DEFAULT",
-		"Stats": {
-			"Agility": 10.0,
-			"Intelligence": 8.0,
-			"Strength": 10.0,
-			"Wisdom": 8.0
-		},
+		"SpriteSheet": "Sprites/BanditCaptain_SpriteSheet",
 		"_DefVersion": "1"
 	},
 	"Bandit_Ranged": {
@@ -147,16 +123,14 @@
 		},
 		"ActorData": {
 			"DropItemsSet": {
-				"": 10.0,
-				"BanditLightArmor_BodyApparel": 5.0,
-				"BanditLightArmor_HeadApparel": 5.0,
-				"BanditLightArmor_LegApparel": 5.0,
-				"Bandit_PageBook": 1.0,
+				"": 5.0,
+				"Bandit_PageBook": 5.0,
 				"BaseBow_Weapon": 5.0,
 				"HealthPotionM": 5.0,
 				"HealthPotionS": 10.0,
 				"Money:10": 10.0
 			},
+			"TitleKey": "BanditArcher_TitlePage",
 			"ExpValue": 60.0,
 			"Faction": "Bandits",
 			"MoneyValue": 15.0
@@ -164,9 +138,6 @@
 		"SpawnEquipmentArr": [
 			"Bandit_PageBook",
 			"OldBag_ItemBag",
-			"BanditLightArmor_HeadApparel",
-			"BanditLightArmor_BodyApparel",
-			"BanditLightArmor_LegApparel",
 			"BaseBow_Weapon"
 		],
 		"SpawnItemArr": [
@@ -174,7 +145,6 @@
 			"HealthPotionM"
 		],
 		"SpawnPageArr": [
-			"BanditArcher_TitlePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
@@ -183,13 +153,6 @@
 			"ReloadPage"
 		],
 		"SpriteSheet": "Sprites/BanditArcher_SpriteSheet",
-		"Stats": {
-			"Agility": 10.0,
-			"HealthMax": 30.0,
-			"Intelligence": 5.0,
-			"Strength": 7.0,
-			"Wisdom": 5.0
-		},
 		"PortraitRect": [
 			12.0,
 			22.0,

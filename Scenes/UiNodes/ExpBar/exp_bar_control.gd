@@ -2,6 +2,8 @@
 class_name ExpBarControl
 extends TextureRect
 
+signal  level_up_button_pressed
+
 @export var full_rect:Control
 @export var color_rect:ColorRect
 @export var level_label:Label
@@ -40,11 +42,9 @@ func set_actor(actor:BaseActor):
 	_sync()
 
 func open_level_up_menu():
-	if CharacterMenuControl.Instance.combat_mode:
-		return
 	if level_up_button_animation:
 		level_up_button_animation.play('waiting')
-	CharacterMenuControl.Instance.show_level_up_pages()
+	level_up_button_pressed.emit()
 
 func _sync():
 	if level_label:

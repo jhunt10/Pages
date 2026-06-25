@@ -2,7 +2,7 @@
 class_name MapControllerNode
 extends Node2D
 
-const LOGGING = false
+const LOGGING = true
 
 var grid_tile_map:TileMapLayer:
 	get:
@@ -110,8 +110,9 @@ func get_player_spawn_area()->Array[Vector2i]:
 
 func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)->BaseActorNode:
 	if Engine.is_editor_hint(): return
-	if LOGGING: print("MapControllerNode: Creating Actor Node: %s" % [actor.Id])
+	if LOGGING: print("MapControllerNode: Getting or Creating Actor Node: %s" % [actor.Id])
 	if actor_nodes.keys().has(actor.Id):
+		if LOGGING: print("MapControllerNode: Got Actor Node: %s" % [actor.Id])
 		return actor_nodes[actor.Id]
 	
 	var actor_node_path = actor.get_node_scene_path()

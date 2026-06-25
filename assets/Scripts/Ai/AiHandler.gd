@@ -138,7 +138,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 			if move_action:
 				return move_action
 	elif path_moves.size() == 0:
-		printerr("No Path found for actor: %s" % [actor.Id])
+		printerr("No Path found for actor: %s trying to reach %s" % [actor.Id, target_enemy.Id])
 	var mosey_action = build_mosey_round(actor, game_state)
 	var wait_action = ItemLibrary.get_item(mosey_action)
 	return wait_action
@@ -168,6 +168,8 @@ static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseAc
 	var min_dist = 10000
 	var closest_actor = null
 	for enemy:BaseActor in game_state.list_actors():
+		if enemy.Id == actor.Id:
+			continue
 		if not game_state.are_enemies(actor, enemy):
 			continue
 		var enemy_pos = game_state.get_actor_pos(enemy)

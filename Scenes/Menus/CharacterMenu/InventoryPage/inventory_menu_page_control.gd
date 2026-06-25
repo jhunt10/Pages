@@ -100,7 +100,7 @@ func on_player_inventory_changed():
 	rebuild_on_next_scync = true
 	#var greater_filter = filter_option_button.get_current_option_text()
 	#var tab_filter = tab_bar.get_tab_title(tab_bar.current_tab)
-	#build_item_slots()
+	build_item_slots()
 	#_refilter()
 	#filter_items_with_tag(tab_filter)
 

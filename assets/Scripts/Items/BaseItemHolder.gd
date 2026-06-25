@@ -321,7 +321,7 @@ func get_item_id_in_slot(index:int):
 			return item_id
 	return ''
 
-func list_ids_of_items_with_key(item_key):
+func list_items_with_key(item_key):
 	var out_list = []
 	for item_id in _raw_item_slots:
 		if !item_id:
@@ -329,7 +329,7 @@ func list_ids_of_items_with_key(item_key):
 		var item = ItemLibrary.get_item(item_id, false)
 		if item:
 			if item.ItemKey == item_key:
-				out_list.append(item.Id)
+				out_list.append(item)
 	return out_list
 
 func get_item_in_slot(index:int)->BaseItem:

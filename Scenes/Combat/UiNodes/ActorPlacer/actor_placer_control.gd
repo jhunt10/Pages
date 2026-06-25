@@ -42,40 +42,40 @@ func load_and_show(min_actors:int=1, max_actors:int=4):
 func build_actor_buttons(min_actors:int=1, max_actors:int=4):
 	for child in actor_buttons_container.get_children():
 		child.queue_free()
-	_spawn_tile_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
-	var first_actor_id = ''
-	# Build Buttons for each Party Actor
-	for actor in StoryState.list_party_actors():
-		if !actor:
-			continue
-		if first_actor_id == '':
-			first_actor_id = actor.Id
-		var button = premade_actor_button.duplicate()
-		actor_buttons_container.add_child(button)
-		button.actor_icon.texture = actor.sprite.get_portrait_sprite()
-		button.highlight.hide()
-		button.pressed.connect(_on_actor_button_pressed.bind(actor.Id))
-		button.actor_id = actor.Id
-		button.show()
-		var actor_node = CombatRootControl.Instance.MapController.get_or_create_actor_node(actor, MapPos.new(0,0,0,0), true)
-		if not actor_node:
-			printerr("ActorPlacerControl.load_and_show: No Actor Node found for Actor: '%s'." % [actor.Id])
-			continue
-		if actor_node.get_parent() != _spawn_tile_map:
-			actor_node.reparent(_spawn_tile_map)
-		else:
-			_spawn_tile_map.add_child(actor_node)
-		actor_node.hide()
-		_actor_id_to_buttons[actor.Id] = button
-		_actor_id_to_actor_node[actor.Id] = actor_node
-	max_actor_count = max_actors
-	min_actor_count = min_actors
-	if min_actors == max_actors:
-		min_max_actor_label.text = str(min_actor_count)
-	else:
-		min_max_actor_label.text = str(min_actor_count) + "-" + str(max_actor_count)
-	set_placed_actor_count(0)
-	_on_actor_button_pressed(first_actor_id)
+	#_spawn_tile_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
+	#var first_actor_id = ''
+	## Build Buttons for each Party Actor
+	#for actor in StoryState.list_party_actors():
+		#if !actor:
+			#continue
+		#if first_actor_id == '':
+			#first_actor_id = actor.Id
+		#var button = premade_actor_button.duplicate()
+		#actor_buttons_container.add_child(button)
+		#button.actor_icon.texture = actor.sprite.get_portrait_sprite()
+		#button.highlight.hide()
+		#button.pressed.connect(_on_actor_button_pressed.bind(actor.Id))
+		#button.actor_id = actor.Id
+		#button.show()
+		#var actor_node = CombatRootControl.Instance.MapController.get_or_create_actor_node(actor, MapPos.new(0,0,0,0), true)
+		#if not actor_node:
+			#printerr("ActorPlacerControl.load_and_show: No Actor Node found for Actor: '%s'." % [actor.Id])
+			#continue
+		##if actor_node.get_parent() != _spawn_tile_map:
+			##actor_node.reparent(_spawn_tile_map)
+		##else:
+			##_spawn_tile_map.add_child(actor_node)
+		#actor_node.hide()
+		#_actor_id_to_buttons[actor.Id] = button
+		#_actor_id_to_actor_node[actor.Id] = actor_node
+	#max_actor_count = max_actors
+	#min_actor_count = min_actors
+	#if min_actors == max_actors:
+		#min_max_actor_label.text = str(min_actor_count)
+	#else:
+		#min_max_actor_label.text = str(min_actor_count) + "-" + str(max_actor_count)
+	#set_placed_actor_count(0)
+	#_on_actor_button_pressed(first_actor_id)
 	_been_loaded = true
 
 func set_placed_actor_count(count:int):
@@ -113,7 +113,8 @@ func put_actor_in_spot(actor_id, spot, is_valid:bool = true):
 	var actor_node:BaseActorNode = CombatRootControl.Instance.MapController.get_or_create_actor_node(actor, MapPos.Vector2i(spot))
 	if not actor_node:
 		return
-	actor_node.reparent(_spawn_tile_map)
+	printerr("adjfjs: "+actor_node.Id+" " + actor_node.name)
+	#actor_node.reparent(_spawn_tile_map)
 	if actor_node:
 		actor_node.position = _spawn_tile_map.map_to_local(spot)
 		actor_node.show()

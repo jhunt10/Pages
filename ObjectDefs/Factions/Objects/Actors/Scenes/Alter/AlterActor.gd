@@ -33,7 +33,8 @@ func do_thing(game_state:GameStateData):
 		if actor.is_player:
 			players.append(actor)
 			var pos = game_state.get_actor_pos(actor)
-			min_player_y = min(pos.y, min_player_y)
+			if pos:
+				min_player_y = min(pos.y, min_player_y)
 	
 	# Only use spawners from Back once player enters final room 
 	var spawners = front_spawners

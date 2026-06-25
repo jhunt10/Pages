@@ -30,7 +30,7 @@
     "PhaseDatas": {
         "InitSpawn": {
             "PhaseType": "SpawnEnemy",
-            "NextPhase": "PlacePlayers",
+            "NextPhase": "DemoSpawner",
             "MarkerMap": "InitEnemySpawnMap",
             "EnemySet": {
                 "ZombieBasic": {
@@ -80,7 +80,10 @@
         "CombatPhase1": {
             "PhaseType": "Combat",
             "NextPhase": "END",
-            "CombatCondition": "KillAll"
+            "CombatCondition": {
+                "ConditionKey": "KillTeam",
+                "EnemyTeamKey": "Enemies"
+            }
         }
     }
 }

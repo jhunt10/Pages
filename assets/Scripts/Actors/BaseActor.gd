@@ -71,7 +71,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	super(key, load_path, def, id, data)
 	spawn_map_layer = _def.get('SpawnOnMapLayer', 0)
 	
-	var stat_data = _def["Stats"]
+	var stat_data = _def.get("Stats", {})
 	ai_def = get_load_val("AiData", {})
 	aggro = AggroHandler.new(self)
 	sprite = ActorSpriteHolder.new(self)

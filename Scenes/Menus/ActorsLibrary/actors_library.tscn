@@ -1,15 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1ou0hp5x6pih"]
+[gd_scene format=3 uid="uid://d1ou0hp5x6pih"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/ActorsLibrary/actors_library_column_label_container.gd" id="1_ghtq7"]
-[ext_resource type="Script" path="res://Scenes/Menus/ActorsLibrary/actors_library_menu_control.gd" id="1_gjoa8"]
+[ext_resource type="Script" uid="uid://dr3l52b8g078v" path="res://Scenes/Menus/ActorsLibrary/actors_library_column_label_container.gd" id="1_ghtq7"]
+[ext_resource type="Script" uid="uid://3ov3u3i2f46a" path="res://Scenes/Menus/ActorsLibrary/actors_library_menu_control.gd" id="1_gjoa8"]
 [ext_resource type="Texture2D" uid="uid://vwiqj7k1flkn" path="res://assets/Sprites/UI/SymbolIcons/_A_Symbole.png" id="2_ccjw5"]
 [ext_resource type="Texture2D" uid="uid://coojsfckia2jk" path="res://Scenes/Combat/UiNodes/QueDisplay/UnknownPageSlotIcon.png" id="3_tib36"]
-[ext_resource type="Script" path="res://Scenes/Menus/ActorsLibrary/actor_entry_container.gd" id="4_xb0po"]
-[ext_resource type="Script" path="res://Scenes/Menus/ActorsLibrary/mouse_over_control.gd" id="6_g7210"]
-[ext_resource type="Script" path="res://Scenes/UiNodes/back_patch_container.gd" id="7_ot2n6"]
+[ext_resource type="Script" uid="uid://c3xhxqafnwvnv" path="res://Scenes/Menus/ActorsLibrary/actor_entry_container.gd" id="4_xb0po"]
+[ext_resource type="Script" uid="uid://bwanvg8h4yyu5" path="res://Scenes/Menus/ActorsLibrary/mouse_over_control.gd" id="6_g7210"]
+[ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="7_ot2n6"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="8_iubiy"]
 
-[node name="ActorsLibraryControl" type="Control" node_paths=PackedStringArray("mouse_over_control", "premade_column_label", "premade_actor_entry", "column_container", "entries_container", "column_seperator", "exit_button")]
+[node name="ActorsLibraryControl" type="Control" unique_id=919795409 node_paths=PackedStringArray("mouse_over_control", "premade_column_label", "premade_actor_entry", "column_container", "entries_container", "column_seperator", "exit_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,7 +25,7 @@ entries_container = NodePath("VBoxContainer/ScrollContainer/EntriesContainer")
 column_seperator = NodePath("VBoxContainer/ColumnContainer/VSeparator")
 exit_button = NodePath("VBoxContainer/ColumnContainer/CloseButton")
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="."]
+[node name="NinePatchRect2" type="NinePatchRect" parent="." unique_id=1228697895]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +38,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=931017880]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,67 +46,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColumnContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="ColumnContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=828841574]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="CloseButton" type="Button" parent="VBoxContainer/ColumnContainer"]
+[node name="CloseButton" type="Button" parent="VBoxContainer/ColumnContainer" unique_id=1248975326]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = " Exit "
 
-[node name="Label" type="Label" parent="VBoxContainer/ColumnContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ColumnContainer" unique_id=1362036438]
 visible = false
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 text = "Icon"
 horizontal_alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ColumnContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ColumnContainer" unique_id=1102921394]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 
-[node name="ColumnLabel" type="BoxContainer" parent="VBoxContainer/ColumnContainer"]
+[node name="ColumnLabel" type="BoxContainer" parent="VBoxContainer/ColumnContainer" unique_id=812304699]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 script = ExtResource("1_ghtq7")
 
-[node name="IconRect" type="TextureRect" parent="VBoxContainer/ColumnContainer/ColumnLabel"]
+[node name="IconRect" type="TextureRect" parent="VBoxContainer/ColumnContainer/ColumnLabel" unique_id=1462686119]
 custom_minimum_size = Vector2(38, 40)
 layout_mode = 2
 texture = ExtResource("2_ccjw5")
 
-[node name="Button" type="Button" parent="VBoxContainer/ColumnContainer/ColumnLabel"]
-visible = false
-layout_mode = 2
+[node name="Button" type="Button" parent="VBoxContainer/ColumnContainer/ColumnLabel/IconRect" unique_id=1365203006]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 text = "V"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer" unique_id=940904407]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="EntriesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+[node name="EntriesContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer" unique_id=1311569475]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ActorEntryContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/EntriesContainer"]
+[node name="ActorEntryContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/EntriesContainer" unique_id=697448909]
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("4_xb0po")
 
-[node name="IconRect" type="TextureRect" parent="VBoxContainer/ScrollContainer/EntriesContainer/ActorEntryContainer"]
+[node name="IconRect" type="TextureRect" parent="VBoxContainer/ScrollContainer/EntriesContainer/ActorEntryContainer" unique_id=716498656]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("3_tib36")
 
-[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ScrollContainer/EntriesContainer/ActorEntryContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ScrollContainer/EntriesContainer/ActorEntryContainer" unique_id=81049350]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/EntriesContainer/ActorEntryContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/ScrollContainer/EntriesContainer/ActorEntryContainer" unique_id=608532980]
 modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
@@ -116,7 +121,7 @@ theme_override_font_sizes/font_size = 24
 text = "100"
 horizontal_alignment = 1
 
-[node name="MouseOverControl" type="Control" parent="." node_paths=PackedStringArray("label")]
+[node name="MouseOverControl" type="Control" parent="." unique_id=312692686 node_paths=PackedStringArray("label")]
 anchors_preset = 0
 offset_top = 120.0
 offset_right = 40.0
@@ -125,7 +130,7 @@ mouse_filter = 2
 script = ExtResource("6_g7210")
 label = NodePath("BackPatchContainer/BoxContainer/RichTextLabel")
 
-[node name="BackPatchContainer" type="Container" parent="MouseOverControl" node_paths=PackedStringArray("background", "inner_container")]
+[node name="BackPatchContainer" type="Container" parent="MouseOverControl" unique_id=147176609 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(116, 47)
 layout_mode = 0
 offset_right = 116.0
@@ -135,7 +140,7 @@ script = ExtResource("7_ot2n6")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="MouseOverControl/BackPatchContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="MouseOverControl/BackPatchContainer" unique_id=1744976172]
 layout_mode = 2
 texture = ExtResource("8_iubiy")
 patch_margin_left = 12
@@ -143,10 +148,10 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="BoxContainer" type="BoxContainer" parent="MouseOverControl/BackPatchContainer"]
+[node name="BoxContainer" type="BoxContainer" parent="MouseOverControl/BackPatchContainer" unique_id=275211513]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MouseOverControl/BackPatchContainer/BoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MouseOverControl/BackPatchContainer/BoxContainer" unique_id=921214038]
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Actor Name"

@@ -240,7 +240,7 @@ func set_unlocked_skill_for_actor(actor:BaseActor, skills:Array):
 				if !page_key:
 					continue
 				var is_unlocked = skills.has(page_key) or node_data.get("AlwaysUnlocked", false)
-				var has_page_in_book = actor.pages.list_ids_of_items_with_key(page_key).size() > 0
+				var has_page_in_book = actor.pages.list_items_with_key(page_key).size() > 0
 				var has_page_in_inventory = PlayerInventory.get_item_stack_count(page_key) > 0
 				print("SSST: %s : Unlocked: %s       InBook: %s      InInv: %s" % [page_key, is_unlocked, has_page_in_book, has_page_in_inventory])
 				# Only add non-AlwaysUnlocked skills to list
@@ -256,9 +256,9 @@ func set_unlocked_skill_for_actor(actor:BaseActor, skills:Array):
 						PlayerInventory.add_item(page_key)
 				else:
 					if has_page_in_book:
-						var item_ids = actor.pages.list_ids_of_items_with_key(page_key)
-						for item_id in item_ids:
-							actor.pages.remove_item(item_id)
+						var items = actor.pages.list_items_with_key(page_key)
+						for item in items:
+							ItemHelper.try_delete_item_from_holder(item, actor)
 					if has_page_in_inventory:
 						var item = ItemLibrary.get_item(page_key)
 						PlayerInventory.delete_item_from_inventory(item)

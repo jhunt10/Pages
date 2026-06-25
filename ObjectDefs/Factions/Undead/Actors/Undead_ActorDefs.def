@@ -150,6 +150,7 @@
 				"Money:20": 5.0,
 				"Undead_PageBook": 1.0
 			},
+			"TitleKey": "Skeleton_TitlePage",
 			"ExpValue": 80.0,
 			"Faction": "Undead",
 			"MoneyValue": 15.0
@@ -168,35 +169,6 @@
 			"ReloadPage"
 		],
 		"SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
-		"Stats": {
-			"Accuracy": 100.0,
-			"AggroMod": 1.0,
-			"Agility": 10.0,
-			"Awareness": 0.0,
-			"BlocksLOS": 0.0,
-			"CrashPower": 20.0,
-			"CritChance": 5.0,
-			"CritMod": 1.5,
-			"Evasion": 1.0,
-			"HealthMax": 100.0,
-			"Intelligence": 3.0,
-			"Level": 0.0,
-			"MagAttack": 0.0,
-			"Mass": 8.0,
-			"OffHandMod": 0.5,
-			"PPR": 0.0,
-			"PhyAttack": 0.0,
-			"Potency": 100.0,
-			"Protection": 1.0,
-			"Resistance:Blunt": -50.0,
-			"Resistance:Crash": -50.0,
-			"Resistance:Pierce": 50.0,
-			"Resistance:Slash": 50.0,
-			"Speed": 12.0,
-			"Strength": 5.0,
-			"TwoHandMod": 1.2,
-			"Wisdom": 8.0
-		},
 		"UnarmedAttackData": {
 			"DamageDatas": {
 				"UnarmedDamage": {
@@ -244,6 +216,7 @@
 				"Money:20": 5.0,
 				"Undead_PageBook": 1.0
 			},
+			"TitleKey": "SkeletonMage_TitlePage",
 			"ExpValue": 100.0,
 			"Faction": "Undead",
 			"MoneyValue": 20.0
@@ -251,9 +224,7 @@
 		"SpawnEquipmentArr": [
 			"Undead_PageBook",
 			"BaseBow_Weapon",
-			"BoneWand_Weapon",
-			"DarkHat_HeadApparel",
-			"DarkRobes_BodyApparel"
+			"BoneWand_Weapon"
 		],
 		"SpawnItemArr": [],
 		"SpawnPageArr": [
@@ -264,32 +235,7 @@
 			"BasicWeaponAttack",
 			"ReloadPage"
 		],
-		"SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
-		"Stats": {
-			"Accuracy": 100.0,
-			"AggroMod": 1.0,
-			"Agility": 5.0,
-			"Awareness": 0.0,
-			"BlocksLOS": 0.0,
-			"CrashPower": 20.0,
-			"CritChance": 5.0,
-			"CritMod": 1.5,
-			"Evasion": 1.0,
-			"HealthMax": 100.0,
-			"Intelligence": 10.0,
-			"Level": 0.0,
-			"MagAttack": 0.0,
-			"Mass": 8.0,
-			"OffHandMod": 0.5,
-			"PPR": 0.0,
-			"PhyAttack": 0.0,
-			"Potency": 100.0,
-			"Protection": 1.0,
-			"Speed": 10.0,
-			"Strength": 5.0,
-			"TwoHandMod": 1.2,
-			"Wisdom": 8.0
-		},
+		"SpriteSheet": "SpriteSheets/SkeletonMage_SpriteSheet.png",
 		"UnarmedAttackData": {
 			"DamageDatas": {
 				"UnarmedDamage": {
@@ -336,6 +282,7 @@
 				"ZombieClothes_BodyApparel": 5.0,
 				"ZombieClothes_LegApparel": 5.0
 			},
+			"TitleKey": "Zombie_TitlePage",
 			"ExpValue": 80.0,
 			"Faction": "Undead",
 			"MoneyValue": 15.0
@@ -347,7 +294,6 @@
 		],
 		"SpawnItemArr": [],
 		"SpawnPageArr": [
-			"Zombie_TitlePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
@@ -355,31 +301,6 @@
 			"BiteAttack_ActionPage"
 		],
 		"SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png",
-		"Stats": {
-			"Accuracy": 100.0,
-			"AggroMod": 1.0,
-			"Agility": 5.0,
-			"Awareness": 0.0,
-			"BlocksLOS": 0.0,
-			"CrashPower": 20.0,
-			"CritChance": 5.0,
-			"CritMod": 1.5,
-			"Evasion": 1.0,
-			"HealthMax": 100.0,
-			"Intelligence": 2.0,
-			"Level": 0.0,
-			"MagAttack": 0.0,
-			"Mass": 12.0,
-			"OffHandMod": 0.5,
-			"PPR": 0.0,
-			"PhyAttack": 0.0,
-			"Potency": 100.0,
-			"Protection": 1.0,
-			"Speed": 5.0,
-			"Strength": 10.0,
-			"TwoHandMod": 1.2,
-			"Wisdom": 8.0
-		},
 		"UnarmedAttackData": {
 			"DamageDatas": {
 				"UnarmedDamage": {

@@ -25,22 +25,34 @@ func sync(actor:BaseActor):
 		return
 	else:
 		self.show()
-	if players.size() > 1 and actor.list_held_actor_ids().has(players[1].Id):
-		rogue_x_icon.hide()
+	if players.size() > 1:
+		rogue_button.show()
+		if actor.list_held_actor_ids().has(players[1].Id):
+			rogue_x_icon.hide()
+		else:
+			rogue_x_icon.show()
 	else:
-		rogue_x_icon.show()
+		rogue_button.hide()
 	
 	
-	if players.size() > 2 and actor.list_held_actor_ids().has(players[2].Id):
-		priest_x_icon.hide()
+	if players.size() > 2:
+		priest_button.show()
+		if actor.list_held_actor_ids().has(players[2].Id):
+			priest_x_icon.hide()
+		else:
+			priest_x_icon.show()
 	else:
-		priest_x_icon.show()
+		priest_button.hide()
 	
 	
-	if  players.size() > 3 and actor.list_held_actor_ids().has(players[3].Id):
-		mage_x_icon.hide()
+	if  players.size() > 3:
+		mage_button.show()
+		if actor.list_held_actor_ids().has(players[3].Id):
+			mage_x_icon.hide()
+		else:
+			mage_x_icon.show()
 	else:
-		mage_x_icon.show()
+		mage_button.hide()
 	
 func _on_button_pressed(index:int):
 	# Do nothing in combat mod

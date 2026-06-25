@@ -34,14 +34,27 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"StatMods": {
-				"MagAttackScale": {
-					"DepStatName": "Intelligence",
-					"DisplayName": "Base Stats",
-					"ModType": "AddStat",
-					"StatName": "MagAttack",
-					"Value": 1.0
-				}
+			"Stats": {
+				"Level": 1,
+				"PPR": 4,
+				"Attack": 18,
+				"HealthMax": 35,
+				"Armor": 0,
+				"Ward": 40,
+				"Speed": 50,
+				"Mass": 30,
+				"Accuracy": 90,
+				"AggroMod": 1.0,
+				"CrashPower": 20,
+				"CritChance": 5,
+				"CritMod": 1.5,
+				"Evasion": 3,
+				"Resistance:Light": -50,
+				"Resistance:Blunt": -50.0,
+				"Resistance:Crash": -50.0,
+				"Resistance:Pierce": 50.0,
+				"Resistance:Slash": 50.0,
+				"Resistance:Dark": 150.0
 			}
 		},
 		"PassiveData": {
@@ -83,8 +96,27 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"StatMods": {
-
+			"Stats": {
+				"Level": 1,
+				"PPR": 4,
+				"Attack": 15,
+				"HealthMax": 30,
+				"Armor": 0,
+				"Ward": 30,
+				"Speed": 70,
+				"Mass": 30,
+				"Accuracy": 90,
+				"AggroMod": 1.0,
+				"CrashPower": 20,
+				"CritChance": 5,
+				"CritMod": 1.5,
+				"Evasion": 3,
+				"Resistance:Light": -50,
+				"Resistance:Blunt": -50.0,
+				"Resistance:Crash": -50.0,
+				"Resistance:Pierce": 50.0,
+				"Resistance:Slash": 50.0,
+				"Resistance:Dark": 150.0
 			}
 		},
 		"PassiveData": {
@@ -126,8 +158,23 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"StatMods": {
-
+			"Stats": {
+				"Level": 1,
+				"PPR": 4,
+				"Attack": 10,
+				"HealthMax": 40,
+				"Armor": 0,
+				"Ward": 0,
+				"Speed": 30,
+				"Mass": 90,
+				"Accuracy": 90,
+				"AggroMod": 1.0,
+				"CrashPower": 20,
+				"CritChance": 5,
+				"CritMod": 1.5,
+				"Evasion": 0,
+				"Resistance:Light": -50,
+				"Resistance:Dark": 150.0
 			}
 		},
 		"PassiveData": {

@@ -15,6 +15,7 @@ func start_state():
 	if _logging: print("Start UiState: Action Input")
 	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Action Input")
 	CombatRootControl.Instance.ui_control.active_combat_control.show()
+	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
 	if first_actor_index < 0:
 		var living_actors = CombatRootControl.list_player_actors()
 		if living_actors.size() > 0:

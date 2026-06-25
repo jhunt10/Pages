@@ -85,6 +85,22 @@ static func try_pickup_item(actor:BaseActor, item:BaseItem)->Dictionary:
 	return popup_data
 
 static var transering_items = []
+
+static func try_delete_item_from_holder(item:BaseItem, actor:BaseActor):
+	var transaction_data = {"AddedItemIds": [], "RemovedItemIds": []}
+	var holder:BaseItemHolder = null
+	#var index = -1
+	if item is BaseEquipmentItem:
+		holder = actor.equipment
+	elif item is BasePageItem:
+		holder = actor.pages
+	elif item is BaseSupplyItem:
+		holder = actor.items
+	if holder.has_item(item):
+		holder.remove_item(item.Id)
+		holder._actor.on_held_items_change(holder.get_holder_name(), transaction_data)
+	
+
 static func get_first_valid_slot_for_item(item:BaseItem, actor:BaseActor, allow_replace:bool = true)->int:
 	var holder:BaseItemHolder = null
 	#var index = -1

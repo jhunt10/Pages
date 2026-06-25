@@ -57,7 +57,7 @@ func _ready() -> void:
 	bag_tab.parent_menu = self
 	
 	if inventory_container:
-		inventory_option_button.item_selected.connect(_on_inventory_option_select)
+		inventory_option_button.item_selected.connect(_on_right_page_option_select)
 		inventory_container.parent_menu = self
 		inventory_container.item_button_down.connect(on_item_button_down)
 		inventory_container.item_button_up.connect(on_item_button_up)
@@ -80,6 +80,8 @@ func _ready() -> void:
 	equipment_control.mouse_enter_item.connect(on_mouse_enter_slot)
 	equipment_control.mouse_exit_item.connect(on_mouse_exit_slot)
 	
+	name_panel.xp_bar.level_up_button_pressed.connect(_on_right_page_option_select.bind(3))
+	
 	var first_actor = StoryState.get_party_actor_by_index(current_party_actor_index)
 	set_actor(first_actor)
 
@@ -98,7 +100,9 @@ func set_actor(actor:BaseActor):
 	_sync()
 	skill_tree_control.set_actor(_actor)
 
-func _on_inventory_option_select(index:int):
+func _on_right_page_option_select(index:int):
+	if inventory_option_button.selected != index:
+		inventory_option_button.selected = index
 	if index < 3:
 		var option = inventory_option_button.get_item_text(index)
 		inventory_container.set_character_menu_context(option)

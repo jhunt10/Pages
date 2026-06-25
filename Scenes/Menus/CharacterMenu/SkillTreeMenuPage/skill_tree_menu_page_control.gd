@@ -196,6 +196,7 @@ func on_node_confirmed(item:BaseItem):
 		_unlocked_skills.append(item.ItemKey)
 	character_menu._current_details_card.start_hide()
 	sync_skill_nodes_states()
+	apply_changes()
 
 func apply_changes():
 	var unlocked_skills = []

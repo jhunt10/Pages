@@ -7,13 +7,18 @@
     "StartingPhase": "InitSpawn",
 	"TeamData": {
 		"Players": {
-			"DisplayName": "Heros",
-			"Enemies": [],
+			"DisplayName": "Friendly",
+			"Enemies": ["Hostile"],
 			"Allies": []
 		},
 		"Decor": {
-			"DisplayName": "Decor",
+			"DisplayName": "Neutral",
 			"Enemies": [],
+			"Allies": []
+		},
+		"Hostile":{
+			"DisplayName": "Hostile",
+			"Enemies": ["Players"],
 			"Allies": []
 		}
 	},

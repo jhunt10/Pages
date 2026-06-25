@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="2_y5687"]
 
 [node name="FlashTextVfxNode" type="Node2D" unique_id=788758491 node_paths=PackedStringArray("label")]
+z_index = 5
 script = ExtResource("1_qx418")
 flash_text_value = "10"
 flash_text_type = 4
