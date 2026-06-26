@@ -149,9 +149,18 @@ func _get_draw_ordered_equipment()->Array:
 		if page.has_spite_sheet():
 			out_list.append(page)
 	if _actor is CarrierActor:
+		var sub_actor_titles = {}
 		for held_actor:BaseActor in _actor.list_held_actors():
 			var title = held_actor.get_title_page()
-			out_list.append(title)
+			sub_actor_titles[title.get_title_key()] = title
+		if sub_actor_titles.has("Priest"):
+			out_list.append(sub_actor_titles['Priest'])
+		if sub_actor_titles.has("Rogue"):
+			out_list.append(sub_actor_titles['Rogue'])
+		if sub_actor_titles.has("Mage"):
+			out_list.append(sub_actor_titles['Mage'])
+		
+			
 	return out_list
 
 func get_black_and_white_portrait()->Texture2D:

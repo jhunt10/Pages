@@ -263,3 +263,4 @@ func set_gate_state(gate_key:String, open:bool):
 			node.open_gate()
 		else:
 			node.close_gate()
+	

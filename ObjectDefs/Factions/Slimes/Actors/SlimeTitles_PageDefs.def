@@ -33,8 +33,27 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"StatMods": {
-
+			"Stats": {
+				"Level": 1,
+				"PPR": 4,
+				"Attack": 30,
+				"HealthMax": 30,
+				"Armor": 0,
+				"Ward": 0,
+				"Speed": 50,
+				"Mass": 30,
+				"Accuracy": 90,
+				"AggroMod": 1.0,
+				"CrashPower": 20,
+				"CritChance": 5,
+				"CritMod": 1.5,
+				"Evasion": 3,
+				"Resistance:Blunt": 50.0,
+				"Resistance:Crash": 50.0,
+				"Resistance:Pierce": 50.0,
+				"Resistance:Slash": 50.0,
+				"Resistance:Light": 0.0,
+				"MinStat:Awareness": 5.0
 			}
 		},
 		"PassiveData": {
@@ -44,7 +63,7 @@
 	},
 	"SlimePoison_TitlePage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
-		"!ParentKey": "#BaseTitlePage",
+		"!ParentKey": "SlimeBase_TitlePage",
 		"#ObjDetails": {
 			"Description": "With a high tolerance to toxins and poor personal hygiene, @@#Color:Red:Slimes@@ often become polluted with whatever is in their environment. After a @@#Color:Red:Slime@@ ingests enough material with @@#Tag:Magical@@ properties, the @@#Color:Blue:PAGE@@ System appears to misinterpret the @@#Color:Red:Slime@@ as possessing the same properties of the given material. At this point, the @@#Color:Red:Slime@@ will alter it's color to conform to cultural norms.\n\n@@#Color:Red:Green Slimes@@ have absorbed large amounts of poisonous plants, toxic waste, and internet comment sections. Any contact with these them is recognized as @@#Color:DmgColor:Poison:Poison Damage@@ and can be potent enough to inflict deadly @@#EftDef:AilmentPoisoned:Link@@ status to the idiot who touched a Poison Slime with their bare hands.",
 			"DisplayName": "Poison Slime",
@@ -76,8 +95,8 @@
 				"TitleReq": "None"
 			},
 			"SourceTitle": "",
-			"StatMods": {
-
+			"Stats": {
+				"Resistance:Poison": 150.0
 			}
 		},
 		"PassiveData": {

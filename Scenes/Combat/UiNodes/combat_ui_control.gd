@@ -84,6 +84,8 @@ func on_player_stat_clicked(index):
 	CombatRootControl.Instance.set_player_index(index)
 
 func on_deployment(actor_id):
+	if CombatRootControl.QueController.execution_state != ActionQueController.ActionStates.Waiting:
+		return
 	var ui_state_data = {
 		"DeployingActor" = actor_id
 	}

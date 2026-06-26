@@ -81,8 +81,8 @@
             "PhaseType": "Combat",
             "NextPhase": "END",
             "CombatCondition": {
-                "ConditionKey": "KillTeam",
-                "EnemyTeamKey": "Enemies"
+                "ConditionKey": "KillActor",
+                "KillActorId": "SkeletonMageBoss"
             }
         }
     }

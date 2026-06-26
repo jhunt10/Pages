@@ -533,12 +533,9 @@ func remove_zone(zone):
 # Called from UiState_ExecRound
 # Returns true if UiState changes
 func check_end_conditions()->bool:
-	
 	if supress_win_conditions:
 		return false
-	
 	var living_actor_by_team = {}
-	var party_ids = StoryState.list_party_actors_ids()
 	for actor:BaseActor in GameState.list_actors(true):
 		if not living_actor_by_team.keys().has(actor.TeamKey):
 			living_actor_by_team[actor.TeamKey] = 0
@@ -579,6 +576,18 @@ func check_end_conditions()->bool:
 		if living_actor_by_team[team_key] == 0:
 			start_next_phase()
 			return true
+	elif condition_key == "KillActor":
+		var target_id = str(combat_condition.get("KillActorId"))
+		var target_actor = GameState.get_actor(target_id, true, false)
+		if !target_actor:
+			printerr("CombatScene.check_end_conditions KillActor: No Actor found with Id '%s'." % [target_id])
+			start_next_phase()
+			return true
+		elif target_actor.is_dead:
+			start_next_phase()
+			return true
+		else:
+			return false
 	elif condition_key == "Exit":
 		var exit_coor = combat_condition.get("ExitCoor")
 		if not exit_coor is Array or not exit_coor.size() == 2:
@@ -589,7 +598,7 @@ func check_end_conditions()->bool:
 		for actor:BaseActor in GameState.list_actors(false):
 			if actor.is_player:
 				var pos = GameState.get_actor_pos(actor)
-				if pos.x == exit_coor[0] and pos.y == exit_coor[1]:
+				if pos and (pos.x == exit_coor[0] and pos.y == exit_coor[1]):
 					player_on_exit = true
 					break
 		if player_on_exit:

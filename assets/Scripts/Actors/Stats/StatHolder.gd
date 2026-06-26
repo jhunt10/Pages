@@ -197,6 +197,8 @@ func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, gam
 	var damage = damage_event.final_damage
 	var cur_hp = current_health 
 	var new_hp = max(min(cur_hp - damage, max_health), 0)
+	if LOGGING:
+		print("Taking Damage %s: Current: %s | Damage: %s | new: %s" % [ _actor.Id, cur_hp, damage, new_hp])
 	_cached_stats[StatHelper.HealthCurrent] = new_hp
 	if current_health <= 0 and CombatRootControl.Instance:
 		CombatRootControl.Instance.kill_actor(_actor)
@@ -267,7 +269,6 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	var xp_before_caching = null
 	if _cached_stats.keys().has(StatHelper.Experience):
 		xp_before_caching = _cached_stats[StatHelper.Experience]
-	
 	_cached_mods.clear()
 	
 	
@@ -369,9 +370,9 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 			temp_stats[added_stat] = 0
 	
 	# Add current health to temp stats
-	if health_before_caching is int:
+	if health_before_caching != null:
 		temp_stats[StatHelper.HealthCurrent] = health_before_caching
-	if xp_before_caching is int:
+	if xp_before_caching != null:
 		temp_stats[StatHelper.Experience] = xp_before_caching
 	
 	_cached_stats.clear()
@@ -429,3 +430,6 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	_stats_dirty = false
 	if should_emit_signal:
 		held_stats_changed.emit()
+	
+	if LOGGING:
+		print("Hp After Cache: %s" % [current_health])

@@ -35,5 +35,5 @@ func create_new_entry(entry_key:String, _actor:BaseActor, value):
 	var value_label = new_entry.get_child(3)
 	icon.texture = DamageHelper.get_damage_icon(entry_key)
 	name_label.text = entry_key
-	value_label.text = str(value)
+	value_label.text = str(int(value))
 	return new_entry

@@ -399,7 +399,7 @@ script = ExtResource("8_qpbv8")
 layout_mode = 2
 
 [node name="StatsContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1951989594 node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(258, 168)
+custom_minimum_size = Vector2(258, 138)
 layout_mode = 2
 script = ExtResource("1_is6c6")
 background = NodePath("NinePatchRect")
@@ -440,6 +440,7 @@ horizontal_alignment = 1
 text_overrun_behavior = 3
 
 [node name="AttibutesContainer" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer" unique_id=442238162]
+visible = false
 layout_mode = 2
 
 [node name="StrContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer/AttibutesContainer" unique_id=1906980269 instance=ExtResource("6_13e3p")]
@@ -474,6 +475,7 @@ layout_mode = 2
 stat_name = "Wisdom"
 
 [node name="ColorRect4" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/StatsContainer/BoxContainer" unique_id=874333994]
+visible = false
 custom_minimum_size = Vector2(2, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
@@ -712,11 +714,11 @@ horizontal_alignment = 1
 
 [node name="ValueLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer/ResistanceLabel" unique_id=560478360]
 self_modulate = Color(0.498039, 0, 0, 1)
-custom_minimum_size = Vector2(34, 0)
+custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 theme = ExtResource("7_on4i3")
 text = "100"
-horizontal_alignment = 1
+horizontal_alignment = 2
 
 [node name="PercentLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer/ResistanceLabel" unique_id=2083405330]
 self_modulate = Color(0.498039, 0, 0, 1)

@@ -71,8 +71,8 @@ func set_actor(actor:BaseActor):
 	else:
 		money_label.show()
 		xp_label.show()
-		money_label.text = str(actor.actor_data.get("MoneyValue", 0))
-		xp_label.text = str(actor.actor_data.get("ExpValue", 0))
+		money_label.text = str(int(actor.actor_data.get("MoneyValue", 0)))
+		xp_label.text = str(int(actor.actor_data.get("ExpValue", 0)))
 	
 	strength_label.set_stat_values(actor)
 	agility_label.set_stat_values(actor)

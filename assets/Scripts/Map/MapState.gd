@@ -95,6 +95,10 @@ func is_spot_traversable(pos, _actor)->bool:
 		return false
 	# Check Gates
 	for gate_key in spot.get_gate_keys():
+		#TODO: Remove Hack
+		if gate_key == "BlueGate":
+			continue
+		#################
 		var gate_data = _gates_data.get(gate_key)
 		if not gate_data.get("IsOpen"):
 			return false

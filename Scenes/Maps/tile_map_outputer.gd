@@ -50,7 +50,7 @@ func get_map_data()->Dictionary:
 						terrain_type = MapSpot.TerrainType.Cover
 					2:
 						terrain_type = MapSpot.TerrainType.Open
-			out_arr[y].append(terrain_type)
+			out_arr[size_y].append(terrain_type)
 	out_dict['Terrain'] = out_arr
 	return out_dict
 	
