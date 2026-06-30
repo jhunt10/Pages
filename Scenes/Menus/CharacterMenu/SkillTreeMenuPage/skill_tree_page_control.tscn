@@ -1,28 +1,158 @@
 [gd_scene format=3 uid="uid://deon0fff5iq41"]
 
 [ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="1_8d4ux"]
+[ext_resource type="Script" uid="uid://y2gsag3g4cxg" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_menu_page_control.gd" id="1_ic66j"]
 [ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="2_tprlx"]
+[ext_resource type="Theme" uid="uid://cg4cnbceql6tl" path="res://assets/Themes/fancy_panel_theme.tres" id="2_tye7s"]
 [ext_resource type="Texture2D" uid="uid://r7e0y5yv45uc" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/SkillNodeOutline.png" id="3_cvy35"]
+[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="3_hadac"]
+[ext_resource type="Script" uid="uid://enj81pt6wtmr" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_background_control.gd" id="4_r8fdc"]
+[ext_resource type="Script" uid="uid://dndbsj4mjc6m6" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_node.gd" id="5_wymd7"]
+[ext_resource type="Script" uid="uid://bqo08ru41r6uw" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/paired_skill_tree_node.gd" id="9_0dnem"]
+[ext_resource type="Texture2D" uid="uid://yf4r4mr4xa2d" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/OrSepIcon.png" id="10_laoo1"]
+[ext_resource type="Texture2D" uid="uid://drptcqa6g0iua" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/AndSepIcon.png" id="11_eknqe"]
 
-[node name="SkillTreePageControl" type="Control"]
+[node name="SkillTreePageControl" type="Control" unique_id=1862006629 node_paths=PackedStringArray("background_control", "tree_container", "row_prefab", "prefabs_container", "grid_container", "rows_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 292.0
-offset_bottom = 384.0
+offset_right = 356.0
+offset_bottom = 477.0
+size_flags_vertical = 3
+script = ExtResource("1_ic66j")
+background_control = NodePath("PanelContainer/BackgroundControl")
+tree_container = NodePath("PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer")
+row_prefab = NodePath("PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/RowPrefab")
+prefabs_container = NodePath("PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs")
+grid_container = NodePath("PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer")
+rows_container = NodePath("PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/SkillRowsContainer")
+skill_node_prefab = NodePath("PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/SkillTreeNode")
+paired_node_prefab = NodePath("PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode")
+unspent_points_label = NodePath("PanelContainer/ScrollContainer/VBoxContainer/PointsContainer/PointsLeftLabel")
+total_points_label = NodePath("PanelContainer/ScrollContainer/VBoxContainer/PointsContainer/TotalPointsLabel")
 
-[node name="SkillTreeNode" type="Control" parent="."]
-custom_minimum_size = Vector2(64, 64)
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1467968952]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_tye7s")
 
-[node name="BackgroundTextureRect" type="TextureRect" parent="SkillTreeNode"]
+[node name="BackgroundControl" type="Control" parent="PanelContainer" unique_id=1018941393 node_paths=PackedStringArray("parent_control")]
+layout_mode = 2
+script = ExtResource("4_r8fdc")
+parent_control = NodePath("../..")
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/BackgroundControl" unique_id=234242361]
+visible = false
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_8d4ux")
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 400.0
+offset_bottom = 400.0
+color = Color(0.2484, 0.2484, 0.2484, 1)
 
-[node name="IconTextureRect" type="TextureRect" parent="SkillTreeNode"]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer" unique_id=1048329507]
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer" unique_id=1007141429]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = -8
+alignment = 1
+
+[node name="PointsContainer" type="HBoxContainer" parent="PanelContainer/ScrollContainer/VBoxContainer" unique_id=304952824]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/ScrollContainer/VBoxContainer/PointsContainer" unique_id=1017791419]
+layout_mode = 2
+theme = ExtResource("3_hadac")
+theme_override_font_sizes/font_size = 16
+text = "Title Points:"
+horizontal_alignment = 1
+
+[node name="PointsLeftLabel" type="Label" parent="PanelContainer/ScrollContainer/VBoxContainer/PointsContainer" unique_id=1228898859]
+layout_mode = 2
+theme = ExtResource("3_hadac")
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+
+[node name="SeperatorLabel" type="Label" parent="PanelContainer/ScrollContainer/VBoxContainer/PointsContainer" unique_id=622344387]
+visible = false
+layout_mode = 2
+theme = ExtResource("3_hadac")
+theme_override_font_sizes/font_size = 16
+text = "/"
+horizontal_alignment = 1
+
+[node name="TotalPointsLabel" type="Label" parent="PanelContainer/ScrollContainer/VBoxContainer/PointsContainer" unique_id=1149282632]
+visible = false
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme = ExtResource("3_hadac")
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/ScrollContainer/VBoxContainer" unique_id=942644689]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillGridContainer" type="BoxContainer" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=260607093]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+alignment = 1
+vertical = true
+
+[node name="Prefabs" type="HBoxContainer" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1470429254]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="SkillTreeNode" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs" unique_id=223240503 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+script = ExtResource("5_wymd7")
+background_rect = NodePath("Control/Background")
+icon_rect = NodePath("Control/Icon")
+button = NodePath("Control/Button")
+
+[node name="Control" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/SkillTreeNode" unique_id=1392397278]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/SkillTreeNode/Control" unique_id=1618454426]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8d4ux")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/SkillTreeNode/Control" unique_id=572324896]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,12 +160,402 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_tprlx")
+expand_mode = 3
 
-[node name="HighlightTextureRect" type="TextureRect" parent="SkillTreeNode"]
+[node name="Highlight" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/SkillTreeNode/Control" unique_id=1240339158]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+
+[node name="Outline" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/SkillTreeNode/Control" unique_id=1857995821]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+
+[node name="Button" type="Button" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/SkillTreeNode/Control" unique_id=1920772717]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PairedSkillTreeNode" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs" unique_id=1488150346]
+custom_minimum_size = Vector2(64, 48)
+layout_mode = 2
+script = ExtResource("9_0dnem")
+
+[node name="Control" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode" unique_id=1205309698]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -32.0
+offset_right = 46.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTreeNode1" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control" unique_id=2124310854 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+script = ExtResource("5_wymd7")
+background_rect = NodePath("Control/Background")
+icon_rect = NodePath("Control/Icon")
+button = NodePath("Control/Button")
+
+[node name="Control" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode1" unique_id=51554157]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode1/Control" unique_id=1487824321]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8d4ux")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode1/Control" unique_id=364759658]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tprlx")
+expand_mode = 3
+
+[node name="Highlight" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode1/Control" unique_id=385568754]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("3_cvy35")
+
+[node name="Outline" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode1/Control" unique_id=992876232]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+
+[node name="Button" type="Button" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode1/Control" unique_id=982771783]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTreeNode2" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control" unique_id=1670800848 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 0
+script = ExtResource("5_wymd7")
+background_rect = NodePath("Control/Background")
+icon_rect = NodePath("Control/Icon")
+button = NodePath("Control/Button")
+
+[node name="Control" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode2" unique_id=1427392104]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode2/Control" unique_id=1141923368]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8d4ux")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode2/Control" unique_id=39752971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tprlx")
+expand_mode = 3
+
+[node name="Highlight" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode2/Control" unique_id=1035658765]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+
+[node name="Outline" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode2/Control" unique_id=503413524]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+
+[node name="Button" type="Button" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control/SkillTreeNode2/Control" unique_id=1718669459]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OrIcon" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control" unique_id=1159736405]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -32.0
+offset_right = 16.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_laoo1")
+
+[node name="AndIcon" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control" unique_id=1425101662]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -17.0
+offset_top = -32.0
+offset_right = 16.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_eknqe")
+
+[node name="HighlightPatch" type="NinePatchRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control" unique_id=942986686]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="OutlinePatch" type="NinePatchRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/Prefabs/PairedSkillTreeNode/Control" unique_id=1422387564]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="RowPrefab" type="HBoxContainer" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1674779715]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 38
+alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1128614047]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=418745148]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=1863606868]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=524601262]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+
+[node name="SkillRowsContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=941995207]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer" unique_id=244006570]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="Control" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=2102551189]
+layout_mode = 2
+
+[node name="SkillTreeNode" type="Control" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/ScrollContainer/Control" unique_id=1703952966 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
+custom_minimum_size = Vector2(48, 48)
+anchors_preset = 0
+offset_right = 48.0
+offset_bottom = 48.0
+pivot_offset = Vector2(24, 24)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("5_wymd7")
+background_rect = NodePath("Background")
+icon_rect = NodePath("Icon")
+button = NodePath("Button")
+
+[node name="Background" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1590409700]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8d4ux")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=480581557]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tprlx")
+expand_mode = 3
+
+[node name="Highlight" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1983459957]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+
+[node name="Outline" type="TextureRect" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=321480701]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_cvy35")
+
+[node name="Button" type="Button" parent="PanelContainer/ScrollContainer/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=290842207]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

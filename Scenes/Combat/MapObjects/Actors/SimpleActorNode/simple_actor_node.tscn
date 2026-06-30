@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ckjibk7etsb75" path="res://Scenes/Combat/MapObjects/Actors/awareness_display_node.gd" id="8_2sjxt"]
 [ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="8_mm6ep"]
 [ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="9_88pjr"]
+[ext_resource type="Script" uid="uid://ckxgndrl4khg8" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/awareness_display.gd" id="11_dcpll"]
 
 [sub_resource type="Animation" id="Animation_hcvlo"]
 length = 0.001
@@ -357,7 +358,18 @@ states/RESET/position = Vector2(433, 236)
 states/Start/position = Vector2(178, 153)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_ti2jm"), "RESET", "DodgeAndShake", SubResource("AnimationNodeStateMachineTransition_5km5r"), "DodgeAndShake", "RESET", SubResource("AnimationNodeStateMachineTransition_jwynx"), "DodgeAndShake", "DamageAnimations_death_effect", SubResource("AnimationNodeStateMachineTransition_px2my"), "RESET", "DamageAnimations_death_effect", SubResource("AnimationNodeStateMachineTransition_w5iv7")]
 
-[node name="SimpleActorNode" type="Node2D" unique_id=994540300 node_paths=PackedStringArray("vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ra2yb"]
+texture = ExtResource("9_88pjr")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_b7trf"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_ra2yb")
+
+[node name="SimpleActorNode" type="Node2D" unique_id=994540300 node_paths=PackedStringArray("vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation", "awareness_display")]
 script = ExtResource("1_bln3d")
 vfx_holder = NodePath("ActorMotionNode/VFXHolder")
 aura_holder = NodePath("AuraHolder")
@@ -367,6 +379,7 @@ actor_motion_node = NodePath("ActorMotionNode")
 offset_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode")
 damage_animation_player = NodePath("DamageAnimationPlayer")
 body_animation = NodePath("BodyAnimationPlayer")
+awareness_display = NodePath("AwarenessDisplay")
 
 [node name="ActorMotionNode" type="Node2D" parent="." unique_id=1831556728]
 
@@ -427,3 +440,8 @@ anim_player = NodePath("../DamageAnimationPlayer")
 parameters/conditions/Damage = false
 parameters/conditions/Dead = false
 parameters/DodgeAndShake/blend_position = Vector2(1, 1)
+
+[node name="AwarenessDisplay" type="TileMapLayer" parent="." unique_id=1188822295]
+position = Vector2(-16, -16)
+tile_set = SubResource("TileSet_b7trf")
+script = ExtResource("11_dcpll")

@@ -5,7 +5,9 @@ extends Control
 @export var background_control:Control
 @export var tree_container:BoxContainer
 @export var row_prefab:HBoxContainer
+@export var prefabs_container:Container
 @export var grid_container:GridContainer
+@export var rows_container:VBoxContainer
 @export var skill_node_prefab:SkillTreeNode
 @export var paired_node_prefab:PairedSkillTreeNode
 
@@ -27,26 +29,32 @@ func set_actor(actor):
 	_actor =  actor
 	# Clean up
 	var color_rec_spacers = []
-	for child in grid_container.get_children():
-		if child != row_prefab and child != background_control:
-			# Dumb hack to control spacing
-			if child is ColorRect:
-				color_rec_spacers.append(child)
-				grid_container.remove_child(child)
-			else:
-				child.queue_free()
+	#for child in grid_container.get_children():
+		#if child != row_prefab and child != background_control:
+			## Dumb hack to control spacing
+			#if child is ColorRect:
+				#color_rec_spacers.append(child)
+				#grid_container.remove_child(child)
+			#else:
+				#child.queue_free()
+	for child in rows_container.get_children():
+		child.queue_free()
+	prefabs_container.hide()
 	row_prefab.hide()
 	skill_node_prefab.hide()
 	paired_node_prefab.hide()
-	
+	#return
 	self.tree_data = StoryState.get_skill_tree_data_for_actor(actor)
 	self._unlocked_skills = StoryState.get_unlocked_skills_for_actor(actor, false)
 	self._starting_skills = _unlocked_skills.duplicate()
 	var y_index = 0
 	for row in tree_data:
 		var x_index = 0
-		#var new_row = row_prefab.duplicate()
-		#tree_container.add_child(new_row)
+		var new_row = row_prefab.duplicate()
+		if row.size() > 3:
+			new_row.add_theme_constant_override('separation', 18)
+		new_row.show()
+		rows_container.add_child(new_row)
 		for node_data in row:
 			var new_node = null
 			# Paired Nodes
@@ -68,15 +76,15 @@ func set_actor(actor):
 				page_id_to_grid_mapping[page_item_id] = [x_index, y_index]
 			if not new_node:
 				continue
-			grid_container.add_child(new_node)
+			new_row.add_child(new_node)
 			#new_row.add_child(new_node)
 			new_node.show()
 			node_data['Node'] = new_node
 			x_index += 1
 		#new_row.show()
 		y_index += 1
-	for child in color_rec_spacers:
-		grid_container.add_child(child)
+	#for child in color_rec_spacers:
+		#grid_container.add_child(child)
 	tree_built = true
 	sync_skill_nodes_states()
 	background_control.queue_redraw()
@@ -86,7 +94,7 @@ func sync_skill_nodes_states():
 	var spent_points:int = _unlocked_skills.size()
 	total_points_label.text = str(points_to_spend)
 	var remaining_points:int = points_to_spend - spent_points
-	unspent_points_label.text = str(remaining_points)
+	unspent_points_label.text = str(_actor.stats.get_unspent_skill_points())
 	max_unlocked_y_index = 0
 	var y_index = 0
 	for row in tree_data:
@@ -197,6 +205,8 @@ func on_node_confirmed(item:BaseItem):
 	character_menu._current_details_card.start_hide()
 	sync_skill_nodes_states()
 	apply_changes()
+	unspent_points_label.text = str(_actor.stats.get_unspent_skill_points())
+	_actor.stats_changed.emit()
 
 func apply_changes():
 	var unlocked_skills = []

@@ -15,6 +15,8 @@ extends BaseActorNode
 @export var tombstone_sprite:Sprite2D
 @export var tombstone_portrait_sprite:Sprite2D
 
+
+
 var current_main_weapon_animation_action
 var current_off_weapon_animation_action
 

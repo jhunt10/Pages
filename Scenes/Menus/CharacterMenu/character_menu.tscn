@@ -55,17 +55,9 @@
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="49_c7klo"]
 [ext_resource type="PackedScene" uid="uid://bqi05unl37q0p" path="res://Scenes/UiNodes/DamageLabelContainer/damage_label_container.tscn" id="50_hlfpa"]
 [ext_resource type="Texture2D" uid="uid://cl7v6htwim8aw" path="res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png" id="52_j58mc"]
-[ext_resource type="Script" uid="uid://y2gsag3g4cxg" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_menu_page_control.gd" id="52_s1b61"]
-[ext_resource type="Script" uid="uid://enj81pt6wtmr" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_background_control.gd" id="53_teogu"]
-[ext_resource type="Script" uid="uid://dndbsj4mjc6m6" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_node.gd" id="54_7egd2"]
-[ext_resource type="Texture2D" uid="uid://cegwhar55vupc" path="res://assets/Sprites/Paper/Common_Background.png" id="55_d0duj"]
-[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="56_656xf"]
-[ext_resource type="Texture2D" uid="uid://r7e0y5yv45uc" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/SkillNodeOutline.png" id="57_0r1b3"]
 [ext_resource type="Script" uid="uid://2dqdth8xwfg3" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/StatsMenuPage/resistances_container.gd" id="57_c2vjq"]
-[ext_resource type="Script" uid="uid://bqo08ru41r6uw" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/paired_skill_tree_node.gd" id="58_djw0b"]
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="58_i62ke"]
-[ext_resource type="Texture2D" uid="uid://yf4r4mr4xa2d" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/OrSepIcon.png" id="59_hu50l"]
-[ext_resource type="Texture2D" uid="uid://drptcqa6g0iua" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/AndSepIcon.png" id="60_sxp7b"]
+[ext_resource type="PackedScene" uid="uid://deon0fff5iq41" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_page_control.tscn" id="58_iofuq"]
 [ext_resource type="Script" uid="uid://c8jheyrbbjxrh" path="res://Scenes/Menus/CharacterMenu_old/MouseOverControl/character_menu_mouse_control.gd" id="63_7egd2"]
 [ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu_old/MouseOverControl/DragItemBackground.png" id="64_d0duj"]
 
@@ -203,15 +195,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dowqg")
 name_panel = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer")
-stats_panel = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer")
-actor_sprite = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control/ActorNode")
-equipment_control = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer")
-title_slot_button = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton")
+stats_panel = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer")
+actor_sprite = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control/ActorNode")
+equipment_control = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer")
+title_slot_button = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton")
 tab_container = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer")
 page_tab = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages")
 bag_tab = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies")
 stats_tab = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats")
-carrier_control = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl")
+carrier_control = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl")
 inventory_container = NodePath("CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/InventoryMenuPage")
 close_button = NodePath("CenterContainer/HBoxContainer/VBoxContainer/Button3")
 previous_character_button = NodePath("CenterContainer/HBoxContainer/Button")
@@ -448,23 +440,23 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=808050233]
+[node name="StatsAndActorContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=808050233]
 layout_mode = 2
 
-[node name="Stats-PanelContainer" type="PanelContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer" unique_id=106545721]
+[node name="Stats-PanelContainer" type="PanelContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer" unique_id=106545721]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_iofuq")
 script = ExtResource("11_l2wto")
 
-[node name="StatsContainer" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer" unique_id=979039758]
+[node name="StatsContainer" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer" unique_id=979039758]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 vertical = true
 
-[node name="StatContainer-PPR" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=1070955256 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-PPR" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1070955256 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -476,19 +468,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-PPR" unique_id=2042751531]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PPR" unique_id=2042751531]
 layout_mode = 2
 texture = ExtResource("12_656xf")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-PPR" unique_id=699083076]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PPR" unique_id=699083076]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Health" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=1568802761 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Health" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1568802761 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -500,19 +492,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Health" unique_id=1289949508]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Health" unique_id=1289949508]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Health" unique_id=1737936165]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Health" unique_id=1737936165]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Atk" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=2069378739 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Atk" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=2069378739 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -524,19 +516,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Atk" unique_id=648976515]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Atk" unique_id=648976515]
 layout_mode = 2
 texture = ExtResource("15_djw0b")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Atk" unique_id=1358902060]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Atk" unique_id=1358902060]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Armor" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=686104635 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Armor" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=686104635 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -548,19 +540,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Armor" unique_id=1976801063]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Armor" unique_id=1976801063]
 layout_mode = 2
 texture = ExtResource("16_hu50l")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Armor" unique_id=1997286673]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Armor" unique_id=1997286673]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Ward" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=1789731590 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Ward" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1789731590 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -572,19 +564,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Ward" unique_id=265499000]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Ward" unique_id=265499000]
 layout_mode = 2
 texture = ExtResource("17_sxp7b")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Ward" unique_id=1478484914]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Ward" unique_id=1478484914]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Mass" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=2028188355 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Mass" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=2028188355 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -596,19 +588,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Mass" unique_id=130943133]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Mass" unique_id=130943133]
 layout_mode = 2
 texture = ExtResource("18_q1lsx")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Mass" unique_id=1352135702]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Mass" unique_id=1352135702]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Speed" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=1406406839 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Speed" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1406406839 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -620,19 +612,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Speed" unique_id=2140659339]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Speed" unique_id=2140659339]
 layout_mode = 2
 texture = ExtResource("19_l4r3y")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Speed" unique_id=2140638318]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Speed" unique_id=2140638318]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Acc" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=1314481448 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Acc" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1314481448 node_paths=PackedStringArray("icon", "value_label")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -645,19 +637,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Acc" unique_id=2135907432]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Acc" unique_id=2135907432]
 layout_mode = 2
 texture = ExtResource("20_8e5eg")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Acc" unique_id=246750823]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Acc" unique_id=246750823]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Evasion" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=856772027 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Evasion" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=856772027 node_paths=PackedStringArray("icon", "value_label")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -670,19 +662,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Evasion" unique_id=1269504630]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Evasion" unique_id=1269504630]
 layout_mode = 2
 texture = ExtResource("21_cqfet")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-Evasion" unique_id=441304305]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Evasion" unique_id=441304305]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-CritMod" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer" unique_id=1848218783 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-CritMod" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1848218783 node_paths=PackedStringArray("icon", "value_label")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -695,19 +687,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-CritMod" unique_id=220201249]
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-CritMod" unique_id=220201249]
 layout_mode = 2
 texture = ExtResource("22_b4myk")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Stats-PanelContainer/StatsContainer/StatContainer-CritMod" unique_id=1092019932]
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-CritMod" unique_id=1092019932]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="Character-VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer" unique_id=53276164 node_paths=PackedStringArray("title_button", "book_button", "bag_button", "trinket_button", "main_hand_button", "off_hand_button")]
+[node name="Character-VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer" unique_id=53276164 node_paths=PackedStringArray("title_button", "book_button", "bag_button", "trinket_button", "main_hand_button", "off_hand_button")]
 layout_mode = 2
 alignment = 1
 script = ExtResource("25_7egd2")
@@ -718,17 +710,17 @@ trinket_button = NodePath("HBoxContainer/GridContainer2/Trinket_EquipmentSlotBut
 main_hand_button = NodePath("HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton")
 off_hand_button = NodePath("HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer" unique_id=112745799]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer" unique_id=112745799]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer" unique_id=957808465]
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=957808465]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="Title_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=667676761 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="Title_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=667676761 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -740,7 +732,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1594529223]
+[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1594529223]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -750,7 +742,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=349397232]
+[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=349397232]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -759,7 +751,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1262540348]
+[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1262540348]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -770,7 +762,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1671237252]
+[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1671237252]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -778,7 +770,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1401471229]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1401471229]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -787,7 +779,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=30900823]
+[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=30900823]
 visible = false
 layout_mode = 0
 offset_left = 6.0
@@ -796,7 +788,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon" unique_id=1930863836]
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon" unique_id=1930863836]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -808,7 +800,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon/Label" unique_id=1217614451]
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon/Label" unique_id=1217614451]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -826,7 +818,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon" unique_id=923954391]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon" unique_id=923954391]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -835,7 +827,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Book_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=688073422 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="Book_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=688073422 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -847,7 +839,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1550896896]
+[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1550896896]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -857,7 +849,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=771993028]
+[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=771993028]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -867,7 +859,7 @@ grow_vertical = 2
 texture = ExtResource("32_656xf")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1384595122]
+[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1384595122]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -878,7 +870,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1185426795]
+[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1185426795]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -886,7 +878,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=186500491]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=186500491]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -895,7 +887,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=260329211]
+[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=260329211]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -903,7 +895,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon" unique_id=31371692]
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon" unique_id=31371692]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -915,7 +907,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon/Label" unique_id=2126507056]
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon/Label" unique_id=2126507056]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -933,7 +925,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon" unique_id=1561698966]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon" unique_id=1561698966]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -942,7 +934,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Bag_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=1053141570 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="Bag_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=1053141570 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -954,7 +946,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1603580890]
+[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1603580890]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -964,7 +956,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1299107193]
+[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1299107193]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -974,7 +966,7 @@ grow_vertical = 2
 texture = ExtResource("7_t340l")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=2124104740]
+[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=2124104740]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -985,7 +977,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1247342537]
+[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1247342537]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -993,7 +985,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=467344065]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=467344065]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1002,7 +994,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1359956786]
+[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1359956786]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1010,7 +1002,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon" unique_id=1361557448]
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon" unique_id=1361557448]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1022,7 +1014,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon/Label" unique_id=1446771545]
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon/Label" unique_id=1446771545]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1040,7 +1032,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon" unique_id=2143158518]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon" unique_id=2143158518]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1049,11 +1041,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer" unique_id=1757579934]
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=1757579934]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="CarrierControl" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1313591486 node_paths=PackedStringArray("rogue_button", "priest_button", "mage_button", "rogue_x_icon", "priest_x_icon", "mage_x_icon")]
+[node name="CarrierControl" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1313591486 node_paths=PackedStringArray("rogue_button", "priest_button", "mage_button", "rogue_x_icon", "priest_x_icon", "mage_x_icon")]
 visible = false
 layout_mode = 2
 alignment = 1
@@ -1065,11 +1057,11 @@ rogue_x_icon = NodePath("RogueButtonControl/R-TextureButton/TextureRect2")
 priest_x_icon = NodePath("PriestButton/P-TextureButton/TextureRect2")
 mage_x_icon = NodePath("MageButton/M-TextureButton/TextureRect2")
 
-[node name="RogueButtonControl" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=999999395]
+[node name="RogueButtonControl" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=999999395]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="R-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl" unique_id=276209151]
+[node name="R-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl" unique_id=276209151]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1078,7 +1070,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("35_hu50l")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1184210147]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1184210147]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1088,7 +1080,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("36_sxp7b")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1299390484]
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1299390484]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1100,11 +1092,11 @@ mouse_filter = 2
 texture = ExtResource("37_q1lsx")
 stretch_mode = 3
 
-[node name="PriestButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=788866875]
+[node name="PriestButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=788866875]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="P-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton" unique_id=64812729]
+[node name="P-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton" unique_id=64812729]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1113,7 +1105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("35_hu50l")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=176357187]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=176357187]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1123,7 +1115,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("38_l4r3y")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=3147858]
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=3147858]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1135,11 +1127,11 @@ mouse_filter = 2
 texture = ExtResource("37_q1lsx")
 stretch_mode = 3
 
-[node name="MageButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=101432861]
+[node name="MageButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=101432861]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="M-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton" unique_id=1330534418]
+[node name="M-TextureButton" type="TextureButton" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton" unique_id=1330534418]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1148,7 +1140,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("35_hu50l")
 
-[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=1871687308]
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=1871687308]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1158,7 +1150,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("39_8e5eg")
 
-[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=397441036]
+[node name="TextureRect2" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=397441036]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1170,27 +1162,27 @@ mouse_filter = 2
 texture = ExtResource("37_q1lsx")
 stretch_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=17540647]
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=17540647]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer" unique_id=375474259]
+[node name="Control" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer" unique_id=375474259]
 custom_minimum_size = Vector2(64, 156)
 layout_mode = 2
 
-[node name="ActorNode" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("27_jq4bi")]
+[node name="ActorNode" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("27_jq4bi")]
 position = Vector2(32, 120)
 scale = Vector2(4, 4)
 
-[node name="GridContainer2" type="GridContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer" unique_id=2067442765]
+[node name="GridContainer2" type="GridContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=2067442765]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="Trinket_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=655902137 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="Trinket_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=655902137 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -1202,7 +1194,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=1504616591]
+[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=1504616591]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1212,7 +1204,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=711692443]
+[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=711692443]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1222,7 +1214,7 @@ grow_vertical = 2
 texture = ExtResource("28_psmk2")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=788797210]
+[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=788797210]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -1233,7 +1225,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=6465725]
+[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=6465725]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1241,7 +1233,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=233838107]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=233838107]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1250,7 +1242,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=2098283253]
+[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=2098283253]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1258,7 +1250,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon" unique_id=92179242]
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon" unique_id=92179242]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1270,7 +1262,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon/Label" unique_id=719682860]
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon/Label" unique_id=719682860]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1288,7 +1280,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon" unique_id=656575454]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon" unique_id=656575454]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1297,7 +1289,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainHand_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=786172599 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="MainHand_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=786172599 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -1309,7 +1301,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=274580117]
+[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=274580117]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1319,7 +1311,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1118572945]
+[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1118572945]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1329,7 +1321,7 @@ grow_vertical = 2
 texture = ExtResource("4_xk513")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=534764229]
+[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=534764229]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -1340,7 +1332,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=742532647]
+[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=742532647]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1348,7 +1340,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1555352546]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1555352546]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1357,7 +1349,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=776898503]
+[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=776898503]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1365,7 +1357,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon" unique_id=824004371]
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon" unique_id=824004371]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1377,7 +1369,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon/Label" unique_id=1851312940]
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon/Label" unique_id=1851312940]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1395,7 +1387,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon" unique_id=1824097817]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon" unique_id=1824097817]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1404,7 +1396,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OffHand_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=1164794056 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="OffHand_EquipmentSlotButton" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=1164794056 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -1416,7 +1408,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1513152275]
+[node name="Frame" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1513152275]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1426,7 +1418,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1984418854]
+[node name="DefaultIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1984418854]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1436,7 +1428,7 @@ grow_vertical = 2
 texture = ExtResource("30_1dkcm")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1977989483]
+[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1977989483]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -1447,7 +1439,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=913268152]
+[node name="PageIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=913268152]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1455,7 +1447,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=925605293]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=925605293]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1464,7 +1456,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=977230341]
+[node name="InvalidIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=977230341]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1472,7 +1464,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon" unique_id=1301505927]
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon" unique_id=1301505927]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1484,7 +1476,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon/Label" unique_id=886597891]
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon/Label" unique_id=886597891]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1502,7 +1494,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/HBoxContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon" unique_id=649940623]
+[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon" unique_id=649940623]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -2008,467 +2000,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SkillTreePageControl" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=2093387313 node_paths=PackedStringArray("character_menu", "background_control", "tree_container", "row_prefab", "grid_container", "skill_node_prefab", "paired_node_prefab", "unspent_points_label", "total_points_label")]
+[node name="SkillTreePageControl" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1862006629 node_paths=PackedStringArray("character_menu") instance=ExtResource("58_iofuq")]
 layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("52_s1b61")
 character_menu = NodePath("../../../../../..")
-background_control = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/BackgroundControl")
-tree_container = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer")
-row_prefab = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/Row")
-grid_container = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer")
-skill_node_prefab = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode")
-paired_node_prefab = NodePath("VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode")
-unspent_points_label = NodePath("VBoxContainer/PointsContainer/PointsLeftLabel")
-total_points_label = NodePath("VBoxContainer/PointsContainer/TotalPointsLabel")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl" unique_id=1112500765]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = -8
-
-[node name="PointsContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer" unique_id=924749338]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/PointsContainer" unique_id=1349012036]
-layout_mode = 2
-theme = ExtResource("23_wu165")
-theme_override_font_sizes/font_size = 24
-text = "Title Points:"
-horizontal_alignment = 1
-
-[node name="PointsLeftLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/PointsContainer" unique_id=1537041141]
-custom_minimum_size = Vector2(28, 0)
-layout_mode = 2
-theme = ExtResource("23_wu165")
-theme_override_font_sizes/font_size = 24
-text = "0"
-horizontal_alignment = 1
-
-[node name="SeperatorLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/PointsContainer" unique_id=1274454409]
-layout_mode = 2
-theme = ExtResource("23_wu165")
-theme_override_font_sizes/font_size = 24
-text = "/"
-horizontal_alignment = 1
-
-[node name="TotalPointsLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/PointsContainer" unique_id=1454781979]
-custom_minimum_size = Vector2(28, 0)
-layout_mode = 2
-theme = ExtResource("23_wu165")
-theme_override_font_sizes/font_size = 24
-text = "0"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer" unique_id=1701018227]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="SkillGridContainer" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer" unique_id=910993675]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 12
-vertical = true
-
-[node name="BackgroundControl" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1039014556 node_paths=PackedStringArray("parent_control")]
-layout_mode = 2
-script = ExtResource("53_teogu")
-parent_control = NodePath("../../../..")
-
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/BackgroundControl" unique_id=2047848899]
-visible = false
-custom_minimum_size = Vector2(500, 500)
-layout_mode = 0
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 400.0
-offset_bottom = 400.0
-color = Color(0.2484, 0.2484, 0.2484, 1)
-
-[node name="Row" type="HBoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1658559195]
-layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
-
-[node name="SkillTreeNode" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row" unique_id=1168884916 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-script = ExtResource("54_7egd2")
-background_rect = NodePath("Background")
-icon_rect = NodePath("Icon")
-button = NodePath("Button")
-
-[node name="Background" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=36810113]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("55_d0duj")
-expand_mode = 1
-
-[node name="Icon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=186903522]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("56_656xf")
-expand_mode = 3
-
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=1468755696]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-
-[node name="Outline" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=1487092246]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/SkillTreeNode" unique_id=1670843819]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PairedSkillTreeNode" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row" unique_id=1770764677]
-custom_minimum_size = Vector2(72, 48)
-layout_mode = 2
-script = ExtResource("58_djw0b")
-
-[node name="SkillTreeNode1" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=1872882623 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -50.0
-offset_right = -2.0
-offset_bottom = 48.0
-grow_horizontal = 2
-script = ExtResource("54_7egd2")
-background_rect = NodePath("Background")
-icon_rect = NodePath("Icon")
-button = NodePath("Button")
-
-[node name="Background" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=208702205]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("55_d0duj")
-expand_mode = 1
-
-[node name="Icon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=73266003]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("56_656xf")
-expand_mode = 3
-
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=114095149]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-
-[node name="Outline" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=337555981]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode1" unique_id=1394863870]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SkillTreeNode2" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=1014259641 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = 2.0
-offset_right = 50.0
-offset_bottom = 48.0
-grow_horizontal = 0
-script = ExtResource("54_7egd2")
-background_rect = NodePath("Background")
-icon_rect = NodePath("Icon")
-button = NodePath("Button")
-
-[node name="Background" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=655246759]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("55_d0duj")
-expand_mode = 1
-
-[node name="Icon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=564562758]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("56_656xf")
-expand_mode = 3
-
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=885421349]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-
-[node name="Outline" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=2001491646]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode/SkillTreeNode2" unique_id=266653878]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="OrIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=1268518087]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = -24.0
-offset_right = 12.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("59_hu50l")
-
-[node name="AndIcon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=610946838]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -12.0
-offset_top = -24.0
-offset_right = 12.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("60_sxp7b")
-
-[node name="HighlightPatch" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=264909820]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-
-[node name="OutlinePatch" type="NinePatchRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/Row/PairedSkillTreeNode" unique_id=2060019735]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
-
-[node name="GridContainer" type="GridContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer" unique_id=1338023829]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 12
-columns = 3
-
-[node name="ColorRect" type="ColorRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=272085349]
-custom_minimum_size = Vector2(72, 0)
-layout_mode = 2
-
-[node name="ColorRect2" type="ColorRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=1918021616]
-custom_minimum_size = Vector2(72, 0)
-layout_mode = 2
-
-[node name="ColorRect3" type="ColorRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/SkillGridContainer/GridContainer" unique_id=855131224]
-custom_minimum_size = Vector2(72, 0)
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer" unique_id=2075472264]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
-
-[node name="Control" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=735082198]
-layout_mode = 2
-
-[node name="SkillTreeNode" type="Control" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control" unique_id=224951876 node_paths=PackedStringArray("background_rect", "icon_rect", "button")]
-custom_minimum_size = Vector2(48, 48)
-anchors_preset = 0
-offset_right = 48.0
-offset_bottom = 48.0
-pivot_offset = Vector2(24, 24)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-script = ExtResource("54_7egd2")
-background_rect = NodePath("Background")
-icon_rect = NodePath("Icon")
-button = NodePath("Button")
-
-[node name="Background" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1267653406]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("55_d0duj")
-expand_mode = 1
-
-[node name="Icon" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1651236924]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("56_656xf")
-expand_mode = 3
-
-[node name="Highlight" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=392462890]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-
-[node name="Outline" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=106670921]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("57_0r1b3")
-
-[node name="Button" type="Button" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl/VBoxContainer/HBoxContainer/ScrollContainer/Control/SkillTreeNode" unique_id=1730393527]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/HBoxContainer" unique_id=2029805583]
 layout_mode = 2

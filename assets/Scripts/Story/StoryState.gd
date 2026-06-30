@@ -225,6 +225,11 @@ func set_unlocked_skill_for_actor(actor:BaseActor, skills:Array):
 	var always_skills = []
 	print("StoryState Set Skill: %s : %s" % [actor_id, skills])
 	var tree_data = get_skill_tree_data_for_actor(actor)
+	var items_to_move = {
+		"AddToInventory":[],
+		"RemoveFromInventory":[],
+		"RemoveFromPlayer":[]
+	}
 	for row in tree_data:
 		for node_data in row:
 			var page_list = []
@@ -253,22 +258,29 @@ func set_unlocked_skill_for_actor(actor:BaseActor, skills:Array):
 				# Add or remove item from player inventory or actor pages
 				if is_unlocked:
 					if not has_page_in_book and not has_page_in_inventory:
-						PlayerInventory.add_item(page_key)
+						items_to_move["AddToInventory"].append(page_key)
 				else:
 					if has_page_in_book:
-						var items = actor.pages.list_items_with_key(page_key)
-						for item in items:
-							ItemHelper.try_delete_item_from_holder(item, actor)
+						items_to_move["RemoveFromPlayer"].append(page_key)
 					if has_page_in_inventory:
-						var item = ItemLibrary.get_item(page_key)
-						PlayerInventory.delete_item_from_inventory(item)
+						items_to_move["RemoveFromInventory"].append(page_key)
+						
+	# This need to be set before we start triggering recaches by moving items
 	_party_skills_data[actor_id] = {
 		"Unlocked": unlocked_skills,
 		"Always": always_skills
 	}
-				
-			
 	
+	for page_key in items_to_move["AddToInventory"]:
+		PlayerInventory.add_item(page_key)
+	for page_key in items_to_move["RemoveFromPlayer"]:
+		var items = actor.pages.list_items_with_key(page_key)
+		for item in items:
+			ItemHelper.try_delete_item_from_holder(item, actor)
+	for page_key in items_to_move["RemoveFromInventory"]:
+			var item = ItemLibrary.get_item(page_key)
+			PlayerInventory.delete_item_from_inventory(item)
+		
 
 func get_runtime_untix_time()->float:
 	var val = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)

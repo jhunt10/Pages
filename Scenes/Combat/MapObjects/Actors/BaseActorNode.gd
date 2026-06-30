@@ -29,6 +29,8 @@ signal reached_scripted_motion_destination
 		if material:
 			material.set_shader_parameter("progress", shader_val)
 
+@export var awareness_display:ActorAwarenessDisplay
+
 var Id:String 
 var Actor:BaseActor 
 var facing_dir:MapPos.Directions = MapPos.Directions.North
@@ -57,6 +59,8 @@ func _process(delta: float) -> void:
 			return
 		self.queue_free()
 		return
+	#if awareness_display:
+		#awareness_display.sync()
 	if is_moving:
 		var change = delta * movement_speed
 		move_timmer += delta

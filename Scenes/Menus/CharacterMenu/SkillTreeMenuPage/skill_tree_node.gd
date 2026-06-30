@@ -30,12 +30,13 @@ func set_page(page_id:String):
 	grey_page_icon_texture = get_black_and_white_texture(page_icon_texture)
 	grey_page_background_texture = get_black_and_white_texture(page_background_texture)
 	
-	var out_line_rect:TextureRect = $Outline
-	out_line_rect.hide()
+	var out_line_rect:TextureRect = $Control/Outline
+	if out_line_rect:
+		out_line_rect.hide()
 
 func set_unlock_state( is_unlocked:bool, can_unlock:bool):
-	var _highlight_rect:TextureRect = $Highlight
-	var _icon_rect:TextureRect = $Icon
+	var _highlight_rect:TextureRect = $Control/Highlight
+	var _icon_rect:TextureRect = $Control/Icon
 	if is_unlocked:
 		is_node_unlocked = true
 		can_node_unlock = false 
@@ -61,10 +62,10 @@ func set_unlock_state( is_unlocked:bool, can_unlock:bool):
 
 func on_mouse_enter():
 	if can_node_unlock:
-		var out_line_rect:TextureRect = $Outline
+		var out_line_rect:TextureRect = $Control/Outline
 		out_line_rect.show()
 func on_mouse_exit():
-	var out_line_rect:TextureRect = $Outline
+	var out_line_rect:TextureRect = $Control/Outline
 	out_line_rect.hide()
 	
 

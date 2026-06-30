@@ -10,7 +10,8 @@ static func DoThing():
 	print("\nSanity Check")
 	#format_def_files()
 	#update_def_files()
-	tags_check()
+	#tags_check()
+	page_defs_to_csv()
 	#build_mermaid_def_chart()
 	#create_class_def_files("Rogue")
 	#rename_test_files()
@@ -79,12 +80,89 @@ static func intake_descriptions():
 		save_file.close()
 	
 
-static func get_all_defs()->Dictionary:
+
+static func page_defs_to_csv():
+	if !ItemLibrary.Instance:
+		ItemLibrary.new()
+	else:
+		ItemLibrary.Instance.reload()
+	var all_defs = ItemLibrary.Instance._object_defs
+	var out_lines = [",".join([
+		"PageKey",
+		"Title",
+		"DisplayName",
+		"Script",
+		"AmmoType",
+		"AmmoCost",
+		"AmmoClip",
+		"AccMod",
+		#"Description",
+		"AtkStat",
+		"AtkPwrBase",
+		"AtkPwrRange",
+		"AtkPwrScale",
+		"BaseDamage",
+		"DamageType",
+	])]
+	for def_key in all_defs.keys():
+		var def = all_defs[def_key]
+		var script_path:String = def.get("!ObjectScript", "")
+		var taxonomy = def.get("#ObjDetails",{}).get("Taxonomy", [])
+		
+		if not taxonomy.has("Page"):
+			continue
+		
+		var action_data = def.get("ActionData", {})
+		
+		var display_name = def.get("#ObjDetails",{}).get("DisplayName")
+		var description = def.get("#ObjDetails",{}).get("Description")
+		var source_title = def.get("PageData",{}).get("SourceTitle")
+		var script_name = script_path.get_file()
+		
+		var ammo_data = action_data.get("AmmoData", {})
+		var ammo_type = ammo_data.get("AmmoType", "")
+		var ammo_cost = ammo_data.get("Cost","")
+		var ammo_clip = ammo_data.get("Clip","")
+		
+		var attack_details = action_data.get("AttackDetails", {})
+		var acc_mod = attack_details.get("AccuracyMod", "")
+		var damage_datas = action_data.get("DamageDatas", {})
+		var damage_data = {}
+		if damage_datas.size() > 1:
+			printerr("MultIDamage Page: " + def_key)
+		if damage_datas.size() == 1:
+			damage_data = damage_datas.values()[0]
+		
+		out_lines.append(",".join([
+			def_key,
+			source_title, 
+			display_name, 
+			script_name,
+			ammo_type, 
+			ammo_cost,
+			ammo_clip,
+			acc_mod,
+			#description
+			damage_data.get("AtkStat", ""),
+			damage_data.get("AtkPwrBase", ""),
+			damage_data.get("AtkPwrRange", ""),
+			damage_data.get("AtkPwrScale", ""),
+			damage_data.get("BaseDamage", ""),
+			damage_data.get("DamageType", ""),
+		]))
+	
+	var save_path = "C:\\Users\\johnn\\Documents\\Repos\\Pages\\notes\\pages.csv"
+	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
+	print("Saving File: " + save_path)
+	save_file.store_string("\n".join(out_lines))
+	save_file.close()
+
+
+# sufix = [PageDefs | ItemDefs | ...]
+static func get_all_defs(sufix:String='')->Dictionary:
 	var defs_dict = {}
 	var files = []
-	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_PageDefs.def"))
-	#files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", "_ItemDefs.def"))
-	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", ".def"))
+	files.append_array(BaseLoadObjectLibrary._search_for_files("res://ObjectDefs/", sufix+".def"))
 	var keys = []
 	for file:String in files:
 		var defs = parse_def_file(file)

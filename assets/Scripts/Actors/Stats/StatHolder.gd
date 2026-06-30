@@ -154,9 +154,15 @@ func get_damage_resistance(damage_type)->float:
 func add_experiance(value:int):
 	if not _base_stats.has(StatHelper.Experience):
 		_base_stats[StatHelper.Experience] = 0
+	var old_level = _base_stats.get(StatHelper.Level, 1)
 	_base_stats[StatHelper.Experience] += value
 	_cached_stats[StatHelper.Experience] = _base_stats[StatHelper.Experience]
 	_actor.set_load_val(["Stats", StatHelper.Experience], _base_stats[StatHelper.Experience])
+	var new_level = get_level_for_exp(value)
+	if old_level != new_level:
+		_base_stats[StatHelper.Level] = new_level
+		_cached_stats[StatHelper.Level] = _base_stats[StatHelper.Level]
+		_actor.set_load_val(["Stats", StatHelper.Level], _base_stats[StatHelper.Level])
 
 func get_exp_to_next_level(current_level:int=-1)->int:
 	if current_level < 0:
@@ -176,12 +182,19 @@ func get_level_for_exp(total_exp:int)->int:
 		remaining -= required
 	return 100
 
+func get_unspent_skill_points()->int:
+	var level = _actor.stats.get_stat(StatHelper.Level, 1)
+	var unlocked = StoryState.get_unlocked_skills_for_actor(_actor, false)
+	if unlocked != null:
+		return level - unlocked.size()
+	return 0
+
 func apply_level_up(new_level:int, remaining_exp:int, add_att_levels:Dictionary):
 	_actor.set_load_val(["Stats", StatHelper.Level], new_level)
 	_actor.set_load_val(["Stats", StatHelper.Experience], remaining_exp)
-	for attribute in [StatHelper.Strength, StatHelper.Agility, StatHelper.Intelligence, StatHelper.Wisdom]:
-		_actor.set_load_val(["Stats", "AttributeLevels", attribute], add_att_levels.get(attribute))
-		attribute_levels[attribute] = add_att_levels.get(attribute)
+	#for attribute in [StatHelper.Strength, StatHelper.Agility, StatHelper.Intelligence, StatHelper.Wisdom]:
+		#_actor.set_load_val(["Stats", "AttributeLevels", attribute], add_att_levels.get(attribute))
+		#attribute_levels[attribute] = add_att_levels.get(attribute)
 	recache_stats()
 
 func reset_health():
