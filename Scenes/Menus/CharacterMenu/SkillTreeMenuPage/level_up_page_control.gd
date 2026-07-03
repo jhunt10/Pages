@@ -71,7 +71,7 @@ func _on_confirm():
 	_actor = null
 
 func save_changes():
-	_actor.stats.apply_level_up(next_level, exp_after_level_up, add_values.duplicate())
+	#_actor.stats.apply_level_up(next_level, exp_after_level_up, add_values.duplicate())
 	skill_page.apply_changes()
 
 func set_actor(actor:BaseActor, confirmed:bool=false, apply_before_switch:bool=false):
@@ -86,18 +86,18 @@ func set_actor(actor:BaseActor, confirmed:bool=false, apply_before_switch:bool=f
 	
 	_actor = actor
 	
-	var current_level:int = _actor.stats.get_stat(StatHelper.Level, 0)
-	var exp_val = _actor.stats.get_stat(StatHelper.Experience, 0)
+	var current_level:int = _actor.get_level()
+	var exp_val = _actor.get_xp()
 	next_level = current_level
-	var exp_to_next = _actor.stats.get_exp_to_next_level(current_level)
-	var remaining = exp_val
-	while remaining >= exp_to_next:
-		remaining -= exp_to_next
-		next_level += 1
-		exp_to_next = _actor.stats.get_exp_to_next_level(current_level)
+	#var exp_to_next = _actor.get_xp_to_next_level(current_level)
+	#var remaining = exp_val
+	#while remaining >= exp_to_next:
+		#remaining -= exp_to_next
+		#next_level += 1
+		#exp_to_next = _actorget_xp_to_next_level(current_level)
 	
 	
-	exp_after_level_up = remaining
+	exp_after_level_up = exp_val
 	
 	if current_level == next_level:
 		current_level_label.text = str(current_level)

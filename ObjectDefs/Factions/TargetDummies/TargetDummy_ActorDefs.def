@@ -18,7 +18,21 @@
 			]
 		},
 		"ActorData": {
-			"Faction": "Dummies"
+			"Faction": "Dummies",
+			"Stats": {
+				"Armor": 0.0,
+				"BarRegen:Health:Round": 500.0,
+				"BarRegen:Health:Turn": 500.0,
+				"BarStat:Health": 500.0,
+				"BlockChance": 0.0,
+				"BlockMod": 0.0,
+				"Evasion": 0.0,
+				"HealthMax": 500.0,
+				"Mass": 10.0,
+				"Resistance:Dark": 0.0,
+				"Resistance:Light": 0.0,
+				"Speed": 0.0
+			},
 		},
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
 		"SpriteFrameWH": [
@@ -30,20 +44,6 @@
 			-16.0
 		],
 		"SpriteSheet": "Sprites/Target_SpriteSheet.png",
-		"Stats": {
-			"Armor": 0.0,
-			"BarRegen:Health:Round": 500.0,
-			"BarRegen:Health:Turn": 500.0,
-			"BarStat:Health": 500.0,
-			"BlockChance": 0.0,
-			"BlockMod": 0.0,
-			"Evasion": 0.0,
-			"HealthMax": 500.0,
-			"Mass": 10.0,
-			"Resistance:Dark": 0.0,
-			"Resistance:Light": 0.0,
-			"Speed": 0.0
-		},
 		"_DefVersion": "1"
 	},
 	"TargetDummy_Mag": {
@@ -62,9 +62,11 @@
 			]
 		},
 		"SpriteSheet": "Sprites/TargetWarded_SpriteSheet.png",
-		"Stats": {
-			"Protection": 50.0,
-			"Ward": 50.0
+		"ActorData": {
+			"Stats": {
+				"Protection": 50.0,
+				"Ward": 50.0
+			}
 		},
 		"_DefVersion": "1"
 	},
@@ -114,8 +116,10 @@
 			]
 		},
 		"SpriteSheet": "Sprites/TargetArmored_SpriteSheet.png",
-		"Stats": {
-			"Armor": 50.0
+		"ActorData": {
+			"Stats": {
+				"Armor": 50.0
+			}
 		},
 		"_DefVersion": "1"
 	}

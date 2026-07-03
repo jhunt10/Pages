@@ -48,13 +48,13 @@ func open_level_up_menu():
 
 func _sync():
 	if level_label:
-		level_label.text = str(int(_actor.stats.get_stat(StatHelper.Level)))
-	current_exp = _actor.stats.get_stat(StatHelper.Experience)
+		level_label.text = str(_actor.get_level())
+	current_exp = _actor.get_xp()
 	current_exp_label.text = str(int(current_exp))
-	max_exp = _actor.stats.get_exp_to_next_level()
+	max_exp = _actor.get_xp_to_next_level()
 	max_exp_label.text = str(int(max_exp))
 	self.percent_full = current_exp / max_exp
-	var unspent_count = _actor.stats.get_unspent_skill_points()
+	var unspent_count = _actor.get_unspent_skill_points()
 	if level_up_button_control:
 		if unspent_count > 0 and not (CharacterMenuControl.Instance and CharacterMenuControl.Instance.combat_mode):
 			if level_up_button_animation:

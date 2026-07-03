@@ -82,6 +82,9 @@ func _ready() -> void:
 	
 	name_panel.xp_bar.level_up_button_pressed.connect(_on_right_page_option_select.bind(3))
 	
+	
+	skill_tree_control.node_button_down.connect(on_item_button_down)
+	skill_tree_control.node_button_up.connect(on_item_button_up)
 	var first_actor = StoryState.get_party_actor_by_index(current_party_actor_index)
 	set_actor(first_actor)
 
@@ -137,6 +140,13 @@ func _process(_delta: float) -> void:
 		var mouse_pos = self.get_local_mouse_position()
 		if mouse_pos.distance_to(_button_down_pos) > _drag_dead_zone:
 			start_dragging()
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and _current_details_card:
+		var mouse_event:InputEventMouseButton = event as InputEventMouseButton
+		var mouse_pos = mouse_event.global_position
+		if not _current_details_card.get_global_rect().has_point(mouse_pos):
+			_current_details_card._on_exit_button()
 
 func _on_close():
 	self.queue_free()

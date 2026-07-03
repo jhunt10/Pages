@@ -25,8 +25,6 @@ func _sync():
 		if child != premade_entry:
 			child.queue_free()
 	var ordered_stats = [
-		StatHelper.Level,
-		StatHelper.Experience,
 		StatHelper.Strength,
 		StatHelper.Agility,
 		StatHelper.Intelligence,

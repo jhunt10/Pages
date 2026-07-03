@@ -50,7 +50,7 @@ func set_unlock_state( is_unlocked:bool, can_unlock:bool):
 		background_rect.texture = grey_page_background_texture
 		_icon_rect.texture = grey_page_icon_texture
 		_highlight_rect.show()
-		_highlight_rect.modulate = Color.SLATE_GRAY
+		_highlight_rect.modulate = Color.WEB_GREEN
 	else:
 		is_node_unlocked = false
 		can_node_unlock = false 

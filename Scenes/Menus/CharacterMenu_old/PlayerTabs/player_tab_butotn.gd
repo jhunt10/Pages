@@ -82,7 +82,7 @@ func check_level_up():
 		var actor = ActorLibrary.get_actor(_actor_id)
 		if !actor:
 			return
-		if actor.stats.can_level_up():
+		if actor.get_unspent_skill_points() > 0:
 			self.button_label.text = "+" + _actor_name
 		else:
 			self.button_label.text = _actor_name

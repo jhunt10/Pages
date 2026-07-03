@@ -2,12 +2,12 @@
 	"GuardEffect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
-			"Description": "Gain @@#StatMod:AwrStatMod@@ and @@#StatMod:BlcStatMod@@.",
+			"Description": "Gain @@#StatMod:BlcStatMod@@.",
 			"DisplayName": "Guard",
 			"LargeIcon": "Sprites/Guard.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/Guard.png",
-			"SnippetDesc": "Increase AWR and Block Chance until Next Action.",
+			"SnippetDesc": "Increase Block Chance until Next Action.",
 			"Tags": [],
 			"Taxonomy": [
 				"Effect"
@@ -26,15 +26,10 @@
 				"ShowInHud": true
 			},
 			"StatMods": {
-				"AwrStatMod": {
-					"ModType": "Add",
-					"StatName": "Awareness",
-					"Value": 1.0
-				},
 				"BlcStatMod": {
 					"ModType": "Add",
 					"StatName": "BlockChance",
-					"Value": 50.0
+					"Value": 100.0
 				}
 			},
 			"SubEffects": {

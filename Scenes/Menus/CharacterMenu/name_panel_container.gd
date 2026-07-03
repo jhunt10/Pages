@@ -7,5 +7,5 @@ extends PanelContainer
 
 func sync(actor:BaseActor):
 	name_label.text = actor.get_display_name()
-	level_label.text = str(int(actor.stats.get_stat(StatHelper.Level)))
+	level_label.text = str(actor.get_level())
 	xp_bar.set_actor(actor)

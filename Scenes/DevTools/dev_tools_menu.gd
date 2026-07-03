@@ -96,7 +96,7 @@ func items_to_inventory():
 
 func add_xp_to_party():
 	for actor:BaseActor in StoryState.list_party_actors():
-		actor.stats.add_experiance(100)
+		actor.add_xp(100)
 	pass
 
 

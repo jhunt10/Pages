@@ -11,14 +11,14 @@ const StatBarColors:Dictionary = {
 
 ## Every Actor is exspected to have these stats
 const BasicStats:Array = [
-	HealthMax, HealthCurrent, Mass, Speed, Crash, PPR,
+	HealthMax, HealthCurrent, Mass, Speed, CrashPower, PPR,
 	Armor, Ward, 
 	Accuracy, Evasion, Potency, Protection,
 	Awareness, CritChance, CritMod, BlockChance, BlockMod,
 	BlocksLOS
 ]
-const Level = "Level"
-const Experience = "Experience"
+#const Level = "Level"
+#const Experience = "Experience"
 const Strength = "Strength"
 const Agility = "Agility"
 const Intelligence = "Intelligence"
@@ -29,7 +29,7 @@ const HealthCurrent = "HealthCur"
 const _HealthStat = "Health"
 const Mass = "Mass"
 const Speed = "Speed"
-const Crash = "Push"
+const CrashPower = "CrashPower"
 const PPR = "PPR"
 const PhyAttack = "PhyAttack"
 const MagAttack = "MagAttack"
@@ -103,7 +103,7 @@ const stat_icon_paths:Dictionary = {
 	Potency: "res://assets/Sprites/UI/SymbolIcons/PotencySymbol.png",
 	Protection: "res://assets/Sprites/UI/SymbolIcons/ProtectionSymbol.png",
 	PPR: "res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png",
-	
+	CrashPower: "res://assets/Sprites/UI/SymbolIcons/CrashSymbol.png",
 	CritChance: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png",
 	CritMod: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png",
 	BlockMod: "res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png",

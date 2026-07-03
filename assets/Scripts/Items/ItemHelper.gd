@@ -245,6 +245,8 @@ static func swap_item_holder_slots(holder:BaseItemHolder, slot_a:int, slot_b:int
 		
 static func cant_equip_reasons_to_string(reasons_data:Dictionary)->String:
 	var missing_string = 'Req: '
+	if reasons_data.has("Text"):
+		missing_string += reasons_data['Text']
 	if reasons_data.has("Tags"):
 		var missing_tags = reasons_data['Tags']
 		for tag in missing_tags:

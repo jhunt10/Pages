@@ -584,9 +584,9 @@ static func handle_colision(
 		"AtkPwrBase": 100, 
 		"AtkPwrRange": 30, 
 		"AtkPwrScale": 1, 
-		"AtkStat": "Mass",
+		"AtkStat": StatHelper.CrashPower,
 		"DamageType": "Crash",
-		"DefenseType": "Armor",
+		"DefenseType": "None",
 		"DamageVfxKey": "Blunt_DamageEffect",
 		"DamageVfxData":{
 			"ShakeActor":false

@@ -278,14 +278,13 @@
 	"GuardAction": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Gain @@#EftData:GuardEffectData:Name@@ until the start of your next turn.\n\n@@#EftData:GuardEffectData:Description@@",
+			"Description": "Raise your shield and gain @@#EftData:GuardEffectData:Name@@ until the start of your next turn.\n\n@@#EftData:GuardEffectData:Description@@",
 			"DisplayName": "Guard",
 			"LargeIcon": "Effects/Sprites/Guard.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Effects/Sprites/Guard.png",
 			"SnippetDesc": "Guard until start of next action",
-			"Tags": [
-			],
+			"Tags": [],
 			"Taxonomy": [
 				"Item",
 				"Page",
@@ -345,6 +344,21 @@
 				"ConflictingPages": [],
 				"IncompatiblePages": [],
 				"TitleReq": "Match"
+			},
+			"Requirments": {
+				"ReqEquip": [
+					{
+						"DisplayName":"Shield",
+						"TagFilters": [
+							{
+								"RequireAllTags": [
+									"Shield"
+								]
+							}
+						],
+						"TagFiltersReqAll": true
+					}
+				]
 			},
 			"SourceTitle": "Soldier"
 		},

@@ -37,8 +37,6 @@ func _init(actor:BaseActor, data:Dictionary) -> void:
 
 func build_save_data()->Dictionary:
 	var out_dict = {}
-	out_dict[StatHelper.Level] = get_stat(StatHelper.Level)
-	out_dict[StatHelper.Experience] = get_stat(StatHelper.Experience, 0)
 	out_dict['AttributeLevels'] = {
 		StatHelper.Strength: attribute_levels[StatHelper.Strength],
 		StatHelper.Agility: attribute_levels[StatHelper.Agility],
@@ -48,8 +46,6 @@ func build_save_data()->Dictionary:
 	return out_dict
 
 func load_data(stat_data:Dictionary):
-	self._base_stats[StatHelper.Level] = stat_data.get(StatHelper.Level, 0)
-	self._base_stats[StatHelper.Experience] = stat_data.get(StatHelper.Experience, 0)
 	var loaded_attribute_levels = stat_data.get("AttributeLevels", {})
 	for attribute in loaded_attribute_levels.keys():
 		attribute_levels[attribute] = loaded_attribute_levels.get(attribute, 0)
@@ -148,54 +144,8 @@ func get_damage_resistance(damage_type)->float:
 	return float(int_val)
 
 # -----------------------------------------------------------------
-#					Level Up
+#					Health
 # -----------------------------------------------------------------
-
-func add_experiance(value:int):
-	if not _base_stats.has(StatHelper.Experience):
-		_base_stats[StatHelper.Experience] = 0
-	var old_level = _base_stats.get(StatHelper.Level, 1)
-	_base_stats[StatHelper.Experience] += value
-	_cached_stats[StatHelper.Experience] = _base_stats[StatHelper.Experience]
-	_actor.set_load_val(["Stats", StatHelper.Experience], _base_stats[StatHelper.Experience])
-	var new_level = get_level_for_exp(value)
-	if old_level != new_level:
-		_base_stats[StatHelper.Level] = new_level
-		_cached_stats[StatHelper.Level] = _base_stats[StatHelper.Level]
-		_actor.set_load_val(["Stats", StatHelper.Level], _base_stats[StatHelper.Level])
-
-func get_exp_to_next_level(current_level:int=-1)->int:
-	if current_level < 0:
-		current_level = get_stat(StatHelper.Level)
-	return 100 + (100 * current_level) + (50 * (current_level - 1))
-
-func can_level_up()->bool:
-	var required = get_exp_to_next_level()
-	return required < _base_stats.get(StatHelper.Experience, 0)
-
-func get_level_for_exp(total_exp:int)->int:
-	var remaining = total_exp
-	for level in range(100):
-		var required = get_exp_to_next_level(level)
-		if required > remaining:
-			return level
-		remaining -= required
-	return 100
-
-func get_unspent_skill_points()->int:
-	var level = _actor.stats.get_stat(StatHelper.Level, 1)
-	var unlocked = StoryState.get_unlocked_skills_for_actor(_actor, false)
-	if unlocked != null:
-		return level - unlocked.size()
-	return 0
-
-func apply_level_up(new_level:int, remaining_exp:int, add_att_levels:Dictionary):
-	_actor.set_load_val(["Stats", StatHelper.Level], new_level)
-	_actor.set_load_val(["Stats", StatHelper.Experience], remaining_exp)
-	#for attribute in [StatHelper.Strength, StatHelper.Agility, StatHelper.Intelligence, StatHelper.Wisdom]:
-		#_actor.set_load_val(["Stats", "AttributeLevels", attribute], add_att_levels.get(attribute))
-		#attribute_levels[attribute] = add_att_levels.get(attribute)
-	recache_stats()
 
 func reset_health():
 	var max_hp = max_health
@@ -279,9 +229,6 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	var health_before_caching = null
 	if _cached_stats.keys().has(StatHelper.HealthCurrent):
 		health_before_caching = _cached_stats[StatHelper.HealthCurrent]
-	var xp_before_caching = null
-	if _cached_stats.keys().has(StatHelper.Experience):
-		xp_before_caching = _cached_stats[StatHelper.Experience]
 	_cached_mods.clear()
 	
 	
@@ -385,8 +332,6 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	# Add current health to temp stats
 	if health_before_caching != null:
 		temp_stats[StatHelper.HealthCurrent] = health_before_caching
-	if xp_before_caching != null:
-		temp_stats[StatHelper.Experience] = xp_before_caching
 	
 	_cached_stats.clear()
 	var safety_limit = 10

@@ -43,6 +43,51 @@
 		},
 		"_DefVersion": "1"
 	},
+	"CrashBully_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "You've learned to be rougher with your less massive foes, now dealing more damage on @@#Tag:Collision@@.\n\n@@#StatMod:BullyCrashMod@@",
+			"DisplayName": "Bully",
+			"LargeIcon": "Sprites/CrashEnemyUp.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/CrashEnemyUp.png",
+			"SnippetDesc": "Increase Crash Damage on Collision with Enemy.",
+			"Tags": [
+				"Passive",
+				"Crash",
+				"DmgMod"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Soldier",
+			"StatMods": {
+				"BullyCrashMod": {
+					"ModType": "Add",
+					"StatName": "CrashPower",
+					"Value": 5
+				}
+			}
+		},
+		"PassiveData": {
+
+		},
+		"_DefVersion": "1"
+	},
 	"CrashGentlePage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
@@ -194,12 +239,12 @@
 	"HeavyArmorTrainingPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "You have spent so much time plated in Heavy Armor that's in almost become a second skin to you. You should probably buy some new clothes.\n@@#StatMod:ArmorMod@@ when wearing only @@#Tag:HeavyArmor:Heavy Armor Apparel@@.",
+			"Description": "You have spent so much time in Armor that it's become a second skin to you. You should probably buy some new clothes.\n\n@@#StatMod:ArmorMod@@",
 			"DisplayName": "Heavy Armored",
 			"LargeIcon": "Sprites/HeavyArmor_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/HeavyArmor_Icon.png",
-			"SnippetDesc": "+20% Armor for Heavy Armor",
+			"SnippetDesc": "+15 Armor",
 			"Tags": [
 				"Passive"
 			],
@@ -233,9 +278,9 @@
 			"SourceTitle": "Soldier",
 			"StatMods": {
 				"ArmorMod": {
-					"ModType": "Scale",
+					"ModType": "Add",
 					"StatName": "Armor",
-					"Value": 1.2
+					"Value": 15
 				}
 			}
 		},
@@ -247,7 +292,7 @@
 	"HeavyFootPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "Thanks to a special diet and an unholy curse you are heavier but slower. @@#StatMod:MassMod@@ and @@#StatMod:SpeedMod@@",
+			"Description": "Thanks to intensive stregnth training, a special diet, and an curse from an old gypsy woman, you are heavier but slower.\n\n@@#StatMod:MassMod@@ and @@#StatMod:SpeedMod@@",
 			"DisplayName": "Heavy Foot",
 			"LargeIcon": "Sprites/HeavyFoot.png",
 			"ObjectType": "Item",
@@ -295,7 +340,7 @@
 	"ShieldTrainingPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "Formal training allows you to use a Shield to full effect.\n\n@@#Color:Red:x2 Block Mod of Shields@@",
+			"Description": "Formal training allows you to use a Shield to full effect.\n\n@@#Tag:Block:Blocking@@ with @@#Tag:Shield:Shields@@ reduce damage by an additional @@#Color:Red:20%@@",
 			"DisplayName": "Shield Training",
 			"LargeIcon": "Sprites/ShieldTraining.png",
 			"ObjectType": "Item",
@@ -326,9 +371,9 @@
 			"SourceTitle": "Soldier",
 			"StatMods": {
 				"BlockModMod": {
-					"ModType": "Scale",
+					"ModType": "Add",
 					"StatName": "BlockMod",
-					"Value": 0.5
+					"Value": -0.2
 				}
 			}
 		},
@@ -522,7 +567,7 @@
 	"TwoHandBonus_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "When @@#Color:Blue:TwoHand@@ with a @@#Color:Blue:Melee Weapons@@, it's @@#Color:Red:Base Attack Power@@ is increased to @@#Color:Red:120%@@ from the default 100%.",
+			"Description": "They say two heads are better than one, but you only have one head. So what about two hands?\n\nWhen @@#Tag:TwoHand:Two Handing@@ a @@#Tag:MedWpn:Medium@@ @@#Tag:Melee:Melee Weapon@@, it's @@#Tag:AtkPwr@@ is increased by @@#Color:Red:+20%@@.",
 			"DisplayName": "Two Hander",
 			"LargeIcon": "Sprites/TwoHandBonus_Icon.png",
 			"ObjectType": "Item",
@@ -549,6 +594,28 @@
 				"IncompatiblePages": [],
 				"TitleReq": "Match"
 			},
+			"Requirments": {
+				"ActorTagFilterDisplayName": "TwoHand",
+				"ActorTagFilters": [
+					{
+						"RequireAllTags":["TwoHand"]
+					}
+				],
+				"ActorTagFiltersReqAll": true,
+				"ReqEquip": [
+					{
+						"DisplayName":"Medium Melee Weapon",
+						"TagFilters": [
+							{
+								"RequireAllTags": [
+									"MedWpn", "Melee"
+								]
+							}
+						],
+						"TagFiltersReqAll": true
+					}
+				]
+			},
 			"SourceTitle": "Soldier",
 			"WeaponMods": {
 				"TwoHanderBonus": {
@@ -561,7 +628,14 @@
 							}
 						],
 						"ActorTagFiltersReqAll": true,
-						"MainHandTagFilters": [],
+						"MainHandTagFilters": [
+							{
+								"RequireAllTags": [
+									"MedWpn",
+									"Melee"
+								]
+							}
+						],
 						"MainHandTagFiltersReqAll": false,
 						"OffHandTagFilters": [],
 						"OffHandTagFiltersReqAll": false,
@@ -572,8 +646,8 @@
 					"WeaponMods": {
 						"AtkPwrMod": {
 							"ModProperty": "AtkPwrBase",
-							"ModType": "Set",
-							"ModValue": 120.0
+							"ModType": "Add",
+							"ModValue": 20
 						}
 					}
 				}

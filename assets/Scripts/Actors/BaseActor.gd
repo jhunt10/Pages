@@ -52,7 +52,7 @@ var actor_data:Dictionary:
 var TeamKey : String
 var enemy_npc_index:int = -1
 
-var title_page:PageItemTitle
+var _title_page:PageItemTitle
 
 var spawn_map_layer
 
@@ -140,26 +140,57 @@ func get_carrier_actor()->CarrierActor:
 	return null
 
 func get_title()->String:
-	var title_page = get_title_page()
-	if title_page:
-		return title_page.get_title_key()
+	var title_page_item = get_title_page()
+	if title_page_item:
+		return title_page_item.get_title_key()
 	return ""
 
+func get_level()->int:
+	var title_page_item = get_title_page()
+	if title_page_item:
+		return title_page_item.get_level()
+	return 1
+
+func get_xp()->int:
+	var title_page = get_title_page()
+	if title_page:
+		return title_page.get_xp()
+	return 0
+
+func get_xp_to_next_level(current_level:int=-1)->int:
+	var title_page = get_title_page()
+	if title_page:
+		return title_page.get_xp_to_next_level(current_level)
+	return 1
+
+func get_unspent_skill_points()->int:
+	var level = get_level()
+	var unlocked = StoryState.get_unlocked_skills_for_actor(self, false)
+	if unlocked != null:
+		return level - unlocked.size() -1
+	return 0
+
+func add_xp(value:int)->bool:
+	var title_page = get_title_page()
+	if title_page:
+		return title_page.add_xp(value)
+	return false
+	
 func get_title_page()->PageItemTitle:
 	# TODO: Dumb init load hack
-	if !title_page:
+	if !_title_page:
 		var title_key = actor_data.get("TitleKey")
 		if !title_key:
 			printerr("No Title Key found for Actor: %s" % [self.Id])
 			return null
-		title_page = ItemLibrary.create_item(title_key, {})
-	return title_page
+		_title_page = ItemLibrary.create_item(title_key, {})
+	return _title_page
 
 func get_raw_base_stats()->Dictionary:
 	var title_page = get_title_page()
 	if title_page:
 		return title_page.get_base_stats()
-	return {}#self.get_load_val("Stats", {})
+	return actor_data.get("Stats")#self.get_load_val("Stats", {})
 	
 
 func get_stat_mods_granted_to_carrier():
@@ -255,6 +286,7 @@ func on_held_items_change(item_holder_name:String, change_data:Dictionary):
 		pages._build_slots_list()
 		equipment._build_slots_list()
 		items._build_slots_list()
+	self.dirty_tags()
 	validate_itemholders()
 	
 	stats.recache_stats(false)
@@ -281,6 +313,7 @@ func validate_itemholders():
 	pages.validate_items()
 	equipment.validate_items()
 	items.validate_items()
+	pages.validate_items()
 	
 	for invalid_item:BaseItem in pages.list_invalid_items():
 		if invalid_item.get_item_slots_mods().size() > 0:
@@ -539,10 +572,14 @@ func get_weapon_damage_datas(weapon_filter:Dictionary={})->Dictionary:
 						continue
 					var new_prop_val = mod_data.get("ModValue")
 					var mod_type = mod_data.get("ModType", "")
-					if mod_type != "Set":
-						printerr("Unsuported WeaponMod Type: " + str(mod_type))
-						continue
-					damage_data[prop_key] = new_prop_val
+					match  mod_type:
+						"Set": 
+							damage_data[prop_key] = new_prop_val
+						"Add":
+							damage_data[prop_key] += new_prop_val
+						_:
+							printerr("Unsuported WeaponMod Type: " + str(mod_type))
+					
 			damage_data['IsWeaponDamage'] = true
 			out_dict[sub_key] = damage_data
 			

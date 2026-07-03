@@ -106,6 +106,8 @@ func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 	var missing_requirements = {}
 	
 	var requirments = get_data_containing_mods().get("Requirments", {})
+	
+	# Required Stats
 	var required_stats = requirments.get("ReqStats", {})
 	var missing_stats = {}
 	for stat_name in required_stats.keys():
@@ -116,6 +118,22 @@ func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 	if missing_stats.size() > 0:
 		missing_requirements["Stats"] = missing_stats
 	
+	# Required Equipment
+	var required_equipment_filters = requirments.get("ReqEquip", {})
+	for required_filter:Dictionary in required_equipment_filters:
+		var found_item = false
+		for item in actor.equipment.list_items(false):
+			if TagHelper.check_tag_filters("TagFilters", required_filter, item):
+				found_item = true
+				break
+		if not found_item:
+			missing_requirements["Text"] = required_filter.get("DisplayName")
+	
+	# Required Tags on Actor
+	if requirments.keys().has("ActorTagFilters"):
+		if not TagHelper.check_tag_filters("ActorTagFilters", requirments, actor):
+			missing_requirements["Text"] = requirments.get("ActorTagFilterDisplayName", "Missing Tag")
+		
 	
 	return missing_requirements
 

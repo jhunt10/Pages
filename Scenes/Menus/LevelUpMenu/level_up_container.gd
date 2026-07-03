@@ -87,7 +87,7 @@ func _on_cancel():
 	self.queue_free()
 
 func _on_confirm():
-	_actor.stats.apply_level_up(next_level, exp_after_level_up, add_values.duplicate())
+	#_actor.stats.apply_level_up(next_level, exp_after_level_up, add_values.duplicate())
 	closed.emit()
 	self.queue_free()
 
@@ -96,15 +96,15 @@ func set_actor(actor:BaseActor):
 		_actor.stats.clear_temp_mods()
 	_actor = actor
 	
-	var current_level = _actor.stats.get_stat(StatHelper.Level, 0)
-	var exp_val = _actor.stats.get_stat(StatHelper.Experience, 0)
+	var current_level = _actor.get_level()
+	var exp_val = _actor.get_xp()
 	next_level = current_level
-	var exp_to_next = _actor.stats.get_exp_to_next_level(current_level)
+	var exp_to_next = _actor.get_xp_to_next_level(current_level)
 	var remaining = exp_val
 	while remaining >= exp_to_next:
 		remaining -= exp_to_next
 		next_level += 1
-		exp_to_next = _actor.stats.get_exp_to_next_level(current_level)
+		exp_to_next = _actor.get_xp_to_next_level(current_level)
 	
 	current_level_label.text = str(current_level)
 	current_level_label2.text = str(current_level)

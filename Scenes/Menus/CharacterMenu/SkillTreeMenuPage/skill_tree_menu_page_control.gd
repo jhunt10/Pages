@@ -1,6 +1,9 @@
 class_name SkillTreePageControl
 extends Control
 
+signal node_button_down(context, item_key, index, offset)
+signal node_button_up(context, item_key, index, offset)
+
 @export var character_menu:CharacterMenu
 @export var background_control:Control
 @export var tree_container:BoxContainer
@@ -64,15 +67,18 @@ func set_actor(actor):
 				var page_item_id_1 = node_data.get("PageItemId1")
 				var page_item_id_2 = node_data.get("PageItemId2")
 				new_node.set_pages(pair_type, page_item_id_1, page_item_id_2)
-				new_node.node_1_pressed.connect(on_node_clicked.bind(page_item_id_1))
-				new_node.node_2_pressed.connect(on_node_clicked.bind(page_item_id_2))
+				new_node.node_1_button_down.connect(on_node_button_down.bind(page_item_id_1))
+				new_node.node_1_button_up.connect(on_node_button_up.bind(page_item_id_1))
+				new_node.node_2_button_down.connect(on_node_button_down.bind(page_item_id_2))
+				new_node.node_2_button_up.connect(on_node_button_up.bind(page_item_id_2))
 				page_id_to_grid_mapping[page_item_id_1] = [x_index, y_index]
 				page_id_to_grid_mapping[page_item_id_2] = [x_index, y_index]
 			else:
 				new_node = skill_node_prefab.duplicate()
 				var page_item_id = node_data.get("PageItemId")
 				new_node.set_page(page_item_id)
-				new_node.button.pressed.connect(on_node_clicked.bind(page_item_id))
+				new_node.button.button_down.connect(on_node_button_down.bind(page_item_id))
+				new_node.button.button_up.connect(on_node_button_up.bind(page_item_id))
 				page_id_to_grid_mapping[page_item_id] = [x_index, y_index]
 			if not new_node:
 				continue
@@ -90,11 +96,12 @@ func set_actor(actor):
 	background_control.queue_redraw()
 
 func sync_skill_nodes_states():
-	var points_to_spend:int = _actor.stats.get_stat(StatHelper.Level, 0)
+	var total_title_points:int = _actor.get_level() - 1
 	var spent_points:int = _unlocked_skills.size()
-	total_points_label.text = str(points_to_spend)
-	var remaining_points:int = points_to_spend - spent_points
-	unspent_points_label.text = str(_actor.stats.get_unspent_skill_points())
+	total_points_label.text = str(total_title_points)
+	# Can't use _actor.get_unspent_skill_points since actor might not be synced  
+	var remaining_points:int = total_title_points - spent_points 
+	unspent_points_label.text = str(remaining_points)
 	max_unlocked_y_index = 0
 	var y_index = 0
 	for row in tree_data:
@@ -143,8 +150,18 @@ func get_node_data_for_page_id(page_id:String)->Dictionary:
 		return data
 	return {}
 
-func on_node_clicked(page_id):
+func on_node_button_down(page_id):
+	var node_data = get_node_data_for_page_id(page_id)
+	if node_data.get("IsUnlocked") or node_data.get("AlwaysUnlocked"):
+		node_button_down.emit("Inventory", page_id, 0, Vector2.ZERO)
+	pass
+
+func on_node_button_up(page_id):
 	var page_item = ItemLibrary.get_static_inst_of_item(page_id)
+	var  was_dragging = character_menu._dragging
+	node_button_up.emit("Inventory", page_id, 0)
+	if was_dragging:
+		return
 	var node_data = get_node_data_for_page_id(page_id)
 	var confirm_text = "-LOCKED-"
 	var disabled = true
@@ -205,7 +222,7 @@ func on_node_confirmed(item:BaseItem):
 	character_menu._current_details_card.start_hide()
 	sync_skill_nodes_states()
 	apply_changes()
-	unspent_points_label.text = str(_actor.stats.get_unspent_skill_points())
+	unspent_points_label.text = str(_actor.get_unspent_skill_points())
 	_actor.stats_changed.emit()
 
 func apply_changes():

@@ -55,6 +55,7 @@ func _ready() -> void:
 		shop_button.disabled = true
 	if StoryState.get_story_flag("CampScribeDisabled"):
 		system_button.disabled = true
+	StoryState.title_skills_changed.connect(check_levels)
 	check_levels()
 	
 	#var location = StoryState.get_location()
@@ -67,14 +68,17 @@ func _ready() -> void:
 	_sub_menu_open("Main")
 	pass # Replace with function body.
 
+var _showed_level_up_already = false
 func check_levels():
 	var can_level = false
 	for actor:BaseActor in StoryState.list_party_actors():
-		if actor.stats.can_level_up():
+		if actor.get_unspent_skill_points() > 0:
 			can_level = true
-	if can_level:
+			break
+	if can_level and not _showed_level_up_already:
 		character_button.text = "+ Party"
 	else:
+		_showed_level_up_already = true
 		character_button.text = "Party"
 		
 

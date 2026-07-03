@@ -95,22 +95,22 @@ func get_cant_use_reasons(actor:BaseActor)->Dictionary:
 				missing_requirements['Conflict'] = []
 			missing_requirements['Conflict'].append(other_page_key)
 	
-	# Apparel Required to use Page
-	if requirment_data.has("ApparelReq"):
-		var appel_req = requirment_data.get("ApparelReq", {})
-		var all_apparel_must_match = appel_req.get("AllApparelMustMatch")
-		var any_apparel_matches = false
-		for apparel:BaseApparelEquipment in actor.equipment.list_apparel():
-			if TagHelper.check_tag_filters("ApparelTagFilters", appel_req, apparel):
-				any_apparel_matches = true
-			elif all_apparel_must_match:
-				if not missing_requirements.has("Apparel"):
-					missing_requirements['Apparel'] = []
-				missing_requirements['Apparel'].append(apparel.get_display_name())
-		if not any_apparel_matches and not all_apparel_must_match:
-			if not missing_requirements.has("Apparel"):
-				missing_requirements['Apparel'] = []
-			missing_requirements['Apparel'].append("No Match")
+	## Apparel Required to use Page
+	#if requirment_data.has("ApparelReq"):
+		#var appel_req = requirment_data.get("ApparelReq", {})
+		#var all_apparel_must_match = appel_req.get("AllApparelMustMatch")
+		#var any_apparel_matches = false
+		#for apparel:BaseApparelEquipment in actor.equipment.list_apparel():
+			#if TagHelper.check_tag_filters("ApparelTagFilters", appel_req, apparel):
+				#any_apparel_matches = true
+			#elif all_apparel_must_match:
+				#if not missing_requirements.has("Apparel"):
+					#missing_requirements['Apparel'] = []
+				#missing_requirements['Apparel'].append(apparel.get_display_name())
+		#if not any_apparel_matches and not all_apparel_must_match:
+			#if not missing_requirements.has("Apparel"):
+				#missing_requirements['Apparel'] = []
+			#missing_requirements['Apparel'].append("No Match")
 	
 	return missing_requirements
 			

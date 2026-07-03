@@ -1,11 +1,10 @@
 class_name CharacterMenu_StatsTab
 extends ScrollContainer
 
-@export var accuracy_label:StatLabelContainer
-@export var crit_chance_label:StatLabelContainer
-@export var crit_mod_label:StatLabelContainer
+@export var menu_root:Control
+@export var tag_box:TagBox
+@export var stat_labels:Array[StatLabelContainer]
 
-@export var evasion_label:StatLabelContainer
 @export var block_container:Container
 @export var block_chance_label:StatLabelContainer
 @export var block_mod_label:StatLabelContainer
@@ -22,6 +21,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func sync(actor:BaseActor):
+	tag_box.set_tags(actor.get_tags())
 	for child in damage_datas_container.get_children():
 		child.queue_free()
 	var damage_datas = actor.get_weapon_damage_datas()
@@ -35,10 +35,9 @@ func sync(actor:BaseActor):
 	var target_params = actor.get_weapon_attack_target_params("Weapon")
 	range_display.load_area_matrix(target_params.target_area)
 	
-	accuracy_label.set_stat_values(actor)
-	crit_chance_label.set_stat_values(actor)
-	crit_mod_label.set_stat_values(actor)
-	evasion_label.set_stat_values(actor)
+	for stat_label in stat_labels:
+		stat_label.mouse_over_parent = menu_root
+		stat_label.set_stat_values(actor)
 	
 	var block_chance = actor.stats.get_stat(StatHelper.BlockChance, -1)
 	if block_chance != -1:

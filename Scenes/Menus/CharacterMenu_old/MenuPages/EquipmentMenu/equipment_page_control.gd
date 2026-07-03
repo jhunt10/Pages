@@ -34,7 +34,6 @@ var off_hand_index:int=-1
 		#_actor.equipment_changed.disconnect(set_tags)
 	#_actor = actor
 	#name_label.text = actor.get_name()
-	#level_label.text = str(actor.stats.get_stat(StatHelper.Level, 0))
 	#equipment_slots_container.set_actor(actor)
 	#stat_box.set_actor(actor)
 	#exp_bar.set_actor(actor)
@@ -79,7 +78,7 @@ func sync():
 	if _actor:
 		actor_node.set_actor(_actor)
 		name_label.text = _actor.get_display_name()
-		level_label.text = str(_actor.stats.get_stat(StatHelper.Level, 0))
+		level_label.text = str(_actor.get_level())
 		#stat_box.set_actor(_actor)
 		exp_bar.set_actor(_actor)
 		phy_attack_label.set_stat_values(_actor)

@@ -2,6 +2,7 @@
 extends Node
 
 signal money_changed()
+signal title_skills_changed()
 
 var story_id
 var save_id
@@ -280,7 +281,7 @@ func set_unlocked_skill_for_actor(actor:BaseActor, skills:Array):
 	for page_key in items_to_move["RemoveFromInventory"]:
 			var item = ItemLibrary.get_item(page_key)
 			PlayerInventory.delete_item_from_inventory(item)
-		
+	title_skills_changed.emit()
 
 func get_runtime_untix_time()->float:
 	var val = _total_play_time + (Time.get_unix_time_from_system() - _session_start_unix_time)

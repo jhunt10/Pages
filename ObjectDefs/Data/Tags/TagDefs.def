@@ -24,6 +24,14 @@
 		"Description": "@@#Color:Blue:AttackMod@@ implies this @@#Tag:Page@@ modifies @@#Color:Red:Attacks@@ made by other @@#Tag:Action:Action Pages@@.",
 		"DisplayName": "AttackMod"
 	},
+	"AtkPwr": {
+		"Abreviation": "AtkPwr",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Attack Power@@ is a percentage of @@#Stat:PhyAttack@@ or @@#Stat:MagAttack@@ that will be applied in an @@#Tag:Attack@@.",
+		"DisplayName": "Attack Power"
+	},
 	"ActionMod": {
 		"Abreviation": "ActionMod",
 		"AppliesTo": [
@@ -294,13 +302,21 @@
 		"Description": "@@#Color:Blue:Constructs@@ are artificial being created through @@#Tag:Magic@@ or good ol engener'n.  ",
 		"DisplayName": "Construct"
 	},
+	"Collision": {
+		"Abreviation": "Collision",
+		"AppliesTo": [
+			"Damage"
+		],
+		"Description": "@@#Color:Blue:Collisions@@ occure when an @@#Color:Red:Actor@@ attempts to enter the same @@#Color:Red:Spot@@ as another @@#Color:Red:Actor@@.\n\nThe one with less @@#Stat:Mass@@ will be @@#Tag:Push:pushed@@ or repeled and take @@#Color:DmgColor:Crash:Crash Damage@@ based on the other's @@#Stat:CrashPower@@.",
+		"DisplayName": "Collision"
+	},
 	"Crash": {
 		"Abreviation": "Crash",
 		"AppliesTo": [
 			"Page",
 			"Damage"
 		],
-		"Description": "@@#Color:DmgColor:Crash:Crash@@ is a @@#Color:Blue:Physical Damage Type@@ most often caused by @@#Color:Blue:Collisions@@ between @@#Color:Red:Actors@@.",
+		"Description": "@@#Color:DmgColor:Crash:Crash@@ is a @@#Color:Blue:Physical Damage Type@@ most often caused by @@#Tag:Collision:Collisions@@ between @@#Color:Red:Actors@@.",
 		"DisplayName": "Crash"
 	},
 	"DOT": {
