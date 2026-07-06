@@ -4,10 +4,12 @@ extends RichTextLabel
 const pop_up_container_path = "res://Scenes/UiNodes/DescriptionBox/DescriptionPopUpContainer/description_popup_container.tscn"
 const RED_TEXT = "[color=#460000]"
 const BLUE_TEXT = "[color=#000046]"
+const GREEN_TEXT = "[color=#004600]"
 
 const COLORS_DIC = {
 	"Red": RED_TEXT,
 	"Blue": BLUE_TEXT,
+	"Green": GREEN_TEXT,
 	"Grey": "[color=#3f3f3f]"
 }
 

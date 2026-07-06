@@ -33,7 +33,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		var current_threat = target.aggro.get_threat_from_actor(actor.Id)
 		if change_type == 'ToHighestThreat':
 			var highest = target.aggro.get_highest_threat() * AggroHandler.THREAT_SWITCH_THRESHOLD
-			var add = max(0, highest - current_threat) + 1
+			var add = (max(5, highest - current_threat) + 1) * 2
 			target.aggro.add_threat_from_actor(actor, add, game_state)
 			
 		if change_type == 'ToLowestThreat':

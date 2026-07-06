@@ -1,5 +1,5 @@
 {
-	"Charge": {
+	"Charge_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Quickly Move Forward one Spot and make an Attack for @@#DmgData:WeaponDmgData@@.",
@@ -275,7 +275,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"GuardAction": {
+	"GuardAction_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Raise your shield and gain @@#EftData:GuardEffectData:Name@@ until the start of your next turn.\n\n@@#EftData:GuardEffectData:Description@@",
@@ -359,88 +359,6 @@
 						"TagFiltersReqAll": true
 					}
 				]
-			},
-			"SourceTitle": "Soldier"
-		},
-		"_DefVersion": "1"
-	},
-	"MassTauntEnemy": {
-		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-		"#ObjDetails": {
-			"Description": "Force all Enemy Actors in Area to see you as the highest Threat. They will focus their attacks on you until another actor generates more Threat.",
-			"DisplayName": "Shout",
-			"LargeIcon": "Sprites/TauntEnemyMass.png",
-			"ObjectType": "Item",
-			"SmallIcon": "Sprites/TauntEnemyMass.png",
-			"SnippetDesc": "Force an Enemy Actor to see you as the highest Threat.",
-			"Tags": [
-				"Taunt"
-			],
-			"Taxonomy": [
-				"Item",
-				"Page",
-				"Action"
-			]
-		},
-		"ActionData": {
-			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
-			},
-			"Preview": {
-				"PreviewTargetKey": "TargetParam1"
-			},
-			"SubActions": {
-				"ApplyAggro": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_ApplyAggro.gd",
-					"#FrameIndex": 11.0,
-					"#SubIndex": 0.0,
-					"ChangeType": "ToHighestThreat",
-					"TargetKey": "Target1"
-				},
-				"GetTarget": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-					"#FrameIndex": 10.0,
-					"#SubIndex": 0.0,
-					"AllowAlreadyTargeted": false,
-					"AllowAutoTarget": false,
-					"SetTargetKey": "Target1",
-					"TargetParamKey": "TargetParam1"
-				},
-				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
-					"#FrameIndex": 11.0,
-					"#SubIndex": 1.0,
-					"MainHand": true,
-					"OffHand": "Never"
-				},
-				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
-					"#FrameIndex": 5.0,
-					"#SubIndex": 0.0,
-					"Animation": "Raise",
-					"MainHand": true,
-					"OffHand": "Never"
-				}
-			},
-			"TargetParams": {
-				"TargetParam1": {
-					"LineOfSight": false,
-					"TargetArea": "[[-1,3],[0,3],[1,3],[-2,2],[-1,2],[0,2],[1,2],[2,2],[-3,1],[-2,1],[-1,1],[0,1],[1,1],[2,1],[3,1],[-3,0],[-2,0],[-1,0],[1,0],[2,0],[3,0],[-3,-1],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[3,-1],[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],[-1,-3],[0,-3],[1,-3]]",
-					"TargetType": "FullArea"
-				}
-			}
-		},
-		"ItemData": {
-			"ItemType": "Page",
-			"Rarity": "Common",
-			"Value": 50.0
-		},
-		"PageData": {
-			"PageRequirements": {
-				"ConflictingPages": [],
-				"IncompatiblePages": [],
-				"TitleReq": "Match"
 			},
 			"SourceTitle": "Soldier"
 		},
@@ -653,7 +571,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ShieldBash": {
+	"ShieldBash_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Strike an Actor with your Shield, dealing  @@#DmgData:Damage1:Crash Damage based on Block Chance@@ and pushing them back.",
@@ -770,10 +688,10 @@
 		},
 		"_DefVersion": "1"
 	},
-	"TauntEnemy": {
+	"TauntEnemy_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Force an Enemy Actor to see you as the highest Threat. They will focus their attacks on you until another actor generates more Threat.",
+			"Description": "Force an @@#Color:Red:Enemy Actor@@ to see you as the highest @@#Tag:Threat@@. They will focus their attention on you until another @@#Color:Red:Actor@@ generates more @@#Tag:Threat@@.",
 			"DisplayName": "Taunt",
 			"LargeIcon": "Sprites/TauntEnemy.png",
 			"ObjectType": "Item",
@@ -799,15 +717,15 @@
 			"SubActions": {
 				"ApplyAggro": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_ApplyAggro.gd",
-					"#FrameIndex": 11.0,
-					"#SubIndex": 0.0,
+					"#FrameIndex": 10,
+					"#SubIndex": 1,
 					"ChangeType": "ToHighestThreat",
 					"TargetKey": "Target1"
 				},
 				"GetTarget": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
-					"#FrameIndex": 10.0,
-					"#SubIndex": 0.0,
+					"#FrameIndex": 10,
+					"#SubIndex": 0,
 					"AllowAlreadyTargeted": false,
 					"AllowAutoTarget": false,
 					"SetTargetKey": "Target1",
@@ -815,15 +733,15 @@
 				},
 				"WeaponMotionAnimation": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
-					"#FrameIndex": 11.0,
-					"#SubIndex": 1.0,
+					"#FrameIndex": 11,
+					"#SubIndex": 0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
-					"#FrameIndex": 5.0,
-					"#SubIndex": 0.0,
+					"#FrameIndex": 5,
+					"#SubIndex": 0,
 					"Animation": "Raise",
 					"MainHand": true,
 					"OffHand": "Never"
@@ -852,7 +770,89 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ThrowJavelin": {
+	"TauntEnemyMass_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Force all @@#Color:Red:Enemy Actors@@ in @@#Color:Red:Effect Area@@ to see you as the highest @@#Tag:Threat@@. They will focus their attention on you until another @@#Color:Red:Actor@@ generates more @@#Tag:Threat@@.",
+			"DisplayName": "Shout",
+			"LargeIcon": "Sprites/TauntEnemyMass.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/TauntEnemyMass.png",
+			"SnippetDesc": "Force an Enemy Actor to see you as the highest Threat.",
+			"Tags": [
+				"Taunt"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"Preview": {
+				"PreviewTargetKey": "TargetParam1"
+			},
+			"SubActions": {
+				"ApplyAggro": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_ApplyAggro.gd",
+					"#FrameIndex": 10,
+					"#SubIndex": 1,
+					"ChangeType": "ToHighestThreat",
+					"TargetKey": "Target1"
+				},
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 10,
+					"#SubIndex": 0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": false,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam1"
+				},
+				"WeaponMotionAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"#FrameIndex": 11,
+					"#SubIndex": 0,
+					"MainHand": true,
+					"OffHand": "Never"
+				},
+				"WeaponReadyAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"#FrameIndex": 5,
+					"#SubIndex": 0,
+					"Animation": "Raise",
+					"MainHand": true,
+					"OffHand": "Never"
+				}
+			},
+			"TargetParams": {
+				"TargetParam1": {
+					"LineOfSight": false,
+					"TargetArea": "[[-1,3],[0,3],[1,3],[-2,2],[-1,2],[0,2],[1,2],[2,2],[-3,1],[-2,1],[-1,1],[0,1],[1,1],[2,1],[3,1],[-3,0],[-2,0],[-1,0],[1,0],[2,0],[3,0],[-3,-1],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[3,-1],[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],[-1,-3],[0,-3],[1,-3]]",
+					"TargetType": "FullArea"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Soldier"
+		},
+		"_DefVersion": "1"
+	},
+	"ThrowJavelin_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Throw a Javelin Missile at @@#TrgParm:TargetParam:TargetType@@ for @@#DmgData:Damage1@@.",

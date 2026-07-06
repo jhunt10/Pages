@@ -190,7 +190,7 @@ func get_raw_base_stats()->Dictionary:
 	var title_page = get_title_page()
 	if title_page:
 		return title_page.get_base_stats()
-	return actor_data.get("Stats")#self.get_load_val("Stats", {})
+	return actor_data.get("Stats",{})#self.get_load_val("Stats", {})
 	
 
 func get_stat_mods_granted_to_carrier():
@@ -441,12 +441,10 @@ func leaves_corpse()->bool:
 	return is_player
 
 func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, game_state:GameStateData=null):
+	if aggro:
+		aggro.add_threat_from_actor(damage_event.attacker, damage_event.final_damage, game_state)
 	if stats:
-		return stats.apply_damage_event(damage_event, trigger_effect, game_state)
-
-func apply_damage(damage):
-	if stats:
-		return stats.apply_damage(damage)
+		stats.apply_damage_event(damage_event, trigger_effect, game_state)
 
 func apply_healing(value:int, can_revive:bool=false):
 	if stats:

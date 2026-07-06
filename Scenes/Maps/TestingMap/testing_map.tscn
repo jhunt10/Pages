@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://cc1kqm82ckglk" path="res://ObjectDefs/Factions/Objects/Actors/Scenes/Lever/Lever_Icon.png" id="14_v847v"]
 [ext_resource type="Script" uid="uid://ms8plc3341vx" path="res://Scenes/Maps/MapEditing/lever_spawn_node.gd" id="15_wreyn"]
 [ext_resource type="Texture2D" uid="uid://bkmin2ryysfo" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_Icon.png" id="17_ddyhq"]
+[ext_resource type="Script" uid="uid://jkmw74mmfc8h" path="res://Scenes/DevTools/aggro_display_node.gd" id="17_h856d"]
+[ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="18_8vll5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwpvo"]
 texture = ExtResource("2_2xpuf")
@@ -1395,3 +1397,8 @@ script = ExtResource("11_vji11")
 spawn_actor_key = "ShrineActor"
 facing = 2
 map_coor = Vector2i(8, 7)
+
+[node name="AggroDisplay" type="Node2D" parent="." unique_id=1242957819 node_paths=PackedStringArray("map_controller")]
+script = ExtResource("17_h856d")
+map_controller = NodePath("..")
+text_font = ExtResource("18_8vll5")

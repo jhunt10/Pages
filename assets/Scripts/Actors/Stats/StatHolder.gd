@@ -168,17 +168,17 @@ func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, gam
 	health_changed.emit()
 	
 
-func apply_damage(damage):
-	if damage is DamageEvent:
-		damage = damage.final_damage
-	if damage < 0:
-		damage = abs(damage)
-	var cur_hp = current_health 
-	var new_hp = max(min(cur_hp - damage, max_health), 0)
-	_cached_stats[StatHelper.HealthCurrent] = new_hp
-	if current_health <= 0 and CombatRootControl.Instance:
-		CombatRootControl.Instance.kill_actor(_actor)
-	health_changed.emit()
+#func apply_damage(damage):
+	#if damage is DamageEvent:
+		#damage = damage.final_damage
+	#if damage < 0:
+		#damage = abs(damage)
+	#var cur_hp = current_health 
+	#var new_hp = max(min(cur_hp - damage, max_health), 0)
+	#_cached_stats[StatHelper.HealthCurrent] = new_hp
+	#if current_health <= 0 and CombatRootControl.Instance:
+		#CombatRootControl.Instance.kill_actor(_actor)
+	#health_changed.emit()
 
 func apply_healing(value:int, can_revive:bool=false):
 	

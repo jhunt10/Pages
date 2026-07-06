@@ -30,7 +30,7 @@ func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
 			var heal_effect = VfxHelper.create_vfx_on_actor(target_actor, "Heal_DamageEffect", {})
 			VfxHelper.add_chained_flash_text(heal_effect, heal_val, BaseFlashTextVfxNode.FlashTextType.Healing_Dmg)
 		elif heal_val < 0:
-			target_actor.apply_damage(heal_val)
+			target_actor.apply_healing(heal_val)
 			var heal_effect = VfxHelper.create_vfx_on_actor(target_actor, "Hurt_DamageEffect", {})
 			VfxHelper.add_chained_flash_text(heal_effect, heal_val, BaseFlashTextVfxNode.FlashTextType.Normal_Dmg)
 		var hp_after = target_actor.stats.current_health

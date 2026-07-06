@@ -23,7 +23,7 @@ func on_damage_taken(effect:BaseEffect, subeffect_data:Dictionary,
 		if !attacker:
 			printerr("SubEffect_ShareDamage.on_damage_taken: Damage source '%s' is not BaseActor.")
 			return
-		attacker.apply_damage(damage_event.final_damage)
+		attacker.apply_damage_event(damage_event)
 		VfxHelper.create_flash_text(attacker, str(damage_event.final_damage), BaseFlashTextVfxNode.FlashTextType.DOT_Dmg)
 		return
 	if share_with == "EffectSource":
@@ -31,7 +31,7 @@ func on_damage_taken(effect:BaseEffect, subeffect_data:Dictionary,
 		if !source_actor:
 			printerr("SubEffect_ShareDamage.on_damage_taken: Effect source '%s' is not BaseActor.")
 			return
-		source_actor.apply_damage(damage_event.final_damage)
+		source_actor.apply_damage_event(damage_event)
 		VfxHelper.create_flash_text(source_actor, str(damage_event.final_damage), BaseFlashTextVfxNode.FlashTextType.DOT_Dmg)
 		return
 	pass

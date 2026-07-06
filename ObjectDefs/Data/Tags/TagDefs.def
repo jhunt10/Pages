@@ -940,6 +940,22 @@
 		"Description": "@@#Color:Blue:TargetMod@@ modify the @@#Color:Red:Targeting@@ of @@#Tag:Action:Action Pages@@.",
 		"DisplayName": "TargetMod"
 	},
+	"Taunt": {
+		"Abreviation": "Taunt",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Taunt@@ is an @@#Tag:Action:Action@@ which generate high @@#Tag:Threat@@ and causes effected @@#Color:Red:Enemies@@ to focus their @@#Tag:Attack:Attacks@@ against the user.",
+		"DisplayName": "Taunt"
+	},
+	"Threat": {
+		"Abreviation": "Threat",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Threat@@ is used by @@#Color:Red:Enemy Actors@@ to determine which @@#Color:Green:Player Actor@@ should be the focus of thier attention.\n\nWhen a @@#Color:Green:Player@@ deals damage to an @@#Color:Red:Enemy@@, an equal amout of @@#Color:Blue:Threat@@ is applied between the two.",
+		"DisplayName": "Threat"
+	},
 	"Supplies": {
 		"Abreviation": "Supplies",
 		"AppliesTo": [
@@ -963,14 +979,6 @@
 		],
 		"Description": "@@#Color:Blue:Tactic@@ means @@#Color:Blue:Physical@@ @@#Color:Red:Action@@",
 		"DisplayName": "Tactic"
-	},
-	"Taunt": {
-		"Abreviation": "Taunt",
-		"AppliesTo": [
-			"Page"
-		],
-		"Description": "@@#Color:Blue:Taunt@@ are @@#Tag:Action:Actions@@ which generate high @@#Tag:Aggro@@ causing enemies to focus on the @@#Color:Red:Actor@@.",
-		"DisplayName": "Taunt"
 	},
 	"Teleport": {
 		"Abreviation": "Teleport",

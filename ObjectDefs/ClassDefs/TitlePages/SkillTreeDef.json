@@ -2,24 +2,24 @@
     "Soldier": [
         [
             {
-                "PageItemId": "HeavyFootPage",
+                "PageItemId": "HeavyFoot_PageItem",
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "GuardAction",
+                "PageItemId": "GuardAction_PageItem",
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "ThrowJavelin",
+                "PageItemId": "ThrowJavelin_PageItem",
                 "AlwaysUnlocked": true
             }
         ],
         [
             {
-                "PageItemId": "HeavyArmorTrainingPage"
+                "PageItemId": "HeavyArmorTraining_PageItem"
             },
             {
-                "PageItemId": "ShieldTrainingPage"
+                "PageItemId": "ShieldTraining_PageItem"
             },
             {
                 "PageItemId": "TwoHandBonus_PageItem"
@@ -30,16 +30,16 @@
                 "PageItemId": "CrashBully_PageItem"
             },
             {
-                "PageItemId": "ShieldBash",
-                "ParentId": "ShieldTrainingPage"
+                "PageItemId": "ShieldBash_PageItem",
+                "ParentId": "ShieldTraining_PageItem"
             },
             {
-                "PageItemId": "Charge"
+                "PageItemId": "Charge_PageItem"
             }
         ],
         [
             {
-                "PageItemId": "TauntEnemy"
+                "PageItemId": "TauntEnemy_PageItem"
             },
             {
                 "PageItemId": "WideGuardPage"
@@ -52,7 +52,8 @@
         ],
         [
             {
-                "PageItemId": "TakeBruntPage"
+                "PageItemId": "TauntEnemyMass_PageItem",
+                "ParentId": "TauntEnemy_PageItem"
             },
             {
                 "PageItemId": "FaceFoe"
@@ -63,7 +64,7 @@
         ],
         [
             {
-                "PageItemId": "MassTauntEnemy"
+                "PageItemId": "TakeBruntPage"
             },
             {
                 "PageItemId": "BlockAoePage"

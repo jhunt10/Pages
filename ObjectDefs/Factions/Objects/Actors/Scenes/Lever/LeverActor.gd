@@ -17,9 +17,6 @@ func on_combat_start():
 func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, game_state:GameStateData=null):
 	on_trigger(game_state)
 
-func apply_damage(damage):
-	on_trigger(CombatRootControl.Instance.GameState)
-
 func apply_healing(value:int, can_revive:bool=false):
 	on_trigger(CombatRootControl.Instance.GameState)
 

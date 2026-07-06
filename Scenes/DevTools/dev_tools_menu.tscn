@@ -303,10 +303,10 @@ mouse_over_parent = NodePath("../../../..")
 
 [node name="AggroMenu" type="Control" parent="." unique_id=1348014628 node_paths=PackedStringArray("close_button", "actors_options_button", "list_container", "premade_label")]
 anchors_preset = 0
-offset_left = 5.0
-offset_top = 511.0
-offset_right = 45.0
-offset_bottom = 551.0
+offset_left = 20.0
+offset_top = 402.0
+offset_right = 60.0
+offset_bottom = 442.0
 script = ExtResource("6_sbyrl")
 close_button = NodePath("BackPatch/BoxContainer/TitleContainer/ExitButton")
 actors_options_button = NodePath("BackPatch/BoxContainer/LoadedOptionButton")

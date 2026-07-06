@@ -19,7 +19,7 @@ func _init(actor:BaseActor) -> void:
 	
 	# Connect signals
 func on_combat_start():
-	if CombatRootControl.Instance:
+	if CombatRootControl.Instance and not CombatRootControl.Instance.QueController.start_of_turn_with_state.is_connected(_on_turn_start):
 		CombatRootControl.Instance.QueController.start_of_turn_with_state.connect(_on_turn_start)
 		CombatRootControl.Instance.QueController.end_of_turn_with_state.connect(_on_turn_end)
 		CombatRootControl.Instance.QueController.start_of_round_with_state.connect(_on_round_start)
