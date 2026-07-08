@@ -42,15 +42,12 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"BackStab_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "It's a good rule of thumb to never turn your back on the enemy. For those who forget why, you'll be happy to remind them.\n\n@@#AtkMod:BackStabAtkMod:StatMod:BackStabStatMod@@ when attacking from @@#Color:Red:Behind@@.",
+			"Description": "It's a good rule of thumb to never turn your back on the enemy. For those who forget why, you'll be happy to remind them.\n\n@@#AtkMod:BackStabAtkMod:StatMod:BackStabStatMod@@ when attacking from @@#Tag:Behind@@.",
 			"DisplayName": "Back Stabber",
 			"LargeIcon": "Sprites/BackStab_Icon.png",
 			"ObjectType": "Item",
@@ -121,9 +118,6 @@
 			},
 			"SourceTitle": "Rogue"
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"Bleeder_PageItem": {
@@ -193,9 +187,6 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"Blinder_PageItem": {
@@ -264,9 +255,6 @@
 					}
 				}
 			}
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	},
@@ -342,9 +330,6 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"EvasionAoePage": {
@@ -384,9 +369,6 @@
 					"Value": 1.0
 				}
 			}
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	},
@@ -428,9 +410,6 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"LowAggro_PageItem": {
@@ -471,9 +450,6 @@
 					"Value": 0.7
 				}
 			}
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	},
@@ -526,9 +502,6 @@
 				"TitleReq": "Match"
 			},
 			"SourceTitle": "Rogue"
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	},
@@ -598,9 +571,6 @@
 					}
 				}
 			}
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	}

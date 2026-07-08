@@ -494,6 +494,13 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 		front_back_change = x_change
 		right_left_change = y_change
 	
+	# Simplified
+	if front_back_change > 0:
+		return AttackDirection.Front
+	if front_back_change < 0:
+		return AttackDirection.Back
+	return AttackDirection.Flank
+	
 	var is_side = abs(front_back_change) < abs(right_left_change)
 	var is_diaginal = abs(front_back_change) == abs(right_left_change)
 	var is_forward = not is_side and front_back_change >= 0
@@ -547,15 +554,15 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 			return AttackDirection.Front
 	else:
 		return AttackDirection.Front
-			
 	
-	#if abs(front_back_change) >= abs(right_left_change):
-		#if front_back_change >= 0:
-			#return AttackDirection.Front
-		#else:
-			#return AttackDirection.Back
-	#else:
-		#return AttackDirection.Flank
+	
+	##if abs(front_back_change) >= abs(right_left_change):
+		##if front_back_change >= 0:
+			##return AttackDirection.Front
+		##else:
+			##return AttackDirection.Back
+	##else:
+		##return AttackDirection.Flank
 
 
 

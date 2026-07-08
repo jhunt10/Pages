@@ -13,9 +13,9 @@ func set_pages(pair_type:String, page_item_id_1, page_item_id_2):
 	node_2.set_page(page_item_id_2)
 	if not node_1.button.pressed.is_connected(on_node_button_pressed):
 		node_1.button.button_down.connect(on_node_button_pressed.bind(0, true))
-		node_1.button.button_down.connect(on_node_button_pressed.bind(0, false))
+		node_1.button.button_up.connect(on_node_button_pressed.bind(0, false))
 		node_2.button.button_down.connect(on_node_button_pressed.bind(1, true))
-		node_2.button.button_down.connect(on_node_button_pressed.bind(1, false))
+		node_2.button.button_up.connect(on_node_button_pressed.bind(1, false))
 	if pair_type.to_lower() == "or":
 		$Control/AndIcon.hide()
 		$Control/OrIcon.show()

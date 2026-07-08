@@ -200,7 +200,10 @@ func create_details_card(item:BaseItem,
 			return
 		_current_details_card.hide_done.disconnect(_on_details_card_freed)
 		_current_details_card.start_hide()
-		
+	
+	if !item:
+		return null
+	
 	if confirm_button_text == 'UNSET':
 		var actor_has_item = false 
 		if item is BasePageItem:
@@ -222,7 +225,7 @@ func create_details_card(item:BaseItem,
 			#var reason = get_cant_equip_reason(cant_equip_reasons)
 			#confirm_button_text = reason[0]
 			#disable_confirm = reason[1]
-			
+	
 	_current_details_card = load("res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
 	details_card_spawn_point.add_child(_current_details_card)
 	_current_details_card.vertical = true

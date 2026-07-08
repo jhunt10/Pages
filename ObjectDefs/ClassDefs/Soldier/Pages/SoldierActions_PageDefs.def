@@ -2,7 +2,7 @@
 	"Charge_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Quickly Move Forward one Spot and make an Attack for @@#DmgData:WeaponDmgData@@.",
+			"Description": "@@#Tag:Quick:Quickly@@ Move Forward one @@#Color:Red:Spot@@ and make a @@#Tag:WpnAtk:Weapon Attack@@ for @@#DmgData:WeaponDmgData@@.",
 			"DisplayName": "Charge",
 			"LargeIcon": "Sprites/Charge.png",
 			"ObjectType": "Item",
@@ -21,9 +21,13 @@
 			]
 		},
 		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Phy",
+				"Clip": 8.0,
+				"Cost": 1.0
+			},
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
+				"AccuracyMod": 1.0
 			},
 			"DamageDatas": {
 				"WeaponDmgData": {
@@ -110,10 +114,10 @@
 		},
 		"_DefVersion": "1"
 	},
-	"Cleave": {
+	"Cleave_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Swing your weapon and cleave through anyone in front of you.\n\nMake a Attack against all Actors in range for @@#DmgData:WeaponDmgData@@.",
+			"Description": "Swing your weapon and cleave through all before you.\n\nMake a weaken @@#Tag:WpnAtk:Weapon Attack@@ against all @@#Red:Actors@@ in range for @@#DmgData:WeaponDmgData@@.",
 			"DisplayName": "Cleave",
 			"LargeIcon": "Sprites/Cleave.png",
 			"ObjectType": "Item",
@@ -131,16 +135,15 @@
 		"ActionData": {
 			"AmmoData": {
 				"AmmoType": "Phy",
-				"Clip": 4.0,
+				"Clip": 6.0,
 				"Cost": 1.0
 			},
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
+				"AccuracyMod": 1.0
 			},
 			"DamageDatas": {
 				"WeaponDmgData": {
-					"AtkPwrScale": 0.5,
+					"AtkPwrScale": 0.6,
 					"WeaponFilter": {
 						"FallbackToUnarmed": false,
 						"IncludeSlots": [
@@ -152,7 +155,7 @@
 			},
 			"Preview": {
 				"PreviewDamageKey": "WeaponDmgData",
-				"PreviewTargetKey": "TargetParams1"
+				"PreviewTargetKey": "PreviewTargetParams"
 			},
 			"SubActions": {
 				"Attack": {
@@ -194,6 +197,11 @@
 					"LineOfSight": false,
 					"TargetArea": "[[-1,1],[0,1],[1,1]]",
 					"TargetType": "Actor"
+				},
+				"PreviewTargetParams": {
+					"LineOfSight": false,
+					"TargetArea": "[[-1,1],[0,1],[1,1]]",
+					"TargetType": "FullArea"
 				}
 			}
 		},
@@ -212,10 +220,10 @@
 		},
 		"_DefVersion": "1"
 	},
-	"FaceFoe": {
+	"FaceFoe_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Select an Enemy in range and quickly Turn to face them.",
+			"Description": "Select an Enemy in range and @@#Tag:Quick:Quickly@@ Turn to face them.",
 			"DisplayName": "Face Foe",
 			"LargeIcon": "Sprites/FaceFoe.png",
 			"ObjectType": "Item",
@@ -223,7 +231,8 @@
 			"SnippetDesc": "Turn to face Enemy",
 			"Tags": [
 				"Tactic",
-				"Fast"
+				"Move",
+				"Quick"
 			],
 			"Taxonomy": [
 				"Item",
@@ -278,7 +287,7 @@
 	"GuardAction_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Raise your shield and gain @@#EftData:GuardEffectData:Name@@ until the start of your next turn.\n\n@@#EftData:GuardEffectData:Description@@",
+			"Description": "Raise your @@#Tag:Shield@@ and gain @@#EftData:GuardEffectData:Name@@ until the start of your next @@#Color:Red:Turn@@.\n\n@@#EftData:GuardEffectData:Description@@",
 			"DisplayName": "Guard",
 			"LargeIcon": "Effects/Sprites/Guard.png",
 			"ObjectType": "Item",
@@ -385,8 +394,7 @@
 		},
 		"ActionData": {
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
+				"AccuracyMod": 1.0
 			},
 			"DamageDatas": {
 				"Damage1": {
@@ -491,8 +499,7 @@
 				"Cost": 1.0
 			},
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
+				"AccuracyMod": 1.0
 			},
 			"DamageDatas": {
 				"WeaponDamage": {
@@ -574,7 +581,7 @@
 	"ShieldBash_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Strike an Actor with your Shield, dealing  @@#DmgData:Damage1:Crash Damage based on Block Chance@@ and pushing them back.",
+			"Description": "Strike an Actor with your @@#Tag:Shield@@, dealing  @@#DmgData:Damage1:Crash Damage based on Block Mod@@ and @@#Tag:Push:Push@@ them back one @@#Color:Red:Spot@@.",
 			"DisplayName": "Shield Bash",
 			"LargeIcon": "Sprites/ShieldBash.png",
 			"ObjectType": "Item",
@@ -596,8 +603,7 @@
 				"Cost": 1.0
 			},
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
+				"AccuracyMod": 1.0
 			},
 			"DamageDatas": {
 				"Damage1": {
@@ -708,8 +714,7 @@
 		},
 		"ActionData": {
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
+				"AccuracyMod": 1.0
 			},
 			"Preview": {
 				"PreviewTargetKey": "TargetParam1"
@@ -790,8 +795,7 @@
 		},
 		"ActionData": {
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
+				"AccuracyMod": 1.0
 			},
 			"Preview": {
 				"PreviewTargetKey": "TargetParam1"
@@ -855,7 +859,8 @@
 	"ThrowJavelin_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Throw a Javelin Missile at @@#TrgParm:TargetParam:TargetType@@ for @@#DmgData:Damage1@@.",
+			"Description":
+			"Throw a Javelin @@#Tag:Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:Damage1@@ to any @@#Color:Red:Actor@@ it hits.",
 			"DisplayName": "Javelin",
 			"LargeIcon": "Sprites/JavelinsIcon.png",
 			"ObjectType": "Item",
@@ -881,8 +886,7 @@
 				"Cost": 1.0
 			},
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
+				"AccuracyMod": 1.0
 			},
 			"DamageDatas": {
 				"Damage1": {
@@ -989,8 +993,7 @@
 				"Cost": 1.0
 			},
 			"AttackDetails": {
-				"AccuracyMod": 0.5,
-				"PotencyMod": 1.0
+				"AccuracyMod": 0.5
 			},
 			"DamageDatas": {
 				"WeaponDmgData": {

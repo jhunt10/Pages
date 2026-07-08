@@ -91,7 +91,7 @@ func calc_button_size():
 	
 	var seperator_total_width = (est_button_count-1) * sep_size
 	var real_button_width = (container_width - seperator_total_width) / est_button_count
-	print("Width: %s | Est Cnt: %s | Button Size: %s" % [container_width, est_button_count, real_button_width])
+	#print("Width: %s | Est Cnt: %s | Button Size: %s" % [container_width, est_button_count, real_button_width])
 	for child in items_container.get_children():
 		if child is InventoryItemButton:
 			(child as InventoryItemButton).custom_minimum_size = Vector2(real_button_width, real_button_width + 16)
@@ -141,7 +141,7 @@ func build_item_slots():
 		items_container.remove_child(_item_groups[sub_group_key])
 	#print("Item Groups:")
 	for sub_group_key in get_sorted_sub_group_keys():
-		print(sub_group_key)
+		#print(sub_group_key)
 		if _item_groups.keys().has(sub_group_key):
 			items_container.add_child(_item_groups[sub_group_key])
 	#print("\n\n")

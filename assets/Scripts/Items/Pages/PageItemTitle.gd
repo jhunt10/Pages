@@ -51,6 +51,10 @@ func get_level()->int:
 func get_xp()->int:
 	return get_load_val("Xp", 1)
 
+func set_level_and_xp(level:int, xp:int):
+	set_load_val(["Xp"], xp)
+	set_load_val(["Level"], level)
+
 func add_xp(value:int)->bool:
 	var old_level = get_level()
 	var new_level = old_level

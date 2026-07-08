@@ -428,6 +428,7 @@ position = Vector2(0, -8)
 texture = ExtResource("24_brgje")
 
 [node name="AwarenessDisplay" type="TileMapLayer" parent="." unique_id=426874659]
+visible = false
 position = Vector2(-16, -16)
 tile_set = SubResource("TileSet_wmkvr")
 script = ExtResource("25_ysrah")

@@ -35,7 +35,7 @@ func validate_items():
 	super()
 	_cache_action_mods()
 
-func build_effects():
+func sync_passive_page_effects():
 	for page_id in item_id_to_effect_id.keys():
 		var effect_id = item_id_to_effect_id[page_id]
 		if not _actor.effects.has_effect(effect_id):

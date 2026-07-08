@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 			return
 		self.queue_free()
 		return
-	#if awareness_display:
+	#if awareness_display and not Engine.is_editor_hint():
 		#awareness_display.sync()
 	if is_moving:
 		var change = delta * movement_speed

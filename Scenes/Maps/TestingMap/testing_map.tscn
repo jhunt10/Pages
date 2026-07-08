@@ -1399,6 +1399,7 @@ facing = 2
 map_coor = Vector2i(8, 7)
 
 [node name="AggroDisplay" type="Node2D" parent="." unique_id=1242957819 node_paths=PackedStringArray("map_controller")]
+visible = false
 script = ExtResource("17_h856d")
 map_controller = NodePath("..")
 text_font = ExtResource("18_8vll5")

@@ -44,15 +44,15 @@
 		},
 		"_DefVersion": "1"
 	},
-	"StrMass_Nested_Effect": {
+	"InStoppable_Nested_Effect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
-			"Description": "@@#StatMod:MassStatMod@@",
-			"DisplayName": "Strong Mass",
+			"Description": "@@#StatMod:MassStatMod@@ when using a @@#Tag:Move:Move Action@@.",
+			"DisplayName": "Instoppable",
 			"LargeIcon": "Sprites/MassUp.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/MassUp.png",
-			"SnippetDesc": "Add STR to MAS",
+			"SnippetDesc": "+20% MAS when using a Move Action.",
 			"Tags": [],
 			"Taxonomy": [
 				"Effect"
@@ -69,10 +69,9 @@
 			},
 			"StatMods": {
 				"MassStatMod": {
-					"DepStatName": "Strength",
-					"ModType": "AddStat",
+					"ModType": "Scale",
 					"StatName": "Mass",
-					"Value": 1.0
+					"Value": 1.2
 				}
 			},
 			"SubEffects": {
@@ -86,15 +85,15 @@
 		},
 		"_DefVersion": "1"
 	},
-	"UnStoppable_Effect": {
+	"InStoppable_PageEffect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
-			"Description": "Add @@#Color:Red:STR@@ to @@#Color:Red:MAS@@ when you move.",
-			"DisplayName": "Unstopable",
+			"Description": "@@#StatMod:MassStatMod@@ when using a @@#Tag:Move:Move Action@@.",
+			"DisplayName": "Instopable",
 			"LargeIcon": "Sprites/MassUp.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/MassUp.png",
-			"SnippetDesc": "Add STR to MAS",
+			"SnippetDesc": "+20% MAS when using a Move Action.",
 			"Tags": [],
 			"Taxonomy": [
 				"Effect"
@@ -113,37 +112,86 @@
 				"AddChild": {
 					"ChildEffectData": {
 						"Details": {
-							"DisplayName": "Unstopable"
+							"DisplayName": "Instopable"
 						}
 					},
-					"ChildEffectKey": "StrMass_Nested_Effect",
+					"ChildEffectKey": "InStoppable_Nested_Effect",
 					"DeleteChildOnDelete": true,
 					"OptionalTriggers": [
-						"PreMove"
+						"OnPageUse"
 					],
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
-					"UniqueChildEffectId": "ImStoppable_StrMass_Nested"
+					"UniqueChildEffectId": "InStoppable_Nested_Effect",
+					"OnPageUseTriggerCondition":{
+						"PageTagFilters": [
+							{
+								"RequireAllTags":["Move"]
+							}
+						],
+						"PageTagFiltersReqAll": true
+					}
 				},
 				"RemoveChild": {
 					"OptionalTriggers": [
 						"OnTurnEnd"
 					],
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_RemoveNestedEffect.gd",
-					"UniqueChildEffectId": "ImStoppable_StrMass_Nested"
+					"UniqueChildEffectId": "InStoppable_Nested_Effect"
 				}
 			}
 		},
 		"_DefVersion": "1"
 	},
-	"Unmoveable_Effect": {
+	"Unmoveable_Nested_Effect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
-			"Description": "Add @@#Color:Red:STR@@ to @@#Color:Red:MAS@@ until you move.",
-			"DisplayName": "Immoveable",
+			"Description": "@@#StatMod:MassStatMod@@ when not using a @@#Tag:Move:Move Action@@.",
+			"DisplayName": "Unmoveable",
 			"LargeIcon": "Sprites/MassUp.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/MassUp.png",
-			"SnippetDesc": "Add STR to MAS",
+			"SnippetDesc": "+20% MAS when NOT using a Move Action.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"IsBad": false,
+				"IsGood": true,
+				"IsTemporary": true,
+				"ShowDuration": false,
+				"ShowInHud": true
+			},
+			"StatMods": {
+				"MassStatMod": {
+					"ModType": "Scale",
+					"StatName": "Mass",
+					"Value": 1.2
+				}
+			},
+			"SubEffects": {
+				"ModStat": {
+					"StatModKeys": [
+						"MassStatMod"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Unmoveable_PageEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#StatMod:MassStatMod@@ when not using a @@#Tag:Move:Move Action@@.",
+			"DisplayName": "Unmoveable",
+			"LargeIcon": "Sprites/MassUp.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/MassUp.png",
+			"SnippetDesc": "+20% MAS when NOT using a Move Action.",
 			"Tags": [],
 			"Taxonomy": [
 				"Effect"
@@ -162,24 +210,42 @@
 				"AddChild": {
 					"ChildEffectData": {
 						"Details": {
-							"DisplayName": "Immoveable"
+							"DisplayName": "Unmoveable"
 						}
 					},
-					"ChildEffectKey": "StrMass_Nested_Effect",
+					"ChildEffectKey": "Unmoveable_Nested_Effect",
 					"DeleteChildOnDelete": true,
 					"OptionalTriggers": [
 						"OnCombatStart",
-						"OnTurnStart"
+						"OnPageUse",
+						"OnGapTurnStart",
+						"OnRoundEnd"
 					],
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
-					"UniqueChildEffectId": "Immoveable_StrMass_Nested"
+					"UniqueChildEffectId": "Unmoveable_Nested_Effect",
+					"OnPageUseTriggerCondition":{
+						"PageTagFilters": [
+							{
+								"ExcludeAllTags":["Move"]
+							}
+						],
+						"PageTagFiltersReqAll": true
+					}
 				},
 				"RemoveChild": {
 					"OptionalTriggers": [
-						"PreMove"
+						"OnPageUse"
 					],
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_RemoveNestedEffect.gd",
-					"UniqueChildEffectId": "Immoveable_StrMass_Nested"
+					"UniqueChildEffectId": "Unmoveable_Nested_Effect",
+					"OnPageUseTriggerCondition":{
+						"PageTagFilters": [
+							{
+								"RequireAllTags":["Move"]
+							}
+						],
+						"PageTagFiltersReqAll": true
+					}
 				}
 			}
 		},

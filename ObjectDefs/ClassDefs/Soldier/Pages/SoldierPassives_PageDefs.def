@@ -38,9 +38,6 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"CrashBully_PageItem": {
@@ -82,9 +79,6 @@
 					"Value": 5
 				}
 			}
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	},
@@ -157,9 +151,6 @@
 
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"CrashRoughPage": {
@@ -231,9 +222,6 @@
 
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"HeavyArmorTraining_PageItem": {
@@ -284,9 +272,6 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"HeavyFoot_PageItem": {
@@ -332,9 +317,6 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"ShieldTraining_PageItem": {
@@ -376,9 +358,6 @@
 					"Value": -0.2
 				}
 			}
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	},
@@ -423,9 +402,6 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
 	"ShieldWallPage": {
@@ -465,9 +441,6 @@
 					"Value": 1.0
 				}
 			}
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	},
@@ -558,9 +531,6 @@
 				"TitleReq": "Match"
 			},
 			"SourceTitle": "Soldier"
-		},
-		"PassiveData": {
-
 		},
 		"_DefVersion": "1"
 	},
@@ -653,20 +623,17 @@
 				}
 			}
 		},
-		"PassiveData": {
-
-		},
 		"_DefVersion": "1"
 	},
-	"UnMovablePage": {
+	"UnMovable_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "You stand your ground, even against more massive foes.\n\nAt the start of your turn, gain @@#EftData:NestedEffectData:Name@@.\n\n@@#EftData:NestedEffectData:Description@@",
-			"DisplayName": "Immoveable",
+			"Description": "You stand your ground, even against more massive foes.\n\nIn combat gain:\n @@#EftDef:Unmoveable_Nested_Effect:Description@@",
+			"DisplayName": "Unmoveable",
 			"LargeIcon": "Sprites/Unmovable.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/Unmovable.png",
-			"SnippetDesc": "Add STR to MAS until you Move.",
+			"SnippetDesc": "+20% MAS when NOT using a Move Action.",
 			"Tags": [
 				"Passive",
 				"Effect"
@@ -683,9 +650,6 @@
 			"Value": 50.0
 		},
 		"PageData": {
-			"EffectData": {
-				"EffectKey": "Unmoveable_Effect"
-			},
 			"PageRequirements": {
 				"ConflictingPages": [],
 				"IncompatiblePages": [],
@@ -693,20 +657,22 @@
 			},
 			"SourceTitle": "Soldier"
 		},
-		"PassiveData": {
-
+		"PassiveData":{
+			"InCombatEftData": {
+				"EffectKey": "Unmoveable_PageEffect"
+			}
 		},
 		"_DefVersion": "1"
 	},
-	"UnStopablePage": {
+	"InStopable_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "You push forward, even against more massive foes.\n\nOn Move, gain @@#EftData:NestedEffectData:Name@@ until then end of Turn.\n\n@@#EftData:NestedEffectData:Description@@",
-			"DisplayName": "Unstoppable",
+			"Description": "You push forward, even against more massive foes.\n\nIn combat gain:\n @@#EftDef:InStoppable_Nested_Effect:Description@@",
+			"DisplayName": "Instoppable",
 			"LargeIcon": "Sprites/Unstoppable.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/Unstoppable.png",
-			"SnippetDesc": "Add STR to MAS on Move.",
+			"SnippetDesc": "+20% MAS when using a Move Action.",
 			"Tags": [
 				"Passive",
 				"Effect"
@@ -723,9 +689,6 @@
 			"Value": 50.0
 		},
 		"PageData": {
-			"EffectData": {
-				"EffectKey": "UnStoppable_Effect"
-			},
 			"PageRequirements": {
 				"ConflictingPages": [],
 				"IncompatiblePages": [],
@@ -733,8 +696,10 @@
 			},
 			"SourceTitle": "Soldier"
 		},
-		"PassiveData": {
-
+		"PassiveData":{
+			"InCombatEftData": {
+				"EffectKey": "InStoppable_PageEffect"
+			}
 		},
 		"_DefVersion": "1"
 	},
@@ -786,8 +751,76 @@
 				}
 			}
 		},
-		"PassiveData": {
+		"_DefVersion": "1"
+	},
+	
+	"ForwardGuard_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "You've spent enough time around the @@#Color:Green:Rogue@@ to learn that you should never turn your back on the enemy... or the @@#Color:Green:Rogue@@.\n\n@@#AtkMod:ForwardGuardAtkMod:StatMod:ForwardGuardStatMod@@ when defending against @@#Tag:Attack:Attacks@@ from your @@#Tag:Front@@.",
+			"DisplayName": "Forward Guard",
+			"LargeIcon": "Sprites/FrontGuard_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/FrontGuard_Icon.png",
+			"SnippetDesc": "+20 Block Chance attacking from Font",
+			"Tags": [
+				"Passive"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"AttackMods": {
+				"ForwardGuardAtkMod": {
+					"AttackModKey": "ForwardGuardAtkMod",
+					"CanStack": false,
+					"Conditions": {
+						"AttackSourceTagFilters": [],
+						"DefenderTeamFilters": [
+							"Self"
+						],
+						"DefendersConditions": [
+							{
+								"AttackDirections": [
+									"Front"
+								]
+							}
+						]
+					},
+					"DamageMods": {
 
+					},
+					"DisplayName": "Forward Guard",
+					"StatMods": {
+						"ForwardGuardStatMod": {
+							"Conditions": {
+								"CanStack": false,
+								"TagFilters": [],
+								"TeamFilters": [
+									"Self"
+								]
+							},
+							"ModType": "Add",
+							"StatName": "BlockChance",
+							"Value": 20.0
+						}
+					}
+				}
+			},
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Soldier"
 		},
 		"_DefVersion": "1"
 	}

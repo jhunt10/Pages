@@ -9,6 +9,7 @@ enum EffectTriggers {
 	OnCreate, OnDurationEnds,
 	OnCombatStart, OnCombatEnd,
 	OnTurnStart, OnTurnEnd, 
+	OnPageUse,
 	OnActionStart, OnActionEnd, 
 	OnGapTurnStart, OnGapTurnEnd,
 	OnRoundStart, OnRoundEnd,
@@ -289,27 +290,30 @@ func _get_sub_effect_script(sub_effect_key:String):
 
 func _cache_triggers():
 	_triggers_to_sub_effect_keys.clear()
-	if is_instant():
-		_triggers_to_sub_effect_keys[EffectTriggers.OnCreate] = []
-		for sub_effect_key in _sub_effects_data.keys():
-			_triggers_to_sub_effect_keys[EffectTriggers.OnCreate].append(sub_effect_key)
-	else:
-		for sub_effect_key in _sub_effects_data.keys():
-			var sub_effect_data = _sub_effects_data[sub_effect_key]
-			var sub_effect = _get_sub_effect_script(sub_effect_key)
-			if not sub_effect:
-				continue
-			var trigger_list = sub_effect.get_triggers(self, sub_effect_data)
-			for trig:EffectTriggers in trigger_list:
-				if trig == EffectTriggers.None:
-					continue
-				if not _triggers_to_sub_effect_keys.keys().has(trig):
-					_triggers_to_sub_effect_keys[trig] = []
-				if not _triggers_to_sub_effect_keys[trig].has(sub_effect_key):
-					_triggers_to_sub_effect_keys[trig].append(sub_effect_key)
+	
 	if duration_trigger != EffectTriggers.None:
 		if !_triggers_to_sub_effect_keys.has(duration_trigger):
 			_triggers_to_sub_effect_keys[duration_trigger] = []
+	
+	if is_instant(): # Instant effects only need OnCreate triggers
+		_triggers_to_sub_effect_keys[EffectTriggers.OnCreate] = []
+		for sub_effect_key in _sub_effects_data.keys():
+			_triggers_to_sub_effect_keys[EffectTriggers.OnCreate].append(sub_effect_key)
+		return
+	
+	for sub_effect_key in _sub_effects_data.keys():
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		if not sub_effect:
+			continue
+		var trigger_list = sub_effect.get_triggers(self, sub_effect_data)
+		for trig:EffectTriggers in trigger_list:
+			if trig == EffectTriggers.None:
+				continue
+			if not _triggers_to_sub_effect_keys.keys().has(trig):
+				_triggers_to_sub_effect_keys[trig] = []
+			if not _triggers_to_sub_effect_keys[trig].has(sub_effect_key):
+				_triggers_to_sub_effect_keys[trig].append(sub_effect_key)
 
 func on_created(game_state:GameStateData=null):
 	trigger_effect(EffectTriggers.OnCreate, game_state)
@@ -356,6 +360,17 @@ func trigger_other_effect_to_be_added(game_state:GameStateData, other_effect:Bas
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.other_effect_to_be_added(self, sub_effect_data, game_state, other_effect, meta_data)
+
+func trigger_on_page_use(page:PageItemAction, game_state:GameStateData):
+	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnPageUse, []):
+		var sub_effect_data = _sub_effects_data[sub_effect_key]
+		var page_use_trigger_condition = sub_effect_data.get("OnPageUseTriggerCondition")
+		if page_use_trigger_condition and not TagHelper.check_tag_filters("PageTagFilters", page_use_trigger_condition, page):
+			continue
+		var sub_effect = _get_sub_effect_script(sub_effect_key)
+		if sub_effect:
+			sub_effect.on_effect_trigger(self, sub_effect_data, EffectTriggers.OnPageUse, game_state)
+		
 	
 
 func trigger_pre_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by_actor:BaseActor):

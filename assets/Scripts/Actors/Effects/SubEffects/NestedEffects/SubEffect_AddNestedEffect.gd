@@ -30,6 +30,7 @@ func on_delete(effect:BaseEffect, subeffect_data:Dictionary):
 		if effect_id == "":
 			printerr("%s.SubEffect_AddNestedEffect.on_delete: No Unique Effect Id found." % [effect.EffectKey])
 			return
-		var other_effect:BaseEffect = actor.effects.get_effect(effect_id)
-		if other_effect.source_id == effect.Id:
-			actor.effects.remove_effect(other_effect)
+		if actor:
+			var other_effect:BaseEffect = actor.effects.get_effect(effect_id)
+			if other_effect and other_effect.source_id == effect.Id:
+				actor.effects.remove_effect(other_effect)

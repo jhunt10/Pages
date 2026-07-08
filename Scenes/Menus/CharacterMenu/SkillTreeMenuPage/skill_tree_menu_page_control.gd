@@ -210,7 +210,7 @@ func on_node_button_up(page_id):
 		confirm_text = "Unlock"
 		disabled = false
 	var detail_card = character_menu.create_details_card(page_item, confirm_text, true, disabled)
-	if not detail_card.item_confirmed.is_connected(on_node_confirmed):
+	if detail_card and not detail_card.item_confirmed.is_connected(on_node_confirmed):
 		detail_card.item_confirmed.connect(on_node_confirmed)
 
 func on_node_confirmed(item:BaseItem):

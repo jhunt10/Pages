@@ -167,13 +167,13 @@ static func get_defense_stat_for_attack_direction(actor:BaseActor, attack_dir, s
 	var default_mod = 1.0
 	if attack_dir == AttackHandler.AttackDirection.Flank:
 		dir_prefix = DirectionalMod_Flank
-		default_mod = 0.5
+		default_mod = 1.0
 	elif attack_dir == AttackHandler.AttackDirection.Back:
 		dir_prefix = DirectionalMod_Back
-		default_mod = 0.0
+		default_mod = 1.0
 	elif attack_dir == AttackHandler.AttackDirection.AOE:
 		dir_prefix = DirectionalMod_Aoe
-		default_mod = 0.0
+		default_mod = 1.0
 	
 	
 	var full_stat_name = dir_prefix + ":" + stat_name

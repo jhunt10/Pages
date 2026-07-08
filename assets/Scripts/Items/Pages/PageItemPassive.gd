@@ -8,8 +8,20 @@ var passive_data:Dictionary:
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 
+func has_in_combat_effect()->bool:
+	var effect_data:Dictionary = passive_data.get("InCombatEftData", {})
+	var effect_key = effect_data.get("EffectKey", null)
+	return effect_key != null
+
+func get_in_combat_effect_def()->Dictionary:
+	var effect_data:Dictionary = passive_data.get("InCombatEftData", {})
+	var effect_key = effect_data.get("EffectKey", null)
+	if effect_key:
+		return EffectLibrary.get_merged_effect_def(effect_key, effect_data)
+	return {}
+
 func get_effect_def():
-	var effect_data:Dictionary = passive_data.get("EffectDatas", {})
+	var effect_data:Dictionary = passive_data.get("InCombatEftData", {})
 	var effect_key = effect_data.get("EffectKey", null)
 	if effect_key:
 		return EffectLibrary.get_merged_effect_def(effect_key, effect_data)

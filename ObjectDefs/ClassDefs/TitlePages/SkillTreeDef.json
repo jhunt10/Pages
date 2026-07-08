@@ -42,12 +42,12 @@
                 "PageItemId": "TauntEnemy_PageItem"
             },
             {
-                "PageItemId": "WideGuardPage"
+                "PageItemId": "ForwardGuard_PageItem"
             },
             {
                 "PairType": "Or",
-                "PageItemId1": "UnStopablePage",
-                "PageItemId2": "UnMovablePage"
+                "PageItemId1": "InStopable_PageItem",
+                "PageItemId2": "UnMovable_PageItem"
             }
         ],
         [
@@ -56,18 +56,19 @@
                 "ParentId": "TauntEnemy_PageItem"
             },
             {
-                "PageItemId": "FaceFoe"
+                "PageItemId": "FaceFoe_PageItem",
+                "ParentId": "ForwardGuard_PageItem"
             },
             {
-                "PageItemId": "Cleave"
+                "PageItemId": "Cleave_PageItem"
             }
         ],
         [
             {
-                "PageItemId": "TakeBruntPage"
+                "PageItemId": "PLACE_HOLDER"
             },
             {
-                "PageItemId": "BlockAoePage"
+                "PageItemId": "PLACE_HOLDER"
             },
             {
                 "PageItemId": "WildSwing"

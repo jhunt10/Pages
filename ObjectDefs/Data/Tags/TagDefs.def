@@ -406,13 +406,13 @@
 		"Description": "Every @@#Color:Red:Actor@@ has a set of @@#Color:Blue:Equipment Slots@@ based on thier body type. Each slot can hold one piece of @@#Color:Blue:Equipment@@ of the corrosponding type. .",
 		"DisplayName": "Equipment Slot"
 	},
-	"Fast": {
-		"Abreviation": "Fast",
+	"Quick": {
+		"Abreviation": "Quick",
 		"AppliesTo": [
 			"Action"
 		],
-		"Description": "@@#Color:Blue:Fast@@ @@#Color:Red:Actions@@ are preformed early in the @@#Color:Red:Turn@@, usually before other @@#Color:Red:Actors@@ move, regardless of @@#Stat:Speed@@.",
-		"DisplayName": "Fast"
+		"Description": "@@#Color:Blue:Quick@@ @@#Color:Red:Actions@@ are preformed early in the @@#Color:Red:Turn@@, usually before other @@#Color:Red:Actors@@ move, regardless of @@#Stat:Speed@@.",
+		"DisplayName": "Quick"
 	},
 	"Feet": {
 		"Abreviation": "Feet",
@@ -630,7 +630,7 @@
 		"AppliesTo": [
 			"Page"
 		],
-		"Description": "@@#Color:Blue:Moves@@ are @@#Tag:Action:Actions@@ which change an @@#Color:Red:Actor's@@ position on the @@#Color:Red:Map@@.",
+		"Description": "@@#Color:Blue:Moves@@ are @@#Tag:Action:Actions@@ which change an @@#Color:Red:Actor's@@ rotation or position on the @@#Color:Red:Map@@.",
 		"DisplayName": "Move"
 	},
 	"Object": {
@@ -1098,7 +1098,7 @@
 		"AppliesTo": [
 			"Page"
 		],
-		"Description": "@@#Color:Blue:Weapon Attacks@@ are @@#Tag:Attack:Attacks@@ that use the @@#Color:Red:Actor's@@ @@#Tag:Weapon@@ for determening damage and or @@#Color:Red:Attack Area@@.",
+		"Description": "@@#Color:Blue:Weapon Attacks@@ are @@#Tag:Attack:Attacks@@ that use the @@#Color:Red:Actor's@@ @@#Tag:Weapon@@ for determening @@#Color:Red:Attack Area@@ and @@#Color:Red:Damage@@.",
 		"DisplayName": "WpnAtk"
 	},
 	"WpnMod": {
@@ -1169,5 +1169,23 @@
 		],
 		"Description": "@@#Color:Blue:Clothes@@ are mundain @@#Tag:Appearl@@ with no @@#Stat:Armor@@ or @@#Stat:Ward@@.",
 		"DisplayName": "Clothes"
+	},
+	"Front": {
+		"Abreviation": "Front",
+		"AppliesTo": [
+			"Page",
+			"Attack"
+		],
+		"Description": "@@#Color:Blue:Front@@ describes @@#Color:Red:Spots@@ in the direction an @@#Color:Red:Actor@@ is facing.If you are pointing North, then \"Front\" is any position North of yours.",
+		"DisplayName": "Front"
+	},
+	"Behind": {
+		"Abreviation": "Behind",
+		"AppliesTo": [
+			"Page",
+			"Attack"
+		],
+		"Description": "@@#Color:Blue:Behind@@ describes @@#Color:Red:Spots@@ in the oposite direction an @@#Color:Red:Actor@@ is facing.If you are pointing North, then \"Behind\" is any position South of yours.",
+		"DisplayName": "Behind"
 	}
 }

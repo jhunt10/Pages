@@ -26,6 +26,8 @@ static func tags_include_all_in_array(check_for:Array, tags:Array)->bool:
 ## Returns true if tags are accepted by (all|any) filters.
 ## require_all: When true all filters must accept tags
 static func filters_accept_tags(tag_filters, tags:Array, require_all:bool=true)->bool:
+	if tag_filters.size() == 0:
+		return true
 	if tag_filters is Dictionary:
 		tag_filters = [tag_filters]
 	var any_accepted = false

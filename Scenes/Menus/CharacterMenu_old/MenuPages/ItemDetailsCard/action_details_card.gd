@@ -69,7 +69,7 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 	else:
 		damage_label.hide()
 	
-	var attack_details = action.get_load_val("AttackDetails", {})
+	var attack_details = action.action_data.get("AttackDetails", {})
 	if not page_item.get_tags().has("Attack"):
 		accuracy_icon.hide()
 		accuracy_label.hide()
@@ -77,10 +77,13 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		potency_label.hide()
 	else:
 		var accuracy_mod = attack_details.get('AccuracyMod', 1)
-		if _actor:
-			accuracy_label.text = str(accuracy_mod * _actor.stats.get_stat(StatHelper.Accuracy))
+		if accuracy_mod > 1:
+			accuracy_label.text = "+"+str(1-accuracy_mod)
+		elif accuracy_mod < 1:
+			accuracy_label.text = str(1-accuracy_mod)
 		else:
-			accuracy_label.text = str(accuracy_mod * 100)
+			accuracy_label.hide()
+			accuracy_icon.hide()
 		
 		var potency_mod = attack_details.get('PotencyMod', 1)
 		if potency_mod == 1:

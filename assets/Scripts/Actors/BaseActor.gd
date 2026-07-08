@@ -357,7 +357,10 @@ func save_data()->Dictionary:
 	data['Pages'] = pages.build_save_data()
 	data['BagItems'] = items.build_save_data()
 	data['Equipment'] = equipment.build_save_data()
-	data['Stats'] = stats.build_save_data()
+	data['Title'] = {
+		"Level": get_level(),
+		"Xp": get_xp()
+	}
 	return data
 
 func load_data(loading_data:Dictionary):
@@ -382,6 +385,11 @@ func load_data(loading_data:Dictionary):
 	equipment._build_slots_list()
 	items._build_slots_list()
 	_validate_items_for_slot_mods = true
+	
+	var title_data = loading_data.get('Title', {})
+	var title_page = get_title_page()
+	if title_page:
+		title_page.set_level_and_xp(title_data.get("Level", 1), title_data.get("Xp", 0))
 	
 	validate_itemholders()
 	pages._cache_action_mods()
@@ -427,6 +435,7 @@ func clean_state():
 
 func on_combat_start():
 	clean_state()
+	pages.sync_passive_page_effects()
 	effects.on_combat_start()
 
 func on_delete():
