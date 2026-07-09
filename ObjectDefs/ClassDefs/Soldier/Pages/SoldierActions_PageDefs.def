@@ -1318,5 +1318,68 @@
 			"SourceTitle": "Soldier"
 		},
 		"_DefVersion": "1"
-	}
+	},
+	"Recall_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Select an @@#Color:Blue:Ally Actor@@ and re-merge with them.",
+			"DisplayName": "Recall",
+			"LargeIcon": "Sprites/Recall_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Recall_Icon.png",
+			"SnippetDesc": "Recall a Party Member.",
+			"Tags": [
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+			},
+			"Preview": {
+				"PreviewTargetKey": "TargetParam1"
+			},
+			"SubActions": {
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 10,
+					"#SubIndex": 0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": false,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam1"
+				},
+				"RecallTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_RecallActor.gd",
+					"#FrameIndex": 11,
+					"#SubIndex": 0,
+					"TargetKey": "Target1"
+				}
+			},
+			"TargetParams": {
+				"TargetParam1": {
+					"LineOfSight": false,
+					"TargetArea": "[[-1,3],[0,3],[1,3],[-2,2],[-1,2],[0,2],[1,2],[2,2],[-3,1],[-2,1],[-1,1],[0,1],[1,1],[2,1],[3,1],[-3,0],[-2,0],[-1,0],[1,0],[2,0],[3,0],[-3,-1],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[3,-1],[-2,-2],[-1,-2],[0,-2],[1,-2],[2,-2],[-1,-3],[0,-3],[1,-3]]",
+					"TargetType": "Ally"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Soldier"
+		},
+		"_DefVersion": "1"
+	},
 }

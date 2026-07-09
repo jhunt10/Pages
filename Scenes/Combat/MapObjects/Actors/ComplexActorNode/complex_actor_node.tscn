@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="22_xdlor"]
 [ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="24_brgje"]
 [ext_resource type="Script" uid="uid://ckxgndrl4khg8" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/awareness_display.gd" id="25_ysrah"]
+[ext_resource type="Texture2D" uid="uid://2go3xe4mp5dk" path="res://ObjectDefs/ClassDefs/Mage/Items/Equipment/Weapons/Sprites/OldOrb.png" id="26_vvjqf"]
 [ext_resource type="Texture2D" uid="uid://cmpc2v60v42vw" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/TombStone.png" id="26_yeo0n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2jcyd"]
@@ -290,10 +291,62 @@ _data = {
 
 [sub_resource type="Animation" id="Animation_fneeu"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wmkvr"]
+resource_name = "recall_srink"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eolao"]
 _data = {
-&"RESET": SubResource("Animation_fneeu")
+&"RESET": SubResource("Animation_fneeu"),
+&"recall_srink": SubResource("Animation_wmkvr")
 }
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87ioo"]
@@ -432,3 +485,8 @@ visible = false
 position = Vector2(-16, -16)
 tile_set = SubResource("TileSet_wmkvr")
 script = ExtResource("25_ysrah")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1119152523]
+self_modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("26_vvjqf")

@@ -27,7 +27,7 @@ func add_threat_from_actor(enemy:BaseActor, val:float, game_state:GameStateData)
 		return
 	if not actor_id_to_threat.has(enemy.Id):
 		actor_id_to_threat[enemy.Id] = 0
-	var enemy_aggro_scale = enemy.stats.get_stat(StatHelper.AggroMod, 1)
+	var enemy_aggro_scale = enemy.stats.get_stat(StatHelper.ThreatMod, 1)
 	actor_id_to_threat[enemy.Id] += (val * enemy_aggro_scale)
 	var switch_thresh =  THREAT_SWITCH_THRESHOLD * get_threat_from_actor(current_aggroed_actor_id) 
 	if current_aggroed_actor_id == '' or actor_id_to_threat[enemy.Id] >= switch_thresh:

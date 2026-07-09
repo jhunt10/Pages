@@ -145,8 +145,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and _current_details_card:
 		var mouse_event:InputEventMouseButton = event as InputEventMouseButton
 		var mouse_pos = mouse_event.global_position
-		if not _current_details_card.get_global_rect().has_point(mouse_pos):
-			_current_details_card._on_exit_button()
+		if not mouse_event.pressed and not _current_details_card.get_global_rect().has_point(mouse_pos):
+			_current_details_card.que_hide()
 
 func _on_close():
 	self.queue_free()
@@ -193,13 +193,23 @@ func create_details_card(item:BaseItem,
 		confirm_button_text:String="UNSET", 
 		override_on_confirm:bool=false, 
 		disable_confirm:bool=false)->ItemDetailsCard:
+	var old_detail_card
 	if _current_details_card:
-		# Could cause problems switching between skill tree and pages
-		if _current_details_card.item_id == item.Id and not override_on_confirm:
-			_current_details_card.show()
+		old_detail_card = _current_details_card
+		# Same Item is already beging displayed
+		if _current_details_card.item_id == item.Id:
+			# Overriding the comfirm button
+			if override_on_confirm:
+				if _current_details_card.item_confirmed.is_connected(_on_details_card_confirmed):
+					_current_details_card.item_confirmed.disconnect(_on_details_card_confirmed)
+			
+			_current_details_card.set_detail_card_item(_actor, item, confirm_button_text, disable_confirm)
 			return
+			
+			
 		_current_details_card.hide_done.disconnect(_on_details_card_freed)
-		_current_details_card.start_hide()
+		if _current_details_card.state != ItemDetailsCard.States.Hidden:
+			_current_details_card.start_hide()
 	
 	if !item:
 		return null
@@ -225,9 +235,11 @@ func create_details_card(item:BaseItem,
 			#var reason = get_cant_equip_reason(cant_equip_reasons)
 			#confirm_button_text = reason[0]
 			#disable_confirm = reason[1]
-	
+	_current_details_card = null
 	_current_details_card = load("res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
 	details_card_spawn_point.add_child(_current_details_card)
+	details_card_spawn_point.remove_child(old_detail_card)
+	details_card_spawn_point.add_child(old_detail_card)
 	_current_details_card.vertical = true
 	_current_details_card.hide_done.connect(_on_details_card_freed)
 	_current_details_card.set_detail_card_item(_actor, item, confirm_button_text, disable_confirm)
@@ -300,8 +312,8 @@ func on_item_button_down(context, item_key, index, offset):
 	_selected_context = context
 	_button_down_pos = self.get_local_mouse_position()
 	_selected_index_data = index
-	if _current_details_card and _current_details_card.item_id != item_key:
-		_current_details_card.start_hide()
+	#if _current_details_card and _current_details_card.item_id != item_key:
+		#_current_details_card.start_hide()
 	if item_key:
 		_selected_item = ItemLibrary.get_item(item_key)
 		mouse_control.offset = offset

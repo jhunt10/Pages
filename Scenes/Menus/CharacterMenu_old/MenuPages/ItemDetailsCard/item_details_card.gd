@@ -112,19 +112,24 @@ func _process(delta: float) -> void:
 		return
 	if not self.visible:
 		return
+	if _qued_hide:
+		if showing:
+			start_hide()
+	_qued_hide = false
 	if state == States.Hidden or state == States.Showing:
 		return
+	
 	if state == States.Growing:
-		grow_timer = min(time_to_show, grow_timer + delta)
-		var distance = offset_point.position
-		offset_control.position = distance * (1 - (grow_timer / time_to_show))
-		if time_to_show == grow_timer:
+		var lerp_wieght = self.global_position.distance_to(offset_point.global_position) * delta * (1.0/time_to_show)
+		offset_control.global_position = offset_control.global_position.move_toward(self.global_position, lerp_wieght)
+		var distance = offset_control.global_position.distance_to(self.global_position)
+		if distance  <= 1:
 			state = States.Showing
 	if state == States.Shrinking:
-		grow_timer = max(0, grow_timer - delta)
-		var distance = offset_point.position
-		offset_control.position = distance * (1-(grow_timer / time_to_show))
-		if grow_timer == 0:
+		var lerp_wieght = self.global_position.distance_to(offset_point.global_position) * delta * (1.0/time_to_show)
+		offset_control.global_position = offset_control.global_position.move_toward(offset_point.global_position, lerp_wieght)
+		var distance = offset_control.global_position.distance_to(offset_point.global_position)
+		if distance  <= 5:
 			state = States.Hidden
 			hide_done.emit()
 			self.queue_free()
@@ -151,6 +156,10 @@ func _process(delta: float) -> void:
 func _on_exit_button():
 	exit_button_pressed.emit()
 	start_hide()
+
+var _qued_hide = false
+func que_hide():
+	_qued_hide = true
 	
 
 func start_show():

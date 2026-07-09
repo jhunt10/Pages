@@ -543,7 +543,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseRangedAttack",
 		"#ObjDetails": {
-			"Description": "Throw a small knife making a @@#Color:Red:Ranged Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, and dealing @@#DmgData:RangedDamage@@ on hit.",
+			"Description": "Throw a small knife making a @@#Tag:Ranged:Ranged Attack@@ against an @@#TrgParm:TargetParam:TargetType@@, dealing @@#DmgData:RangedDamage@@ on hit.",
 			"DisplayName": "Throw Knife",
 			"LargeIcon": "Sprites/ThrowKnife_Icon.png",
 			"ObjectType": "Item",

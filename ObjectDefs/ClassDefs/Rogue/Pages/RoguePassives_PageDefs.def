@@ -415,7 +415,7 @@
 	"LowAggro_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "It's easy to go unnoticed when in a crowd or alone in an alley. But not drawing attention while stabbing someone in their side, that takes real skill.\n\nGenerate less @@#Color:Red:30% less Threat@@ causing Enemies to be less likely to prioritise you as their Target.",
+			"Description": "It's easy to go unnoticed when in a crowd or alone in an alley. But not drawing attention while stabbing someone in the gut, that takes real skill.\n\nGenerate @@#Color:Red:30% less@@ @@#Tag:Threat@@.",
 			"DisplayName": "Sneaky",
 			"LargeIcon": "Sprites/AggroDown_Icon.png",
 			"ObjectType": "Item",
@@ -423,7 +423,7 @@
 			"SnippetDesc": "Generate less Threat.",
 			"Tags": [
 				"Passive",
-				"AggroMod"
+				"ThreatMod"
 			],
 			"Taxonomy": [
 				"Item",
@@ -446,7 +446,7 @@
 			"StatMods": {
 				"StatMod1": {
 					"ModType": "Scale",
-					"StatName": "AggroMod",
+					"StatName": "ThreatMod",
 					"Value": 0.7
 				}
 			}

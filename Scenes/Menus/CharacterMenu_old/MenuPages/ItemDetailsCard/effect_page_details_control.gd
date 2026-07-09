@@ -16,6 +16,10 @@ func _ready() -> void:
 func set_action(actor:BaseActor, page:BasePageItem):
 	_actor = actor
 	_item = page
+	for child in stat_mods_container.get_children():
+		if child == premade_stat_mod_label:
+			continue
+		child.queue_free()
 	var stat_mods = page.page_data.get("StatMods", {})
 	for mod_data in stat_mods.values():
 		if mod_data.get("DisplayName", "") == "Base Stats":

@@ -49,7 +49,7 @@ const BlockChance = "BlockChance"
 const BlockMod = "BlockMod"
 
 const BlocksLOS = "BlocksLOS"
-const AggroMod = "AggroMod"
+const ThreatMod = "ThreatMod"
 
 
 const CoverBonus = "CoverBonus"
@@ -108,6 +108,7 @@ const stat_icon_paths:Dictionary = {
 	CritMod: "res://assets/Sprites/UI/SymbolIcons/CriticalSymbol.png",
 	BlockMod: "res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png",
 	BlockChance: "res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png",
+	ThreatMod:"res://assets/Sprites/UI/SymbolIcons/AggroSymbole.png"
 }
 
 static func get_stat_abbr(stat_name:String)->String:

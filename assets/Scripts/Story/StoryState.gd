@@ -185,7 +185,7 @@ func add_encounter_with_actor(actor):
 
 
 func load_skill_trees():
-	var file_path = "res://ObjectDefs/ClassDefs/TitlePages/SkillTreeDef.json"
+	var file_path = "res://ObjectDefs/ClassDefs/TitlePages/SkillTreeDef.def"
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var text:String = file.get_as_text()
 	var data = JSON.parse_string(text)
