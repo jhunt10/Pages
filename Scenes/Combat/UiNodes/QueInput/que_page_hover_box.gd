@@ -79,6 +79,10 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 				merged_counts[hash_val] = {"Value": dam_data, "Count": dam_data.get("PreviewCount", 1)}
 			else:
 				merged_counts[hash_val]['Count'] += 1
+		for child in damage_container.get_children():
+			if child == damage_label:
+				continue
+			child.queue_free()
 		for merged_data in merged_counts.values():
 			if dam_label == null:
 				dam_label = damage_label.duplicate()

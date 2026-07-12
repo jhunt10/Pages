@@ -219,6 +219,10 @@ static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, def
 	if not TagHelper.filters_accept_tags(source_tag_filters, source_tag_chain.get_all_tags()):
 		return false
 	
+	# Check Damage Type
+	if not conditions.get("RequireDamageTypes", [damage_type]).has(damage_type):
+		return false
+	
 	return true
 
 static func _order_damage_mods(mods:Array):

@@ -45,7 +45,7 @@ FireRangedSpell,,Fire Shot,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.
 PoisonRangedSpell,,Poison Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,70.0,20.0,1.0,0.0,Poison
 ShockRangedSpell,,Shock Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,30.0,1.0,0.0,Shock
 LightRangedSpell,Priest,Light Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.0,1.0,0.0,Light
-ThrowKnifeAction,Rogue,Throw Knife,PageItemAction.gd,Phy,4.0,32.0,1.0,PhyAttack,80.0,20.0,1.0,0.0,Pierce
+ThrowKnife_PageItem,Rogue,Throw Knife,PageItemAction.gd,Phy,4.0,32.0,1.0,PhyAttack,80.0,20.0,1.0,0.0,Pierce
 #BaseTrapAttack,,#Base Trap Attack,PageItemAction.gd,Mag,4.0,24.0,1.0,PhyAttack,100.0,20.0,1.0,0.0,RAW
 #BaseTrapSpell,,#Base Trap Action,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,120.0,20.0,1.0,0.0,RAW
 ColdTrapSpell,,Cold Trap,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,120.0,10.0,1.0,0.0,Cold
@@ -64,8 +64,8 @@ ApplyLightAuraAction,Priest,Light Aura,PageItemAction.gd,Mag,4.0,8.0,1.0,,,,,,
 ApplyPreemtive,Priest,Preemtive,PageItemAction.gd,Mag,4.0,25.0,1.0,,,,,,
 #BaseApplySelfBuffAction,,#Base Self Buff,PageItemAction.gd,,,,1.0,,,,,,
 BeDeadlySelfBuff,Rogue,Be Deadly,PageItemAction.gd,,,,1.0,,,,,,
-BeNimbleSelfBuff,Rogue,Be Nimble,PageItemAction.gd,,,,1.0,,,,,,
-BeQuickSelfBuff,Rogue,Be Quick,PageItemAction.gd,,,,1.0,,,,,,
+BeNimble_PageItem,Rogue,Be Nimble,PageItemAction.gd,,,,1.0,,,,,,
+BeQuick_PageItem,Rogue,Be Quick,PageItemAction.gd,,,,1.0,,,,,,
 DodgeAction,Rogue,Dodge,PageItemAction.gd,,,,1.0,,,,,,
 #BaseAttackZoneSpell,,#Base Zone Action,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,RAW
 FireZoneSpell,Mage,Fire Zone,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,10.0,3.0,1.0,0.0,Fire

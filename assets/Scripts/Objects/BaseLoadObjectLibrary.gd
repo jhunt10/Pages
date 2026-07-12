@@ -187,6 +187,8 @@ func reload():
 	all_objs.append_array(_static_objects.values())
 	all_objs.append_array(_loaded_objects.values())
 	for obj:BaseLoadObject in all_objs:
+		if !obj:
+			continue
 		var obj_key = obj._key
 		var def = get_object_def(obj_key)
 		var load_path = get_object_def_load_path(obj_key)

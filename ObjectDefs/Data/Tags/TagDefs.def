@@ -149,6 +149,14 @@
 		"Description": "@@#Color:Blue:Attacks@@ are @@#Tag:Action:Actions@@ which attempt to apply damage to one or more other @@#Color:Red:Actors@@.",
 		"DisplayName": "Attack"
 	},
+	"Crit": {
+		"Abreviation": "Crit",
+		"AppliesTo": [
+			"Page", "Attack"
+		],
+		"Description": "@@#Color:Blue:Ciritcal Hits@@ have a random chance to occure with every @@#Tag:Attack@@ and deal additional damage based on @@#Stat:CritMod@@.",
+		"DisplayName": "Attack"
+	},
 	"Aura": {
 		"Abreviation": "Aura",
 		"AppliesTo": [

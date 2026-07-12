@@ -47,12 +47,12 @@
 	"BackStab_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "It's a good rule of thumb to never turn your back on the enemy. For those who forget why, you'll be happy to remind them.\n\n@@#AtkMod:BackStabAtkMod:StatMod:BackStabStatMod@@ when attacking from @@#Tag:Behind@@.",
+			"Description": "It's a good rule of thumb to never turn your back on the enemy. For those who forget why, you'll be happy to remind them.\n\nAlways @@#Tag:Crit:Critical Hit@@ when attacking from @@#Tag:Behind@@.",
 			"DisplayName": "Back Stabber",
 			"LargeIcon": "Sprites/BackStab_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/BackStab_Icon.png",
-			"SnippetDesc": "+50 Crit Chance attacking from Behind",
+			"SnippetDesc": "Auto Crit when attacking from Behind",
 			"Tags": [
 				"Passive"
 			],
@@ -104,9 +104,9 @@
 									"Self"
 								]
 							},
-							"ModType": "Add",
+							"ModType": "Set",
 							"StatName": "CritChance",
-							"Value": 50.0
+							"Value": 100
 						}
 					}
 				}
@@ -251,6 +251,40 @@
 								},
 								"EffectKey": "AilmentBlind"
 							}
+						}
+					}
+				}
+			},
+			"AttackMods": {
+				"BlinderAtkMod": {
+					"AttackModKey": "BlinderAtkMod",
+					"CanStack": false,
+					"Conditions": {
+						"AttackSourceTagFilters": [
+							{
+								"RequireAnyTags": [
+									"WpnAtk"
+								]
+							}
+						],
+						"AttackerTeamFilters": [
+							"Self"
+						],
+						"RequireDamageTypes": ["Pierce"]
+					},
+					"DisplayName": "Blinder",
+					"StatMods": {
+						"BackStabStatMod": {
+							"Conditions": {
+								"CanStack": false,
+								"TagFilters": [],
+								"TeamFilters": [
+									"Self"
+								]
+							},
+							"ModType": "Add",
+							"StatName": "CritChance",
+							"Value": 50.0
 						}
 					}
 				}
@@ -415,7 +449,7 @@
 	"LowAggro_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "It's easy to go unnoticed when in a crowd or alone in an alley. But not drawing attention while stabbing someone in the gut, that takes real skill.\n\nGenerate @@#Color:Red:30% less@@ @@#Tag:Threat@@.",
+			"Description": "It's easy to go unnoticed when in a crowd or alone in an alley. But not drawing attention as you stab someone in the gut, that takes real skill.\n\nGenerate @@#Color:Red:30% less@@ @@#Tag:Threat@@.",
 			"DisplayName": "Sneaky",
 			"LargeIcon": "Sprites/AggroDown_Icon.png",
 			"ObjectType": "Item",

@@ -477,6 +477,8 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 		#TODO: Missiles from dead actors
 		printerr("Attcker posision not provided")
 		return AttackDirection.Front
+	if defender_awareness >= 5:
+		return AttackDirection.Front
 	var x_change = defender_pos.x - attacker_pos.x
 	var y_change = defender_pos.y - attacker_pos.y
 	var front_back_change = 0

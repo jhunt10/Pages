@@ -204,7 +204,7 @@ func create_details_card(item:BaseItem,
 					_current_details_card.item_confirmed.disconnect(_on_details_card_confirmed)
 			
 			_current_details_card.set_detail_card_item(_actor, item, confirm_button_text, disable_confirm)
-			return
+			return _current_details_card
 			
 			
 		_current_details_card.hide_done.disconnect(_on_details_card_freed)

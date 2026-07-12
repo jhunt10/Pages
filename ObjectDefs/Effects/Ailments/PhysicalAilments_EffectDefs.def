@@ -56,7 +56,7 @@
 	"AilmentBlind": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
-			"Description": "-50% Accuracy and -2 Awareness.",
+			"Description": "-50% @@#Stat:Accuracy@@",
 			"DisplayName": "Blind",
 			"LargeIcon": "Sprites/BlindIcon.png",
 			"ObjectType": "Effect",
@@ -90,11 +90,6 @@
 					"ModType": "Scale",
 					"StatName": "Accuracy",
 					"Value": 0.5
-				},
-				"BlindAwrMod": {
-					"ModType": "Add",
-					"StatName": "Awareness",
-					"Value": -2.0
 				}
 			},
 			"SubEffects": {

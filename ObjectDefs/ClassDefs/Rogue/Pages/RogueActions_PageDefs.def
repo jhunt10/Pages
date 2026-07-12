@@ -103,7 +103,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"BeNimbleSelfBuff": {
+	"BeNimble_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplySelfBuffAction",
 		"#ObjDetails": {
@@ -129,7 +129,7 @@
 							}
 						}
 					},
-					"EffectKey": "BeNimbleBuff"
+					"EffectKey": "BeNimble_PageEffect"
 				}
 			}
 		},
@@ -148,7 +148,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"BeQuickSelfBuff": {
+	"BeQuick_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplySelfBuffAction",
 		"#ObjDetails": {
@@ -174,7 +174,7 @@
 							}
 						}
 					},
-					"EffectKey": "BeQuickBuff"
+					"EffectKey": "BeQuick_PageEffect"
 				}
 			}
 		},
@@ -263,11 +263,12 @@
 		},
 		"_DefVersion": "1"
 	},
-	"DodgeAction": {
+	"Dodge_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplySelfBuffAction",
 		"#ObjDetails": {
 			"DisplayName": "Dodge",
+			"Description": "Ready yourself and gain @@#EftData:ApplyEffect:Name@@ until the start of your next @@#Color:Red:Turn@@.\n\n@@#EftData:ApplyEffect:Description@@",
 			"LargeIcon": "Effects/Sprites/Dodge_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Effects/Sprites/Dodge_Icon.png",
@@ -470,11 +471,11 @@
 		},
 		"_DefVersion": "1"
 	},
-	"PocketSandAction": {
+	"PocketSand_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseInflictAttack",
 		"#ObjDetails": {
-			"Description": "Make a @@#Color:Red:Inflicting Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, attempting to apply @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\n\n-\"Pocket Sand!\"",
+			"Description": "Make a @@#Tag:Inflict:Inflicting Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, and apply @@#EftData:InflictEffect:Link@@ for @@#EftData:InflictEffect:Duration@@.\n\n-\"Pocket Sand!\"",
 			"DisplayName": "Pocket Sand",
 			"LargeIcon": "Sprites/PocketSand_Icon.png",
 			"ObjectType": "Item",
@@ -539,7 +540,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ThrowKnifeAction": {
+	"ThrowKnife_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseRangedAttack",
 		"#ObjDetails": {
