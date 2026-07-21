@@ -1,9 +1,9 @@
 class_name PageItemTitle
 extends BasePageItem
 
-#var title_data:Dictionary:
-	#get:
-		#return _def.get("TitleData", {})
+var title_data:Dictionary:
+	get:
+		return _def.get("TitleData", {})
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
@@ -75,3 +75,6 @@ func get_xp_to_next_level(current_level:int=-1)->int:
 	if current_level < 0:
 		current_level = get_level()
 	return (100 * current_level)
+
+func get_skill_tree_data()->Array:
+	return title_data.get("SkillTree", []).duplicate()

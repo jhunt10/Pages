@@ -2,307 +2,326 @@
     "Soldier": [
         [
             {
-                "PageItemId": "HeavyFoot_PageItem",
+                "SkillNodeKey": "HeavyFoot",
+                "PageKey": "HeavyFoot_PageItem",
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "GuardAction_PageItem",
+                "SkillNodeKey": "GuardAction",
+                "PageKey": "GuardAction_PageItem",
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "ThrowJavelin_PageItem",
+                "SkillNodeKey": "ThrowJavelin",
+                "PageKey": "ThrowJavelin_PageItem",
                 "AlwaysUnlocked": true
             }
         ],
         [
             {
-                "PageItemId": "HeavyArmorTraining_PageItem"
+                "SkillNodeKey": "HeavyArmorTraining",
+                "PageKey": "HeavyArmorTraining_PageItem"
             },
             {
-                "PageItemId": "ShieldTraining_PageItem"
+                "SkillNodeKey": "ShieldTraining",
+                "PageKey": "ShieldTraining_PageItem"
             },
             {
-                "PageItemId": "TwoHandBonus_PageItem"
+                "SkillNodeKey": "TwoHandBonus",
+                "PageKey": "TwoHandBonus_PageItem"
             }
         ],
         [
             {
-                "PageItemId": "CrashBully_PageItem"
+                "SkillNodeKey": "CrashBully",
+                "PageKey": "CrashBully_PageItem"
             },
             {
-                "PageItemId": "ShieldBash_PageItem",
-                "ParentId": "ShieldTraining_PageItem"
+                "SkillNodeKey": "ShieldBash",
+                "PageKey": "ShieldBash_PageItem",
+                "ParentSkillKey": "ShieldTraining"
             },
             {
-                "PageItemId": "Charge_PageItem"
+                "SkillNodeKey": "Charge",
+                "PageKey": "Charge_PageItem"
             }
         ],
         [
             {
-                "PageItemId": "TauntEnemy_PageItem"
+                "SkillNodeKey": "TauntEnemy",
+                "PageKey": "TauntEnemy_PageItem"
             },
             {
-                "PageItemId": "ForwardGuard_PageItem"
+                "SkillNodeKey": "ForwardGuard",
+                "PageKey": "ForwardGuard_PageItem"
             },
             {
+                "SkillNodeKey": "InStopableUnMovable",
                 "PairType": "Or",
-                "PageItemId1": "InStopable_PageItem",
-                "PageItemId2": "UnMovable_PageItem"
+                "Pages": ["InStopable_PageItem", "UnMovable_PageItem"]
             }
         ],
         [
             {
-                "PageItemId": "TauntEnemyMass_PageItem",
-                "ParentId": "TauntEnemy_PageItem"
+                "SkillNodeKey": "TauntEnemyMass",
+                "PageKey": "TauntEnemyMass_PageItem",
+                "ParentSkillKey": "TauntEnemy"
             },
             {
-                "PageItemId": "FaceFoe_PageItem",
-                "ParentId": "ForwardGuard_PageItem"
+                "SkillNodeKey": "FaceFoe",
+                "PageKey": "FaceFoe_PageItem",
+                "ParentSkillKey": "ForwardGuard"
             },
             {
-                "PageItemId": "Cleave_PageItem"
+                "SkillNodeKey": "Cleave",
+                "PageKey": "Cleave_PageItem"
             }
         ],
         [
             {
-                "PageItemId": "Recall_PageItem"
+                "SkillNodeKey": "Recall",
+                "PageKey": "Recall_PageItem"
             },
             {
-                "PageItemId": "PLACE_HOLDER"
+                "PageKey": "PLACE_HOLDER"
             },
             {
-                "PageItemId": "WildSwing"
+                "SkillNodeKey": "WildSwing",
+                "PageKey": "WildSwing"
             }
         ]
     ],
     "Rogue": [
         [
             {
-                "PageItemId": "ThrowKnife_PageItem",
+                "SkillNodeKey": "ThrowKnife",
+                "PageKey": "ThrowKnife_PageItem",
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "EvasivePage",
+                "PageKey": "EvasivePage",
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "LowAggro_PageItem",
-                "AlwaysUnlocked": true
-            },
-            {
-                "PageItemId": "BeNimble_PageItem",
+                "SkillNodeKey": "LowAggro",
+                "PageKey": "LowAggro_PageItem",
                 "AlwaysUnlocked": true
             }
         ],
         [
             {
-                "PageItemId": "Blinder_PageItem"
+                "SkillNodeKey": "BeNimbleBeQuick",
+                "PairType": "And",
+                "Pages": ["BeNimble_PageItem", "BeQuick_PageItem"]
             },
             {
-                "PageItemId": "PhyBoostPage"
+                "SkillNodeKey": "Blinder",
+                "PageKey": "Blinder_PageItem"
             },
             {
-                "PageItemId": "BeQuick_PageItem"
+                "PageKey": "PhyBoostPage"
             }
         ],
         [
             {
-                "PageItemId": "PocketSand_PageItem"
+                "SkillNodeKey": "PocketSand",
+                "PageKey": "PocketSand_PageItem"
             },
             {
-                "PageItemId": "Dodge_PageItem"
+                "SkillNodeKey": "Dodge",
+                "PageKey": "Dodge_PageItem"
             },
             {
-                "PageItemId": "BackStab_PageItem"
+                "SkillNodeKey": "BackStab",
+                "PageKey": "BackStab_PageItem"
             }
         ],
         [
             {
-                "PageItemId": "Bleeder_PageItem"
+                "SkillNodeKey": "Bleeder",
+                "PageKey": "Bleeder_PageItem"
             },
             {
-                "PageItemId": "EvasionAoePage"
+                "PageKey": "EvasionAoePage"
             },
             {
-                "PageItemId": "BeDeadlySelfBuff"
+                "PageKey": "BeDeadlySelfBuff"
             }
         ],
         [
             {
-                "PageItemId": "ArmorBreakAction"
+                "PageKey": "ArmorBreakAction"
             },
             {
-                "PageItemId": "CoupDeGraceAttackAction"
+                "PageKey": "CoupDeGraceAttackAction"
             },
             {
-                "PageItemId": "DualHander_PageItem"
+                "SkillNodeKey": "DualHander",
+                "PageKey": "DualHander_PageItem"
             }
         ],
         [
             {
-                "PageItemId": "Stunner_PageItem"
+                "SkillNodeKey": "Stunner",
+                "PageKey": "Stunner_PageItem"
             },
             {
-                "PageItemId": "GetBehindAction"
+                "PageKey": "GetBehindAction"
             },
             {
-                "PageItemId": "JumpOverAction"
+                "PageKey": "JumpOverAction"
             }
         ]
     ],
     "Priest":[
         [
             {
-                "PageItemId": "LightMeleeSpell",
+                "PageKey": "LightMeleeSpell",
                 "AlwaysUnlocked": true
             },
             {
                 "PairType": "And",
-                "PageItemId1": "ApplyBlessing_Water",
-                "PageItemId2": "BlessedLimit1Page",
+                "Pages": ["ApplyBlessing_Water", "BlessedLimit1Page"],
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "RemoveAilmentSpell",
+                "PageKey": "RemoveAilmentSpell",
                 "AlwaysUnlocked": true
             }
         ],
         [
             {
-                "PageItemId": "ApplyPreemtive"
+                "PageKey": "ApplyPreemtive"
             },
             {
-                "PageItemId": "ApplyBlessing_Air"
+                "PageKey": "ApplyBlessing_Air"
             },
             {
-                "PageItemId": "HealSmallSpell"
+                "PageKey": "HealSmallSpell"
             }
         ],
         [
             {
-                "PageItemId": "LightRangedSpell"
+                "PageKey": "LightRangedSpell"
             },
             {
-                "PageItemId": "BlessedLimit2Page"
+                "PageKey": "BlessedLimit2Page"
             },
             {
-                "PageItemId": "HealMediumSpell"
+                "PageKey": "HealMediumSpell"
             }
         ],
         [
             {
                 "PairType": "Or",
-                "PageItemId1": "HarmingLightPage",
-                "PageItemId2": "HealingLightPage"
+                "Pages": ["HarmingLightPage", "HealingLightPage"]
             },
             {
-                "PageItemId": "ApplyBlessing_Earth"
+                "PageKey": "ApplyBlessing_Earth"
             },
             {
                 "PairType": "Or",
-                "PageItemId1": "RemoveMorePage",
-                "PageItemId2": "RemoveSelectPage"
+                "Pages": ["RemoveMorePage", "RemoveSelectPage"]
             }
         ],
         [
             {
-                "PageItemId": "LightMissileSpell"
+                "PageKey": "LightMissileSpell"
             },
             {
-                "PageItemId": "ApplyBlessing_Fire"
+                "PageKey": "ApplyBlessing_Fire"
             },
             {
-                "PageItemId": "HealLargeSpell"
+                "PageKey": "HealLargeSpell"
             }
         ],
         [
             {
-                "PageItemId": "ApplyLightAuraAction"
+                "PageKey": "ApplyLightAuraAction"
             },
             {
                 "PairType": "Or",
-                "PageItemId1": "BlessedLimit3Page",
-                "PageItemId2": "BlessedMassPage"
+                "Pages": ["BlessedLimit3Page", "BlessedMassPage"]
             },
             {
-                "PageItemId": "ReviveSpell"
+                "PageKey": "ReviveSpell"
             }
         ]
     ],
     "Mage":[
         [
             {
-                "PageItemId": "ColdMeleeSpell",
+                "PageKey": "ColdMeleeSpell",
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "ShockMissileSpell",
+                "PageKey": "ShockMissileSpell",
                 "AlwaysUnlocked": true
             },
             {
-                "PageItemId": "MagBoostPage",
+                "PageKey": "MagBoostPage",
                 "AlwaysUnlocked": true
             }
         ],
         [
             {
-                "PageItemId": "WaterGunSpell"
+                "PageKey": "WaterGunSpell"
             },
             {
-                "PageItemId": "DischargeSpell"
+                "PageKey": "DischargeSpell"
             },
             {
-                "PageItemId": "FireThrowSpell"
+                "PageKey": "FireThrowSpell"
             }
         ],
         [
             {
                 "PairType": "Or",
-                "PageItemId1": "Dash",
-                "PageItemId2": "TurnAround"
+                "PageKey1": "Dash",
+                "PageKey2": "TurnAround"
             },
             {
-                "PageItemId": "ChainShockSpell"
+                "PageKey": "ChainShockSpell"
             },
             {
-                "PageItemId": "FireZoneSpell"
+                "PageKey": "FireZoneSpell"
             }
         ],
         [
             {
-                "PageItemId": "WaterBallSpell"
+                "PageKey": "WaterBallSpell"
             },
             {
                 "PairType": "Or",
-                "PageItemId1": "ChainExtendPage",
-                "PageItemId2": "ChainSelectPage"
+                "PageKey1": "ChainExtendPage",
+                "PageKey2": "ChainSelectPage"
             },
             {
-                "PageItemId": "ThrowBombPage"
+                "PageKey": "ThrowBombPage"
             }
         ],
         [
             {
-                "PageItemId": "WaterBeamSpell"
+                "PageKey": "WaterBeamSpell"
             },
             {
-                "PageItemId": "CallShockSpell"
+                "PageKey": "CallShockSpell"
             },
             {
                 "PairType": "Or",
-                "PageItemId1": "SafteyHazardPage",
-                "PageItemId2": "HazardSafetyPage"
+                "PageKey1": "SafteyHazardPage",
+                "PageKey2": "HazardSafetyPage"
             }
         ],
         [
             {
-                "PageItemId": "ColdMage_PassivePage"
+                "PageKey": "ColdMage_PassivePage"
             },
             {
-                "PageItemId": "ShockStormSpell"
+                "PageKey": "ShockStormSpell"
             },
             {
-                "PageItemId": "FireBallSpell"
+                "PageKey": "FireBallSpell"
             }
         ]
     ]

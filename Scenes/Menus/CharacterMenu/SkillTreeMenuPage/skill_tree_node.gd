@@ -4,7 +4,7 @@ extends Control
 @export var background_rect:TextureRect
 @export var icon_rect:TextureRect
 @export var button:Button
-
+@export var invalid_icon:TextureRect
 
 @export var is_node_unlocked:bool
 @export var can_node_unlock:bool

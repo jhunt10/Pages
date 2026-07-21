@@ -20,7 +20,7 @@ Skeleton_TitlePage,,Skeleton,PageItemTitle.gd,,,,,,,,,,
 Zombie_TitlePage,,Zombie,PageItemTitle.gd,,,,,,,,,,
 #BaseInflictAttack,,#Base Inflict Attack,PageItemAction.gd,,,,1.0,,,,,,
 ArmorBreakAction,Rogue,Armor Break,PageItemAction.gd,Phy,3.0,12.0,1.0,,,,,,
-PocketSandAction,Rogue,Pocket Sand,PageItemAction.gd,Phy,3.0,12.0,1.0,,,,,,
+PocketSand_PageItem,Rogue,Pocket Sand,PageItemAction.gd,Phy,3.0,12.0,1.0,,,,,,
 #BaseMeleeAttack,,#Base Melee Attack,PageItemAction.gd,,,,1.0,PhyAttack,100.0,10.0,1.0,0.0,RAW
 #BaseMeleeSpell,,#Base Melee Spell,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,RAW
 ColdMeleeSpell,,Cold Touch,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,Cold
@@ -65,8 +65,8 @@ ApplyPreemtive,Priest,Preemtive,PageItemAction.gd,Mag,4.0,25.0,1.0,,,,,,
 #BaseApplySelfBuffAction,,#Base Self Buff,PageItemAction.gd,,,,1.0,,,,,,
 BeDeadlySelfBuff,Rogue,Be Deadly,PageItemAction.gd,,,,1.0,,,,,,
 BeNimble_PageItem,Rogue,Be Nimble,PageItemAction.gd,,,,1.0,,,,,,
-BeQuick_PageItem,Rogue,Be Quick,PageItemAction.gd,,,,1.0,,,,,,
-DodgeAction,Rogue,Dodge,PageItemAction.gd,,,,1.0,,,,,,
+_OLD_BeQuick_PageItem,Rogue,Be Quick,PageItemAction.gd,,,,1.0,,,,,,
+Dodge_PageItem,Rogue,Dodge,PageItemAction.gd,,,,1.0,,,,,,
 #BaseAttackZoneSpell,,#Base Zone Action,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,RAW
 FireZoneSpell,Mage,Fire Zone,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,10.0,3.0,1.0,0.0,Fire
 #BaseEffectZoneSpell,,#Base Zone Action,PageItemAction.gd,Mag,4.0,24.0,1.0,,,,,,
@@ -149,6 +149,7 @@ GetBehindAction,Rogue,Get Behind,PageItemAction.gd,Abn,1.0,2.0,,,,,,,
 JumpOverAction,Rogue,Jump Over,PageItemAction.gd,Abn,1.0,2.0,,,,,,,
 ArtfulDodgerPage,Rogue,Artful Dodger,PageItemPassive.gd,,,,,,,,,,
 BackStab_PageItem,Rogue,Back Stabber,PageItemPassive.gd,,,,,,,,,,
+BeQuick_PageItem,Rogue,Be Quick,PageItemPassive.gd,,,,,,,,,,
 Bleeder_PageItem,Rogue,Bleeder,PageItemPassive.gd,,,,,,,,,,
 Blinder_PageItem,Rogue,Blinder,PageItemPassive.gd,,,,,,,,,,
 DualHander_PageItem,Rogue,Ambidualtrous,PageItemPassive.gd,,,,,,,,,,

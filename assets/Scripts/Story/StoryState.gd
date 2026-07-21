@@ -38,7 +38,7 @@ func add_actor_to_party(actor)->BaseActor:
 		
 		# Add class pages
 		var title = actor.get_title_page().get_display_name()
-		set_unlocked_skill_for_actor(actor, [])
+		set_unlocked_skills_for_actor(actor, {})
 		#var has_pages = []
 		#for party_actor:BaseActor in list_party_actors():
 			#has_pages.append_array(party_actor.pages.list_page_keys())
@@ -118,7 +118,7 @@ func start_new_story():
 		var _new_player = ActorLibrary.create_actor(player_actor_keys[i], {}, player_id)
 		if _new_player:
 			_party_actor_ids.append(player_id)
-			set_unlocked_skill_for_actor(_new_player, [])
+			set_unlocked_skills_for_actor(_new_player, {})
 			add_encounter_with_actor(_new_player)
 	# Add all pages
 	var has_pages = []
@@ -210,51 +210,73 @@ func get_skill_tree_data_for_actor(actor:BaseActor)->Array:
 		return skill_tree_data.duplicate()
 	return []
 
-func get_unlocked_skills_for_actor(actor, include_always_unlocked=true)->Array:
+func get_unlocked_skills_for_actor(actor)->Dictionary:
 	var actor_id = actor
 	if actor_id is BaseActor:
 		actor_id = actor.Id
 	var data = _party_skills_data.get(actor_id, {})
-	var out_list = data.get("Unlocked", []).duplicate()
-	if include_always_unlocked:
-		out_list.append_array(data.get("Always", []))
-	return out_list
+	var out_dict = data.get("Unlocked", []).duplicate()
+	
+	# TODO: Remove Hack for PageItemId to SkillNodeKey change
+	if out_dict is Array:
+		var real_dict = {}
+		for kay:String in out_dict:
+			real_dict[kay.trim_suffix("_PageItem")] = {}
+		out_dict = real_dict
+	
+	return out_dict
 
-func set_unlocked_skill_for_actor(actor:BaseActor, skills:Array):
+func set_unlocked_skills_for_actor(actor:BaseActor, setting_skills:Dictionary):
 	var actor_id = actor.Id
-	var unlocked_skills = []
+	var unlocked_skills = {}
 	var always_skills = []
-	print("StoryState Set Skill: %s : %s" % [actor_id, skills])
+	print("StoryState Set Skill: %s : %s" % [actor_id, setting_skills])
 	var tree_data = get_skill_tree_data_for_actor(actor)
 	var items_to_move = {
 		"AddToInventory":[],
 		"RemoveFromInventory":[],
 		"RemoveFromPlayer":[]
 	}
+	var x_index = -1
+	var y_index = -1
 	for row in tree_data:
+		y_index+= 1
 		for node_data in row:
+			x_index+= 1
+			var skill_node_key = node_data.get("SkillNodeKey")
+			if !skill_node_key:
+				printerr("StoryState.set_unlocked_skills_for_actor: Miss SkillNodeKey in Skill Tree for %s at (%s, %s)" %[actor.Id, x_index, y_index])
+				continue
 			var page_list = []
 			# Paired Node
 			if node_data.keys().has("PairType"):
-				page_list = [node_data.get("PageItemId1"), node_data.get("PageItemId2")]
+				page_list = node_data.get("Pages")
 			# Single Node
 			else:
-				page_list = [node_data.get("PageItemId")] 
+				page_list = [node_data.get("PageKey")] 
 			
-			
-			for page_key in page_list:
+			for page_index in range(page_list.size()):
+				var page_key = page_list[page_index]
 				if !page_key:
 					continue
-				var is_unlocked = skills.has(page_key) or node_data.get("AlwaysUnlocked", false)
+				var is_unlocked = ( 
+						node_data.get("AlwaysUnlocked", false)  # Always Unlocked Pages
+						or setting_skills.keys().has(skill_node_key) # Skill is unlocked
+					)
+				# "Or" paired skills
+				if setting_skills.keys().has(skill_node_key) and node_data.get("PairType", "").to_lower() == "or":
+					is_unlocked = setting_skills[skill_node_key].get("Index", -1) == page_index
+					
+					
 				var has_page_in_book = actor.pages.list_items_with_key(page_key).size() > 0
 				var has_page_in_inventory = PlayerInventory.get_item_stack_count(page_key) > 0
 				print("SSST: %s : Unlocked: %s       InBook: %s      InInv: %s" % [page_key, is_unlocked, has_page_in_book, has_page_in_inventory])
-				# Only add non-AlwaysUnlocked skills to list
+				# Add Unlocked and Always skills to list
 				if is_unlocked:
 					if node_data.get("AlwaysUnlocked"):
-						always_skills.append(page_key)
+						always_skills.append(skill_node_key)
 					else:
-						unlocked_skills.append(page_key)
+						unlocked_skills[skill_node_key] = setting_skills[skill_node_key]
 			
 				# Add or remove item from player inventory or actor pages
 				if is_unlocked:

@@ -165,7 +165,7 @@ func get_xp_to_next_level(current_level:int=-1)->int:
 
 func get_unspent_skill_points()->int:
 	var level = get_level()
-	var unlocked = StoryState.get_unlocked_skills_for_actor(self, false)
+	var unlocked = StoryState.get_unlocked_skills_for_actor(self)
 	if unlocked != null:
 		return level - unlocked.size() -1
 	return 0

@@ -120,6 +120,47 @@
 		},
 		"_DefVersion": "1"
 	},
+	"BeQuick_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "\"... and everyone else hurry the hell up!\"\n\n@@#StatMod:BeQuickSpeedMod@@\n\n@@#Color:Red:[Shared]@@ This Page is unlocked for other Actors in The Party.",
+			"DisplayName": "Be Quick",
+			"LargeIcon": "Sprites/BeQuick_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/BeQuick_Icon.png",
+			"SnippetDesc": "+20 Speed.",
+			"Tags": [
+				"Shared",
+				"Passive"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Shared"
+			},
+			"SourceTitle": "Rogue",
+			"StatMods": {
+				"BeQuickSpeedMod": {
+					"ModType": "Add",
+					"StatName": "Speed",
+					"Value": 20.0
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
 	"Bleeder_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {

@@ -25,9 +25,9 @@ func _draw() -> void:
 			var node = node_data.get("Node")
 			if !node:
 				continue
-			var parent_id = node_data.get("ParentId")
-			if parent_id:
-				var parent_skill_node_data = parent_control.get_node_data_for_page_id(parent_id)
+			var parent_key = node_data.get("ParentSkillKey")
+			if parent_key:
+				var parent_skill_node_data = parent_control.get_node_data_for_skill_node(parent_key)
 				if parent_skill_node_data.size() == 0:
 					continue
 				var parent_skill_node = parent_skill_node_data.get("Node")

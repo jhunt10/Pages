@@ -20,13 +20,14 @@ signal node_button_up(context, item_key, index, offset)
 var _actor:BaseActor
 var tree_data:Array
 var page_id_to_grid_mapping:Dictionary
+var skill_node_key_to_grid_mapping:Dictionary
 var tree_built:bool = false
 var skill_page_items:Dictionary = {}
 var max_unlocked_y_index:int = 0
 # Skills player had when first entering menu
-var _starting_skills:Array = []
+var _starting_skills:Dictionary = {}
 # Working set of skills, doesn't apply until closing menu
-var _unlocked_skills:Array = []
+var _unlocked_skills:Dictionary = {}
 
 func set_actor(actor):
 	_actor =  actor
@@ -48,7 +49,7 @@ func set_actor(actor):
 	paired_node_prefab.hide()
 	#return
 	self.tree_data = StoryState.get_skill_tree_data_for_actor(actor)
-	self._unlocked_skills = StoryState.get_unlocked_skills_for_actor(actor, false)
+	self._unlocked_skills = StoryState.get_unlocked_skills_for_actor(actor)
 	self._starting_skills = _unlocked_skills.duplicate()
 	var y_index = 0
 	for row in tree_data:
@@ -60,32 +61,41 @@ func set_actor(actor):
 		rows_container.add_child(new_row)
 		for node_data in row:
 			var new_node = null
+			var skill_node_key = node_data.get("SkillNodeKey")
+			var is_invalid = false
+			if !skill_node_key:
+				printerr("SkillTreeMenu.set_actor: SkillTreeNode missing SkillNodeKey at (%s, %s)"%[x_index, y_index])
+				skill_node_key = node_data.get("PageKey")
+				if node_data.keys().has("PairType"):
+					skill_node_key = node_data["Pages"][0]
+				is_invalid = true
+				#continue
+			skill_node_key_to_grid_mapping[skill_node_key] = [x_index, y_index]
 			# Paired Nodes
 			if node_data.keys().has("PairType"):
 				new_node = paired_node_prefab.duplicate()
 				var pair_type = node_data['PairType']
-				var page_item_id_1 = node_data.get("PageItemId1")
-				var page_item_id_2 = node_data.get("PageItemId2")
+				var page_item_id_1 = node_data["Pages"][0]
+				var page_item_id_2 = node_data["Pages"][1]
 				new_node.set_pages(pair_type, page_item_id_1, page_item_id_2)
-				new_node.node_1_button_down.connect(on_node_button_down.bind(page_item_id_1))
-				new_node.node_1_button_up.connect(on_node_button_up.bind(page_item_id_1))
-				new_node.node_2_button_down.connect(on_node_button_down.bind(page_item_id_2))
-				new_node.node_2_button_up.connect(on_node_button_up.bind(page_item_id_2))
-				page_id_to_grid_mapping[page_item_id_1] = [x_index, y_index]
-				page_id_to_grid_mapping[page_item_id_2] = [x_index, y_index]
+				new_node.node_1_button_down.connect(on_node_button_down.bind(skill_node_key, {"Index": 0}))
+				new_node.node_1_button_up.connect(on_node_button_up.bind(skill_node_key, {"Index": 0}))
+				new_node.node_2_button_down.connect(on_node_button_down.bind(skill_node_key, {"Index": 1}))
+				new_node.node_2_button_up.connect(on_node_button_up.bind(skill_node_key, {"Index": 1}))
 			else:
 				new_node = skill_node_prefab.duplicate()
-				var page_item_id = node_data.get("PageItemId")
+				var page_item_id = node_data.get("PageKey")
 				new_node.set_page(page_item_id)
-				new_node.button.button_down.connect(on_node_button_down.bind(page_item_id))
-				new_node.button.button_up.connect(on_node_button_up.bind(page_item_id))
-				page_id_to_grid_mapping[page_item_id] = [x_index, y_index]
+				new_node.button.button_down.connect(on_node_button_down.bind(skill_node_key, {}))
+				new_node.button.button_up.connect(on_node_button_up.bind(skill_node_key, {}))
 			if not new_node:
 				continue
 			new_row.add_child(new_node)
 			#new_row.add_child(new_node)
 			new_node.show()
 			node_data['Node'] = new_node
+			if is_invalid:
+				new_node.invalid_icon.show()
 			x_index += 1
 		#new_row.show()
 		y_index += 1
@@ -105,14 +115,16 @@ func sync_skill_nodes_states():
 	max_unlocked_y_index = 0
 	var y_index = 0
 	for row in tree_data:
-		var x_index = 0
 		for node_data in row:
+			var skill_node_key = node_data.get("SkillNodeKey", "")
 			# Paired Nodes
 			if node_data.keys().has("PairType"):
-				var page_item_id_1 = node_data.get("PageItemId1")
-				var page_item_id_2 = node_data.get("PageItemId2")
-				var p1_is_unlocked = _unlocked_skills.has(page_item_id_1)  or node_data.get("AlwaysUnlocked", false)
-				var p2_is_unlocked = _unlocked_skills.has(page_item_id_2) or node_data.get("AlwaysUnlocked", false)
+				var unlock_data = _unlocked_skills.get(skill_node_key, {})
+				var p1_is_unlocked = unlock_data.get("Index", -1) == 0
+				var p2_is_unlocked =  unlock_data.get("Index", -1) == 1
+				if node_data.get("AlwaysUnlocked", false):
+					p1_is_unlocked = true
+					p2_is_unlocked = true
 				var can_unlock_either = y_index-1 <= spent_points and remaining_points > 0
 				var paired_skill_node:PairedSkillTreeNode = node_data.get("Node")
 				if paired_skill_node:
@@ -123,11 +135,10 @@ func sync_skill_nodes_states():
 				node_data['CanUnlock'] = can_unlock_either
 			# Single Node
 			else:
-				var page_item_id = node_data.get("PageItemId")
-				var is_unlocked = (_unlocked_skills.has(page_item_id) or node_data.get("AlwaysUnlocked", false) )
+				var is_unlocked = (_unlocked_skills.keys().has(skill_node_key) or node_data.get("AlwaysUnlocked", false) )
 				var can_unlock = y_index-1 <= spent_points and remaining_points > 0
-				var parent_id = node_data.get("ParentId")
-				if parent_id and not _unlocked_skills.has(parent_id):
+				var parent_id = node_data.get("ParentSkillKey")
+				if parent_id and not _unlocked_skills.keys().has(parent_id):
 					can_unlock = false
 				var skill_node:SkillTreeNode = node_data.get("Node")
 				if skill_node:
@@ -137,7 +148,6 @@ func sync_skill_nodes_states():
 				node_data['CanUnlock'] = can_unlock
 				if is_unlocked:
 					max_unlocked_y_index = max(y_index, max_unlocked_y_index)
-			x_index += 1
 		y_index += 1
 	background_control.queue_redraw()
 
@@ -150,31 +160,53 @@ func get_node_data_for_page_id(page_id:String)->Dictionary:
 		return data
 	return {}
 
-func on_node_button_down(page_id):
-	var node_data = get_node_data_for_page_id(page_id)
-	if node_data.get("IsUnlocked") or node_data.get("AlwaysUnlocked"):
-		node_button_down.emit("Inventory", page_id, 0, Vector2.ZERO)
-	pass
+func get_node_data_for_skill_node(skill_node_key:String)->Dictionary:
+	var indexes = skill_node_key_to_grid_mapping.get(skill_node_key, null)
+	if !indexes:
+		return {}
+	if tree_data.size() > indexes[1] and tree_data[indexes[1]].size() > indexes[0]:
+		var data = tree_data[indexes[1]][indexes[0]]
+		return data
+	return {}
 
-func on_node_button_up(page_id):
-	var page_item = ItemLibrary.get_static_inst_of_item(page_id)
-	var  was_dragging = character_menu._dragging
-	node_button_up.emit("Inventory", page_id, 0)
-	if was_dragging:
-		return
-	var node_data = get_node_data_for_page_id(page_id)
-	var confirm_text = "-LOCKED-"
-	var disabled = true
-	var is_unlocked = false
+func on_node_button_down(skill_node_key, args):
+	var node_data = get_node_data_for_skill_node(skill_node_key)
+	var page_key = node_data.get("PageKey")
+	var is_unlocked = _unlocked_skills.has(skill_node_key)  or node_data.get("AlwaysUnlocked")
 	# Paired Node
 	if node_data.keys().has("PairType"):
-		if node_data.get("PageItemId1") == page_id:
-			is_unlocked = node_data.get("P1IsUnlocked")
-		else:
-			is_unlocked = node_data.get("P2IsUnlocked")
-	# Single Node
-	else:
-		is_unlocked = node_data.get("IsUnlocked")
+		var sub_pages:Array = node_data.get("Pages", [])
+		var index = args.get("Index", -1)
+		if sub_pages.size() < index:
+			printerr("SkillTreeMenu on_node_button_down: Invalid Index [%s,%s]" %[skill_node_key, args])
+			return
+		page_key = node_data.get("Pages", [])[args.get("Index")]
+		is_unlocked = _unlocked_skills.get(skill_node_key, {}).get("Index", -2) == index
+	if is_unlocked:
+		node_button_down.emit("Inventory", page_key, 0, Vector2.ZERO)
+
+func on_node_button_up(skill_node_key, args):
+	var node_data = get_node_data_for_skill_node(skill_node_key)
+	var page_key = node_data.get("PageKey")
+	if args.has("Index"):
+		page_key = node_data.get("Pages", [])[args.get("Index")]
+	var page_item = ItemLibrary.get_static_inst_of_item(page_key)
+	var  was_dragging = character_menu._dragging
+	node_button_up.emit("Inventory", page_key, 0)
+	if was_dragging:
+		return
+	var confirm_text = "-LOCKED-"
+	var disabled = true
+	var is_unlocked = _unlocked_skills.keys().has(skill_node_key)  or node_data.get("AlwaysUnlocked")
+	# Paired Node
+	if node_data.keys().has("PairType"):
+		var sub_pages:Array = node_data.get("Pages", [])
+		var index = args.get("Index", -1)
+		if sub_pages.size() < index:
+			printerr("SkillTreeMenu on_node_button_down: Invalid Index [%s,%s]" %[skill_node_key, args])
+			return
+		page_key = node_data.get("Pages", [])[args.get("Index")]
+		is_unlocked = _unlocked_skills.get(skill_node_key, {}).get("Index", -2) == index
 	
 	
 	# Always Unlocked
@@ -184,7 +216,7 @@ func on_node_button_up(page_id):
 	elif is_unlocked:
 		# Determine if can refund
 		var can_refund = true
-		var indexes = page_id_to_grid_mapping.get(page_id, null)
+		var indexes = skill_node_key_to_grid_mapping.get(skill_node_key, null)
 		var x_index = indexes[0]
 		var y_index = indexes[1]
 		# If this node isn't on the last unlocked row, 
@@ -211,14 +243,15 @@ func on_node_button_up(page_id):
 		disabled = false
 	var detail_card = character_menu.create_details_card(page_item, confirm_text, true, disabled)
 	if detail_card and not detail_card.item_confirmed.is_connected(on_node_confirmed):
-		detail_card.item_confirmed.connect(on_node_confirmed)
+		detail_card.item_confirmed.connect(on_node_confirmed.bind(skill_node_key, args))
 
-func on_node_confirmed(item:BaseItem):
-	var node_data = get_node_data_for_page_id(item.ItemKey)
-	if _unlocked_skills.has(item.ItemKey):
-		_unlocked_skills.erase(item.ItemKey)
-	else:
-		_unlocked_skills.append(item.ItemKey)
+func on_node_confirmed(_item:BaseItem, skill_node_key, args={}):
+	var node_data = get_node_data_for_skill_node(skill_node_key)
+	var node_key = node_data.get("SkillNodeKey", "")
+	if _unlocked_skills.keys().has(skill_node_key):
+		_unlocked_skills.erase(skill_node_key)
+	elif node_key != '':
+		_unlocked_skills[skill_node_key] = args
 	character_menu._current_details_card.start_hide()
 	sync_skill_nodes_states()
 	apply_changes()
@@ -226,18 +259,18 @@ func on_node_confirmed(item:BaseItem):
 	_actor.stats_changed.emit()
 
 func apply_changes():
-	var unlocked_skills = []
-	for row in tree_data:
-		for node_data in row:
-			if node_data.keys().has("PairType"):
-				if node_data.get("P1IsUnlocked"):
-					unlocked_skills.append(node_data.get("PageItemId1"))
-				if node_data.get("P2IsUnlocked"):
-					unlocked_skills.append(node_data.get("PageItemId2"))
-			else:
-				if node_data.get("IsUnlocked"):
-					unlocked_skills.append(node_data.get("PageItemId"))
-	StoryState.set_unlocked_skill_for_actor(_actor, unlocked_skills)
+	#var unlocked_skills = []
+	#for row in tree_data:
+		#for node_data in row:
+			#if node_data.keys().has("PairType"):
+				#if node_data.get("P1IsUnlocked"):
+					#unlocked_skills.append(node_data.get("PageItemId1"))
+				#if node_data.get("P2IsUnlocked"):
+					#unlocked_skills.append(node_data.get("PageItemId2"))
+			#else:
+				#if node_data.get("IsUnlocked"):
+					#unlocked_skills.append(node_data.get("PageItemId"))
+	StoryState.set_unlocked_skills_for_actor(_actor, _unlocked_skills)
 
 func get_has_changes()->bool:
 	if _unlocked_skills.size() != _starting_skills.size():

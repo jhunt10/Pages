@@ -108,6 +108,7 @@
 		"!ParentKey": "#BaseApplySelfBuffAction",
 		"#ObjDetails": {
 			"DisplayName": "Be Nimble",
+			"Description": "Apply @@#EftData:ApplyEffect@@ to @@#TrgParm:TargetParam:TargetType@@ for @@#EftData:ApplyEffect:Duration@@.\n\n\"Jack be nimble...\"",
 			"LargeIcon": "Effects/Sprites/BeNimble_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Effects/Sprites/BeNimble_Icon.png",
@@ -148,7 +149,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"BeQuick_PageItem": {
+	"_OLD_BeQuick_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplySelfBuffAction",
 		"#ObjDetails": {

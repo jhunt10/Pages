@@ -33,6 +33,11 @@ func set_unlock_state(pair_type:String, page_1_unlocked:bool, page_2_unlocked:bo
 			can_unlock_2 = false
 		if page_2_unlocked:
 			can_unlock_1 = false
+	if pair_type.to_lower() == "and":
+		if page_1_unlocked:
+			page_2_unlocked = true
+		if page_2_unlocked:
+			page_1_unlocked = true
 	node_1.set_unlock_state(page_1_unlocked, can_unlock_1)
 	node_2.set_unlock_state(page_2_unlocked, can_unlock_2)
 
