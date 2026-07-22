@@ -23,5 +23,6 @@ func execute_action_motion_animation(speed:float=1, _off_hand:bool=false):
 	pass
 
 func cancel_action_animations():
-	body_animation.play(current_body_animation_action + "_cancel")
+	if current_body_animation_action:
+		body_animation.play(current_body_animation_action + "_cancel")
 	pass

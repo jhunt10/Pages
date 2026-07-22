@@ -108,7 +108,7 @@ enum DamageTypes {
 
 @export var effect_container:HBoxContainer
 @export var effect_change_label:Label
-@export var effect_name_label:Label
+@export var effect_name_label:DescriptionBox
 @export var effect_duration_value_label:Label
 @export var effect_duration_type_label:Label
 
@@ -158,7 +158,7 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 	attack_scale = damage_data.get("AtkPwrScale", 1)
 	
 	if count > 1:
-		count_label.text = str(count) + "x"
+		count_label.text = str(int(count)) + "x"
 		count_label.show()
 	else:
 		count_label.hide()
@@ -241,10 +241,11 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 		
 		
 		effect_change_label.text = str(floori(effect_meta_data.get("ApplicationChance") * 100.0))
-		effect_name_label.text = effect_def.get("#ObjDetails", {}).get("DisplayName", "")
+		effect_name_label.clear()
+		effect_name_label.set_description("@@#EftDef:"+effect_key+":Link@@")
 		
 		var duration_data = effect_def.get("EffectData", {}).get("EffectDetails", {}).get("DurationData", {})
-		effect_duration_value_label.text = str(duration_data.get("BaseDuration", 0))
+		effect_duration_value_label.text = str(int(duration_data.get("BaseDuration", 0)))
 		
 		var duration_type_str = duration_data.get("DurationTrigger", "")
 		if duration_type_str == "OnTurnEnd":

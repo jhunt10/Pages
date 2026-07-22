@@ -48,6 +48,10 @@
 						"OnActionEnd"
 					],
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
+				},
+				"VfxEffect": {
+					"AilmentKey": "Bleed",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
 				}
 			}
 		},
@@ -105,11 +109,11 @@
 		},
 		"_DefVersion": "1"
 	},
-	"AilmentDazed": {
+	"AilmentStun": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
 			"Description": "@@#StatMod:MultiMods:-50% to most Stats@@, and can not @@#Color:Red:Block@@ or @@#Color:Red:Evade@@.\nLasts for @@#Color:Red:2 Turn@@ and can only apply @@#Color:Red:Once per Round@@.",
-			"DisplayName": "Dazed",
+			"DisplayName": "Stunned",
 			"LargeIcon": "Sprites/DazedIcon.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/DazedIcon.png",
@@ -124,7 +128,7 @@
 		"EffectData": {
 			"EffectDetails": {
 				"AddTagsToActor": [
-					"Dazed"
+					"Stunned"
 				],
 				"CanStack": false,
 				"DeleteAfterCombat": true,
@@ -176,13 +180,13 @@
 				}
 			},
 			"SubEffects": {
-				"ApplyDazeImune": {
-					"ApplyEffectKey": "DazedImmune",
+				"ApplyStunImune": {
+					"ApplyEffectKey": "StunImmune",
 					"OptionalTriggers": [
 						"OnDurationEnds"
 					],
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_ApplyEffect.gd",
-					"UniqueEffectId": "DazeImmune"
+					"UniqueEffectId": "StunImmune"
 				},
 				"ApplyStatMod": {
 					"AllStatMods": true,
@@ -192,7 +196,7 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Frozen.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Dazed",
+					"AilmentKey": "Stunned",
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
 				}
 			}
@@ -254,15 +258,15 @@
 		},
 		"_DefVersion": "1"
 	},
-	"DazedImmune": {
+	"StunImmune": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
-			"Description": "You were @@#Color:Blue:Dazed@@ once this @@#Color:Red:Round@@ and are now immune until @@#Color:Red:End of Round@@ .",
+			"Description": "You were @@#Color:Blue:Stunned@@ once this @@#Color:Red:Round@@ and are now immune until @@#Color:Red:End of Round@@ .",
 			"DisplayName": "Daze Immune",
 			"LargeIcon": "Sprites/DazedImmuneIcon.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/DazedImmuneIcon.png",
-			"SnippetDesc": "Immune to Dazed until End of Round.",
+			"SnippetDesc": "Immune to Stun until End of Round.",
 			"Tags": [],
 			"Taxonomy": [
 				"Effect"
@@ -271,10 +275,10 @@
 		"EffectData": {
 			"EffectDetails": {
 				"AddEffectImmunity": [
-					"AilmentDazed"
+					"AilmentStun"
 				],
 				"AddTagsToActor": [
-					"DazeImmune"
+					"StunImmune"
 				],
 				"CanStack": false,
 				"DeleteAfterCombat": true,

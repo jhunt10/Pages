@@ -741,6 +741,19 @@ func _does_weapon_mod_apply_to_item(mod_data:Dictionary, item:BaseToolEquipment)
 	if conditions.has("TagFilters"):
 		if not TagHelper.check_tag_filters("TagFilters", conditions, item):
 			return false
+	# Check that it matches on at least one damage type
+	if conditions.has("DamageTypes"):
+		var req_types = conditions.get("DamageTypes", [])
+		var at_least_one_match = false
+		if item is BaseWeaponEquipment:
+			var damage_types = item.get_damage_types()
+			for req_type in req_types:
+				if damage_types.has(req_type):
+					at_least_one_match = true
+					break
+		if not at_least_one_match:
+			return false
+		
 	return true
 
 func get_hands_conditions_for_tool(tool:BaseToolEquipment)->Dictionary:

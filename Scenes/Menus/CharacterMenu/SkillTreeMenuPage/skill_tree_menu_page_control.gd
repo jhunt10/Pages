@@ -94,7 +94,7 @@ func set_actor(actor):
 			#new_row.add_child(new_node)
 			new_node.show()
 			node_data['Node'] = new_node
-			if is_invalid:
+			if is_invalid and new_node:
 				new_node.invalid_icon.show()
 			x_index += 1
 		#new_row.show()

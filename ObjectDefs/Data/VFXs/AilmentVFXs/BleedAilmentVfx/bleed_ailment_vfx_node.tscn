@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://pvi5htfmced7"]
+[gd_scene format=3 uid="uid://dibl2wtrrsm8a"]
 
-[ext_resource type="Script" path="res://assets/Scripts/VFXs/ParticalVfxs/ailment_vfx_node.gd" id="1_r3818"]
-[ext_resource type="Texture2D" uid="uid://dbidsbq0fuknv" path="res://ObjectDefs/Data/VFXs/AilmentVFXs/GreaseAilmentVfx/GreasePartical.png" id="2_b7nfe"]
+[ext_resource type="Script" uid="uid://ds0u1knhnghdt" path="res://assets/Scripts/VFXs/ParticalVfxs/ailment_vfx_node.gd" id="1_p7sgg"]
+[ext_resource type="Texture2D" uid="uid://dylbjgd46mj3s" path="res://ObjectDefs/Data/VFXs/AilmentVFXs/BleedAilmentVfx/BleedPartical.png" id="2_e8vns"]
 
 [sub_resource type="Curve" id="Curve_tfdxx"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 100), 0.0, 0.0, 0, 0, Vector2(0.196532, 99.2647), 0.0, 0.0, 0, 0, Vector2(0.283237, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 4
 
@@ -16,19 +16,19 @@ point_count = 2
 offsets = PackedFloat32Array(0, 0.86478, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="VFXNode" type="Node2D" node_paths=PackedStringArray("particals")]
+[node name="VFXNode" type="Node2D" unique_id=1134892348 node_paths=PackedStringArray("particals")]
 z_index = 9
-script = ExtResource("1_r3818")
+script = ExtResource("1_p7sgg")
 particals = NodePath("CPUParticles2D")
-actor_modulate = Color(0.611765, 1, 0.611765, 1)
+actor_modulate = Color(1, 0.36862746, 0.36862746, 1)
 y_scale = 0.3
 top_of_head = true
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=558753259]
 clip_children = 2
 amount = 2
+texture = ExtResource("2_e8vns")
 lifetime = 2.5
-texture = ExtResource("2_b7nfe")
 emission_shape = 3
 emission_rect_extents = Vector2(16, 16)
 gravity = Vector2(0, 15)

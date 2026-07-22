@@ -95,6 +95,15 @@ func is_melee_weapon()->bool:
 func get_damage_datas()->Dictionary:
 	return weapon_attack_data.get("DamageDatas", {})
 
+func get_damage_types()->Array:
+	var out_list = []
+	var datas = get_damage_datas()
+	for data in datas.values():
+		var damage_type = data.get("DamageType")
+		if damage_type and not out_list.has(damage_type):
+			out_list.append(damage_type)
+	return out_list
+
 func get_effect_on_attack_data()->Dictionary:
 	return weapon_attack_data.get("EffectDatas", {})
 

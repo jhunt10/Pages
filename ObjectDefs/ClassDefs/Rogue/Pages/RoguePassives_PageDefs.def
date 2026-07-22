@@ -193,7 +193,7 @@
 			},
 			"SourceTitle": "Rogue",
 			"WeaponMods": {
-				"DualLightBonus": {
+				"BleederWpnMod": {
 					"Conditions": {
 
 					},
@@ -201,14 +201,7 @@
 					"WeaponMods": {
 						"DamageTypeMod": {
 							"Conditions": {
-								"TagFilters": [
-									{
-										"RequireAnyTags": [
-											"Slash"
-										]
-									}
-								],
-								"TagFiltersReqAll": true
+								"DamageTypes": ["Slash"]
 							},
 							"ModProperty": "DmgEffectData",
 							"ModType": "Set",
@@ -262,7 +255,7 @@
 			},
 			"SourceTitle": "Rogue",
 			"WeaponMods": {
-				"DualLightBonus": {
+				"BlinderWpnMod": {
 					"Conditions": {
 
 					},
@@ -270,14 +263,7 @@
 					"WeaponMods": {
 						"DamageTypeMod": {
 							"Conditions": {
-								"TagFilters": [
-									{
-										"RequireAnyTags": [
-											"Pierce"
-										]
-									}
-								],
-								"TagFiltersReqAll": true
+								"DamageTypes": ["Pierce"]
 							},
 							"ModProperty": "DmgEffectData",
 							"ModType": "Set",
@@ -295,37 +281,65 @@
 						}
 					}
 				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Stunner_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "The secret to getting the most out of your @@#Tag:Blunt:Hint:Blunt Weapons@@ is to hit them really, really hard. Like really hard.\n\n@@#Tag:Weapon:Hint:Weapon Attacks@@ that deal @@#Color:DmgColor:Blunt:Blunt Damage@@ have a @@#Color:Blue:10%@@ chance to inflict @@#EftDef:AilmentStun@@ for @@#Color:Blue:1 Turn@@.",
+			"DisplayName": "Stunner",
+			"LargeIcon": "Sprites/Stunner_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Stunner_Icon.png",
+			"SnippetDesc": "Blunt Damage may inflict Stun",
+			"Tags": [
+				"Passive",
+				"WpnMod"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
 			},
-			"AttackMods": {
-				"BlinderAtkMod": {
-					"AttackModKey": "BlinderAtkMod",
-					"CanStack": false,
+			"SourceTitle": "Rogue",
+			"WeaponMods": {
+				"StunnerWpnMod": {
 					"Conditions": {
-						"AttackSourceTagFilters": [
-							{
-								"RequireAnyTags": [
-									"WpnAtk"
-								]
-							}
-						],
-						"AttackerTeamFilters": [
-							"Self"
-						],
-						"RequireDamageTypes": ["Pierce"]
+
 					},
-					"DisplayName": "Blinder",
-					"StatMods": {
-						"BackStabStatMod": {
+					"DisplayName": "Stunner",
+					"WeaponMods": {
+						"DamageTypeMod": {
 							"Conditions": {
-								"CanStack": false,
-								"TagFilters": [],
-								"TeamFilters": [
-									"Self"
-								]
+								"DamageTypes": ["Blunt"]
 							},
-							"ModType": "Add",
-							"StatName": "CritChance",
-							"Value": 50.0
+							"ModProperty": "DmgEffectData",
+							"ModType": "Set",
+							"ModValue": {
+								"ApplicationChance": 0.2,
+								"EffectDataDef": {
+									"EffectDetails": {
+										"DurationData": {
+											"BaseDuration": 1
+										}
+									}
+								},
+								"EffectKey": "AilmentStun"
+							}
 						}
 					}
 				}
@@ -577,75 +591,6 @@
 				"TitleReq": "Match"
 			},
 			"SourceTitle": "Rogue"
-		},
-		"_DefVersion": "1"
-	},
-	"Stunner_PageItem": {
-		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
-		"#ObjDetails": {
-			"Description": "The secret to getting the most out of your @@#Tag:Blunt:Hint:Blunt Weapons@@ is to hit them really, really hard. Like really hard.\n\n@@#Tag:Weapon:Hint:Weapon Attacks@@ that deal @@#Color:DmgColor:Blunt:Blunt Damage@@ have a @@#Color:Blue:10%@@ chance to inflict @@#EftDef:AilmentDazed@@ for @@#Color:Blue:1 Turn@@.",
-			"DisplayName": "Stunner",
-			"LargeIcon": "Sprites/Stunner_Icon.png",
-			"ObjectType": "Item",
-			"SmallIcon": "Sprites/Stunner_Icon.png",
-			"SnippetDesc": "Blunt Damage may inflict Blindness",
-			"Tags": [
-				"Passive",
-				"WpnMod"
-			],
-			"Taxonomy": [
-				"Item",
-				"Page",
-				"Passive"
-			]
-		},
-		"ItemData": {
-			"ItemType": "Page",
-			"Rarity": "Common",
-			"Value": 50.0
-		},
-		"PageData": {
-			"PageRequirements": {
-				"ConflictingPages": [],
-				"IncompatiblePages": [],
-				"TitleReq": "Match"
-			},
-			"SourceTitle": "Rogue",
-			"WeaponMods": {
-				"DualLightBonus": {
-					"Conditions": {
-
-					},
-					"DisplayName": "Blinder",
-					"WeaponMods": {
-						"DamageTypeMod": {
-							"Conditions": {
-								"TagFilters": [
-									{
-										"RequireAnyTags": [
-											"Blunt"
-										]
-									}
-								],
-								"TagFiltersReqAll": true
-							},
-							"ModProperty": "DmgEffectData",
-							"ModType": "Set",
-							"ModValue": {
-								"ApplicationChance": 0.1,
-								"EffectDataDef": {
-									"EffectDetails": {
-										"DurationData": {
-											"BaseDuration": 5.0
-										}
-									}
-								},
-								"EffectKey": "AilmentDazed"
-							}
-						}
-					}
-				}
-			}
 		},
 		"_DefVersion": "1"
 	}

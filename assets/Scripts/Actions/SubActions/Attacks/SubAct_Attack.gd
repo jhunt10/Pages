@@ -152,7 +152,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	if subaction_data.keys().has("LeachPercent"):
 		attack_details["LeachPercent"] = subaction_data["LeachPercent"]
 	
-	var attack_event = AttackHandler.handle_attack(
+	var _attack_event = AttackHandler.handle_attack(
 		actor, 
 		hittable_actors,
 		attack_details, 
