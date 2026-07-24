@@ -35,8 +35,9 @@ func on_combat_end(game_state):
 func purge_combat_efffects():
 	for effect_key in _effects.keys():
 		var effect:BaseEffect = _effects.get(effect_key)
-		if effect.RemainingDuration > 0 or effect.delete_after_combat():
-			remove_effect(effect)
+		if effect:
+			if effect.RemainingDuration > 0 or effect.delete_after_combat():
+				remove_effect(effect)
 
 ## Should only be called by EffectLibrary.create_effect
 func __add_new_effect(effect:BaseEffect, suppress_signals:bool = false):

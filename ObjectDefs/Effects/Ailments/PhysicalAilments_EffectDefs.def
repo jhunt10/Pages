@@ -50,8 +50,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Bleed",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentBleedVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},
@@ -102,8 +102,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Blinded",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentBlindedVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},
@@ -196,8 +196,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Frozen.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Stunned",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentStunnedVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},
@@ -251,8 +251,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Greased.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Greased",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentGreasedVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},

@@ -1,5 +1,5 @@
 {
-	"ArmorBreakAction": {
+	"ArmorBreak_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseInflictAttack",
 		"#ObjDetails": {
@@ -19,16 +19,30 @@
 		"ActionData": {
 			"AmmoData": {
 				"AmmoType": "Phy",
-				"Clip": 12.0,
-				"Cost": 3.0
+				"Clip": 4.0,
+				"Cost": 1.0
 			},
 			"AttackDetails": {
-				"AccuracyMod": 1.0,
 				"AttackVfxData": {
-
+					"ScenePath": "res://Scenes/VFXs/ArmorBreak/armor_break_vfx_node.tscn"
+				}
+			},
+			"SubActions":{
+				"WeaponMotionAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 0.0,
+					"MainHand": true,
+					"OffHand": "Never"
 				},
-				"AttackVfxKey": "",
-				"PotencyMod": 1.0
+				"WeaponReadyAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"#FrameIndex": 5.0,
+					"#SubIndex": 0.0,
+					"Animation": "Stab",
+					"MainHand": true,
+					"OffHand": "Never"
+				}
 			},
 			"EffectDatas": {
 				"InflictEffect": {
@@ -58,7 +72,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"BeDeadlySelfBuff": {
+	"BeDeadly_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplySelfBuffAction",
 		"#ObjDetails": {
@@ -84,7 +98,7 @@
 							}
 						}
 					},
-					"EffectKey": "BeDeadlyBuff"
+					"EffectKey": "BeDeadly_Effect"
 				}
 			}
 		},
@@ -217,8 +231,8 @@
 		"ActionData": {
 			"AmmoData": {
 				"AmmoType": "Phy",
-				"Clip": 8.0,
-				"Cost": 2.0
+				"Clip": 4.0,
+				"Cost": 1.0
 			},
 			"AttackDetails": {
 				"AccuracyMod": 0.5,
@@ -323,7 +337,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"GetBehindAction": {
+	"GetBehind_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Select an @@#Color:Red:Actor@@ and @@#Color:Red:Teleport@@ to the @@#Color:Red:Spot@@ behind them.\n\n-\"It's nothing personnel\"",
@@ -351,11 +365,6 @@
 				"PreviewTargetKey": "TargetParam"
 			},
 			"SubActions": {
-				"EndTeleportAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
-					"#FrameIndex": 12.0,
-					"#SubIndex": 0.0
-				},
 				"GetTarget": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
 					"#FrameIndex": 8.0,
@@ -364,22 +373,34 @@
 					"SetTargetKey": "Target1",
 					"TargetParamKey": "TargetParam"
 				},
+				"CheckTeleportDest": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_CheckTeleportDest.gd",
+					"#FrameIndex": 11,
+					"#SubIndex": 0,
+					"DestRelativePos": "[0, 1, 0, 0]",
+					"TargetDestKey": "Target1"
+				},
 				"PayCost": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-					"#FrameIndex": 8.0,
-					"#SubIndex": 1.0
+					"#FrameIndex": 11,
+					"#SubIndex": 1
 				},
 				"StartTeleportAnimation": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
-					"#FrameIndex": 9.0,
-					"#SubIndex": 0.0
+					"#FrameIndex": 11,
+					"#SubIndex": 2
 				},
 				"Teleport": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Teleport.gd",
-					"#FrameIndex": 11.0,
-					"#SubIndex": 0.0,
+					"#FrameIndex": 11,
+					"#SubIndex": 3,
 					"DestRelativePos": "[0, 1, 0, 0]",
 					"TargetDestKey": "Target1"
+				},
+				"EndTeleportAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
+					"#FrameIndex": 12,
+					"#SubIndex": 0
 				}
 			},
 			"TargetParams": {
@@ -405,7 +426,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"JumpOverAction": {
+	"JumpOver_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Teleport Forward two spots",
@@ -432,28 +453,34 @@
 				"PreviewMoveOffset": "[0, -2, 0, 0]"
 			},
 			"SubActions": {
-				"EndTeleportAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
-					"#FrameIndex": 12.0,
-					"#SubIndex": 1.0
-				},
-				"Move": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd",
-					"#FrameIndex": 11.0,
-					"#SubIndex": 0.0,
-					"MovementType": "Telport",
-					"PlayWalkin": false,
+				"CheckTeleportDest": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_CheckTeleportDest.gd",
+					"#FrameIndex": 11,
+					"#SubIndex": 0,
 					"RelativePos": "[0, -2, 0, 0]"
 				},
 				"PayCost": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
-					"#FrameIndex": 8.0,
-					"#SubIndex": 1.0
+					"#FrameIndex": 11,
+					"#SubIndex": 1
 				},
 				"StartTeleportAnimation": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
-					"#FrameIndex": 9.0,
-					"#SubIndex": 0.0
+					"#FrameIndex": 11,
+					"#SubIndex": 2
+				},
+				"Move": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Movement/SubAct_Move.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 3,
+					"MovementType": "Telport",
+					"PlayWalkin": false,
+					"RelativePos": "[0, -2, 0, 0]"
+				},
+				"EndTeleportAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_TeleportAnimation_Start.gd",
+					"#FrameIndex": 12,
+					"#SubIndex": 0
 				}
 			}
 		},
@@ -492,8 +519,8 @@
 		"ActionData": {
 			"AmmoData": {
 				"AmmoType": "Phy",
-				"Clip": 12.0,
-				"Cost": 3.0
+				"Clip": 6.0,
+				"Cost": 1.0
 			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
@@ -561,8 +588,8 @@
 		"ActionData": {
 			"AmmoData": {
 				"AmmoType": "Phy",
-				"Clip": 32.0,
-				"Cost": 4.0
+				"Clip": 8.0,
+				"Cost": 1.0
 			},
 			"AttackDetails": {
 				"AttackVfxData": {

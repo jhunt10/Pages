@@ -11,16 +11,17 @@ func set_vfx_data(new_id:String, data:Dictionary):
 	super(new_id, data)
 	
 	# Load Sprite
-	var sprite_name = _data.get("SpriteName")
-	if sprite_name:
-		var sprite_path = _data.get("LoadPath", "NO_LOAD_PATH").path_join(sprite_name)
-		if ResourceLoader.exists(sprite_path):
-			sprite.texture = load(sprite_path)
-			sprite.hframes = _data.get("SpriteSheetWidth", 1)
-			sprite.vframes = _data.get("SpriteSheetHight", 1)
-		else:
-			printerr("BaseSpriteVfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
-			sprite.texture = load(NO_SPRITE_PATH)
+	if sprite:
+		var sprite_name = _data.get("SpriteName")
+		if sprite_name:
+			var sprite_path = _data.get("LoadPath", "NO_LOAD_PATH").path_join(sprite_name)
+			if ResourceLoader.exists(sprite_path):
+				sprite.texture = load(sprite_path)
+				sprite.hframes = _data.get("SpriteSheetWidth", 1)
+				sprite.vframes = _data.get("SpriteSheetHight", 1)
+			else:
+				printerr("BaseSpriteVfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
+				sprite.texture = load(NO_SPRITE_PATH)
 	
 	# Load Audio
 	if audio_player:
@@ -29,7 +30,8 @@ func set_vfx_data(new_id:String, data:Dictionary):
 			audio_player.stream = load(sound_effect)
 	
 	# Hide sprite until started
-	sprite.visible = false
+	if sprite:
+		sprite.visible = false
 	
 	if _data.get("MatchSourceDir", false):
 		var dir = _data.get("Direction", 0)
@@ -70,7 +72,8 @@ func _on_start():
 	if audio_player:
 		audio_player.play()
 	
-	sprite.visible = true
+	if sprite:
+		sprite.visible = true
 
 
 func _on_animation_finish(_animation_name:String):

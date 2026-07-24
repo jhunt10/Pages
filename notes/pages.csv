@@ -19,8 +19,8 @@ SkeletonMage_TitlePage,,Skeleton Mage,PageItemTitle.gd,,,,,,,,,,
 Skeleton_TitlePage,,Skeleton,PageItemTitle.gd,,,,,,,,,,
 Zombie_TitlePage,,Zombie,PageItemTitle.gd,,,,,,,,,,
 #BaseInflictAttack,,#Base Inflict Attack,PageItemAction.gd,,,,1.0,,,,,,
-ArmorBreakAction,Rogue,Armor Break,PageItemAction.gd,Phy,3.0,12.0,1.0,,,,,,
-PocketSand_PageItem,Rogue,Pocket Sand,PageItemAction.gd,Phy,3.0,12.0,1.0,,,,,,
+ArmorBreak_PageItem,Rogue,Armor Break,PageItemAction.gd,Phy,1.0,4.0,1.0,,,,,,
+PocketSand_PageItem,Rogue,Pocket Sand,PageItemAction.gd,Phy,1.0,6.0,1.0,,,,,,
 #BaseMeleeAttack,,#Base Melee Attack,PageItemAction.gd,,,,1.0,PhyAttack,100.0,10.0,1.0,0.0,RAW
 #BaseMeleeSpell,,#Base Melee Spell,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,RAW
 ColdMeleeSpell,,Cold Touch,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,Cold
@@ -45,7 +45,7 @@ FireRangedSpell,,Fire Shot,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.
 PoisonRangedSpell,,Poison Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,70.0,20.0,1.0,0.0,Poison
 ShockRangedSpell,,Shock Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,30.0,1.0,0.0,Shock
 LightRangedSpell,Priest,Light Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.0,1.0,0.0,Light
-ThrowKnife_PageItem,Rogue,Throw Knife,PageItemAction.gd,Phy,4.0,32.0,1.0,PhyAttack,80.0,20.0,1.0,0.0,Pierce
+ThrowKnife_PageItem,Rogue,Throw Knife,PageItemAction.gd,Phy,1.0,8.0,1.0,PhyAttack,80.0,20.0,1.0,0.0,Pierce
 #BaseTrapAttack,,#Base Trap Attack,PageItemAction.gd,Mag,4.0,24.0,1.0,PhyAttack,100.0,20.0,1.0,0.0,RAW
 #BaseTrapSpell,,#Base Trap Action,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,120.0,20.0,1.0,0.0,RAW
 ColdTrapSpell,,Cold Trap,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,120.0,10.0,1.0,0.0,Cold
@@ -85,7 +85,7 @@ BasicWeaponAttack,,Weapon Attack,PageItemAction.gd,,,,,,,,,,
 FastAttackAction,,Fast Attack,PageItemAction.gd,Phy,4.0,32.0,,,,,,,
 PowerAttackAction,,Power Attack,PageItemAction.gd,Phy,8.0,32.0,,,,,1.2,,
 SlowAttackAction,,Slow Attack,PageItemAction.gd,Phy,4.0,32.0,,,,,,,
-CoupDeGraceAttackAction,Rogue,Coup De Grace,PageItemAction.gd,Phy,2.0,8.0,0.5,,,,,,
+CoupDeGraceAttackAction,Rogue,Coup De Grace,PageItemAction.gd,Phy,1.0,4.0,0.5,,,,,,
 DoubleAttackAction,,Double Attack,PageItemAction.gd,Phy,4.0,32.0,,,,,,,
 #BaseThrowItemPage,,Throw Bomb,PageItemAction.gd,,,,,,,,,,
 ThrowBombPage,,Throw Bomb,PageItemAction.gd,,,,,,,,,,
@@ -147,17 +147,19 @@ RemoveMorePage,Priest,Remove More,PageItemPassive.gd,,,,,,,,,,
 RemoveSelectPage,Priest,Remove Select,PageItemPassive.gd,,,,,,,,,,
 GetBehindAction,Rogue,Get Behind,PageItemAction.gd,Abn,1.0,2.0,,,,,,,
 JumpOverAction,Rogue,Jump Over,PageItemAction.gd,Abn,1.0,2.0,,,,,,,
-ArtfulDodgerPage,Rogue,Artful Dodger,PageItemPassive.gd,,,,,,,,,,
+_OLD_ArtfulDodgerPage,Rogue,Artful Dodger,PageItemPassive.gd,,,,,,,,,,
+ArtfulDodger_PageItem,Rogue,Artful Dodger,PageItemPassive.gd,,,,,,,,,,
+Momentum_PageItem,Rogue,Momentum,PageItemPassive.gd,,,,,,,,,,
 BackStab_PageItem,Rogue,Back Stabber,PageItemPassive.gd,,,,,,,,,,
 BeQuick_PageItem,Rogue,Be Quick,PageItemPassive.gd,,,,,,,,,,
 Bleeder_PageItem,Rogue,Bleeder,PageItemPassive.gd,,,,,,,,,,
 Blinder_PageItem,Rogue,Blinder,PageItemPassive.gd,,,,,,,,,,
+Stunner_PageItem,Rogue,Stunner,PageItemPassive.gd,,,,,,,,,,
 DualHander_PageItem,Rogue,Ambidualtrous,PageItemPassive.gd,,,,,,,,,,
 EvasionAoePage,Rogue,Evade AOE,PageItemPassive.gd,,,,,,,,,,
-EvasivePage,Rogue,Evasive,PageItemPassive.gd,,,,,,,,,,
+Evasive_PageItem,Rogue,Evasive,PageItemPassive.gd,,,,,,,,,,
 LowAggro_PageItem,Rogue,Sneaky,PageItemPassive.gd,,,,,,,,,,
 PhyBoostPage,Rogue,Phy Boost,PageItemPassive.gd,,,,,,,,,,
-Stunner_PageItem,Rogue,Stunner,PageItemPassive.gd,,,,,,,,,,
 Charge_PageItem,Soldier,Charge,PageItemAction.gd,Phy,1.0,8.0,1.0,,,,1.0,,
 Cleave_PageItem,Soldier,Cleave,PageItemAction.gd,Phy,1.0,6.0,1.0,,,,0.6,,
 FaceFoe_PageItem,Soldier,Face Foe,PageItemAction.gd,,,,,,,,,,

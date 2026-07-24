@@ -70,7 +70,17 @@ func start_vfx():
 		if vfx_holder and vfx_holder.actor_node:
 			vfx_holder.actor_node.play_shake()
 
+## Called after the node has "finished" to check for any lingering Audio or Particals to finish.
+func is_ready_to_delete()->bool:
+	return true
+
 func _on_start(): 
+	pass
+
+func _on_finish():
+	pass
+
+func _on_delete():
 	pass
 
 func _trigger_next_vfxs():
@@ -89,9 +99,6 @@ func build_chained_vfx():
 	for vfx_key in chain_vfx_datas.keys():
 		VfxHelper.create_vfx_on_actor(self.actor_node.Actor, vfx_key, chain_vfx_datas[vfx_key], source_actor)
 
-## Called after the node has "finished" to check for any lingering Audio or Particals to finish.
-func is_ready_to_delete()->bool:
-	return true
 
 func finish():
 	if _state == States.Finished:
@@ -111,12 +118,6 @@ func _delete_self():
 	if vfx_holder and vfx_holder.has_vfx(self.id):
 		vfx_holder.remove_vfx(self.id)
 	self.queue_free()
-
-func _on_finish():
-	pass
-
-func _on_delete():
-	pass
 
 # Only called by VfxHolder.remove_vfx. Exists to double check logic
 func _removed_from_vfx_holder():

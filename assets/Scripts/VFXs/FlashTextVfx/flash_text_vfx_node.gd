@@ -4,7 +4,7 @@ extends BaseVfxNode
 
 enum FlashTextType {
 	Normal_Dmg, Blocked_Dmg, Crit_Dmg, Healing_Dmg, DOT_Dmg,
-	NoAmmo, NoTarget, Miss, Evade, Protect, Message
+	NoAmmo, NoTarget, Miss, Evade, Protect, Message, FailMessage
 }
 
 @export var flash_text_value:String
@@ -63,6 +63,10 @@ enum FlashTextType {
 					label.add_theme_font_size_override("font_size", small_font_size)
 				FlashTextType.Message:
 					label.modulate = blocked_damage_color
+					label.text = " "+str(flash_text_value)+" "
+					label.add_theme_font_size_override("font_size", default_font_size)
+				FlashTextType.FailMessage:
+					label.modulate = no_ammo_color
 					label.text = " "+str(flash_text_value)+" "
 					label.add_theme_font_size_override("font_size", default_font_size)
 			

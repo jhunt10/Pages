@@ -144,11 +144,6 @@ static func create_missile_vfx_node(missile_vfx_key:String, vfx_data:Dictionary)
 	node.start_vfx()
 	return node
 
-static func create_ailment_vfx_node(ailment_key:String, actor:BaseActor)->BaseVfxNode:
-	if FORCE_RELOAD: VfxLibrary.reload_vfxs()
-	var vfx_key = "Ailment" + ailment_key + "Vfx"
-	return create_vfx_on_actor(actor, vfx_key, {"CanStack": false})
-
 static func create_vfs_for_attack_event(attack_event:AttackEvent, game_state:GameStateData, override_source_actor:BaseActor = null):
 	for sub_attack_event_key in attack_event.sub_events.keys():
 		var sub_attack_event:AttackSubEvent = attack_event.sub_events.get(sub_attack_event_key)

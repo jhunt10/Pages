@@ -169,7 +169,8 @@ func _on_item_removed(item_id:String, _supressing_signals:bool):
 	super(item_id, _supressing_signals)
 	if item_id_to_effect_id.keys().has(item_id):
 		var effect = EffectLibrary.get_effect(item_id_to_effect_id[item_id])
-		_actor.effects.remove_effect(effect)
+		if effect:
+			_actor.effects.remove_effect(effect)
 		item_id_to_effect_id.erase(item_id)
 	_cache_action_mods()
 

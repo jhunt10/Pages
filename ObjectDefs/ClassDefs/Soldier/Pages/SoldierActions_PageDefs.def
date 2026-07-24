@@ -1,4 +1,49 @@
 {
+	"Analize_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseInflictAttack",
+		"#ObjDetails": {
+			"Description": "Analize",
+			"DisplayName": "Analize",
+			"LargeIcon": "Sprites/Analize_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Analize_Icon.png",
+			"SnippetDesc": "Analize",
+			"Tags": [],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+			},
+			"SubActions":{
+			},
+			"EffectDatas": {
+				"InflictEffect": {
+					"EffectDataDef": {
+					},
+					"EffectKey": "AnalizeEffect"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Soldier"
+		},
+		"_DefVersion": "1"
+	},
 	"Charge_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
@@ -1381,5 +1426,5 @@
 			"SourceTitle": "Soldier"
 		},
 		"_DefVersion": "1"
-	},
+	}
 }

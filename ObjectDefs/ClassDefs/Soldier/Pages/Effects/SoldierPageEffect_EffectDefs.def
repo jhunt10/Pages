@@ -1,4 +1,44 @@
 {
+	"AnalizeEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "Analize.",
+			"DisplayName": "Analize",
+			"LargeIcon": "Sprites/Guard.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/Guard.png",
+			"SnippetDesc": "Analize",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"DurationData": {
+					"BaseDuration": 3,
+					"DurationTrigger": "OnRoundEnd"
+				},
+				"IsBad": false,
+				"IsGood": true,
+				"ShowDuration": true,
+				"ShowInHud": true
+			},
+			"SubEffects": {
+				"VfxEffect": {
+					"VfxKey": "AnalizeVfx",
+					"VfxData": {
+						"VfxKey": "AilmentPoisonedVfx",
+						"ScenePath": "res://Scenes/VFXs/HealthBarVfx/health_bar_vfx_node.tscn",
+						"CanStack": false
+					},
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
 	"GuardEffect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
@@ -44,6 +84,7 @@
 		},
 		"_DefVersion": "1"
 	},
+
 	"InStoppable_Nested_Effect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
@@ -89,7 +130,7 @@
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
 			"Description": "@@#StatMod:MassStatMod@@ when using a @@#Tag:Move:Move Action@@.",
-			"DisplayName": "Instopable",
+			"DisplayName": "Instoppable",
 			"LargeIcon": "Sprites/MassUp.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/MassUp.png",

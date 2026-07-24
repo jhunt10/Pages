@@ -46,7 +46,205 @@
 		"ShowInHud": true,
 		"_DefVersion": "1"
 	},
-	"BeDeadlyBuff": {
+	"ArtfulDodger_Nested_Effect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#StatMod:EvadeStatMod@@ on using a @@#Tag:Move:Move Action@@.",
+			"DisplayName": "ArtfulDodger",
+			"LargeIcon": "Sprites/EvaUp.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/EvaUp.png",
+			"SnippetDesc": "+20 Evasion while using a Move Action.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"IsBad": false,
+				"IsGood": true,
+				"IsTemporary": true,
+				"ShowDuration": false,
+				"ShowInHud": true
+			},
+			"StatMods": {
+				"EvadeStatMod": {
+					"ModType": "Add",
+					"StatName": "Evasion",
+					"Value": 20
+				}
+			},
+			"SubEffects": {
+				"ModStat": {
+					"StatModKeys": [
+						"EvadeStatMod"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"ArtfulDodger_PageEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#StatMod:EvadeStatMod@@ when using a @@#Tag:Move:Move Action@@.",
+			"DisplayName": "ArtfulDodger",
+			"LargeIcon": "Sprites/EvaUp.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/EvaUp.png",
+			"SnippetDesc": "+20 Evasion while using a Move Action.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"IsBad": false,
+				"IsGood": true,
+				"IsTemporary": false,
+				"ShowDuration": false,
+				"ShowInHud": false
+			},
+			"SubEffects": {
+				"AddChild": {
+					"ChildEffectData": {
+						"Details": {
+							"DisplayName": "Artful Dodger"
+						}
+					},
+					"ChildEffectKey": "ArtfulDodger_Nested_Effect",
+					"DeleteChildOnDelete": true,
+					"OptionalTriggers": [
+						"OnPageUse"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
+					"UniqueChildEffectId": "ArtfulDodger_Nested_Effect",
+					"OnPageUseTriggerCondition":{
+						"PageTagFilters": [
+							{
+								"RequireAllTags":["Move"]
+							}
+						],
+						"PageTagFiltersReqAll": true
+					}
+				},
+				"RemoveChild": {
+					"OptionalTriggers": [
+						"OnTurnEnd"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_RemoveNestedEffect.gd",
+					"UniqueChildEffectId": "ArtfulDodger_Nested_Effect"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Momentum_Nested_Effect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#StatMod:AtkStatMod@@ on next @@#Tag:Attack@@ after using a @@#Tag:Move:Move Action@@.",
+			"DisplayName": "Momentum",
+			"LargeIcon": "Sprites/AtkUp.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/AtkUp.png",
+			"SnippetDesc": "+8 PhyAtk on next Attack after using a Move Action.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"IsBad": false,
+				"IsGood": true,
+				"IsTemporary": true,
+				"ShowDuration": false,
+				"ShowInHud": true
+			},
+			"StatMods": {
+				"AtkStatMod": {
+					"ModType": "Add",
+					"StatName": "PhyAttack",
+					"Value": 8
+				}
+			},
+			"SubEffects": {
+				"ModStat": {
+					"StatModKeys": [
+						"AtkStatMod"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Momentum_PageEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#StatMod:AtkStatMod@@ on next @@#Tag:Attack@@ after using a @@#Tag:Move:Move Action@@.",
+			"DisplayName": "Momentum",
+			"LargeIcon": "Sprites/AtkUp.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/AtkUp.png",
+			"SnippetDesc": "+8 PhyAtk on next Attack after using a Move Action.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"DeleteAfterCombat": true,
+				"IsBad": false,
+				"IsGood": true,
+				"IsTemporary": false,
+				"ShowDuration": false,
+				"ShowInHud": false
+			},
+			"SubEffects": {
+				"AddChild": {
+					"ChildEffectData": {
+						"Details": {
+							"DisplayName": "Momentum"
+						}
+					},
+					"ChildEffectKey": "Momentum_Nested_Effect",
+					"DeleteChildOnDelete": true,
+					"OptionalTriggers": [
+						"OnPageUse"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
+					"UniqueChildEffectId": "Momentum_Nested_Effect",
+					"OnPageUseTriggerCondition":{
+						"PageTagFilters": [
+							{
+								"RequireAllTags":["Move"]
+							}
+						],
+						"PageTagFiltersReqAll": true
+					}
+				},
+				"RemoveChild": {
+					"OptionalTriggers": [
+						"OnAttacking_AfterAttack"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_RemoveNestedEffect.gd",
+					"UniqueChildEffectId": "Momentum_Nested_Effect"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"BeDeadly_Effect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
 			"Description": "Gain @@#StatMod:BuffStatMod@@",
@@ -54,7 +252,7 @@
 			"LargeIcon": "Sprites/BeDeadly_Icon.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/BeDeadly_Icon.png",
-			"SnippetDesc": "+50 to Accuracy",
+			"SnippetDesc": "+0.5 to Crit Damage Multiplier",
 			"Tags": [],
 			"Taxonomy": [
 				"Effect"
@@ -77,9 +275,9 @@
 			"StatMods": {
 				"BuffStatMod": {
 					"DisplayName": "Be Deadly",
-					"ModType": "Scale",
+					"ModType": "Add",
 					"StatName": "CritMod",
-					"Value": 1.5
+					"Value": 0.5
 				}
 			},
 			"SubEffects": {

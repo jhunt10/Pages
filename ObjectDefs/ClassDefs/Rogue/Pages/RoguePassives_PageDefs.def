@@ -1,5 +1,5 @@
 {
-	"ArtfulDodgerPage": {
+	"_OLD_ArtfulDodgerPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
 			"Description": "You've learned to keep on your toes and react to threats from every which way.\n\nDecrease @@#Stat:Evasion@@ penalty when attack from:\n[color=#460000]Flank -50% => [/color]@@#StatMod:FlankBlockMod:InvertPercent@@\n[color=#460000]Back -100% => [/color]@@#StatMod:BackBlockMod:InvertPercent@@.",
@@ -40,6 +40,84 @@
 					"StatName": "DirMod_Flank:Evasion",
 					"Value": 0.75
 				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"ArtfulDodger_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "You've learned to keep on your toes, weaving between attacks as you dancing across the battle field.\n\nIn combat gain:\n @@#EftDef:ArtfulDodger_Nested_Effect:Description@@",
+			"DisplayName": "Artful Dodger",
+			"LargeIcon": "Sprites/ArtfulDodger_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ArtfulDodger_Icon.png",
+			"SnippetDesc": "+20 EVA when using a Move Action.",
+			"Tags": [
+				"Passive",
+				"Effect"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Rogue"
+		},
+		"PassiveData":{
+			"InCombatEftData": {
+				"EffectKey": "ArtfulDodger_PageEffect"
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Momentum_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "An object in motion stays in motion, which is unfortunate for the guy it's motioning towards.\n\nIn combat gain:\n @@#EftDef:Momentum_Nested_Effect:Description@@",
+			"DisplayName": "Momentum",
+			"LargeIcon": "Sprites/Momentum_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Momentum_Icon.png",
+			"SnippetDesc": "+Phy Atk when using a Move Action.",
+			"Tags": [
+				"Passive",
+				"Effect"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Rogue"
+		},
+		"PassiveData":{
+			"InCombatEftData": {
+				"EffectKey": "Momentum_PageEffect"
 			}
 		},
 		"_DefVersion": "1"
@@ -350,7 +428,7 @@
 	"DualHander_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "When @@#Color:Blue:DualHand@@ with two @@#Color:Blue:Light Weapons@@, their @@#Color:Red:Base Attack Power@@ is increased to @@#Color:Red:60%@@ from the default is 50%.",
+			"Description": "Am·bi·dex·trous  (adjective)\n  able to use the right and left hands equally well for stabbing.\n\nWhen @@#Tag:DualHand:Dual Handing@@ with two @@#Tag:LgtWpn:Light Weapons@@, their @@#Tag:AtkPwr:Base Attack Power@@ is increased to @@#Color:Red:60%@@ (default 50%).",
 			"DisplayName": "Ambidualtrous",
 			"LargeIcon": "Sprites/DualDagger_Icon.png",
 			"ObjectType": "Item",
@@ -461,7 +539,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"EvasivePage": {
+	"Evasive_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
 			"Description": "You've had to dodge a lot of things in life, blades, people, alimony payments. And you've gotten pretty good at it.\n\n@@#StatMod:EvasionMod@@",

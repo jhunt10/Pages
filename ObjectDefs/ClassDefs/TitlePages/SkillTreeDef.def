@@ -19,6 +19,10 @@
         ],
         [
             {
+                "SkillNodeKey":"Analize",
+                "PageKey": "Analize_PageItem"
+            },
+            {
                 "SkillNodeKey": "HeavyArmorTraining",
                 "PageKey": "HeavyArmorTraining_PageItem"
             },
@@ -99,7 +103,8 @@
                 "AlwaysUnlocked": true
             },
             {
-                "PageKey": "EvasivePage",
+                "SkillNodeKey": "Evasive",
+                "PageKey": "Evasive_PageItem",
                 "AlwaysUnlocked": true
             },
             {
@@ -142,15 +147,23 @@
                 "PageKey": "Bleeder_PageItem"
             },
             {
-                "PageKey": "EvasionAoePage"
+                "SkillNodeKey": "ArtfulDodger",
+                "PageKey": "ArtfulDodger_PageItem"
             },
             {
-                "PageKey": "BeDeadlySelfBuff"
+                "SkillNodeKey": "Momentum",
+                "PageKey": "Momentum_PageItem"
+            },
+            {
+                "SkillNodeKey": "BeDeadly",
+                "PageKey": "BeDeadly_PageItem"
             }
+            
         ],
         [
             {
-                "PageKey": "ArmorBreakAction"
+                "SkillNodeKey": "ArmorBreak",
+                "PageKey": "ArmorBreak_PageItem"
             },
             {
                 "PageKey": "CoupDeGraceAttackAction"
@@ -166,10 +179,12 @@
                 "PageKey": "Stunner_PageItem"
             },
             {
-                "PageKey": "GetBehindAction"
+                "SkillNodeKey":"GetBehind",
+                "PageKey": "GetBehind_PageItem"
             },
             {
-                "PageKey": "JumpOverAction"
+                "SkillNodeKey": "JumpOver",
+                "PageKey": "JumpOver_PageItem"
             }
         ]
     ],

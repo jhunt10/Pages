@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c1hn3uk67i7im"]
+
+[ext_resource type="Script" uid="uid://ct84qryq8yowy" path="res://Scenes/VFXs/HealthBarVfx/health_bar_vfx_node.gd" id="1_10dvc"]
+[ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="2_wvpls"]
+
+[node name="HealthBarVfxNode" type="Node2D" unique_id=1502074114 node_paths=PackedStringArray("label")]
+script = ExtResource("1_10dvc")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="." unique_id=449467848]
+offset_left = -10.0
+offset_top = -21.0
+offset_right = 56.0
+offset_bottom = 2.0
+scale = Vector2(0.3, 0.3)
+theme = ExtResource("2_wvpls")
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_constants/outline_size = 8
+text = "100/100"
+horizontal_alignment = 1

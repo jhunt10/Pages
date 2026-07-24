@@ -73,8 +73,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_RemoveOtherEffect.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Burned",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentBurnedVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},
@@ -161,8 +161,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_RemoveOtherEffect.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Chilled",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentChilledVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},
@@ -230,8 +230,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/OtherEffects/SubEffect_RemoveOtherEffect.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Frozen",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentFrozenVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},
@@ -293,8 +293,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Damage/SubEffect_ApplyDotDamage.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Poisoned",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentPoisonedVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},
@@ -355,8 +355,8 @@
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_Shocked.gd"
 				},
 				"VfxEffect": {
-					"AilmentKey": "Shocked",
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/Ailments/SubEffect_AlimentVfx.gd"
+					"VfxKey": "AilmentShockedVfx",
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_CreateVfx.gd"
 				}
 			}
 		},
