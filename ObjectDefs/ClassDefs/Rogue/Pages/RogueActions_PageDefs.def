@@ -340,7 +340,7 @@
 	"GetBehind_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Select an @@#Color:Red:Actor@@ and @@#Color:Red:Teleport@@ to the @@#Color:Red:Spot@@ behind them.\n\n-\"It's nothing personnel\"",
+			"Description": "Select an @@#Color:Red:Actor@@ in range and @@#Tag:Teleport@@ to the @@#Color:Red:Spot@@ dirrectly @@#Tag:Behind@@ them.\n\n-\"It's nothing personnel\"",
 			"DisplayName": "Get Behind",
 			"LargeIcon": "Sprites/Behind_Icon.png",
 			"ObjectType": "Item",
@@ -429,7 +429,7 @@
 	"JumpOver_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Teleport Forward two spots",
+			"Description": "@@#Tag:Teleport@@ forward two @@#Color:Red:Spots@@",
 			"DisplayName": "Jump Over",
 			"LargeIcon": "Sprites/JumpOver_Icon.png",
 			"ObjectType": "Item",
