@@ -256,26 +256,6 @@ func _set_turn_mapping(gap_or_nots:Array):
 	#for key in _page_ammo_datas.keys():
 		#ammo_changed.emit(key)
 
-#func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, action:PageItemAction, _actor)->bool:
-	#if not action.has_ammo():
-		#return false
-	#
-	#var conditions = mod_data.get("Conditions", null)
-	#if not conditions:
-		#return true
-	#
-	#var ammo_types = conditions.get("AmmoTypes", [])
-	#if ammo_types.size() > 0:
-		#var ammo_type = ammo_data.get("AmmoType", "NOTSET")
-		#if not ammo_types.has(ammo_type):
-			#return false
-	#
-	#var tag_filters = conditions.get("ActionTagFilters", [])
-	#if not TagHelper.filters_accept_tags(tag_filters, action.get_tags()):
-		#return false
-	#
-	#return true
-
 #func fill_page_ammo(action_key:String="", supress_signal:bool=false):
 	#if _ammo_mod_dirty:
 		#_cache_page_ammo()

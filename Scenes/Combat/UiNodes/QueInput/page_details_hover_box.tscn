@@ -38,7 +38,7 @@ ammo_acc_pot_line = NodePath("BackPatchContainer/BoxContainer/ColorRect2")
 damage_line = NodePath("BackPatchContainer/BoxContainer/ColorRect3")
 
 [node name="BackPatchContainer" type="Container" parent="." unique_id=700076961 node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(256, 181)
+custom_minimum_size = Vector2(276, 181)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -47,7 +47,7 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -138.0
 offset_top = -136.0
-offset_right = 118.0
+offset_right = 138.0
 offset_bottom = 45.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -205,11 +205,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PotIcon" type="TextureRect" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer" unique_id=1710886386]
+visible = false
 layout_mode = 2
 texture = ExtResource("14_6sxbo")
 expand_mode = 3
 
 [node name="PotLabel" type="Label" parent="BackPatchContainer/BoxContainer/AmmoAccPotContainer" unique_id=1389480960]
+visible = false
 layout_mode = 2
 size_flags_vertical = 8
 theme = ExtResource("11_4xuiv")

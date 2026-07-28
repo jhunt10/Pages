@@ -401,6 +401,18 @@ static func _does_attack_mod_apply(attack_mod, attacker, defenders, source_tag_c
 					else:
 						continue
 			
+			# Check Health
+			if defender_condition.has("HealthBellow"):
+				var hp_limit = defender_condition["HealthBellow"]
+				var percent_hp = float(defender.stats.current_health) / maxf(defender.stats.max_health,1)
+				if not (percent_hp <= hp_limit):
+					all_defenders_are_valid = false
+					if require_all_defenders:
+						break
+					else:
+						continue
+					
+			
 			# Defender is valid faction
 			if not TagHelper.check_team_filter(mod_source_actor, faction_filter, defender, game_state):
 				all_defenders_are_valid = false

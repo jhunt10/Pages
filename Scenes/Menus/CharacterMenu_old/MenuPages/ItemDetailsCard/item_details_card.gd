@@ -75,7 +75,7 @@ var is_selling:bool = false
 @export var page_que_details:PageQueDetailsControl
 @export var default_details:DefaultItemDetailsControl
 @export var tag_label:Label
-@export var tag_box:TagBox
+@export var tag_box:TagsContainer
 
 
 @export var confirm_button_background:NinePatchRect

@@ -124,7 +124,8 @@
                 "PageKey": "Blinder_PageItem"
             },
             {
-                "PageKey": "PhyBoostPage"
+                "SkillNodeKey": "PhyAmmoBoost",
+                "PageKey": "PhyAmmoBoost_PageItem"
             }
         ],
         [
@@ -137,8 +138,8 @@
                 "PageKey": "Dodge_PageItem"
             },
             {
-                "SkillNodeKey": "BackStab",
-                "PageKey": "BackStab_PageItem"
+                "SkillNodeKey": "DoubleAttack",
+                "PageKey": "DoubleAttack_PageItem"
             }
         ],
         [
@@ -147,12 +148,9 @@
                 "PageKey": "Bleeder_PageItem"
             },
             {
-                "SkillNodeKey": "ArtfulDodger",
-                "PageKey": "ArtfulDodger_PageItem"
-            },
-            {
-                "SkillNodeKey": "Momentum",
-                "PageKey": "Momentum_PageItem"
+                "SkillNodeKey": "SerpentineMomentum",
+                "PairType": "Or",
+                "Pages": ["Serpentine_PageItem", "Momentum_PageItem"]
             },
             {
                 "SkillNodeKey": "BeDeadly",
@@ -166,7 +164,8 @@
                 "PageKey": "ArmorBreak_PageItem"
             },
             {
-                "PageKey": "CoupDeGraceAttackAction"
+                "SkillNodeKey": "JumpOver",
+                "PageKey": "JumpOver_PageItem"
             },
             {
                 "SkillNodeKey": "DualHander",
@@ -183,8 +182,9 @@
                 "PageKey": "GetBehind_PageItem"
             },
             {
-                "SkillNodeKey": "JumpOver",
-                "PageKey": "JumpOver_PageItem"
+                "SkillNodeKey": "BackStabFinisher",
+                "PairType": "Or",
+                "Pages": ["BackStab_PageItem","Finisher_PageItem"]
             }
         ]
     ],

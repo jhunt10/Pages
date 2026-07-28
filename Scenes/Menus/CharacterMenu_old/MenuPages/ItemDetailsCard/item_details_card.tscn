@@ -13,9 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="8_v2bx5"]
 [ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="9_0f8c5"]
 [ext_resource type="Script" uid="uid://bcf3yo7yhmwwr" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="9_1ue73"]
+[ext_resource type="Script" uid="uid://drh2bv6oh7wkq" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/tag_container.gd" id="10_xpx0y"]
+[ext_resource type="Texture2D" uid="uid://cmsfac2sl2iuy" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/TagsPlusIcon.png" id="11_tuu4e"]
 [ext_resource type="Script" uid="uid://1avbudpko86d" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/action_details_card.gd" id="12_fd6vk"]
 [ext_resource type="Script" uid="uid://6kxiipq6hsr2" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/default_item_details_control.gd" id="12_gvhwc"]
 [ext_resource type="Script" uid="uid://dnm2858aothe6" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/armor_details_control.gd" id="12_rxuc0"]
+[ext_resource type="Texture2D" uid="uid://hhvgr1kn3vit" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/TagsMinusIcon.png" id="12_utq40"]
 [ext_resource type="Script" uid="uid://kd25wgnxxnmi" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/cost_container.gd" id="13_an536"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
@@ -68,8 +71,8 @@ action_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ActionPageD
 effect_page_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/EffectPageDetailsContainer")
 page_que_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/PageBookDetailsContainer")
 default_details = NodePath("OffsetControl/NinePatchRect/VBoxContainer/DefaultDetailsContainer")
-tag_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagLabel")
-tag_box = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagsBox")
+tag_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagsContainer/TagsFlowContainer/HBoxContainer/TagLabel")
+tag_box = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TagsContainer")
 confirm_button_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground")
 confirm_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground/ConfirmButton")
 confirm_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground/ConfirmFitScaleLabel")
@@ -178,6 +181,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TagsBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1664022145]
+visible = false
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("6_do8nn")
@@ -188,16 +192,59 @@ scroll_active = false
 autowrap_mode = 2
 script = ExtResource("9_1ue73")
 
-[node name="TagLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=547662595]
-visible = false
+[node name="TagsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1426239430 node_paths=PackedStringArray("premade_tag", "tags_container", "tags_show_hide_button", "tags_title_container", "tags_plus_minus_icon")]
+layout_mode = 2
+vertical = true
+script = ExtResource("10_xpx0y")
+premade_tag = NodePath("TagsFlowContainer/TagsBox")
+tags_container = NodePath("TagsFlowContainer")
+tags_show_hide_button = NodePath("TagsFlowContainer/HBoxContainer/TextureRect/TagsShowHidButton")
+tags_title_container = NodePath("TagsFlowContainer/HBoxContainer")
+tags_plus_minus_icon = NodePath("TagsFlowContainer/HBoxContainer/TextureRect")
+tags_plus_texture = ExtResource("11_tuu4e")
+tags_minus_texture = ExtResource("12_utq40")
+
+[node name="TagsFlowContainer" type="FlowContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/TagsContainer" unique_id=1499354822]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer/TagsContainer/TagsFlowContainer" unique_id=1740105677]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="TextureRect" type="TextureRect" parent="OffsetControl/NinePatchRect/VBoxContainer/TagsContainer/TagsFlowContainer/HBoxContainer" unique_id=825631788]
+layout_mode = 2
+texture = ExtResource("11_tuu4e")
+stretch_mode = 4
+
+[node name="TagsShowHidButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/TagsContainer/TagsFlowContainer/HBoxContainer/TextureRect" unique_id=1262609460]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -2.0
+offset_right = 41.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TagLabel" type="Label" parent="OffsetControl/NinePatchRect/VBoxContainer/TagsContainer/TagsFlowContainer/HBoxContainer" unique_id=547662595]
 layout_mode = 2
 theme = ExtResource("6_do8nn")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
 theme_override_font_sizes/font_size = 14
-text = "Human, Actor, Living, Unarmed, Attack, Spell, Page, Action"
+text = "Tags:"
 vertical_alignment = 1
-text_overrun_behavior = 3
-ellipsis_char = "+"
+
+[node name="TagsBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/TagsContainer/TagsFlowContainer" unique_id=1063597655]
+layout_mode = 2
+theme = ExtResource("6_do8nn")
+theme_override_font_sizes/normal_font_size = 14
+text = "Human"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+script = ExtResource("9_1ue73")
 
 [node name="ColorRect" type="ColorRect" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1763555214]
 self_modulate = Color(0.470588, 0, 0, 1)

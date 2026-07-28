@@ -58,9 +58,9 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		
 		var attack_details = action.get_attack_details()
 		var accuracy_mod = attack_details.get('AccuracyMod', 1)
-		var potency_mod = attack_details.get('PotencyMod', 1)
-		accuracy_label.text = str(accuracy_mod * actor.stats.get_stat(StatHelper.Accuracy))
-		potency_label.text = str(potency_mod * actor.stats.get_stat(StatHelper.Potency))
+		#var potency_mod = attack_details.get('PotencyMod', 1)
+		accuracy_label.text = str(floori(accuracy_mod * actor.stats.get_stat(StatHelper.Accuracy)))
+		#potency_label.text = str(potency_mod * actor.stats.get_stat(StatHelper.Potency))
 		ammo_acc_pot_container.show()
 		ammo_acc_pot_line.show()
 	else:

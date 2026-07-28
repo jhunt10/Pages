@@ -44,14 +44,14 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ArtfulDodger_PageItem": {
+	"Serpentine_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "You've learned to keep on your toes, weaving between attacks as you dancing across the battle field.\n\nIn combat gain:\n @@#EftDef:ArtfulDodger_Nested_Effect:Description@@",
-			"DisplayName": "Artful Dodger",
-			"LargeIcon": "Sprites/ArtfulDodger_Icon.png",
+			"Description": "You've learned to keep on your toes, weaving between attacks as you dancing across the battle field.\n\nIn combat gain:\n @@#EftDef:Serpentine_Nested_Effect:Description@@",
+			"DisplayName": "Serpentine",
+			"LargeIcon": "Sprites/Serpentine_Icon.png",
 			"ObjectType": "Item",
-			"SmallIcon": "Sprites/ArtfulDodger_Icon.png",
+			"SmallIcon": "Sprites/Serpentine_Icon.png",
 			"SnippetDesc": "+20 EVA when using a Move Action.",
 			"Tags": [
 				"Passive",
@@ -78,7 +78,7 @@
 		},
 		"PassiveData":{
 			"InCombatEftData": {
-				"EffectKey": "ArtfulDodger_PageEffect"
+				"EffectKey": "Serpentine_PageEffect"
 			}
 		},
 		"_DefVersion": "1"
@@ -175,6 +175,80 @@
 					"DisplayName": "Back Stab",
 					"StatMods": {
 						"BackStabStatMod": {
+							"Conditions": {
+								"CanStack": false,
+								"TagFilters": [],
+								"TeamFilters": [
+									"Self"
+								]
+							},
+							"ModType": "Set",
+							"StatName": "CritChance",
+							"Value": 100
+						}
+					}
+				}
+			},
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Rogue"
+		},
+		"_DefVersion": "1"
+	},
+	"Finisher_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "When you see an enemy on their last leg, you take the chance to put them out of thier misery. Such a nice guy!\n\nAlways @@#Tag:Crit:Critical Hit@@ against targets with @@#Color:Red:less than 30% Hp@@.",
+			"DisplayName": "Finisher",
+			"LargeIcon": "Sprites/Finisher_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Finisher_Icon.png",
+			"SnippetDesc": "Auto Crit when attacking from Behind",
+			"Tags": [
+				"Passive"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"AttackMods": {
+				"FinisherAtkMod": {
+					"AttackModKey": "FinisherAtkMod",
+					"CanStack": false,
+					"Conditions": {
+						"AttackSourceTagFilters": [
+							{
+								"RequireAnyTags": [
+									"Attack"
+								]
+							}
+						],
+						"AttackerTeamFilters": [
+							"Self"
+						],
+						"DefendersConditions": [
+							{
+								"HealthBellow": 0.3
+							}
+						]
+					},
+					"DamageMods": {
+
+					},
+					"DisplayName": "Finisher",
+					"StatMods": {
+						"FinisherStatMod": {
 							"Conditions": {
 								"CanStack": false,
 								"TagFilters": [],
@@ -620,10 +694,10 @@
 		},
 		"_DefVersion": "1"
 	},
-	"PhyBoostPage": {
+	"PhyAmmoBoost_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "@@#Color:Blue:Ammo@@ is expensive, so you've learned to squeeze a clip for all it's worth.@@#Color:Blue:Money@@.\n\n@@#Color:Red:+100% Max@@ @@#Color:Ammo:Phy:Phy Ammo@@ on @@#Color:Blue:Pages@@.",
+			"Description": "@@#Color:Blue:Ammo@@ is expensive, so you've learned to squeeze a clip for all it's worth.@@#Color:Blue:Money@@.\n\n@@#Color:Red:+50% Max@@ @@#Color:Ammo:Phy:Phy Ammo@@ on @@#Color:Blue:Pages@@.",
 			"DisplayName": "Phy Boost",
 			"LargeIcon": "Sprites/PhyAmmoBoost_Icon.png",
 			"ObjectType": "Item",
@@ -660,7 +734,7 @@
 						]
 					},
 					"ModType": "ScaleClip",
-					"Value": 2.0
+					"Value": 1.5
 				}
 			},
 			"PageRequirements": {

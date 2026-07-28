@@ -278,6 +278,146 @@
 		},
 		"_DefVersion": "1"
 	},
+	"DoubleAttack_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Make one @@#Tag:Quick@@ and one @@#Tag:Slow@@ @@#Tag:WpnAtk:Weapon Attacks@@ against an @@#Color:Red:Enemy@@ for @@#DmgData:WeaponDamage@@.",
+			"DisplayName": "Double Attack",
+			"LargeIcon": "Sprites/AttackDouble_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/AttackDouble_Icon.png",
+			"SnippetDesc": "Make two Weapon Attacks",
+			"Tags": [
+				"Attack",
+				"WpnAtk",
+				"Quick",
+				"Slow"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Phy",
+				"Clip": 8,
+				"Cost": 1
+			},
+			"DamageDatas": {
+				"WeaponDamage": {
+					"AtkPwrScale": 1.0,
+					"WeaponFilter": {
+						"FallbackToUnarmed": true,
+						"IncludeSlots": [
+							"Primary",
+							"OffHand"
+						],
+						"LimitRangeMelee": "MatchPrimary"
+					}
+				},
+				"WeaponDamage2": {
+					"AtkPwrScale": 1.0,
+					"WeaponFilter": {
+						"FallbackToUnarmed": true,
+						"IncludeSlots": [
+							"Primary",
+							"OffHand"
+						],
+						"LimitRangeMelee": "MatchPrimary"
+					}
+				}
+			},
+			"Preview": {
+				"OverlaySprite": "Sprites/AttackDouble_Overlay.png",
+				"PreviewDamageKeys": [
+					"WeaponDamage",
+					"WeaponDamage2"
+				],
+				"PreviewTargetKey": "Weapon",
+				"UseEquipmentIcon": "MainHand"
+			},
+			"SubActions": {
+				"Attack1": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 7.0,
+					"#SubIndex": 2.0,
+					"DamageKey": "WeaponDamage",
+					"TargetKey": "Target1"
+				},
+				"Attack2": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 15.0,
+					"#SubIndex": 0.0,
+					"DamageKey": "WeaponDamage",
+					"TargetKey": "Target1"
+				},
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 7.0,
+					"#SubIndex": 0.0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": true,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "Weapon"
+				},
+				"PayCost": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Misc/SubAct_PayCost.gd",
+					"#FrameIndex": 7.0,
+					"#SubIndex": 1.0
+				},
+				"WeaponMotionAnimation1": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"#FrameIndex": 7.0,
+					"#SubIndex": 3.0,
+					"AnimationSpeed": 2.0,
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				},
+				"WeaponMotionAnimation2": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"#FrameIndex": 15.0,
+					"#SubIndex": 1.0,
+					"AnimationSpeed": 2.0,
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				},
+				"WeaponReadyAnimation1": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"#FrameIndex": 0.0,
+					"#SubIndex": 0.0,
+					"Animation": "WEAPON_DEFAULT",
+					"AnimationSpeed": 2.0,
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				},
+				"WeaponReadyAnimation2": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 0.0,
+					"Animation": "WEAPON_DEFAULT",
+					"AnimationSpeed": 2.0,
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Rogue"
+		},
+		"_DefVersion": "1"
+	},
 	"Dodge_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplySelfBuffAction",
@@ -429,7 +569,7 @@
 	"JumpOver_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "@@#Tag:Teleport@@ forward two @@#Color:Red:Spots@@",
+			"Description": "@@#Tag:Teleport@@ forward two @@#Color:Red:Spots@@\n\n-\"If you can jump a candle, you can jump a tree.\"",
 			"DisplayName": "Jump Over",
 			"LargeIcon": "Sprites/JumpOver_Icon.png",
 			"ObjectType": "Item",

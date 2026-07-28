@@ -46,11 +46,11 @@
 		"ShowInHud": true,
 		"_DefVersion": "1"
 	},
-	"ArtfulDodger_Nested_Effect": {
+	"Serpentine_Nested_Effect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
 			"Description": "@@#StatMod:EvadeStatMod@@ on using a @@#Tag:Move:Move Action@@.",
-			"DisplayName": "ArtfulDodger",
+			"DisplayName": "Serpentine",
 			"LargeIcon": "Sprites/EvaUp.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/EvaUp.png",
@@ -87,11 +87,11 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ArtfulDodger_PageEffect": {
+	"Serpentine_PageEffect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
 			"Description": "@@#StatMod:EvadeStatMod@@ when using a @@#Tag:Move:Move Action@@.",
-			"DisplayName": "ArtfulDodger",
+			"DisplayName": "Serpentine",
 			"LargeIcon": "Sprites/EvaUp.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/EvaUp.png",
@@ -118,13 +118,13 @@
 							"DisplayName": "Artful Dodger"
 						}
 					},
-					"ChildEffectKey": "ArtfulDodger_Nested_Effect",
+					"ChildEffectKey": "Serpentine_Nested_Effect",
 					"DeleteChildOnDelete": true,
 					"OptionalTriggers": [
 						"OnPageUse"
 					],
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
-					"UniqueChildEffectId": "ArtfulDodger_Nested_Effect",
+					"UniqueChildEffectId": "Serpentine_Nested_Effect",
 					"OnPageUseTriggerCondition":{
 						"PageTagFilters": [
 							{
@@ -139,7 +139,7 @@
 						"OnTurnEnd"
 					],
 					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_RemoveNestedEffect.gd",
-					"UniqueChildEffectId": "ArtfulDodger_Nested_Effect"
+					"UniqueChildEffectId": "Serpentine_Nested_Effect"
 				}
 			}
 		},

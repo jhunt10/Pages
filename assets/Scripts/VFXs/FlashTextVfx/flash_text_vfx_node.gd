@@ -31,7 +31,7 @@ enum FlashTextType {
 					use_x_velocity = true
 				FlashTextType.Healing_Dmg:
 					label.modulate = healing_damage_color
-					label.text = " +"+str(flash_text_value)+" "
+					label.text = " +"+str(flash_text_value.trim_prefix("-"))+" "
 					label.add_theme_font_size_override("font_size", default_font_size)
 					use_x_velocity = true
 				FlashTextType.DOT_Dmg:

@@ -16,7 +16,7 @@ var _target_params:Dictionary
 var _init_data:Dictionary
 var _action_mods_cache:Dictionary
 
-var _current_ammo:float = 0
+var _current_ammo:int = 0
 
 func get_tagable_id(): return ActionKey
 
@@ -361,15 +361,68 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 ##    Icons  Data     ##
 ########################
 
-func _get_ammo_data():
+func _get_ammo_data(with_mods:bool = true):
 	var ammo_data = action_data.get("AmmoData", 
 	{
 		"AmmoType": "None",
 		"Clip": 0,
 		"Cost": 0
 	})
-	ammo_data['AmmoKey'] = self._key # size() is checked later in has_ammo
+	ammo_data['AmmoKey'] = self._key # is checked later in has_ammo
+	
+	var holding_actor = get_holding_actor()
+	var ammo_mods = {}
+	var applied_mod_keys = []
+	if holding_actor and with_mods:
+		var mods = holding_actor.get_ammo_mods()
+		# Get applicable mods
+		for mod_key in mods.keys():
+			var mod_data = mods[mod_key]
+			if _does_ammo_mod_apply_to_action(mod_data, ammo_data, self, holding_actor):
+				ammo_mods[mod_key] = mod_data
+				
+		# Apply mods
+		var clip = ammo_data.get("Clip",0)
+		var cost = ammo_data.get("Cost",0)
+		for mod_key in ammo_mods.keys():
+			var mod_data = mods[mod_key]
+			var mod_type = mod_data.get("ModType", "")
+			var mod_value = mod_data.get("Value")
+			if mod_type == "ScaleClip":
+				clip = clip * mod_value
+			elif mod_type == "ScaleCost":
+				cost = cost * mod_value
+			#elif mod_type == "FreeChance":
+				#free_chance += mod_value
+			applied_mod_keys.append(mod_key)
+		ammo_data = {
+			"Cost": cost,
+			"Clip": clip,
+			"AmmoType": ammo_data.get("AmmoType"),
+			#"FreeChance": free_chance,
+			"PreviewUses": 0,
+			"ModKeys": applied_mod_keys
+		}
 	return ammo_data
+
+
+func _does_ammo_mod_apply_to_action(mod_data:Dictionary, ammo_data:Dictionary, action:PageItemAction, _actor)->bool:
+	var conditions = mod_data.get("Conditions", null)
+	if not conditions:
+		return true
+	
+	var ammo_types = conditions.get("AmmoTypes", [])
+	if ammo_types.size() > 0:
+		var ammo_type = ammo_data.get("AmmoType", "NOTSET")
+		if not ammo_types.has(ammo_type):
+			return false
+	
+	var tag_filters = conditions.get("ActionTagFilters", [])
+	if not TagHelper.filters_accept_tags(tag_filters, action.get_tags()):
+		return false
+	
+	return true
+
 
 func has_ammo()->bool:
 	if not action_data.has("AmmoData"):
@@ -392,7 +445,7 @@ func get_ammo_cost_per_use():
 	var ammo_data = _get_ammo_data()
 	return ammo_data.get("Cost", 0)
 
-func get_ammo_current():
+func get_ammo_current()->int:
 	return _current_ammo
 
 func get_ammo_remaining_uses()->int:
