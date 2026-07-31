@@ -55,23 +55,3 @@ func sync():
 		#5: pressed_item = _actor.equipment.get_offhand_weapon()
 	#if pressed_item:
 		#item_pressed.emit(pressed_item)
-
-
-func can_place_item_in_slot(item:BaseItem, index:int):
-	if item is BaseEquipmentItem:
-		return _actor.equipment.can_set_item_in_slot(item, index)
-	return false
-func remove_item_from_slot(item:BaseItem, index:int):
-	if index == 0:
-		#play_pagebook_warning_animation()
-		return
-	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.equipment)
-
-func try_place_item_in_slot(item:BaseItem, index:int):
-	var res = ItemHelper.try_transfer_item_from_inventory_to_holder(item, _actor.equipment, index, true)
-	if res == '':
-		return true
-	return false
-
-func try_move_item_to_slot(_item:BaseItem, from_index:int, to_index:int):
-	ItemHelper.swap_item_holder_slots(_actor.equipment, from_index, to_index)

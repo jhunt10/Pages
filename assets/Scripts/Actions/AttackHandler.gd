@@ -336,7 +336,7 @@ static func _roll_for_effects(attacker:BaseActor, defender:BaseActor, attack_eve
 			continue
 		
 		# Roll for applying
-		var application_chance = (1-float(net_protection)/100.0)
+		var application_chance = 2.0#(1-float(net_protection)/100.0)
 		var roll = Roll.get_roll_for_actor(attacker, application_chance)
 		
 		# Check Immunity (Don't skip, because we still want to show "Immune" message)

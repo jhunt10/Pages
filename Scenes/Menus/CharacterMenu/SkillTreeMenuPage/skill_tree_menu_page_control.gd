@@ -169,21 +169,28 @@ func get_node_data_for_skill_node(skill_node_key:String)->Dictionary:
 		return data
 	return {}
 
-func on_node_button_down(skill_node_key, args):
+func get_page_key_if_unlocked(skill_node_key, args):
 	var node_data = get_node_data_for_skill_node(skill_node_key)
-	var page_key = node_data.get("PageKey")
+	var page_key = node_data.get("PageKey", null)
 	var is_unlocked = _unlocked_skills.has(skill_node_key)  or node_data.get("AlwaysUnlocked")
-	# Paired Node
+	# Paired Node extra logic
 	if node_data.keys().has("PairType"):
 		var sub_pages:Array = node_data.get("Pages", [])
 		var index = args.get("Index", -1)
 		if sub_pages.size() < index:
 			printerr("SkillTreeMenu on_node_button_down: Invalid Index [%s,%s]" %[skill_node_key, args])
-			return
+			return null
 		page_key = node_data.get("Pages", [])[args.get("Index")]
 		is_unlocked = _unlocked_skills.get(skill_node_key, {}).get("Index", -2) == index
 	if is_unlocked:
-		node_button_down.emit("Inventory", page_key, 0, Vector2.ZERO)
+		return page_key
+	return null
+
+func on_node_button_down(skill_node_key, args):
+	var node_data = get_node_data_for_skill_node(skill_node_key)
+	var page_key = get_page_key_if_unlocked(skill_node_key, args)
+	if page_key:
+		node_button_down.emit("SkillTree", page_key, 0, Vector2.ZERO)
 
 func on_node_button_up(skill_node_key, args):
 	var node_data = get_node_data_for_skill_node(skill_node_key)
@@ -192,7 +199,7 @@ func on_node_button_up(skill_node_key, args):
 		page_key = node_data.get("Pages", [])[args.get("Index")]
 	var page_item = ItemLibrary.get_static_inst_of_item(page_key)
 	var  was_dragging = character_menu._dragging
-	node_button_up.emit("Inventory", page_key, 0)
+	node_button_up.emit("SkillTree", page_key, 0)
 	if was_dragging:
 		return
 	var confirm_text = "-LOCKED-"
@@ -241,9 +248,12 @@ func on_node_button_up(skill_node_key, args):
 	elif node_data.get("CanUnlock"):
 		confirm_text = "Unlock"
 		disabled = false
-	var detail_card = character_menu.create_details_card(page_item, confirm_text, true, disabled)
-	if detail_card and not detail_card.item_confirmed.is_connected(on_node_confirmed):
-		detail_card.item_confirmed.connect(on_node_confirmed.bind(skill_node_key, args))
+	var detail_card = character_menu.create_details_card(
+		page_item, 
+		on_node_confirmed.bind(skill_node_key, args),
+		confirm_text, 
+		disabled
+	)
 
 func on_node_confirmed(_item:BaseItem, skill_node_key, args={}):
 	var node_data = get_node_data_for_skill_node(skill_node_key)

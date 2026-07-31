@@ -316,7 +316,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMissileAttack",
 		"#ObjDetails": {
-			"Description": "Make a @@#Tag:Ranged@@ @@#Tag:Spell:Hint:Spell Attack@@ by launching a @@#Tag:Missile:Hint:Magical Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n@@#EftChances@@",
+			"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n@@#EftChances@@",
 			"DisplayName": "#Base Missile Spell",
 			"LargeIcon": "Sprites/BaseMissile.png",
 			"ObjectType": "Item",
@@ -414,7 +414,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseRangedAttack",
 		"#ObjDetails": {
-			"Description": "Make a @@#Tag:Ranged@@ @@#Tag:Spell@@ Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n@@#EftChances@@",
+			"Description": "Make a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n@@#EftChances@@",
 			"DisplayName": "#Base Range Action",
 			"LargeIcon": "Sprites/BaseBullet.png",
 			"ObjectType": "Item",

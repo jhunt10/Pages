@@ -2,6 +2,8 @@
 class_name TagsContainer
 extends BoxContainer
 
+static var show_on_start:bool = false
+
 @export var show_all:bool
 
 @export var premade_tag:DescriptionBox
@@ -37,7 +39,7 @@ func set_tags(tags:Array):
 		new_tag_label.set_description("@@#Tag:"+tag+"@@")
 		new_tag_label.show()
 		tags_container.add_child(new_tag_label)
-	show_all = false
+	show_all = show_on_start
 	set_show_on_next_process = true
 	
 
@@ -46,6 +48,7 @@ func toggle_show_hide():
 
 func set_show_hide(val):
 	show_all = val
+	show_on_start = val
 	if tags_plus_minus_icon:
 		if show_all:
 			tags_plus_minus_icon.texture = tags_minus_texture

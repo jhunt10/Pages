@@ -115,9 +115,6 @@ func can_place_item_in_slot(item:BaseItem, index:int):
 	print("Item Not Page Item")
 	return false
 
-func remove_item_from_slot(item:BaseItem, _index:int):
-	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.pages)
-
 func try_place_item_in_slot(item:BaseItem, index:int):
 	var res = ItemHelper.try_transfer_item_from_inventory_to_holder(item, _actor.pages, index, true)
 	if res == '':

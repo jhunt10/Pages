@@ -57,9 +57,6 @@ func _create_sub_container(slot_set_data)->SubBagContainer:
 	_sub_containers[slot_set_data['Key']] = new_sub
 	return new_sub
 
-func remove_item_from_slot(item:BaseItem, _index:int):
-	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.items)
-
 func try_move_item_to_slot(_item:BaseItem, from_index:int, to_index:int):
 	ItemHelper.swap_item_holder_slots(_actor.items, from_index, to_index)
 

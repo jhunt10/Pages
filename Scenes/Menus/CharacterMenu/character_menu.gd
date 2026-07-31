@@ -176,9 +176,12 @@ func _on_previous_actor_pressed():
 
 func _on_title_button_pressed():
 	var title = _actor.get_title_page()
-	create_details_card(title, "", false, true)
+	create_details_card(title, no_call, "", true)
 
-func context_to_page_control(context):
+func no_call():
+	pass
+
+func context_to_page_control(context)->BaseCharacterSubMenu:
 	if context == "Equipment":
 		return equipment_control
 	if context == "Pages":
@@ -189,70 +192,75 @@ func context_to_page_control(context):
 		return inventory_container
 	return null
 
-func create_details_card(item:BaseItem, 
-		confirm_button_text:String="UNSET", 
-		override_on_confirm:bool=false, 
-		disable_confirm:bool=false)->ItemDetailsCard:
+func create_details_card(
+		item:BaseItem, 
+		on_confirm:Callable,
+		confirm_button_text:String="Confirm",  
+		disable_confirm:bool=false
+		)->ItemDetailsCard:
 	var old_detail_card
 	if _current_details_card:
 		old_detail_card = _current_details_card
 		# Same Item is already beging displayed
-		if _current_details_card.item_id == item.Id:
-			# Overriding the comfirm button
-			if override_on_confirm:
-				if _current_details_card.item_confirmed.is_connected(_on_details_card_confirmed):
-					_current_details_card.item_confirmed.disconnect(_on_details_card_confirmed)
-			
-			_current_details_card.set_detail_card_item(_actor, item, confirm_button_text, disable_confirm)
-			return _current_details_card
+		if old_detail_card.item_id == item.Id:
+			return old_detail_card
 			
 			
-		_current_details_card.hide_done.disconnect(_on_details_card_freed)
-		if _current_details_card.state != ItemDetailsCard.States.Hidden:
-			_current_details_card.start_hide()
+		old_detail_card.hide_done.disconnect(_on_details_card_freed)
+		if old_detail_card.state != ItemDetailsCard.States.Hidden:
+			old_detail_card.start_hide()
 	
 	if !item:
 		return null
-	
-	if confirm_button_text == 'UNSET':
-		var actor_has_item = false 
-		if item is BasePageItem:
-			actor_has_item = _actor.pages.has_item(item.Id)
-		if item is BaseSupplyItem:
-			actor_has_item = _actor.items.has_item(item.Id)
-		if item is BaseEquipmentItem:
-			actor_has_item = _actor.equipment.has_item(item.Id)
-			
-		if actor_has_item:
-			confirm_button_text = "Remove"
-		#else:
-			#var cant_equip_reasons = {}
-			#var posible_slot = ItemHelper.get_first_valid_slot_for_item(item, _actor, true)
-			#if posible_slot < 0:
-				#cant_equip_reasons = {"NoSlot":true} 
-			#else:
-				#cant_equip_reasons = item.get_cant_use_reasons(_actor)
-			#var reason = get_cant_equip_reason(cant_equip_reasons)
-			#confirm_button_text = reason[0]
-			#disable_confirm = reason[1]
 	_current_details_card = null
 	_current_details_card = load("res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
 	details_card_spawn_point.add_child(_current_details_card)
-	details_card_spawn_point.remove_child(old_detail_card)
-	details_card_spawn_point.add_child(old_detail_card)
+	if old_detail_card:
+		details_card_spawn_point.remove_child(old_detail_card)
+		details_card_spawn_point.add_child(old_detail_card)
 	_current_details_card.vertical = true
 	_current_details_card.hide_done.connect(_on_details_card_freed)
 	_current_details_card.set_detail_card_item(_actor, item, confirm_button_text, disable_confirm)
+	_current_details_card.item_confirmed.connect(on_confirm)
 	_current_details_card.start_show()
-	if not override_on_confirm:
-		_current_details_card.item_confirmed.connect(_on_details_card_confirmed)
 	return _current_details_card
 
 func _on_details_card_freed():
 	pass
+	
+func get_context_for_item(item:BaseItem)->BaseCharacterSubMenu:
+		if item is BaseEquipmentItem:
+			return equipment_control
+		elif item is BasePageItem:
+			return page_tab
+		elif item is BaseSupplyItem:
+			return bag_tab
+		return null
 
-func _on_details_card_confirmed():
-	pass
+func _on_details_card_confirmed(item:BaseItem, context):
+	# From Inventory to a holder
+	if context == 'Inventory':
+		var target_context = get_context_for_item(item)
+		if not target_context:
+			return
+		var target_holder:BaseItemHolder = target_context.get_item_holder()
+		if not target_holder:
+			return
+		var allow_replace = item is BaseEquipmentItem
+		var target_index = target_holder.get_first_valid_slot_for_item(item, allow_replace)
+		if target_index >= 0:
+			target_context.try_place_item_in_slot(item, target_index)
+			
+	else:
+		var control = context_to_page_control(context)
+		var holder = control.get_item_holder()
+		if not holder:
+			return
+		if holder.has_item(item):
+			var index = holder.get_raw_slot_index_of_item(item)
+			control.remove_item_from_slot(item, index)
+		
+	_current_details_card.start_hide()
 
 func start_dragging():
 	if _selected_item:
@@ -278,6 +286,11 @@ func stop_dragging():
 	_button_down_pos = null
 	mouse_control.hide()
 	if LOGGING: print("\n\nStop Dragging: %s | %s" % [_selected_context, _mouse_over_context])
+	# Lazy Hack
+	if _mouse_over_context == "SkillTree":
+		_mouse_over_context = "Inventory"
+	if _selected_context == "SkillTree":
+		_selected_context = "Inventory"
 	 #Transfering items
 	if _selected_context and _mouse_over_context:
 		var source_page_control = context_to_page_control(_selected_context)
@@ -286,7 +299,7 @@ func stop_dragging():
 		if _mouse_over_context == "Inventory" and _selected_context != "Inventory":
 			if LOGGING: print("Remove Item: %s" %[_selected_item.Id])
 			if source_page_control:
-				source_page_control.remove_item_from_slot(_selected_item, _selected_index_data)
+				ItemHelper.try_transfer_item_from_holder_to_inventory(_selected_item, source_page_control.get_item_holder())
 		
 		if _mouse_over_index_data != null:
 			# From Inventory to Left Page - Add Item
@@ -308,54 +321,79 @@ func stop_dragging():
 
 
 
-func on_item_button_down(context, item_key, index, offset):
+func on_item_button_down(context, item_id, index, offset):
 	_selected_context = context
 	_button_down_pos = self.get_local_mouse_position()
 	_selected_index_data = index
 	#if _current_details_card and _current_details_card.item_id != item_key:
 		#_current_details_card.start_hide()
-	if item_key:
-		_selected_item = ItemLibrary.get_item(item_key)
+	if item_id:
+		_selected_item = ItemLibrary.get_item(item_id)
 		mouse_control.offset = offset
 	else:
 		_selected_item = null
 	var page_control = context_to_page_control(context)
 	if page_control:
 		page_control.highlight_slot(index)
-	if LOGGING: print("Item Button Down: %s | %s | %s" % [context, item_key, index])
+	if LOGGING: print("Item Button Down: %s | %s | %s" % [context, item_id, index])
 
-func on_item_button_up(context, item_key, index):
+func on_item_button_up(context, item_id, index):
 	_button_down_pos = null
 	if _dragging:
 		stop_dragging()
 		_selected_context = null
 		_selected_index_data = null
 		return
-	if item_key:
-		_selected_item = ItemLibrary.get_item(item_key)
-		if _selected_item:
-			var confirm_text = "UNSET"
-			#if _left_page_context == "Supplies" and context == "Inventory":
-				#confirm_text = "Add"
-			create_details_card(_selected_item, confirm_text)
-			var page_control = context_to_page_control(context)
-			if page_control:
-				page_control.highlight_slot(index)
-	if LOGGING: print("Item Button Up: %s | %s | %s" % [context, item_key, index])
+	if context == "SkillTree":
+		return
+	if item_id:
+		_selected_item = ItemLibrary.get_item(item_id)
+		if not _selected_item:
+			return
+		var dest_context = get_context_for_item(_selected_item)
+		var disable_confirm = false
+		var is_removing = true
+		var confirm_text = "Remove"
+		
+		if context == "Inventory":
+			is_removing = false
+			if dest_context == equipment_control:
+				confirm_text = "Equip"
+			else:
+				confirm_text = "Add"
+			
+		# Disable removing PageBook
+		if _selected_item is BaseQueEquipment and is_removing:
+			disable_confirm = true
+		
+		# Check open slots for Pages and Supplies
+		if not is_removing and dest_context != equipment_control:
+			var holder = dest_context.get_item_holder()
+			if holder:
+				var open_index = holder.get_first_valid_slot_for_item(_selected_item)
+				if open_index < 0:
+					disable_confirm = true
+					confirm_text = "Full"
+		
+		create_details_card(_selected_item, _on_details_card_confirmed.bind(context), confirm_text, disable_confirm)
+		var page_control = context_to_page_control(context)
+		if page_control:
+			page_control.highlight_slot(index)
+	if LOGGING: print("Item Button Up: %s | %s | %s" % [context, item_id, index])
 
-func on_mouse_enter_slot(context, item_key, index):
+func on_mouse_enter_slot(context, item_id, index):
 	_mouse_over_context = context
 	_mouse_over_index_data = index
-	if LOGGING: print("Item Button Enter: %s | %s | %s" % [context, item_key, index])
+	if LOGGING: print("Item Button Enter: %s | %s | %s" % [context, item_id, index])
 	if _dragging:
 		var control = context_to_page_control(context)
 		if control:
 			control.highlight_slot(index)
 			
-func on_mouse_exit_slot(context, item_key, index):
+func on_mouse_exit_slot(context, item_id, index):
 	_mouse_over_context = context
 	_mouse_over_index_data = null
 	var control = context_to_page_control(context)
 	if control:
 		control.clear_highlight(index)
-	if LOGGING: print("Item Button Exit : %s | %s | %s" % [context, item_key, index])
+	if LOGGING: print("Item Button Exit : %s | %s | %s" % [context, item_id, index])

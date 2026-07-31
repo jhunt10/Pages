@@ -364,7 +364,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"HealLargeSpell": {
+	"HealLargeSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:100% Max Hp@@.",
@@ -453,7 +453,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"HealMediumSpell": {
+	"HealMediumSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:50% Max Hp@@.",
@@ -542,7 +542,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"HealSmallSpell": {
+	"HealSmallSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
 			"Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:25% Max Hp@@.",
@@ -631,11 +631,11 @@
 		},
 		"_DefVersion": "1"
 	},
-	"LightMeleeSpell": {
+	"LightMeleeSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMeleeSpell",
 		"#ObjDetails": {
-			"Description": "Make a @@#Color:Red:Melee Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeDamage@@ on hit.\n\n@@#Color:DmgColor:Light:Light Damage@@ heals most @@#Tag:Living@@ @@#Color:Red:Actors@@.",
+			"Description": "Make a @@#Tag:Melee@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ dealing @@#DmgData:MeleeDamage@@ on hit.\n\n*@@#Color:DmgColor:Light:Light Damage@@ heals @@#Tag:Living@@ @@#Color:Red:Actors@@",
 			"DisplayName": "Light Touch",
 			"LargeIcon": "Sprites/LightTouch.png",
 			"ObjectType": "Item",
@@ -674,7 +674,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"LightMissileSpell": {
+	"LightMissileSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMissileSpell",
 		"#ObjDetails": {
@@ -726,7 +726,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"LightRangedSpell": {
+	"LightRangedSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseRangedSpell",
 		"#ObjDetails": {

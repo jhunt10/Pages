@@ -110,3 +110,23 @@ func _on_mouse_exit_item_button(index:int):
 	var holder = get_item_holder()
 	var item_id = holder.get_item_id_in_slot(index)
 	mouse_exit_item.emit(holder.get_holder_name(), item_id, index)
+
+
+func can_place_item_in_slot(item:BaseItem, index:int):
+	var holder = get_item_holder()
+	return holder.can_set_item_in_slot(item, index, true)
+
+func try_place_item_in_slot(item:BaseItem, index:int):
+	var holder = get_item_holder()
+	var res = ItemHelper.try_transfer_item_from_inventory_to_holder(item, holder, index, true)
+	if res == '':
+		return true
+	return false
+
+func try_move_item_to_slot(_item:BaseItem, from_index:int, to_index:int):
+	var holder = get_item_holder()
+	ItemHelper.swap_item_holder_slots(holder, from_index, to_index)
+
+func remove_item_from_slot(item:BaseItem, _index:int):
+	var holder = get_item_holder()
+	ItemHelper.try_transfer_item_from_holder_to_inventory(item, holder)

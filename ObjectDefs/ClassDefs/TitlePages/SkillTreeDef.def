@@ -191,7 +191,8 @@
     "Priest":[
         [
             {
-                "PageKey": "LightMeleeSpell",
+                "SkillNodeKey": "LightMeleeSpell",
+                "PageKey": "LightMeleeSpell_PageItem",
                 "AlwaysUnlocked": true
             },
             {
@@ -212,24 +213,28 @@
                 "PageKey": "ApplyBlessing_Air"
             },
             {
-                "PageKey": "HealSmallSpell"
+                "SkillNodeKey": "HealSmallSpell",
+                "PageKey": "HealSmallSpell_PageItem"
             }
         ],
         [
             {
-                "PageKey": "LightRangedSpell"
+                "SkillNodeKey": "LightRangedSpell",
+                "PageKey": "LightRangedSpell_PageItem"
             },
             {
                 "PageKey": "BlessedLimit2Page"
             },
             {
-                "PageKey": "HealMediumSpell"
+                "SkillNodeKey": "HealMediumSpell",
+                "PageKey": "HealMediumSpell_PageItem"
             }
         ],
         [
             {
+                "SkillNodeKey": "HealingHarmingLight",
                 "PairType": "Or",
-                "Pages": ["HarmingLightPage", "HealingLightPage"]
+                "Pages": ["HarmingLight_PageItem", "HealingLight_PageItem"]
             },
             {
                 "PageKey": "ApplyBlessing_Earth"
@@ -241,13 +246,15 @@
         ],
         [
             {
-                "PageKey": "LightMissileSpell"
+                "SkillNodeKey": "LightMissileSpell",
+                "PageKey": "LightMissileSpell_PageItem"
             },
             {
                 "PageKey": "ApplyBlessing_Fire"
             },
             {
-                "PageKey": "HealLargeSpell"
+                "SkillNodeKey": "HealLargeSpell",
+                "PageKey": "HealLargeSpell_PageItem"
             }
         ],
         [

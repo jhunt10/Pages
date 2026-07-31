@@ -53,26 +53,3 @@ func _create_sub_container(slot_set_data)->SubBagContainer:
 	new_sub.visible = true
 	_sub_containers[slot_set_data['Key']] = new_sub
 	return new_sub
-
-func remove_item_from_slot(item:BaseItem, _index:int):
-	ItemHelper.try_transfer_item_from_holder_to_inventory(item, _actor.items)
-
-func try_move_item_to_slot(_item:BaseItem, from_index:int, to_index:int):
-	ItemHelper.swap_item_holder_slots(_actor.items, from_index, to_index)
-
-func can_place_item_in_slot(item:BaseItem, index:int):
-	if item is BasePageItem:
-		var page = item as BasePageItem
-		if _actor.items.can_set_item_in_slot(page, index, true):
-			print("Can Place")
-			return true
-		else:
-			print("Can't Place")
-	print("Item Not Page Item")
-	return false
-
-func try_place_item_in_slot(item:BaseItem, index:int):
-	var res = ItemHelper.try_transfer_item_from_inventory_to_holder(item, _actor.items, index, true)
-	if res == '':
-		return true
-	return false
