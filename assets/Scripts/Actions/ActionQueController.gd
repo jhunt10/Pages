@@ -64,12 +64,16 @@ var _action_ques:Dictionary = {}
 var _que_order:Array = []
 var _cached_actor_speeds:Dictionary = {}
 var _cached_actor_ppr:Dictionary = {}
-var _ppr_changed_mid_round:bool = false
 var subaction_script_cache:Dictionary = {}
 
 # Ques that have been removed durring execution
 # They will be deleted once the round finishes
 var _dead_ques:Array = []
+var _flagged_for_reorder:bool = false
+var _flagged_for_repadding:bool = false
+
+# Actors added mid Turn, and delayed until end of turn
+var _to_add_actor_ques = []
 
 func list_actors_by_order()->Array:
 	var out_list = []
@@ -114,12 +118,16 @@ func _end_round():
 	for que_id in _que_order:
 		var que:ActionQue = _action_ques[que_id]
 		que.actor.round_ended.emit()
-	_cleanup_dead_ques()
 	end_of_round.emit()
 	end_of_round_with_state.emit(CombatRootControl.Instance.GameState)
 			
 	execution_suspended.emit()
+	_cleanup_dead_ques()
 	_clear_ques()
+	if _flagged_for_repadding:
+		if _flagged_for_reorder:
+			_order_ques_by_speed()
+		_pad_ques()
 	after_round.emit()
 
 func _on_turn_start(game_state):
@@ -145,8 +153,13 @@ func _on_turn_end(game_state):
 
 	while _to_add_actor_ques.size() > 0:
 		var que = _to_add_actor_ques[0]
-		add_action_que(que, false)
+		execution_state = ActionStates.Waiting
+		add_action_que(que)
+		execution_state = ActionStates.Running
 		_to_add_actor_ques.remove_at(0)
+	
+	if _flagged_for_reorder:
+		_order_ques_by_speed()
 
 func start_or_resume_execution():
 	if execution_state == ActionStates.Waiting:
@@ -171,19 +184,18 @@ func get_active_action_ques()->Array:
 			out_list.append(que)
 	return out_list
 
-# Add an action que to the controller
-var _to_add_actor_ques = []
-func add_action_que(new_que:ActionQue, delay_if_running:bool=true):
+func add_action_que(new_que:ActionQue):
 	if _action_ques.has(new_que.Id):
 		return
-	if delay_if_running and execution_state != ActionStates.Waiting:
+	# Don't add ques mid turn
+	if execution_state != ActionStates.Waiting:
 		_to_add_actor_ques.append(new_que)
 		return
 	_action_ques[new_que.Id] = new_que
 	new_que.actor.stats_changed.connect(_on_actor_stat_change.bind(new_que.actor))
-	
-	new_que.max_que_size_changed.connect(_organize_ques)
-	_organize_ques()
+	new_que.max_que_size_changed.connect(_on_actor_stat_change.bind(new_que.actor))
+	_flagged_for_reorder = true
+	_flagged_for_repadding = true
 
 
 func remove_action_que(que:ActionQue):
@@ -275,7 +287,8 @@ func _cleanup_dead_ques():
 			dead_que.clear_que()
 		_action_ques.erase(dead_que_id)
 	_dead_ques.clear()
-	_organize_ques()
+	_flagged_for_reorder = true
+	_flagged_for_repadding = true
 
 func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:int, subaction_index:int):
 	if DEEP_LOGGING: print("\tChecking Que: %s(%s)" %[que.actor.ActorKey, que.Id])
@@ -389,22 +402,30 @@ func _on_actor_stat_change(actor:BaseActor):
 	var que_size = actor.Que.get_max_que_size()
 	var speed = actor.stats.get_stat("Speed", 0)
 	if _cached_actor_speeds.get(actor.Id, null) != speed:
-		_organize_ques()
+		_flagged_for_reorder = true
 	if _cached_actor_ppr.get(actor.Id, 0) != que_size:
-		_organize_ques()
-		_ppr_changed_mid_round = true
-	
-	
+		_flagged_for_repadding = true
 
-func _organize_ques():
-	_sort_ques_by_speed()
-	if execution_state != ActionStates.Running:
-		_calc_turn_padding()
-	que_ordering_changed.emit()
-	pass
+func check_que_order():
+	for que:ActionQue in _action_ques.values():
+		var actor = que.actor
+		if _cached_actor_speeds.get(actor.Id, null) != actor.stats.get_stat(StatHelper.Speed, 0):
+			_flagged_for_reorder = true
+		if _cached_actor_ppr.get(actor.Id, null) != actor.stats.get_stat(StatHelper.PPR, 0):
+			_flagged_for_repadding = true
+	
+	var had_chance = false
+	if _flagged_for_reorder:
+		_order_ques_by_speed(true)
+		had_chance = true
+	if _flagged_for_repadding:
+		_pad_ques(true)
+		had_chance = true
+	if had_chance:
+		que_ordering_changed.emit()
 
 ## Sort ques in order of Actor.Speed desc
-func _sort_ques_by_speed():
+func _order_ques_by_speed(supress_signal=false):
 	var speeds = []
 	var speed_to_ques = {}
 	for que:ActionQue in _action_ques.values():
@@ -423,8 +444,11 @@ func _sort_ques_by_speed():
 		var spd_ques = speed_to_ques[spd]
 		for que_id in spd_ques:
 			_que_order.append(que_id)
+	_flagged_for_reorder = false
+	if not supress_signal:
+		que_ordering_changed.emit()
 
-func _calc_turn_padding():
+func _pad_ques(supress_signal=false):
 	var new_max_que_size = -1
 	var max_que_last_index = 0
 	for index in range(_que_order.size()):
@@ -441,9 +465,9 @@ func _calc_turn_padding():
 		var is_slow = index >= max_que_last_index
 		var que_gaps = _get_premade_que_gaps(que.get_max_que_size(), max_que_size, is_slow)
 		que._set_turn_mapping(que_gaps)
-	
-
-
+	_flagged_for_repadding = false
+	if not supress_signal:
+		que_ordering_changed.emit()
 
 func _get_premade_que_gaps(que_size:int, max_que_size_val:int, is_slow:bool)->Array:
 	if que_size == 0:

@@ -64,7 +64,7 @@ func clear_states():
 	state_stack.clear()
 	current_ui_state = null
 	
-func open_options_menu(actor:BaseActor, selecting_key:String, option_sets, queing_action_key:String=''):
+func open_options_menu(actor:BaseActor, selecting_key:String, option_sets, queing_action_id:String=''):
 	if option_sets is Dictionary:
 		option_sets = option_sets.values()
 	if not option_sets is Array:
@@ -74,7 +74,7 @@ func open_options_menu(actor:BaseActor, selecting_key:String, option_sets, quein
 		"SelectionKey": selecting_key,
 		"OptionSets": option_sets
 	}
-	if queing_action_key != '':
-		args['ActionKey'] = queing_action_key
+	if queing_action_id != '':
+		args['ActionId'] = queing_action_id
 	set_ui_state_from_path("res://assets/Scripts/Ui/UiStates/UiState_SelectActionOption.gd", args)
 	

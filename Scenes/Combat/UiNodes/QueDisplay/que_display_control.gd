@@ -122,7 +122,7 @@ func preview_que_path(add_movement:MapPos=null):
 	if !preview_pos:
 		_actor_node.hide_path_arrow()
 		return
-	if preview_pos == actor_pos:
+	if preview_pos.equals(actor_pos):
 		_actor_node.hide_path_arrow()
 		return
 		

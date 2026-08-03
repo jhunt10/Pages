@@ -305,7 +305,7 @@ func _page_button_pressed(_index, key_name):
 	var action:PageItemAction = _actor.get_action_page(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
 	if on_que_options and on_que_options.size() > 0:
-		CombatUiControl.Instance.ui_state_controller.open_options_menu(_actor, "OnQueOption", on_que_options, action.ActionKey)
+		CombatUiControl.Instance.ui_state_controller.open_options_menu(_actor, "OnQueOption", on_que_options, action.Id)
 		#on_que_options_menu.visible = true
 		##on_que_options_menu.position = get_local_mouse_position()# _buttons[index].position + Vector2(_buttons[index].size.x,0)
 		#for opt:OnQueOptionsData in on_que_options:
@@ -321,7 +321,7 @@ func _page_button_pressed(_index, key_name):
 func _start_button_pressed():
 	#var current_index = CombatRootControl.Instance.get_current_player_index() 
 	for player_actor:BaseActor in CombatRootControl.list_player_actors(false):
-		if not player_actor.Que.is_ready() and CombatRootControl.Instance.is_deployed(player_actor):
+		if not player_actor.Que.is_ready() and CombatRootControl.Instance.is_deployed(player_actor) and not player_actor.is_dead:
 			CombatRootControl.Instance.set_current_player_actor(player_actor)
 			hide_start_button()
 			return

@@ -64,3 +64,8 @@ func apply_relative_pos(other_pos:MapPos)->MapPos:
 func duplicate()->MapPos:
 	return MapPos.new(x, y, z, dir)
 	
+func equals(other_pos:MapPos)->bool:
+	return (self.x == other_pos.x 
+		and self.y == other_pos.y
+		and self.z == other_pos.z
+		and self.dir == other_pos.dir)

@@ -88,9 +88,21 @@ func set_actor(actor:BaseActor):
 	y_label.add_theme_color_override("font_color", Color.BLACK)
 
 func set_target_coord(coord:Vector2i):
+	var target:BaseActor = null
 	if TargetParameters.ActorTargetTypes.has(target_type):
-		var targets = CombatRootControl.Instance.GameState.get_actors_at_pos(coord)
-		var target = targets[0]
+		# Select corpse
+		if target_type == TargetParameters.TargetTypes.Corpse:	
+			var targets = CombatRootControl.Instance.GameState.get_actors_at_pos(coord, true)
+			for check_target:BaseActor in targets:
+				if check_target.is_dead:
+					target = check_target
+					break
+		else:
+			var targets = CombatRootControl.Instance.GameState.get_actors_at_pos(coord, true)
+			if targets.size() > 0:
+				target = targets[0]
+	
+	if target:
 		target_icon.texture = target.sprite.get_portrait_sprite()
 		target_npc_index_label.text = target.get_npc_index_str()
 	else:

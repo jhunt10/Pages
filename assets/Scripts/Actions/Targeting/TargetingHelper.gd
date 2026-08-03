@@ -146,9 +146,9 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 	if target_params.target_type == TargetParameters.TargetTypes.FullArea:
 		return {actor_pos: [actor]}
 	
-	#if target_params.target_type == TargetParameters.TargetTypes.Corpse:
-		
-		
+	var include_dead_actors = false
+	if target_params.target_type == TargetParameters.TargetTypes.Corpse:
+		include_dead_actors = true
 	
 	for spot:Vector2i in target_area.keys():
 		var spot_los:LOS_VALUE = target_area[spot]
@@ -156,7 +156,7 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 		if spot_los == LOS_VALUE.Blocked:
 			continue
 		
-		var include_dead_actors = target_params.target_type == TargetParameters.TargetTypes.Corpse
+		# Targeting Actors
 		if target_params.is_actor_target_type():
 			var actors_in_spot:Array = game_state.get_actors_at_pos(spot, include_dead_actors)
 			for target:BaseActor in actors_in_spot:
@@ -175,7 +175,7 @@ static func get_potential_coor_to_targets(target_params:TargetParameters, actor:
 				if target_params.is_valid_target_actor(actor, target, game_state):
 					if not potential_targets.has(target.Id) and not exclude_targets.has(target.Id):
 						_add_to_dicarry(potential_targets, spot, target.Id)
-		
+		# Targeting Spots
 		if target_params.is_spot_target_type():
 			var target = MapPos.new(spot.x, spot.y, actor_pos.z, actor_pos.dir)
 			if target_params.target_type == TargetParameters.TargetTypes.Spot:

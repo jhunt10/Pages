@@ -147,56 +147,9 @@ func load_init_state(sub_scene_data:Dictionary):
 	# Build Action Que Controller
 	QueController = ActionQueController.new()
 	
-	## Build Actors from Map Data
-	#_player_actor_ids.clear()
-	#var npcs_to_name = {}
-	#var actor_count = map_data['Actors'].size()
-	#var actor_index = 0
-	#for actor_info:Dictionary in map_data['Actors']:
-		#var new_actor = null
-		#var actor_pos = actor_info['Pos']
-		#
-		#
-		#if new_actor:
-			#if actor_info['WaitToSpawn']:
-				## Must call without signals because actors are spawned before MapControlNode._ready()
-				#MapController.get_or_create_actor_node(new_actor, actor_pos, true)
-			#else:
-				#add_actor(new_actor, actor_pos)
-		#actor_index += 1
-		#loading_actor_progressed.emit(actor_count, actor_index)
-	#
-	# Name NPC Actors
-	#for display_name in npcs_to_name.keys():
-		#if npcs_to_name[display_name].size() == 1:
-			#continue
-		#var index = 0
-		#for actor:BaseActor in npcs_to_name[display_name]:
-			#actor.enemy_npc_index = index
-			#index += 1
-	
-	
-	#var player_actor = StoryState.get_player_actor()
-	## Check that actor in actually in game
-	#player_actor = GameState.get_actor(player_actor.Id)
-	#if !player_actor:
-		#printerr("Player Actor not loaded to GameState")
-	
-	
 	camera.zoom = Vector2(2,2)
-	#var camera_point = MapController.get_pos_marker("CameraStart")
-	#if camera_point:
-		#camera.snap_to_map_pos(camera_point)
 	
 	is_story_map = sub_scene_data.get("IsStoryMap", false)
-	#var dialog_script = sub_scene_data.get("DialogScript")
-	#if dialog_script:
-		#dialog_controller.load_dialog_script(dialog_script)
-		#dialog_controller.show()
-	#else:
-		#dialog_controller.queue_free()
-		#dialog_controller = null
-		#camera.freeze = false
 	var starting_phase = combat_map_data.get("StartingPhase")
 	start_phase(starting_phase)
 
@@ -403,8 +356,8 @@ func kill_actor(actor:BaseActor):
 
 func revive_actor(actor:BaseActor):
 	actor.revive()
-	QueController.add_action_que(actor.Que)
 	if GameState.get_actor(actor.Id):
+		QueController.add_action_que(actor.Que)
 		GameState.move_actor_to_default_layer(actor)
 	else:
 		printerr("Revived Actor '%s' no longer exists in GameState." % [actor.Id])
@@ -471,8 +424,6 @@ func add_carried_actor(actor:BaseActor, carrier:CarrierActor):
 	# Add actor to GameState and set position
 	GameState.add_actor(actor)
 	carrier.add_held_actor(actor)
-	#QueController.add_action_que(actor.Que)
-	#GameState.set_actor_pos(actor, pos)
 	
 	# Add to player list if player
 	if is_player and not _player_actor_ids.has(actor.Id):

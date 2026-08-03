@@ -10,7 +10,7 @@ static var SelfTargetParams:TargetParameters = TargetParameters.new(
 
 enum TargetTypes {Self, FullArea, Spot, OpenSpot, Actor, Ally, Enemy, Corpse}
 
-static var ActorTargetTypes = [TargetTypes.Actor, TargetTypes.Ally, TargetTypes.Enemy]
+static var ActorTargetTypes = [TargetTypes.Actor, TargetTypes.Ally, TargetTypes.Enemy, TargetTypes.Corpse]
 static var SpotTargetTypes = [TargetTypes.Spot, TargetTypes.OpenSpot]
 
 var _target_param_key
@@ -135,7 +135,7 @@ func is_actor_effected_by_aoe(actor:BaseActor, target:BaseActor, game_state:Game
 
 ## Returns Dictionary of Coor mapped to LOS_VAL
 func get_valid_target_area(center:MapPos)->Dictionary:
-	if _cached_canter_pos == center:
+	if _cached_canter_pos and _cached_canter_pos.equals(center):
 		return _cached_target_area
 		
 	var spots =  target_area.to_map_spots(center)

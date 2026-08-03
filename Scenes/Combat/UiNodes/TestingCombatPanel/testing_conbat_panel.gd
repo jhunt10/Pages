@@ -1,17 +1,21 @@
-class_name DevEnemySpawnerControl
-extends Control
+extends PanelContainer
 
+@export var refill_ammo_button:Button
 @export var spawn_button:Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	refill_ammo_button.pressed.connect(refill_ammo)
 	spawn_button.pressed.connect(open_spawn_menu)
-	pass # Replace with function body.
 
+func refill_ammo():
+	for actor_id in CombatRootControl.Instance.GameState._actors.keys():
+		if actor_id == null:
+			continue
+		var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
+		if actor:
+			actor.pages.fill_page_ammo()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func open_spawn_menu():
 	var option_menu = CombatRootControl.Instance.ui_control.option_select_menu

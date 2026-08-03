@@ -182,7 +182,23 @@ func set_actor_pos(actor, pos:MapPos, suppress_signal:bool=false):
 			zone.on_actor_enter(actor, self)
 	
 func get_actor_pos(actor)->MapPos:
-	return map_data.get_actor_pos(actor)
+	var actor_id = actor
+	if actor is BaseActor:
+		actor_id = actor.Id
+	
+	var pos = map_data.get_actor_pos(actor_id)
+	if pos:
+		return pos
+	
+	if actor is String:
+		actor = _actors.get(actor_id)
+	
+	if actor is BaseActor:
+		if actor.is_being_carried():
+			var carrier = actor.get_carrier_actor()
+			return get_actor_pos(carrier)
+	return null
+		
 
 func get_actors_at_pos(pos, include_dead:bool=false)->Array:
 	return map_data.get_actors_at_pos(pos, null, include_dead)

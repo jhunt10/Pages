@@ -45,9 +45,10 @@
 [ext_resource type="Script" uid="uid://b1akgv3jk1q85" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_button.gd" id="33_lhmsf"]
 [ext_resource type="Script" uid="uid://dkailnjyay32w" path="res://Scenes/Combat/GameOverScreens/game_unlock_screen.gd" id="33_ucts4"]
 [ext_resource type="PackedScene" uid="uid://dqruidykupjgt" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.tscn" id="34_6y7uw"]
+[ext_resource type="Theme" uid="uid://qsca7lvb1a68" path="res://assets/Themes/ComputerPanels/combat_panel_theme.tres" id="34_a7rqi"]
 [ext_resource type="Texture2D" uid="uid://bvmw0aystxedy" path="res://ObjectDefs/ClassDefs/Rogue/Actors/Sprites/RogueIcon.png" id="34_kd43d"]
 [ext_resource type="Texture2D" uid="uid://c4yedxpiinlff" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/outline.png" id="34_wuopp"]
-[ext_resource type="Script" uid="uid://6xpl5ilp8omq" path="res://Scenes/Combat/dev_enemy_spawner_control.gd" id="35_8qg5x"]
+[ext_resource type="Script" uid="uid://bpb31xc2bos73" path="res://Scenes/Combat/UiNodes/TestingCombatPanel/testing_conbat_panel.gd" id="35_oxcbf"]
 [ext_resource type="Script" uid="uid://ddkwxu8k23crl" path="res://Scenes/Combat/UiNodes/CombatLog/combat_log_controller.gd" id="35_swuh7"]
 [ext_resource type="PackedScene" uid="uid://bh3p8kqb34n5r" path="res://Scenes/Combat/StartCombatScreen/start_combat_screen.tscn" id="37_2ks4j"]
 [ext_resource type="Script" uid="uid://mfpoiy74ma8u" path="res://Scenes/Combat/dev_map_drawing.gd" id="37_fh4f7"]
@@ -721,19 +722,27 @@ text = "Someone did something to someone else and it had some kind of effect."
 fit_content = true
 scroll_active = false
 
-[node name="EnemySpawnerControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl" unique_id=348406079 node_paths=PackedStringArray("spawn_button")]
-anchors_preset = 0
-offset_left = 792.0
-offset_top = 34.0
-offset_right = 832.0
-offset_bottom = 74.0
-script = ExtResource("35_8qg5x")
-spawn_button = NodePath("Button")
+[node name="TestingConbatPanel" type="PanelContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl" unique_id=1688100550 node_paths=PackedStringArray("refill_ammo_button", "spawn_button")]
+layout_mode = 1
+offset_left = 759.0
+offset_top = 8.0
+offset_right = 893.0
+offset_bottom = 92.0
+theme = ExtResource("34_a7rqi")
+script = ExtResource("35_oxcbf")
+refill_ammo_button = NodePath("BoxContainer/AmmoButton")
+spawn_button = NodePath("BoxContainer/SpawnButton")
 
-[node name="Button" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl/EnemySpawnerControl" unique_id=1494832706]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+[node name="BoxContainer" type="BoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl/TestingConbatPanel" unique_id=1699640626]
+layout_mode = 2
+vertical = true
+
+[node name="AmmoButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl/TestingConbatPanel/BoxContainer" unique_id=686378623]
+layout_mode = 2
+text = "Refill Ammo"
+
+[node name="SpawnButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl/TestingConbatPanel/BoxContainer" unique_id=1494832706]
+layout_mode = 2
 text = "Spawn Enemy"
 
 [node name="TargetInputControl" parent="MoveableCamera2D/CanvasLayer" unique_id=1327304093 instance=ExtResource("27_4pyrd")]

@@ -28,7 +28,7 @@ ColdMeleeSpell,,Cold Touch,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10
 FireMeleeSpell,,Fire Touch,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,Fire
 PoisonMeleeSpell,,Poison Touch,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,90.0,20.0,1.0,0.0,Poison
 ShockMeleeSpell,,Shock Touch,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,30.0,1.0,0.0,Shock
-LightMeleeSpell,Priest,Light Touch,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,Light
+LightMeleeSpell_PageItem,Priest,Light Touch,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,Light
 #BaseMissileAttack,,#Base Missile Attack,PageItemAction.gd,,,,1.0,PhyAttack,100.0,20.0,1.0,0.0,RAW
 #BaseMissileSpell,,#Base Missile Spell,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0,20.0,1.0,0.0,RAW
 ColdMissileSpell,,Cold Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0,10.0,1.0,0.0,Cold
@@ -38,14 +38,14 @@ PoisonMissileSpell,,Poison Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,9
 ShockMissileSpell,,Shock Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0,30.0,1.0,0.0,Shock
 FireBallSpell,Mage,Fire Ball,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,60.0,10.0,1.0,0.0,Fire
 WaterBallSpell,Mage,Water Ball,PageItemAction.gd,Mag,3.0,12.0,1.0,,,,,,
-LightMissileSpell,Priest,Light Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0,20.0,1.0,0.0,Light
+LightMissileSpell_PageItem,Priest,Light Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0,20.0,1.0,0.0,Light
 #BaseRangedAttack,,#Base Range Attack,PageItemAction.gd,,,,1.0,PhyAttack,80.0,20.0,1.0,0.0,RAW
 #BaseRangedSpell,,#Base Range Action,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.0,1.0,0.0,RAW
 ColdRangedSpell,,Cold Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,10.0,1.0,0.0,Cold
 FireRangedSpell,,Fire Shot,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.0,1.0,0.0,Fire
 PoisonRangedSpell,,Poison Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,70.0,20.0,1.0,0.0,Poison
 ShockRangedSpell,,Shock Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,30.0,1.0,0.0,Shock
-LightRangedSpell,Priest,Light Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.0,1.0,0.0,Light
+LightRangedSpell_PageItem,Priest,Light Bullet,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.0,1.0,0.0,Light
 ThrowKnife_PageItem,Rogue,Throw Knife,PageItemAction.gd,Phy,1.0,8.0,1.0,PhyAttack,80.0,20.0,1.0,0.0,Pierce
 #BaseTrapAttack,,#Base Trap Attack,PageItemAction.gd,Mag,4.0,24.0,1.0,PhyAttack,100.0,20.0,1.0,0.0,RAW
 #BaseTrapSpell,,#Base Trap Action,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,120.0,20.0,1.0,0.0,RAW
@@ -87,7 +87,6 @@ FastAttackAction,,Fast Attack,PageItemAction.gd,Phy,4.0,32.0,,,,,,,
 PowerAttackAction,,Power Attack,PageItemAction.gd,Phy,8.0,32.0,,,,,1.2,,
 SlowAttackAction,,Slow Attack,PageItemAction.gd,Phy,4.0,32.0,,,,,,,
 CoupDeGraceAttackAction,Rogue,Coup De Grace,PageItemAction.gd,Phy,1.0,4.0,0.5,,,,,,
-DoubleAttackAction,,Double Attack,PageItemAction.gd,Phy,4.0,32.0,,,,,,,
 #BaseThrowItemPage,,Throw Bomb,PageItemAction.gd,,,,,,,,,,
 ThrowBombPage,,Throw Bomb,PageItemAction.gd,,,,,,,,,,
 ThrowPotionPage,,Throw Potion,PageItemAction.gd,,,,,,,,,,
@@ -133,25 +132,27 @@ EnchantWeapon_Cold_PageItem,Mage,Cold Enchant,PageItemPassive.gd,,,,,,,,,,
 EnchantWeapon_Fire_PageItem,Mage,Fire Enchant,PageItemPassive.gd,,,,,,,,,,
 EnchantWeapon_Poison_PageItem,Mage,Poison Enchant,PageItemPassive.gd,,,,,,,,,,
 EnchantWeapon_Shock_PageItem,Mage,Shock Enchant,PageItemPassive.gd,,,,,,,,,,
-HealLargeSpell,Priest,Restore,PageItemAction.gd,Abn,1.0,1.0,,,,,,,
-HealMediumSpell,Priest,Relieve,PageItemAction.gd,Abn,1.0,2.0,,,,,,,
-HealSmallSpell,Priest,Refresh,PageItemAction.gd,Abn,1.0,4.0,,,,,,,
+HealLargeSpell_PageItem,Priest,Restore,PageItemAction.gd,Abn,1.0,1.0,,,,,,,
+HealMediumSpell_PageItem,Priest,Relieve,PageItemAction.gd,Abn,1.0,2.0,,,,,,,
+HealSmallSpell_PageItem,Priest,Refresh,PageItemAction.gd,Abn,1.0,4.0,,,,,,,
 RemoveAilmentSpell,Priest,Remove Ailment,PageItemAction.gd,Mag,4.0,16.0,1.0,,,,,,
 ReviveSpell,Priest,Revive,PageItemAction.gd,Abn,1.0,1.0,,,,,,,
 BlessedLimit1Page,Priest,Blessed,PageItemPassive.gd,,,,,,,,,,
 BlessedLimit2Page,Priest,More Blessed,PageItemPassive.gd,,,,,,,,,,
 BlessedLimit3Page,Priest,Even Blesseder,PageItemPassive.gd,,,,,,,,,,
 BlessedMassPage,Priest,Mass Bless,PageItemPassive.gd,,,,,,,,,,
-HarmingLightPage,Priest,Harming Light,PageItemPassive.gd,,,,,,,,,,
-HealingLightPage,Priest,Healing Light,PageItemPassive.gd,,,,,,,,,,
+HarmingLight_PageItem,Priest,Harming Light,PageItemPassive.gd,,,,,,,,,,
+HealingLight_PageItem,Priest,Healing Light,PageItemPassive.gd,,,,,,,,,,
 RemoveMorePage,Priest,Remove More,PageItemPassive.gd,,,,,,,,,,
 RemoveSelectPage,Priest,Remove Select,PageItemPassive.gd,,,,,,,,,,
+DoubleAttack_PageItem,Rogue,Double Attack,PageItemAction.gd,Phy,1.0,8.0,,,,,,,
 GetBehind_PageItem,Rogue,Get Behind,PageItemAction.gd,Abn,1.0,2.0,,,,,,,
 JumpOver_PageItem,Rogue,Jump Over,PageItemAction.gd,Abn,1.0,2.0,,,,,,,
 _OLD_ArtfulDodgerPage,Rogue,Artful Dodger,PageItemPassive.gd,,,,,,,,,,
-ArtfulDodger_PageItem,Rogue,Artful Dodger,PageItemPassive.gd,,,,,,,,,,
+Serpentine_PageItem,Rogue,Serpentine,PageItemPassive.gd,,,,,,,,,,
 Momentum_PageItem,Rogue,Momentum,PageItemPassive.gd,,,,,,,,,,
 BackStab_PageItem,Rogue,Back Stabber,PageItemPassive.gd,,,,,,,,,,
+Finisher_PageItem,Rogue,Finisher,PageItemPassive.gd,,,,,,,,,,
 BeQuick_PageItem,Rogue,Be Quick,PageItemPassive.gd,,,,,,,,,,
 Bleeder_PageItem,Rogue,Bleeder,PageItemPassive.gd,,,,,,,,,,
 Blinder_PageItem,Rogue,Blinder,PageItemPassive.gd,,,,,,,,,,

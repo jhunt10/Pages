@@ -331,6 +331,8 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 			var use_actor = actor
 			if use_actor == null:
 				use_actor = page_owner_actor
+			# If the user is not the owner, but they are carrying the owner
+			# then treat it like the owner is using it
 			elif use_actor != page_owner_actor and use_actor is CarrierActor: 
 				if page_owner_actor and (use_actor as CarrierActor).is_holding_actor(page_owner_actor):
 					use_actor = page_owner_actor

@@ -7,14 +7,14 @@ func _get_debug_name()->String:
 ## Keyed off Option Id, has 'Icon'
 var _option_sets:Array = []
 var _selection_key:String
-var _queing_action_key:String
+var _queing_action_id:String
 var _selecting_for_actor_id:String
 var finished_selecting:bool
 	
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	_selecting_for_actor_id = args.get("ActorId", "")
-	_queing_action_key = args.get("ActionKey", "")
+	_queing_action_id = args.get("ActionId", "")
 	_selection_key = args.get("SelectionKey", "")
 	_option_sets = args.get("OptionSets", [])
 	
@@ -26,9 +26,10 @@ func start_state():
 	CombatRootControl.Instance.camera.freeze_camera()
 
 func _on_all_que_options_selected(selection_key:String, options_data:Dictionary):
+	_selection_key = selection_key
 	var actor = ActorLibrary.get_actor(_selecting_for_actor_id)
-	if _queing_action_key:
-		var action = ItemLibrary.get_item(_queing_action_key)
+	if _queing_action_id:
+		var action = ItemLibrary.get_item(_queing_action_id)
 		actor.Que.que_action(action, options_data)
 	else:
 		var turn_data:TurnExecutionData = actor.Que.QueExecData.get_current_turn_data()
@@ -47,7 +48,7 @@ func on_option_menu_closed():
 func end_state():
 	pass
 	
-func handle_input(event):
-	pass
+#func handle_input(event):
+	#pass
 
 	#CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)

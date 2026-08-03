@@ -89,7 +89,9 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 		if attack_action.has_ammo():
 			if not attack_action.can_pay_ammo_cost():
 				continue
-			if not actor.Que.will_have_ammo(attack_action):
+			#if not actor.Que.will_have_ammo(attack_action):
+			var qued_count = actor.Que.count_qued_page_uses(attack_action)
+			if qued_count >= attack_action.get_ammo_remaining_uses():
 				continue
 		# Get potential targets for attack Action
 		var attack_params =  attack_action.get_preview_target_params(actor)
