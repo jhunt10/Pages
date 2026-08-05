@@ -15,7 +15,7 @@ func get_required_props()->Dictionary:
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return []
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var setting_target_key = subaction_data['SetTargetKey']

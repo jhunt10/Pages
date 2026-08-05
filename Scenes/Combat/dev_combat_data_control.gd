@@ -57,7 +57,7 @@ func _toggle_stat_bars():
 
 func force_build_ques():
 	AiHandler.build_action_ques(true)
-	#for que:ActionQue in CombatRootControl.QueController._action_ques.values():
+	#for que:ActionQueHolder in CombatRootControl.QueController._action_ques.values():
 		#var actor = que.actor
 		##if not actor.is_player:
 		#actor.auto_build_que(0)

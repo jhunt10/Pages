@@ -193,7 +193,7 @@ static func get_damage_data_of_action(action:PageItemAction, _actor:BaseActor)->
 		
 
 static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:TargetSelectionData, _action:PageItemAction, game_state:GameStateData)->bool:
-	var turndata = selection_data.focused_actor.Que.QueExecData.get_current_turn_data()
+	var turndata = selection_data.focused_actor.Que.get_current_turn_data()
 	var potentail_actors = []
 	var coor_to_actor = {}
 	if selection_data.target_params.is_actor_target_type():

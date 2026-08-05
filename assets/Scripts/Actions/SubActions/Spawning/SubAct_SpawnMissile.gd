@@ -13,7 +13,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 	return ["Missile"]
 
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var target_key = subaction_data['TargetKey']
 	var damage_key = subaction_data['DamageKey']
@@ -71,7 +71,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	CombatRootControl.Instance.create_new_missile_node(missile)
 	return BaseSubAction.Success
 
-func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, game_state:GameStateData)->MapPos:
+func get_target_spot_of_missile(target_key:String, metadata, game_state:GameStateData)->MapPos:
 	var turn_data = metadata.get_current_turn_data()
 	
 	if !turn_data.has_target(target_key):

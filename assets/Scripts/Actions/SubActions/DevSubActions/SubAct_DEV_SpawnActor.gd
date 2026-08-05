@@ -10,7 +10,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 	return ["Spawn", "_Dev_Action"]
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
-func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
+func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	var options = OnQueOptionsData.new("SelectedActorKey", "Select Effect:")
 	
 	for actor_key in ActorLibrary.list_all_actor_keys():
@@ -24,7 +24,7 @@ func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary
 	#out_list.append(OnQueOptionsData.new("SelectedDirection", "Select Direction:", ["North", "East", "South", "West"], [], []))
 	return out_list
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data = que_exe_data.get_current_turn_data()

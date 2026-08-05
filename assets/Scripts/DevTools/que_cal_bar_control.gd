@@ -1,7 +1,7 @@
 class_name QueCalcBarControl
 extends HBoxContainer
 
-func build_slots(que:ActionQue):
+func build_slots(que:ActionQueHolder):
 	var section_size = 120 / max(que.get_max_que_size(),1)
 	var box_prefab:NinePatchRect = self.get_child(0)
 	for n in range(que.get_max_que_size()):

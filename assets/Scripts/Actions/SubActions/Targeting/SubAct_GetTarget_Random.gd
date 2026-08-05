@@ -13,7 +13,7 @@ func get_required_props()->Dictionary:
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return []
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	# Check if Target is already set
 	var setting_target_key = subaction_data['SetTargetKey']
@@ -32,13 +32,10 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:
 		return BaseSubAction.Success
 	
 	# Get Targeting Params
-	var actor_pos = game_state.get_actor_pos(actor)
 	var allow_dups = subaction_data.get("AllowAlreadyTargeted", false)
-	
 	var exclude_targets = []
 	if not allow_dups:
 		exclude_targets = turn_data.list_targets()
-		
 	var selection_data = TargetSelectionData.new(target_params, setting_target_key, actor, game_state, exclude_targets)
 	
 	# No valid targets

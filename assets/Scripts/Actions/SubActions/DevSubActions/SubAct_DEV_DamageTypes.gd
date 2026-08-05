@@ -17,7 +17,7 @@ func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary
 		options.append_option(damage_type, damage_type, DamageHelper.get_damage_icon(damage_type))
 	return [options]
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data = que_exe_data.get_current_turn_data()

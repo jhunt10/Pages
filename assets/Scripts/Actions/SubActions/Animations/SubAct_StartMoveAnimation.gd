@@ -16,7 +16,7 @@ func get_prop_enum_values(_prop_key:String)->Array:
 	]
 
 
-func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, _metadata:QueExecutionData,
+func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, _metadata,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var move:MapPos = MapPos.Parse(subaction_data.get("RelativePos", [0,0,0,0]))
 	var actor_pos = game_state.get_actor_pos(actor)

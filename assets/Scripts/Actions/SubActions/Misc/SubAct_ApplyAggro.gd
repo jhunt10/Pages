@@ -16,14 +16,10 @@ func get_prop_enum_values(prop_key:String)->Array:
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return []
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var target_key = subaction_data['TargetKey']
 	var targets:Array = _find_target_effected_actors(parent_action, subaction_data, target_key, que_exe_data, game_state, actor)
-	var tag_chain = SourceTagChain.new()\
-			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
-			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
-	
 	var change_type = subaction_data.get("ChangeType", '')
 	
 	for target:BaseActor in targets:

@@ -32,7 +32,7 @@ func _on_all_que_options_selected(selection_key:String, options_data:Dictionary)
 		var action = ItemLibrary.get_item(_queing_action_id)
 		actor.Que.que_action(action, options_data)
 	else:
-		var turn_data:TurnExecutionData = actor.Que.QueExecData.get_current_turn_data()
+		var turn_data:TurnExecutionData = actor.Que.get_current_turn_data()
 		turn_data.on_que_data[_selection_key] = options_data[_selection_key]
 	var option_menu = CombatRootControl.Instance.ui_control.option_select_menu
 	option_menu.menu_closed.disconnect(on_option_menu_closed)

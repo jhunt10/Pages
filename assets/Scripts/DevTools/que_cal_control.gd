@@ -36,7 +36,7 @@ func _process(_delta: float) -> void:
 func on_actor_spawn(actor, _pos):
 	que_bars[actor.Id] = add_que(actor.Que)
 
-func add_que(que:ActionQue):
+func add_que(que:ActionQueHolder):
 	if que.get_max_que_size() > max_que_size:
 		max_que_size = que.get_max_que_size()
 	var new_que:QueCalcBarControl = que_bar_prefab.duplicate()

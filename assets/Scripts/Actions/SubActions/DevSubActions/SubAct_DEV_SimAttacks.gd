@@ -9,8 +9,8 @@ func get_required_props()->Dictionary:
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return ["Attack", "_Dev_Action"]
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor)->bool:
+func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, _que_exe_data,
+				_game_state:GameStateData, _actor:BaseActor)->bool:
 	#
 	#var turn_data = que_exe_data.get_current_turn_data()
 	#var target_key = subaction_data['TargetKey']

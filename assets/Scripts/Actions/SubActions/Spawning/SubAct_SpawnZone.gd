@@ -11,7 +11,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 		TagHelper.merge_lists(tags, sub_effect_tags)
 	return tags
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var zone_data_key = subaction_data.get("ZoneDataKey")
 	var zone_data = parent_action.get_zone_data(zone_data_key)
@@ -69,7 +69,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	return BaseSubAction.Success
 	
 
-func get_target_spot_of_zone(target_key:String, metadata:QueExecutionData, game_state:GameStateData)->MapPos:
+func get_target_spot_of_zone(target_key:String, metadata, game_state:GameStateData)->MapPos:
 	var turn_data = metadata.get_current_turn_data()
 	
 	if !turn_data.has_target(target_key):

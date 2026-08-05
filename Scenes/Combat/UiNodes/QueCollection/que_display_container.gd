@@ -113,25 +113,10 @@ func _build_slots():
 
 func _sync_icons():
 	if LOGGING: print("\nSync Icons for " + _actor.ActorKey + " " + self.name)
-	var index = 0
-	for action:PageItemAction in _actor.Que.list_qued_actions():
-		if _slots.size() <= index:
-			break
-		var slot:QueMiniSlotIcon = _slots[index]
-		while slot and slot.is_gap:
-			index += 1
-			if index < _slots.size():
-				slot = _slots[index]
-			else:
-				slot = null
-		if slot:
-			slot.set_action(index, _actor, action)
-		if LOGGING: print("Set SLot Page: %s | %s " % [index, action.ActionKey])
-		index += 1
-		
-	for n in range(index, _slots.size()+1):
-		if n < _slots.size():
-			if LOGGING: print("Set SLot Page: %s | NULL " % [index])
-			var slot:QueMiniSlotIcon = _slots[n]
-			slot.set_action(n, _actor, null)
-	if LOGGING: print("\n")
+	
+	for turn_index in range(_slots.size()):
+		var slot:QueMiniSlotIcon = _slots[turn_index]
+		var is_gap = _actor.Que.is_turn_gap(turn_index)
+		slot.set_is_gap(is_gap)
+		var action = _actor.Que.get_action_for_turn(turn_index)
+		slot.set_action(turn_index, _actor, action)

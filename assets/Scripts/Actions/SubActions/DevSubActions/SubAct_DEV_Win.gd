@@ -6,8 +6,8 @@ extends BaseSubAction
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return ["_Dev_Action"]
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor)->bool:
+func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, _que_exe_data,
+				_game_state:GameStateData, _actor:BaseActor)->bool:
 	var controller = CombatRootControl.Instance
 	controller.QueController.pause_execution()
 	controller.trigger_end_condition(true)

@@ -50,7 +50,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 		
 	return tags
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data = que_exe_data.get_current_turn_data()
@@ -174,7 +174,8 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	
 
 func _create_weapon_missile():
-	
+	var t = true
+	t.break()
 		#var weapon = actor.equipment.get_primary_weapon()
 		## Create missile for ranged weapons
 		#var missile_data = (weapon as BaseWeaponEquipment).get_misile_data()

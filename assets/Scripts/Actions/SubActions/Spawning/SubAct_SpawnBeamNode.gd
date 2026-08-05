@@ -13,8 +13,8 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 	return ["Beam"]
 
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor)->bool:
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data,
+				_game_state:GameStateData, actor:BaseActor)->bool:
 	var target_param_key = subaction_data.get("TargetParamKey", null)
 	var target_params = _get_target_parameters(target_param_key, parent_action, actor, que_exe_data.get_current_turn_data())
 	var damage_data_key = subaction_data.get("DamageKey", "")
@@ -41,6 +41,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		'AttackDetails': attack_details,
 		'DamageData': damage_data,
 		'EffectData': parent_action.get_load_val("EffectDatas", []), 
+		'TagChain': tag_chain
 	}
 	new_node.set_data(actor_node.vfx_holder, beam_data, target_params)
 	

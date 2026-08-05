@@ -9,8 +9,8 @@ func get_required_props()->Dictionary:
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return ["Reload"]
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
-				game_state:GameStateData, actor:BaseActor)->bool:
+func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, metadata,
+				_game_state:GameStateData, actor:BaseActor)->bool:
 	var turn_data = metadata.get_current_turn_data()
 	if turn_data.data_cache.has("ReloadDone"):
 		return Success

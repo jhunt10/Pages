@@ -78,7 +78,7 @@ var _to_add_actor_ques = []
 func list_actors_by_order()->Array:
 	var out_list = []
 	for que_id in _que_order:
-		var que:ActionQue = _action_ques[que_id]
+		var que:ActionQueHolder = _action_ques[que_id]
 		out_list.append(que.actor)
 	return out_list
 
@@ -101,7 +101,7 @@ func _start_round():
 	start_of_round_with_state.emit(game_state)
 	# Emit start of round for actors
 	for que_id in _que_order:
-		var que:ActionQue = _action_ques[que_id]
+		var que:ActionQueHolder = _action_ques[que_id]
 		que.actor.round_starting.emit()
 	execution_active.emit()
 
@@ -116,7 +116,7 @@ func _end_round():
 	execution_state = ActionStates.Waiting
 	# Emit end of round for actors
 	for que_id in _que_order:
-		var que:ActionQue = _action_ques[que_id]
+		var que:ActionQueHolder = _action_ques[que_id]
 		que.actor.round_ended.emit()
 	end_of_round.emit()
 	end_of_round_with_state.emit(CombatRootControl.Instance.GameState)
@@ -137,7 +137,7 @@ func _on_turn_start(game_state):
 	#_pay_turn_costs()
 	# Emit start of turn for actors
 	for que_id in _que_order:
-		var que:ActionQue = _action_ques[que_id]
+		var que:ActionQueHolder = _action_ques[que_id]
 		if not que.is_turn_gap(action_index):
 			que.actor.turn_starting.emit()
 
@@ -147,7 +147,7 @@ func _on_turn_end(game_state):
 	end_of_turn_post_actors.emit()
 	# Emit end of turn for actors
 	for que_id in _que_order:
-		var que:ActionQue = _action_ques[que_id]
+		var que:ActionQueHolder = _action_ques[que_id]
 		if not que.is_turn_gap(action_index):
 			que.actor.turn_ended.emit()
 
@@ -174,17 +174,7 @@ func pause_execution():
 	execution_suspended.emit()
 	execution_paused.emit()
 
-func get_paused_on_que()->ActionQue:
-	return _action_ques[_que_order[que_index]]
-
-func get_active_action_ques()->Array:
-	var out_list = []
-	for que in _action_ques.values():
-		if not _dead_ques.has(que.Id):
-			out_list.append(que)
-	return out_list
-
-func add_action_que(new_que:ActionQue):
+func add_action_que(new_que:ActionQueHolder):
 	if _action_ques.has(new_que.Id):
 		return
 	# Don't add ques mid turn
@@ -193,12 +183,10 @@ func add_action_que(new_que:ActionQue):
 		return
 	_action_ques[new_que.Id] = new_que
 	new_que.actor.stats_changed.connect(_on_actor_stat_change.bind(new_que.actor))
-	new_que.max_que_size_changed.connect(_on_actor_stat_change.bind(new_que.actor))
 	_flagged_for_reorder = true
 	_flagged_for_repadding = true
 
-
-func remove_action_que(que:ActionQue):
+func remove_action_que(que:ActionQueHolder):
 	if not _dead_ques.has(que.Id):
 		_dead_ques.append(que.Id)
 		que_marked_as_dead.emit(que.Id)
@@ -260,9 +248,10 @@ func update(delta: float) -> void:
 				
 				if SHORTCUT_QUE and action_index < max_que_size:
 					var any_left = false
-					for q:ActionQue in get_active_action_ques():
-						if q.get_action_for_turn(action_index):
+					for que in _action_ques.values():
+						if not _dead_ques.has(que.Id):
 							any_left = true
+							break
 					if not any_left:
 						if DEEP_LOGGING: print("\tShort Cutting Que")
 						_end_round()
@@ -274,9 +263,8 @@ func update(delta: float) -> void:
 				_end_round()
 
 func _clear_ques():
-	for que:ActionQue in _action_ques.values():
+	for que:ActionQueHolder in _action_ques.values():
 		que.clear_que()
-		que.QueExecData.clear()
 
 func _cleanup_dead_ques():
 	if _dead_ques.size() == 0:
@@ -290,7 +278,7 @@ func _cleanup_dead_ques():
 	_flagged_for_reorder = true
 	_flagged_for_repadding = true
 
-func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:int, subaction_index:int):
+func _execute_turn_frames(game_state:GameStateData, que:ActionQueHolder, turn_index:int, subaction_index:int):
 	if DEEP_LOGGING: print("\tChecking Que: %s(%s)" %[que.actor.ActorKey, que.Id])
 	if que.is_turn_gap(turn_index):
 		if DEEP_LOGGING: print("\t\tGap action")
@@ -308,26 +296,24 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		
 	# Get the action for this turn
 	var action:PageItemAction = que.get_action_for_turn(turn_index)
-	# If no action, skip. Ussually caused by smaller ques.
+	# If no action, skip. Ussually caused by short-cut ques.
 	if !action:
 		if DEEP_LOGGING: print("\t\tNo action")
 		return
 	
-	var turn_data = que.QueExecData.TurnDataList[que.turn_to_que_index(turn_index)]
+	var turn_data = que.get_data_for_turn(turn_index)
 	 
 	if subaction_index == 0:
 		if action.has_ammo() and not action.can_pay_ammo_cost():
 			VfxHelper.create_flash_text(que.actor, "AMMO", BaseFlashTextVfxNode.FlashTextType.NoAmmo)
 			que.fail_turn()
 			return
-			
 	
 	# Get subaction for this frame
 	var sub_action_list = action.get_sub_action_datas_for_frame(subaction_index)
 	if !sub_action_list:
 		if DEEP_LOGGING: print("\t\tNo SubAction List on action: %s" % [action.ActionKey])
 		return
-		
 	
 	if DEEP_LOGGING: print("Starting SubAction Index: %s of  %s" % [sub_sub_action_index, sub_action_list.size()])
 	while sub_sub_action_index < sub_action_list.size():
@@ -365,7 +351,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQue, turn_index:in
 		var result = subaction.do_thing(
 			action, # Parent Action
 			sub_action_data, # SubAction configuration
-			que.QueExecData, # Metadata for action execution
+			que._current_que, # Metadata for action execution
 			game_state, # GameState
 			que.actor # Actor
 		)
@@ -406,8 +392,8 @@ func _on_actor_stat_change(actor:BaseActor):
 	if _cached_actor_ppr.get(actor.Id, 0) != que_size:
 		_flagged_for_repadding = true
 
-func check_que_order():
-	for que:ActionQue in _action_ques.values():
+func clear_and_check_ques():
+	for que:ActionQueHolder in _action_ques.values():
 		var actor = que.actor
 		if _cached_actor_speeds.get(actor.Id, null) != actor.stats.get_stat(StatHelper.Speed, 0):
 			_flagged_for_reorder = true
@@ -428,11 +414,11 @@ func check_que_order():
 func _order_ques_by_speed(supress_signal=false):
 	var speeds = []
 	var speed_to_ques = {}
-	for que:ActionQue in _action_ques.values():
+	_cached_actor_speeds.clear()
+	for que:ActionQueHolder in _action_ques.values():
 		var actor:BaseActor = que.actor
 		var speed = actor.stats.get_stat("Speed", 0)
 		_cached_actor_speeds[actor.Id] = speed
-		_cached_actor_ppr[actor.Id] = que.get_max_que_size()
 		if not speeds.has(speed):
 			speed_to_ques[speed] = []
 			speeds.append(speed)
@@ -451,20 +437,22 @@ func _order_ques_by_speed(supress_signal=false):
 func _pad_ques(supress_signal=false):
 	var new_max_que_size = -1
 	var max_que_last_index = 0
+	_cached_actor_ppr.clear()
 	for index in range(_que_order.size()):
 		var que_id = _que_order[index]
-		var que:ActionQue = _action_ques[que_id]
+		var que:ActionQueHolder = _action_ques[que_id]
 		var que_size = que.get_max_que_size()
+		_cached_actor_ppr[que.actor.Id] = que.get_max_que_size()
 		if que_size >= new_max_que_size:
 			new_max_que_size = que_size
 			max_que_last_index = index
 	max_que_size = new_max_que_size
 	for index in range(_que_order.size()):
 		var que_id = _que_order[index]
-		var que:ActionQue = _action_ques[que_id]
+		var que:ActionQueHolder = _action_ques[que_id]
 		var is_slow = index >= max_que_last_index
 		var que_gaps = _get_premade_que_gaps(que.get_max_que_size(), max_que_size, is_slow)
-		que._set_turn_mapping(que_gaps)
+		que._set_turn_padding(que_gaps)
 	_flagged_for_repadding = false
 	if not supress_signal:
 		que_ordering_changed.emit()
@@ -564,7 +552,7 @@ func _get_premade_que_gaps(que_size:int, max_que_size_val:int, is_slow:bool)->Ar
 	#max_que_size = -1
 	#var max_que_last_key = ''
 	#for que_id in _que_order:
-		#var que:ActionQue = _action_ques[que_id]
+		#var que:ActionQueHolder = _action_ques[que_id]
 		#if que.get_max_que_size() >= max_que_size:	
 			#max_que_size = que.get_max_que_size()
 			#max_que_last_key = que_id
@@ -606,7 +594,7 @@ func _get_premade_que_gaps(que_size:int, max_que_size_val:int, is_slow:bool)->Ar
 	#
 	#var shift_forward = true
 	#for que_id in _que_order:
-		#var que:ActionQue = _action_ques[que_id]
+		#var que:ActionQueHolder = _action_ques[que_id]
 		#if que.Id == max_que_last_key:
 			#shift_forward = false
 			#

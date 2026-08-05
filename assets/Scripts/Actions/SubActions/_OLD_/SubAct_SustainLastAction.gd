@@ -10,7 +10,7 @@ func get_required_props()->Dictionary:
 func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)->Array:
 	return ["Sustain"]
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, que_exe_data,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	var last_turn_index = game_state.current_turn_index - 1
 	if last_turn_index < 0:
@@ -40,5 +40,4 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			continue
 		EffectHelper.create_effect(last_actor, actor, sustain_effect_key, sustain_effect_data, game_state)
 	
-	var turn_data = que_exe_data.get_current_turn_data()
 	return BaseSubAction.Success

@@ -16,7 +16,7 @@ func _draw() -> void:
 	
 	draw_astar_map()
 	 #Draw Paths
-	for action_que:ActionQue in CombatRootControl.QueController._action_ques.values():
+	for action_que:ActionQueHolder in CombatRootControl.QueController._action_ques.values():
 		var actor_node = CombatRootControl.get_actor_node(action_que.actor.Id)
 		if not actor_node:
 			continue

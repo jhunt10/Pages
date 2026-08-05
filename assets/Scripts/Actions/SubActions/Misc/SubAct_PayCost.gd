@@ -13,7 +13,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 		return [ammo_type+"Ammo"]
 	return []
 
-func do_thing(parent_action:PageItemAction, _subaction_data:Dictionary, _que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, _subaction_data:Dictionary, _que_exe_data,
 				_game_state:GameStateData, actor:BaseActor)->bool:
 	if not parent_action.can_pay_ammo_cost():
 		VfxHelper.create_flash_text(actor, "AMMO", BaseFlashTextVfxNode.FlashTextType.NoAmmo)

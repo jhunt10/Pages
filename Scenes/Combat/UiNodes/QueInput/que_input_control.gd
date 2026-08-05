@@ -169,11 +169,9 @@ func set_actor(actor:BaseActor):
 	if _actor:
 		_actor.page_list_changed.disconnect(_build_buttons)
 		_actor.Que.action_que_changed.disconnect(_on_que_change)
-		_actor.Que.ammo_changed.disconnect(_on_ammo_change)
 	_actor = actor
 	_actor.page_list_changed.connect(_build_buttons)
 	_actor.Que.action_que_changed.connect(_on_que_change)
-	_actor.Que.ammo_changed.connect(_on_ammo_change)
 	hover_box.hide()
 	_build_buttons()
 	clear_preview_display()
@@ -264,9 +262,9 @@ func show_preview_target_area(action:PageItemAction):
 
 func show_last_qued_target_area():
 	# Display last page's target area for mobile
-	if _actor and _actor.Que and _actor.Que.real_que and _actor.Que.real_que.size() > 0:
+	if _actor and _actor.Que:
 		var last_page:PageItemAction = _actor.Que.get_last_qued_action()
-		if last_page.has_preview_target():
+		if last_page and last_page.has_preview_target():
 			show_preview_target_area(last_page)
 
 func _mouse_entered_page_button(_index, key_name):

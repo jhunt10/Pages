@@ -26,7 +26,7 @@ signal on_death()
 signal on_revive()
 signal sprite_changed()
 
-var Que:ActionQue
+var Que:ActionQueHolder
 #var node:BaseActorNode
 var sprite:ActorSpriteHolder
 var stats:StatHolder
@@ -85,7 +85,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	pages = PageHolder.new(self)
 	
 	# Que requires info from Pages and Equipment so must be inited after item validation
-	Que = ActionQue.new(self)
+	Que = ActionQueHolder.new(self)
 	if get_load_val("IsPlayer", false):
 		is_player = true
 	_cache_after_loading_def()

@@ -27,7 +27,7 @@ func get_action_tags(parent_action:PageItemAction, subaction_data:Dictionary)->A
 				tags.append("LOS")
 	return tags
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	# Check if Target is already set
 	var setting_target_key = subaction_data['SetTargetKey']

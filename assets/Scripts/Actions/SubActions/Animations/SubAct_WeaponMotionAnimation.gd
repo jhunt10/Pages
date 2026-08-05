@@ -19,7 +19,7 @@ func get_prop_enum_values(prop_key:String)->Array:
 	return []
 
 
-func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, _metadata:QueExecutionData,
+func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, _metadata,
 				_game_state:GameStateData, actor:BaseActor)->bool:
 	var actor_node:BaseActorNode = CombatRootControl.get_actor_node(actor.Id)
 	if !actor_node:

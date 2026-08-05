@@ -31,7 +31,7 @@ func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionar
 	return []
 
 ## Execute this sub_action. Returns true if the sub_action was successful. If false is returned, no further sub_actions will be executed this turn.
-func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, _metadata:QueExecutionData,
+func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, _metadata,
 				_game_state:GameStateData, _actor:BaseActor)->bool:
 	printerr("BaseSubAction.do_thing: No Override.")
 	return false
@@ -64,7 +64,7 @@ func _get_target_parameters_for_target_key(target_key, parent_action:PageItemAct
 ## Get actors that were effected by the selected target key
 ## Only use when you haven't already pulled out Target Parames and Selected Targets
 func _find_target_effected_actors(parent_action:PageItemAction, subaction_data:Dictionary, target_key:String, 
-					metadata:QueExecutionData, 	game_state:GameStateData, source_actor:BaseActor)->Array:
+					metadata, 	game_state:GameStateData, source_actor:BaseActor)->Array:
 	if target_key == "Self":
 		return [source_actor]
 	var turn_data = metadata.get_current_turn_data()
@@ -88,7 +88,7 @@ func _find_target_effected_actors(parent_action:PageItemAction, subaction_data:D
 	return target_list
 
 ## Get MapPos Array of positions that were included by the selected target key
-func _find_target_effected_spots(target_key:String,  metadata:QueExecutionData, game_state:GameStateData, source_actor:BaseActor)->Array:
+func _find_target_effected_spots(target_key:String,  metadata, game_state:GameStateData, source_actor:BaseActor)->Array:
 	if target_key == "Self":
 		return [game_state.get_actor_pos(source_actor)]
 	var turn_data = metadata.get_current_turn_data()

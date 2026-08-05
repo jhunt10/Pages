@@ -137,10 +137,10 @@ func sort_subacts_ascending(a, b):
 ##    Icons  Data     ##
 ########################
 
-func get_qued_icon(turn_index:int, que:ActionQue, override_actor:BaseActor =  null)->Texture2D:
-	# If qued by a Carrier Actor, we need to use thier QueExecData
+func get_qued_icon(turn_index:int, que:ActionQueHolder, override_actor:BaseActor =  null)->Texture2D:
+	# If qued by a Carrier Actor, we need to use thier ActionQue
 	if action_data.get("Preview", {}).get("UseDynamicIcons", false):
-		var turn_data = que.QueExecData.get_data_for_turn(turn_index)
+		var turn_data = que.get_data_for_turn(turn_index)
 		var icon = turn_data.on_que_data.get("OverrideQueIcon", null)
 		if icon:
 			return icon

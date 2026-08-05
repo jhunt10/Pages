@@ -15,7 +15,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	return BaseItemUsage_SubAct._get_on_que_options(_parent_action, _subaction_data, _actor, _game_state)
 
-func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data:QueExecutionData,
+func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_data,
 				game_state:GameStateData, actor:BaseActor)->bool:
 	
 	var turn_data:TurnExecutionData = que_exe_data.get_current_turn_data()
@@ -65,7 +65,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	actor.items.consume_item(item_id, false)
 	return BaseSubAction.Success
 
-func get_target_spot_of_missile(target_key:String, metadata:QueExecutionData, game_state:GameStateData)->MapPos:
+func get_target_spot_of_missile(target_key:String, metadata, game_state:GameStateData)->MapPos:
 	var turn_data = metadata.get_current_turn_data()
 	
 	if !turn_data.has_target(target_key):

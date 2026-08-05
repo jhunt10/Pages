@@ -8,11 +8,8 @@ func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionar
 
 # Made static so can be used by SubAct_SpawnThrowItemMissile
 static func _get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
-	var queued_items = []
-	for turn_data in _actor.Que.QueExecData.TurnDataList:
-		var queed_item = turn_data.on_que_data.get("SelectedItemId", "")
-		if queed_item:
-			queued_items.append(queed_item)
+	# Check items that have already been qued
+	var queued_items =  _actor.Que.get_on_qued_prop_values("SelectedItemId")
 	# TODO: Translation
 	var selection_description = _subaction_data.get("SelectionDesc", "Please select the Item you would like to use with this Page.")
 	var options = OnQueOptionsData.new("SelectedItemId", selection_description)

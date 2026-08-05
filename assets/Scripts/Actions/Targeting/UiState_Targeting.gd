@@ -143,7 +143,7 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 	
 	if _logging: print("Setting Target: " + str(coord))
 	# Add selected target to Turn Data
-	var turndata = selection_data.focused_actor.Que.QueExecData.get_current_turn_data()
+	var turndata = selection_data.focused_actor.Que.get_current_turn_data()
 	if selection_data.target_params.is_spot_target_type():
 		var map_spot = MapPos.new(coord.x, coord.y, selection_data.actor_pos.z, selection_data.actor_pos.dir)
 		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params, map_spot)

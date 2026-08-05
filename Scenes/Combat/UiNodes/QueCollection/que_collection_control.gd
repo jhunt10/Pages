@@ -46,7 +46,7 @@ func _build_que_displays():
 	_ques.clear()
 	
 	for que_id in CombatRootControl.QueController._que_order:
-		var que:ActionQue = CombatRootControl.QueController._action_ques[que_id]
+		var que:ActionQueHolder = CombatRootControl.QueController._action_ques[que_id]
 		if que.get_max_que_size() <= 0:
 			continue
 		var new_display:QueCollection_QueDisplayContainer = null
