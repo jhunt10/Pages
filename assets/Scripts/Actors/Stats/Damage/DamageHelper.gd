@@ -136,25 +136,25 @@ static func roll_for_damage(
 	var min_power = float(damage_event.attack_power - damage_event.attack_power_range) / 100.0
 	damage_event.applied_power = roll_flat_range(min_power, max_power) * damage_event.attack_power_scale
 	
-	var min_test = 99
-	var max_test = -99
-	var sum = 0
-	var counts = {}
-	for i in range(100000):
-		var test_val = randf_range(0, 10)
-		min_test = min(test_val, min_test)
-		max_test = max(test_val, max_test)
-		sum += test_val
-		var rouneded = round(test_val*10)
-		if not counts.has(str(rouneded)):
-			counts[str(rouneded)] = 0
-		counts[str(rouneded)] += 1
-		#printerr(test_val)
-	print("Min: %s | Max: %s | Avg: %s" %[min_test, max_test, sum/10000])
-	printerr(counts)
-	for i in range(11):
-		if counts.keys().has(str(i)+".0"):
-			printerr("%s: %s" % [i, counts[str(i)+".0"]])
+	#var min_test = 99
+	#var max_test = -99
+	#var sum = 0
+	#var counts = {}
+	#for i in range(100000):
+		#var test_val = randf_range(0, 10)
+		#min_test = min(test_val, min_test)
+		#max_test = max(test_val, max_test)
+		#sum += test_val
+		#var rouneded = round(test_val*10)
+		#if not counts.has(str(rouneded)):
+			#counts[str(rouneded)] = 0
+		#counts[str(rouneded)] += 1
+		##printerr(test_val)
+	#print("Min: %s | Max: %s | Avg: %s" %[min_test, max_test, sum/10000])
+	#printerr(counts)
+	#for i in range(11):
+		#if counts.keys().has(str(i)+".0"):
+			#printerr("%s: %s" % [i, counts[str(i)+".0"]])
 		
 	# Get Damage Resistance
 	damage_event.defender_resistance = defender.stats.get_damage_resistance(damage_event.damage_type)

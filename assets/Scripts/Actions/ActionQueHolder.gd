@@ -69,6 +69,10 @@ func delete_at_index(index):
 	_current_que.delete_at_index(index)
 	action_que_changed.emit()
 
+func delete_at_turn_index(index):
+	_current_que.delete_at_turn_index(index)
+	action_que_changed.emit()
+
 func get_data_for_turn(turn_index:int)->TurnExecutionData:
 	return _current_que.get_data_for_turn(turn_index)
 

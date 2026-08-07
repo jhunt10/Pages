@@ -59,11 +59,12 @@
 [ext_resource type="Script" uid="uid://bcf3yo7yhmwwr" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="51_d0duj"]
 [ext_resource type="Texture2D" uid="uid://cl7v6htwim8aw" path="res://assets/Sprites/UI/SymbolIcons/BlockSymbol.png" id="52_j58mc"]
 [ext_resource type="Texture2D" uid="uid://den756c067qbk" path="res://assets/Sprites/UI/SymbolIcons/CrashSymbol.png" id="54_d0duj"]
+[ext_resource type="Script" uid="uid://bqumm45yxb7l" path="res://Scenes/Menus/CharacterMenu/Stats/limited_effect_container.gd" id="56_d0duj"]
 [ext_resource type="Script" uid="uid://2dqdth8xwfg3" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/StatsMenuPage/resistances_container.gd" id="57_c2vjq"]
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="58_i62ke"]
 [ext_resource type="PackedScene" uid="uid://deon0fff5iq41" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_page_control.tscn" id="58_iofuq"]
-[ext_resource type="Script" uid="uid://c8jheyrbbjxrh" path="res://Scenes/Menus/CharacterMenu_old/MouseOverControl/character_menu_mouse_control.gd" id="63_7egd2"]
-[ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu_old/MouseOverControl/DragItemBackground.png" id="64_d0duj"]
+[ext_resource type="Script" uid="uid://c8jheyrbbjxrh" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="63_7egd2"]
+[ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="64_d0duj"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j63nq"]
 texture = ExtResource("2_l2wto")
@@ -1558,14 +1559,15 @@ theme_override_font_sizes/font_size = 24
 text = "Class Pages"
 horizontal_alignment = 1
 
-[node name="Stats" type="ScrollContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=864007836 node_paths=PackedStringArray("menu_root", "tag_box", "stat_labels", "block_container", "block_chance_label", "block_mod_label", "main_weapon_damage_label", "off_weapon_damage_label", "damage_datas_container", "range_display", "resistances_container")]
+[node name="Stats" type="ScrollContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=864007836 node_paths=PackedStringArray("parent_menu", "tag_box", "stat_labels", "limit_effect_contaienr", "block_container", "block_chance_label", "block_mod_label", "main_weapon_damage_label", "off_weapon_damage_label", "damage_datas_container", "range_display", "resistances_container")]
 visible = false
 layout_mode = 2
 theme = ExtResource("36_xueyn")
 script = ExtResource("45_0r1b3")
-menu_root = NodePath("../../../../../../../..")
+parent_menu = NodePath("../../../../../../../..")
 tag_box = NodePath("StatsContainer/TagsBox")
 stat_labels = [NodePath("StatsContainer/AccContainer/StatContainer-Accuracy"), NodePath("StatsContainer/AccContainer/StatContainer-Mass"), NodePath("StatsContainer/AccContainer/StatContainer-Speed"), NodePath("StatsContainer/AccContainer/StatContainer-CrashPower"), NodePath("StatsContainer/CritContainer/StatContainer-CritChc"), NodePath("StatsContainer/CritContainer/StatContainer-CritMod"), NodePath("StatsContainer/EvasionContainer/StatContainer-Armor"), NodePath("StatsContainer/EvasionContainer/StatContainer-Ward"), NodePath("StatsContainer/EvasionContainer/StatContainer-Evasion")]
+limit_effect_contaienr = NodePath("StatsContainer/LimitedEffectContainer")
 block_container = NodePath("StatsContainer/BlockContainer")
 block_chance_label = NodePath("StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc")
 block_mod_label = NodePath("StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod")
@@ -1708,6 +1710,78 @@ layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
+
+[node name="LimitedEffectContainer" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1355136971 node_paths=PackedStringArray("name_label", "stat_label")]
+custom_minimum_size = Vector2(68, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("56_d0duj")
+name_label = NodePath("NameLabel")
+stat_label = NodePath("StatContainer-LimitEffect")
+
+[node name="VSeparator" type="VSeparator" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1737539937]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MaxLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=689656059]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "Max "
+horizontal_alignment = 2
+
+[node name="NameLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1799775801]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = "EFT_NAME"
+horizontal_alignment = 2
+
+[node name="SepLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=2036137336]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("12_dy5pv")
+text = ":"
+horizontal_alignment = 2
+
+[node name="StatContainer-LimitEffect" type="BoxContainer" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1796943883 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 7
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("11_d0duj")
+stat_name = "LmtEftCount"
+value_label = NodePath("StatLabel")
+force_to_int = true
+mouse_over_parent = NodePath("../../../../../../../../../../StatMouesOverPopUpControl")
+
+[node name="IconRect" type="TextureRect" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=942405700]
+visible = false
+layout_mode = 2
+texture = ExtResource("22_b4myk")
+stretch_mode = 3
+
+[node name="StatLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=816833942]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme = ExtResource("13_0r1b3")
+text = "000"
+horizontal_alignment = 1
+
+[node name="PercentLabel" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=692682511]
+visible = false
+layout_mode = 2
+theme = ExtResource("13_0r1b3")
+text = "%"
+horizontal_alignment = 1
+
+[node name="VSeparator2" type="VSeparator" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1396071483]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="SectionTitleLabel2" type="Label" parent="CenterContainer/HBoxContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1482474942]
 layout_mode = 2

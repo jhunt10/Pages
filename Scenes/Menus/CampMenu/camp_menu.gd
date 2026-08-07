@@ -27,13 +27,9 @@ static var Instance:CampMenu
 @export var rec_pages_button:CampOptionButton
 @export var rec_actors_button:CampOptionButton
 
-@export var character_menu:CharacterMenuControl
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	if character_menu:
-		character_menu.hide()
 	character_button.button.pressed.connect(_on_prepare_button)
 	quest_button.button.pressed.connect(_on_quest_button)
 	shop_button.button.pressed.connect(_on_shop_button)

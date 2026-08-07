@@ -62,22 +62,22 @@ func _on_click():
 	state = States.Dragging
 	if mimic_drag_data.size() > 0:
 		var offset = target_click_element.get_local_mouse_position()
-		if CharacterMenuControl.Instance:
-			var item_id = ""
-			var index = 0
-			if mimic_drag_data.has("Index"):
-				if mimic_drag_data['Context'] == "Equipment":
-					index = mimic_drag_data['Index']
-					item_id = CharacterMenuControl.Instance._actor.equipment.get_item_id_in_slot(index)
-			elif mimic_drag_data.has("ItemKey"):
-				if mimic_drag_data['Context'] == "Inventory":
-					var item = PlayerInventory.get_item_by_key(mimic_drag_data['ItemKey'])
-					if item:
-						item_id = item.Id
-						index = -1
-						
-			if item_id != "":
-				CharacterMenuControl.Instance.on_item_button_down(mimic_drag_data['Context'], item_id, index, offset)
+		#if CharacterMenuControl.Instance:
+			#var item_id = ""
+			#var index = 0
+			#if mimic_drag_data.has("Index"):
+				#if mimic_drag_data['Context'] == "Equipment":
+					#index = mimic_drag_data['Index']
+					#item_id = CharacterMenuControl.Instance._actor.equipment.get_item_id_in_slot(index)
+			#elif mimic_drag_data.has("ItemKey"):
+				#if mimic_drag_data['Context'] == "Inventory":
+					#var item = PlayerInventory.get_item_by_key(mimic_drag_data['ItemKey'])
+					#if item:
+						#item_id = item.Id
+						#index = -1
+						#
+			#if item_id != "":
+				#CharacterMenuControl.Instance.on_item_button_down(mimic_drag_data['Context'], item_id, index, offset)
 
 func _on_drag_finished():
 	print("Button Up")
@@ -85,27 +85,27 @@ func _on_drag_finished():
 	print("MouseUp: " + str(mouse_pos))
 	if mouse_pos.x > 0 and mouse_pos.x < drag_outline_patch.size.x and mouse_pos.y > 0 and mouse_pos.y < drag_outline_patch.size.y:
 		state = States.Done
-		if mimic_drag_data.size() > 0:
-			if CharacterMenuControl.Instance:
-				var item_id = ""
-				var index = 0
-				var target_context = mimic_drag_data.get("TargetContext", "Inventory")
-				if mimic_drag_data.has("Index"):
-					if mimic_drag_data['Context'] == "Equipment":
-						index = mimic_drag_data['Index']
-						item_id = CharacterMenuControl.Instance._actor.equipment.get_item_id_in_slot(mimic_drag_data['Index'])
-				elif mimic_drag_data.has("ItemKey"):
-					if mimic_drag_data['Context'] == "Inventory":
-						var item = PlayerInventory.get_item_by_key(mimic_drag_data['ItemKey'])
-						if item:
-							item_id = item.Id
-							index = -1
-							CharacterMenuControl.Instance._mouse_over_index_data = mimic_drag_data['EquipPageSlot']
-							
-				CharacterMenuControl.Instance._selected_context = mimic_drag_data['Context']
-				CharacterMenuControl.Instance._mouse_over_context = target_context
-				
-				CharacterMenuControl.Instance.on_item_button_up(mimic_drag_data['Context'], item_id, index)
+		#if mimic_drag_data.size() > 0:
+			#if CharacterMenuControl.Instance:
+				#var item_id = ""
+				#var index = 0
+				#var target_context = mimic_drag_data.get("TargetContext", "Inventory")
+				#if mimic_drag_data.has("Index"):
+					#if mimic_drag_data['Context'] == "Equipment":
+						#index = mimic_drag_data['Index']
+						#item_id = CharacterMenuControl.Instance._actor.equipment.get_item_id_in_slot(mimic_drag_data['Index'])
+				#elif mimic_drag_data.has("ItemKey"):
+					#if mimic_drag_data['Context'] == "Inventory":
+						#var item = PlayerInventory.get_item_by_key(mimic_drag_data['ItemKey'])
+						#if item:
+							#item_id = item.Id
+							#index = -1
+							#CharacterMenuControl.Instance._mouse_over_index_data = mimic_drag_data['EquipPageSlot']
+							#
+				#CharacterMenuControl.Instance._selected_context = mimic_drag_data['Context']
+				#CharacterMenuControl.Instance._mouse_over_context = target_context
+				#
+				#CharacterMenuControl.Instance.on_item_button_up(mimic_drag_data['Context'], item_id, index)
 		finished.emit()
 		self.queue_free()
 	else:

@@ -22,6 +22,9 @@ func set_action(actor:BaseActor, page:BasePageItem):
 		child.queue_free()
 	var stat_mods = page.page_data.get("StatMods", {})
 	for mod_data in stat_mods.values():
+		var stat = mod_data.get("StatName")
+		if not StatHelper.stat_icon_paths.keys().has(stat):
+			continue
 		if mod_data.get("DisplayName", "") == "Base Stats":
 			continue
 		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()

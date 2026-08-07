@@ -15,6 +15,7 @@ var allow_lockon:bool = true
 var wait_for_confirm:bool = MainRootNode.is_mobile
 var is_waiting_for_confirm:bool = false
 var waiting_selection
+var waiting_selection_sub_index=0
 
 func _get_debug_name()->String: 
 	return "Targeting"
@@ -37,6 +38,7 @@ func start_state():
 	
 	#if wait_for_confirm:
 	target_input_display.visible = true
+	target_input_display.sub_target_container.hide()
 	target_input_display.set_target_type(selection_data.target_params.target_type, allow_lockon)
 	target_input_display.set_confirm_enabled(false)
 	target_input_display.confirmed.connect(_on_confirmed)
@@ -79,30 +81,35 @@ func end_state():
 	actor_node.reset_path_arrow()
 	actor_node.hide_path_arrow()
 	
+var last_mouse_over = null
 func handle_input(event):
 	if event is InputEventMouseMotion:
-		
+		# Mouse Over Logic
 		var mouse_pos = CombatRootControl.Instance.MapController.get_local_mouse_position()
 		var mouse_over_spot = CombatRootControl.Instance.MapController.actor_tile_map.local_to_map(mouse_pos)
-		if selection_data.is_coor_selectable(mouse_over_spot):
-			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
-			CombatRootControl.Instance.GridCursor.lock_position = false
-			target_area_dislay_node.show_area_effect(_target_display_key)
-			target_input_display.set_target_coord(mouse_over_spot)
-			target_area_dislay_node.set_area_effect_coor(_target_display_key, mouse_over_spot)
-		elif waiting_selection:
-			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
-			CombatRootControl.Instance.GridCursor.position = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(waiting_selection)
-			CombatRootControl.Instance.GridCursor.lock_position = true
-			target_area_dislay_node.show_area_effect(_target_display_key)
-			target_input_display.set_target_coord(waiting_selection)
-			target_area_dislay_node.set_area_effect_coor(_target_display_key, waiting_selection)
-		else:
-			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
-			CombatRootControl.Instance.GridCursor.lock_position = false
-			target_area_dislay_node.hide_area_effect(_target_display_key)
-			target_input_display.set_invalid_target_coord(mouse_over_spot)
-			target_area_dislay_node.set_area_effect_coor(_target_display_key, mouse_over_spot)
+		if mouse_over_spot != last_mouse_over:
+			# Target is selectable
+			if mouse_over_spot != waiting_selection and selection_data.is_coor_selectable(mouse_over_spot):
+				CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
+				CombatRootControl.Instance.GridCursor.lock_position = false
+				target_area_dislay_node.show_area_effect(_target_display_key)
+				target_input_display.set_target_coord(mouse_over_spot)
+				target_area_dislay_node.set_area_effect_coor(_target_display_key, mouse_over_spot)
+			# We have a selected target
+			elif waiting_selection:
+				CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
+				CombatRootControl.Instance.GridCursor.position = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(waiting_selection)
+				CombatRootControl.Instance.GridCursor.lock_position = true
+				target_area_dislay_node.show_area_effect(_target_display_key)
+				target_input_display.set_target_coord(waiting_selection, waiting_selection_sub_index)
+				target_area_dislay_node.set_area_effect_coor(_target_display_key, waiting_selection)
+			else:
+				CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
+				CombatRootControl.Instance.GridCursor.lock_position = false
+				target_area_dislay_node.hide_area_effect(_target_display_key)
+				target_input_display.set_invalid_target_coord(mouse_over_spot)
+				target_area_dislay_node.set_area_effect_coor(_target_display_key, mouse_over_spot)
+		last_mouse_over = mouse_over_spot
 		
 	# Mouse in viewport coordinates.
 	if event is InputEventMouseButton and not (event as InputEventMouseButton).pressed:
@@ -117,6 +124,7 @@ func handle_input(event):
 func clear_target(coord:Vector2i):
 	is_waiting_for_confirm = false
 	waiting_selection = null
+	waiting_selection_sub_index = 0
 	target_area_dislay_node.hide_area_effect(_target_display_key)
 	target_input_display.set_confirm_enabled(false)
 	target_input_display.set_invalid_target_coord(coord)
@@ -124,7 +132,7 @@ func clear_target(coord:Vector2i):
 	CombatRootControl.Instance.GridCursor.position = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(coord)
 	CombatRootControl.Instance.GridCursor.lock_position = false
 
-func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
+func select_target(coord:Vector2i, confirmed:bool, soft_select=false, sub_target_index=-1):
 	# Highlight target, but wait for Comfirm button
 	if (wait_for_confirm or soft_select) and (not confirmed or coord != waiting_selection):
 		if _logging: print("Started Waiting for comfirm")
@@ -132,7 +140,7 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 		waiting_selection = coord
 		target_area_dislay_node.set_area_effect_coor(_target_display_key, coord)
 		target_input_display.set_confirm_enabled(true)
-		target_input_display.set_target_coord(coord)
+		target_input_display.set_target_coord(coord, max(sub_target_index, 0))
 		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Targeting)
 		CombatRootControl.Instance.GridCursor.position = CombatRootControl.Instance.MapController.actor_tile_map.map_to_local(coord)
 		CombatRootControl.Instance.GridCursor.lock_position = true
@@ -140,6 +148,7 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 		
 	is_waiting_for_confirm = false
 	waiting_selection = null
+	waiting_selection_sub_index = 0
 	
 	if _logging: print("Setting Target: " + str(coord))
 	# Add selected target to Turn Data
@@ -149,14 +158,28 @@ func select_target(coord:Vector2i, confirmed:bool, soft_select=false):
 		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params, map_spot)
 	elif selection_data.target_params.is_actor_target_type():
 		var include_dead = selection_data.target_params.target_type == TargetParameters.TargetTypes.Corpse
-		var actors = CombatRootControl.Instance.GameState.get_actors_at_pos(coord, include_dead)
-		if actors.size() > 1:
-			printerr("Multiple Actors on targeted spot not supported")
-			return
+		var include_carried = selection_data.target_params.target_type == TargetParameters.TargetTypes.Ally
+		var actors = CombatRootControl.Instance.GameState.get_actors_at_pos(coord, include_dead, include_carried)
 		if actors.size() == 0:
 			printerr("No Actors on targeted spot when looking for Actor target")
 			return
-		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params, actors[0].Id)
+		if actors.size() == 1:
+			sub_target_index = 0
+		if actors.size() > 1 and sub_target_index < 0: # Sub Targets
+			var sub_target_options = {}
+			for index in range(actors.size()):
+				var actor:BaseActor = actors[index]
+				sub_target_options[actor.Id] = {
+					'Text': actor.get_display_name(),
+					'Value': index
+				}
+			target_input_display.sub_target_container.set_options(sub_target_options)
+			target_input_display.sub_target_container.option_selected.connect(_on_sub_target_selected.bind(coord))
+			var screen_pos = MapHelper.get_map_pos_screen_position(coord)
+			target_input_display.sub_target_container.global_position = screen_pos - Vector2(41,0)
+			return
+			
+		turndata.add_target_for_key(selection_data.setting_target_key, selection_data.target_params, actors[sub_target_index].Id)
 		
 		var lock_target = target_input_display.lock_on_box.button_pressed
 		CombatRootControl.Instance.last_target_records[selection_data.focused_actor.Id] = {"ActorId": actors[0].Id, "LockOn": lock_target}
@@ -168,9 +191,13 @@ func _on_confirmed():
 	if not is_waiting_for_confirm:
 		_on_canceled()
 	elif waiting_selection != null:
-		select_target(waiting_selection, true)
+		select_target(waiting_selection, true, false, waiting_selection_sub_index)
 
 func _on_canceled():
 	selection_data.focused_actor.Que.fail_turn()
 	CombatUiControl.ui_state_controller.back_to_last_state()
-	
+
+func _on_sub_target_selected(sub_target_index, coord):
+	waiting_selection_sub_index = sub_target_index
+	select_target(coord, false,true, sub_target_index)
+	target_input_display.sub_target_container.option_selected.disconnect(_on_sub_target_selected)

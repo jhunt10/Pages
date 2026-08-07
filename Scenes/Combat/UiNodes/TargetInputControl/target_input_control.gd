@@ -25,6 +25,8 @@ signal canceled
 @export var x_label:Label
 @export var y_label:Label
 
+@export var sub_target_container:SubTargetPanelContainer
+
 var target_type:TargetParameters.TargetTypes
 
 # Called when the node enters the scene tree for the first time.
@@ -87,7 +89,7 @@ func set_actor(actor:BaseActor):
 	x_label.add_theme_color_override("font_color", Color.BLACK)
 	y_label.add_theme_color_override("font_color", Color.BLACK)
 
-func set_target_coord(coord:Vector2i):
+func set_target_coord(coord:Vector2i, sub_target_index=0):
 	var target:BaseActor = null
 	if TargetParameters.ActorTargetTypes.has(target_type):
 		# Select corpse
@@ -98,9 +100,9 @@ func set_target_coord(coord:Vector2i):
 					target = check_target
 					break
 		else:
-			var targets = CombatRootControl.Instance.GameState.get_actors_at_pos(coord, true)
-			if targets.size() > 0:
-				target = targets[0]
+			var targets = CombatRootControl.Instance.GameState.get_actors_at_pos(coord, true, true)
+			if targets.size() > sub_target_index:
+				target = targets[sub_target_index]
 	
 	if target:
 		target_icon.texture = target.sprite.get_portrait_sprite()

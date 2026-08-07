@@ -119,12 +119,12 @@ func _sync():
 	name_panel.sync(_actor)
 	stats_panel.sync(_actor)
 	actor_sprite.set_actor(_actor)
+	carrier_control.sync(_actor)
 	equipment_control.sync()
 	page_tab.sync()
 	bag_tab.sync()
+	stats_tab.sync()
 	inventory_container.sync()
-	stats_tab.sync(_actor)
-	carrier_control.sync(_actor)
 
 func _process(_delta: float) -> void:
 	# Delay loading Inventory

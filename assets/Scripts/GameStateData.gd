@@ -200,8 +200,15 @@ func get_actor_pos(actor)->MapPos:
 	return null
 		
 
-func get_actors_at_pos(pos, include_dead:bool=false)->Array:
-	return map_data.get_actors_at_pos(pos, null, include_dead)
+func get_actors_at_pos(pos, include_dead:bool=false, include_carried:bool=false)->Array:
+	var actors = map_data.get_actors_at_pos(pos, null, include_dead)
+	if include_carried:
+		var carried_actors = []
+		for actor:BaseActor in actors:
+			if actor is CarrierActor:
+				carried_actors.append_array(actor.list_held_actors())
+		actors.append_array(carried_actors)
+	return actors
 
 ## "Open" means both traversable and unoccupied
 func is_spot_open(pos, ignore_actor_ids:Array=[])->bool:

@@ -237,6 +237,7 @@ text = "Tags:"
 vertical_alignment = 1
 
 [node name="TagsBox" type="RichTextLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/TagsContainer/TagsFlowContainer" unique_id=1063597655]
+visible = false
 layout_mode = 2
 theme = ExtResource("6_do8nn")
 theme_override_font_sizes/normal_font_size = 14
@@ -522,7 +523,6 @@ custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
 [node name="EffectPageDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1049632255 node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
-visible = false
 layout_mode = 2
 vertical = true
 script = ExtResource("16_tp5cp")

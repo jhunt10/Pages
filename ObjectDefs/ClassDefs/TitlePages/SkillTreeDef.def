@@ -196,8 +196,9 @@
                 "AlwaysUnlocked": true
             },
             {
+                "SkillNodeKey": "WaterBlessing",
                 "PairType": "And",
-                "Pages": ["ApplyBlessing_Water", "BlessedLimit1Page"],
+                "Pages": ["ApplyBlessing_Water_PageItem", "BlessedLimit1_PageItem"],
                 "AlwaysUnlocked": true
             },
             {
@@ -210,7 +211,8 @@
                 "PageKey": "ApplyPreemtive"
             },
             {
-                "PageKey": "ApplyBlessing_Air"
+                "SkillNodeKey": "AirBlessing",
+                "PageKey": "ApplyBlessing_Air_PageItem"
             },
             {
                 "SkillNodeKey": "HealSmallSpell",
@@ -223,7 +225,8 @@
                 "PageKey": "LightRangedSpell_PageItem"
             },
             {
-                "PageKey": "BlessedLimit2Page"
+                "SkillNodeKey": "BlessedLimit2",
+                "PageKey": "BlessedLimit2_PageItem"
             },
             {
                 "SkillNodeKey": "HealMediumSpell",
@@ -237,7 +240,8 @@
                 "Pages": ["HarmingLight_PageItem", "HealingLight_PageItem"]
             },
             {
-                "PageKey": "ApplyBlessing_Earth"
+                "SkillNodeKey": "EarthBlessing",
+                "PageKey": "ApplyBlessing_Earth_PageItem"
             },
             {
                 "PairType": "Or",
@@ -250,7 +254,8 @@
                 "PageKey": "LightMissileSpell_PageItem"
             },
             {
-                "PageKey": "ApplyBlessing_Fire"
+                "SkillNodeKey": "FireBlessing",
+                "PageKey": "ApplyBlessing_Fire_PageItem"
             },
             {
                 "SkillNodeKey": "HealLargeSpell",
@@ -259,11 +264,13 @@
         ],
         [
             {
-                "PageKey": "ApplyLightAuraAction"
+                "SkillNodeKey": "LightAura",
+                "PageKey": "LightAura_PageItem"
             },
             {
+                "SkillNodeKey": "BlessedLimit3",
                 "PairType": "Or",
-                "Pages": ["BlessedLimit3Page", "BlessedMassPage"]
+                "Pages": ["BlessedLimit3_PageItem", "BlessedMassPage"]
             },
             {
                 "SkillNodeKey": "ReviveSpell",

@@ -17,6 +17,12 @@ static func get_map_pos_global_position(map_pos:MapPos)->Vector2:
 	var global_pos = map_control.position + map_control.actor_tile_map.map_to_local(Vector2i(map_pos.x, map_pos.y))
 	return global_pos
 
+static func get_map_pos_screen_position(map_pos)->Vector2:
+	var map_control = CombatRootControl.Instance.MapController
+	var global_pos = map_control.position + map_control.actor_tile_map.map_to_local(Vector2i(map_pos.x, map_pos.y))
+	var screen_position: Vector2 = map_control.get_viewport().get_canvas_transform() * global_pos
+	return screen_position
+
 static func get_actor_global_position(actor:BaseActor)->Vector2:
 	var map_pos = CombatRootControl.Instance.GameState.get_actor_pos(actor)
 	if !map_pos:

@@ -32,9 +32,9 @@
 			},
 			"StatMods": {
 				"BlessMod1": {
-					"ModType": "Scale",
+					"ModType": "Add",
 					"StatName": "Speed",
-					"Value": 1.2
+					"Value": 25
 				},
 				"BlessMod2": {
 					"ModType": "Add",
@@ -66,13 +66,13 @@
 		"EffectData": {
 			"StatMods": {
 				"BlessMod1": {
-					"ModType": "Scale",
+					"ModType": "Add",
 					"StatName": "Speed",
-					"Value": 1.2
+					"Value": 15
 				},
 				"BlessMod2": {
 					"ModType": "Add",
-					"StatName": "Evasion",
+					"StatName": "Accuracy",
 					"Value": 10.0
 				}
 			}
@@ -84,6 +84,7 @@
 		"!ParentKey": "#BaseBlessingEffect",
 		"#ObjDetails": {
 			"DisplayName": "Earth Blessing",
+			"Description": "Gain @@#StatMod:BlessMod1@@, @@#StatMod:BlessMod2@@, and @@#StatMod:BlessMod3@@.",
 			"LargeIcon": "Sprites/Blessing_Earth.png",
 			"ObjectType": "Effect",
 			"SmallIcon": "Sprites/Blessing_Earth.png",
@@ -101,7 +102,12 @@
 				"BlessMod2": {
 					"ModType": "Add",
 					"StatName": "Armor",
-					"Value": 15.0
+					"Value": 20.0
+				},
+				"BlessMod3": {
+					"ModType": "Add",
+					"StatName": "CrashPower",
+					"Value": 5
 				}
 			}
 		},
@@ -123,13 +129,13 @@
 			"StatMods": {
 				"BlessMod1": {
 					"ModType": "Scale",
-					"StatName": "Potency",
+					"StatName": "PhyAttack",
 					"Value": 1.2
 				},
 				"BlessMod2": {
-					"ModType": "Add",
-					"StatName": "CritChance",
-					"Value": 10.0
+					"ModType": "Scale",
+					"StatName": "MagAttack",
+					"Value": 1.2
 				}
 			}
 		},
@@ -150,14 +156,14 @@
 		"EffectData": {
 			"StatMods": {
 				"BlessMod1": {
-					"ModType": "Scale",
-					"StatName": "Protection",
-					"Value": 1.2
+					"ModType": "Add",
+					"StatName": "Evasion",
+					"Value": 10
 				},
 				"BlessMod2": {
 					"ModType": "Add",
 					"StatName": "Ward",
-					"Value": 15.0
+					"Value": 20.0
 				}
 			}
 		},
@@ -463,7 +469,7 @@
 	"LightAuraEffect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
-			"Description": "@@#Color:Red:Actors@@ within range gain @@#EftDef:LightAura_InZoneEffect:Description@@",
+			"Description": "@@#Color:Red:Actors@@ in @@#Tag:Aura@@ take @@#Color:Red:5% Max Health@@ as @@#Color:DmgColor:Light:Light@@ on end of @@#Color:Red:Turn@@.",
 			"DisplayName": "Aura of Light",
 			"LargeIcon": "Sprites/LightAura.png",
 			"ObjectType": "Effect",
@@ -517,7 +523,7 @@
 	"LightAura_InZoneEffect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
-			"Description": "Take 5% Max Health as Light Damage at the end of each Turn.",
+			"Description": "Take @@#Color:Red:5% Max Health@@ as @@#Color:DmgColor:Light:Light@@ on end of @@#Color:Red:Turn@@.",
 			"DisplayName": "In Aura of Light",
 			"LargeIcon": "Sprites/LightAura.png",
 			"ObjectType": "Effect",
@@ -536,14 +542,14 @@
 				"DamageData1": {
 					"AtkPwrBase": 5.0,
 					"AtkPwrRange": 0.0,
-					"AtkPwrScale": 0.2,
+					"AtkPwrScale": 1.0,
 					"AtkStat": "Percent",
 					"DamageType": "Light",
 					"DamageVfxData": {
 						"ShakeActor": false
 					},
-					"DamageVfxKey": "SmallLight_TYPE_DamageEffect",
-					"DefenseType": "Nne"
+					"DamageVfxKey": "AUTO",
+					"DefenseType": "None"
 				}
 			},
 			"EffectDetails": {

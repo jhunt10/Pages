@@ -14,8 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://ds06ojwvkmeit" path="res://Scenes/Combat/UiNodes/TargetInputControl/ArrowIcon.png" id="10_534j1"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="11_eq70b"]
 [ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="14_u1hsq"]
+[ext_resource type="Theme" uid="uid://qsca7lvb1a68" path="res://assets/Themes/ComputerPanels/combat_panel_theme.tres" id="15_25h16"]
+[ext_resource type="Script" uid="uid://gkqtae2brt5t" path="res://Scenes/Combat/UiNodes/TargetInputControl/sub_target_panel_container.gd" id="16_prhg0"]
 
-[node name="TargetInputControl" type="Control" unique_id=1327304093 node_paths=PackedStringArray("close_button", "comfirm_button", "cancel_button", "title_label", "target_type_label", "actor_portrait", "page_icon", "page_details", "lock_on_container", "lock_on_box", "target_icon", "target_icon_container", "target_npc_index_label", "spot_container", "x_label", "y_label")]
+[node name="TargetInputControl" type="Control" unique_id=1327304093 node_paths=PackedStringArray("close_button", "comfirm_button", "cancel_button", "title_label", "target_type_label", "actor_portrait", "page_icon", "page_details", "lock_on_container", "lock_on_box", "target_icon", "target_icon_container", "target_npc_index_label", "spot_container", "x_label", "y_label", "sub_target_container")]
 layout_mode = 3
 anchor_top = 0.7
 anchor_right = 1.0
@@ -41,6 +43,7 @@ target_npc_index_label = NodePath("CenterContainer/PanelContainer/VBoxContainer/
 spot_container = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer")
 x_label = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer/XLablesContainer/XValueLabel")
 y_label = NodePath("CenterContainer/PanelContainer/VBoxContainer/IconsContainer/SpotTargetContainer/YLabelsContainer/YValueLabel")
+sub_target_container = NodePath("SubTargetPanelContainer")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=940688891]
 layout_mode = 1
@@ -321,3 +324,21 @@ text = "Ok"
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="SubTargetPanelContainer" type="PanelContainer" parent="." unique_id=1798005201 node_paths=PackedStringArray("premade_button", "buttons_container")]
+layout_mode = 0
+offset_right = 82.0
+offset_bottom = 49.0
+theme = ExtResource("15_25h16")
+script = ExtResource("16_prhg0")
+premade_button = NodePath("VBoxContainer/Button")
+buttons_container = NodePath("VBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SubTargetPanelContainer" unique_id=551765217]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Button" type="Button" parent="SubTargetPanelContainer/VBoxContainer" unique_id=47578067]
+layout_mode = 2
+text = "Soldier"

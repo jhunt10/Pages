@@ -1,5 +1,5 @@
 class_name BaseCharacterSubMenu
-extends Node
+extends Control
 
 signal item_button_down(context, item_key, index)
 signal item_button_up(context, item_key, index)
@@ -22,7 +22,7 @@ var _actor:BaseActor:
 
 
 func _ready() -> void:
-	pass 
+	self.visibility_changed.connect(sync)
 
 func _process(_delta: float) -> void:
 	pass
@@ -45,12 +45,11 @@ func get_button_mouse_offset(index:int)->Vector2:
 ######################################
 ###########   Base Funcs   ###########
 ######################################
-func show_menu_page():
-	sync()
-	self.visible = true
-
 func sync():
 	if !_actor:
+		return
+	
+	if !self.visible:
 		return
 	if last_synced_actor_id != _actor.Id:
 		rebuild_slots = true

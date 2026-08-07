@@ -29,27 +29,24 @@ var _starting_skills:Dictionary = {}
 # Working set of skills, doesn't apply until closing menu
 var _unlocked_skills:Dictionary = {}
 
+func _ready() -> void:
+	self.visibility_changed.connect(sync)
+
 func set_actor(actor):
 	_actor =  actor
-	# Clean up
-	var color_rec_spacers = []
-	#for child in grid_container.get_children():
-		#if child != row_prefab and child != background_control:
-			## Dumb hack to control spacing
-			#if child is ColorRect:
-				#color_rec_spacers.append(child)
-				#grid_container.remove_child(child)
-			#else:
-				#child.queue_free()
 	for child in rows_container.get_children():
 		child.queue_free()
 	prefabs_container.hide()
 	row_prefab.hide()
 	skill_node_prefab.hide()
 	paired_node_prefab.hide()
-	#return
-	self.tree_data = StoryState.get_skill_tree_data_for_actor(actor)
-	self._unlocked_skills = StoryState.get_unlocked_skills_for_actor(actor)
+	tree_built = false
+	if self.visible:
+		sync()
+
+func build_tree():
+	self.tree_data = StoryState.get_skill_tree_data_for_actor(_actor)
+	self._unlocked_skills = StoryState.get_unlocked_skills_for_actor(_actor)
 	self._starting_skills = _unlocked_skills.duplicate()
 	var y_index = 0
 	for row in tree_data:
@@ -67,7 +64,10 @@ func set_actor(actor):
 				printerr("SkillTreeMenu.set_actor: SkillTreeNode missing SkillNodeKey at (%s, %s)"%[x_index, y_index])
 				skill_node_key = node_data.get("PageKey")
 				if node_data.keys().has("PairType"):
-					skill_node_key = node_data["Pages"][0]
+					if node_data.keys().has("Pages"):
+						skill_node_key = node_data["Pages"][0]
+					else:
+						skill_node_key = ''
 				is_invalid = true
 				#continue
 			skill_node_key_to_grid_mapping[skill_node_key] = [x_index, y_index]
@@ -102,10 +102,11 @@ func set_actor(actor):
 	#for child in color_rec_spacers:
 		#grid_container.add_child(child)
 	tree_built = true
-	sync_skill_nodes_states()
 	background_control.queue_redraw()
 
-func sync_skill_nodes_states():
+func sync():
+	if not tree_built:
+		build_tree()
 	var total_title_points:int = _actor.get_level() - 1
 	var spent_points:int = _unlocked_skills.size()
 	total_points_label.text = str(total_title_points)
@@ -181,7 +182,7 @@ func get_page_key_if_unlocked(skill_node_key, args):
 			printerr("SkillTreeMenu on_node_button_down: Invalid Index [%s,%s]" %[skill_node_key, args])
 			return null
 		page_key = node_data.get("Pages", [])[args.get("Index")]
-		is_unlocked = _unlocked_skills.get(skill_node_key, {}).get("Index", -2) == index
+		is_unlocked = _unlocked_skills.get(skill_node_key, {}).get("Index", -2) == index or node_data.get("AlwaysUnlocked")
 	if is_unlocked:
 		return page_key
 	return null
@@ -263,7 +264,7 @@ func on_node_confirmed(_item:BaseItem, skill_node_key, args={}):
 	elif node_key != '':
 		_unlocked_skills[skill_node_key] = args
 	character_menu._current_details_card.start_hide()
-	sync_skill_nodes_states()
+	sync()
 	apply_changes()
 	unspent_points_label.text = str(_actor.get_unspent_skill_points())
 	_actor.stats_changed.emit()

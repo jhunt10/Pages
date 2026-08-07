@@ -9,8 +9,8 @@ var _sub_containers:Dictionary
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	super()
 	premade_sub_container.visible = false
-	pass # Replace with function body.
 
 func get_item_holder()->BaseItemHolder:
 	if parent_menu and parent_menu._actor:

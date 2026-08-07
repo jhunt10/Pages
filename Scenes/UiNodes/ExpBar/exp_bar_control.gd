@@ -56,7 +56,7 @@ func _sync():
 	self.percent_full = current_exp / max_exp
 	var unspent_count = _actor.get_unspent_skill_points()
 	if level_up_button_control:
-		if unspent_count > 0 and not (CharacterMenuControl.Instance and CharacterMenuControl.Instance.combat_mode):
+		if unspent_count > 0:
 			if level_up_button_animation:
 				level_up_button_animation.play('flashing_animation')
 		else:

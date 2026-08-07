@@ -9,6 +9,7 @@ var _sub_containers:Dictionary = {}
 var sub_book_pages:Array = []
 
 func _ready() -> void:
+	super()
 	premade_page_set.hide()
 
 func get_item_holder()->BaseItemHolder:

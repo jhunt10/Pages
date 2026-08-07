@@ -22,8 +22,9 @@ func _ready() -> void:
 
 func set_values(stat_name_val:String, actor:BaseActor):
 	self.stat_name = stat_name_val
-	name_label.show()
-	self.name_label.text = StatHelper.get_stat_abbr(stat_name)
+	if name_label:
+		name_label.show()
+		name_label.text = StatHelper.get_stat_abbr(stat_name)
 	load_icon()
 	set_stat_values(actor)
 

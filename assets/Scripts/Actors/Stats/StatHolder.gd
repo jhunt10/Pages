@@ -74,6 +74,15 @@ func get_stat(stat_name:String, default:float=0):
 		_calc_cache_stats()
 	return _cached_stats.get(stat_name, default)
 
+func get_stats_by_prefix(stat_prefix:String)->Dictionary:
+	if _stats_dirty:
+		_calc_cache_stats()
+	var stats = {}
+	for stat_name:String in _cached_stats.keys():
+		if stat_name.begins_with(stat_prefix):
+			stats[stat_name] = _cached_stats[stat_name]
+	return stats
+
 func get_base_stat(stat_name:String, default:int=0):
 	# TODO: MagPhy Hack
 	if stat_name == "MagAttack" or stat_name == "PhyAttack":

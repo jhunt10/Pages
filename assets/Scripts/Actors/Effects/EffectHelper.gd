@@ -30,9 +30,9 @@ static func create_effect(
 		return null
 	
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
-	var effect_details = effect_def.get("EffectDetails", {})
+	var effect_details = effect_def.get("EffectData").get("EffectDetails", {})
 	var effect_potency = effect_def.get("AppliedPotency", 1)
-	
+	print(effect_def)
 	# Build Id
 	if force_id == '':
 		if effect_details.get("CanHaveMultiple", false):
@@ -65,27 +65,28 @@ static func create_effect(
 				existing_same.merge_new_duplicate_effect_data(source, effect_def)
 				is_creating_effect = false
 				return existing_same
-		# Check Per Actor Limit: how many Effects one Actor can have
-		var source_per_actor_limit = source_actor.effects.get_per_actor_limit_for_limited_effect(limited_effect_type)
-		var actor_per_actor_limit = actor.effects.get_on_self_limit_for_limited_effect(limited_effect_type)
-		var per_actor_limit = max(source_per_actor_limit, actor_per_actor_limit)
-		var existing_effects_on_actor = actor.effects.list_holding_limited_effect(limited_effect_type)
-		# Over the limit for number of effects on one actor
-		if existing_effects_on_actor.size() > per_actor_limit - 1:
-			existing_effects_on_actor.reverse()
-			var lowest_potency_val = effect_potency
-			var lowest_potency_effect = null
-			for limited_effect:BaseEffect in existing_effects_on_actor:
-				var other_pot = limited_effect.get_applied_potency()
-				if other_pot < lowest_potency_val:
-					lowest_potency_val = other_pot
-					lowest_potency_effect = limited_effect
-			if lowest_potency_effect != null:
-				limited_effect_to_remove = lowest_potency_effect
-			else:
-				# Can not replace any existing limited effects
-				is_creating_effect = false
-				return null
+				
+		## Check Per Actor Limit: how many Effects one Actor can have
+		#var source_per_actor_limit = source_actor.effects.get_per_actor_limit_for_limited_effect(limited_effect_type)
+		#var actor_per_actor_limit = actor.effects.get_on_self_limit_for_limited_effect(limited_effect_type)
+		#var per_actor_limit = max(source_per_actor_limit, actor_per_actor_limit)
+		#var existing_effects_on_actor = actor.effects.list_holding_limited_effect(limited_effect_type)
+		## Over the limit for number of effects on one actor
+		#if existing_effects_on_actor.size() > per_actor_limit - 1:
+			#existing_effects_on_actor.reverse()
+			#var lowest_potency_val = effect_potency
+			#var lowest_potency_effect = null
+			#for limited_effect:BaseEffect in existing_effects_on_actor:
+				#var other_pot = limited_effect.get_applied_potency()
+				#if other_pot < lowest_potency_val:
+					#lowest_potency_val = other_pot
+					#lowest_potency_effect = limited_effect
+			#if lowest_potency_effect != null:
+				#limited_effect_to_remove = lowest_potency_effect
+			#else:
+				## Can not replace any existing limited effects
+				#is_creating_effect = false
+				#return null
 		
 		# Check Total Count Limit: how many instances of Effect that Source has applied
 		var max_count_limit = source_actor.effects.get_count_limit_for_limited_effect(limited_effect_type)
@@ -107,6 +108,10 @@ static func create_effect(
 	if effect == null:
 		return null
 	
+	if limited_effect_to_remove:
+		var remove_from_actor = limited_effect_to_remove.get_effected_actor()
+		remove_from_actor.effects.remove_effect(limited_effect_to_remove)
+	
 	var meta_data = {}
 	actor.effects.trigger_new_effect_to_be_added(game_state, effect, meta_data)
 	
@@ -117,6 +122,7 @@ static func create_effect(
 		return null
 	
 	actor.effects.__add_new_effect(effect, suppress_signals)
+	
 	
 	if effect.get_limited_effect_type() != EffectHelper.LimitedEffectTypes.None:
 		if source is BaseActor:

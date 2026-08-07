@@ -1,5 +1,5 @@
 {
-	"ApplyBlessing_Air": {
+	"ApplyBlessing_Air_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplyBuffAction",
 		"#ObjDetails": {
@@ -31,7 +31,8 @@
 				"TargetParam": {
 					"LineOfSight": true,
 					"TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
-					"TargetType": "Ally"
+					"TargetType": "Ally",
+					"AOETeamFilters": ["Ally"]
 				}
 			}
 		},
@@ -50,7 +51,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ApplyBlessing_Earth": {
+	"ApplyBlessing_Earth_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplyBuffAction",
 		"#ObjDetails": {
@@ -82,7 +83,8 @@
 				"TargetParam": {
 					"LineOfSight": true,
 					"TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
-					"TargetType": "Ally"
+					"TargetType": "Ally",
+					"AOETeamFilters": ["Ally"]
 				}
 			}
 		},
@@ -101,7 +103,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ApplyBlessing_Fire": {
+	"ApplyBlessing_Fire_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplyBuffAction",
 		"#ObjDetails": {
@@ -133,7 +135,8 @@
 				"TargetParam": {
 					"LineOfSight": true,
 					"TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
-					"TargetType": "Ally"
+					"TargetType": "Ally",
+					"AOETeamFilters": ["Ally"]
 				}
 			}
 		},
@@ -152,7 +155,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ApplyBlessing_Water": {
+	"ApplyBlessing_Water_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplyBuffAction",
 		"#ObjDetails": {
@@ -184,7 +187,8 @@
 				"TargetParam": {
 					"LineOfSight": true,
 					"TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
-					"TargetType": "Ally"
+					"TargetType": "Ally",
+					"AOETeamFilters": ["Ally"]
 				}
 			}
 		},
@@ -280,7 +284,7 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ApplyLightAuraAction": {
+	"LightAura_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplyBuffAction",
 		"#ObjDetails": {
@@ -299,8 +303,8 @@
 		"ActionData": {
 			"AmmoData": {
 				"AmmoType": "Mag",
-				"Clip": 8.0,
-				"Cost": 4.0
+				"Clip": 4.0,
+				"Cost": 1.0
 			},
 			"EffectDatas": {
 				"ApplyEffect": {
@@ -367,7 +371,7 @@
 	"HealLargeSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:100% Max Hp@@.",
+			"Description": "Heal an @@#TrgParm:TargetParam:TargetType@@ for @@#Color:Red:100% Max Hp@@.\n\n@@#Color:Red:[Forbidden Access] Alert!@@ Use of Emergency Medical @@#Color:Blue:Pages@@ ",
 			"DisplayName": "Restore",
 			"LargeIcon": "Sprites/Heal3.png",
 			"ObjectType": "Item",
