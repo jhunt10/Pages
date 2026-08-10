@@ -202,13 +202,15 @@
                 "AlwaysUnlocked": true
             },
             {
-                "PageKey": "RemoveAilmentSpell",
+                "SkillNodeKey":"SustainBlessing",
+                "PageKey": "SustainBlessing_PageItem",
                 "AlwaysUnlocked": true
             }
         ],
         [
             {
-                "PageKey": "ApplyPreemtive"
+                "SkillNodeKey": "LightRangedSpell",
+                "PageKey": "LightRangedSpell_PageItem"
             },
             {
                 "SkillNodeKey": "AirBlessing",
@@ -221,8 +223,9 @@
         ],
         [
             {
-                "SkillNodeKey": "LightRangedSpell",
-                "PageKey": "LightRangedSpell_PageItem"
+                "SkillNodeKey": "HealingHarmingLight",
+                "PairType": "Or",
+                "Pages": ["HarmingLight_PageItem", "HealingLight_PageItem"]
             },
             {
                 "SkillNodeKey": "BlessedLimit2",
@@ -235,9 +238,8 @@
         ],
         [
             {
-                "SkillNodeKey": "HealingHarmingLight",
-                "PairType": "Or",
-                "Pages": ["HarmingLight_PageItem", "HealingLight_PageItem"]
+                "SkillNodeKey": "HaloOfLight",
+                "PageKey": "HaloOfLight_PageItem"
             },
             {
                 "SkillNodeKey": "EarthBlessing",

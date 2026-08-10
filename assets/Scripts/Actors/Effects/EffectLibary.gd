@@ -89,6 +89,13 @@ static func _create_effect(
 		printerr("EffectLibrary.create_effect: Unknown source type: %s" % [source])
 		return null
 	
+	if CombatRootControl.Instance:
+		var que_controller = CombatRootControl.Instance.QueController
+		var now = (que_controller.round_counter * 100000) + (que_controller.action_index * 100) + que_controller.sub_action_index
+		effect_data['CreatedAt'] = now
+	else:
+		effect_data['CreatedAt'] = 0
+	
 	# Make Id Unique to actor
 	var effect_id = force_id
 	if effect_id == '': 

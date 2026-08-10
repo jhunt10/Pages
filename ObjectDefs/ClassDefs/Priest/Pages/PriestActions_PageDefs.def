@@ -368,6 +368,67 @@
 		},
 		"_DefVersion": "1"
 	},
+	"SustainBlessing_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Chant a simple prayer and @@#Tag:Sustain@@ all active @@#Tag:Blessing:Blessings@@.",
+			"DisplayName": "Chant",
+			"LargeIcon": "Sprites/Chant.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Chant.png",
+			"SnippetDesc": "Sustain Blessings",
+			"Tags": [
+				"Heal",
+				"Spell"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"Preview": {
+			},
+			"SubActions": {
+				"SustainEffects": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_SustainLimitedEffect.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 1.0,
+					"LimitEftType": "Blessing"
+				},
+				"WeaponMotionAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"#FrameIndex": 16.0,
+					"#SubIndex": 0.0,
+					"MainHand": true,
+					"OffHand": "Never"
+				},
+				"WeaponReadyAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"#FrameIndex": 0.0,
+					"#SubIndex": 0.0,
+					"Animation": "Raise",
+					"MainHand": true,
+					"OffHand": "Never"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Priest"
+		},
+		"_DefVersion": "1"
+	},
 	"HealLargeSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {

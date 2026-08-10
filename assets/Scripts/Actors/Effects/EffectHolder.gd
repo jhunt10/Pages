@@ -166,12 +166,14 @@ func _on_hosted_effect_ends(limit_type:EffectHelper.LimitedEffectTypes, effect_i
 			index += 1
 
 func get_count_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
-	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
-	var stat_name = "LmtEftCount" + ":" + str_type
-	return _actor.stats.get_stat(stat_name, 1)
+	#var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
+	#var stat_name = "LmtEftCount" + ":" + str_type
+	#return _actor.stats.get_stat(stat_name, 1)
+	return 999
 func get_per_actor_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
 	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
-	var stat_name = str_type + ":PerActorLimit"
+	#var stat_name = str_type + ":PerActorLimit"
+	var stat_name = "LmtEftCount" + ":" + str_type
 	return _actor.stats.get_stat(stat_name, 1)
 func get_on_self_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
 	var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
@@ -183,6 +185,14 @@ func get_count_of_hosted_limited_effect(type:EffectHelper.LimitedEffectTypes)->i
 	if not _hosted_limited_effects.keys().has(type):
 		return 0
 	return _hosted_limited_effects[type].size()
+
+func get_hosted_limited_effect_ids(type:EffectHelper.LimitedEffectTypes)->Array:
+	var out_list = []
+	for hosted_data:Dictionary in _hosted_limited_effects[type]:
+		var eft_id = hosted_data['EffectId']
+		if not out_list.has(eft_id):
+			out_list.append(eft_id)
+	return out_list
 
 func get_oldest_hosted_limited_effect_id(type:EffectHelper.LimitedEffectTypes):
 	if not _hosted_limited_effects.keys().has(type):

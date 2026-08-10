@@ -145,9 +145,6 @@ func _get_draw_ordered_equipment()->Array:
 			if equip.get_equipment_slot_type() == slot:
 				if equip.has_spite_sheet():
 					out_list.append(equip)
-	for page:BasePageItem in _actor.pages.list_items():
-		if page.has_spite_sheet():
-			out_list.append(page)
 	if _actor is CarrierActor:
 		var sub_actor_titles = {}
 		for held_actor:BaseActor in _actor.list_held_actors():
@@ -160,6 +157,9 @@ func _get_draw_ordered_equipment()->Array:
 		if sub_actor_titles.has("Mage"):
 			out_list.append(sub_actor_titles['Mage'])
 		
+	for page:BasePageItem in _actor.pages.list_items():
+		if page.has_spite_sheet():
+			out_list.append(page)
 			
 	return out_list
 

@@ -43,6 +43,11 @@ static func create_effect(
 	# Check if effect exists
 	var existing = actor.effects.get_effect(force_id)
 	if existing:
+		# Set Created At
+		if CombatRootControl.Instance:
+			var que_controller = CombatRootControl.Instance.QueController
+			var now = (que_controller.round_counter * 100000) + (que_controller.action_index * 100) + que_controller.sub_action_index
+			effect_def['EffectData']['CreatedAt'] = now
 		existing.merge_duplicate_effect(source, effect_def)
 		is_creating_effect = false
 		return existing
@@ -66,43 +71,43 @@ static func create_effect(
 				is_creating_effect = false
 				return existing_same
 				
-		## Check Per Actor Limit: how many Effects one Actor can have
-		#var source_per_actor_limit = source_actor.effects.get_per_actor_limit_for_limited_effect(limited_effect_type)
-		#var actor_per_actor_limit = actor.effects.get_on_self_limit_for_limited_effect(limited_effect_type)
-		#var per_actor_limit = max(source_per_actor_limit, actor_per_actor_limit)
-		#var existing_effects_on_actor = actor.effects.list_holding_limited_effect(limited_effect_type)
-		## Over the limit for number of effects on one actor
-		#if existing_effects_on_actor.size() > per_actor_limit - 1:
-			#existing_effects_on_actor.reverse()
-			#var lowest_potency_val = effect_potency
-			#var lowest_potency_effect = null
-			#for limited_effect:BaseEffect in existing_effects_on_actor:
-				#var other_pot = limited_effect.get_applied_potency()
-				#if other_pot < lowest_potency_val:
-					#lowest_potency_val = other_pot
-					#lowest_potency_effect = limited_effect
-			#if lowest_potency_effect != null:
-				#limited_effect_to_remove = lowest_potency_effect
-			#else:
-				## Can not replace any existing limited effects
-				#is_creating_effect = false
-				#return null
-		
-		# Check Total Count Limit: how many instances of Effect that Source has applied
-		var max_count_limit = source_actor.effects.get_count_limit_for_limited_effect(limited_effect_type)
-		var current_effect_count = source_actor.effects.get_count_of_hosted_limited_effect(limited_effect_type)
-		if max_count_limit == 0:
-			printerr("EffectHelper: Failed to make effect '%s'. ActorCountLimit for Limited Effect of type '%s' is Zero for Source Actor '%s'." % [effect_key, limited_effect_type_str, source.Id])
-			is_creating_effect = false
-			return null
-		# Over the limit for number of hoested effects 
-		if limited_effect_to_remove == null and current_effect_count > max_count_limit - 1:
-			var rm_count_limit_effect_id = source_actor.effects.get_oldest_hosted_limited_effect_id(limited_effect_type)
-			if rm_count_limit_effect_id == null:
-				printerr("EffectHelper: Found null for oldest Limited Effect Id. Shouldn't Happen." )
+		# Check Per Actor Limit: how many Effects one Actor can have
+		var source_per_actor_limit = source_actor.effects.get_per_actor_limit_for_limited_effect(limited_effect_type)
+		var actor_per_actor_limit = actor.effects.get_on_self_limit_for_limited_effect(limited_effect_type)
+		var per_actor_limit = max(source_per_actor_limit, actor_per_actor_limit)
+		var existing_effects_on_actor = actor.effects.list_holding_limited_effect(limited_effect_type)
+		# Over the limit for number of effects on one actor
+		if existing_effects_on_actor.size() > per_actor_limit - 1:
+			existing_effects_on_actor.reverse()
+			var check_val = null
+			var lowest_effect = null
+			for limited_effect:BaseEffect in existing_effects_on_actor:
+				var other_val = limited_effect.get_created_at()
+				if check_val == null or other_val < check_val:
+					check_val = other_val
+					lowest_effect = limited_effect
+			if lowest_effect != null:
+				limited_effect_to_remove = lowest_effect
 			else:
-				var oldest_effect = EffectLibrary.get_effect(rm_count_limit_effect_id)
-				limited_effect_to_remove = oldest_effect
+				# Can not replace any existing limited effects
+				is_creating_effect = false
+				return null
+		
+		## Check Total Count Limit: how many instances of Effect that Source has applied
+		#var max_count_limit = source_actor.effects.get_count_limit_for_limited_effect(limited_effect_type)
+		#var current_effect_count = source_actor.effects.get_count_of_hosted_limited_effect(limited_effect_type)
+		#if max_count_limit == 0:
+			#printerr("EffectHelper: Failed to make effect '%s'. ActorCountLimit for Limited Effect of type '%s' is Zero for Source Actor '%s'." % [effect_key, limited_effect_type_str, source.Id])
+			#is_creating_effect = false
+			#return null
+		## Over the limit for number of hoested effects 
+		#if limited_effect_to_remove == null and current_effect_count > max_count_limit - 1:
+			#var rm_count_limit_effect_id = source_actor.effects.get_oldest_hosted_limited_effect_id(limited_effect_type)
+			#if rm_count_limit_effect_id == null:
+				#printerr("EffectHelper: Found null for oldest Limited Effect Id. Shouldn't Happen." )
+			#else:
+				#var oldest_effect = EffectLibrary.get_effect(rm_count_limit_effect_id)
+				#limited_effect_to_remove = oldest_effect
 	
 	var effect = EffectLibrary._create_effect(source, actor, effect_key, effect_data, force_id, game_state, suppress_signals)
 	if effect == null:

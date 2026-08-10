@@ -180,6 +180,12 @@ func merge_duplicate_effect(_source, dup_effect_def:Dictionary):
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, dup_effect_def, dupl_sub_effect_data)
+	if dup_data.keys().has("CreatedAt"):
+		self._data['CreatedAt'] = max(self._data.get("CreatedAt", 0), dup_data['CreatedAt'])
+
+func sustain(_created_at:int):
+	self._duration_counter = max(self._inital_duration, self._max_duration)
+	#self._data['CreatedAt'] = created_at # This would force everything to the same age and ruin 'oldest' logic
 
 func get_source_actor()->BaseActor:
 	var source_actor_id = get_load_val('SourceActorId', '')
@@ -191,6 +197,9 @@ func is_bad()->bool:
 	return effect_details.get("IsBad", false)
 func is_good()->bool:
 	return effect_details.get("IsGood", false)
+
+func get_created_at()->int:
+	return self._data.get("CreatedAt", 0)
 
 func get_effected_actor()->BaseActor:
 	var actor_id = get_load_val("EffectedActorId", null)

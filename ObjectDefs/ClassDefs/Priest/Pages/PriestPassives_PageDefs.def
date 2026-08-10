@@ -2,7 +2,7 @@
 	"BlessedLimit1_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "You are beloved by the God and or gods of the @@#Color:Red:Four Elements@@ and have been granted the ability to gift thier blessings to others.\n\n@@#StatMod:BlessCountMod@@\n\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
+			"Description": "You are beloved by the God and or gods of the @@#Color:Red:Four Elements@@ and have been granted the ability to gift thier blessings to others.\n\n@@#StatMod:BlessCountMod@@\n\nA limited number of @@#Color:Blue:Blessing@@ may be applied to an @@#Color:Red:Actor@@ (default 1). If this limit is exceed, the oldest active @@#Color:Blue:Blessing@@ ends.",
 			"DisplayName": "Blessed",
 			"LargeIcon": "Sprites/MoreBlessing1.png",
 			"ObjectType": "Item",
@@ -42,7 +42,7 @@
 	"BlessedLimit2_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "The God(s) love for you only grows deeper. Keep up the good work, champ!\n\n@@#StatMod:BlessCountMod@@\n\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
+			"Description": "The God(s) love for you only grows deeper. Keep up the good work, champ!\n\n@@#StatMod:BlessCountMod@@\n\nA limited number of @@#Color:Blue:Blessing@@ may be applied to an @@#Color:Red:Actor@@ (default 1). If this limit is exceed, the oldest active @@#Color:Blue:Blessing@@ ends.",
 			"DisplayName": "More Blessed",
 			"LargeIcon": "Sprites/MoreBlessing2.png",
 			"ObjectType": "Item",
@@ -82,12 +82,12 @@
 	"BlessedLimit3_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "At this point it's pretty clear who their favorite is, but don't tell the other Priests.\n\n@@#StatMod:BlessCountMod@@\n\nYou may have a limited number of @@#Color:Blue:Blessing@@ active at once (default 1). If you exceed this limit, your oldest active @@#Color:Blue:Blessing@@ ends.",
+			"Description": "At this point it's pretty clear who their favorite is, but don't tell the other Priests.\n\n@@#StatMod:BlessCountMod@@\n\nA limited number of @@#Color:Blue:Blessing@@ may be applied to an @@#Color:Red:Actor@@ (default 1). If this limit is exceed, the oldest active @@#Color:Blue:Blessing@@ ends.",
 			"DisplayName": "Even Blesseder",
 			"LargeIcon": "Sprites/MoreBlessing4.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/MoreBlessing4.png",
-			"SnippetDesc": "+2 Max Blessing",
+			"SnippetDesc": "+3 Max Blessing",
 			"Tags": [
 				"Passive"
 			],
@@ -113,7 +113,7 @@
 				"BlessCountMod": {
 					"ModType": "Add",
 					"StatName": "LmtEftCount:Blessing",
-					"Value": 4.0
+					"Value": 3.0
 				}
 			}
 		},
@@ -122,7 +122,7 @@
 	"BlessedMassPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "The God(s) love for you overflows, blessing all those around you.\n\n@@#StatMod:BlessCountMod@@ and @@#Color:Blue:Blessing@@ now apply to all @@#Color:Greed:Allies@@ in @@#Color:Red:Target Area@@.",
+			"Description": "The God(s) love for you overflows, blessing all those around you.\n\n@@#Color:Blue:Blessing@@ now apply to all @@#Color:Green:Allies@@ in @@#Color:Red:Target Area@@.",
 			"DisplayName": "Mass Bless",
 			"LargeIcon": "Sprites/MassBlessing.png",
 			"ObjectType": "Item",
@@ -150,11 +150,6 @@
 			},
 			"SourceTitle": "Priest",
 			"StatMods": {
-				"BlessCountMod": {
-					"ModType": "Add",
-					"StatName": "LmtEftCount:Blessing",
-					"Value": 3.0
-				}
 			},
 			"TargetMods": {
 				"AoeBlessing": {
@@ -205,6 +200,55 @@
 						}
 					}
 				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"HaloOfLight_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "The Priest has bestowed upon you a sacred halo which attunes you to @@#Color:DmgColor:Light@@ and protects you from @@#Color:DmgColor:Dark@@.\nAnd it looks neat!\n\n@@#StatMod:LightResistMod@@\n@@#StatMod:DarkResistMod@@\n\n@@#Color:Red:[Shared]@@ This Page is unlocked for other Actors in The Party.",
+			"DisplayName": "Light Halo",
+			"LargeIcon": "Sprites/LightHalo_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/LightHalo_Icon.png",
+			"SnippetDesc": "Bonus Dark and Light Resistance",
+			"Tags": [
+				"Shared",
+				"Passive"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Shared"
+			},
+			"SourceTitle": "Priest",
+			"StatMods": {
+				"LightResistMod": {
+					"ModType": "Add",
+					"StatName": "Resistance:Light",
+					"Value": 50.0
+				},
+				"DarkResistMod": {
+					"ModType": "Add",
+					"StatName": "Resistance:Dark",
+					"Value": 50.0
+				}
+			},
+			"SpriteData": {
+				"SpriteSheet": "Sprites/LightHalo_SpriteSheet.png"
 			}
 		},
 		"_DefVersion": "1"
