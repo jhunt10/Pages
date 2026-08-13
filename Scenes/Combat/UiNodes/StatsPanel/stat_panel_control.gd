@@ -4,6 +4,7 @@ extends VBoxContainer
 const BoxPadding:int = 4
 
 signal pressed
+signal deployment_pressed(actor_id:String)
 
 @export var deploy_button:Button
 @export var panel:PanelContainer
@@ -15,6 +16,9 @@ signal pressed
 @export var premade_effect_icon:EffectIconControl
 @export var npc_index_label:Label
 
+@export var premade_carried_actor:CarriedActorPortrait
+@export var carried_actors_container:HBoxContainer
+
 var actor:BaseActor
 var effect_icons:Dictionary
 var _stat_bars:Dictionary = {}
@@ -23,6 +27,7 @@ var _resize:bool = true
 func _ready() -> void:
 	panel.gui_input.connect(on_mouse_clicked)
 	premade_effect_icon.visible = false
+	premade_carried_actor.visible = false
 
 func _on_press():
 	pressed.emit()
@@ -58,14 +63,31 @@ func set_actor(act:BaseActor):
 	_build_stat_bars()
 	if is_node_ready():
 		_sync_values()
+	
+	if actor is CarrierActor:
+		for carried_actor:BaseActor in actor.list_carried_actors():
+			var port:CarriedActorPortrait = premade_carried_actor.duplicate() 
+			port.set_actor(carried_actor)
+			carried_actors_container.add_child(port)
+			port.show()
+			port.button.pressed.connect(_on_deployment_pressed.bind(carried_actor.Id))
+		carried_actors_container.show()
+	else:
+		carried_actors_container.hide()
+
+func _on_deployment_pressed(actor_id):
+	deployment_pressed.emit(actor_id)
 
 func set_is_deployed(is_deployed):
 	if is_deployed:
-		deploy_button.hide()
-		health_bar.show()
+		# TODO:Lazy Hack
+		self.show()
+		#deploy_button.hide()
+		#health_bar.show()
 	else:
-		deploy_button.show()
-		health_bar.hide()
+		self.hide()
+		#deploy_button.show()
+		#health_bar.hide()
 
 func _process(_delta: float) -> void:
 	if _resize:

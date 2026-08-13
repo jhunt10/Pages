@@ -2,11 +2,13 @@ extends PanelContainer
 
 @export var refill_ammo_button:Button
 @export var spawn_button:Button
+@export var recall_button:Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	refill_ammo_button.pressed.connect(refill_ammo)
 	spawn_button.pressed.connect(open_spawn_menu)
+	recall_button.pressed.connect(recall_all_actors)
 
 func refill_ammo():
 	for actor_id in CombatRootControl.Instance.GameState._actors.keys():
@@ -45,3 +47,13 @@ func on_option_selected(selection_key:String, options_data:Dictionary):
 	CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.SpawnActor,
 	{"SpawningActorId":new_actor.Id})
 	pass
+
+func recall_all_actors():
+	var players = CombatRootControl.list_player_actors()
+	var soldier = StoryState.list_party_actors()[0]
+	for player in players:
+		if player == soldier:
+			continue
+		if player.is_being_carried():
+			continue
+		CombatRootControl.Instance.recall_actor(player, soldier)

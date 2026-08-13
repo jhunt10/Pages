@@ -27,7 +27,7 @@ func sync(actor:BaseActor):
 		self.show()
 	if players.size() > 1:
 		rogue_button.show()
-		if actor.list_held_actor_ids().has(players[1].Id):
+		if actor.list_carried_actor_ids().has(players[1].Id):
 			rogue_x_icon.hide()
 		else:
 			rogue_x_icon.show()
@@ -37,7 +37,7 @@ func sync(actor:BaseActor):
 	
 	if players.size() > 2:
 		priest_button.show()
-		if actor.list_held_actor_ids().has(players[2].Id):
+		if actor.list_carried_actor_ids().has(players[2].Id):
 			priest_x_icon.hide()
 		else:
 			priest_x_icon.show()
@@ -47,7 +47,7 @@ func sync(actor:BaseActor):
 	
 	if  players.size() > 3:
 		mage_button.show()
-		if actor.list_held_actor_ids().has(players[3].Id):
+		if actor.list_carried_actor_ids().has(players[3].Id):
 			mage_x_icon.hide()
 		else:
 			mage_x_icon.show()
@@ -61,10 +61,10 @@ func _on_button_pressed(index:int):
 	var players = StoryState.list_party_actors()
 	var soldier:CarrierActor = players[0]
 	var other_actor:BaseActor = players[index]
-	if soldier.list_held_actor_ids().has(other_actor.Id):
+	if soldier.list_carried_actor_ids().has(other_actor.Id):
 		soldier.remove_held_actor(other_actor)
 	else:
-		soldier.add_held_actor(other_actor)
+		soldier.add_carried_actor(other_actor)
 	self.sync(soldier)
 	
 	

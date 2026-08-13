@@ -22,7 +22,7 @@ func _sync_deployable_actors():
 		if child != premade_button:
 			child.queue_free()
 	var main_actor:CarrierActor = StoryState.list_party_actors()[0]
-	for sub_actor:BaseActor in main_actor.list_held_actors():
+	for sub_actor:BaseActor in main_actor.list_carried_actors():
 		var new_button = premade_button.duplicate()
 		new_button.text = sub_actor.get_display_name()
 		new_button.show()

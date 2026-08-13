@@ -22,7 +22,17 @@
 [ext_resource type="Texture2D" uid="uid://dq2fpuokt1s5r" path="res://Scenes/Combat/UiNodes/QueDisplay/SlotBackground.png" id="19_gjejj"]
 [ext_resource type="Texture2D" uid="uid://bu1v4w3d6hau" path="res://Scenes/Combat/UiNodes/QueDisplay/FilledSlotBackground.png" id="20_k35kq"]
 
-[node name="QueInputControl" type="BoxContainer" unique_id=1976729749 node_paths=PackedStringArray("_fill_button", "que_display_control", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "input_buttons_container", "page_selection_container", "page_selection_container_cancel_button", "page_selection_container_close_button", "hover_box")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g6164"]
+texture = ExtResource("3_2484v")
+texture_margin_left = 21.0
+texture_margin_top = 8.0
+texture_margin_right = 21.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="Theme" id="Theme_80cou"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_g6164")
+
+[node name="QueInputControl" type="BoxContainer" unique_id=1976729749 node_paths=PackedStringArray("_fill_button", "que_display_control", "page_button_prefab", "start_label", "side_start_button", "top_start_button", "input_buttons_container", "page_selection_container", "page_selection_container_cancel_button", "page_selection_container_close_button", "hover_box", "tab_bar")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -37,9 +47,9 @@ size_flags_horizontal = 4
 alignment = 1
 vertical = true
 script = ExtResource("1_bqb47")
-_fill_button = NodePath("QueInputBackPatchContainer/Background/FillQueButton")
+_fill_button = NodePath("QueInputBackPatchContainer/Control/FillQueButton")
 que_display_control = NodePath("QueInputPanelContainer")
-page_button_prefab = NodePath("QueInputBackPatchContainer/HBoxContainerA/HBoxContainerB/QueInputButtonControl")
+page_button_prefab = NodePath("QueInputBackPatchContainer/HBoxContainerA/ScrollContainer/HBoxContainerB/QueInputButtonControl")
 start_label = NodePath("QueInputBackPatchContainer/Control/SideStatButtonControl/TextureRect/Label")
 side_start_button = NodePath("QueInputBackPatchContainer/Control/SideStatButtonControl")
 top_start_button = NodePath("QueInputBackPatchContainer/Control/TopStatButtonControl")
@@ -48,6 +58,7 @@ page_selection_container = NodePath("PageSelectionContainer")
 page_selection_container_cancel_button = NodePath("PageSelectionContainer/VBoxContainer/ButtonsContainer/CancelButton")
 page_selection_container_close_button = NodePath("PageSelectionContainer/VBoxContainer/Control/CloseButton")
 hover_box = NodePath("Control/PageDetailsHoverBox")
+tab_bar = NodePath("BoxContainer/TabBar")
 
 [node name="Control" type="Control" parent="." unique_id=2014690861]
 layout_mode = 2
@@ -226,6 +237,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BoxContainer" type="BoxContainer" parent="." unique_id=764588661]
+layout_mode = 2
+alignment = 1
+
+[node name="TabBar" type="TabBar" parent="BoxContainer" unique_id=634043456]
+layout_mode = 2
+current_tab = 0
+clip_tabs = false
+tab_count = 3
+tab_0/title = "All"
+tab_1/title = "Soldier"
+tab_2/title = "Rogue"
+
 [node name="QueInputBackPatchContainer" type="Container" parent="." unique_id=902089309 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(112, 80)
 layout_mode = 2
@@ -331,6 +355,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="FillQueButton" type="Button" parent="QueInputBackPatchContainer/Control" unique_id=247272302]
+layout_mode = 0
+offset_left = 270.0
+offset_top = -63.0
+offset_right = 309.0
+offset_bottom = -32.0
+text = " Fill "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="QueInputBackPatchContainer/Control" unique_id=917599797]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Background" type="NinePatchRect" parent="QueInputBackPatchContainer" unique_id=468201823]
 layout_mode = 2
 texture = ExtResource("3_2484v")
@@ -339,23 +376,26 @@ patch_margin_top = 8
 patch_margin_right = 21
 patch_margin_bottom = 8
 
-[node name="FillQueButton" type="Button" parent="QueInputBackPatchContainer/Background" unique_id=247272302]
-layout_mode = 0
-offset_left = 270.0
-offset_top = -63.0
-offset_right = 309.0
-offset_bottom = -32.0
-text = " Fill "
-
 [node name="HBoxContainerA" type="HBoxContainer" parent="QueInputBackPatchContainer" unique_id=1630360398]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="HBoxContainerB" type="HBoxContainer" parent="QueInputBackPatchContainer/HBoxContainerA" unique_id=550841808]
+[node name="ScrollContainer" type="ScrollContainer" parent="QueInputBackPatchContainer/HBoxContainerA" unique_id=1654117632]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainerB" type="HBoxContainer" parent="QueInputBackPatchContainer/HBoxContainerA/ScrollContainer" unique_id=550841808]
 layout_mode = 2
 
-[node name="QueInputButtonControl" parent="QueInputBackPatchContainer/HBoxContainerA/HBoxContainerB" unique_id=1388769299 instance=ExtResource("6_ua6n5")]
+[node name="QueInputButtonControl" parent="QueInputBackPatchContainer/HBoxContainerA/ScrollContainer/HBoxContainerB" unique_id=1388769299 instance=ExtResource("6_ua6n5")]
 layout_mode = 2
 
 [node name="GridContainer" type="GridContainer" parent="QueInputBackPatchContainer/HBoxContainerA" unique_id=1113271196]
 layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=584161059]
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_80cou")

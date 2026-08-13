@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://6m4oxbfln65"]
+[gd_scene format=3 uid="uid://bd0ondxyb02kc"]
 
-[ext_resource type="Script" uid="uid://di0ldqo3yw3py" path="res://assets/Scripts/VFXs/BulletVfxs/bullet_vfx_node.gd" id="1_e51vb"]
-[ext_resource type="Texture2D" uid="uid://26rrlc3hiro5" path="res://ObjectDefs/Data/VFXs/OLD_DamageVFXs/SmokeEffect.png" id="2_rojs5"]
-[ext_resource type="AudioStream" uid="uid://dg2b3magghe3y" path="res://assets/Sounds/SoundEffects/05887 air gun shot.wav" id="3_ftbqy"]
+[ext_resource type="Script" uid="uid://i3o2niqho5sh" path="res://ObjectDefs/Data/VFXs/DeploymentVFXs/RecallVfx/recall_actor_vfx_node.gd" id="1_ylopw"]
+[ext_resource type="AudioStream" uid="uid://dg2b3magghe3y" path="res://assets/Sounds/SoundEffects/05887 air gun shot.wav" id="2_imevy"]
+[ext_resource type="Texture2D" uid="uid://4ytgx5iknhm3" path="res://ObjectDefs/Data/VFXs/DeploymentVFXs/DeploySpriteSheet.png" id="3_7bhi6"]
 
 [sub_resource type="Animation" id="Animation_wtg8w"]
 resource_name = "4_sprites_250ms_frames"
@@ -10,7 +10,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -39,7 +39,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -56,7 +56,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -86,7 +86,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -104,7 +104,7 @@ step = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -131,7 +131,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -163,19 +163,36 @@ _data = {
 &"RESET": SubResource("Animation_lwwt5")
 }
 
-[node name="VFXNode" type="Node2D" unique_id=1684724338 node_paths=PackedStringArray("sprite", "audio_player")]
-z_index = 9
-script = ExtResource("1_e51vb")
-sprite = NodePath("Sprite2D")
-audio_player = NodePath("AudioStreamPlayer2D")
+[sub_resource type="Gradient" id="Gradient_olg57"]
+colors = PackedColorArray(0.34781694, 0.34781697, 0.3478169, 1, 1, 1, 1, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2117814411]
-texture = ExtResource("2_rojs5")
-hframes = 2
-vframes = 3
+[node name="VFXNode" type="Node2D" unique_id=1684724338 node_paths=PackedStringArray("sprite_motion_node", "sprite_offset_node", "sprite", "particals")]
+z_index = 9
+script = ExtResource("1_ylopw")
+sprite_motion_node = NodePath("SpriteMotionNode")
+sprite_offset_node = NodePath("SpriteMotionNode/SpriteOffsetNode")
+sprite = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D")
+particals = NodePath("SpriteMotionNode/SpriteOffsetNode/CPUParticles2D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1800955160]
 libraries/ = SubResource("AnimationLibrary_3vpeu")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1021730230]
-stream = ExtResource("3_ftbqy")
+stream = ExtResource("2_imevy")
+
+[node name="SpriteMotionNode" type="Node2D" parent="." unique_id=1980979630]
+
+[node name="SpriteOffsetNode" type="Node2D" parent="SpriteMotionNode" unique_id=1116722974]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteMotionNode/SpriteOffsetNode" unique_id=2117814411]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_7bhi6")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="SpriteMotionNode/SpriteOffsetNode" unique_id=1126840787]
+amount = 64
+lifetime = 0.5
+emission_shape = 6
+emission_ring_inner_radius = 5.5
+emission_ring_radius = 7.0
+gravity = Vector2(0, 0)
+color_initial_ramp = SubResource("Gradient_olg57")

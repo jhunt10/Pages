@@ -26,8 +26,8 @@ signal reached_scripted_motion_destination
 @export var shader_val:float:
 	set(val):
 		shader_val = val
-		if material:
-			material.set_shader_parameter("progress", shader_val)
+		if offset_node and offset_node.material:
+			offset_node.material.set_shader_parameter("progress", shader_val)
 
 @export var awareness_display:ActorAwarenessDisplay
 
@@ -80,11 +80,11 @@ func _process(delta: float) -> void:
 			finish_move_animation()
 
 
-func set_actor(actor:BaseActor):
+func set_actor(actor:BaseActor, connect_signals=true):
 	Id = actor.Id
 	Actor = actor
 	self.name = actor.Id
-	if not actor.on_move.is_connected(_on_actor_moved):
+	if connect_signals and not actor.on_move.is_connected(_on_actor_moved):
 		actor.on_move_failed.connect(_on_movement_failed)
 		actor.action_failed.connect(_on_action_failed)
 		actor.on_move.connect(_on_actor_moved)
@@ -281,12 +281,18 @@ func _scripted_move_finshed():
 ##		Animations
 ##############################
 
+func ready_spawn_animation():
+	if spawn_shader_material:
+		if !offset_node.material:
+			offset_node.material = spawn_shader_material
+	shader_val = 0
+
 func start_spawn_animation():
 	if spawn_shader_material:
-		if !self.material:
-			self.material = spawn_shader_material
-			shader_val = 0
-			self.body_animation.play("spawn_in")
+		if !offset_node.material:
+			offset_node.material = spawn_shader_material
+	shader_val = 0
+	self.body_animation.play("spawn_in")
 
 func finish_spawn_animation():
 	self.material = null

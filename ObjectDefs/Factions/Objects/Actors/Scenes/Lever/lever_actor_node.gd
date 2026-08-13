@@ -1,8 +1,8 @@
 class_name LeverActorNode
 extends BaseActorNode
 
-func set_actor(actor:BaseActor):
-	super(actor)
+func set_actor(actor:BaseActor, connect_signals=true):
+	super(actor, connect_signals)
 	if actor is LeverActor:
 		actor.triggered.connect(on_lever_triggered)
 		offset_node.modulate = actor.get_load_val("GateColor", Color.WHITE)

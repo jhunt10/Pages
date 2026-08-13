@@ -1,0 +1,199 @@
+[gd_scene format=3 uid="uid://6m4oxbfln65"]
+
+[ext_resource type="Script" uid="uid://dpnreer0t5mfe" path="res://ObjectDefs/Data/VFXs/DeploymentVFXs/DeployVfx/deploy_actor_vfx_node.gd" id="1_olg57"]
+[ext_resource type="Texture2D" uid="uid://4ytgx5iknhm3" path="res://ObjectDefs/Data/VFXs/DeploymentVFXs/DeploySpriteSheet.png" id="2_nvxw0"]
+[ext_resource type="AudioStream" uid="uid://dg2b3magghe3y" path="res://assets/Sounds/SoundEffects/05887 air gun shot.wav" id="3_7ao8c"]
+
+[sub_resource type="Animation" id="Animation_wtg8w"]
+resource_name = "4_sprites_250ms_frames"
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_mg4p0"]
+resource_name = "4_sprites_250ms_frames_loop"
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_uwom5"]
+resource_name = "6_sprites_250ms_frames"
+length = 1.5
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.75),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7qvkc"]
+resource_name = "6_sprites_250ms_frames_loop"
+length = 1.5
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_kvxq2"]
+resource_name = "8_sprites_250ms_frames_loop"
+length = 2.0
+loop_mode = 1
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_lwwt5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation_half_way")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vpeu"]
+_data = {
+&"4_sprites_250ms_frames": SubResource("Animation_wtg8w"),
+&"4_sprites_250ms_frames_loop": SubResource("Animation_mg4p0"),
+&"6_sprites_250ms_frames": SubResource("Animation_uwom5"),
+&"6_sprites_250ms_frames_loop": SubResource("Animation_7qvkc"),
+&"8_sprites_250ms_frames_loop": SubResource("Animation_kvxq2"),
+&"RESET": SubResource("Animation_lwwt5")
+}
+
+[sub_resource type="Gradient" id="Gradient_olg57"]
+colors = PackedColorArray(0.34781694, 0.34781697, 0.3478169, 1, 1, 1, 1, 1)
+
+[node name="VFXNode" type="Node2D" unique_id=1684724338 node_paths=PackedStringArray("sprite_motion_node", "sprite_offset_node", "sprite", "particals")]
+z_index = 9
+script = ExtResource("1_olg57")
+sprite_motion_node = NodePath("SpriteMotionNode")
+sprite_offset_node = NodePath("SpriteMotionNode/SpriteOffsetNode")
+sprite = NodePath("SpriteMotionNode/SpriteOffsetNode/Sprite2D")
+particals = NodePath("SpriteMotionNode/SpriteOffsetNode/CPUParticles2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1800955160]
+libraries/ = SubResource("AnimationLibrary_3vpeu")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1021730230]
+stream = ExtResource("3_7ao8c")
+
+[node name="SpriteMotionNode" type="Node2D" parent="." unique_id=1980979630]
+
+[node name="SpriteOffsetNode" type="Node2D" parent="SpriteMotionNode" unique_id=1116722974]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteMotionNode/SpriteOffsetNode" unique_id=2117814411]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_nvxw0")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="SpriteMotionNode/SpriteOffsetNode" unique_id=1126840787]
+amount = 64
+lifetime = 0.5
+preprocess = 0.1
+emission_shape = 6
+emission_ring_inner_radius = 5.5
+emission_ring_radius = 7.0
+gravity = Vector2(0, 0)
+color_initial_ramp = SubResource("Gradient_olg57")

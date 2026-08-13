@@ -334,7 +334,7 @@ func get_damage_datas(actor:BaseActor, damage_keys)->Dictionary:
 			# If the user is not the owner, but they are carrying the owner
 			# then treat it like the owner is using it
 			elif use_actor != page_owner_actor and use_actor is CarrierActor: 
-				if page_owner_actor and (use_actor as CarrierActor).is_holding_actor(page_owner_actor):
+				if page_owner_actor and (use_actor as CarrierActor).is_carrying_actor(page_owner_actor):
 					use_actor = page_owner_actor
 			if use_actor:
 				damage_data['ActorlessWeapon'] = false

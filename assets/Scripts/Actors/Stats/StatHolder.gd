@@ -273,7 +273,7 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	
 	# Get mods from carried actors
 	if _actor is CarrierActor:
-		for sub_actor:BaseActor in _actor.list_held_actors():
+		for sub_actor:BaseActor in _actor.list_carried_actors():
 			mods_list.append_array(sub_actor.get_stat_mods_granted_to_carrier())
 	
 	for mod:BaseStatMod in mods_list:

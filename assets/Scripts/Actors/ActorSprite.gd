@@ -147,7 +147,7 @@ func _get_draw_ordered_equipment()->Array:
 					out_list.append(equip)
 	if _actor is CarrierActor:
 		var sub_actor_titles = {}
-		for held_actor:BaseActor in _actor.list_held_actors():
+		for held_actor:BaseActor in _actor.list_carried_actors():
 			var title = held_actor.get_title_page()
 			sub_actor_titles[title.get_title_key()] = title
 		if sub_actor_titles.has("Priest"):

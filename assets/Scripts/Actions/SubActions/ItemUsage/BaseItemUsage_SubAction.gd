@@ -18,7 +18,7 @@ static func _get_on_que_options(_parent_action:PageItemAction, _subaction_data:D
 	var items = _actor.items.list_items()
 	if _actor is CarrierActor:
 		var all_actors = [_actor]
-		all_actors.append_array(_actor.list_held_actors())
+		all_actors.append_array(_actor.list_carried_actors())
 		for sub_actor:BaseActor in all_actors:
 			options.append_divider(sub_actor.get_display_name())
 			for item in sub_actor.items.list_items():

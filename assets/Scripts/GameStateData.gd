@@ -206,7 +206,7 @@ func get_actors_at_pos(pos, include_dead:bool=false, include_carried:bool=false)
 		var carried_actors = []
 		for actor:BaseActor in actors:
 			if actor is CarrierActor:
-				carried_actors.append_array(actor.list_held_actors())
+				carried_actors.append_array(actor.list_carried_actors())
 		actors.append_array(carried_actors)
 	return actors
 

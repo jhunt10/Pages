@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="7_xlcc4"]
 [ext_resource type="Script" uid="uid://ci77vt452i6uk" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_icon_control.gd" id="8_6sy3m"]
 [ext_resource type="Texture2D" uid="uid://c56f4fi1dxjyo" path="res://Scenes/Combat/UiNodes/StatsPanel/BaneBackground.png" id="8_ayfcx"]
+[ext_resource type="Script" uid="uid://j8lc212c0klo" path="res://Scenes/Combat/UiNodes/StatsPanel/CarriedActorPortrait.gd" id="8_jxmif"]
 [ext_resource type="Texture2D" uid="uid://cmqlh7kaay8qg" path="res://Scenes/Combat/UiNodes/StatsPanel/EffectBackground.png" id="9_ejl1u"]
 [ext_resource type="Script" uid="uid://qi376y8t3rep" path="res://Scenes/Combat/UiNodes/StatsPanel/effect_description_box.gd" id="10_7hami"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="11_ptagv"]
@@ -17,7 +18,7 @@
 [ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="15_ydpjt"]
 [ext_resource type="Script" uid="uid://cukfwo131b0bn" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="16_jxmif"]
 
-[node name="StatPanelControl" type="VBoxContainer" unique_id=2045825563 node_paths=PackedStringArray("deploy_button", "panel", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon", "npc_index_label")]
+[node name="StatPanelControl" type="VBoxContainer" unique_id=2045825563 node_paths=PackedStringArray("deploy_button", "panel", "portrait_texture_rect", "main_container", "health_bar", "bars_container", "effect_icon_box", "premade_effect_icon", "npc_index_label", "premade_carried_actor", "carried_actors_container")]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 1
@@ -31,6 +32,8 @@ bars_container = NodePath("PanelContainer/VBoxContainer/HBoxContainer/StatBarCon
 effect_icon_box = NodePath("IconBoxContainer")
 premade_effect_icon = NodePath("EffectIconControl")
 npc_index_label = NodePath("PanelContainer/VBoxContainer/HBoxContainer/TextureRect/PortaitTextureRect/IndexLabel")
+premade_carried_actor = NodePath("PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer/CarriedActorPortrait")
+carried_actors_container = NodePath("PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1523677901]
 layout_mode = 2
@@ -90,6 +93,74 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("7_3xrn2")
 text = "Deploy"
+
+[node name="CarriedActorsContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=347864398]
+layout_mode = 2
+
+[node name="ColorRect3" type="ColorRect" parent="PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer" unique_id=683417443]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 2
+color = Color(0.3882353, 0.3882353, 0.3882353, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer/ColorRect3" unique_id=1404564381]
+custom_minimum_size = Vector2(1, 0)
+layout_mode = 0
+offset_left = 1.0
+offset_right = 2.0
+offset_bottom = 34.0
+color = Color(0.60784316, 0.60784316, 0.60784316, 1)
+
+[node name="CarriedActorPortrait" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer" unique_id=423934557 node_paths=PackedStringArray("real_portrait", "hp_max_bar", "hp_cur_bar", "button")]
+layout_mode = 2
+texture = ExtResource("3_3xrn2")
+script = ExtResource("8_jxmif")
+real_portrait = NodePath("PortaitTextureRect")
+hp_max_bar = NodePath("HpMaxColorRect")
+hp_cur_bar = NodePath("HpCurtColorRect")
+button = NodePath("Button")
+
+[node name="PortaitTextureRect" type="TextureRect" parent="PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer/CarriedActorPortrait" unique_id=599074075]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 33.0
+offset_bottom = 33.0
+texture = ExtResource("4_lfhmk")
+stretch_mode = 4
+
+[node name="HpMaxColorRect" type="ColorRect" parent="PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer/CarriedActorPortrait" unique_id=556760857]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -6.0
+offset_right = 32.0
+offset_bottom = -2.0
+grow_vertical = 0
+color = Color(0.1879043, 2.2862106e-07, 3.008172e-08, 1)
+
+[node name="HpCurtColorRect" type="ColorRect" parent="PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer/CarriedActorPortrait" unique_id=1417082534]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -6.0
+offset_right = 23.0
+offset_bottom = -2.0
+grow_vertical = 0
+color = Color(1, 0, 0, 1)
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer/CarriedActorsContainer/CarriedActorPortrait" unique_id=1371843387]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="EffectIconControl" type="Control" parent="." unique_id=1209957324 node_paths=PackedStringArray("background", "effect_icon", "count_label", "description_box")]
 custom_minimum_size = Vector2(32, 32)

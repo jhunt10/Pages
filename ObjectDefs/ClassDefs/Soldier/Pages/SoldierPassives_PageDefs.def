@@ -823,5 +823,45 @@
 			"SourceTitle": "Soldier"
 		},
 		"_DefVersion": "1"
+	},
+	"ExtendDeployment_Soldier_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "you can deploy other actors 1 spot further away",
+			"DisplayName": "Long Throw",
+			"LargeIcon": "Sprites/ExtendDeploy_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ExtendDeploy_Icon.png",
+			"SnippetDesc": "Extends Deployment Range.",
+			"Tags": [
+				"Passive"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Soldier",
+			"StatMods": {
+				"EvasionMod": {
+					"ModType": "Add",
+					"StatName": "DeployRange",
+					"Value": 1
+				}
+			}
+		},
+		"_DefVersion": "1"
 	}
 }

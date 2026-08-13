@@ -72,7 +72,7 @@ func build_player_stats_panels():
 			panel.set_actor(actor)
 			player_stats_panels_container.add_child(panel)
 			panel.pressed.connect(on_player_stat_clicked.bind(index))
-			panel.deploy_button.pressed.connect(on_deployment.bind(actor.Id))
+			panel.deployment_pressed.connect(on_deployment)
 		panel.set_is_deployed(CombatRootControl.Instance.is_deployed(actor))
 		
 

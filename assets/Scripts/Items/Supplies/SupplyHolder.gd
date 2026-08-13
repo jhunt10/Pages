@@ -28,7 +28,7 @@ func consume_item(item_id:String, delete:bool=true):
 		if item and delete:
 			ItemLibrary.delete_item(item)
 	elif _actor is CarrierActor:
-		for sub_actor:BaseActor in _actor.list_held_actors():
+		for sub_actor:BaseActor in _actor.list_carried_actors():
 			if sub_actor.items.has_item(item_id):
 				sub_actor.items.consume_item(item_id, delete)
 				break

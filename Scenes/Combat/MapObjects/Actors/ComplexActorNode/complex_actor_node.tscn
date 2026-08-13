@@ -24,12 +24,20 @@
 [ext_resource type="Texture2D" uid="uid://bjo761ym76mti" path="res://assets/Sprites/TileSets/AwarenessTileSet.png" id="22_xdlor"]
 [ext_resource type="Texture2D" uid="uid://bbs3uvepyto08" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/SoldierIcon.png" id="24_brgje"]
 [ext_resource type="Script" uid="uid://ckxgndrl4khg8" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/awareness_display.gd" id="25_ysrah"]
-[ext_resource type="Texture2D" uid="uid://2go3xe4mp5dk" path="res://ObjectDefs/ClassDefs/Mage/Items/Equipment/Weapons/Sprites/OldOrb.png" id="26_vvjqf"]
 [ext_resource type="Texture2D" uid="uid://cmpc2v60v42vw" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/Sprites/TombStone.png" id="26_yeo0n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vvjqf"]
+shader = ExtResource("2_k2j27")
+shader_parameter/progress = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2jcyd"]
 shader = ExtResource("2_k2j27")
-shader_parameter/progress = 0.0
+shader_parameter/progress = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wmkvr"]
+resource_local_to_scene = true
+shader = ExtResource("2_k2j27")
+shader_parameter/progress = 1.0
 
 [sub_resource type="Animation" id="Animation_y5og4"]
 resource_name = "RESET"
@@ -303,18 +311,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_wmkvr"]
 resource_name = "recall_srink"
@@ -328,19 +324,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Vector2(1, 1), Vector2(0.5, 0.5)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_eolao"]
@@ -374,6 +358,7 @@ sources/0 = SubResource("TileSetAtlasSource_vvjqf")
 
 [node name="ActorNode" type="Node2D" unique_id=1084358338 node_paths=PackedStringArray("main_hand_node", "off_hand_node", "tombstone_sprite", "tombstone_portrait_sprite", "vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation", "awareness_display")]
 y_sort_enabled = true
+material = SubResource("ShaderMaterial_vvjqf")
 script = ExtResource("1_wfbib")
 editing_facing_direction = 2
 main_hand_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/MainHandNode")
@@ -415,7 +400,7 @@ use_parent_material = true
 use_parent_material = true
 
 [node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode" unique_id=1550687716]
-use_parent_material = true
+material = SubResource("ShaderMaterial_wmkvr")
 position = Vector2(0, -16)
 
 [node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" unique_id=2081949340]
@@ -485,8 +470,3 @@ visible = false
 position = Vector2(-16, -16)
 tile_set = SubResource("TileSet_wmkvr")
 script = ExtResource("25_ysrah")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1119152523]
-self_modulate = Color(1, 1, 1, 0)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("26_vvjqf")
