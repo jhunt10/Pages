@@ -666,9 +666,11 @@ func is_deployed(actor)->bool:
 	return false
 
 func deploy_actor(actor, pos:MapPos, take_with:Array=[]):
-	var deploying_actor = actor
+	var deploying_actor:BaseActor = null
 	if actor is String:
 		deploying_actor = GameState.get_actor(actor)
+	if actor is BaseActor:
+		deploying_actor = actor
 	var carrier_actor_id = deploying_actor.parent_carrier_actor_id
 	var carrier_actor = GameState.get_actor(carrier_actor_id)
 	if !carrier_actor:
@@ -677,8 +679,8 @@ func deploy_actor(actor, pos:MapPos, take_with:Array=[]):
 	if not GameState.map_data.is_spot_open(pos):
 		printerr("CombatRootControl.deploy_actor: Invalid MapPosition '%s'." % [pos])
 		return
-	GameState.set_actor_pos(actor, pos)
-	var actor_node = get_actor_node(actor)
+	GameState.set_actor_pos(deploying_actor, pos)
+	var actor_node = get_actor_node(deploying_actor)
 	actor_node.visible = true
 	QueController.add_action_que(deploying_actor.Que)
 	var confirmed_take = []
@@ -689,6 +691,7 @@ func deploy_actor(actor, pos:MapPos, take_with:Array=[]):
 	carrier_actor.remove_held_actor(deploying_actor)
 	for actor_id in confirmed_take:
 		deploying_actor.add_carried_actor(actor_id)
+	deploying_actor.effects._trigger_effects(BaseEffect.EffectTriggers.OnDeployed, GameState)
 	ui_control.build_player_stats_panels()
 
 func merge_actors(actor_a, actor_b):
@@ -716,6 +719,10 @@ func merge_actors(actor_a, actor_b):
 	QueController.remove_action_que(deployed_actor.Que)
 	
 	carrier_actor.add_carried_actor(deployed_actor)
+	
+	
+	deployed_actor.effects._trigger_effects(BaseEffect.EffectTriggers.OnMerged, GameState)
+	
 	ui_control.build_player_stats_panels()
 	if deployed_actor == get_current_player_actor():
 		set_current_player_actor(carrier_actor, true)

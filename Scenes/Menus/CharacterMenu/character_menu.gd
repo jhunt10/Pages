@@ -1,7 +1,7 @@
 class_name CharacterMenu
 extends Control
 
-const LOGGING = true
+const LOGGING = false
 const DRAG_DEAD_ZONE = 10
 
 signal closed

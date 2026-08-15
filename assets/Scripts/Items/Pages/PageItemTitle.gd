@@ -30,18 +30,6 @@ func get_base_stats()->Dictionary:
 	var stats = page_data.get("Stats", {})
 	return stats
 
-func get_merged_carrier_stat_mods()->Array:
-	var sub_data = get_data_containing_mods()
-	var stat_mod_datas:Dictionary = sub_data.get("MergedStatMods", {})
-	var out_list = []
-	for mod_data in stat_mod_datas.values():
-		if not mod_data.has("DisplayName"):
-			mod_data['DisplayName'] = self.get_display_name()
-			mod_data['SourceItemId'] = self.Id
-		out_list.append(BaseStatMod.create_from_data(Id, mod_data))
-	return out_list
-
-
 # -----------------------------------------------------------------
 #					Title Level
 # -----------------------------------------------------------------

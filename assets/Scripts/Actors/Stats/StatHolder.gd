@@ -59,17 +59,17 @@ func recache_stats(should_emit_signal:bool=true):
 	_calc_cache_stats(should_emit_signal)
 
 func has_stat(stat_name:String)->bool:
-	# TODO: MagPhy Hack
-	if stat_name == "MagAttack" or stat_name == "PhyAttack":
-		stat_name = "Attack"
+	## TODO: MagPhy Hack
+	#if stat_name == "MagAttack" or stat_name == "PhyAttack":
+		#stat_name = "Attack"
 	if _stats_dirty:
 		_calc_cache_stats()
 	return _cached_stats.has(stat_name)
 
 func get_stat(stat_name:String, default:float=0):
-	# TODO: MagPhy Hack
-	if stat_name == "MagAttack" or stat_name == "PhyAttack":
-		stat_name = "Attack"
+	## TODO: MagPhy Hack
+	#if stat_name == "MagAttack" or stat_name == "PhyAttack":
+		#stat_name = "Attack"
 	if _stats_dirty:
 		_calc_cache_stats()
 	return _cached_stats.get(stat_name, default)
@@ -84,9 +84,9 @@ func get_stats_by_prefix(stat_prefix:String)->Dictionary:
 	return stats
 
 func get_base_stat(stat_name:String, default:int=0):
-	# TODO: MagPhy Hack
-	if stat_name == "MagAttack" or stat_name == "PhyAttack":
-		stat_name = "Attack"
+	## TODO: MagPhy Hack
+	#if stat_name == "MagAttack" or stat_name == "PhyAttack":
+		#stat_name = "Attack"
 	return _base_stats.get(stat_name, default)
 
 func get_leveled_attribute(stat_name:String):
@@ -241,17 +241,17 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	_cached_mods.clear()
 	
 	
-	# TODO: MagPhy Hack
-	# _base_stats = _actor.get_raw_base_stats()
-	var temp_base = _actor.get_raw_base_stats()
-	_base_stats.clear()
-	for stat_name in temp_base.keys():
-		var val = temp_base[stat_name]
-		if stat_name == "MagAttack" or stat_name == "PhyAttack":
-			_base_stats["Attack"] = max(val, temp_base.get("MagAttack", 0), temp_base.get("PhyAttack", 0))
-		else:
-			_base_stats[stat_name] = val
-	# Hack Ends
+	## TODO: MagPhy Hack
+	_base_stats = _actor.get_raw_base_stats()
+	#var temp_base = _actor.get_raw_base_stats()
+	#_base_stats.clear()
+	#for stat_name in temp_base.keys():
+		#var val = temp_base[stat_name]
+		#if stat_name == "MagAttack" or stat_name == "PhyAttack":
+			#_base_stats["Attack"] = max(val, temp_base.get("MagAttack", 0), temp_base.get("PhyAttack", 0))
+		#else:
+			#_base_stats[stat_name] = val
+	## Hack Ends
 	
 	# MinStats - being used to set Slimes awareness to 5, but I don't remember why
 	var min_stats = {}
@@ -279,9 +279,9 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 	for mod:BaseStatMod in mods_list:
 		if LOGGING: print("# Found Mod '", mod.display_name, " for: %s" % _actor.ActorKey)
 		
-		# TODO: MagPhy Hack
-		if mod.stat_name == "MagAttack" or mod.stat_name == "PhyAttack":
-			mod.stat_name = "Attack"
+		## TODO: MagPhy Hack
+		#if mod.stat_name == "MagAttack" or mod.stat_name == "PhyAttack":
+			#mod.stat_name = "Attack"
 			
 		if not agg_mods.keys().has(mod.stat_name): # Add stat name to agg mods
 			agg_mods[mod.stat_name] = {}

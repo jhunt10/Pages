@@ -20,6 +20,7 @@ enum EffectTriggers {
 	OnDefending_PreAttackRoll, OnDefending_PostAttackRoll, 
 	OnDefending_PostEffectRoll, OnDefending_PostDamageRoll, OnDefending_AfterAttack,
 	OnDeath, OnKill,
+	OnDeployed, OnMerged,
 	OnUseItem,
 	OnOtherEffectToBeAdded, # When a different effect is added
 }

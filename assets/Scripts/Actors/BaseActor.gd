@@ -193,9 +193,13 @@ func get_raw_base_stats()->Dictionary:
 	return actor_data.get("Stats",{})#self.get_load_val("Stats", {})
 	
 
-func get_stat_mods_granted_to_carrier():
+func get_stat_mods_granted_to_carrier()->Array:
+	var out_list = []
 	var title_page = get_title_page()
-	return title_page.get_merged_carrier_stat_mods()
+	out_list.append_array(title_page.get_stat_mods_granted_to_carrier())
+	for page in pages.list_items():
+		out_list.append_array(page.get_stat_mods_granted_to_carrier())
+	return out_list
 
 func _get_object_specific_tags()->Array:
 	var tag_list = []

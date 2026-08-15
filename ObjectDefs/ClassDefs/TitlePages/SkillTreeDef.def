@@ -37,10 +37,6 @@
         ],
         [
             {
-                "SkillNodeKey": "ExtendDeploy_Soldier",
-                "PageKey": "ExtendDeployment_Soldier_PageItem"
-            },
-            {
                 "SkillNodeKey": "CrashBully",
                 "PageKey": "CrashBully_PageItem"
             },
@@ -91,7 +87,8 @@
                 "PageKey": "Recall_PageItem"
             },
             {
-                "PageKey": "PLACE_HOLDER"
+                "SkillNodeKey": "ExtendDeploy_Soldier",
+                "PageKey": "ExtendDeployment_Soldier_PageItem"
             },
             {
                 "SkillNodeKey": "WildSwing",
@@ -316,9 +313,9 @@
         ],
         [
             {
+                "SkillNodeKey": "MergedOrDeployed",
                 "PairType": "Or",
-                "PageKey1": "Dash",
-                "PageKey2": "TurnAround"
+                "Pages": ["MergedMagBonus_PageItem", "DeployedMagBonus_PageItem"]
             },
             {
                 "PageKey": "ChainShockSpell"
@@ -333,8 +330,7 @@
             },
             {
                 "PairType": "Or",
-                "PageKey1": "ChainExtendPage",
-                "PageKey2": "ChainSelectPage"
+                "Pages": ["ChainExtendPage", "ChainSelectPage"]
             },
             {
                 "PageKey": "ThrowBombPage"
@@ -349,8 +345,7 @@
             },
             {
                 "PairType": "Or",
-                "PageKey1": "SafteyHazardPage",
-                "PageKey2": "HazardSafetyPage"
+                "Pages": ["SafteyHazardPage", "HazardSafetyPage"]
             }
         ],
         [

@@ -796,7 +796,12 @@ func get_effect_datas_from_def(def:Dictionary)->Dictionary:
 
 func get_stat_mods_from_def(def:Dictionary)->Dictionary:
 	if def.has("PageData"):
-		return def['PageData'].get("StatMods", {})
+		var mods = def['PageData'].get("StatMods", {})
+		var merged_mods = def['PageData'].get("MergedStatMods")
+		if merged_mods:
+			for key in merged_mods.keys():
+				mods[key] = merged_mods
+		return mods
 	if def.has("EffectData"):
 		return def['EffectData'].get("StatMods", {})
 	if def.has("EquipmentData"):

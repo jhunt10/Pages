@@ -75,6 +75,10 @@ func build_tree():
 			if node_data.keys().has("PairType"):
 				new_node = paired_node_prefab.duplicate()
 				var pair_type = node_data['PairType']
+				var page_list = node_data.get("Pages")
+				if !page_list:
+					printerr("SkillTreeMenu.set_actor: SkillTreeNode missing Page List at (%s, %s)"%[x_index, y_index])
+					continue
 				var page_item_id_1 = node_data["Pages"][0]
 				var page_item_id_2 = node_data["Pages"][1]
 				new_node.set_pages(pair_type, page_item_id_1, page_item_id_2)
@@ -178,7 +182,7 @@ func get_page_key_if_unlocked(skill_node_key, args):
 	if node_data.keys().has("PairType"):
 		var sub_pages:Array = node_data.get("Pages", [])
 		var index = args.get("Index", -1)
-		if sub_pages.size() < index:
+		if index < 0 or sub_pages.size() < index:
 			printerr("SkillTreeMenu on_node_button_down: Invalid Index [%s,%s]" %[skill_node_key, args])
 			return null
 		page_key = node_data.get("Pages", [])[args.get("Index")]
@@ -198,6 +202,9 @@ func on_node_button_up(skill_node_key, args):
 	var page_key = node_data.get("PageKey")
 	if args.has("Index"):
 		page_key = node_data.get("Pages", [])[args.get("Index")]
+	if !page_key:
+		printerr("SkillTreeMenu on_node_button_down: Failed to find Page Key for node at [%s,%s]" %[skill_node_key, args])
+		return
 	var page_item = ItemLibrary.get_static_inst_of_item(page_key)
 	var  was_dragging = character_menu._dragging
 	node_button_up.emit("SkillTree", page_key, 0)

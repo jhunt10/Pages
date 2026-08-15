@@ -55,5 +55,96 @@
 			}
 		},
 		"_DefVersion": "1"
+	},
+	
+	"DeployedMagBonus_Nested_Effect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#StatMod:MagAttackStatMod@@ when @@#Tag:Deployed@@.",
+			"DisplayName": "Deployed Bonus",
+			"LargeIcon": "Sprites/MagUp_Icon.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/MagUp_Icon.png",
+			"SnippetDesc": "+20% MagAttack when Deployed",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"IsBad": false,
+				"IsGood": true,
+				"IsTemporary": true,
+				"ShowDuration": false,
+				"ShowInHud": true
+			},
+			"StatMods": {
+				"MagAttackStatMod": {
+					"ModType": "Scale",
+					"StatName": "MagAttack",
+					"Value": 1.2
+				}
+			},
+			"SubEffects": {
+				"ModStat": {
+					"StatModKeys": [
+						"MagAttackStatMod"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"DeployedMagBonus_PageEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#StatMod:MassStatMod@@ when @@#Tag:Deployed@@.",
+			"DisplayName": "Deployed Bonus",
+			"LargeIcon": "Sprites/MagAttackUp.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/MagAttackUp.png",
+			"SnippetDesc": "+10 MagAttack when Deployed.",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"IsBad": false,
+				"IsGood": true,
+				"IsTemporary": false,
+				"ShowDuration": false,
+				"ShowInHud": false
+			},
+			"SubEffects": {
+				"AddChild": {
+					"ChildEffectData": {
+						"Details": {
+							"DisplayName": "Deployed Bonus"
+						}
+					},
+					"ChildEffectKey": "DeployedMagBonus_Nested_Effect",
+					"DeleteChildOnDelete": true,
+					"OptionalTriggers": [
+						"OnDeployed"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
+					"UniqueChildEffectId": "DeployedMagBonus_Nested_Effect"
+				},
+				"RemoveChild": {
+					"OptionalTriggers": [
+						"OnMerged"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_RemoveNestedEffect.gd",
+					"UniqueChildEffectId": "DeployedMagBonus_Nested_Effect"
+				}
+			}
+		},
+		"_DefVersion": "1"
 	}
 }

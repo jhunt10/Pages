@@ -508,5 +508,87 @@
 			"SourceTitle": "Mage"
 		},
 		"_DefVersion": "1"
+	},
+	"MergedMagBonus_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "You're starting to see the benifit of working as a team and have come to rely on the strangers that you now call meat sheilds.\n\nWhile @@#Tag:Merged@@ grant @@#StatMod:MagAttackBonus@@ to @@#Tag:Carrier@@",
+			"DisplayName": "Merged Bonus",
+			"LargeIcon": "Sprites/MergedMag_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/MergedMag_Icon.png",
+			"SnippetDesc": "Bonus MagAtk when merged",
+			"Tags": [
+				"Passive"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Mage",
+			"StatMods": {
+			},
+			"MergedStatMods":{
+				"MagAttackBonus": {
+					"DisplayName": "Merged Bonus",
+					"ModType": "Add",
+					"StatName": "MagAttack",
+					"Value": 10
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"DeployedMagBonus_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
+		"#ObjDetails": {
+			"Description": "A good Mage needs room to work. Having a large open space is important both for channeling your magic, and making sure poeple see how cool you look while doing it.\n\n@@#EftDef:DeployedMagBonus_Nested_Effect:Description@@",
+			"DisplayName": "Deploy Bonus",
+			"LargeIcon": "Sprites/DeployedMag_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/DeployedMag_Icon.png",
+			"SnippetDesc": "+20% MagAttack when Deployed.",
+			"Tags": [
+				"Passive",
+				"Effect"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Passive"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Mage"
+		},
+		"PassiveData":{
+			"InCombatEftData": {
+				"EffectKey": "DeployedMagBonus_PageEffect"
+			}
+		},
+		"_DefVersion": "1"
 	}
 }
