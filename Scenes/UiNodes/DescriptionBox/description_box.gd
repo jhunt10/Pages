@@ -512,14 +512,16 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 			description_line = val_line + "% Max HP as " + damage_type
 		else:
 			description_line = val_line + "% " + StatHelper.get_stat_abbr(atk_stat) + " as " + damage_type
-		
+	
+	var damage_count = ""
+	if damage_data.keys().has("PreviewCount"):
+		var preview_count = damage_data.get("PreviewCount")
+		damage_count = _to_str(preview_count) + " X "
+		description_line = damage_count + description_line
 	if actor and not is_percent_hp_damage:
 		hover_line = description_line
-		description_line = ''
+		description_line = damage_count
 		
-		if damage_data.keys().has("PreviewCount"):
-			var preview_count = damage_data.get("PreviewCount")
-			description_line = _to_str(preview_count) + " X "
 		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
 		if min_max[0] == min_max[1]:
 			description_line += _to_str(min_max[0]) + damage_type# + " Damage"
@@ -530,6 +532,7 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 	if extra_damage_datas.size() == 0:
 		if description_line != '':
 			#description_line = description_line.replace(damage_type, "[/color]" + get_damage_colored_text(damage_type) + RED_TEXT)
+			
 			if hover_line != '':
 				out_line += "[url={\"text\":\"" + hover_line+ "\"}]" + get_damage_colored_text(damage_type, description_line) + "[/url]"
 			else:

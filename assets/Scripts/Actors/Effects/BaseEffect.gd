@@ -3,6 +3,7 @@ extends BaseLoadObject
 # An "Effect" is any Buff, Debuff, or modifier on an actor. 
 
 signal effect_ended
+signal something_changed
 
 enum EffectTriggers { 
 	None,
@@ -59,6 +60,8 @@ var Triggers:Array:
 	get: return _triggers_to_sub_effect_keys.keys()
 
 
+var _count:int = 0
+var _count_merge_type = "Add"
 var _inital_duration:int = 0
 var _max_duration:int = -1
 # Ignore, Reset, Replace, Add
@@ -94,6 +97,10 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 			duration_trigger = EffectTriggers.get(duration_trigger_str)
 		else:
 			printerr("BaseEffect._init: No DurationTrigger found on '%s'." %[_key])
+	if effect_data.keys().has("CounterData"):
+		var counter_data = effect_data.get("CounterData", {})
+		_count = counter_data.get("InitCount", 1)
+		_count_merge_type = effect_data.get("MergeType")
 	_cache_after_loading_def()
 
 func  get_tags()->Array:
@@ -171,7 +178,25 @@ func merge_duplicate_effect(_source, dup_effect_def:Dictionary):
 					self._max_duration = max(self._max_duration, dup_max_duration)
 					self._inital_duration = min(self._inital_duration + dup_duration, self._max_duration)
 					self._duration_counter = min(self._duration_counter + dup_duration, self._max_duration)
-	
+	# Merge Count
+	if dup_data.keys().has("CounterData"):
+		var counter_data = effect_data.get("CounterData", {})
+		var merge_count = counter_data.get("InitCount", 1)
+		var count_merge_type = counter_data.get("MergeType")
+		match count_merge_type:
+			"Ignore":
+				pass
+			"Reset":
+				_count = merge_count
+			"Replace":
+				_count = merge_count
+			"Add":
+				_count += merge_count
+		_count = min(_count, counter_data.get("MaxCount", 999))
+		var actor = get_effected_actor()
+		actor.stats.dirty_stats()
+			
+		
 	# Merge Sub Effects
 	var dup_subs_datas = dup_data.get('SubEffects', {})
 	for sub_effect_key in dup_subs_datas.keys():
@@ -183,6 +208,7 @@ func merge_duplicate_effect(_source, dup_effect_def:Dictionary):
 			sub_effect.merge_new_duplicate_sub_effect_data(self, sub_effect_data, dup_effect_def, dupl_sub_effect_data)
 	if dup_data.keys().has("CreatedAt"):
 		self._data['CreatedAt'] = max(self._data.get("CreatedAt", 0), dup_data['CreatedAt'])
+	something_changed.emit()
 
 func sustain(_created_at:int):
 	self._duration_counter = max(self._inital_duration, self._max_duration)
@@ -212,11 +238,15 @@ func get_effected_actor()->BaseActor:
 func show_in_hud()->bool:
 	return effect_details.get("ShowInHud", false)
 
-func show_counter()->bool:
-	return effect_details.get("ShowCounter", false)
+func show_duration()->bool:
+	return effect_details.get("ShowDuration", false)
+
+func show_count()->bool:
+	return effect_details.get("ShowCount", false)
+
 ## Will be deleted after combat
 func delete_after_combat()->bool:
-	return effect_details.get("DeleteAfterCombat", false)
+	return effect_details.get("DeleteAfterCombat", true)
 
 func is_instant()->bool:
 	return effect_details.get("IsInstant", false)
@@ -353,6 +383,9 @@ func trigger_effect(trigger:EffectTriggers, game_state:GameStateData):
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.on_effect_trigger(self, sub_effect_data, trigger, game_state)
+	check_duration(trigger, game_state)
+
+func check_duration(trigger:EffectTriggers, game_state):
 	if trigger == duration_trigger and _duration_counter > 0:
 		_duration_counter -= 1
 	# Check if durration has ended and remove self if so
@@ -370,16 +403,21 @@ func trigger_other_effect_to_be_added(game_state:GameStateData, other_effect:Bas
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.other_effect_to_be_added(self, sub_effect_data, game_state, other_effect, meta_data)
+	check_duration(EffectTriggers.OnOtherEffectToBeAdded, game_state)
 
-func trigger_on_page_use(page:PageItemAction, game_state:GameStateData):
+func trigger_on_page_use(page:PageItemAction, game_state:GameStateData, after_use=false):
 	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.OnPageUse, []):
 		var sub_effect_data = _sub_effects_data[sub_effect_key]
 		var page_use_trigger_condition = sub_effect_data.get("OnPageUseTriggerCondition")
-		if page_use_trigger_condition and not TagHelper.check_tag_filters("PageTagFilters", page_use_trigger_condition, page):
-			continue
+		if page_use_trigger_condition:
+			if not TagHelper.check_tag_filters("PageTagFilters", page_use_trigger_condition, page):
+				continue
+			if page_use_trigger_condition.get("TriggerAfterUse", false) != after_use:
+				continue
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.on_effect_trigger(self, sub_effect_data, EffectTriggers.OnPageUse, game_state)
+	check_duration(EffectTriggers.OnPageUse, game_state)
 		
 	
 
@@ -389,18 +427,21 @@ func trigger_pre_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, 
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.before_move(self, sub_effect_data, game_state, old_pos, new_pos, move_type, moved_by_actor)
+	check_duration(EffectTriggers.PreMove, game_state)
 func trigger_post_move(game_state:GameStateData, old_pos:MapPos, new_pos:MapPos, move_type:String, moved_by_actor:BaseActor):
 	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.PostMove, []):
 		var sub_effect_data = _sub_effects_data[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.after_move(self, sub_effect_data, game_state, old_pos, new_pos, move_type, moved_by_actor)
+	check_duration(EffectTriggers.PostMove, game_state)
 func trigger_collision(game_state:GameStateData, collision_event:CollisionEvent):
 	for sub_effect_key in _triggers_to_sub_effect_keys.get(EffectTriggers.PostMove, []):
 		var sub_effect_data = _sub_effects_data[sub_effect_key]
 		var sub_effect = _get_sub_effect_script(sub_effect_key)
 		if sub_effect:
 			sub_effect.on_collision(self, sub_effect_data, collision_event, game_state)
+	check_duration(EffectTriggers.PostMove, game_state)
 
 
 func trigger_on_damage_taken(game_state:GameStateData, damage_event:DamageEvent):

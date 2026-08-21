@@ -162,7 +162,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="EffectIconControl" type="Control" parent="." unique_id=1209957324 node_paths=PackedStringArray("background", "effect_icon", "count_label", "description_box")]
+[node name="EffectIconControl" type="Control" parent="." unique_id=1209957324 node_paths=PackedStringArray("background", "effect_icon", "duration_label", "count_label", "description_box")]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -170,7 +170,8 @@ size_flags_vertical = 0
 script = ExtResource("8_6sy3m")
 background = NodePath("Background")
 effect_icon = NodePath("Icon")
-count_label = NodePath("Label")
+duration_label = NodePath("DurationLabel")
+count_label = NodePath("CountLabel")
 description_box = NodePath("Icon/DescriptionBox")
 buff_background_texture = ExtResource("7_ow4ab")
 bane_background_texture = ExtResource("8_ayfcx")
@@ -276,7 +277,7 @@ fit_content = true
 scroll_active = false
 script = ExtResource("16_jxmif")
 
-[node name="Label" type="Label" parent="EffectIconControl" unique_id=1352400344]
+[node name="DurationLabel" type="Label" parent="EffectIconControl" unique_id=1352400344]
 self_modulate = Color(0, 0, 0, 1)
 z_index = 1
 z_as_relative = false
@@ -298,6 +299,24 @@ theme = ExtResource("7_xlcc4")
 text = "0"
 horizontal_alignment = 2
 vertical_alignment = 2
+justification_flags = 128
+
+[node name="CountLabel" type="Label" parent="EffectIconControl" unique_id=233888582]
+self_modulate = Color(0, 0, 0, 1)
+z_index = 1
+z_as_relative = false
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_xlcc4")
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
 justification_flags = 128
 
 [node name="IconBoxContainer" type="HBoxContainer" parent="." unique_id=1000595864]

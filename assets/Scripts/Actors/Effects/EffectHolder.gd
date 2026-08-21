@@ -293,10 +293,10 @@ func _on_turn_start(game_state:GameStateData):
 		_trigger_effects(BaseEffect.EffectTriggers.OnGapTurnStart, game_state)
 	else:
 		var action_page = _actor.Que.get_action_for_turn(game_state.current_turn_index)
-		_trigger_on_page_used_effects(action_page, game_state)
+		_trigger_on_page_used_effects(action_page, game_state, false)
 		_trigger_effects(BaseEffect.EffectTriggers.OnActionStart, game_state)
 
-func _trigger_on_page_used_effects(action_page:PageItemAction, game_state:GameStateData):
+func _trigger_on_page_used_effects(action_page:PageItemAction, game_state:GameStateData, after_use=false):
 	if LOGGING: print("Triggering OnPageUse '%s' for actor:%s." % [action_page.Id, _actor.Id])
 	for id in _triggers_to_effect_ids[BaseEffect.EffectTriggers.OnPageUse]:
 		var effect:BaseEffect = _effects.get(id, null)
@@ -306,13 +306,15 @@ func _trigger_on_page_used_effects(action_page:PageItemAction, game_state:GameSt
 			_triggers_to_effect_ids.erase(id)
 		else:
 			if LOGGING: print("Trigger effect with id: '%s'." % [ id])
-			effect.trigger_on_page_use(action_page, game_state)
+			effect.trigger_on_page_use(action_page, game_state, after_use)
 
 func _on_turn_end(game_state:GameStateData):
 	_trigger_effects(BaseEffect.EffectTriggers.OnTurnEnd, game_state)
 	if _actor.Que.is_turn_gap(game_state.current_turn_index):
 		_trigger_effects(BaseEffect.EffectTriggers.OnGapTurnEnd, game_state)
 	else:
+		var action_page = _actor.Que.get_action_for_turn(game_state.current_turn_index)
+		_trigger_on_page_used_effects(action_page, game_state, true)
 		_trigger_effects(BaseEffect.EffectTriggers.OnActionEnd, game_state)
 
 func _on_round_start(game_state:GameStateData):

@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 
 func set_effect(effect:BaseEffect):
 	name_label.text = effect.get_display_name()
-	if effect.show_counter():
+	if effect.show_duration():
 		var dur_val = effect.RemainingDuration
 		if !dur_val:
 			dur_val = 0

@@ -3,6 +3,7 @@ render_mode blend_mix;
 
 uniform vec2 sprite_dim = vec2(2,3);
 uniform int frame_count = 6;
+uniform float speed_scale = 1.0;
 
 varying float lifetime;
 varying float animation_frame;
@@ -14,7 +15,7 @@ varying vec2 frame;
 varying vec2 frame_uv;
 
 void vertex() {
-	lifetime = INSTANCE_CUSTOM.y;
+	lifetime = INSTANCE_CUSTOM.y * speed_scale;
 	animation_frame = INSTANCE_CUSTOM.z;
 	
 	progress = ((float(frame_count) * animation_frame) + (float(frame_count) * lifetime));
@@ -31,7 +32,8 @@ void vertex() {
 
 void fragment() {
 	// Called for every pixel the material is visible on.
-	COLOR = texture(TEXTURE, frame_uv);
+	vec4 text_color = texture(TEXTURE, frame_uv);
+	COLOR = vec4(text_color.x, text_color.y, text_color.z, COLOR.a);
 }
 
 //void light() {

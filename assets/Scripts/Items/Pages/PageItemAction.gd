@@ -95,6 +95,7 @@ func add_action_mod(mod_data:Dictionary):
 		var targ_parms = action_data.get('TargetParams')
 		for tparm_key in targ_parms.keys():
 			_target_params[tparm_key] = TargetParameters.new(tparm_key, targ_parms[tparm_key])
+	dirty_tags()
 
 func clear_action_mods():
 	var rebuild_targets = _action_mods_cache.size() > 0

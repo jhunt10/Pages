@@ -26,7 +26,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var attack_details = parent_action.get_attack_details()
 	
 	var actor_node = CombatRootControl.get_actor_node(actor.Id)
-	var script_path = "res://data/VFXs/WaterJet/WaterJet_VfxNode.tscn"
+	var script_path = "res://ObjectDefs/Data/VFXs/WaterJet/WaterJet_VfxNode.tscn"
 	var script = load(script_path)
 	if not script:
 		printerr("SubAct_SpawnBeamNode: Failed to load scene: %s" % [script_path])

@@ -28,9 +28,11 @@ func get_active_stat_mods(effect:BaseEffect, subeffect_data:Dictionary)->Array:
 	var out_list = []
 	for mod_key in stat_mod_keys:
 		if stat_mods_datas.has(mod_key):
-			var mod_data = stat_mods_datas[mod_key]
+			var mod_data = stat_mods_datas[mod_key].duplicate()
 			if not mod_data.has("DisplayName"):
 				mod_data['DisplayName'] = effect.get_display_name()
+			if mod_data.keys().has("PerStack"):
+				mod_data['Value'] += mod_data['PerStack'] * (effect._count)
 			out_list.append(BaseStatMod.create_from_data(effect.Id, mod_data))
 	return out_list
 

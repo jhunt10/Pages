@@ -5,6 +5,7 @@ signal icon_hovered(effect_id)
 
 @export var background:TextureRect
 @export var effect_icon:TextureRect
+@export var duration_label:Label
 @export var count_label:Label
 
 @export var description_box:Container
@@ -30,14 +31,26 @@ func _process(delta: float) -> void:
 
 func set_effect(effect:BaseEffect):
 	effect_id = effect.Id
+	if not effect.something_changed.is_connected(_sync):
+		effect.something_changed.connect(_sync)
+	_sync()
+
+func _sync():
+	var effect = EffectLibrary.get_effect(effect_id)
 	effect_icon.texture = effect.get_small_icon()
+	if effect.show_duration():
+		duration_label.show()
+		duration_label.text = str(effect.RemainingDuration)
+	else:
+		duration_label.hide()
 	
-	if effect.show_counter():
+	if effect.show_count():
 		count_label.show()
-		count_label.text = str(effect.RemainingDuration)
+		count_label.text = str(effect._count)
 	else:
 		count_label.hide()
-		
+	
+	
 	if effect.is_good():
 		background.texture = buff_background_texture
 	if effect.is_bad():

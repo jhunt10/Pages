@@ -25,7 +25,7 @@
 				},
 				"IsBad": true,
 				"IsGood": false,
-				"ShowCounter": true,
+				"ShowDuration": true,
 				"ShowInHud": true
 			},
 			"StatMods": {
@@ -42,7 +42,7 @@
 				}
 			}
 		},
-		"ShowCounter": true,
+		"ShowDuration": true,
 		"ShowInHud": true,
 		"_DefVersion": "1"
 	},
@@ -219,11 +219,11 @@
 					},
 					"ChildEffectKey": "Momentum_Nested_Effect",
 					"DeleteChildOnDelete": true,
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
+					"UniqueChildEffectId": "Momentum_Nested_Effect",
 					"OptionalTriggers": [
 						"OnPageUse"
 					],
-					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/NestedEffects/SubEffect_AddNestedEffect.gd",
-					"UniqueChildEffectId": "Momentum_Nested_Effect",
 					"OnPageUseTriggerCondition":{
 						"PageTagFilters": [
 							{
@@ -269,7 +269,7 @@
 				},
 				"IsBad": false,
 				"IsGood": true,
-				"ShowCounter": true,
+				"ShowDuration": true,
 				"ShowInHud": true
 			},
 			"StatMods": {
@@ -315,7 +315,7 @@
 				},
 				"IsBad": false,
 				"IsGood": true,
-				"ShowCounter": true,
+				"ShowDuration": true,
 				"ShowInHud": true
 			},
 			"StatMods": {
@@ -333,7 +333,7 @@
 				}
 			}
 		},
-		"ShowCounter": true,
+		"ShowDuration": true,
 		"ShowInHud": true,
 		"_DefVersion": "1"
 	},
@@ -363,7 +363,7 @@
 				},
 				"IsBad": false,
 				"IsGood": true,
-				"ShowCounter": true,
+				"ShowDuration": true,
 				"ShowInHud": true
 			},
 			"StatMods": {
@@ -381,7 +381,7 @@
 				}
 			}
 		},
-		"ShowCounter": true,
+		"ShowDuration": true,
 		"ShowInHud": true,
 		"_DefVersion": "1"
 	},
@@ -411,7 +411,7 @@
 				},
 				"IsBad": false,
 				"IsGood": true,
-				"ShowCounter": false,
+				"ShowDuration": false,
 				"ShowInHud": true
 			},
 			"StatMods": {
@@ -429,7 +429,7 @@
 				}
 			}
 		},
-		"ShowCounter": true,
+		"ShowDuration": true,
 		"ShowInHud": true,
 		"_DefVersion": "1"
 	}

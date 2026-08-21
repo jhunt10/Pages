@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://bw20dlsulqekk"]
+
+[ext_resource type="Script" uid="uid://dndbsj4mjc6m6" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_node.gd" id="1_lh4oe"]
+[ext_resource type="Texture2D" uid="uid://x1vdcv00dg1i" path="res://Scenes/Menus/SkillTreeMenu/SkillNode_Disabled.png" id="2_lh4oe"]
+[ext_resource type="Texture2D" uid="uid://dtdjgtskd20r4" path="res://Scenes/Menus/SkillTreeMenu/SkillNode_Avalible.png" id="3_5qn11"]
+[ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="3_7lxuh"]
+[ext_resource type="Texture2D" uid="uid://r7e0y5yv45uc" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/SkillNodeOutline.png" id="4_7evt4"]
+[ext_resource type="Texture2D" uid="uid://domp4wr4ihcr6" path="res://Scenes/Menus/SkillTreeMenu/SkillNode_Disabled_Clipped.png" id="4_f740j"]
+[ext_resource type="Texture2D" uid="uid://ljmmqtlwmin3" path="res://assets/Sprites/Paper/Soldier_Background.png" id="4_sefcj"]
+[ext_resource type="Texture2D" uid="uid://f5dyomv4wwn1" path="res://assets/Sprites/UI/SymbolIcons/InvalidEquipmentIcon.png" id="5_a3ya4"]
+[ext_resource type="Texture2D" uid="uid://bn4dpm3nu2w1k" path="res://assets/Sprites/Paper/Rogue_Background.png" id="5_f740j"]
+[ext_resource type="Texture2D" uid="uid://dimqh04igvj6g" path="res://Scenes/Menus/SkillTreeMenu/SkillNode_Avalible_Clipped.png" id="5_l00gp"]
+[ext_resource type="Texture2D" uid="uid://bxirs2s5ht65u" path="res://assets/Sprites/Paper/Priest_Background.png" id="6_l00gp"]
+[ext_resource type="Texture2D" uid="uid://cnh2wqmt7x8ib" path="res://assets/Sprites/Paper/Mage_Background.png" id="7_qg02j"]
+
+[node name="SkillTreeNode" type="Control" unique_id=1229891160 node_paths=PackedStringArray("background_rect", "icon_rect", "button", "invalid_icon")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 6
+script = ExtResource("1_lh4oe")
+background_rect = NodePath("Control/Background")
+icon_rect = NodePath("Control/Icon")
+button = NodePath("Control/Button")
+invalid_icon = NodePath("Control/InvalidIcon")
+disabled_texture = ExtResource("2_lh4oe")
+avalible_texture = ExtResource("3_5qn11")
+disabled_clipped_texture = ExtResource("4_f740j")
+avalible_clipped_texture = ExtResource("5_l00gp")
+soldier_background = ExtResource("4_sefcj")
+rogue_background = ExtResource("5_f740j")
+priest_background = ExtResource("6_l00gp")
+mage_background = ExtResource("7_qg02j")
+
+[node name="Control" type="Control" parent="." unique_id=1440816245]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="Control" unique_id=253172669]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_lh4oe")
+expand_mode = 1
+
+[node name="Icon" type="TextureRect" parent="Control" unique_id=153664380]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_7lxuh")
+expand_mode = 3
+
+[node name="Highlight" type="TextureRect" parent="Control" unique_id=47498231]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_7evt4")
+
+[node name="Outline" type="TextureRect" parent="Control" unique_id=1978062999]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_7evt4")
+
+[node name="Button" type="Button" parent="Control" unique_id=1680454870]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InvalidIcon" type="TextureRect" parent="Control" unique_id=1613603214]
+visible = false
+layout_mode = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 16.0
+offset_bottom = 27.0
+texture = ExtResource("5_a3ya4")

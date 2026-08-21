@@ -59,7 +59,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		if eff_data.size() > 0:
 			effect_datas[key] = eff_data
 	missile_data['EffectDatas'] = effect_datas
-	
+	missile_data['ParentActionId'] = parent_action.Id
 	missile_data['TargetParams'] = target_params
 	var missile_script_path = missile_data.get("MissileScriptPath", "res://assets/Scripts/Missiles/AttackMissile.gd")
 	var missile_script =  load(missile_script_path)

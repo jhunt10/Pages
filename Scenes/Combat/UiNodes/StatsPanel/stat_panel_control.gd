@@ -124,7 +124,7 @@ func _sync_icons():
 		var new_icon:EffectIconControl = premade_effect_icon.duplicate()
 		new_icon.set_effect(effect)
 		new_icon.visible = true
-		#if effect.show_counter():
+		#if effect.show_duration():
 			#_set_duration_text(effect.Id, effect.RemainingDuration)
 		#else:
 			#new_icon.get_child(0).hide()

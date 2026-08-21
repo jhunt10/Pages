@@ -1,4 +1,68 @@
 {
+	"ChannelMagic_PageEffect": {
+		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
+		"#ObjDetails": {
+			"Description": "@@#Color:Red:+10%@@ @@#Stat:MagAttack@@ per stack",
+			"DisplayName": "Channeling    ",
+			"LargeIcon": "Sprites/ChannelEffect_Icon.png",
+			"ObjectType": "Effect",
+			"SmallIcon": "Sprites/ChannelEffect_Icon.png",
+			"SnippetDesc": "Boost next spell",
+			"Tags": [],
+			"Taxonomy": [
+				"Effect"
+			]
+		},
+		"EffectData": {
+			"EffectDetails": {
+				"CanStack": false,
+				"IsBad": false,
+				"IsGood": true,
+				"IsTemporary": true,
+				"ShowDuration": false,
+				"ShowCount": true,
+				"ShowInHud": true
+
+			},
+			"CounterData":{
+				"InitCount": 1,
+				"MaxCount": 10,
+				"MergeType": "Add"
+			},
+			"StatMods": {
+				"ChannelStatMod": {
+					"ModType": "Scale",
+					"StatName": "MagAttack",
+					"PerStack": 0.1,
+					"Value": 1.0
+				}
+			},
+			"SubEffects": {
+				"EndCondition": {
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_EndEffect.gd",
+					"OptionalTriggers": [
+						"OnPageUse"
+					],
+					"OnPageUseTriggerCondition":{
+						"TriggerAfterUse": true,
+						"PageTagFilters": [
+							{
+								"RequireAllTags":["Spell"]
+							}
+						],
+						"PageTagFiltersReqAll": true
+					}
+				},
+				"ModStat": {
+					"StatModKeys": [
+						"ChannelStatMod"
+					],
+					"SubEffectScript": "res://assets/Scripts/Actors/Effects/SubEffects/SubEffect_ModStat.gd"
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
 	"PoisonZoneEffect": {
 		"!ObjectScript": "res://assets/Scripts/Actors/Effects/BaseEffect.gd",
 		"#ObjDetails": {
@@ -38,7 +102,7 @@
 				},
 				"IsBad": true,
 				"IsGood": false,
-				"ShowCounter": false,
+				"ShowDuration": false,
 				"ShowInHud": true
 			},
 			"StatMods": {

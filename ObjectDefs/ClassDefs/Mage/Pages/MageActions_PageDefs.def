@@ -1,4 +1,52 @@
 {
+	"ChannelMagic_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseApplySelfBuffAction",
+		"#ObjDetails": {
+			"Description": "Channel your magic boosting next spell.",
+			"DisplayName": "Channel",
+			"LargeIcon": "Sprites/Channel_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Channel_Icon.png",
+			"SnippetDesc": "Channel Magic.",
+			"Tags": [
+				"Shock"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"EffectDatas": {
+				"ApplyEffect": {
+					"EffectDataDef": {
+						"EffectDetails": {
+							"DurationData": {
+								"BaseDuration": 2.0
+							}
+						}
+					},
+					"EffectKey": "ChannelMagic_PageEffect"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Mage"
+		},
+		"_DefVersion": "1"
+	},
 	"CallShockSpell": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
@@ -122,7 +170,7 @@
 	"ChainShockSpell": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Send out a jolt of electrical energy modified to arch across multiple targets.\n\nMake a @@#Color:Red:Ranged Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit and @@Color:Blue:Chain@@ up to @@Color:Red:3@@ @@#Color:Red:Adj Actor@@.  20% chance to target an @@#Color:Red:Adj Actor@@ instead.",
+			"Description": "Send out a jolt of @@#Color:DmgColor:Shock@@ energy which archs between helpless enemies and allies who shouldn't have been standing there.\n\nMake a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit and @@#Tag:Chain@@ up to @@#Color:Red:3@@ @@#Color:Red:Adj Actors@@.",
 			"DisplayName": "Chain Shock",
 			"LargeIcon": "Sprites/ChainShock_Icon.png",
 			"ObjectType": "Item",
@@ -182,7 +230,7 @@
 					"#SubIndex": 0.0,
 					"AllowAutoTarget": false,
 					"AllowSelectingChain": false,
-					"MaxChainCount": 3.0,
+					"MaxChainCount": 2.0,
 					"SetTargetKey": "Target1",
 					"TargetParamKey": "TargetParam"
 				},
@@ -350,11 +398,11 @@
 		},
 		"_DefVersion": "1"
 	},
-	"FireBallSpell": {
+	"FireBallSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMissileSpell",
 		"#ObjDetails": {
-			"Description": "Launch a @@#Color:Fireball Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ @@#Color:Red:AOE@@.\n-I didn't ask how big the room was, I said I use Fireball!",
+			"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to all @@#Color:Red:Actors@@ in @@#Tag:AOE@@.\n\n-\"I didn't ask how big the room was...\"",
 			"DisplayName": "Fire Ball",
 			"LargeIcon": "Sprites/FireBall_Icon.png",
 			"ObjectType": "Item",
@@ -362,6 +410,7 @@
 			"SnippetDesc": "Launch a Fire Ball Missile",
 			"Tags": [
 				"Fire",
+				"Spell",
 				"AOE"
 			],
 			"Taxonomy": [
@@ -435,17 +484,18 @@
 		},
 		"_DefVersion": "1"
 	},
-	"FireThrowSpell": {
+	"FireThrowSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Unleash a stream of Fire burning everything in the area 3 times for bla bla damage.\n\n-\"The air is lava!\"",
+			"Description": "Unleash an @@#Tag:AOE@@ @@#Tag:SpellAtk:Spell Attack@@ dealing @@#DmgData:AoeDamage@@ to all @@#Color:Red:Actors@@ in range.\n\n-\"The air is lava!\"",
 			"DisplayName": "Throw Flames",
 			"LargeIcon": "Sprites/ThrowFire_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/ThrowFire_Icon.png",
 			"SnippetDesc": "Throw Fire",
 			"Tags": [
-				"Fire"
+				"Fire",
+				"Spell"
 			],
 			"Taxonomy": [
 				"Item",
@@ -454,6 +504,11 @@
 			]
 		},
 		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 6,
+				"Cost": 1
+			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
 				"ActionVerb": "threw flames",
@@ -530,7 +585,7 @@
 					"SaveIdAs": "FlameVfxId",
 					"VfxData": {
 						"CanStack": true,
-						"ScenePath": "res://assets/Scripts/VFXs/ParticalVfxs/flame_thrower_vfx_node.tscn",
+						"ScenePath": "res://Scenes/VFXs/FlameThrower/flame_thrower_vfx_node.tscn",
 						"VfxKey": "ThrowFlameVfx"
 					},
 					"VfxKey": "ThrowFlameVfx"
@@ -577,18 +632,19 @@
 		},
 		"_DefVersion": "1"
 	},
-	"FireZoneSpell": {
+	"FireZoneSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseAttackZoneSpell",
 		"#ObjDetails": {
-			"Description": "Create a Zone of Fire which last for @@#ZoneData:Zone1:Duration@@. All Actors in the Zone take @@#DmgData:ZoneDamage@@ at @@#Color:Red:End of Turn@@.\n\n-\"The floor is lava!\"",
+			"Description": "Create a @@#Tag:Zone@@ of @@#Color:DmgColor:Fire@@ which last for @@#ZoneData:Zone1:Duration@@. All @@#Color:Red:Actors@@ in the @@#Color:Red:Area@@ take @@#DmgData:ZoneDamage@@ at @@#Color:Red:End of Turn@@.\n\n-\"The floor is lava!\"",
 			"DisplayName": "Fire Zone",
 			"LargeIcon": "Sprites/FireZone_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/FireZone_Icon.png",
 			"SnippetDesc": "Create a Zone of Fire",
 			"Tags": [
-				"Fire"
+				"Fire",
+				"Spell"
 			],
 			"Taxonomy": [
 				"Item",
@@ -597,6 +653,11 @@
 			]
 		},
 		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 4,
+				"Cost": 1
+			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
 				"ActionVerb": "'s FireZone attacked",
@@ -615,7 +676,7 @@
 				"Effect1": {
 					"ApplicationChance": 0.2,
 					"EffectKey": "AilmentBurned",
-					"ShowCounter": false,
+					"ShowDuration": false,
 					"SubEffects": {
 						"Duration": {
 							"DurationType": "Trigger"
@@ -632,7 +693,7 @@
 					"RemoveEffectOnLeave": false,
 					"TileSet": "SpriteSheets/FireZone_TileSheet.png",
 					"ZoneKey": "Zone1",
-					"ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/zone_node.tscn"
+					"ZoneScenePath": "res://Scenes/Combat/MapObjects/Zones/fire_zone_node.tscn"
 				}
 			}
 		},
@@ -839,18 +900,20 @@
 		},
 		"_DefVersion": "1"
 	},
-	"WaterBallSpell": {
+	"WaterBallSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMissileSpell",
 		"#ObjDetails": {
-			"Description": "Launch a @@#Color:Waterball Missile@@ at @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to @@#Color:Red:Actor@@ in @@#Color:Red:Spot@@. On impact the ball shatters launching more @@#Color:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n@@#EftChances@@\n-One of many spells banned from professional water balloon fights.",
-			"DisplayName": "Water Ball",
+			"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n\nOn impact the ball shatters launching @@#Tag:Missile:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n@@#EftChances@@\n-One of many spells banned from professional snowball fights.",
+			"DisplayName": "Ice Ball",
 			"LargeIcon": "Sprites/WaterBall_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/WaterBall_Icon.png",
-			"SnippetDesc": "Launch a Water Ball Missile",
+			"SnippetDesc": "Launch a Ice Ball Missile",
 			"Tags": [
-				"Water"
+				"Ice",
+				"Spell",
+				"Attack"
 			],
 			"Taxonomy": [
 				"Item",
@@ -861,8 +924,8 @@
 		"ActionData": {
 			"AmmoData": {
 				"AmmoType": "Mag",
-				"Clip": 12.0,
-				"Cost": 3.0
+				"Clip": 4,
+				"Cost": 1
 			},
 			"DamageDatas": {
 				"MissileDamage": {
@@ -968,18 +1031,18 @@
 		},
 		"_DefVersion": "1"
 	},
-	"WaterBeamSpell": {
+	"WaterBeamSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Spawn a @@#Color:Beam@@ of water, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Also great for power washing the blood left behind after power washing enemies.",
-			"DisplayName": "Water Beam",
+			"Description": "Spawn a @@#Color:Beam@@ of ice, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Great for refrigerating food, corpses, and poeple you wish to be corpses.",
+			"DisplayName": "Ice Beam",
 			"LargeIcon": "Sprites/WaterBeam.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/WaterBeam.png",
-			"SnippetDesc": "Spawn Piercing Beam of Water.",
+			"SnippetDesc": "Spawn Piercing Beam of Ice.",
 			"Tags": [
 				"Beam",
-				"Water"
+				"Ice"
 			],
 			"Taxonomy": [
 				"Item",
@@ -988,6 +1051,11 @@
 			]
 		},
 		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 4,
+				"Cost": 1
+			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
 				"PotencyMod": 1.0
@@ -1066,16 +1134,18 @@
 		},
 		"_DefVersion": "1"
 	},
-	"WaterGunSpell": {
+	"WaterGunSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Fire a rapid series of @@#Color:Red:Ranged Attacks@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
-			"DisplayName": "Water Gun",
+			"Description": "Fire a rapid series of @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n\n-A more perfect murder. (Looking at you Ice Knife)",
+			"DisplayName": "Ice Gun",
 			"LargeIcon": "Sprites/WaterGun_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/WaterGun_Icon.png",
 			"SnippetDesc": "Rapid fire Water",
 			"Tags": [
+				"Ice",
+				"Spell",
 				"Attack",
 				"Ranged",
 				"LOS"
@@ -1087,6 +1157,11 @@
 			]
 		},
 		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 6,
+				"Cost": 1
+			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
 				"AttackVfxData": {
@@ -1205,9 +1280,9 @@
 			"PageRequirements": {
 				"ConflictingPages": [],
 				"IncompatiblePages": [],
-				"TitleReq": "None"
+				"TitleReq": "Match"
 			},
-			"SourceTitle": ""
+			"SourceTitle": "Mage"
 		},
 		"_DefVersion": "1"
 	}

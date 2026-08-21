@@ -1,6 +1,7 @@
 {
     "Soldier": [
         [
+            {"Spacer":true},
             {
                 "SkillNodeKey": "HeavyFoot",
                 "PageKey": "HeavyFoot_PageItem",
@@ -15,7 +16,8 @@
                 "SkillNodeKey": "ThrowJavelin",
                 "PageKey": "ThrowJavelin_PageItem",
                 "AlwaysUnlocked": true
-            }
+            },
+            {"Spacer":true}
         ],
         [
             {
@@ -33,9 +35,11 @@
             {
                 "SkillNodeKey": "TwoHandBonus",
                 "PageKey": "TwoHandBonus_PageItem"
-            }
+            },
+            {"Spacer":true}
         ],
         [
+            {"Spacer":true},
             {
                 "SkillNodeKey": "CrashBully",
                 "PageKey": "CrashBully_PageItem"
@@ -48,9 +52,11 @@
             {
                 "SkillNodeKey": "Charge",
                 "PageKey": "Charge_PageItem"
-            }
+            },
+            {"Spacer":true}
         ],
         [
+            {"Spacer":true},
             {
                 "SkillNodeKey": "TauntEnemy",
                 "PageKey": "TauntEnemy_PageItem"
@@ -63,9 +69,11 @@
                 "SkillNodeKey": "InStopableUnMovable",
                 "PairType": "Or",
                 "Pages": ["InStopable_PageItem", "UnMovable_PageItem"]
-            }
+            },
+            {"Spacer":true}
         ],
         [
+            {"Spacer":true},
             {
                 "SkillNodeKey": "TauntEnemyMass",
                 "PageKey": "TauntEnemyMass_PageItem",
@@ -79,9 +87,11 @@
             {
                 "SkillNodeKey": "Cleave",
                 "PageKey": "Cleave_PageItem"
-            }
+            },
+            {"Spacer":true}
         ],
         [
+            {"Spacer":true},
             {
                 "SkillNodeKey": "Recall",
                 "PageKey": "Recall_PageItem"
@@ -93,7 +103,8 @@
             {
                 "SkillNodeKey": "WildSwing",
                 "PageKey": "WildSwing"
-            }
+            },
+            {"Spacer":true}
         ]
     ],
     "Rogue": [
@@ -251,6 +262,7 @@
                 "PageKey": "ApplyBlessing_Earth_PageItem"
             },
             {
+                "SkillNodeKey": "RemoveOr",
                 "PairType": "Or",
                 "Pages": ["RemoveMorePage", "RemoveSelectPage"]
             }
@@ -287,28 +299,32 @@
     ],
     "Mage":[
         [
+            {"Spacer":true},
             {
-                "PageKey": "ColdMeleeSpell",
+                "SkillNodeKey": "ChannelMagic",
+                "PageKey": "ChannelMagic_PageItem",
+                "AlwaysUnlocked": true
+
+            },
+            {"Spacer":true},
+            {
+                "SkillNodeKey": "MagBoost",
+                "PageKey": "MagBoost_PageItem",
                 "AlwaysUnlocked": true
             },
-            {
-                "PageKey": "ShockMissileSpell",
-                "AlwaysUnlocked": true
-            },
-            {
-                "PageKey": "MagBoostPage",
-                "AlwaysUnlocked": true
-            }
+            {"Spacer":true}
         ],
         [
             {
-                "PageKey": "WaterGunSpell"
+                "SkillNodeKey": "WaterGun",
+                "PageKey": "WaterGunSpell_PageItem"
             },
             {
                 "PageKey": "DischargeSpell"
             },
             {
-                "PageKey": "FireThrowSpell"
+                "SkillNodeKey": "FireThrowSpell",
+                "PageKey": "FireThrowSpell_PageItem"
             }
         ],
         [
@@ -318,27 +334,30 @@
                 "Pages": ["MergedMagBonus_PageItem", "DeployedMagBonus_PageItem"]
             },
             {
+                "SkillNodeKey": "ChainShockSpell",
                 "PageKey": "ChainShockSpell"
             },
             {
-                "PageKey": "FireZoneSpell"
+                "SkillNodeKey": "FireThrowSpell",
+                "PageKey": "FireZoneSpell_PageItem"
             }
         ],
         [
             {
-                "PageKey": "WaterBallSpell"
+                "SkillNodeKey": "WaterBall",
+                "PageKey": "WaterBallSpell_PageItem"
             },
             {
                 "PairType": "Or",
+                "ParentSkillKey": "ChainShockSpell",
                 "Pages": ["ChainExtendPage", "ChainSelectPage"]
             },
-            {
-                "PageKey": "ThrowBombPage"
-            }
+            {"Spacer":true}
         ],
         [
             {
-                "PageKey": "WaterBeamSpell"
+                "SkillNodeKey": "WaterBeam",
+                "PageKey": "WaterBeamSpell_PageItem"
             },
             {
                 "PageKey": "CallShockSpell"
@@ -350,13 +369,15 @@
         ],
         [
             {
-                "PageKey": "ColdMage_PassivePage"
+                "SkillNodeKey": "ColdMage",
+                "PageKey": "ColdMagePassive_PageItem"
             },
             {
                 "PageKey": "ShockStormSpell"
             },
             {
-                "PageKey": "FireBallSpell"
+                "SkillNodeKey": "FireBall",
+                "PageKey": "FireBallSpell_PageItem"
             }
         ]
     ]

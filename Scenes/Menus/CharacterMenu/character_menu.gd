@@ -27,6 +27,9 @@ signal closed
 @export var mouse_control:CharacterMenuMouseControl
 @export var inventory_option_button:OptionButton
 @export var skill_tree_control:SkillTreePageControl
+@export var skill_tree_menu:SkillTreeMenu
+
+@export var animation_player:AnimationPlayer
 
 var _current_details_card:ItemDetailsCard
 
@@ -83,8 +86,9 @@ func _ready() -> void:
 	name_panel.xp_bar.level_up_button_pressed.connect(_on_right_page_option_select.bind(3))
 	
 	
-	skill_tree_control.node_button_down.connect(on_item_button_down)
-	skill_tree_control.node_button_up.connect(on_item_button_up)
+	skill_tree_menu.node_button_down.connect(on_item_button_down)
+	skill_tree_menu.node_button_up.connect(on_item_button_up)
+	skill_tree_menu.skill_menu_closed.connect(close_skill_menu)
 	var first_actor = StoryState.get_party_actor_by_index(current_party_actor_index)
 	set_actor(first_actor)
 
@@ -101,19 +105,36 @@ func set_actor(actor:BaseActor):
 	_actor.bag_items_changed.connect(_sync)
 	_actor.page_list_changed.connect(_sync)
 	_sync()
-	skill_tree_control.set_actor(_actor)
+	#skill_tree_control.set_actor(_actor)
+	skill_tree_menu.set_actor(_actor)
 
+var _last_right_page_index = 0
 func _on_right_page_option_select(index:int):
-	if inventory_option_button.selected != index:
-		inventory_option_button.selected = index
 	if index < 3:
 		var option = inventory_option_button.get_item_text(index)
 		inventory_container.set_character_menu_context(option)
 		inventory_container.show()
-		skill_tree_control.hide()
+		#skill_tree_control.hide()
+		#skill_tree_menu.hide()
+		if skill_tree_menu.visible:
+			animation_player.play("close_skill_menu")
+		if inventory_option_button.selected != index:
+			inventory_option_button.selected = index
 	if index == 3:
-		inventory_container.hide()
-		skill_tree_control.show()
+		inventory_option_button.selected = _last_right_page_index
+		#inventory_container.hide()
+		#skill_tree_control.show()
+		#skill_tree_menu.show()
+		if skill_tree_menu._actor != _actor:
+			skill_tree_menu.set_actor(_actor)
+		skill_tree_menu.sync(true)
+		if not skill_tree_menu.visible:
+			animation_player.play("open_skill_menu")
+	_last_right_page_index = index
+
+func close_skill_menu():
+	animation_player.play("close_skill_menu")
+	
 
 func _sync():
 	name_panel.sync(_actor)

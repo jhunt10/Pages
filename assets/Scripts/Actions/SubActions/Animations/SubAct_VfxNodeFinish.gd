@@ -20,7 +20,7 @@ func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, metadata
 	if subaction_data.keys().has("VfxIdKey"):
 		var key_id = subaction_data['VfxIdKey']
 		var turn_data = metadata.get_current_turn_data()
-		var vfx_id = turn_data.data_cache['CreatedVfxs'].get(key_id)
+		var vfx_id = turn_data.data_cache.get('CreatedVfxs', {}).get(key_id)
 		if vfx_id and actor_node.vfx_holder.has_vfx(vfx_id):
 			var vfx = actor_node.vfx_holder.get_vfx(vfx_id)
 			vfx.finish()

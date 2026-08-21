@@ -1,0 +1,414 @@
+[gd_scene format=3 uid="uid://dtq43lg70b7wm"]
+
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="1_hiajf"]
+[ext_resource type="Script" uid="uid://bjb1gvc1k7d4b" path="res://Scenes/Menus/SkillTreeMenu/skill_tree_menu.gd" id="1_px1gp"]
+[ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="2_cw7vj"]
+[ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="3_px1gp"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="4_srsn6"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="5_ihvrh"]
+[ext_resource type="Texture2D" uid="uid://bu5de6o2t70if" path="res://assets/Themes/ComputerPanels/InsetPatch.png" id="6_4vbi8"]
+[ext_resource type="Script" uid="uid://jyeqet3kbvxl" path="res://Scenes/Menus/SkillTreeMenu/skill_tree_progress_bar.gd" id="8_4vbi8"]
+[ext_resource type="Script" uid="uid://cyt134tso5psr" path="res://Scenes/Menus/SkillTreeMenu/skill_tree_background_panel.gd" id="8_ihvrh"]
+[ext_resource type="PackedScene" uid="uid://bw20dlsulqekk" path="res://Scenes/Menus/SkillTreeMenu/skill_tree_node.tscn" id="8_srsn6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihvrh"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.6, 0.6, 0.6, 1)
+
+[sub_resource type="Theme" id="Theme_4vbi8"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_ihvrh")
+
+[node name="SkillTreeMenu" type="Control" unique_id=853623227 node_paths=PackedStringArray("title_args_label", "close_button", "cancel_button", "ok_button", "background_panel", "grid_main_container", "premade_column", "premade_spacer", "progress_bar", "unspent_points_label", "spent_points_label", "point_seperator_label", "total_points_label", "remaining_points_display", "details_card_spawn_point")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_px1gp")
+title_args_label = NodePath("PanelContainer/VBoxContainer/TitleBar/Label2")
+close_button = NodePath("PanelContainer/VBoxContainer/TitleBar/CloseButton")
+cancel_button = NodePath("PanelContainer/VBoxContainer/ButtonsContainer/CancelButton")
+ok_button = NodePath("PanelContainer/VBoxContainer/ButtonsContainer/OkButton")
+background_panel = NodePath("PanelContainer/VBoxContainer/MainContainer/GridPanelContainer")
+grid_main_container = NodePath("PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer")
+premade_column = NodePath("PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/PremadeRow")
+premade_spacer = NodePath("PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/PremadeSpacer")
+progress_bar = NodePath("PanelContainer/VBoxContainer/MainContainer/HBoxContainer2/Progress_NinePatch")
+unspent_points_label = NodePath("PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/RemainingPointsControl/HBoxContainer/TitlePoints_Current")
+spent_points_label = NodePath("PanelContainer/VBoxContainer/MainContainer/HBoxContainer/TitlePoints_Spent")
+point_seperator_label = NodePath("PanelContainer/VBoxContainer/MainContainer/HBoxContainer/TitlePoints_Sep")
+total_points_label = NodePath("PanelContainer/VBoxContainer/MainContainer/HBoxContainer/TitlePoints_Max")
+remaining_points_display = NodePath("PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/RemainingPointsControl")
+details_card_spawn_point = NodePath("DetailsCardSpawnPoint")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1084273047]
+custom_minimum_size = Vector2(0, 521)
+layout_mode = 0
+offset_right = 537.0
+offset_bottom = 385.0
+theme = ExtResource("1_hiajf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1257019059]
+layout_mode = 2
+
+[node name="TitleBar" type="Control" parent="PanelContainer/VBoxContainer" unique_id=743819323]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/TitleBar" unique_id=995437799]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("1_hiajf")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../PageQuest/level_up.sub"
+
+[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/TitleBar" unique_id=969909097]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 196.0
+offset_top = -19.0
+offset_right = 346.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("1_hiajf")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "-S"
+
+[node name="CloseButton" type="TextureButton" parent="PanelContainer/VBoxContainer/TitleBar" unique_id=286590093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_cw7vj")
+texture_pressed = ExtResource("3_px1gp")
+
+[node name="InfoButton" type="TextureButton" parent="PanelContainer/VBoxContainer/TitleBar" unique_id=1295525169]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_srsn6")
+texture_pressed = ExtResource("5_ihvrh")
+
+[node name="MainContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1441477445]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer" unique_id=65677130]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer" unique_id=1116071337]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TitlePoints_Title" type="Label" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer" unique_id=227295217]
+layout_mode = 2
+text = "Title Points: "
+
+[node name="TitlePoints_Spent" type="Label" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer" unique_id=278601940]
+layout_mode = 2
+text = "00"
+
+[node name="TitlePoints_Sep" type="Label" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer" unique_id=10399173]
+layout_mode = 2
+text = "/"
+
+[node name="TitlePoints_Max" type="Label" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer" unique_id=2107293391]
+layout_mode = 2
+text = "00"
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer" unique_id=701349298]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer" unique_id=1920497839]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer2" unique_id=276669616]
+layout_mode = 2
+text = " Progress"
+
+[node name="Progress_NinePatch" type="NinePatchRect" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer2" unique_id=1520103600 node_paths=PackedStringArray("progress_bar_background", "progress_bar_color")]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("6_4vbi8")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+script = ExtResource("8_4vbi8")
+speed = 250.0
+progress_bar_background = NodePath("ProgressBackground")
+progress_bar_color = NodePath("ProgressBackground/ProgressColor")
+
+[node name="ProgressBackground" type="ColorRect" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer2/Progress_NinePatch" unique_id=1574462429]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="ProgressColor" type="ColorRect" parent="PanelContainer/VBoxContainer/MainContainer/HBoxContainer2/Progress_NinePatch/ProgressBackground" unique_id=79118804]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 68.0
+grow_vertical = 2
+color = Color(0.30980393, 0.5294118, 0.6862745, 1)
+
+[node name="GridPanelContainer" type="PanelContainer" parent="PanelContainer/VBoxContainer/MainContainer" unique_id=549758289 node_paths=PackedStringArray("parent_control")]
+layout_mode = 2
+size_flags_vertical = 3
+theme = SubResource("Theme_4vbi8")
+script = ExtResource("8_ihvrh")
+parent_control = NodePath("../../../..")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer" unique_id=894020160]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer" unique_id=670932081]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="GridMainContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer" unique_id=721591340]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+
+[node name="PremadeSpacer" type="HSeparator" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer" unique_id=1106887156]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PremadeRow" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer" unique_id=378626312]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer" unique_id=1429173985]
+layout_mode = 2
+
+[node name="SkillTreeNode" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer2" unique_id=1992605408 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode4" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer2" unique_id=1229891160 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode5" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer2" unique_id=1032719527 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode2" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer2" unique_id=538773768 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode3" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer2" unique_id=319251977 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer" unique_id=2021811988]
+layout_mode = 2
+
+[node name="SkillTreeNode" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer3" unique_id=491270267 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode2" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer3" unique_id=1150802235 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode3" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer3" unique_id=1578181846 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer" unique_id=659649361]
+layout_mode = 2
+
+[node name="SkillTreeNode" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer4" unique_id=1050385969 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode2" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer4" unique_id=510408116 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode3" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer4" unique_id=1036117863 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer" unique_id=1271029448]
+layout_mode = 2
+
+[node name="SkillTreeNode" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer5" unique_id=1247965295 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode2" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer5" unique_id=1220447328 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode3" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer5" unique_id=1533449771 instance=ExtResource("8_srsn6")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer" unique_id=94801203]
+layout_mode = 2
+
+[node name="SkillTreeNode" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer6" unique_id=757485687 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode2" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer6" unique_id=1768039989 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode3" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer6" unique_id=741428174 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer7" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer" unique_id=1336575369]
+layout_mode = 2
+
+[node name="SkillTreeNode" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer7" unique_id=937776410 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode2" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer7" unique_id=871564772 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SkillTreeNode3" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer/GridMainContainer/VBoxContainer7" unique_id=1117561370 instance=ExtResource("8_srsn6")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/VBoxContainer" unique_id=1979729582]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="RemainingPointsControl" type="Control" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer" unique_id=2092663771]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/RemainingPointsControl" unique_id=2145348066]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -14.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/RemainingPointsControl/HBoxContainer" unique_id=764469065]
+layout_mode = 2
+text = "Points Left:"
+horizontal_alignment = 1
+
+[node name="TitlePoints_Current" type="Label" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/RemainingPointsControl/HBoxContainer" unique_id=1748355907]
+layout_mode = 2
+text = "00"
+
+[node name="TitlePoints_Current2" type="Label" parent="PanelContainer/VBoxContainer/MainContainer/GridPanelContainer/RemainingPointsControl" unique_id=2144647263]
+layout_mode = 0
+offset_left = -23.0
+offset_top = 392.0
+offset_right = 89.0
+offset_bottom = 435.0
+theme_override_constants/line_spacing = -2
+theme_override_font_sizes/font_size = 14
+text = "Ctrl + Click
+Quick Buy"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1299773834]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/ButtonsContainer" unique_id=1405469559]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonsContainer" unique_id=2142163461]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_hiajf")
+text = " Cancel "
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/VBoxContainer/ButtonsContainer" unique_id=2061223208]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OkButton" type="Button" parent="PanelContainer/VBoxContainer/ButtonsContainer" unique_id=848218759]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_hiajf")
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="PanelContainer/VBoxContainer/ButtonsContainer" unique_id=1453275349]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DetailsCardSpawnPoint" type="Control" parent="." unique_id=1013873048]
+custom_minimum_size = Vector2(300, 340)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -989.99994
+offset_top = -232.99998
+offset_right = -689.99994
+offset_bottom = 107.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.25, 1.25)
+mouse_filter = 2

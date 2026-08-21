@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://n764424bta01"]
+[gd_scene format=3 uid="uid://n764424bta01"]
 
-[ext_resource type="Texture2D" uid="uid://b5rie2o064xi6" path="res://data/VFXs/WaterJet/WaterJet_Neck.png" id="1_lbwy0"]
-[ext_resource type="Script" path="res://data/VFXs/WaterJet/water_jet_attack_vfx_node.gd" id="1_tddp5"]
-[ext_resource type="Texture2D" uid="uid://crxstfp5rs2fg" path="res://data/VFXs/WaterJet/WaterJet_Head.png" id="2_fao0l"]
-[ext_resource type="Texture2D" uid="uid://doh42p65vvrlw" path="res://data/VFXs/WaterJet/WaterJet_Tail.png" id="4_rxgg3"]
+[ext_resource type="Texture2D" uid="uid://b5rie2o064xi6" path="res://ObjectDefs/Data/VFXs/WaterJet/WaterJet_Neck.png" id="1_lbwy0"]
+[ext_resource type="Script" uid="uid://cp8fevhholovq" path="res://ObjectDefs/Data/VFXs/WaterJet/water_jet_attack_vfx_node.gd" id="1_tddp5"]
+[ext_resource type="Texture2D" uid="uid://crxstfp5rs2fg" path="res://ObjectDefs/Data/VFXs/WaterJet/WaterJet_Head.png" id="2_fao0l"]
+[ext_resource type="Texture2D" uid="uid://doh42p65vvrlw" path="res://ObjectDefs/Data/VFXs/WaterJet/WaterJet_Tail.png" id="4_rxgg3"]
 
 [sub_resource type="Animation" id="Animation_vw7im"]
 length = 0.001
@@ -40,11 +40,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_54066"]
 _data = {
-"RESET": SubResource("Animation_vw7im"),
-"new_animation": SubResource("Animation_yw842")
+&"RESET": SubResource("Animation_vw7im"),
+&"new_animation": SubResource("Animation_yw842")
 }
 
-[node name="WaterJetNode" type="Node2D" node_paths=PackedStringArray("head", "lead_neck", "premade_neck", "neck_sprites", "tail", "animation_player")]
+[node name="WaterJetNode" type="Node2D" unique_id=2077315865 node_paths=PackedStringArray("head", "lead_neck", "premade_neck", "neck_sprites", "tail", "animation_player")]
 script = ExtResource("1_tddp5")
 head = NodePath("HeadSprite2D")
 lead_neck = NodePath("HeadSprite2D/Node2D/Lead_NeckSprite2D")
@@ -53,15 +53,15 @@ neck_sprites = NodePath("NeckSpritesHolder")
 tail = NodePath("TailSprite2D")
 animation_player = NodePath("AnimationPlayer")
 
-[node name="HeadSprite2D" type="Sprite2D" parent="."]
+[node name="HeadSprite2D" type="Sprite2D" parent="." unique_id=95415025]
 position = Vector2(0, -32)
 texture = ExtResource("2_fao0l")
 hframes = 8
 
-[node name="Node2D" type="Node2D" parent="HeadSprite2D"]
+[node name="Node2D" type="Node2D" parent="HeadSprite2D" unique_id=1962033832]
 position = Vector2(0, 16)
 
-[node name="Lead_NeckSprite2D" type="Sprite2D" parent="HeadSprite2D/Node2D"]
+[node name="Lead_NeckSprite2D" type="Sprite2D" parent="HeadSprite2D/Node2D" unique_id=1403408475]
 texture = ExtResource("1_lbwy0")
 centered = false
 offset = Vector2(-16, 0)
@@ -69,19 +69,18 @@ hframes = 8
 region_enabled = true
 region_rect = Rect2(0, 32, 256, 0)
 
-[node name="Premade_NeckSprite2D" type="Sprite2D" parent="."]
+[node name="Premade_NeckSprite2D" type="Sprite2D" parent="." unique_id=818009731]
 visible = false
 texture = ExtResource("1_lbwy0")
 hframes = 8
 
-[node name="NeckSpritesHolder" type="Node2D" parent="."]
+[node name="NeckSpritesHolder" type="Node2D" parent="." unique_id=1222648029]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_54066")
-}
-autoplay = "new_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1213928164]
+libraries/ = SubResource("AnimationLibrary_54066")
+autoplay = &"new_animation"
+speed_scale = 2.0
 
-[node name="TailSprite2D" type="Sprite2D" parent="."]
+[node name="TailSprite2D" type="Sprite2D" parent="." unique_id=504660134]
 texture = ExtResource("4_rxgg3")
 hframes = 8

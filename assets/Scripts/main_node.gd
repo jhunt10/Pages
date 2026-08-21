@@ -169,11 +169,19 @@ func open_character_sheet(_actor:BaseActor=null, parent_node=null)->CharacterMen
 	#charsheet.show_menu()
 	return charsheet
 
-func open_page_menu(actor:BaseActor):
-	var page_menu = load("res://Scenes/Menus/PageQueMenu/page_que_menu.tscn").instantiate()
-	center_container.add_child(page_menu)
-	page_menu.set_actor(actor)
-	return page_menu
+func open_skill_tree(_actor:BaseActor=null, parent_node=null)->SkillTreeMenu:
+	var actor = _actor
+	if not actor:
+		actor = StoryState.get_party_actor_by_index(0)
+		#actor = ActorLibrary.create_actor("TestActor", {})
+	var skill_tree:SkillTreeMenu = load("res://Scenes/Menus/SkillTreeMenu/skill_tree_menu.tscn").instantiate()
+	if parent_node:
+		parent_node.add_child(skill_tree)
+	else:
+		self.add_child(skill_tree)
+	#charsheet.show_menu()
+	skill_tree.set_actor(actor)
+	return skill_tree
 
 func open_archive():
 	var menu = load("res://Scenes/Menus/Archive/archive_control.tscn").instantiate()

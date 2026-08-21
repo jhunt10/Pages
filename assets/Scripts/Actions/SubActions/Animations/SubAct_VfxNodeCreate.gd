@@ -21,6 +21,9 @@ func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, metadata
 	var vfx_key = subaction_data.get("VfxKey")
 	var vfx_data = subaction_data.get("VfxData", {})
 	var vfx = VfxHelper.create_vfx_on_actor(actor, vfx_key, vfx_data)
+	if !vfx:
+		printerr("SubAct_VfxNodeCreate: Failed to create VFX")
+		return BaseSubAction.Success
 	if subaction_data.keys().has("SaveIdAs"):
 		var vfx_id_key = subaction_data['SaveIdAs']
 		var turn_data = metadata.get_current_turn_data()

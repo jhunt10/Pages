@@ -1,0 +1,451 @@
+[gd_scene format=3 uid="uid://dmeur0dllaqrk"]
+
+[ext_resource type="Script" uid="uid://bqo08ru41r6uw" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/paired_skill_tree_node.gd" id="1_wjhw6"]
+[ext_resource type="PackedScene" uid="uid://bw20dlsulqekk" path="res://Scenes/Menus/SkillTreeMenu/skill_tree_node.tscn" id="2_w1rxv"]
+[ext_resource type="Texture2D" uid="uid://r7e0y5yv45uc" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/SkillNodeOutline.png" id="5_4lnft"]
+[ext_resource type="Texture2D" uid="uid://yf4r4mr4xa2d" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/OrSepIcon.png" id="7_waevk"]
+[ext_resource type="Texture2D" uid="uid://drptcqa6g0iua" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/AndSepIcon.png" id="8_ktfi2"]
+
+[sub_resource type="Animation" id="Animation_w1rxv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/SkillTreeNode1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/SkillTreeNode1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.75, 0.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/SkillTreeNode2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 32)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/SkillTreeNode2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.75, 0.75)]
+}
+
+[sub_resource type="Animation" id="Animation_m8cka"]
+resource_name = "grow_node_1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/SkillTreeNode1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -32), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/SkillTreeNode1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/SkillTreeNode2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 32), Vector2(0, 64)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/SkillTreeNode2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_xk4yj"]
+resource_name = "grow_node_2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/SkillTreeNode1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -32), Vector2(0, -64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/SkillTreeNode1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(0.5, 0.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/SkillTreeNode2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 32), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/SkillTreeNode2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wjhw6"]
+resource_name = "reset_node_1"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/SkillTreeNode1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/SkillTreeNode1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.75, 0.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/SkillTreeNode2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 64), Vector2(0, 32)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/SkillTreeNode2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.75, 0.75)]
+}
+
+[sub_resource type="Animation" id="Animation_1j6xv"]
+resource_name = "reset_node_2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/SkillTreeNode1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -64), Vector2(0, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/SkillTreeNode1:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0.75, 0.75)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/SkillTreeNode2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 32)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/SkillTreeNode2:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.75, 0.75)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gliif"]
+_data = {
+&"RESET": SubResource("Animation_w1rxv"),
+&"grow_node_1": SubResource("Animation_m8cka"),
+&"grow_node_2": SubResource("Animation_xk4yj"),
+&"reset_node_1": SubResource("Animation_wjhw6"),
+&"reset_node_2": SubResource("Animation_1j6xv")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_vqybr"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4lnft"]
+animation = &"grow_node_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_w1rxv"]
+animation = &"grow_node_2"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o30j1"]
+animation = &"reset_node_1"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m8cka"]
+animation = &"reset_node_2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_waevk"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ktfi2"]
+advance_mode = 2
+advance_expression = "grow_index == 0"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ct5k"]
+advance_mode = 2
+advance_expression = "grow_index == -1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_umqfp"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xk4yj"]
+advance_mode = 2
+advance_expression = "grow_index == 1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wjhw6"]
+advance_mode = 2
+advance_expression = "grow_index == -1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1j6xv"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_djaxe"]
+states/RESET/node = SubResource("AnimationNodeAnimation_vqybr")
+states/RESET/position = Vector2(373, 100)
+states/grow_node_1/node = SubResource("AnimationNodeAnimation_4lnft")
+states/grow_node_1/position = Vector2(307, 20)
+states/grow_node_2/node = SubResource("AnimationNodeAnimation_w1rxv")
+states/grow_node_2/position = Vector2(273.6004, 213.1934)
+states/reset_node_1/node = SubResource("AnimationNodeAnimation_o30j1")
+states/reset_node_1/position = Vector2(519.6004, 22.193405)
+states/reset_node_2/node = SubResource("AnimationNodeAnimation_m8cka")
+states/reset_node_2/position = Vector2(542.6004, 194.1934)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_waevk"), "RESET", "grow_node_1", SubResource("AnimationNodeStateMachineTransition_ktfi2"), "grow_node_1", "reset_node_1", SubResource("AnimationNodeStateMachineTransition_3ct5k"), "reset_node_1", "RESET", SubResource("AnimationNodeStateMachineTransition_umqfp"), "RESET", "grow_node_2", SubResource("AnimationNodeStateMachineTransition_xk4yj"), "grow_node_2", "reset_node_2", SubResource("AnimationNodeStateMachineTransition_wjhw6"), "reset_node_2", "RESET", SubResource("AnimationNodeStateMachineTransition_1j6xv")]
+graph_offset = Vector2(-107.39959, -117.806595)
+
+[node name="PairedSkillTreeNode" type="Control" unique_id=766234812 node_paths=PackedStringArray("skill_node_1", "skill_node_2")]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 3
+anchors_preset = 0
+size_flags_vertical = 3
+script = ExtResource("1_wjhw6")
+skill_node_1 = NodePath("Control/SkillTreeNode1")
+skill_node_2 = NodePath("Control/SkillTreeNode2")
+
+[node name="Control" type="Control" parent="." unique_id=1961320824]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SkillTreeNode1" parent="Control" unique_id=1229891160 instance=ExtResource("2_w1rxv")]
+layout_mode = 0
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(32, 64)
+
+[node name="SkillTreeNode2" parent="Control" unique_id=1663701644 instance=ExtResource("2_w1rxv")]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 64.0
+offset_bottom = 96.0
+scale = Vector2(0.75, 0.75)
+pivot_offset = Vector2(32, 0)
+
+[node name="OrIcon" type="TextureRect" parent="Control" unique_id=474802009]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -16.0
+offset_right = 65.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+mouse_filter = 2
+texture = ExtResource("7_waevk")
+
+[node name="AndIcon" type="TextureRect" parent="Control" unique_id=215319008]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 34.0
+offset_top = -16.0
+offset_right = 67.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+mouse_filter = 2
+texture = ExtResource("8_ktfi2")
+
+[node name="HighlightPatch" type="NinePatchRect" parent="Control" unique_id=2009471118]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_4lnft")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="OutlinePatch" type="NinePatchRect" parent="Control" unique_id=992086812]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_4lnft")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=302257826]
+libraries/ = SubResource("AnimationLibrary_gliif")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=86557166]
+tree_root = SubResource("AnimationNodeStateMachine_djaxe")
+advance_expression_base_node = NodePath("..")
+anim_player = NodePath("../AnimationPlayer")

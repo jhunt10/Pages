@@ -140,11 +140,11 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ColdMage_PassivePage": {
+	"ColdMagePassive_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "You've learned a technique to focus the @@#Color:DmgColor:Cold:Cold@@ energy of @@#Color:Blue:Water Spells@@ into the projectile itself. It then hardens enough to register as @@#Tag:Physical Damage@@.\n\n@@#Color:Blue:Water Spells@@ now deal @@#Color:DmgColor:Slash@@, @@#Color:DmgColor:Blunt@@, or @@#Color:DmgColor:Pierce@@ Damage vs @@#Stat:Ward@@. The new damage type depends on the spell.",
-			"DisplayName": "Harded Ice",
+			"Description": "By refocusing the @@#Color:DmgColor:Cold:Cold@@ energy of @@#Color:Blue:Water Spells@@, you've found a way to freeze the projectiles into solid ice dealing @@#Tag:Physical:Physical Damage@@.\n\n@@#Tag:Spell:Spells@@ with the @@#Color:Blue:Water@@ tag are modified to deal @@#Color:DmgColor:Blunt@@ or @@#Color:DmgColor:Pierce@@ Damage, and are resisted by @@#Stat:Armor@@. The new damage type depends on the spell.",
+			"DisplayName": "Cold Hardened",
 			"LargeIcon": "Sprites/ColdMage_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/ColdMage_Icon.png",
@@ -177,16 +177,17 @@
 				"WaterBallSpellMod": {
 					"Conditions": {
 						"ItemKeys": [
-							"WaterBallSpell"
+							"WaterBallSpell_PageItem"
 						],
 						"TagFilters": []
 					},
 					"ModdedDefData": {
 						"#ObjDetails": {
-							"DisplayName": "Ice Ball",
+							"DisplayName": "Water Ball",
+							"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n\nOn impact the ball splashes launching @@#Tag:Missile:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n@@#EftChances@@\n-One of many spells banned from professional water balloon fights.",
 							"SnippetDesc": "Launch a Ice Ball Missile",
 							"Tags": [
-								"Cold"
+								"Water"
 							],
 							"Taxonomy": [
 								"Item",
@@ -198,21 +199,12 @@
 							"DamageDatas": {
 								"MissileDamage": {
 									"DamageType": "Blunt",
-									"DefenseType": "Ward"
+									"DefenseType": "Armor"
 								},
 								"SubMissileDamage": {
 									"DamageType": "Pierce",
-									"DefenseType": "Ward"
+									"DefenseType": "Armor"
 								}
-							},
-							"EffectDatas": {
-								"ChilledEffect": {
-									"ApplicationChance": 0.2,
-									"EffectKey": "AilmentChilled"
-								}
-							},
-							"SubActions": {
-
 							}
 						}
 					}
@@ -220,16 +212,16 @@
 				"WaterBeamSpell": {
 					"Conditions": {
 						"ItemKeys": [
-							"WaterBeamSpell"
+							"WaterBeamSpell_PageItem"
 						],
 						"TagFilters": []
 					},
 					"ModdedDefData": {
 						"#ObjDetails": {
-							"DisplayName": "Ice Beam",
-							"SnippetDesc": "Spawn Piercing Beam of Ice.",
+							"DisplayName": "Water Beam",
+							"Description": "Spawn a @@#Color:Beam@@ of ice, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Also great for power washing the blood left behind after power washing enemies.",
 							"Tags": [
-								"Cold"
+								"Water"
 							],
 							"Taxonomy": [
 								"Item",
@@ -241,20 +233,7 @@
 							"DamageDatas": {
 								"WaterBeamDamage": {
 									"DamageType": "Pierce",
-									"DefenseType": "Ward"
-								}
-							},
-							"EffectDatas": {
-								"ChilledEffect": {
-									"ApplicationChance": 0.2,
-									"EffectKey": "AilmentChilled"
-								}
-							},
-							"SubActions": {
-								"Attack": {
-									"EffectKeys": [
-										"ChilledEffect"
-									]
+									"DefenseType": "Armor"
 								}
 							}
 						}
@@ -263,16 +242,16 @@
 				"WaterGunSpellMod": {
 					"Conditions": {
 						"ItemKeys": [
-							"WaterGunSpell"
+							"WaterGunSpell_PageItem"
 						],
 						"TagFilters": []
 					},
 					"ModdedDefData": {
 						"#ObjDetails": {
-							"DisplayName": "Ice Gun",
-							"SnippetDesc": "Rapid fire Ice",
+							"DisplayName": "Water Gun",
+							"Description": "Fire a rapid series of @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n\n-Summer time fun turned deadly.",
 							"Tags": [
-								"Cold"
+								"Water"
 							],
 							"Taxonomy": [
 								"Item",
@@ -284,17 +263,8 @@
 							"DamageDatas": {
 								"RangedDamage": {
 									"DamageType": "Pierce",
-									"DefenseType": "Ward"
+									"DefenseType": "Armor"
 								}
-							},
-							"EffectDatas": {
-								"ChilledEffect": {
-									"ApplicationChance": 0.2,
-									"EffectKey": "AilmentChilled"
-								}
-							},
-							"SubActions": {
-
 							}
 						}
 					}
@@ -363,10 +333,10 @@
 		},
 		"_DefVersion": "1"
 	},
-	"MagBoostPage": {
+	"MagBoost_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "The first thing @@#Color:Blue:The Collage@@ teaches every new @@#Color:Blue:Mage@@ is how to optimize @@#Color:Blue:Mag Ammo@@ usage. This leads to more efficient @@#Color:Blue:Spell@@ casting, and frankly saves a ton of @@#Color:Blue:Money@@.\n\n@@#Color:Red:+100% Max@@ @@#Color:Ammo:Mag:Mag Ammo@@ on @@#Color:Blue:Spell Pages@@.",
+			"Description": "The first thing @@#Color:Blue:The Collage@@ teaches every new @@#Color:Red:Mage@@ is how to optimize @@#Color:Blue:Mag Ammo@@ usage. This leads to more efficient @@#Color:Blue:Spell@@ casting, and frankly saves a ton of @@#Color:Blue:Money@@.\n\n@@#Color:Red:+100% Max@@ @@#Color:Ammo:Mag:Mag Ammo@@ on @@#Color:Blue:Spell Pages@@.",
 			"DisplayName": "Mag Boost",
 			"LargeIcon": "Sprites/MagAmmoBoost_Icon.png",
 			"ObjectType": "Item",
