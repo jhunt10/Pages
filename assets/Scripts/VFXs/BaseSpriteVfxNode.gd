@@ -66,7 +66,7 @@ func _on_start():
 		var animation_name = _data.get("AnimationName", "main_animation")
 		if animation_name:
 			animation.play(animation_name)
-			animation.speed_scale = _data.get("AnimationSpeed", 1)
+			animation.speed_scale = _data.get("AnimationSpeed", 1) * CombatRootControl.get_time_scale()
 			animation.animation_finished.connect(_on_animation_finish)
 	
 	if audio_player:

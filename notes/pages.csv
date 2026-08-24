@@ -36,8 +36,8 @@ DarkMissileSpell,,Dark Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0
 FireMissileSpell,,Fire Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0,20.0,1.0,0.0,Fire
 PoisonMissileSpell,,Poison Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,90.0,20.0,1.0,0.0,Poison
 ShockMissileSpell,,Shock Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0,30.0,1.0,0.0,Shock
-FireBallSpell,Mage,Fire Ball,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,60.0,10.0,1.0,0.0,Fire
-WaterBallSpell,Mage,Water Ball,PageItemAction.gd,Mag,3.0,12.0,1.0,,,,,,
+FireBallSpell_PageItem,Mage,Fire Ball,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,60.0,10.0,1.0,0.0,Fire
+WaterBallSpell_PageItem,Mage,Ice Ball,PageItemAction.gd,Mag,1.0,4.0,1.0,,,,,,
 LightMissileSpell_PageItem,Priest,Light Missile,PageItemAction.gd,Mag,2.0,6.0,1.0,MagAttack,100.0,20.0,1.0,0.0,Light
 #BaseRangedAttack,,#Base Range Attack,PageItemAction.gd,,,,1.0,PhyAttack,80.0,20.0,1.0,0.0,RAW
 #BaseRangedSpell,,#Base Range Action,PageItemAction.gd,Mag,4.0,16.0,1.0,MagAttack,80.0,20.0,1.0,0.0,RAW
@@ -64,12 +64,13 @@ ApplyHolyBookAction,Priest,Holy Book,PageItemAction.gd,,,,1.0,,,,,,
 LightAura_PageItem,Priest,Light Aura,PageItemAction.gd,Mag,1.0,4.0,1.0,,,,,,
 ApplyPreemtive,Priest,Preemtive,PageItemAction.gd,Mag,4.0,25.0,1.0,,,,,,
 #BaseApplySelfBuffAction,,#Base Self Buff,PageItemAction.gd,,,,1.0,,,,,,
+ChannelMagic_PageItem,Mage,Channel,PageItemAction.gd,,,,1.0,,,,,,
 BeDeadly_PageItem,Rogue,Be Deadly,PageItemAction.gd,,,,1.0,,,,,,
 BeNimble_PageItem,Rogue,Be Nimble,PageItemAction.gd,,,,1.0,,,,,,
 _OLD_BeQuick_PageItem,Rogue,Be Quick,PageItemAction.gd,,,,1.0,,,,,,
 Dodge_PageItem,Rogue,Dodge,PageItemAction.gd,,,,1.0,,,,,,
 #BaseAttackZoneSpell,,#Base Zone Action,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,100.0,10.0,1.0,0.0,RAW
-FireZoneSpell,Mage,Fire Zone,PageItemAction.gd,Mag,4.0,24.0,1.0,MagAttack,10.0,3.0,1.0,0.0,Fire
+FireZoneSpell_PageItem,Mage,Fire Zone,PageItemAction.gd,Mag,1.0,4.0,1.0,MagAttack,10.0,3.0,1.0,0.0,Fire
 #BaseEffectZoneSpell,,#Base Zone Action,PageItemAction.gd,Mag,4.0,24.0,1.0,,,,,,
 PoisonZoneSpell,Mage,Poison Cloud,PageItemAction.gd,Mag,4.0,24.0,1.0,,,,,,
 BasicMeleeAttack,,Basic Attack,PageItemAction.gd,,,,,,,,,,
@@ -116,16 +117,16 @@ UnarmedMaster_PageItem,<null>,Unarmed Master,PageItemPassive.gd,,,,,,,,,,
 CallShockSpell,Mage,Call Shock,PageItemAction.gd,,,,1.0,MagAttack,120.0,30.0,1.0,0.0,Shock
 ChainShockSpell,Mage,Chain Shock,PageItemAction.gd,,,,1.0,MagAttack,80.0,30.0,1.0,0.0,Shock
 DischargeSpell,Mage,Discharge,PageItemAction.gd,,,,1.0,MagAttack,100.0,30.0,1.0,0.0,Shock
-FireThrowSpell,Mage,Throw Flames,PageItemAction.gd,,,,1.0,MagAttack,20.0,3.0,1.0,0.0,Fire
+FireThrowSpell_PageItem,Mage,Throw Flames,PageItemAction.gd,Mag,1.0,6.0,1.0,MagAttack,20.0,3.0,1.0,0.0,Fire
 ShockStormSpell,Mage,Shock Storm,PageItemAction.gd,,,,1.0,MagAttack,100.0,30.0,1.0,0.0,Shock
-WaterBeamSpell,Mage,Water Beam,PageItemAction.gd,,,,1.0,MagAttack,50.0,10.0,1.0,0.0,Cold
-WaterGunSpell,,Water Gun,PageItemAction.gd,,,,1.0,MagAttack,20.0,5.0,1.0,0.0,Cold
+WaterBeamSpell_PageItem,Mage,Ice Beam,PageItemAction.gd,Mag,1.0,4.0,1.0,MagAttack,50.0,10.0,1.0,0.0,Cold
+WaterGunSpell_PageItem,Mage,Ice Gun,PageItemAction.gd,Mag,1.0,6.0,1.0,MagAttack,20.0,5.0,1.0,0.0,Cold
 ChainExtendPage,Mage,Chain Longer,PageItemPassive.gd,,,,,,,,,,
 ChainForkPage,Mage,Chain Fork,PageItemPassive.gd,,,,,,,,,,
 ChainSelectPage,Mage,Chain Choice,PageItemPassive.gd,,,,,,,,,,
-ColdMage_PassivePage,Mage,Harded Ice,PageItemPassive.gd,,,,,,,,,,
+ColdMagePassive_PageItem,Mage,Cold Hardened,PageItemPassive.gd,,,,,,,,,,
 HazardSafetyPage,Mage,Hazard Saftey,PageItemPassive.gd,,,,,,,,,,
-MagBoostPage,Mage,Mag Boost,PageItemPassive.gd,,,,,,,,,,
+MagBoost_PageItem,Mage,Mag Boost,PageItemPassive.gd,,,,,,,,,,
 SafteyHazardPage,Mage,Saftey Hazard,PageItemPassive.gd,,,,,,,,,,
 MergedMagBonus_PageItem,Mage,Merged Bonus,PageItemPassive.gd,,,,,,,,,,
 DeployedMagBonus_PageItem,Mage,Deploy Bonus,PageItemPassive.gd,,,,,,,,,,

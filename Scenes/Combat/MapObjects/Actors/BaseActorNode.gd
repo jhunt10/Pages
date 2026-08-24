@@ -151,8 +151,8 @@ func set_move_destination(map_pos:MapPos, frames_to_reach:int, start_walking_if_
 	movement_dest_position = tile_map.map_to_local(map_pos.to_vector2i())  - self.position
 	var secs_to_reach = (frames_to_reach * ActionQueController.SUB_ACTION_FRAME_TIME) 
 	var dist = movement_start_position.distance_to(movement_dest_position)
-	movemen_speed_scale = speed_scale
-	movement_speed =  (dist / secs_to_reach) * CombatRootControl.get_time_scale() * speed_scale
+	movemen_speed_scale = speed_scale * 1.5 #TODO: Bad Animation Speed
+	movement_speed =  (dist / secs_to_reach) * CombatRootControl.get_time_scale() * speed_scale  * 1.5 #TODO: Bad Animation Speed
 	is_moving = movement_start_position.distance_to(movement_dest_position) > 0.01
 	if LOGGING: print("Starting Movement: FtR: %s | TtR: %s | Dist: %s | MS: %s " % [frames_to_reach, secs_to_reach,dist, movement_speed ])
 	if LOGGING: print("Start Pos: %s | Target Pos: %s" % [movement_start_position, movement_dest_position])
@@ -311,7 +311,7 @@ func start_move_animation():
 	if is_animated_moveing:
 		return
 	current_body_animation_action = WALK_ANIM_NAME
-	body_animation.speed_scale = CombatRootControl.get_time_scale()
+	body_animation.speed_scale = CombatRootControl.get_time_scale()  * 1.5 #TODO: Bad Animation Speed
 	body_animation.play(current_body_animation_action)
 
 func finish_move_animation():

@@ -16,6 +16,9 @@ signal book_button_pressed
 
 @export var turns_container:Container
 
+@export var time_scale_label:Label
+@export var time_scale_slider:HSlider
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	min_button.pressed.connect(_on_min_button)
@@ -25,6 +28,7 @@ func _ready() -> void:
 	CombatRootControl.Instance.QueController.start_of_turn.connect(_on_turn_start)
 	CombatRootControl.Instance.QueController.start_of_round.connect(_on_round_start)
 	CombatRootControl.Instance.QueController.end_of_round.connect(_on_round_end)
+	time_scale_slider.value_changed.connect(on_time_scale_change)
 
 func _process(delta: float) -> void:
 	if round_progress_bar.visible:
@@ -35,6 +39,7 @@ func _process(delta: float) -> void:
 		var cur_frame:float = (turn_index * ActionQueController.FRAMES_PER_ACTION) + frame_index
 		var progress:float = (cur_frame / total_frames) * 100.0
 		round_progress_bar.value = progress
+		time_scale_label.text = str(CombatRootControl.Instance._time_scale).trim_suffix(".0")
 
 func _on_min_button():
 	min_button.hide()
@@ -64,4 +69,8 @@ func _on_round_end():
 
 func set_status(val:String):
 	status_label.text = val
-	
+
+func on_time_scale_change(index:int):
+	var values = [0.5, 0.75, 1, 1.5, 2, 3]
+	CombatRootControl._time_scale = values[index]
+	time_scale_label.text = str(CombatRootControl.Instance._time_scale).trim_suffix(".0")

@@ -214,7 +214,8 @@ func get_actors_at_pos(pos, include_dead:bool=false, include_carried:bool=false)
 func is_spot_open(pos, ignore_actor_ids:Array=[])->bool:
 	return map_data.is_spot_open(pos, ignore_actor_ids)
 
-func is_spot_traversable(pos, actor)->bool:
+## "Traversable" means it is posible for an Actor to be in this spot
+func is_spot_traversable(pos, actor=null)->bool:
 	return map_data.is_spot_traversable(pos, actor)
 
 func spot_blocks_los(pos)->bool:

@@ -5,6 +5,8 @@ extends Node2D
 @onready var tile_sprite:Sprite2D = $Sprite2D
 @onready var timer_label:Label = $Timer
 
+@export var spot_partical_emiter:GPUParticles2D
+
 var _zone:BaseZone
 var _aura_actor_node:BaseActorNode
 
@@ -38,12 +40,27 @@ func _build_zone_area():
 		area_tile_map.hide()
 	else:
 		var pos = _zone.get_pos()
-		var arr = _zone._area_matrix.to_map_spots(MapPos.new(0,0,pos.z))
+		var zone_area = _zone._area_matrix.to_map_spots(pos)
+		var valid_area = []
+		for spot in zone_area:
+			if CombatRootControl.Instance.GameState.is_spot_traversable(spot):
+				valid_area.append(Vector2i(spot.x - pos.x, spot.y - pos.y))
 		area_tile_map.clear()
 		var tile_set = _zone.get_zone_tile_set()
 		if tile_set:
 			area_tile_map.tile_set.get_source(1).texture = tile_set
-			area_tile_map.set_cells_terrain_connect(arr,0,0)
+			area_tile_map.set_cells_terrain_connect(valid_area,0,0)
 			tile_sprite.hide()
 			area_tile_map.show()
+		
+		if spot_partical_emiter:
+			var offset = area_tile_map.tile_set.tile_size / 2.0
+			for index in range(valid_area.size()):
+				var spot = valid_area[index]
+				if index == 0:
+					spot_partical_emiter.position = area_tile_map.map_to_local(spot) - offset
+				else:
+					var new_spot = spot_partical_emiter.duplicate()
+					self.add_child(new_spot)
+					new_spot.position = area_tile_map.map_to_local(spot) - offset
 	

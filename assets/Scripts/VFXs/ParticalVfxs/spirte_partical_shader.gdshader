@@ -14,8 +14,10 @@ varying vec2 frame;
 
 varying vec2 frame_uv;
 
+varying vec4 v_modulate;
+
 void vertex() {
-	lifetime = INSTANCE_CUSTOM.y * speed_scale;
+	lifetime = INSTANCE_CUSTOM.y;
 	animation_frame = INSTANCE_CUSTOM.z;
 	
 	progress = ((float(frame_count) * animation_frame) + (float(frame_count) * lifetime));
@@ -27,13 +29,18 @@ void vertex() {
 	
 	frame_uv = frame / vec2(1.0,1.0);
 	VERTEX = VERTEX * frame_size;
-	
+	v_modulate = COLOR;
 }
 
 void fragment() {
 	// Called for every pixel the material is visible on.
 	vec4 text_color = texture(TEXTURE, frame_uv);
-	COLOR = vec4(text_color.x, text_color.y, text_color.z, COLOR.a);
+	
+	vec3 custom_rgb = text_color.rgb;
+    COLOR = vec4(custom_rgb, text_color.a) * v_modulate;
+	
+	//text_color.a = COLOR.a;
+	//COLOR = text_color;
 }
 
 //void light() {

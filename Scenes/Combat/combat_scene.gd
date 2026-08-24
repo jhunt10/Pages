@@ -89,8 +89,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	QueController.update(delta)
 
+static var _time_scale:float = 1.0
 static func get_time_scale()->float:
-	return 1.5
+	return _time_scale
 
 static func get_remaining_frames_for_turn()->int:
 	if Instance:
@@ -476,7 +477,7 @@ func create_new_missile_node(missile):
 	MapController.add_missile_node(missile, new_node)
 
 func add_zone(zone:BaseZone):
-	var new_node:ZoneNode  = load(zone.get_zone_scene_path()).instantiate()
+	var new_node  = load(zone.get_zone_scene_path()).instantiate()
 	new_node._zone = zone
 	zone.node = new_node
 	GameState.add_zone(zone)

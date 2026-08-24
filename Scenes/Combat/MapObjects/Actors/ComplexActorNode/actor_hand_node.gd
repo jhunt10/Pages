@@ -95,7 +95,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if editing_mod and Engine.is_editor_hint():
 		return
-	var time_scale = CombatRootControl.get_time_scale()
+	var time_scale = CombatRootControl.get_time_scale() * 1.5 #TODO: Bad Animation Speed
 	if animation_speed > 0:
 		time_scale = time_scale * animation_speed
 	animation_tree.advance(delta * time_scale)

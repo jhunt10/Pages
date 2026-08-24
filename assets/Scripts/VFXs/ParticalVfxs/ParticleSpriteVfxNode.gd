@@ -29,6 +29,10 @@ func set_vfx_data(new_id:String, data:Dictionary):
 			if dir == 3: 
 				#gpu_partical_node.rotation_degrees = 270
 				gpu_partical_node.scale = Vector2(-1,1)
+	#var shader_material = gpu_partical_node.material as ShaderMaterial
+	#shader_material.set_shader_parameter("speed_scale", 1.0)#CombatRootControl.get_time_scale())
+	gpu_partical_node.lifetime = gpu_partical_node.lifetime / CombatRootControl.get_time_scale()
+	fake_life_time = fake_life_time / CombatRootControl.get_time_scale()
 
 func start_vfx():
 	super()

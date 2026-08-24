@@ -355,7 +355,7 @@ shader_parameter/speed_scale = 15.0
 
 [sub_resource type="Gradient" id="Gradient_qrvtt"]
 offsets = PackedFloat32Array(0, 0.254167, 0.7375, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 0.552956, 0.552956, 0.552956, 1, 0.470076, 0.470076, 0.470076, 0)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0.470076, 0.470076, 0.470076, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_7sdhc"]
 gradient = SubResource("Gradient_qrvtt")
@@ -367,22 +367,53 @@ emission_shape = 3
 emission_box_extents = Vector3(48, 48, 1)
 direction = Vector3(0, -1, 0)
 spread = 0.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = -1.6093254e-05
+orbit_velocity_min = 0.0010001
+orbit_velocity_max = 0.0100001
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+color_ramp = SubResource("GradientTexture1D_7sdhc")
+
+[sub_resource type="Gradient" id="Gradient_8i0m3"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jwws5"]
+gradient = SubResource("Gradient_8i0m3")
+
+[sub_resource type="Gradient" id="Gradient_osmqr"]
+offsets = PackedFloat32Array(0, 0.254167, 0.7375, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0.470076, 0.470076, 0.470076, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bcbhq"]
+gradient = SubResource("Gradient_osmqr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uhsq4"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(16, 16, 1)
+direction = Vector3(0, -1, 0)
+spread = 0.0
 initial_velocity_min = 1.0
 initial_velocity_max = 2.0
 angular_velocity_min = -10.0
 angular_velocity_max = 9.99998
-orbit_velocity_min = 0.0010001
-orbit_velocity_max = 0.0100001
+orbit_velocity_min = -0.009999906
+orbit_velocity_max = 0.010000096
 gravity = Vector3(0, 0, 0)
-scale_min = 1.3
-scale_max = 1.5
-color_ramp = SubResource("GradientTexture1D_7sdhc")
+scale_min = 0.5
+scale_max = 3.0
+color_ramp = SubResource("GradientTexture1D_bcbhq")
+color_initial_ramp = SubResource("GradientTexture1D_jwws5")
 
-[node name="ZoneNode" type="Node2D" unique_id=1392372144]
+[node name="ZoneNode" type="Node2D" unique_id=1392372144 node_paths=PackedStringArray("spot_partical_emiter")]
 script = ExtResource("1_y3h0i")
+spot_partical_emiter = NodePath("Sparks_GPUParticles2D2")
 
 [node name="AreaTileMap" type="TileMapLayer" parent="." unique_id=169779252]
 visible = false
+modulate = Color(1, 1, 1, 0.5019608)
 position = Vector2(-16, -16)
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
 tile_set = SubResource("TileSet_hpguw")
@@ -407,7 +438,8 @@ text = "00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1273896736]
+[node name="Flames_GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1273896736]
+visible = false
 modulate = Color(1, 1, 1, 0.282353)
 material = SubResource("ShaderMaterial_osmqr")
 amount = 500
@@ -415,3 +447,12 @@ texture = ExtResource("4_jwws5")
 lifetime = 6.0
 preprocess = 6.0
 process_material = SubResource("ParticleProcessMaterial_ywnvl")
+
+[node name="Sparks_GPUParticles2D2" type="GPUParticles2D" parent="." unique_id=1524421610]
+visibility_layer = 7
+z_index = 5
+material = SubResource("ShaderMaterial_osmqr")
+amount = 300
+lifetime = 6.0
+preprocess = 6.0
+process_material = SubResource("ParticleProcessMaterial_uhsq4")

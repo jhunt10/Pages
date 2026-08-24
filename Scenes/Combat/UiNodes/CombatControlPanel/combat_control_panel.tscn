@@ -70,7 +70,7 @@ texture_margin_bottom = 4.0
 [sub_resource type="Theme" id="Theme_hgp41"]
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_4il04")
 
-[node name="CombatControlPanel" type="PanelContainer" unique_id=1084273047 node_paths=PackedStringArray("min_button", "max_button", "menu_button", "book_button", "round_label", "turn_label", "status_label", "round_progress_bar", "turns_container")]
+[node name="CombatControlPanel" type="PanelContainer" unique_id=1084273047 node_paths=PackedStringArray("min_button", "max_button", "menu_button", "book_button", "round_label", "turn_label", "status_label", "round_progress_bar", "turns_container", "time_scale_label", "time_scale_slider")]
 custom_minimum_size = Vector2(206, 0)
 offset_right = 40.0
 offset_bottom = 40.0
@@ -85,6 +85,8 @@ turn_label = NodePath("VBoxContainer/RoundTurnContainer/TurnLabel2")
 status_label = NodePath("VBoxContainer/StatusContainer/NinePatchRect/StatusLabel")
 round_progress_bar = NodePath("VBoxContainer/StatusContainer/NinePatchRect/RoundProgressBar")
 turns_container = NodePath("VBoxContainer/TurnOrderContainer")
+time_scale_label = NodePath("VBoxContainer/BoxContainer2/TimeScaleValueLabel")
+time_scale_slider = NodePath("VBoxContainer/BoxContainer2/HSlider")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1257019059]
 layout_mode = 2
@@ -311,6 +313,43 @@ text = "0"
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="DividerNinePatchRect2" type="NinePatchRect" parent="VBoxContainer" unique_id=651315065]
+layout_mode = 2
+texture = ExtResource("13_qas4w")
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 2
+patch_margin_bottom = 1
+
+[node name="BoxContainer2" type="BoxContainer" parent="VBoxContainer" unique_id=1071023978]
+layout_mode = 2
+
+[node name="TimeScaleTitleLabel" type="Label" parent="VBoxContainer/BoxContainer2" unique_id=1699934275]
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 12
+text = "Time Scale:"
+
+[node name="TimeScaleValueLabel" type="Label" parent="VBoxContainer/BoxContainer2" unique_id=1768683585]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 14
+text = "1"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/BoxContainer2" unique_id=745704959]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_lhfpo")
+max_value = 5.0
+value = 2.0
+rounded = true
+tick_count = 6
+ticks_on_borders = true
 
 [node name="TurnOrderContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1501039013 node_paths=PackedStringArray("ques_container", "ques_scroll_container", "premade_que_container")]
 layout_mode = 2
