@@ -276,7 +276,7 @@
 	"HazardSafetyPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "You've learned to adjust your distribution of @@#Color:Blue:Mag@@ energy within a set area, making it safer to cast large @@#Color:Blue:Spells@@ around your teammates.\n\n@@#DmgMod:HazardSafetyDmgMod:Value: Damage@@ on @@#DmgMod:HazardSafetyDmgMod:Filters:s@@ against @@#DmgMod:HazardSafetyDmgMod:DefFacFil|Plr@@.",
+			"Description": "You've learned to adjust the distribution of energy on your large area @@#Color:Blue:Spells@@, making them safer to cast around your teammates.\n\nYour @@#Tag:AOE@@ @@#Tag:SpellAtk:Spell Attacks@@ deal @@#DmgMod:HazardSafetyDmgMod:Value: Damage@@ to @@#DmgMod:HazardSafetyDmgMod:DefFacFil|Plr@@.",
 			"DisplayName": "Hazard Saftey",
 			"LargeIcon": "Sprites/HazardSafety_Icon.png",
 			"ObjectType": "Item",
@@ -388,7 +388,7 @@
 	"SafteyHazardPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "You know a technique optimizing the energy output of large area @@#Color:Blue:Spells@@, but it requires a familiar point of reference. A teammate should work nicely.\n\n@@#AtkMod:SafteyHazardAtkMod:DmgMod:SafetyHazardDmgMod:Value: Damage@@ on @@#AtkMod:SafteyHazardAtkMod:AtkSrcFil:s@@ that include a @@#AtkMod:SafteyHazardAtkMod:DefTagsFil@@ @@#AtkMod:SafteyHazardAtkMod:DefFacFil@@ in @@#Color:Red:Area of Effect@@.",
+			"Description": "You know a technique optimizing the energy output of large area @@#Color:Blue:Spells@@, but it requires a familiar point of reference. A teammate should work nicely.\n\nYour @@#Tag:AOE@@ @@#Tag:SpellAtk:Spell Attacks@@ gain @@#AtkMod:SafteyHazardAtkMod:DmgMod:SafetyHazardDmgMod:Value: Damage@@ against all @@#Color:Red:Actors@@ when an @@#AtkMod:SafteyHazardAtkMod:DefFacFil@@ @@#AtkMod:SafteyHazardAtkMod:DefTagsFil@@ is in @@#Color:Red:Area of Effect@@.",
 			"DisplayName": "Saftey Hazard",
 			"LargeIcon": "Sprites/SafetyHazard_Icon.png",
 			"ObjectType": "Item",
@@ -450,9 +450,7 @@
 							"Conditions": {
 								"DamageTypes": [],
 								"DefenderTagFilters": [],
-								"DefenderTeamFilters": [
-									"Ally"
-								],
+								"DefenderTeamFilters": [],
 								"SourceTagFilters": [],
 								"SourceTeamFilters": [
 									"Self"

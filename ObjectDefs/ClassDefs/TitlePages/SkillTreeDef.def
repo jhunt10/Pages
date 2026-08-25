@@ -338,7 +338,7 @@
                 "PageKey": "ChainShockSpell"
             },
             {
-                "SkillNodeKey": "FireThrowSpell",
+                "SkillNodeKey": "FireZoneSpell",
                 "PageKey": "FireZoneSpell_PageItem"
             }
         ],
@@ -352,7 +352,10 @@
                 "ParentSkillKey": "ChainShockSpell",
                 "Pages": ["ChainExtendPage", "ChainSelectPage"]
             },
-            {"Spacer":true}
+            {
+                "SkillNodeKey": "FireTrapSpell",
+                "PageKey": "FireTrapSpell_PageItem"
+            }
         ],
         [
             {
@@ -364,7 +367,7 @@
             },
             {
                 "PairType": "Or",
-                "Pages": ["SafteyHazardPage", "HazardSafetyPage"]
+                "Pages": ["HazardSafetyPage", "SafteyHazardPage"]
             }
         ],
         [

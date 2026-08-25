@@ -40,12 +40,6 @@
 					"DefenseType": "AUTO"
 				}
 			},
-			"EffectDatas": {
-				"Effect1": {
-					"Duration": 5.0,
-					"EffectKey": "AilmentShocked"
-				}
-			},
 			"Preview": {
 				"PreviewDamageKey": "ZoneDamage",
 				"PreviewTargetKey": "TargetParam"
@@ -85,7 +79,7 @@
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "WEAPON_DEFAULT",
+					"Animation": "Raise",
 					"MainHand": true,
 					"OffHand": "OnlyIfDuel"
 				}
@@ -100,7 +94,7 @@
 			},
 			"ZoneDatas": {
 				"Zone1": {
-					"Duration": 8.0,
+					"Duration": 2.0,
 					"DurationType": "Turn",
 					"InZoneEffectDataKey": "Effect1",
 					"Triggers": [
@@ -432,8 +426,8 @@
 		"ActionData": {
 			"AmmoData": {
 				"AmmoType": "Mag",
-				"Clip": 16.0,
-				"Cost": 4.0
+				"Clip": 6.0,
+				"Cost": 1.0
 			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,

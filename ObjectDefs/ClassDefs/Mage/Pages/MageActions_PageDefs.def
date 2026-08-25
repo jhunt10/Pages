@@ -632,11 +632,79 @@
 		},
 		"_DefVersion": "1"
 	},
+	"FireTrapSpell_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "#BaseTrapSpell",
+		"#ObjDetails": {
+			"DisplayName": "Fire Trap",
+			"LargeIcon": "Sprites/FireTrap_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/FireTrap_Icon.png",
+			"SnippetDesc": "Create a Trap of Fire Damage.",
+			"Tags": [
+				"Fire"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action",
+				"Spell"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			
+			"Preview": {
+				"PreviewDamageKey": "TrapDamage",
+				"PreviewTargetKey": "TargetParam"
+			},
+			"TargetParams": {
+				"TargetParam": {
+					"EffectArea": "[[-1,-1],[0,-1],[1,-1],[-1,0],[0,0],[1,0],[1,1],[0,1],[-1,1]]",
+					"LineOfSight": true,
+					"TargetArea": "[[-1,4],[0,4],[1,4],[-1,3],[0,3],[1,3],[-1,2],[0,2],[1,2]]",
+					"TargetType": "Spot"
+				}
+			},
+			"DamageDatas": {
+				"TrapDamage": {
+					"DamageType": "Fire",
+					"DmgEffectData": {
+						"ApplicationChance": 1.0,
+						"EffectKey": "AilmentBurned"
+					}
+				}
+			},
+			"ZoneDatas": {
+				"Zone1": {
+					"TileSprite": "SpriteSheets/FireTrap_Tile.png",
+					"AoeArea": "[[-1,-1],[0,-1],[1,-1],[-1,0],[0,0],[1,0],[1,-1],[1,0],[1,1]]"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Mage"
+		},
+		"_DefVersion": "1"
+	},
 	"FireZoneSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseAttackZoneSpell",
 		"#ObjDetails": {
-			"Description": "Create a @@#Tag:Zone@@ of @@#Color:DmgColor:Fire@@ which last for @@#ZoneData:Zone1:Duration@@. All @@#Color:Red:Actors@@ in the @@#Color:Red:Area@@ take @@#DmgData:ZoneDamage@@ at @@#Color:Red:End of Turn@@.\n\n-\"The floor is lava!\"",
+			"Description": "Create a @@#Tag:Zone@@ of @@#Color:DmgColor:Fire@@ which last for @@#ZoneData:Zone1:Duration@@. All @@#Color:Red:Actors@@ in the @@#Tag:Zone@@ take @@#DmgData:ZoneDamage@@ at @@#Color:Red:End of Turn@@.\n\n-\"The floor is lava!\"",
 			"DisplayName": "Fire Zone",
 			"LargeIcon": "Sprites/FireZone_Icon.png",
 			"ObjectType": "Item",
@@ -666,8 +734,8 @@
 			},
 			"DamageDatas": {
 				"ZoneDamage": {
-					"AtkPwrBase": 10.0,
-					"AtkPwrRange": 3.0,
+					"AtkPwrBase": 20.0,
+					"AtkPwrRange": 5.0,
 					"AtkPwrScale": 1.0,
 					"DamageType": "Fire"
 				}

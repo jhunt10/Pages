@@ -187,10 +187,16 @@ func get_title_page()->PageItemTitle:
 	return _title_page
 
 func get_raw_base_stats()->Dictionary:
+	var raw_stats = {}
+	# Get base stats from Title Page
 	var title_page = get_title_page()
 	if title_page:
-		return title_page.get_base_stats()
-	return actor_data.get("Stats",{})#self.get_load_val("Stats", {})
+		raw_stats = title_page.get_base_stats()
+	# Override with stats from actor
+	var actor_stats = actor_data.get("OverrideStats", {})
+	for key in actor_stats.keys():
+		raw_stats[key] = actor_stats[key]
+	return raw_stats
 	
 
 func get_stat_mods_granted_to_carrier()->Array:

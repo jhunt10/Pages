@@ -323,7 +323,6 @@ layout_mode = 2
 size_flags_vertical = 0
 
 [node name="ActionPageDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=201084818 node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
-visible = false
 layout_mode = 2
 vertical = true
 script = ExtResource("12_fd6vk")
@@ -523,6 +522,7 @@ custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
 [node name="EffectPageDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1049632255 node_paths=PackedStringArray("parent_card_control", "description_box", "stat_mods_container", "premade_stat_mod_label")]
+visible = false
 layout_mode = 2
 vertical = true
 script = ExtResource("16_tp5cp")

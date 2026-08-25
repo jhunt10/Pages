@@ -19,20 +19,7 @@
 		},
 		"ActorData": {
 			"Faction": "Dummies",
-			"Stats": {
-				"Armor": 0.0,
-				"BarRegen:Health:Round": 500.0,
-				"BarRegen:Health:Turn": 500.0,
-				"BarStat:Health": 500.0,
-				"BlockChance": 0.0,
-				"BlockMod": 0.0,
-				"Evasion": 0.0,
-				"HealthMax": 500.0,
-				"Mass": 10.0,
-				"Resistance:Dark": 0.0,
-				"Resistance:Light": 0.0,
-				"Speed": 0.0
-			},
+			"TitleKey": "TargetDummy_TitlePage"
 		},
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
 		"SpriteFrameWH": [
@@ -63,8 +50,7 @@
 		},
 		"SpriteSheet": "Sprites/TargetWarded_SpriteSheet.png",
 		"ActorData": {
-			"Stats": {
-				"Protection": 50.0,
+			"OverrideStats": {
 				"Ward": 50.0
 			}
 		},
@@ -94,9 +80,11 @@
 			]
 		},
 		"SpriteSheet": "Sprites/TargetMoving_SpriteSheet.png",
-		"Stats": {
-			"PPR": 4.0,
-			"Speed": 20.0
+		"ActorData":{
+			"OverrideStats": {
+				"PPR": 4.0,
+				"Speed": 20.0
+			}
 		},
 		"_DefVersion": "1"
 	},
@@ -117,7 +105,7 @@
 		},
 		"SpriteSheet": "Sprites/TargetArmored_SpriteSheet.png",
 		"ActorData": {
-			"Stats": {
+			"OverrideStats": {
 				"Armor": 50.0
 			}
 		},

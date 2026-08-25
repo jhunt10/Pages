@@ -1,0 +1,51 @@
+{
+	"TargetDummy_TitlePage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
+		"!ParentKey": "#BaseTitlePage",
+		"#ObjDetails": {
+			"Description": "A Target Dummy for testing attacks.",
+			"DisplayName": "Target Dummy",
+			"LargeIcon": "Sprites/Target.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Target.png",
+			"SnippetDesc": "Target Dummy",
+			"Tags": [
+				"Title"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Title"
+			]
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Unique",
+			"Value": 50.0
+		},
+		"PageData": {
+			"AddTags": [
+				"Dummy"
+			],
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": "",
+			"Stats": {
+				"Level": 1,
+				"BlockChance": 0.0,
+				"BlockMod": 0.0,
+				"Evasion": 0.0,
+				"HealthMax": 500.0,
+				"Mass": 10.0,
+				"Resistance:Dark": 0.0,
+				"Resistance:Light": 0.0,
+				"Speed": 0.0,
+                "PPR": 0
+			}
+		},
+		"_DefVersion": "1"
+	}
+}

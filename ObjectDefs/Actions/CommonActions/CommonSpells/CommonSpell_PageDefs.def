@@ -494,60 +494,6 @@
 		},
 		"_DefVersion": "1"
 	},
-	"FireTrapSpell": {
-		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-		"!ParentKey": "#BaseTrapSpell",
-		"#ObjDetails": {
-			"DisplayName": "Fire Trap",
-			"LargeIcon": "Sprites/FireTrap.png",
-			"ObjectType": "Item",
-			"SmallIcon": "Sprites/FireTrap.png",
-			"SnippetDesc": "Create a Trap of Fire Damage.",
-			"Tags": [
-				"Fire"
-			],
-			"Taxonomy": [
-				"Item",
-				"Page",
-				"Action",
-				"Spell"
-			]
-		},
-		"ActionData": {
-			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
-			},
-			"DamageDatas": {
-				"TrapDamage": {
-					"DamageType": "Fire",
-					"DmgEffectData": {
-						"ApplicationChance": 1.0,
-						"EffectKey": "AilmentBurned"
-					}
-				}
-			},
-			"ZoneDatas": {
-				"Zone1": {
-					"TileSprite": "TileSets/FireTrap_Tile.png"
-				}
-			}
-		},
-		"ItemData": {
-			"ItemType": "Page",
-			"Rarity": "Common",
-			"Value": 50.0
-		},
-		"PageData": {
-			"PageRequirements": {
-				"ConflictingPages": [],
-				"IncompatiblePages": [],
-				"TitleReq": "None"
-			},
-			"SourceTitle": ""
-		},
-		"_DefVersion": "1"
-	},
 	"PoisonMeleeSpell": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMeleeSpell",

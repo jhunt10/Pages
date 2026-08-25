@@ -28,6 +28,7 @@ func _ready() -> void:
 	prefab_text_box.hide()
 	min_button.pressed.connect(_on_min)
 	max_button.pressed.connect(_on_max)
+	CombatRootControl.Instance.QueController.start_of_round.connect(_on_round_start)
 
 func _on_min():
 	min_button.hide()
@@ -65,6 +66,7 @@ static func log_event(event):
 	elif event is String:
 		var text_box = Instance.prefab_text_box.duplicate()
 		text_box.text = event
+		Instance.entries_container.add_child(text_box)
 		text_box.show()
 
 func log_attack_event(event:AttackEvent):
@@ -76,5 +78,15 @@ func log_attack_event(event:AttackEvent):
 	entries_container.add_child(sep)
 	sep.show()
 	
-	
-	
+func _on_round_start():
+	var sep = prefab_separator.duplicate()
+	entries_container.add_child(sep)
+	sep.show()
+	var new_entry = prefab_text_box.duplicate()
+	var round_index = CombatRootControl.Instance.QueController.round_counter
+	new_entry.text = "Round " + str(int(round_index+1)) + ":"
+	entries_container.add_child(new_entry)
+	new_entry.show()
+	var sep2 = prefab_separator.duplicate()
+	entries_container.add_child(sep2)
+	sep2.show()

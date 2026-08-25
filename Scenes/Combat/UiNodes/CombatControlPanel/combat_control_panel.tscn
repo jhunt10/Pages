@@ -85,8 +85,8 @@ turn_label = NodePath("VBoxContainer/RoundTurnContainer/TurnLabel2")
 status_label = NodePath("VBoxContainer/StatusContainer/NinePatchRect/StatusLabel")
 round_progress_bar = NodePath("VBoxContainer/StatusContainer/NinePatchRect/RoundProgressBar")
 turns_container = NodePath("VBoxContainer/TurnOrderContainer")
-time_scale_label = NodePath("VBoxContainer/BoxContainer2/TimeScaleValueLabel")
-time_scale_slider = NodePath("VBoxContainer/BoxContainer2/HSlider")
+time_scale_label = NodePath("VBoxContainer/TimeScaleContainer/TimeScaleValueLabel")
+time_scale_slider = NodePath("VBoxContainer/TimeScaleContainer/HSlider")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1257019059]
 layout_mode = 2
@@ -226,7 +226,8 @@ layout_mode = 2
 layout_mode = 2
 theme = ExtResource("14_pakc7")
 theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
-text = " Status: "
+theme_override_font_sizes/font_size = 14
+text = " Mode "
 
 [node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/StatusContainer" unique_id=178604167]
 layout_mode = 2
@@ -322,17 +323,17 @@ patch_margin_top = 1
 patch_margin_right = 2
 patch_margin_bottom = 1
 
-[node name="BoxContainer2" type="BoxContainer" parent="VBoxContainer" unique_id=1071023978]
+[node name="TimeScaleContainer" type="BoxContainer" parent="VBoxContainer" unique_id=1071023978]
 layout_mode = 2
 
-[node name="TimeScaleTitleLabel" type="Label" parent="VBoxContainer/BoxContainer2" unique_id=1699934275]
+[node name="TimeScaleTitleLabel" type="Label" parent="VBoxContainer/TimeScaleContainer" unique_id=1699934275]
 layout_mode = 2
 theme = ExtResource("14_pakc7")
 theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
 theme_override_font_sizes/font_size = 12
 text = "Time Scale:"
 
-[node name="TimeScaleValueLabel" type="Label" parent="VBoxContainer/BoxContainer2" unique_id=1768683585]
+[node name="TimeScaleValueLabel" type="Label" parent="VBoxContainer/TimeScaleContainer" unique_id=1768683585]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 theme = ExtResource("14_pakc7")
@@ -341,7 +342,7 @@ theme_override_font_sizes/font_size = 14
 text = "1"
 horizontal_alignment = 1
 
-[node name="HSlider" type="HSlider" parent="VBoxContainer/BoxContainer2" unique_id=745704959]
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TimeScaleContainer" unique_id=745704959]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("1_lhfpo")

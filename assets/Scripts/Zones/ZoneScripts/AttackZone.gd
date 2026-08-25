@@ -50,12 +50,18 @@ func on_actor_exit(actor:BaseActor, game_state:GameStateData):
 		_do_single_attack(actor, game_state)
 
 func _do_single_attack(actor:BaseActor, game_state:GameStateData):
-	var attack_event = AttackHandler.handle_attack(
+	var effects_datas = _data.get("EffectDatas", {})
+	var on_attack_effect_keys = _data.get("OnAttackEffects", [])
+	var on_attack_effects = {}
+	for key in on_attack_effect_keys:
+		on_attack_effects[key] = effects_datas.get(key, {})
+	
+	var _attack_event = AttackHandler.handle_attack(
 		get_source_actor(),
 		[actor],
 		_data.get("AttackDetails", {}),
 		_data.get("DamageDatas", {}),
-		_data.get("EffectDatas", {}),
+		on_attack_effects,
 		_source,
 		game_state,
 		true,
@@ -63,13 +69,19 @@ func _do_single_attack(actor:BaseActor, game_state:GameStateData):
 	)
 
 func _trigger_attacks(game_state:GameStateData):
+	var effects_datas = _data.get("EffectDatas", {})
+	var on_attack_effect_keys = _data.get("OnAttackEffects", [])
+	var on_attack_effects = {}
+	for key in on_attack_effect_keys:
+		on_attack_effects[key] = effects_datas.get(key, {})
+	
 	var actors = list_actors_in_zone(game_state)
-	var attack_event = AttackHandler.handle_attack(
+	var _attack_event = AttackHandler.handle_attack(
 		get_source_actor(),
 		actors,
 		_data.get("AttackDetails", {}),
 		_data.get("DamageDatas", {}),
-		_data.get("EffectDatas", {}),
+		on_attack_effects,
 		_source,
 		game_state,
 		true

@@ -231,10 +231,14 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 	var auto_crit = attack_event.attack_details.get("AutoCrit", false)
 	if auto_crit:
 		sub_event.rolled_crit = true
+	
+	if sub_event.attack_direction == AttackDirection.AOE:
+		sub_event.rolled_blocked = false
+		sub_event.rolled_crit = false
 	else:
 		sub_event.rolled_crit = sub_event.hit_roll < attack_event.attacker_crit_chance
-	
-	sub_event.rolled_blocked = Roll.for_actor(sub_event.get_defender(), sub_event.defender_block_chance)
+		sub_event.rolled_blocked = Roll.for_actor(sub_event.get_defender(), sub_event.defender_block_chance)
+		
 	
 	if attack_event.attack_details.get("AutoHit", false):
 		sub_event.rolled_evade = false
