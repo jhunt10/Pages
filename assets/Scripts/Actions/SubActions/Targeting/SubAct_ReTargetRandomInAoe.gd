@@ -38,7 +38,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	if other_actors.size() == 0:
 		return BaseSubAction.Success
 	
-	var mod_chance = 0.5#subaction_data.get("ChanceToMod", 1)
+	var mod_chance = subaction_data.get("ChanceToMod", 1)
 	var hit_another = Roll.for_chance(mod_chance)
 	if hit_another:
 		var is_good = subaction_data.get("BeingTargetIsGood", false)

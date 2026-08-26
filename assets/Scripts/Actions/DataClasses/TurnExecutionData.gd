@@ -11,7 +11,7 @@ var _targets:Dictionary = {}
 var _targets_from_params:Dictionary = {}
 # Cache of TargetParams form set targets
 var _cached_target_params:Dictionary = {}
-
+var _attack_events:Array = []
 var turn_failed:bool = false
 var _actor:BaseActor
 func _init(actor:BaseActor, on_que:Dictionary) -> void:

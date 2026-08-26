@@ -47,10 +47,10 @@
 		},
 		"_DefVersion": "1"
 	},
-	"CallShockSpell": {
+	"CallShockSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Gather ambient energy in the @@#Color:Blue:Air@@ and release a powerful strike down upon your target or, you know, something in that general vicinity.\n\nMake a @@#Color:Red:Ranged Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n\n@@#EffLine:Effect1@@\n20% chance to target an @@#Color:Red:Adj Actor@@ instead.",
+			"Description": "Gather ambient @@#Color:DmgColor:Shock@@ energy in the air and release a powerful strike down upon your foe or, you know, something in the general vicinity.\n\nMake a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n@@#EffLine:Effect1@@\n@@#Color:Red:5%@@ chance to re-target an @@#Color:Red:Adj Actor@@ instead.",
 			"DisplayName": "Call Shock",
 			"LargeIcon": "Sprites/CallShock_Icon.png",
 			"ObjectType": "Item",
@@ -66,6 +66,11 @@
 			]
 		},
 		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 4,
+				"Cost": 1
+			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
 				"PotencyMod": 1.0
@@ -79,15 +84,15 @@
 					"BaseDamage": 0.0,
 					"DamageType": "Shock",
 					"DamageVfxKey": "LightningStrike_AttackVfx",
-					"DefenseType": "AUTO"
+					"DefenseType": "AUTO",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"Duration": 5.0,
+						"EffectKey": "AilmentShocked"
+					}
 				}
 			},
 			"EffectDatas": {
-				"Effect1": {
-					"ApplicationChance": 0.2,
-					"Duration": 5.0,
-					"EffectKey": "AilmentShocked"
-				}
 			},
 			"Preview": {
 				"PreviewDamageKey": "RangedDamage",
@@ -120,7 +125,7 @@
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_ReTargetRandomInAoe.gd",
 					"#FrameIndex": 10.0,
 					"#SubIndex": 1.0,
-					"ChanceToMod": 0.2,
+					"ChanceToMod": 0.05,
 					"ModifyTargetKey": "Target1",
 					"PrimaryTargetOnly": true
 				},
@@ -187,6 +192,11 @@
 			]
 		},
 		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 6,
+				"Cost": 1
+			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
 				"AttackVfxKey": "LightningChain_AttackVfx",
@@ -278,11 +288,152 @@
 		},
 		"_DefVersion": "1"
 	},
-	"DischargeSpell": {
+	"ShockStormSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Target a Shocked Actor and create a burst of Shock Damage. Removes Shocked from Target.",
-			"DisplayName": "Discharge",
+			"Description": "Unleash a storm of @@#Color:DmgColor:Shock@@ energy raining powerful strikes down upon an unlucky few. Perfect for those without friends.\n\nMake @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attacks@@ against up to @@#Color:Red:3 Random Actors@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
+			"DisplayName": "Shock Storm",
+			"LargeIcon": "Sprites/ShockStorm_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/ShockStorm_Icon.png",
+			"SnippetDesc": "Strike 3 Random Actors with Shock Damage.",
+			"Tags": [
+				"Shock",
+				"RandomTarget",
+				"AOE"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0
+			},
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 3,
+				"Cost": 1
+			},
+			"DamageDatas": {
+				"RangedDamage": {
+					"AtkPwrBase": 120.0,
+					"AtkPwrRange": 30.0,
+					"AtkPwrScale": 1.0,
+					"AtkStat": "MagAttack",
+					"BaseDamage": 0.0,
+					"DamageType": "Shock",
+					"DamageVfxKey": "LightningStrike_AttackVfx",
+					"DefenseType": "AUTO",
+					"DmgEffectData": {
+						"ApplicationChance": 0.2,
+						"Duration": 5.0,
+						"EffectKey": "AilmentShocked"
+					}
+				}
+			},
+			"EffectDatas": {
+			},
+			"Preview": {
+				"PreviewDamageKey": "RangedDamage",
+				"PreviewTargetKey": "TargetParam"
+			},
+			"SubActions": {
+				"Attack": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 7.0,
+					"#SubIndex": 0.0,
+					"DamageKey": "RangedDamage",
+					"TargetKey": "Target1"
+				},
+				"Attack140": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 14.0,
+					"#SubIndex": 0.0,
+					"DamageKey": "RangedDamage",
+					"TargetKey": "Target2"
+				},
+				"Attack210": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 21.0,
+					"#SubIndex": 0.0,
+					"DamageKey": "RangedDamage",
+					"TargetKey": "Target3"
+				},
+				"GetTargetRandom": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
+					"#FrameIndex": 1.0,
+					"#SubIndex": 1.0,
+					"AllowAlreadyTargeted": false,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam"
+				},
+				"GetTargetRandom12": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
+					"#FrameIndex": 1.0,
+					"#SubIndex": 2.0,
+					"AllowAlreadyTargeted": false,
+					"SetTargetKey": "Target2",
+					"TargetParamKey": "TargetParam"
+				},
+				"GetTargetRandom13": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
+					"#FrameIndex": 1.0,
+					"#SubIndex": 3.0,
+					"AllowAlreadyTargeted": false,
+					"SetTargetKey": "Target3",
+					"TargetParamKey": "TargetParam"
+				},
+				"WeaponMotionAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"#FrameIndex": 21.0,
+					"#SubIndex": 1.0,
+					"MainHand": true,
+					"OffHand": "Never"
+				},
+				"WeaponReadyAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"#FrameIndex": 1.0,
+					"#SubIndex": 0.0,
+					"Animation": "Raise",
+					"MainHand": true,
+					"OffHand": "Never"
+				}
+			},
+			"TargetParams": {
+				"TargetParam": {
+					"IncludeAlliesInAoe": true,
+					"IncludeEnemiesInAoe": true,
+					"IncludeSelfInAoe": true,
+					"LineOfSight": false,
+					"TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
+					"TargetType": "Actor"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "Match"
+			},
+			"SourceTitle": "Mage"
+		},
+		"_DefVersion": "1"
+	},
+	"DischargeSpell_PageItem": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Charge/Discharge @@#Color:DmgColor:Shock@@ energy into/from a person/living batter.\n\nTarget an @@#Color:Red:Actor@@ and inflict @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\nIf the target is already @@#EftDef:AilmentShocked:DisplayName@@, end the effect and deal @@#DmgData:RangedDamage@@ to @@#Color:Red:Target@@ and @@#Color:Red:Adj Actors@@.",
+			"DisplayName": "(Dis)charge",
 			"LargeIcon": "Sprites/Discharge_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/Discharge_Icon.png",
@@ -303,6 +454,11 @@
 				"PotencyMod": 1.0,
 				"UseTargetAsOrigin": true
 			},
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 8,
+				"Cost": 1
+			},
 			"DamageDatas": {
 				"RangedDamage": {
 					"AtkPwrBase": 100.0,
@@ -315,20 +471,32 @@
 					"DefenseType": "AUTO"
 				}
 			},
+			"EffectDatas": {
+				"InflictEffect": {
+					"Conditions": {
+						"ApplicationChance": 1.0,
+						"ApplyOnBlock": false,
+						"ApplyOnEvade": false,
+						"TagFilter": {
+
+						},
+						"TeamFilter": []
+					},
+					"EffectDataDef": {
+						"EffectDetails": {
+							"DurationData": {
+								"BaseDuration": 5.0
+							}
+						}
+					},
+					"EffectKey": "AilmentShocked"
+				}
+			},
 			"Preview": {
 				"PreviewDamageKey": "RangedDamage",
 				"PreviewTargetKey": "TargetParam"
 			},
 			"SubActions": {
-				"Attack": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-					"#FrameIndex": 11.0,
-					"#SubIndex": 0.0,
-					"DamageKey": "RangedDamage",
-					"TargetKey": "Target1",
-					"TargetMustBeInRange": false,
-					"UsePrimaryTargetAsOrigin": true
-				},
 				"GetTarget": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
 					"#FrameIndex": 10.0,
@@ -337,13 +505,63 @@
 					"SetTargetKey": "Target1",
 					"TargetParamKey": "TargetParam"
 				},
+				"CheckCondition": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Conditions/SubAct_CheckCondition.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 1.0,
+					"ConditionFlag": "TargetWasShocked",
+					"ConditionType": "TargetHasTag",
+					"PrimaryTargetOnly": true,
+					"RequiredTag": "Shocked",
+					"TargetKey": "Target1"
+				},
+				"DamageAttack": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 11,
+					"#SubIndex": 0,
+					"DamageKey": "RangedDamage",
+					"TargetKey": "Target1",
+					"TargetMustBeInRange": false,
+					"UsePrimaryTargetAsOrigin": true,
+					"RequiredConditions": {
+						"TargetWasShocked": true
+					},
+					"CreateVfx": false
+				},
+				"AttackVfx": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/Attacks/SubAct_Discharge_Attack_Animation.gd",
+					"#FrameIndex": 11,
+					"#SubIndex": 1,
+					"TargetKey": "Target1",
+					"RequiredConditions": {
+						"TargetWasShocked": true
+					}
+
+				},
 				"RemoveEffect": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_RemoveEffect.gd",
-					"#FrameIndex": 11.0,
-					"#SubIndex": 1.0,
+					"#FrameIndex": 11,
+					"#SubIndex": 2,
 					"EffectKey": "AilmentShocked",
 					"PrimaryTargetOnly": true,
-					"TargetKey": "Target1"
+					"TargetKey": "Target1",
+					"RequiredConditions": {
+						"TargetWasShocked": true
+					}
+				},
+				
+				"InflictAttack": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 0.0,
+					"EffectKeys": [
+						"InflictEffect"
+					],
+					"TargetKey": "Target1",
+					"RequiredConditions": {
+						"TargetWasShocked": false
+					},
+					"PrimaryTargetOnly": true
 				},
 				"WeaponMotionAnimation": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
@@ -363,13 +581,13 @@
 			},
 			"TargetParams": {
 				"TargetParam": {
-					"EffectArea": "[[-1,1],[0,1],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0]]",
+					"EffectArea": "[[-1,1],[0,1],[1,1],[1,0],[0,0],[1,-1],[0,-1],[-1,-1],[-1,0]]",
 					"IncludeAlliesInAoe": true,
 					"IncludeEnemiesInAoe": true,
 					"IncludeSelfInAoe": true,
 					"LineOfSight": false,
 					"TargetArea": "[[0,2],[-1,1],[0,1],[1,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-1,-1],[0,-1],[1,-1],[0,-2]]",
-					"TargetConditions": {
+					"_TargetConditions": {
 						"TagFilters": [
 							{
 								"RequireAnyTag": [
@@ -420,13 +638,18 @@
 			]
 		},
 		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 3,
+				"Cost": 1
+			},
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
 				"PotencyMod": 1.0
 			},
 			"DamageDatas": {
 				"MissileDamage": {
-					"AtkPwrBase": 60.0,
+					"AtkPwrBase": 80.0,
 					"AtkPwrRange": 10.0,
 					"AtkPwrScale": 1.0,
 					"DamageType": "Fire"
@@ -832,142 +1055,6 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ShockStormSpell": {
-		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
-		"#ObjDetails": {
-			"Description": "Deal Shock Damage to up to 3 Random Actors in range. 20% chance to apply Shocked.",
-			"DisplayName": "Shock Storm",
-			"LargeIcon": "Sprites/ShockStorm_Icon.png",
-			"ObjectType": "Item",
-			"SmallIcon": "Sprites/ShockStorm_Icon.png",
-			"SnippetDesc": "Strike 3 Random Actors with Shock Damage.",
-			"Tags": [
-				"Shock",
-				"RandomTarget",
-				"AOE"
-			],
-			"Taxonomy": [
-				"Item",
-				"Page",
-				"Action"
-			]
-		},
-		"ActionData": {
-			"AttackDetails": {
-				"AccuracyMod": 1.0,
-				"PotencyMod": 1.0
-			},
-			"DamageDatas": {
-				"ShockStormDamage": {
-					"AtkPwrBase": 100.0,
-					"AtkPwrRange": 30.0,
-					"AtkPwrScale": 1.0,
-					"AtkStat": "MagAttack",
-					"BaseDamage": 0.0,
-					"DamageType": "Shock",
-					"DamageVfxKey": "LightningStrike_AttackVfx",
-					"DefenseType": "AUTO"
-				}
-			},
-			"EffectDatas": {
-				"Effect1": {
-					"ApplicationChance": 0.2,
-					"Duration": 5.0,
-					"EffectKey": "AilmentShocked"
-				}
-			},
-			"Preview": {
-				"PreviewDamageKey": "ShockStormDamage",
-				"PreviewTargetKey": "TargetParam"
-			},
-			"SubActions": {
-				"Attack": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-					"#FrameIndex": 7.0,
-					"#SubIndex": 0.0,
-					"DamageKey": "ShockStormDamage",
-					"TargetKey": "Target1"
-				},
-				"Attack140": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-					"#FrameIndex": 14.0,
-					"#SubIndex": 0.0,
-					"DamageKey": "ShockStormDamage",
-					"TargetKey": "Target2"
-				},
-				"Attack210": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",
-					"#FrameIndex": 21.0,
-					"#SubIndex": 0.0,
-					"DamageKey": "ShockStormDamage",
-					"TargetKey": "Target3"
-				},
-				"GetTargetRandom": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
-					"#FrameIndex": 1.0,
-					"#SubIndex": 1.0,
-					"AllowAlreadyTargeted": false,
-					"SetTargetKey": "Target1",
-					"TargetParamKey": "TargetParam"
-				},
-				"GetTargetRandom12": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
-					"#FrameIndex": 1.0,
-					"#SubIndex": 2.0,
-					"AllowAlreadyTargeted": false,
-					"SetTargetKey": "Target2",
-					"TargetParamKey": "TargetParam"
-				},
-				"GetTargetRandom13": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Random.gd",
-					"#FrameIndex": 1.0,
-					"#SubIndex": 3.0,
-					"AllowAlreadyTargeted": false,
-					"SetTargetKey": "Target3",
-					"TargetParamKey": "TargetParam"
-				},
-				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
-					"#FrameIndex": 21.0,
-					"#SubIndex": 1.0,
-					"MainHand": true,
-					"OffHand": "Never"
-				},
-				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
-					"#FrameIndex": 1.0,
-					"#SubIndex": 0.0,
-					"Animation": "Raise",
-					"MainHand": true,
-					"OffHand": "Never"
-				}
-			},
-			"TargetParams": {
-				"TargetParam": {
-					"IncludeAlliesInAoe": true,
-					"IncludeEnemiesInAoe": true,
-					"IncludeSelfInAoe": true,
-					"LineOfSight": false,
-					"TargetArea": "[[-1,2],[0,2],[1,2],[-2,1],[-1,1],[0,1],[1,1],[2,1],[-2,0],[-1,0],[0,0],[1,0],[2,0],[-2,-1],[-1,-1],[0,-1],[1,-1],[2,-1],[-1,-2],[0,-2],[1,-2]]",
-					"TargetType": "Actor"
-				}
-			}
-		},
-		"ItemData": {
-			"ItemType": "Page",
-			"Rarity": "Common",
-			"Value": 50.0
-		},
-		"PageData": {
-			"PageRequirements": {
-				"ConflictingPages": [],
-				"IncompatiblePages": [],
-				"TitleReq": "Match"
-			},
-			"SourceTitle": "Mage"
-		},
-		"_DefVersion": "1"
-	},
 	"WaterBallSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMissileSpell",
@@ -1104,9 +1191,9 @@
 		"#ObjDetails": {
 			"Description": "Spawn a @@#Color:Beam@@ of ice, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Great for refrigerating food, corpses, and poeple you wish to be corpses.",
 			"DisplayName": "Ice Beam",
-			"LargeIcon": "Sprites/WaterBeam.png",
+			"LargeIcon": "Sprites/ColdMage_Icon.png",
 			"ObjectType": "Item",
-			"SmallIcon": "Sprites/WaterBeam.png",
+			"SmallIcon": "Sprites/ColdMage_Icon.png",
 			"SnippetDesc": "Spawn Piercing Beam of Ice.",
 			"Tags": [
 				"Beam",
@@ -1130,7 +1217,7 @@
 			},
 			"DamageDatas": {
 				"WaterBeamDamage": {
-					"AtkPwrBase": 50.0,
+					"AtkPwrBase": 70.0,
 					"AtkPwrRange": 10.0,
 					"AtkPwrScale": 1.0,
 					"AtkStat": "MagAttack",

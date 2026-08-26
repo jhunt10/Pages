@@ -143,12 +143,12 @@
 	"ColdMagePassive_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "By refocusing the @@#Color:DmgColor:Cold:Cold@@ energy of @@#Color:Blue:Water Spells@@, you've found a way to freeze the projectiles into solid ice dealing @@#Tag:Physical:Physical Damage@@.\n\n@@#Tag:Spell:Spells@@ with the @@#Color:Blue:Water@@ tag are modified to deal @@#Color:DmgColor:Blunt@@ or @@#Color:DmgColor:Pierce@@ Damage, and are resisted by @@#Stat:Armor@@. The new damage type depends on the spell.",
-			"DisplayName": "Cold Hardened",
-			"LargeIcon": "Sprites/ColdMage_Icon.png",
+			"Description": "By limiting the @@#Color:DmgColor:Cold:Cold@@ energy of @@#Tag:Ice:Ice Spells@@, you're able to prevent the projectiles from freezing and instead deal @@#Tag:Physical:Physical Damage@@.\n\n@@#Tag:Spell:Spells@@ with the @@#Tag:Ice@@ tag are modified to deal @@#Color:DmgColor:Blunt@@, @@#Color:DmgColor:Pierce@@ or or @@#Color:DmgColor:Crash@@ Damage, and are resisted by @@#Stat:Armor@@. The new damage type depends on the spell.",
+			"DisplayName": "Aqua Mage",
+			"LargeIcon": "Sprites/AquaMage_Icon.png",
 			"ObjectType": "Item",
-			"SmallIcon": "Sprites/ColdMage_Icon.png",
-			"SnippetDesc": "Deal Poison Damage on contact",
+			"SmallIcon": "Sprites/AquaMage_Icon.png",
+			"SnippetDesc": "Ice Spells deal Physical Damage",
 			"Tags": [
 				"Passive",
 				"ActionMod"
@@ -187,7 +187,6 @@
 							"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n\nOn impact the ball splashes launching @@#Tag:Missile:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n@@#EftChances@@\n-One of many spells banned from professional water balloon fights.",
 							"SnippetDesc": "Launch a Ice Ball Missile",
 							"Tags": [
-								"Water"
 							],
 							"Taxonomy": [
 								"Item",
@@ -220,8 +219,9 @@
 						"#ObjDetails": {
 							"DisplayName": "Water Beam",
 							"Description": "Spawn a @@#Color:Beam@@ of ice, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Also great for power washing the blood left behind after power washing enemies.",
+							"LargeIcon": "Sprites/WaterBeam.png",
+							"SmallIcon": "Sprites/WaterBeam.png",
 							"Tags": [
-								"Water"
 							],
 							"Taxonomy": [
 								"Item",
@@ -232,7 +232,7 @@
 						"ActionData": {
 							"DamageDatas": {
 								"WaterBeamDamage": {
-									"DamageType": "Pierce",
+									"DamageType": "Crash",
 									"DefenseType": "Armor"
 								}
 							}
@@ -251,7 +251,6 @@
 							"DisplayName": "Water Gun",
 							"Description": "Fire a rapid series of @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n\n-Summer time fun turned deadly.",
 							"Tags": [
-								"Water"
 							],
 							"Taxonomy": [
 								"Item",

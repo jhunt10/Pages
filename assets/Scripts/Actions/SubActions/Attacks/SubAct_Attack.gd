@@ -90,9 +90,11 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		)
 	
 	var primary_target = null
+	var primary_target_pos = null
 	if targets_selected.size() > 0:
 		primary_target = targets_selected[0]
-	
+		if primary_target is String or primary_target is BaseActor:
+			primary_target = game_state.get_actor_pos(primary_target)
 	# Get Effect Datas
 	var effect_keys = subaction_data.get("EffectKeys", [])
 	var effect_datas = {}
@@ -134,7 +136,11 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		# Check if target is still in range since being selecting target
 		if target_must_be_in_range:
 			var target_pos = game_state.get_actor_pos(target)
-			var still_in_range = target_params.is_point_in_area(actor_pos, target_pos)
+			var still_in_range = target_params.is_point_in_area(target_pos, actor_pos)
+			# Check if in AOE
+			if not still_in_range and target_params.has_area_of_effect():
+				var effect_area = target_params.get_area_of_effect(primary_target_pos)
+				still_in_range = effect_area.has(target_pos.to_vector2i())
 			if not still_in_range:
 				missed_moved_actor = true
 				continue
@@ -145,14 +151,14 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var override_origin_pos = null
 	if subaction_data.get("UsePrimaryTargetAsOrigin", false):
 		if primary_target is BaseActor or primary_target is String:
-			override_origin_pos = game_state.get_actor_pos(primary_target)
+			override_origin_pos = primary_target_pos
 		if primary_target is MapPos:
 			override_origin_pos = primary_target
 	
 	if subaction_data.keys().has("LeachPercent"):
 		attack_details["LeachPercent"] = subaction_data["LeachPercent"]
 	
-	var _attack_event = AttackHandler.handle_attack(
+	var attack_event = AttackHandler.handle_attack(
 		actor, 
 		hittable_actors,
 		attack_details, 
@@ -161,8 +167,9 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		tag_chain, 
 		game_state,
 		target_params.has_area_of_effect(),
-		override_origin_pos)
-	
+		override_origin_pos,
+		subaction_data.get("CreateVfx", true))
+	turn_data._attack_events.append(attack_event)
 	if missed_moved_actor and not hit_any_actor:
 		VfxHelper.create_flash_text(actor, "Miss", BaseFlashTextVfxNode.FlashTextType.Miss)
 	

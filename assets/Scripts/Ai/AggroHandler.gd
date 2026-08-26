@@ -23,7 +23,7 @@ func add_threat_from_actor(enemy:BaseActor, val:float, game_state:GameStateData)
 	
 	#TODO: Add threat from healing and applying effects
 	
-	if not (enemy and game_state.are_enemies(enemy, _actor)):
+	if not (enemy and game_state and game_state.are_enemies(enemy, _actor)):
 		return
 	if not actor_id_to_threat.has(enemy.Id):
 		actor_id_to_threat[enemy.Id] = 0

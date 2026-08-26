@@ -15,7 +15,9 @@ func _on_start():
 	if _data.get("SourceActorId", '') == _data.get("HostActorId", ''):
 		printerr("%s: SourceActor and Host Actor are same." % [self.id])
 		sprite.hide()
-		animation_player.speed_scale = 10
+		animation_player.speed_scale = 10 * CombatRootControl.get_time_scale()
+	else:
+		animation_player.speed_scale = CombatRootControl.get_time_scale()
 	if source_actor_id == '':
 		printerr("Chain Lightning Effect: No Target ActorId")
 		self.finish()

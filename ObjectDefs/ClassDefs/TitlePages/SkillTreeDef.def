@@ -320,7 +320,8 @@
                 "PageKey": "WaterGunSpell_PageItem"
             },
             {
-                "PageKey": "DischargeSpell"
+                "SkillNodeKey": "DischargeSpell",
+                "PageKey": "DischargeSpell_PageItem"
             },
             {
                 "SkillNodeKey": "FireThrowSpell",
@@ -348,6 +349,7 @@
                 "PageKey": "WaterBallSpell_PageItem"
             },
             {
+                "SkillNodeKey": "ChainMods",
                 "PairType": "Or",
                 "ParentSkillKey": "ChainShockSpell",
                 "Pages": ["ChainExtendPage", "ChainSelectPage"]
@@ -363,7 +365,8 @@
                 "PageKey": "WaterBeamSpell_PageItem"
             },
             {
-                "PageKey": "CallShockSpell"
+                "SkillNodeKey": "CallShock",
+                "PageKey": "CallShockSpell_PageItem"
             },
             {
                 "PairType": "Or",
@@ -376,7 +379,8 @@
                 "PageKey": "ColdMagePassive_PageItem"
             },
             {
-                "PageKey": "ShockStormSpell"
+                "SkillNodeKey": "ShockStormSpell",
+                "PageKey": "ShockStormSpell_PageItem"
             },
             {
                 "SkillNodeKey": "FireBall",

@@ -51,7 +51,8 @@ func __add_new_effect(effect:BaseEffect, suppress_signals:bool = false):
 	if not effect.is_instant():
 		for trigger in effect.Triggers:
 			_triggers_to_effect_ids[trigger].append(effect.Id)
-	
+	if effect.get_tags_added_to_actor().size() > 0:
+		_actor.dirty_tags()
 	if not suppress_signals:
 		_actor.effacts_changed.emit()
 
@@ -111,10 +112,14 @@ func remove_effect(effect:BaseEffect, supress_signal:bool=false):
 			effect.on_delete()
 		# Clean from data
 		_effects.erase(_removing_effect_id)
+		
 		print("EffectHolder.remove_effect: Deleted Effect '%s' from actor '%s'." % [_removing_effect_id, _actor.Id])
 		for trigger in _triggers_to_effect_ids.keys():
 			if _triggers_to_effect_ids[trigger].has(_removing_effect_id):
 				_triggers_to_effect_ids[trigger].erase(_removing_effect_id)
+		
+		if effect.get_tags_added_to_actor().size() > 0:
+			_actor.dirty_tags()
 		EffectLibrary.Instance.erase_object(_removing_effect_id)
 	_removing_effect_id = null
 	if _remove_effect_queue.size() > 0:

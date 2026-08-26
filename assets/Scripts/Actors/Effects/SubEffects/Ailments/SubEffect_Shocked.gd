@@ -18,7 +18,7 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, _trigger:Ba
 	tag_chain.append_source(SourceTagChain.SourceTypes.Effect, effect)
 	
 	var damage_event = DamageHelper.roll_for_damage(damage_data, source_actor, actor, tag_chain, game_state, {})
-	actor.apply_damage_event(damage_event)
+	actor.apply_damage_event(damage_event, false, game_state)
 	damage_event.was_applied = true
 	actor.effects.trigger_damage_taken(game_state, damage_event)
 	
@@ -37,6 +37,6 @@ func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, _trigger:Ba
 		adj_actor.apply_damage_event(adj_damage_event)
 		adj_damage_event.was_applied = true
 		adj_actor.effects.trigger_damage_taken(game_state, adj_damage_event)
-		var vfx_node = VfxHelper.create_vfx_on_actor(adj_actor, "LightningChain_AttackVfx", {"SourceActorId": actor.Id, "HostActorId": adj_actor.Id})
+		var vfx_node = VfxHelper.create_vfx_on_actor(adj_actor, "ShockedAilment_AttackVfx", {"SourceActorId": actor.Id, "HostActorId": adj_actor.Id})
 		
 		VfxHelper.chain_vfx_for_damage_event(vfx_node, damage_event, shared_damage_data)

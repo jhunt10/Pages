@@ -82,16 +82,21 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 		if current_target_count > 0:
 			if not turn_data.data_cache.keys().has("TargetChainMaping"):
 				turn_data.data_cache['TargetChainMaping'] = {}
-			var target_chain = _get_target_chain(
-				parent_action, 
-				actor, 
-				targets[0], 
-				target_param_key, 
-				setting_target_key, 
-				max_chain_count, 
-				fork_count, 
-				game_state
+			var target_chain = {}
+			var first_actor = game_state.get_actor(targets[0])
+			get_target_chain(
+				first_actor, game_state, max_chain_count, target_chain
 			)
+			#_get_target_chain(
+				#parent_action, 
+				#actor, 
+				#targets[0], 
+				#target_param_key, 
+				#setting_target_key, 
+				#max_chain_count, 
+				#fork_count, 
+				#game_state
+			#)
 			for targeted_actor in target_chain.keys():
 				var from_other_target = target_chain[targeted_actor]
 				if targeted_actor == targets[0]:
@@ -135,6 +140,24 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 		"AllowLockon": true
 	})
 	return BaseSubAction.Success
+
+# Returns Dictionary with To:From Actors
+static func get_target_chain(start_actor:BaseActor, game_state:GameStateData, remaining_chain_count:int, chain_dic:Dictionary):
+	var adj_actors = MapHelper.get_adjacent_actors(game_state, start_actor)
+	var possible_targets = []
+	for adj_actor in adj_actors:
+		if chain_dic.keys().has(adj_actor.Id):
+			continue
+		else:
+			possible_targets.append(adj_actor.Id)
+	if possible_targets.size() == 0:
+		return
+	var roll = randi() % possible_targets.size()
+	var selected_target = possible_targets[roll]
+	chain_dic[selected_target.Id] = start_actor.Id
+	if remaining_chain_count > 1:
+		get_target_chain(selected_target, game_state, remaining_chain_count - 1, chain_dic)
+		
 
 static func _get_target_chain(parent_action, attacker, start_actor, target_param_key, set_target_key, max_count, fork_count, game_state)->Dictionary:
 	var target_params = TargetParameters.new(target_param_key, {
