@@ -22,11 +22,10 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 	var turn_data:TurnExecutionData = metadata.get_current_turn_data()
 	
 	var max_chain_count = subaction_data.get("MaxChainCount", 1)
-	max_chain_count += actor.stats.get_stat("ChainLengthBonus", 0)
-	max_chain_count = 5
 	var fork_count = subaction_data.get("ForkCount", 1)
-	fork_count = 2
-	fork_count += actor.stats.get_stat("ChainForkBonus", 0)
+	# These are handled through Action Mods
+	#max_chain_count += actor.stats.get_stat("ChainLengthBonus", 0)
+	#fork_count += actor.stats.get_stat("ChainForkBonus", 0)
 	var current_target_count = 0
 	
 	# Check if Target is already set
@@ -82,11 +81,12 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 		if current_target_count > 0:
 			if not turn_data.data_cache.keys().has("TargetChainMaping"):
 				turn_data.data_cache['TargetChainMaping'] = {}
-			var target_chain = {}
 			var first_actor = game_state.get_actor(targets[0])
+			var target_chain = {first_actor.Id: actor.Id}
 			get_target_chain(
-				first_actor, game_state, max_chain_count, target_chain
+				[first_actor.Id], game_state, max_chain_count-1, fork_count, target_chain
 			)
+			print("Target Chain: %s" %[target_chain])
 			#_get_target_chain(
 				#parent_action, 
 				#actor, 
@@ -142,46 +142,41 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 	return BaseSubAction.Success
 
 # Returns Dictionary with To:From Actors
-static func get_target_chain(start_actor:BaseActor, game_state:GameStateData, remaining_chain_count:int, chain_dic:Dictionary):
-	var adj_actors = MapHelper.get_adjacent_actors(game_state, start_actor)
-	var possible_targets = []
-	for adj_actor in adj_actors:
-		if chain_dic.keys().has(adj_actor.Id):
-			continue
-		else:
-			possible_targets.append(adj_actor.Id)
+static func get_target_chain(source_actor_ids:Array, game_state:GameStateData, remaining_chain_count:int, fork_count:int, chain_dic:Dictionary):
+	if chain_dic.size() == 1:
+		printerr("\n\nBuilding Chain| Size: %s" % [remaining_chain_count])
+	# Get Adj Actors
+	var possible_targets = {} # Target ActorId mapped to array of From Actor Id
+	for from_actor_id in source_actor_ids:
+		var adj_actors = MapHelper.get_adjacent_actors(game_state, from_actor_id)
+		for adj_actor in adj_actors:
+			if chain_dic.keys().has(adj_actor.Id):
+				continue
+			if chain_dic.values().has(adj_actor.Id):
+				continue
+			if source_actor_ids.has(adj_actor.Id):
+				continue
+			if not possible_targets.keys().has(adj_actor.Id):
+				possible_targets[adj_actor.Id] = []
+			possible_targets[adj_actor.Id].append(from_actor_id)
 	if possible_targets.size() == 0:
 		return
-	var roll = randi() % possible_targets.size()
-	var selected_target = possible_targets[roll]
-	chain_dic[selected_target.Id] = start_actor.Id
-	if remaining_chain_count > 1:
-		get_target_chain(selected_target, game_state, remaining_chain_count - 1, chain_dic)
+	print("Possible Targets: %s" %[possible_targets] )
+	# Randomly select targets up to Fork count
+	var selected_targets = {}
+	var possible_target_keys = possible_targets.keys()
+	while ( selected_targets.size() < fork_count 
+			and possible_target_keys.size() > 0
+			and selected_targets.size() < remaining_chain_count):
+		var target_roll = randi() % possible_targets.size()
+		var target_id = possible_target_keys[target_roll]
+		var parent_roll = randi() % possible_targets[target_id].size() # Select random parent
+		selected_targets[target_id] = possible_targets[target_id][parent_roll]
+		possible_targets.erase(target_id)
+		possible_target_keys = possible_targets.keys()
+	
+	for selected_target_id in selected_targets.keys():
+		chain_dic[selected_target_id] = selected_targets[selected_target_id]
+	if remaining_chain_count - selected_targets.size() >= 1:
+		get_target_chain(selected_targets.keys(), game_state, remaining_chain_count - selected_targets.size(), fork_count, chain_dic)
 		
-
-static func _get_target_chain(parent_action, attacker, start_actor, target_param_key, set_target_key, max_count, fork_count, game_state)->Dictionary:
-	var target_params = TargetParameters.new(target_param_key, {
-		"LineOfSight": true,
-		"TargetArea": "[[-1,1],[0,1],[1,1],[-1,0],[1,0],[-1,-1],[0,-1],[1,-1]]",
-		"TargetType": "Actor"
-	})
-	var working_targets = [start_actor]
-	var selected_targets = {start_actor: null}
-	while (working_targets.size() > 0 and selected_targets.size() < max_count):
-		var checking = working_targets[0]
-		working_targets.remove_at(0)
-		var override_pos = game_state.get_actor_pos(checking)
-		var selection_data = TargetSelectionData.new(
-			target_params, 
-			set_target_key, 
-			attacker, 
-			game_state, 
-			selected_targets.values(), 
-			override_pos
-		)
-		var next_targets = Roll.random_targets(parent_action, attacker, selection_data, fork_count, false)
-		for next_targ in next_targets:
-			working_targets.append(next_targ)
-			if selected_targets.size() < max_count:
-				selected_targets[next_targ] = checking
-	return selected_targets

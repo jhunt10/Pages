@@ -79,8 +79,10 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	var target_mappings = turn_data.data_cache.get("TargetChainMaping", {})
 	for target:BaseActor in targets:
 		
+		var from_actor:BaseActor = null
 		if target_mappings.keys().has(target.Id):
 			var from_actor_id = target_mappings.get(target.Id)
+			from_actor = game_state.get_actor(from_actor_id)
 			if from_actor_id:
 				override_origin_pos = game_state.get_actor_pos(from_actor_id)
 		
@@ -98,7 +100,10 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		
 		for sub_attack_event_key in attack_event.sub_events.keys():
 			var sub_attack_event:AttackSubEvent = attack_event.sub_events.get(sub_attack_event_key)
-			VfxHelper.create_vfx_for_sub_attack_event(attack_event, game_state, sub_attack_event, last_target)
+			var source_actor = last_target
+			if from_actor:
+				source_actor = from_actor
+			VfxHelper.create_vfx_for_sub_attack_event(attack_event, game_state, sub_attack_event, source_actor)
 			last_target = target
 	
 		print("\n---------------------------")

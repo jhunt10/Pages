@@ -16,10 +16,6 @@
 [ext_resource type="StyleBox" uid="uid://nwem0n16pjsc" path="res://assets/Themes/ComputerPanels/scroll_grabber_style_box_texture.tres" id="8_8p0co"]
 [ext_resource type="StyleBox" uid="uid://bk3gh5mr8n3ec" path="res://assets/Themes/ComputerPanels/scroll_style_box_flat.tres" id="9_b4sav"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ue03d"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hiujv"]
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dukn7"]
 texture = ExtResource("8_5eygn")
 texture_margin_left = 3.0
@@ -61,8 +57,7 @@ HSlider/icons/grabber = ExtResource("6_hiujv")
 HSlider/icons/grabber_disabled = ExtResource("6_hiujv")
 HSlider/icons/grabber_highlight = ExtResource("6_hiujv")
 HSlider/icons/tick = ExtResource("7_2gfkw")
-HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_ue03d")
-HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_hiujv")
+HSlider/styles/grabber_area = null
 HSlider/styles/slider = SubResource("StyleBoxTexture_dukn7")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/fonts/font = ExtResource("1_hgpg3")

@@ -32,8 +32,12 @@ static func get_actor_global_position(actor:BaseActor)->Vector2:
 	var global_pos = map_control.position + map_control.actor_tile_map.map_to_local(Vector2i(map_pos.x, map_pos.y))
 	return global_pos
 
-static func get_adjacent_actors(game_state:GameStateData, actor:BaseActor)->Array:
+static func get_adjacent_actors(game_state:GameStateData, actor)->Array:
+	if actor is String:
+		actor = game_state.get_actor(actor)
 	var out_arr = []
+	if !actor:
+		return out_arr
 	var center_pos = game_state.get_actor_pos(actor)
 	if not center_pos:
 		return out_arr

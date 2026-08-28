@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://i4emifuyi6eo"]
 
 [ext_resource type="Script" uid="uid://bfo0lxleq45cd" path="res://Scenes/Menus/CharacterMenu/character_menu.gd" id="1_dowqg"]
+[ext_resource type="Texture2D" uid="uid://cgwnc3yb340sm" path="res://Scenes/Menus/CharacterMenu/Sprites/NextActorArrow.png" id="2_cqfet"]
 [ext_resource type="Texture2D" uid="uid://deporx1o1xrvj" path="res://Scenes/Menus/CharacterMenu_old/BookBackground2.png" id="2_l2wto"]
+[ext_resource type="Texture2D" uid="uid://cuk5oq6hevauv" path="res://Scenes/Menus/CharacterMenu/Sprites/NextActorArrow_Pressed.png" id="3_b4myk"]
 [ext_resource type="Theme" uid="uid://cg4cnbceql6tl" path="res://assets/Themes/fancy_panel_theme.tres" id="3_iofuq"]
 [ext_resource type="Script" uid="uid://dh7h75qqd47s2" path="res://Scenes/Menus/CharacterMenu/name_panel_container.gd" id="4_iofuq"]
 [ext_resource type="Texture2D" uid="uid://jwg5aqbw71la" path="res://Scenes/Menus/CharacterMenu/Equipment/Sprites/MainHandSlot.png" id="4_xk513"]
@@ -65,6 +67,8 @@
 [ext_resource type="PackedScene" uid="uid://deon0fff5iq41" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_page_control.tscn" id="58_iofuq"]
 [ext_resource type="Script" uid="uid://c8jheyrbbjxrh" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="63_7egd2"]
 [ext_resource type="Texture2D" uid="uid://xcjbd3xju45w" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/DragItemBackground.png" id="64_d0duj"]
+[ext_resource type="Texture2D" uid="uid://cpe7rudtanbpf" path="res://Scenes/Menus/CharacterMenu/Sprites/ExitTabButton.png" id="65_b4myk"]
+[ext_resource type="Texture2D" uid="uid://ds6u4wut5bs5l" path="res://Scenes/Menus/CharacterMenu/Sprites/ExitTabButton_Pressed.png" id="66_60vuk"]
 [ext_resource type="PackedScene" uid="uid://dtq43lg70b7wm" path="res://Scenes/Menus/SkillTreeMenu/skill_tree_menu.tscn" id="66_656xf"]
 [ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="66_psmk2"]
 [ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="67_1dkcm"]
@@ -214,7 +218,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BookContainer/Control/PanelContainer:size")
+tracks/1/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -226,7 +230,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BookContainer/Control/SkillTreeMenu:visible")
+tracks/2/path = NodePath("PanelContainer/TwoPagesContainer/Control/SkillTreeMenu:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -238,7 +242,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BookContainer/Control/PanelContainer:visible")
+tracks/3/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -250,7 +254,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("BookContainer/Control/PanelContainer:modulate")
+tracks/4/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -258,6 +262,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PanelContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(169, 40)]
 }
 
 [sub_resource type="Animation" id="Animation_8e5eg"]
@@ -279,7 +295,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BookContainer/Control/PanelContainer:size")
+tracks/1/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -291,7 +307,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BookContainer/Control/SkillTreeMenu:visible")
+tracks/2/path = NodePath("PanelContainer/TwoPagesContainer/Control/SkillTreeMenu:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -303,7 +319,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BookContainer/Control/PanelContainer:visible")
+tracks/3/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -315,7 +331,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("BookContainer/Control/PanelContainer:modulate")
+tracks/4/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -323,6 +339,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PanelContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.20004475),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(72, 40), Vector2(169, 40)]
 }
 
 [sub_resource type="Animation" id="Animation_l4r3y"]
@@ -344,7 +372,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("BookContainer/Control/PanelContainer:size")
+tracks/1/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -356,7 +384,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("BookContainer/Control/SkillTreeMenu:visible")
+tracks/2/path = NodePath("PanelContainer/TwoPagesContainer/Control/SkillTreeMenu:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -368,7 +396,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("BookContainer/Control/PanelContainer:visible")
+tracks/3/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -380,7 +408,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("BookContainer/Control/PanelContainer:modulate")
+tracks/4/path = NodePath("PanelContainer/TwoPagesContainer/Control/PanelContainer:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -388,6 +416,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PanelContainer:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.19907601),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(169, 40), Vector2(72, 40)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8e5eg"]
@@ -405,25 +445,25 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dowqg")
-name_panel = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer")
-stats_panel = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer")
-actor_sprite = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control/ActorNode")
-equipment_control = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer")
-title_slot_button = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton")
-tab_container = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer")
-page_tab = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages")
-bag_tab = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies")
-stats_tab = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats")
-carrier_control = NodePath("BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl")
-inventory_container = NodePath("BookContainer/PanelContainer/TwoPagesContainer/RightPageContainer/InventoryMenuPage")
-close_button = NodePath("BookContainer/VBoxContainer/Button3")
-previous_character_button = NodePath("BookContainer/Button")
-next_character_button = NodePath("BookContainer/VBoxContainer/Button2")
+name_panel = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer")
+stats_panel = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer")
+actor_sprite = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control/ActorNode")
+equipment_control = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer")
+title_slot_button = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton")
+tab_container = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer")
+page_tab = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages")
+bag_tab = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies")
+stats_tab = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats")
+carrier_control = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl")
+inventory_container = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/InventoryMenuPage")
+close_button = NodePath("PanelContainer/TwoPagesContainer/CloseHolderControl/CloseTextureButton")
+previous_character_button = NodePath("LastActor_TextureButton")
+next_character_button = NodePath("NextActor_TextureButton")
 details_card_spawn_point = NodePath("DetailsCardSpawnPoint")
 mouse_control = NodePath("MouseOverControl")
-inventory_option_button = NodePath("BookContainer/PanelContainer/TwoPagesContainer/RightPageContainer/OptionButton")
-skill_tree_control = NodePath("BookContainer/PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl")
-skill_tree_menu = NodePath("BookContainer/Control/SkillTreeMenu")
+inventory_option_button = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/OptionButton")
+skill_tree_control = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl")
+skill_tree_menu = NodePath("PanelContainer/TwoPagesContainer/Control/SkillTreeMenu")
 animation_player = NodePath("AnimationPlayer")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=202258781]
@@ -435,47 +475,53 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.22670749, 0.22670752, 0.22670743, 0.5019608)
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=113629347]
+[node name="LastActor_TextureButton" type="TextureButton" parent="." unique_id=1815201397]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 256.0
+grow_vertical = 2
+texture_normal = ExtResource("2_cqfet")
+texture_pressed = ExtResource("3_b4myk")
+stretch_mode = 3
+flip_h = true
+
+[node name="NextActor_TextureButton" type="TextureButton" parent="." unique_id=411022221]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_left = -256.0
+grow_horizontal = 0
 grow_vertical = 2
+texture_normal = ExtResource("2_cqfet")
+texture_pressed = ExtResource("3_b4myk")
+stretch_mode = 3
 
-[node name="StatMouesOverPopUpControl" type="Control" parent="CenterContainer" unique_id=1836556036]
-layout_mode = 2
-
-[node name="BookContainer" type="HBoxContainer" parent="." unique_id=485233078]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=951231591]
 layout_mode = 0
-offset_left = 122.0
+offset_left = 169.0
 offset_top = 40.0
-offset_right = 1034.0
+offset_right = 987.0
 offset_bottom = 608.0
-
-[node name="Button" type="Button" parent="BookContainer" unique_id=1832639898]
-layout_mode = 2
-text = "Back"
-
-[node name="PanelContainer" type="PanelContainer" parent="BookContainer" unique_id=951231591]
-layout_mode = 2
 theme = SubResource("Theme_1gq45")
 
-[node name="TwoPagesContainer" type="HBoxContainer" parent="BookContainer/PanelContainer" unique_id=2032856908]
+[node name="TwoPagesContainer" type="HBoxContainer" parent="PanelContainer" unique_id=2032856908]
 custom_minimum_size = Vector2(0, 512)
 layout_mode = 2
 
-[node name="LeftPageContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer" unique_id=228522046]
+[node name="LeftPageContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer" unique_id=228522046]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
 vertical = true
 
-[node name="ActorPreivewContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer" unique_id=1793992885]
+[node name="ActorPreivewContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer" unique_id=1793992885]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Name-PanelContainer" type="PanelContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=893596779 node_paths=PackedStringArray("name_label", "level_label", "xp_bar")]
+[node name="Name-PanelContainer" type="PanelContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=893596779 node_paths=PackedStringArray("name_label", "level_label", "xp_bar")]
 layout_mode = 2
 theme = ExtResource("3_iofuq")
 script = ExtResource("4_iofuq")
@@ -483,54 +529,54 @@ name_label = NodePath("VBoxContainer/HBoxContainer/NameLabel")
 level_label = NodePath("VBoxContainer/HBoxContainer/LevelLabel")
 xp_bar = NodePath("VBoxContainer/HBoxContainer2/ExpBar")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer" unique_id=853459007]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer" unique_id=853459007]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer" unique_id=289876764]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer" unique_id=289876764]
 layout_mode = 2
 alignment = 1
 
-[node name="NameLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=861013707]
+[node name="NameLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=861013707]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 theme_override_font_sizes/font_size = 20
 text = "Character Name"
 
-[node name="LevelLabel2" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=508592017]
+[node name="LevelLabel2" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=508592017]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 theme_override_font_sizes/font_size = 20
 text = " "
 
-[node name="LevelLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=903417953]
+[node name="LevelLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer" unique_id=903417953]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 theme_override_font_sizes/font_size = 20
 text = "99"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer" unique_id=1141884939]
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer" unique_id=1141884939]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="LevelUpControl" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=141050992]
+[node name="LevelUpControl" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=141050992]
 layout_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl" unique_id=98504408]
+[node name="Sprite2D" type="Sprite2D" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl" unique_id=98504408]
 position = Vector2(26, -6)
 texture = ExtResource("5_hvqxb")
 hframes = 5
 vframes = 3
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D" unique_id=1342729916]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D" unique_id=1342729916]
 libraries/ = SubResource("AnimationLibrary_lb0f8")
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D" unique_id=1321975852]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/LevelUpControl/Sprite2D" unique_id=1321975852]
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -542,12 +588,12 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VSeparator" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=142543547]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=142543547]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ExpBar" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1554772003 node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button", "level_up_button_animation")]
+[node name="ExpBar" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=1554772003 node_paths=PackedStringArray("full_rect", "color_rect", "level_label", "mouse_over_control", "current_exp_label", "max_exp_label", "level_up_button_control", "level_up_button", "level_up_button_animation")]
 z_index = 2
 custom_minimum_size = Vector2(176, 13)
 layout_mode = 2
@@ -563,7 +609,7 @@ level_up_button_control = NodePath("../LevelUpControl")
 level_up_button = NodePath("../LevelUpControl/Sprite2D/Button")
 level_up_button_animation = NodePath("../LevelUpControl/Sprite2D/AnimationPlayer")
 
-[node name="FullRect" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1971472075]
+[node name="FullRect" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1971472075]
 anchors_preset = 0
 offset_left = 9.0
 offset_top = 4.0
@@ -571,7 +617,7 @@ offset_right = 168.0
 offset_bottom = 9.0
 mouse_filter = 2
 
-[node name="ColorRect" type="ColorRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1561030256]
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1561030256]
 layout_mode = 0
 offset_left = 8.0
 offset_top = 4.0
@@ -580,7 +626,7 @@ offset_bottom = 9.0
 mouse_filter = 2
 color = Color(0, 1, 1, 1)
 
-[node name="TextureRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1182153665]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1182153665]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -589,7 +635,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("7_teogu")
 
-[node name="Control" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1504335772]
+[node name="Control" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar" unique_id=1504335772]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -600,7 +646,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="BackPatchContainer" type="Container" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control" unique_id=404662575 node_paths=PackedStringArray("background", "inner_container")]
+[node name="BackPatchContainer" type="Container" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control" unique_id=404662575 node_paths=PackedStringArray("background", "inner_container")]
 visible = false
 z_index = 1
 custom_minimum_size = Vector2(126, 32)
@@ -614,7 +660,7 @@ inner_container = NodePath("BoxContainer")
 margin_override = 6
 center_in_parent = true
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer" unique_id=670675703]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer" unique_id=670675703]
 layout_mode = 2
 texture = ExtResource("9_7egd2")
 patch_margin_left = 16
@@ -622,61 +668,61 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
-[node name="BoxContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer" unique_id=1320603808]
+[node name="BoxContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer" unique_id=1320603808]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="CurentLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1582122292]
+[node name="CurentLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1582122292]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("23_wu165")
 text = "100"
 vertical_alignment = 2
 
-[node name="SlashLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1536635527]
+[node name="SlashLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1536635527]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("23_wu165")
 text = " / "
 vertical_alignment = 2
 
-[node name="NexrLevelLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=713255937]
+[node name="NexrLevelLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=713255937]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("23_wu165")
 text = "1000"
 vertical_alignment = 2
 
-[node name="ExpLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1978152426]
+[node name="ExpLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2/ExpBar/Control/BackPatchContainer/BoxContainer" unique_id=1978152426]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 theme = ExtResource("23_wu165")
 text = " Exp"
 vertical_alignment = 2
 
-[node name="VSeparator2" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=215875117]
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer/VBoxContainer/HBoxContainer2" unique_id=215875117]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatsAndActorContainer" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=808050233]
+[node name="StatsAndActorContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=808050233]
 layout_mode = 2
 
-[node name="Stats-PanelContainer" type="PanelContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer" unique_id=106545721]
+[node name="Stats-PanelContainer" type="PanelContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer" unique_id=106545721]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_iofuq")
 script = ExtResource("11_l2wto")
 
-[node name="StatsContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer" unique_id=979039758]
+[node name="StatsContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer" unique_id=979039758]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 vertical = true
 
-[node name="StatContainer-PPR" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1070955256 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-PPR" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1070955256 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -688,19 +734,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PPR" unique_id=2042751531]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PPR" unique_id=2042751531]
 layout_mode = 2
 texture = ExtResource("12_656xf")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PPR" unique_id=699083076]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PPR" unique_id=699083076]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Health" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1568802761 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Health" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1568802761 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -712,19 +758,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Health" unique_id=1289949508]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Health" unique_id=1289949508]
 layout_mode = 2
 texture = ExtResource("36_5awhv")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Health" unique_id=1737936165]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Health" unique_id=1737936165]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-PhyAtk" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=2069378739 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-PhyAtk" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=2069378739 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -736,19 +782,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PhyAtk" unique_id=648976515]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PhyAtk" unique_id=648976515]
 layout_mode = 2
 texture = ExtResource("15_djw0b")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PhyAtk" unique_id=1358902060]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-PhyAtk" unique_id=1358902060]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Armor" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=686104635 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Armor" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=686104635 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -760,19 +806,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Armor" unique_id=1976801063]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Armor" unique_id=1976801063]
 layout_mode = 2
 texture = ExtResource("16_hu50l")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Armor" unique_id=1997286673]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Armor" unique_id=1997286673]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-MagAtk" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=67413772 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-MagAtk" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=67413772 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -784,19 +830,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-MagAtk" unique_id=1497214855]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-MagAtk" unique_id=1497214855]
 layout_mode = 2
 texture = ExtResource("19_teogu")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-MagAtk" unique_id=1377449088]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-MagAtk" unique_id=1377449088]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Ward" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1789731590 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Ward" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1789731590 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -808,19 +854,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Ward" unique_id=265499000]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Ward" unique_id=265499000]
 layout_mode = 2
 texture = ExtResource("17_sxp7b")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Ward" unique_id=1478484914]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Ward" unique_id=1478484914]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Acc" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1314481448 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Acc" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1314481448 node_paths=PackedStringArray("icon", "value_label")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -833,19 +879,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Acc" unique_id=2135907432]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Acc" unique_id=2135907432]
 layout_mode = 2
 texture = ExtResource("20_8e5eg")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Acc" unique_id=246750823]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Acc" unique_id=246750823]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Evasion" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=856772027 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Evasion" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=856772027 node_paths=PackedStringArray("icon", "value_label")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -858,19 +904,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Evasion" unique_id=1269504630]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Evasion" unique_id=1269504630]
 layout_mode = 2
 texture = ExtResource("21_cqfet")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Evasion" unique_id=441304305]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-Evasion" unique_id=441304305]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-CritMod" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1848218783 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-CritMod" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer" unique_id=1848218783 node_paths=PackedStringArray("icon", "value_label")]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -883,19 +929,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-CritMod" unique_id=220201249]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-CritMod" unique_id=220201249]
 layout_mode = 2
 texture = ExtResource("22_b4myk")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-CritMod" unique_id=1092019932]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer/StatsContainer/StatContainer-CritMod" unique_id=1092019932]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="Character-VBoxContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer" unique_id=53276164 node_paths=PackedStringArray("title_button", "book_button", "bag_button", "trinket_button", "main_hand_button", "off_hand_button")]
+[node name="Character-VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer" unique_id=53276164 node_paths=PackedStringArray("title_button", "book_button", "bag_button", "trinket_button", "main_hand_button", "off_hand_button")]
 layout_mode = 2
 alignment = 1
 script = ExtResource("25_7egd2")
@@ -906,17 +952,17 @@ trinket_button = NodePath("HBoxContainer/GridContainer2/Trinket_EquipmentSlotBut
 main_hand_button = NodePath("HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton")
 off_hand_button = NodePath("HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer" unique_id=112745799]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer" unique_id=112745799]
 layout_mode = 2
 
-[node name="GridContainer" type="GridContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=957808465]
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=957808465]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="Title_EquipmentSlotButton" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=667676761 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="Title_EquipmentSlotButton" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=667676761 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -928,7 +974,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1594529223]
+[node name="Frame" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1594529223]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -938,7 +984,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=349397232]
+[node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=349397232]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -947,7 +993,7 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1262540348]
+[node name="Highlight" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1262540348]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -958,7 +1004,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1671237252]
+[node name="PageIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1671237252]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -966,7 +1012,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1401471229]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=1401471229]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -975,7 +1021,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=30900823]
+[node name="InvalidIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton" unique_id=30900823]
 visible = false
 layout_mode = 0
 offset_left = 6.0
@@ -984,7 +1030,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon" unique_id=1930863836]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon" unique_id=1930863836]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -996,7 +1042,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon/Label" unique_id=1217614451]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon/Label" unique_id=1217614451]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1014,7 +1060,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon" unique_id=923954391]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton/InvalidIcon" unique_id=923954391]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1023,7 +1069,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Book_EquipmentSlotButton" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=688073422 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="Book_EquipmentSlotButton" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=688073422 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -1035,7 +1081,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1550896896]
+[node name="Frame" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1550896896]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1045,7 +1091,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=771993028]
+[node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=771993028]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1055,7 +1101,7 @@ grow_vertical = 2
 texture = ExtResource("32_656xf")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1384595122]
+[node name="Highlight" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1384595122]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -1066,7 +1112,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1185426795]
+[node name="PageIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=1185426795]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1074,7 +1120,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=186500491]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=186500491]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1083,7 +1129,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=260329211]
+[node name="InvalidIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=260329211]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1091,7 +1137,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon" unique_id=31371692]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon" unique_id=31371692]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1103,7 +1149,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon/Label" unique_id=2126507056]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon/Label" unique_id=2126507056]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1121,7 +1167,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon" unique_id=1561698966]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton/InvalidIcon" unique_id=1561698966]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1130,7 +1176,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Bag_EquipmentSlotButton" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=1053141570 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="Bag_EquipmentSlotButton" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer" unique_id=1053141570 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -1142,7 +1188,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1603580890]
+[node name="Frame" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1603580890]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1152,7 +1198,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1299107193]
+[node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1299107193]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1162,7 +1208,7 @@ grow_vertical = 2
 texture = ExtResource("7_t340l")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=2124104740]
+[node name="Highlight" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=2124104740]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -1173,7 +1219,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1247342537]
+[node name="PageIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1247342537]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1181,7 +1227,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=467344065]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=467344065]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1190,7 +1236,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1359956786]
+[node name="InvalidIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1359956786]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1198,7 +1244,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon" unique_id=1361557448]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon" unique_id=1361557448]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1210,7 +1256,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon/Label" unique_id=1446771545]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon/Label" unique_id=1446771545]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1228,7 +1274,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon" unique_id=2143158518]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton/InvalidIcon" unique_id=2143158518]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1237,11 +1283,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=1757579934]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=1757579934]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="CarrierControl" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1313591486 node_paths=PackedStringArray("rogue_button", "priest_button", "mage_button", "rogue_x_icon", "priest_x_icon", "mage_x_icon")]
+[node name="CarrierControl" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1313591486 node_paths=PackedStringArray("rogue_button", "priest_button", "mage_button", "rogue_x_icon", "priest_x_icon", "mage_x_icon")]
 visible = false
 layout_mode = 2
 alignment = 1
@@ -1253,11 +1299,11 @@ rogue_x_icon = NodePath("RogueButtonControl/R-TextureButton/TextureRect2")
 priest_x_icon = NodePath("PriestButton/P-TextureButton/TextureRect2")
 mage_x_icon = NodePath("MageButton/M-TextureButton/TextureRect2")
 
-[node name="RogueButtonControl" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=999999395]
+[node name="RogueButtonControl" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=999999395]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="R-TextureButton" type="TextureButton" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl" unique_id=276209151]
+[node name="R-TextureButton" type="TextureButton" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl" unique_id=276209151]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1266,7 +1312,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("35_hu50l")
 
-[node name="TextureRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1184210147]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1184210147]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1276,7 +1322,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("36_sxp7b")
 
-[node name="TextureRect2" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1299390484]
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/RogueButtonControl/R-TextureButton" unique_id=1299390484]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1288,11 +1334,11 @@ mouse_filter = 2
 texture = ExtResource("37_q1lsx")
 stretch_mode = 3
 
-[node name="PriestButton" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=788866875]
+[node name="PriestButton" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=788866875]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="P-TextureButton" type="TextureButton" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton" unique_id=64812729]
+[node name="P-TextureButton" type="TextureButton" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton" unique_id=64812729]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1301,7 +1347,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("35_hu50l")
 
-[node name="TextureRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=176357187]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=176357187]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1311,7 +1357,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("38_l4r3y")
 
-[node name="TextureRect2" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=3147858]
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/PriestButton/P-TextureButton" unique_id=3147858]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1323,11 +1369,11 @@ mouse_filter = 2
 texture = ExtResource("37_q1lsx")
 stretch_mode = 3
 
-[node name="MageButton" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=101432861]
+[node name="MageButton" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl" unique_id=101432861]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 
-[node name="M-TextureButton" type="TextureButton" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton" unique_id=1330534418]
+[node name="M-TextureButton" type="TextureButton" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton" unique_id=1330534418]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1336,7 +1382,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture_normal = ExtResource("35_hu50l")
 
-[node name="TextureRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=1871687308]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=1871687308]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1346,7 +1392,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("39_8e5eg")
 
-[node name="TextureRect2" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=397441036]
+[node name="TextureRect2" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl/MageButton/M-TextureButton" unique_id=397441036]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -1358,27 +1404,27 @@ mouse_filter = 2
 texture = ExtResource("37_q1lsx")
 stretch_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=17540647]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=17540647]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer" unique_id=375474259]
+[node name="Control" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer" unique_id=375474259]
 custom_minimum_size = Vector2(64, 156)
 layout_mode = 2
 
-[node name="ActorNode" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("27_jq4bi")]
+[node name="ActorNode" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("27_jq4bi")]
 position = Vector2(32, 120)
 scale = Vector2(4, 4)
 
-[node name="GridContainer2" type="GridContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=2067442765]
+[node name="GridContainer2" type="GridContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=2067442765]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="Trinket_EquipmentSlotButton" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=655902137 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="Trinket_EquipmentSlotButton" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=655902137 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -1390,7 +1436,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=1504616591]
+[node name="Frame" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=1504616591]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1400,7 +1446,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=711692443]
+[node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=711692443]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1410,7 +1456,7 @@ grow_vertical = 2
 texture = ExtResource("28_psmk2")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=788797210]
+[node name="Highlight" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=788797210]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -1421,7 +1467,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=6465725]
+[node name="PageIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=6465725]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1429,7 +1475,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=233838107]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=233838107]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1438,7 +1484,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=2098283253]
+[node name="InvalidIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=2098283253]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1446,7 +1492,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon" unique_id=92179242]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon" unique_id=92179242]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1458,7 +1504,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon/Label" unique_id=719682860]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon/Label" unique_id=719682860]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1476,7 +1522,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon" unique_id=656575454]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton/InvalidIcon" unique_id=656575454]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1485,7 +1531,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MainHand_EquipmentSlotButton" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=786172599 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="MainHand_EquipmentSlotButton" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=786172599 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -1497,7 +1543,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=274580117]
+[node name="Frame" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=274580117]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1507,7 +1553,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1118572945]
+[node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1118572945]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1517,7 +1563,7 @@ grow_vertical = 2
 texture = ExtResource("4_xk513")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=534764229]
+[node name="Highlight" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=534764229]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -1528,7 +1574,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=742532647]
+[node name="PageIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=742532647]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1536,7 +1582,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1555352546]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1555352546]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1545,7 +1591,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=776898503]
+[node name="InvalidIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=776898503]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1553,7 +1599,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon" unique_id=824004371]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon" unique_id=824004371]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1565,7 +1611,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon/Label" unique_id=1851312940]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon/Label" unique_id=1851312940]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1583,7 +1629,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon" unique_id=1824097817]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton/InvalidIcon" unique_id=1824097817]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1592,7 +1638,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="OffHand_EquipmentSlotButton" type="Control" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=1164794056 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
+[node name="OffHand_EquipmentSlotButton" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2" unique_id=1164794056 node_paths=PackedStringArray("button", "highlight_background_rect", "item_icon_rect", "default_icon_rect", "valid_state_icon", "valid_state_label", "valid_state_button")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("26_djw0b")
@@ -1604,7 +1650,7 @@ valid_state_icon = NodePath("InvalidIcon")
 valid_state_label = NodePath("InvalidIcon/Label")
 valid_state_button = NodePath("InvalidIcon/Button")
 
-[node name="Frame" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1513152275]
+[node name="Frame" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1513152275]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1614,7 +1660,7 @@ grow_vertical = 2
 texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
-[node name="DefaultIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1984418854]
+[node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1984418854]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1624,7 +1670,7 @@ grow_vertical = 2
 texture = ExtResource("30_1dkcm")
 expand_mode = 1
 
-[node name="Highlight" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1977989483]
+[node name="Highlight" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1977989483]
 visible = false
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 1
@@ -1635,7 +1681,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("29_hu50l")
 
-[node name="PageIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=913268152]
+[node name="PageIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=913268152]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1643,7 +1689,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=925605293]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=925605293]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1652,7 +1698,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="InvalidIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=977230341]
+[node name="InvalidIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=977230341]
 layout_mode = 0
 offset_left = 6.0
 offset_top = 6.0
@@ -1660,7 +1706,7 @@ offset_right = 15.0
 offset_bottom = 22.0
 texture = ExtResource("32_0r1b3")
 
-[node name="Label" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon" unique_id=1301505927]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon" unique_id=1301505927]
 visible = false
 z_index = 5
 layout_mode = 0
@@ -1672,7 +1718,7 @@ theme = ExtResource("23_wu165")
 text = "Req: STR:15"
 vertical_alignment = 1
 
-[node name="NinePatchRect" type="NinePatchRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon/Label" unique_id=886597891]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon/Label" unique_id=886597891]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -1690,7 +1736,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="Button" type="Button" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon" unique_id=649940623]
+[node name="Button" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton/InvalidIcon" unique_id=649940623]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1699,13 +1745,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TabContainer" type="TabContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=428877836]
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer" unique_id=428877836]
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_fevku")
 current_tab = 0
 
-[node name="Pages" type="ScrollContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1886249644 node_paths=PackedStringArray("premade_page_set", "sets_container", "premade_page_button")]
+[node name="Pages" type="ScrollContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1886249644 node_paths=PackedStringArray("premade_page_set", "sets_container", "premade_page_button")]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme = ExtResource("36_xueyn")
@@ -1716,20 +1762,20 @@ sets_container = NodePath("SlotSetsContainer")
 premade_page_button = NodePath("SlotSetsContainer/PageSlotSetContainer/FlowContainer/PageSlotButton")
 metadata/_tab_index = 0
 
-[node name="SlotSetsContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages" unique_id=1448670235]
+[node name="SlotSetsContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages" unique_id=1448670235]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="PageSlotSetContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer" unique_id=2100188799 node_paths=PackedStringArray("title_label", "buttons_container")]
+[node name="PageSlotSetContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer" unique_id=2100188799 node_paths=PackedStringArray("title_label", "buttons_container")]
 layout_mode = 2
 theme_override_constants/separation = 0
 script = ExtResource("41_djw0b")
 title_label = NodePath("Label")
 buttons_container = NodePath("FlowContainer")
 
-[node name="Label" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer/PageSlotSetContainer" unique_id=1758123449]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer/PageSlotSetContainer" unique_id=1758123449]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1737,15 +1783,15 @@ theme_override_font_sizes/font_size = 24
 text = "Class Pages"
 horizontal_alignment = 1
 
-[node name="FlowContainer" type="FlowContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer/PageSlotSetContainer" unique_id=363867215]
+[node name="FlowContainer" type="FlowContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer/PageSlotSetContainer" unique_id=363867215]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 
-[node name="PageSlotButton" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer/PageSlotSetContainer/FlowContainer" unique_id=371516115 instance=ExtResource("37_cdohk")]
+[node name="PageSlotButton" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer/PageSlotSetContainer/FlowContainer" unique_id=371516115 instance=ExtResource("37_cdohk")]
 layout_mode = 2
 
-[node name="Suplies" type="ScrollContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1618710617 node_paths=PackedStringArray("premade_sub_container", "sub_container")]
+[node name="Suplies" type="ScrollContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1618710617 node_paths=PackedStringArray("premade_sub_container", "sub_container")]
 visible = false
 layout_mode = 2
 theme = ExtResource("36_xueyn")
@@ -1754,19 +1800,19 @@ premade_sub_container = NodePath("VBoxContainer/SubBagContainer")
 sub_container = NodePath("VBoxContainer")
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies" unique_id=994099262]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies" unique_id=994099262]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SubBagContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies/VBoxContainer" unique_id=787792717 node_paths=PackedStringArray("title_label")]
+[node name="SubBagContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies/VBoxContainer" unique_id=787792717 node_paths=PackedStringArray("title_label")]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("46_hu50l")
 title_label = NodePath("Label")
 
-[node name="Label" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies/VBoxContainer/SubBagContainer" unique_id=1996139343]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies/VBoxContainer/SubBagContainer" unique_id=1996139343]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -1774,12 +1820,12 @@ theme_override_font_sizes/font_size = 24
 text = "Class Pages"
 horizontal_alignment = 1
 
-[node name="Stats" type="ScrollContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=864007836 node_paths=PackedStringArray("parent_menu", "tag_box", "stat_labels", "limit_effect_contaienr", "block_container", "block_chance_label", "block_mod_label", "main_weapon_damage_label", "off_weapon_damage_label", "damage_datas_container", "range_display", "resistances_container")]
+[node name="Stats" type="ScrollContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=864007836 node_paths=PackedStringArray("parent_menu", "tag_box", "stat_labels", "limit_effect_contaienr", "block_container", "block_chance_label", "block_mod_label", "main_weapon_damage_label", "off_weapon_damage_label", "damage_datas_container", "range_display", "resistances_container")]
 visible = false
 layout_mode = 2
 theme = ExtResource("36_xueyn")
 script = ExtResource("45_0r1b3")
-parent_menu = NodePath("../../../../../../..")
+parent_menu = NodePath("../../../../../..")
 tag_box = NodePath("StatsContainer/TagsBox")
 stat_labels = [NodePath("StatsContainer/AccContainer/StatContainer-Accuracy"), NodePath("StatsContainer/AccContainer/StatContainer-Mass"), NodePath("StatsContainer/AccContainer/StatContainer-Speed"), NodePath("StatsContainer/AccContainer/StatContainer-CrashPower"), NodePath("StatsContainer/CritContainer/StatContainer-CritChc"), NodePath("StatsContainer/CritContainer/StatContainer-CritMod"), NodePath("StatsContainer/EvasionContainer/StatContainer-Armor"), NodePath("StatsContainer/EvasionContainer/StatContainer-Ward"), NodePath("StatsContainer/EvasionContainer/StatContainer-Evasion")]
 limit_effect_contaienr = NodePath("StatsContainer/LimitedEffectContainer")
@@ -1793,17 +1839,17 @@ range_display = NodePath("StatsContainer/RangeDamageContainer/VBoxContainer/Mini
 resistances_container = NodePath("StatsContainer/ResistancesContainer")
 metadata/_tab_index = 2
 
-[node name="StatsContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats" unique_id=1817043243]
+[node name="StatsContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats" unique_id=1817043243]
 layout_mode = 2
 size_flags_horizontal = 3
 vertical = true
 
-[node name="SectionTitleLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1752501320]
+[node name="SectionTitleLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1752501320]
 layout_mode = 2
 theme = ExtResource("51_7egd2")
 text = " Tags:"
 
-[node name="TagsBox" type="RichTextLabel" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1368401658]
+[node name="TagsBox" type="RichTextLabel" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1368401658]
 clip_contents = false
 layout_mode = 2
 theme = ExtResource("23_wu165")
@@ -1814,15 +1860,15 @@ scroll_active = false
 autowrap_mode = 2
 script = ExtResource("51_d0duj")
 
-[node name="SectionTitleLabel5" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=858769794]
+[node name="SectionTitleLabel5" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=858769794]
 layout_mode = 2
 theme = ExtResource("51_7egd2")
 text = " Actor Stats:"
 
-[node name="AccContainer" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1532508407]
+[node name="AccContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1532508407]
 layout_mode = 2
 
-[node name="StatContainer-Accuracy" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer" unique_id=1517220958 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
+[node name="StatContainer-Accuracy" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer" unique_id=1517220958 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1832,9 +1878,9 @@ script = ExtResource("11_d0duj")
 stat_name = "Accuracy"
 value_label = NodePath("StatLabel")
 force_to_int = true
-mouse_over_parent = NodePath("../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
+mouse_over_parent = NodePath("../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
 
-[node name="NameLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Accuracy" unique_id=1615382927]
+[node name="NameLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Accuracy" unique_id=1615382927]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -1842,19 +1888,19 @@ theme = ExtResource("12_dy5pv")
 text = "Accuracy:   "
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Accuracy" unique_id=1901747934]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Accuracy" unique_id=1901747934]
 layout_mode = 2
 texture = ExtResource("20_8e5eg")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Accuracy" unique_id=170815356]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Accuracy" unique_id=170815356]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Mass" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer" unique_id=2028188355 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Mass" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer" unique_id=2028188355 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1866,19 +1912,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Mass" unique_id=130943133]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Mass" unique_id=130943133]
 layout_mode = 2
 texture = ExtResource("18_q1lsx")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Mass" unique_id=1352135702]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Mass" unique_id=1352135702]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Speed" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer" unique_id=1406406839 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Speed" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer" unique_id=1406406839 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1890,19 +1936,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Speed" unique_id=2140659339]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Speed" unique_id=2140659339]
 layout_mode = 2
 texture = ExtResource("19_l4r3y")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Speed" unique_id=2140638318]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-Speed" unique_id=2140638318]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-CrashPower" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer" unique_id=1927738731 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-CrashPower" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer" unique_id=1927738731 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1914,19 +1960,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-CrashPower" unique_id=725171004]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-CrashPower" unique_id=725171004]
 layout_mode = 2
 texture = ExtResource("54_d0duj")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-CrashPower" unique_id=210783450]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/AccContainer/StatContainer-CrashPower" unique_id=210783450]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="LimitedEffectContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1355136971 node_paths=PackedStringArray("name_label", "stat_label")]
+[node name="LimitedEffectContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1355136971 node_paths=PackedStringArray("name_label", "stat_label")]
 custom_minimum_size = Vector2(68, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
@@ -1935,33 +1981,33 @@ script = ExtResource("56_d0duj")
 name_label = NodePath("NameLabel")
 stat_label = NodePath("StatContainer-LimitEffect")
 
-[node name="VSeparator" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1737539937]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1737539937]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MaxLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=689656059]
+[node name="MaxLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=689656059]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "Max "
 horizontal_alignment = 2
 
-[node name="NameLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1799775801]
+[node name="NameLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1799775801]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "EFT_NAME"
 horizontal_alignment = 2
 
-[node name="SepLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=2036137336]
+[node name="SepLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=2036137336]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = ":"
 horizontal_alignment = 2
 
-[node name="StatContainer-LimitEffect" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1796943883 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
+[node name="StatContainer-LimitEffect" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1796943883 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -1971,57 +2017,57 @@ script = ExtResource("11_d0duj")
 stat_name = "LmtEftCount"
 value_label = NodePath("StatLabel")
 force_to_int = true
-mouse_over_parent = NodePath("../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
+mouse_over_parent = NodePath("../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=942405700]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=942405700]
 visible = false
 layout_mode = 2
 texture = ExtResource("22_b4myk")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=816833942]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=816833942]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="PercentLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=692682511]
+[node name="PercentLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer/StatContainer-LimitEffect" unique_id=692682511]
 visible = false
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "%"
 horizontal_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1396071483]
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/LimitedEffectContainer" unique_id=1396071483]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SectionTitleLabel2" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1482474942]
+[node name="SectionTitleLabel2" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1482474942]
 layout_mode = 2
 theme = ExtResource("51_7egd2")
 text = "Critical Hits:"
 
-[node name="CritContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=2119912581]
+[node name="CritContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=2119912581]
 custom_minimum_size = Vector2(68, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="VSeparator" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=2139051643]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=2139051643]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="NameLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=735431374]
+[node name="NameLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=735431374]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "Chance:"
 horizontal_alignment = 2
 
-[node name="StatContainer-CritChc" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=547926375 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
+[node name="StatContainer-CritChc" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=547926375 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2030,32 +2076,32 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "CritChance"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
+mouse_over_parent = NodePath("../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritChc" unique_id=1662380700]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritChc" unique_id=1662380700]
 layout_mode = 2
 texture = ExtResource("22_b4myk")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritChc" unique_id=1891305019]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritChc" unique_id=1891305019]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="PercentLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritChc" unique_id=1767606473]
+[node name="PercentLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritChc" unique_id=1767606473]
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "%"
 horizontal_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=2103128633]
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=2103128633]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatContainer-CritMod" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=886505535 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
+[node name="StatContainer-CritMod" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=886505535 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2064,9 +2110,9 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "CritMod"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
+mouse_over_parent = NodePath("../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
 
-[node name="DividerLabel2" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=1993053796]
+[node name="DividerLabel2" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=1993053796]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2074,79 +2120,79 @@ theme = ExtResource("12_dy5pv")
 text = "Damage:"
 horizontal_alignment = 1
 
-[node name="PhyAttackIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=1414502629]
+[node name="PhyAttackIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=1414502629]
 layout_mode = 2
 texture = ExtResource("15_djw0b")
 
-[node name="DividerLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=179389898]
+[node name="DividerLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=179389898]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "x"
 horizontal_alignment = 1
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=205003463]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer/StatContainer-CritMod" unique_id=205003463]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="VSeparator3" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=1505924919]
+[node name="VSeparator3" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/CritContainer" unique_id=1505924919]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorRect1" type="ColorRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=728656131]
+[node name="ColorRect1" type="ColorRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=728656131]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="RangeDamageContainer" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=64939449]
+[node name="RangeDamageContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=64939449]
 custom_minimum_size = Vector2(0, 56)
 layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer" unique_id=1700271877]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer" unique_id=1700271877]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="NameLabel2" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer/VBoxContainer" unique_id=1779807090]
+[node name="NameLabel2" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer/VBoxContainer" unique_id=1779807090]
 layout_mode = 2
 theme = ExtResource("51_7egd2")
 text = " Weapon:"
 
-[node name="MiniRangeDisplay" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer/VBoxContainer" unique_id=589088971 instance=ExtResource("49_c7klo")]
+[node name="MiniRangeDisplay" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer/VBoxContainer" unique_id=589088971 instance=ExtResource("49_c7klo")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="MainHandDamageContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer" unique_id=494166096 instance=ExtResource("50_hlfpa")]
+[node name="MainHandDamageContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer" unique_id=494166096 instance=ExtResource("50_hlfpa")]
 layout_mode = 2
 
-[node name="DamageDatasContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer" unique_id=1631920146]
+[node name="DamageDatasContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer" unique_id=1631920146]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="OtherHandDamageContainer2" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer/DamageDatasContainer" unique_id=1736331847 instance=ExtResource("50_hlfpa")]
+[node name="OtherHandDamageContainer2" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/RangeDamageContainer/DamageDatasContainer" unique_id=1736331847 instance=ExtResource("50_hlfpa")]
 visible = false
 layout_mode = 2
 
-[node name="ColorRect2" type="ColorRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1076825945]
+[node name="ColorRect2" type="ColorRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1076825945]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="SectionTitleLabel3" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1556334055]
+[node name="SectionTitleLabel3" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1556334055]
 layout_mode = 2
 theme = ExtResource("51_7egd2")
 text = " Defenses:"
 
-[node name="EvasionContainer" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1915785710]
+[node name="EvasionContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=1915785710]
 layout_mode = 2
 
-[node name="StatContainer-Armor" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer" unique_id=390142650 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Armor" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer" unique_id=390142650 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2158,19 +2204,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Armor" unique_id=384706257]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Armor" unique_id=384706257]
 layout_mode = 2
 texture = ExtResource("16_hu50l")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Armor" unique_id=709967436]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Armor" unique_id=709967436]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Ward" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer" unique_id=508096283 node_paths=PackedStringArray("icon", "value_label")]
+[node name="StatContainer-Ward" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer" unique_id=508096283 node_paths=PackedStringArray("icon", "value_label")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -2182,19 +2228,19 @@ icon = NodePath("IconRect")
 value_label = NodePath("StatLabel")
 force_to_int = true
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Ward" unique_id=609245666]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Ward" unique_id=609245666]
 layout_mode = 2
 texture = ExtResource("17_sxp7b")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Ward" unique_id=1918908870]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Ward" unique_id=1918908870]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="StatContainer-Evasion" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer" unique_id=613350541 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
+[node name="StatContainer-Evasion" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer" unique_id=613350541 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2203,9 +2249,9 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "Evasion"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
+mouse_over_parent = NodePath("../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
 
-[node name="NameLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Evasion" unique_id=1400962504]
+[node name="NameLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Evasion" unique_id=1400962504]
 visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
@@ -2213,39 +2259,39 @@ theme = ExtResource("12_dy5pv")
 text = "Evasion:   "
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Evasion" unique_id=1922214853]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Evasion" unique_id=1922214853]
 layout_mode = 2
 texture = ExtResource("21_cqfet")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Evasion" unique_id=1801311798]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/EvasionContainer/StatContainer-Evasion" unique_id=1801311798]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="BlockContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=436399517]
+[node name="BlockContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=436399517]
 custom_minimum_size = Vector2(68, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 vertical = true
 
-[node name="SectionTitleLabel5" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer" unique_id=8405833]
+[node name="SectionTitleLabel5" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer" unique_id=8405833]
 layout_mode = 2
 theme = ExtResource("51_7egd2")
 text = " Block:"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer" unique_id=882195842]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer" unique_id=882195842]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=1677571164]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=1677571164]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatContainer-BlockChc" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=940090445 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
+[node name="StatContainer-BlockChc" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=940090445 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2255,39 +2301,39 @@ script = ExtResource("11_d0duj")
 stat_name = "BlockChance"
 value_label = NodePath("StatLabel")
 force_to_int = true
-mouse_over_parent = NodePath("../../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
+mouse_over_parent = NodePath("../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
 
-[node name="NameLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc" unique_id=1616163243]
+[node name="NameLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc" unique_id=1616163243]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "Chance: "
 horizontal_alignment = 2
 
-[node name="IconRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc" unique_id=918341246]
+[node name="IconRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc" unique_id=918341246]
 layout_mode = 2
 texture = ExtResource("52_j58mc")
 stretch_mode = 3
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc" unique_id=1505584855]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc" unique_id=1505584855]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="PercentLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc" unique_id=1880604217]
+[node name="PercentLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockChc" unique_id=1880604217]
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "%"
 horizontal_alignment = 1
 
-[node name="VSeparator2" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=1386727657]
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=1386727657]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="StatContainer-BlockMod" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=411037857 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
+[node name="StatContainer-BlockMod" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=411037857 node_paths=PackedStringArray("value_label", "mouse_over_parent")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 7
@@ -2296,9 +2342,9 @@ alignment = 1
 script = ExtResource("11_d0duj")
 stat_name = "BlockMod"
 value_label = NodePath("StatLabel")
-mouse_over_parent = NodePath("../../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
+mouse_over_parent = NodePath("../../../../../../../../../../CenterContainer/StatMouesOverPopUpControl")
 
-[node name="DividerLabel2" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod" unique_id=1396743415]
+[node name="DividerLabel2" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod" unique_id=1396743415]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -2306,40 +2352,40 @@ theme = ExtResource("12_dy5pv")
 text = "Damage:"
 horizontal_alignment = 1
 
-[node name="PhyAttackIcon" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod" unique_id=1065326426]
+[node name="PhyAttackIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod" unique_id=1065326426]
 layout_mode = 2
 texture = ExtResource("15_djw0b")
 
-[node name="DividerLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod" unique_id=1730554782]
+[node name="DividerLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod" unique_id=1730554782]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "x"
 horizontal_alignment = 1
 
-[node name="StatLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod" unique_id=1874895885]
+[node name="StatLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer/StatContainer-BlockMod" unique_id=1874895885]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 theme = ExtResource("13_0r1b3")
 text = "000"
 horizontal_alignment = 1
 
-[node name="VSeparator3" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=1159302377]
+[node name="VSeparator3" type="VSeparator" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/BlockContainer/HBoxContainer" unique_id=1159302377]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ColorRect3" type="ColorRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=2055548697]
+[node name="ColorRect3" type="ColorRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=2055548697]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="SectionTitleLabel4" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=655486943]
+[node name="SectionTitleLabel4" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=655486943]
 layout_mode = 2
 theme = ExtResource("51_7egd2")
 text = " Resistances:"
 
-[node name="ResistancesContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=2019639175 node_paths=PackedStringArray("entries_contaienr", "premade_resistance_label")]
+[node name="ResistancesContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer" unique_id=2019639175 node_paths=PackedStringArray("entries_contaienr", "premade_resistance_label")]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
@@ -2348,32 +2394,32 @@ script = ExtResource("57_c2vjq")
 entries_contaienr = NodePath("VBoxContainer")
 premade_resistance_label = NodePath("ResistanceLabel")
 
-[node name="ResistanceLabel" type="HBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer" unique_id=1899819679]
+[node name="ResistanceLabel" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer" unique_id=1899819679]
 visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=1241525038]
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=1241525038]
 layout_mode = 2
 texture = ExtResource("58_i62ke")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="NameLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=464958910]
+[node name="NameLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=464958910]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "Fire"
 horizontal_alignment = 1
 
-[node name="SepLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=2141055080]
+[node name="SepLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=2141055080]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = ":"
 horizontal_alignment = 1
 
-[node name="ValueLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=354075207]
+[node name="ValueLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=354075207]
 self_modulate = Color(0.498039, 0, 0, 1)
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
@@ -2381,33 +2427,33 @@ theme = ExtResource("12_dy5pv")
 text = "100"
 horizontal_alignment = 1
 
-[node name="PercentLabel" type="Label" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=806636201]
+[node name="PercentLabel" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer/ResistanceLabel" unique_id=806636201]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
 text = "%"
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer" unique_id=1529775770]
+[node name="ColorRect" type="ColorRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer" unique_id=1529775770]
 visible = false
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.498039, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer" unique_id=310250079]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats/StatsContainer/ResistancesContainer" unique_id=310250079]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="BookContainer/PanelContainer/TwoPagesContainer" unique_id=1169016472]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/TwoPagesContainer" unique_id=1169016472]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(18, 0)
 layout_mode = 2
 
-[node name="RightPageContainer" type="BoxContainer" parent="BookContainer/PanelContainer/TwoPagesContainer" unique_id=1223729951]
+[node name="RightPageContainer" type="BoxContainer" parent="PanelContainer/TwoPagesContainer" unique_id=1223729951]
 custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
 vertical = true
 
-[node name="OptionButton" type="OptionButton" parent="BookContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1374530258]
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1374530258]
 layout_mode = 2
 selected = 0
 item_count = 4
@@ -2420,52 +2466,51 @@ popup/item_2/id = 2
 popup/item_3/text = "Skill Tree"
 popup/item_3/id = 3
 
-[node name="InventoryMenuPage" parent="BookContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=764217251 instance=ExtResource("39_0run8")]
+[node name="InventoryMenuPage" parent="PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=764217251 instance=ExtResource("39_0run8")]
 custom_minimum_size = Vector2(280, 384)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SkillTreePageControl" parent="BookContainer/PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1862006629 node_paths=PackedStringArray("character_menu") instance=ExtResource("58_iofuq")]
+[node name="SkillTreePageControl" parent="PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1862006629 node_paths=PackedStringArray("character_menu") instance=ExtResource("58_iofuq")]
 visible = false
 layout_mode = 2
-character_menu = NodePath("../../../../..")
+character_menu = NodePath("../../../..")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BookContainer" unique_id=2029805583]
+[node name="CloseHolderControl" type="Control" parent="PanelContainer/TwoPagesContainer" unique_id=1441164572]
 layout_mode = 2
 
-[node name="Button3" type="Button" parent="BookContainer/VBoxContainer" unique_id=1066946325]
-custom_minimum_size = Vector2(0, 64)
-layout_mode = 2
-text = "Exit"
+[node name="CloseTextureButton" type="TextureButton" parent="PanelContainer/TwoPagesContainer/CloseHolderControl" unique_id=1581819736]
+layout_mode = 0
+offset_left = 15.0
+offset_top = -8.0
+offset_right = 79.0
+offset_bottom = 56.0
+texture_normal = ExtResource("65_b4myk")
+texture_pressed = ExtResource("66_60vuk")
 
-[node name="Button2" type="Button" parent="BookContainer/VBoxContainer" unique_id=26281626]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Next"
-
-[node name="Control" type="Control" parent="BookContainer" unique_id=2095326140]
+[node name="Control" type="Control" parent="PanelContainer/TwoPagesContainer" unique_id=2095326140]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="BookContainer/Control" unique_id=1084273047]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/TwoPagesContainer/Control" unique_id=1084273047]
 visible = false
 modulate = Color(1, 1, 1, 0)
 z_index = 1
 layout_mode = 0
-offset_left = -446.0
-offset_top = 12.0
-offset_right = -198.0
-offset_bottom = 45.0
+offset_left = -366.0
+offset_top = -3.0
+offset_right = -118.0
+offset_bottom = 30.0
 theme = ExtResource("66_psmk2")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BookContainer/Control/PanelContainer" unique_id=1257019059]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer" unique_id=1257019059]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="BookContainer/Control/PanelContainer/VBoxContainer" unique_id=743819323]
+[node name="Control" type="Control" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer" unique_id=743819323]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="BookContainer/Control/PanelContainer/VBoxContainer/Control" unique_id=995437799]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer/Control" unique_id=995437799]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -2480,7 +2525,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "P:/.../PageQuest/level_up.sub"
 
-[node name="CloseButton" type="TextureButton" parent="BookContainer/Control/PanelContainer/VBoxContainer/Control" unique_id=286590093]
+[node name="CloseButton" type="TextureButton" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer/Control" unique_id=286590093]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -2492,7 +2537,7 @@ grow_horizontal = 0
 texture_normal = ExtResource("67_1dkcm")
 texture_pressed = ExtResource("68_33hv0")
 
-[node name="InfoButton" type="TextureButton" parent="BookContainer/Control/PanelContainer/VBoxContainer/Control" unique_id=1295525169]
+[node name="InfoButton" type="TextureButton" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer/Control" unique_id=1295525169]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -2505,7 +2550,7 @@ grow_horizontal = 0
 texture_normal = ExtResource("69_d5hf8")
 texture_pressed = ExtResource("70_xee8u")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="BookContainer/Control/PanelContainer/VBoxContainer" unique_id=280832836]
+[node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer" unique_id=280832836]
 visible = false
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
@@ -2518,53 +2563,74 @@ line
 line"
 horizontal_alignment = 1
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="BookContainer/Control/PanelContainer/VBoxContainer" unique_id=1299773834]
+[node name="ButtonsContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer" unique_id=1299773834]
 visible = false
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="BookContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=1405469559]
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=1405469559]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CancelButton" type="Button" parent="BookContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=2142163461]
+[node name="CancelButton" type="Button" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=2142163461]
 custom_minimum_size = Vector2(67, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("66_psmk2")
 text = " Cancel "
 
-[node name="VSeparator2" type="VSeparator" parent="BookContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=2061223208]
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=2061223208]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OkButton" type="Button" parent="BookContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=848218759]
+[node name="OkButton" type="Button" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=848218759]
 custom_minimum_size = Vector2(67, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("66_psmk2")
 text = "Ok"
 
-[node name="VSeparator3" type="VSeparator" parent="BookContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=1453275349]
+[node name="VSeparator3" type="VSeparator" parent="PanelContainer/TwoPagesContainer/Control/PanelContainer/VBoxContainer/ButtonsContainer" unique_id=1453275349]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="SkillTreeMenu" parent="BookContainer/Control" unique_id=853623227 node_paths=PackedStringArray("character_menu") instance=ExtResource("66_656xf")]
+[node name="SkillTreeMenu" parent="PanelContainer/TwoPagesContainer/Control" unique_id=853623227 node_paths=PackedStringArray("character_menu") instance=ExtResource("66_656xf")]
 visible = false
 z_index = 1
 layout_mode = 0
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -445.0
-offset_top = 12.0
-offset_right = -445.0
-offset_bottom = 12.0
+offset_left = -366.0
+offset_top = -3.0
+offset_right = -366.0
+offset_bottom = -3.0
 grow_horizontal = 1
 grow_vertical = 1
-character_menu = NodePath("../../..")
+character_menu = NodePath("../../../..")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=113629347]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="StatMouesOverPopUpControl" type="Control" parent="CenterContainer" unique_id=1836556036]
+layout_mode = 2
+
+[node name="BookContainer" type="HBoxContainer" parent="." unique_id=485233078]
+visible = false
+layout_mode = 0
+offset_left = 122.0
+offset_top = 40.0
+offset_right = 1036.9995
+offset_bottom = 608.0
+alignment = 1
 
 [node name="DetailsCardSpawnPoint" type="Control" parent="." unique_id=894226572]
 z_index = 1

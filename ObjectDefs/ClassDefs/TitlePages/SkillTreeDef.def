@@ -336,7 +336,7 @@
             },
             {
                 "SkillNodeKey": "ChainShockSpell",
-                "PageKey": "ChainShockSpell"
+                "PageKey": "ChainShockSpell_PageItem"
             },
             {
                 "SkillNodeKey": "FireZoneSpell",
@@ -352,7 +352,7 @@
                 "SkillNodeKey": "ChainMods",
                 "PairType": "Or",
                 "ParentSkillKey": "ChainShockSpell",
-                "Pages": ["ChainExtendPage", "ChainSelectPage"]
+                "Pages": ["ChainShockExtend_PageItem", "ChainShockFork_PageItem"]
             },
             {
                 "SkillNodeKey": "FireTrapSpell",

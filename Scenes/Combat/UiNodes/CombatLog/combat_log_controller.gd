@@ -29,6 +29,7 @@ func _ready() -> void:
 	min_button.pressed.connect(_on_min)
 	max_button.pressed.connect(_on_max)
 	CombatRootControl.Instance.QueController.start_of_round.connect(_on_round_start)
+	CombatRootControl.Instance.QueController.start_of_turn.connect(_on_turn_start)
 
 func _on_min():
 	min_button.hide()
@@ -85,6 +86,19 @@ func _on_round_start():
 	var new_entry = prefab_text_box.duplicate()
 	var round_index = CombatRootControl.Instance.QueController.round_counter
 	new_entry.text = "Round " + str(int(round_index+1)) + ":"
+	entries_container.add_child(new_entry)
+	new_entry.show()
+	var sep2 = prefab_separator.duplicate()
+	entries_container.add_child(sep2)
+	sep2.show()
+
+func _on_turn_start():
+	var sep = prefab_separator.duplicate()
+	entries_container.add_child(sep)
+	sep.show()
+	var new_entry = prefab_text_box.duplicate()
+	var turn_index = CombatRootControl.Instance.QueController.action_index
+	new_entry.text = "Turn " + str(int(turn_index+1)) + ":"
 	entries_container.add_child(new_entry)
 	new_entry.show()
 	var sep2 = prefab_separator.duplicate()

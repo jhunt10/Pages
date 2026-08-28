@@ -20,9 +20,9 @@ signal closed
 
 @export var inventory_container:InventoryMenuPageControl
 
-@export var close_button:Button
-@export var previous_character_button:Button
-@export var next_character_button:Button
+@export var close_button:TextureButton
+@export var previous_character_button:TextureButton
+@export var next_character_button:TextureButton
 @export var details_card_spawn_point:Control
 @export var mouse_control:CharacterMenuMouseControl
 @export var inventory_option_button:OptionButton

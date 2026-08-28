@@ -349,7 +349,23 @@ func _build_bbcode_array(
 				out_arr.append(out_line)
 				out_arr.append(parsed_line)
 				out_line = ''
-					
+			"#Chain":
+				var value:int = int(sub_tokens[1])
+				if actor:
+					var bonus = actor.stats.get_stat("ChainLengthBonus", 0)
+					value += bonus
+				out_line += color_text(RED_TEXT, str(value))
+			"#SubAct":
+				var sub_action_datas = {}
+				if object_inst and object_inst is PageItemAction:
+					sub_action_datas = object_inst.get_sub_action_data()
+				else:
+					sub_action_datas = object_def.get("ActionData", {}).get("SubActions")
+				var sub_action_data = sub_action_datas.get(sub_tokens[1], {})
+				var value = sub_action_data.get(sub_tokens[2])
+				if value is float:
+					value = roundi(value)
+				out_line += color_text(RED_TEXT, str(value))
 					
 					
 				

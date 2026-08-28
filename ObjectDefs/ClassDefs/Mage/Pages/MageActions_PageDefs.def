@@ -172,10 +172,10 @@
 		},
 		"_DefVersion": "1"
 	},
-	"ChainShockSpell": {
+	"ChainShockSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Send out a jolt of @@#Color:DmgColor:Shock@@ energy which archs between helpless enemies and allies who shouldn't have been standing there.\n\nMake a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit and @@#Tag:Chain@@ up to @@#Color:Red:3@@ @@#Color:Red:Adj Actors@@.",
+			"Description": "Send out a jolt of @@#Color:DmgColor:Shock@@ energy which archs between helpless enemies and allies who shouldn't have been standing there.\n\nMake a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit and @@#Tag:Chain@@ up to @@#SubAct:GetTarget_Chain:MaxChainCount@@ @@#Color:Red:Actors@@.",
 			"DisplayName": "Chain Shock",
 			"LargeIcon": "Sprites/ChainShock_Icon.png",
 			"ObjectType": "Item",
@@ -236,11 +236,11 @@
 				},
 				"GetTarget_Chain": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget_Chain.gd",
-					"#FrameIndex": 10.0,
-					"#SubIndex": 0.0,
+					"#FrameIndex": 10,
+					"#SubIndex": 0,
 					"AllowAutoTarget": false,
 					"AllowSelectingChain": false,
-					"MaxChainCount": 2.0,
+					"MaxChainCount": 3,
 					"SetTargetKey": "Target1",
 					"TargetParamKey": "TargetParam"
 				},
@@ -1189,7 +1189,7 @@
 	"WaterBeamSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Spawn a @@#Color:Beam@@ of ice, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Great for refrigerating food, corpses, and poeple you wish to be corpses.",
+			"Description": "Spawn a @@#Tag:Beam@@ of ice, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Great for refrigerating food, corpses, and poeple you wish to be corpses.",
 			"DisplayName": "Ice Beam",
 			"LargeIcon": "Sprites/ColdMage_Icon.png",
 			"ObjectType": "Item",
