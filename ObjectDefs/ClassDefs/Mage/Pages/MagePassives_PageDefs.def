@@ -187,9 +187,9 @@
 		"#ObjDetails": {
 			"Description": "By limiting the @@#Color:DmgColor:Cold:Cold@@ energy of @@#Tag:Ice:Ice Spells@@, you're able to prevent the projectiles from freezing and instead deal @@#Tag:Physical:Physical Damage@@.\n\n@@#Tag:Spell:Spells@@ with the @@#Tag:Ice@@ tag are modified to deal @@#Color:DmgColor:Blunt@@, @@#Color:DmgColor:Pierce@@ or or @@#Color:DmgColor:Crash@@ Damage, and are resisted by @@#Stat:Armor@@. The new damage type depends on the spell.",
 			"DisplayName": "Aqua Mage",
-			"LargeIcon": "Sprites/AquaMage_Icon.png",
+			"LargeIcon": "Sprites/AquaMage_Icon2.png",
 			"ObjectType": "Item",
-			"SmallIcon": "Sprites/AquaMage_Icon.png",
+			"SmallIcon": "Sprites/AquaMage_Icon2.png",
 			"SnippetDesc": "Ice Spells deal Physical Damage",
 			"Tags": [
 				"Passive",
@@ -276,6 +276,11 @@
 								"WaterBeamDamage": {
 									"DamageType": "Crash",
 									"DefenseType": "Armor"
+								}
+							},
+							"SubActions":{
+								"SpawnBeamNode": {
+									"BeamNodePath": "res://ObjectDefs/Data/VFXs/WaterJet/WaterJet_VfxNode.tscn"
 								}
 							}
 						}

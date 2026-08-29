@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://lti7hhl6iiof"]
+
+[ext_resource type="Script" uid="uid://cp8fevhholovq" path="res://ObjectDefs/Data/VFXs/WaterJet/water_jet_attack_vfx_node.gd" id="1_3uxjj"]
+[ext_resource type="Texture2D" uid="uid://dg6hej8s63vqf" path="res://ObjectDefs/Data/VFXs/WaterJet/IceBeam_Head.png" id="2_3uxjj"]
+[ext_resource type="Texture2D" uid="uid://dpbkmma022smj" path="res://ObjectDefs/Data/VFXs/WaterJet/IceBeam_Neck.png" id="3_yfwx7"]
+[ext_resource type="Texture2D" uid="uid://px146dfrshyw" path="res://ObjectDefs/Data/VFXs/WaterJet/IceBeam_Tail.png" id="4_8pp5f"]
+
+[sub_resource type="Curve" id="Curve_yfwx7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8730769, 0.95799685), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8pp5f"]
+curve = SubResource("Curve_yfwx7")
+
+[sub_resource type="Gradient" id="Gradient_hyfy8"]
+colors = PackedColorArray(0.627451, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6uorr"]
+gradient = SubResource("Gradient_hyfy8")
+
+[sub_resource type="Gradient" id="Gradient_3uxjj"]
+offsets = PackedFloat32Array(0.18376069, 0.21367522, 0.23076923)
+colors = PackedColorArray(0.7860982, 0.8369566, 0.9756064, 1, 0.41598046, 0.41598043, 0.4159804, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yfwx7"]
+gradient = SubResource("Gradient_3uxjj")
+
+[sub_resource type="Curve" id="Curve_3uxjj"]
+_limits = [0.0, 30.0, 0.0, 1.0]
+_data = [Vector2(0, 30), 0.0, 0.0, 0, 0, Vector2(0.2307692, 30), 0.0, 0.0, 0, 0, Vector2(0.7, 12.988693), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yfwx7"]
+curve = SubResource("Curve_3uxjj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3uxjj"]
+particle_flag_disable_z = true
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+velocity_limit_curve = SubResource("CurveTexture_yfwx7")
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_yfwx7")
+color_initial_ramp = SubResource("GradientTexture1D_6uorr")
+alpha_curve = SubResource("CurveTexture_8pp5f")
+
+[sub_resource type="Animation" id="Animation_vw7im"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation_frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_yw842"]
+resource_name = "new_animation"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:animation_frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_54066"]
+_data = {
+&"RESET": SubResource("Animation_vw7im"),
+&"new_animation": SubResource("Animation_yw842")
+}
+
+[node name="IceBeamVfxNode" type="Node2D" unique_id=2077315865 node_paths=PackedStringArray("head", "lead_neck", "premade_neck", "neck_sprites", "tail", "animation_player")]
+script = ExtResource("1_3uxjj")
+head = NodePath("HeadSprite2D")
+lead_neck = NodePath("HeadSprite2D/Node2D/Lead_NeckSprite2D")
+premade_neck = NodePath("Premade_NeckSprite2D")
+neck_sprites = NodePath("NeckSpritesHolder")
+tail = NodePath("TailSprite2D")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="HeadSprite2D" type="Sprite2D" parent="." unique_id=95415025]
+position = Vector2(0, -32)
+texture = ExtResource("2_3uxjj")
+hframes = 8
+
+[node name="Node2D" type="Node2D" parent="HeadSprite2D" unique_id=1962033832]
+position = Vector2(0, 16)
+
+[node name="Lead_NeckSprite2D" type="Sprite2D" parent="HeadSprite2D/Node2D" unique_id=1403408475]
+texture = ExtResource("3_yfwx7")
+centered = false
+offset = Vector2(-16, 0)
+hframes = 8
+region_enabled = true
+region_rect = Rect2(0, 32, 256, 0)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="HeadSprite2D" unique_id=1050928446]
+z_index = 1
+position = Vector2(0, 9)
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_3uxjj")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="HeadSprite2D" unique_id=1410488644]
+z_index = 1
+position = Vector2(0, 9)
+rotation = 3.1415927
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_3uxjj")
+
+[node name="Premade_NeckSprite2D" type="Sprite2D" parent="." unique_id=818009731]
+visible = false
+texture = ExtResource("3_yfwx7")
+hframes = 8
+
+[node name="NeckSpritesHolder" type="Node2D" parent="." unique_id=1222648029]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1213928164]
+libraries/ = SubResource("AnimationLibrary_54066")
+autoplay = &"new_animation"
+speed_scale = 2.0
+
+[node name="TailSprite2D" type="Sprite2D" parent="." unique_id=504660134]
+texture = ExtResource("4_8pp5f")
+hframes = 8

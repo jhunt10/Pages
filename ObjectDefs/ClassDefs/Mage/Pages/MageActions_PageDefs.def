@@ -241,6 +241,7 @@
 					"AllowAutoTarget": false,
 					"AllowSelectingChain": false,
 					"MaxChainCount": 3,
+					"ForkCount": 1,
 					"SetTargetKey": "Target1",
 					"TargetParamKey": "TargetParam"
 				},
@@ -432,7 +433,7 @@
 	"DischargeSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Charge/Discharge @@#Color:DmgColor:Shock@@ energy into/from a person/living batter.\n\nTarget an @@#Color:Red:Actor@@ and inflict @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\nIf the target is already @@#EftDef:AilmentShocked:DisplayName@@, end the effect and deal @@#DmgData:RangedDamage@@ to @@#Color:Red:Target@@ and @@#Color:Red:Adj Actors@@.",
+			"Description": "Charge/Discharge @@#Color:DmgColor:Shock@@ energy into/from a living batter/person.\n\nTarget an @@#Color:Red:Actor@@ and inflict @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\nIf the target is already @@#EftDef:AilmentShocked:DisplayName@@, end the effect and deal @@#DmgData:RangedDamage@@ to @@#Color:Red:Target@@ and @@#Color:Red:Adj Actors@@.",
 			"DisplayName": "(Dis)charge",
 			"LargeIcon": "Sprites/Discharge_Icon.png",
 			"ObjectType": "Item",
@@ -1119,7 +1120,7 @@
 						],
 						"Rotation": -45.0,
 						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
-						"SpriteName": "SpriteSheets/IceBall_Missile.png",
+						"SpriteName": "SpriteSheets/WaterBall_Missile.png",
 						"SpriteSheetHight": 2.0,
 						"SpriteSheetWidth": 2.0
 					},
@@ -1141,7 +1142,7 @@
 						],
 						"Rotation": -45.0,
 						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
-						"SpriteName": "SpriteSheets/IceBallSub_Missile.png",
+						"SpriteName": "SpriteSheets/WaterBallSub_Missile.png",
 						"SpriteSheetHight": 2.0,
 						"SpriteSheetWidth": 2.0
 					},
@@ -1245,7 +1246,8 @@
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
 					"DamageKey": "WaterBeamDamage",
-					"TargetParamKey": "TargetParam"
+					"TargetParamKey": "TargetParam",
+					"BeamNodePath": "res://ObjectDefs/Data/VFXs/WaterJet/ice_beam_vfx_node.tscn"
 				},
 				"WeaponMotionAnimation": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",

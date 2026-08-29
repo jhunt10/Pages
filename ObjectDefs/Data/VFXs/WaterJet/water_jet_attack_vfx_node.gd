@@ -90,6 +90,7 @@ func set_data(vfx_holder:VfxHolder, data:Dictionary, target_params:TargetParamet
 	_data = data
 	_vfx_holder = vfx_holder
 	_target_params = target_params
+	self.position = _vfx_holder.position * -1
 	
 func on_frame_end():
 	frame += 1
