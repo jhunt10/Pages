@@ -38,7 +38,7 @@
 				}
 			}
 		},
-		"PassiveData":{
+		"PassiveData": {
 			"ActionMods": {
 				"ChainShockSpellMod": {
 					"Conditions": {
@@ -49,7 +49,7 @@
 					},
 					"ModdedDefData": {
 						"ActionData": {
-							"SubActions":{
+							"SubActions": {
 								"GetTarget_Chain": {
 									"MaxChainCount": 5
 								}
@@ -101,7 +101,7 @@
 				}
 			}
 		},
-		"PassiveData":{
+		"PassiveData": {
 			"ActionMods": {
 				"ChainShockSpellMod": {
 					"Conditions": {
@@ -112,7 +112,7 @@
 					},
 					"ModdedDefData": {
 						"ActionData": {
-							"SubActions":{
+							"SubActions": {
 								"GetTarget_Chain": {
 									"ForkCount": 2
 								}
@@ -226,10 +226,10 @@
 					"ModdedDefData": {
 						"#ObjDetails": {
 							"DisplayName": "Water Ball",
-							"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n\nOn impact the ball splashes launching @@#Tag:Missile:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n@@#EftChances@@\n-One of many spells banned from professional water balloon fights.",
+							"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n\nOn impact the ball splashes launching @@#Tag:Missile:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.",
+							"DescriptionSufix": "-One of many spells banned from professional water balloon fights",
 							"SnippetDesc": "Launch a Ice Ball Missile",
-							"Tags": [
-							],
+							"Tags": [],
 							"Taxonomy": [
 								"Item",
 								"Page",
@@ -246,6 +246,19 @@
 									"DamageType": "Pierce",
 									"DefenseType": "Armor"
 								}
+							},
+							"MissileDatas": {
+								"Missile1": {
+									"MissileVfxData": {
+										"SpriteName": "SpriteSheets/WaterBall_Missile.png"
+									}
+								},
+								"SubMissile": {
+									"MissileVfxData": {
+										"Rotation": 0.0,
+										"SpriteName": "SpriteSheets/WaterBallSub_Missile.png"
+									}
+								}
 							}
 						}
 					}
@@ -260,11 +273,11 @@
 					"ModdedDefData": {
 						"#ObjDetails": {
 							"DisplayName": "Water Beam",
-							"Description": "Spawn a @@#Tag:Beam@@ of water, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Also great for power washing the blood left behind after power washing enemies.",
+							"Description": "Spawn a @@#Tag:Beam@@ of water, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.",
+							"DescriptionSufix": "-Also great for power washing the blood left behind after power washing enemies.",
 							"LargeIcon": "Sprites/WaterBeam.png",
 							"SmallIcon": "Sprites/WaterBeam.png",
-							"Tags": [
-							],
+							"Tags": [],
 							"Taxonomy": [
 								"Item",
 								"Page",
@@ -278,7 +291,7 @@
 									"DefenseType": "Armor"
 								}
 							},
-							"SubActions":{
+							"SubActions": {
 								"SpawnBeamNode": {
 									"BeamNodePath": "res://ObjectDefs/Data/VFXs/WaterJet/WaterJet_VfxNode.tscn"
 								}
@@ -296,9 +309,9 @@
 					"ModdedDefData": {
 						"#ObjDetails": {
 							"DisplayName": "Water Gun",
-							"Description": "Fire a rapid series of @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n\n-Summer time fun turned deadly.",
-							"Tags": [
-							],
+							"Description": "Fire a rapid series of @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
+							"DescriptionSufix": "-Summer time fun turned deadly.",
+							"Tags": [],
 							"Taxonomy": [
 								"Item",
 								"Page",
@@ -458,9 +471,7 @@
 			"AttackMods": {
 				"SafteyHazardAtkMod": {
 					"AttackModKey": "SafetyHazardAtkMod",
-					"AttackerStatMods": {
-
-					},
+					"AttackerStatMods": {},
 					"CanStack": false,
 					"Conditions": {
 						"AttackSourceTagFilters": [
@@ -508,9 +519,7 @@
 							"Value": 1.5
 						}
 					},
-					"DefenderStatMods": {
-
-					},
+					"DefenderStatMods": {},
 					"DisplayName": "Safety Hazard"
 				}
 			},
@@ -553,9 +562,8 @@
 				"TitleReq": "Match"
 			},
 			"SourceTitle": "Mage",
-			"StatMods": {
-			},
-			"MergedStatMods":{
+			"StatMods": {},
+			"MergedStatMods": {
 				"MagAttackBonus": {
 					"DisplayName": "Merged Bonus",
 					"ModType": "Add",
@@ -598,7 +606,7 @@
 			},
 			"SourceTitle": "Mage"
 		},
-		"PassiveData":{
+		"PassiveData": {
 			"InCombatEftData": {
 				"EffectKey": "DeployedMagBonus_PageEffect"
 			}

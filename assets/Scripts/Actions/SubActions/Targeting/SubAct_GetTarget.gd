@@ -13,18 +13,20 @@ func get_required_props()->Dictionary:
 func get_action_tags(parent_action:PageItemAction, subaction_data:Dictionary)->Array:
 	var tags = []
 	var target_param_key = subaction_data.get("TargetParamKey", "")
+	var holding_actor = parent_action.get_holding_actor()
+	var target_params:TargetParameters = null
 	if target_param_key == "Self":
 		tags.append("Self")
-	elif target_param_key == "Weapon" and not parent_action.has_holding_actor():
+	elif target_param_key == "Weapon" and not holding_actor:
 		# Weapon Attack with no actor
-		pass
+		return []
 	else:
-		var target_params = _get_target_parameters(target_param_key, parent_action, null, null)
-		if target_params:
-			if target_params.has_area_of_effect():
-				tags.append("AOE")
-			if target_params.line_of_sight:
-				tags.append("LOS")
+		target_params = _get_target_parameters(target_param_key, parent_action, holding_actor, null)
+	if target_params:
+		if target_params.has_area_of_effect():
+			tags.append("AOE")
+		if target_params.line_of_sight:
+			tags.append("LOS")
 	return tags
 
 func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,

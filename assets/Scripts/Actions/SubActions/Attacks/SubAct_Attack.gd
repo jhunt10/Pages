@@ -136,7 +136,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		# Check if target is still in range since being selecting target
 		if target_must_be_in_range:
 			var target_pos = game_state.get_actor_pos(target)
-			var still_in_range = target_params.is_point_in_area(target_pos, actor_pos)
+			var still_in_range = target_params.is_point_in_area(actor_pos, target_pos)
 			# Check if in AOE
 			if not still_in_range and target_params.has_area_of_effect():
 				var effect_area = target_params.get_area_of_effect(primary_target_pos)

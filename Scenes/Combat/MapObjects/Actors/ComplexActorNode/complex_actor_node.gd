@@ -161,16 +161,28 @@ func _on_resume_animations():
 
 func ready_action_animation(action_name:String, speed:float=1, off_hand:bool=false):
 	var weapon_animation = ''
-	if action_name == "Default:Weapon":
-		weapon_animation = 'WEAPON_DEFAULT'
-	elif action_name == "Default:Self":
-		weapon_animation = 'Raise'
-	elif action_name == "Default:Forward":
-		weapon_animation = 'Stab'
-	elif action_name == "Default:Forward:Arch":
-		weapon_animation = 'Swing'
-	elif ['Swing', 'Raise', 'Stab'].has(action_name):
+	if ['Swing', 'Raise', 'Stab'].has(action_name):
 		weapon_animation = action_name
+	elif action_name == "Self":
+		weapon_animation = 'Raise'
+	elif action_name == "Forward":
+		weapon_animation = 'Stab'
+	elif action_name == "Arch":
+		weapon_animation = 'Swing'
+	elif action_name == "Default":
+		if off_hand:
+			var off_weapon = Actor.equipment.get_offhand_weapon()
+			if off_weapon:
+				weapon_animation = off_weapon.get_default_weapon_animation_name()
+		else:
+			var primary_weapon = Actor.equipment.get_primary_weapon()
+			if primary_weapon:
+				weapon_animation = primary_weapon.get_default_weapon_animation_name()
+		if weapon_animation == '':
+			# Unarmed
+			var default_attack_animation = Actor.get_unarmed_attack_weapon_animation()
+			if default_attack_animation != '':
+				weapon_animation = default_attack_animation
 		
 	if weapon_animation != '':
 		ready_weapon_animation(weapon_animation, speed, off_hand)
@@ -184,9 +196,9 @@ func cancel_action_animations():
 	
 func ready_weapon_animation(action_name:String, speed:float=1, off_hand:bool=false):
 	if off_hand and off_hand_node:
-		off_hand_node.ready_arnimation(action_name, speed)
+		off_hand_node.ready_animation(action_name, speed)
 	elif main_hand_node:
-		main_hand_node.ready_arnimation(action_name, speed)
+		main_hand_node.ready_animation(action_name, speed)
 
 func execute_weapon_motion_animation(speed:float=1, off_hand:bool=false):
 	if off_hand and off_hand_node:

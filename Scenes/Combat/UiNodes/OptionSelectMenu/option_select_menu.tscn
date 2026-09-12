@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="12_6bkn7"]
 [ext_resource type="Script" uid="uid://bj7jkk160o6ut" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_divider.gd" id="13_1y6kt"]
 
-[node name="OptionSelectMenu" type="Control" unique_id=585481039 node_paths=PackedStringArray("titile_label", "options_container", "premade_option_button", "premade_option_divider", "close_button", "cancel_button", "confrim_button")]
+[node name="OptionSelectMenu" type="Control" unique_id=585481039 node_paths=PackedStringArray("main_container", "titile_label", "options_container", "premade_option_button", "premade_option_divider", "close_button", "cancel_button", "confrim_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,6 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_pglih")
+main_container = NodePath("CenterContainer/PanelContainer2")
 titile_label = NodePath("CenterContainer/PanelContainer2/VBoxContainer/HBoxContainer/TitleLabel")
 options_container = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ScrollContainer/OptionEntriesContainer")
 premade_option_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/OptionButton")

@@ -187,6 +187,11 @@ func force_finish_panning():
 	auto_pan_start_pos = null
 	panning_finished.emit()
 
+## Add a node to ignore scrolling if mouse is inside node 
+func add_no_scroll_node(node):
+	if not no_scroll_nodes.has(node):
+		no_scroll_nodes.append(node)
+
 func _input(_event: InputEvent) -> void:
 	if freeze or is_auto_panning:
 		return
@@ -224,16 +229,22 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		var can_scroll = true
 		for node_path in no_scroll_nodes:
+			var node:Node = null
+			if node_path is Node:
+				node = node_path
 			if node_path is NodePath:
-				var node = self.get_node(node_path)
-				if !node:
+				node = self.get_node(node_path)
+			if !node:
+				continue
+			if node is Control:
+				if not node.is_visible_in_tree():
 					continue
-				var mouse_pos = node.get_local_mouse_position()
-				var no_touch = node.get_global_rect()
-				no_touch.position.x = 0
-				no_touch.position.y = 0
-				if no_touch.has_point(mouse_pos):
-					can_scroll = false
+			var mouse_pos = node.get_local_mouse_position()
+			var no_touch = node.get_global_rect()
+			no_touch.position.x = 0
+			no_touch.position.y = 0
+			if no_touch.has_point(mouse_pos):
+				can_scroll = false
 		if can_scroll:
 			var new_zoom = self.zoom
 			if mouse_event.button_index == MOUSE_BUTTON_WHEEL_UP:

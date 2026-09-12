@@ -3,7 +3,7 @@
 		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
 		"!ParentKey": "#BaseActor",
 		"#ObjDetails": {
-			"Description": "Radical political extremist of the @@#Color:Blue:New Squorld Order@@. These small and squirrely (they hate that term) @@#Tag:Beasts@@ are highly aggressive. While lacking in @@#Stat:MaxHealth@@ and @@#Stat:PhyAttack@@, they have high @@#Stat:Speed@@ and just enough @@#Stat:Evasion@@ to be annoying.\n\nOften attacking in large swarms, the @@Color:Blue:NSO@@ has committed countless acts of terrorism on defenseless @@#Color:Red:Abandoned Villages@@. So don't feel bad about killing them.",
+			"Description": "Radical political extremist of the @@#Color:Blue:New Squorld Order@@. These small and squirrely (they hate that term) critters are highly aggressive. While lacking in @@#Stat:Health@@ and @@#Stat:PhyAttack@@, they have high @@#Stat:Speed@@ and just enough @@#Stat:Evasion@@ to be annoying.\n\nOften attacking in large swarms, the @@Color:Blue:NSO@@ has committed countless acts of terrorism on defenseless @@#Color:Red:Abandoned Villages@@. So don't feel bad about killing them.",
 			"DisplayName": "Squirrel",
 			"LargeIcon": "Sprites/SquirrelIcon.png",
 			"ObjectType": "Actor",
@@ -38,19 +38,11 @@
 				"MoveForward",
 				"TurnLeft",
 				"TurnRight",
-				"BasicMeleeAttack",
+				"BasicWeaponAttack",
 				"ChuckAcorn_ActionPage"
 			]
 		},
 		"CorpseSprite": null,
-		"DefaultPageSlotSet": [
-			{
-				"Count": 6.0,
-				"DisplayName": "Any Page",
-				"FilterData": null,
-				"Key": "Any"
-			}
-		],
 		"EquipmentSlots": [],
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
 		"SpawnEquipmentArr": [
@@ -63,7 +55,7 @@
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
-			"BasicMeleeAttack",
+			"BasicWeaponAttack",
 			"ChuckAcorn_ActionPage"
 		],
 		"SpriteFrameWH": [

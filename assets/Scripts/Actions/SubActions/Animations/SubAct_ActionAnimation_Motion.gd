@@ -1,4 +1,4 @@
-class_name SubAct_WeaponMotionAnimation
+class_name SubAct_ActionAnimation_Motion
 extends BaseSubAction
 
 func get_required_props()->Dictionary:
@@ -25,27 +25,31 @@ func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, _metadat
 	if !actor_node:
 		return BaseSubAction.Success
 	
-	if not actor_node is ComplexActorNode:
-		printerr("SubAct_WeaponMotionAnimation: Non Complex Actor '%s' attempting to use Weapon animation." % [actor.Id])
+	if not (actor_node is ComplexActorNode or actor_node is SimpleActorNode):
+		printerr("SubAct_WeaponMotionAnimation: Non Complex or Simple Actor '%s' attempting to use Weapon animation." % [actor.Id])
 		return BaseSubAction.Success
 	
-	var animation_speed = 1.0
+	var animation_speed = CombatRootControl.get_time_scale()
 	if subaction_data.keys().has("AnimationSpeed"):
-		animation_speed = subaction_data.get("AnimationSpeed", 1.0)
+		animation_speed = animation_speed * subaction_data.get("AnimationSpeed", 1.0)
+	
+	# Short Cut Simple Actor Nodes
+	if actor_node is SimpleActorNode:
+		actor_node.execute_action_motion_animation(animation_speed)
+		return BaseSubAction.Success
 	
 	# Play Main Hand animation
 	if subaction_data.get("MainHand", false):
 		actor_node.execute_weapon_motion_animation(animation_speed)
-			
+	
+	# Check if play Off Hand animation
 	var play_off_hand =  false
 	var off_hand_val = subaction_data.get("OffHand", null)
-	if !off_hand_val or off_hand_val == "Never":
-		play_off_hand = false
-	elif  off_hand_val == "Always":
-		play_off_hand = true
-	elif off_hand_val == "OnlyIfDuel":
-		play_off_hand = actor.equipment.get_offhand_weapon() != null
-		
+	match (off_hand_val):
+		"Never": play_off_hand = false
+		"Always": play_off_hand = true
+		"OnlyIfDuel": play_off_hand = actor.equipment.get_offhand_weapon() != null
+	
 	if play_off_hand:
 		actor_node.execute_weapon_motion_animation(animation_speed, true)
 	

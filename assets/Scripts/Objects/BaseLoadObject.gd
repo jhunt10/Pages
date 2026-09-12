@@ -144,6 +144,7 @@ func get_load_path()->String:
 
 ## Return value from  _data  ->  _def  ->  default
 func get_load_val(key:String, default=null, duplicate_dict:bool=true):
+	#TODO: Should I be caching merged data/def?
 	var val = _data.get(key, null)
 	if val is Dictionary:
 		val = val.duplicate(duplicate_dict)

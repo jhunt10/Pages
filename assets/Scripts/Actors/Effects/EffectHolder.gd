@@ -193,6 +193,8 @@ func get_count_of_hosted_limited_effect(type:EffectHelper.LimitedEffectTypes)->i
 
 func get_hosted_limited_effect_ids(type:EffectHelper.LimitedEffectTypes)->Array:
 	var out_list = []
+	if not _hosted_limited_effects.keys().has(type):
+		return out_list
 	for hosted_data:Dictionary in _hosted_limited_effects[type]:
 		var eft_id = hosted_data['EffectId']
 		if not out_list.has(eft_id):

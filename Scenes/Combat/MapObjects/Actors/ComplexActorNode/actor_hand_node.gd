@@ -95,7 +95,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if editing_mod and Engine.is_editor_hint():
 		return
-	var time_scale = CombatRootControl.get_time_scale() * 1.5 #TODO: Bad Animation Speed
+	var time_scale = 1.5 #TODO: Bad Animation Speed
 	if animation_speed > 0:
 		time_scale = time_scale * animation_speed
 	animation_tree.advance(delta * time_scale)
@@ -109,7 +109,7 @@ func hide_weapon():
 
 var animation_que = []
 
-func ready_arnimation(animationn_name, speed:float=1.0):
+func ready_animation(animationn_name, speed:float=1.0):
 	if LOGGING: print("HandAnimationg Readying: %s" % [animationn_name])
 	if current_animation_name != null:
 		printerr("!!!ActorHandNodeHand.ready_animation: Animation Overlap: %s > %s" % [current_animation_name, animationn_name])
@@ -180,7 +180,7 @@ func on_animation_finished(animation_name):
 		var qued_ani_data = animation_que[0]
 		if not qued_ani_data.get("Readied", false):
 			qued_ani_data['Readied'] = true
-			ready_arnimation(qued_ani_data['AnimationKey'], qued_ani_data['Speed'])
+			ready_animation(qued_ani_data['AnimationKey'], qued_ani_data['Speed'])
 		elif qued_ani_data.get("Executed", false):
 			qued_ani_data['Executed'] = true
 			execute_animation(qued_ani_data['Speed'])

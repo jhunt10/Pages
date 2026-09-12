@@ -48,14 +48,15 @@
 		"UnarmedAttackData": {
 			"DamageDatas": {
 				"UnarmedDamage": {
-					"AtkPower": 20.0,
-					"AtkStat": "PhyAttack",
-					"DamageType": "Blunt",
-					"DamageVarient": 0.5,
-					"DamageVfxKey": "Blunt_DamageEffect",
-					"DefenseType": "Physical",
 					"DisplayName": "Punch",
-					"FixedBaseDamage": null
+					"AtkPwrBase": 30.0,
+					"AtkPwrRange": 20.0,
+					"AtkPwrScale": 1.0,
+					"AtkStat": "PhyAttack",
+					"BaseDamage": 0.0,
+					"DamageType": "Blunt",
+					"DamageVfxKey": "AUTO",
+					"DefenseType": "AUTO"
 				}
 			},
 			"DefaultAnimation": "Stab",

@@ -35,21 +35,24 @@
 				}
 			},
 			"Preview": {
-				"PreviewDamageKey": "Default",
+				"PreviewDamageKey": "WeaponDamage",
 				"PreviewTargetKey": "TargetParam1"
 			},
 			"SubActions": {
-				"Animation_Motion": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Motion.gd",
+				"WeaponMotionAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
-					"#SubIndex": 0.0
+					"#SubIndex": 2.0,
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
 				},
-				"Animation_Ready": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Ready.gd",
+				"WeaponReadyAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Default:Forward",
-					"AnimationSpeed": 1.0
+					"Animation": "Default",
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
 				},
 				"Attack": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Attacks/SubAct_Attack.gd",

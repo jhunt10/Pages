@@ -24,10 +24,6 @@ func _get_innate_slots_data()->Array:
 	else:
 		if LOGGING: print("--PageItemQue not found")
 		cached_page_book_item_id = null
-		#if LOGGING: print("--Page Book Slots, Checking Actor Def Default")
-		#var defaults = _actor.get_load_val("DefaultPageSlotSet")
-		#if defaults:
-			#out_list.append(defaults)
 	if LOGGING: print("-Loaded Page Slots: %s" % [JSON.stringify(out_list)])
 	return out_list
 

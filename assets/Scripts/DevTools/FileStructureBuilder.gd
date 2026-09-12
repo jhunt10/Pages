@@ -11,7 +11,7 @@ static func DoThing():
 	#format_def_files()
 	#update_def_files()
 	#tags_check()
-	page_defs_to_csv()
+	everything_to_csv()
 	#build_mermaid_def_chart()
 	#create_class_def_files("Rogue")
 	#rename_test_files()
@@ -78,6 +78,82 @@ static func intake_descriptions():
 		var save_file = FileAccess.open(file_path, FileAccess.WRITE)
 		save_file.store_string(JSON.stringify(defs))
 		save_file.close()
+
+static func everything_to_csv():
+	if !ItemLibrary.Instance:
+		ItemLibrary.new()
+		print("Newed up Item Libary]")
+	else:
+		ItemLibrary.Instance.reload()
+	if !ActorLibrary.Instance:
+		ActorLibrary.new()
+	else:
+		ActorLibrary.Instance.reload()
+	var all_defs = ItemLibrary.Instance._object_defs
+	for key in ActorLibrary.Instance._object_defs.keys():
+		all_defs[key] = ActorLibrary.Instance._object_defs[key]
+	var out_lines = [",".join([
+		"Group",
+		"LoadPath",
+		"Key",
+		"DisplayName",
+		"Taxonomy",
+		"Script",
+	])]
+	var groups = {}
+	for def_key in all_defs.keys():
+		var def = all_defs[def_key]
+		var taxonomy = def.get("#ObjDetails",{}).get("Taxonomy", [])
+		var group = "Unknown"
+		if taxonomy.size() > 0:
+			group = taxonomy[0]
+			if group == 'Item' and taxonomy.size() > 1:
+				group = taxonomy[1]
+			if group == 'Page' and taxonomy.size() > 2:
+				group = taxonomy[2]
+		var load_path:String = def.get("#LoadPath", "")
+		var file_name = load_path.get_file()
+		if file_name.begins_with("Soldier"):
+			group = "Soldier"
+		if file_name.begins_with("Rogue"):
+			group = "Rogue"
+		if file_name.begins_with("Priest"):
+			group = "Priest"
+		if file_name.begins_with("Mage"):
+			group = "Mage"
+		
+		if not groups.keys().has(group):
+			groups[group] = {}
+		groups[group][def_key] = def
+	for group_key in groups.keys():
+		if group_key == "Equipment":
+			continue
+		if group_key == "Supply":
+			continue
+		var group = groups[group_key]
+		for def_key in group.keys():
+			var def = all_defs[def_key]
+			var script_path:String = def.get("!ObjectScript", "")
+			var display_name = def.get("#ObjDetails",{}).get("DisplayName")
+			var taxonomy = def.get("#ObjDetails",{}).get("Taxonomy", [])
+			taxonomy = "\"" + str(taxonomy).replace("\"", '').replace(", ", "|") + "\""
+			var description = def.get("#ObjDetails",{}).get("Description")
+			var script_name = script_path.get_file()
+			var load_path:String = def.get("#LoadPath", "")
+			out_lines.append(",".join([
+				group_key,
+				load_path.get_file(),
+				def_key,
+				display_name, 
+				taxonomy,
+				script_name,
+			]))
+	
+	var save_path = "C:\\Users\\johnn\\Documents\\Repos\\Pages\\notes\\all_objects.csv"
+	var save_file = FileAccess.open(save_path, FileAccess.WRITE)
+	print("Saving File: " + save_path)
+	save_file.store_string("\n".join(out_lines))
+	save_file.close()
 	
 
 

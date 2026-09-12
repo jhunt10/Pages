@@ -1,0 +1,249 @@
+Group,LoadPath,Key,DisplayName,Taxonomy,Script
+Mage,MageWeapons_ItemDefs.def,OldWand,Old Wand,"[Item|Equipment|Tool|Weapon]",BaseWeaponEquipment.gd
+Mage,MageWeapons_ItemDefs.def,OldMageOrb,Old Orb,"[Item|Equipment|Tool|Focus]",BaseToolEquipment.gd
+Mage,MageActions_PageDefs.def,FireBallSpell_PageItem,Fire Ball,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,WaterBallSpell_PageItem,Ice Ball,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,FireTrapSpell_PageItem,Fire Trap,"[Item|Page|Action|Spell]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,ChannelMagic_PageItem,Channel,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,FireZoneSpell_PageItem,Fire Zone,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,PoisonZoneSpell,Poison Cloud,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,CallShockSpell_PageItem,Call Shock,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,ChainShockSpell_PageItem,Chain Shock,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,ShockStormSpell_PageItem,Shock Storm,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,DischargeSpell_PageItem,(Dis)charge,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,FireThrowSpell_PageItem,Throw Flames,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,WaterBeamSpell_PageItem,Ice Beam,"[Item|Page|Action]",PageItemAction.gd
+Mage,MageActions_PageDefs.def,WaterGunSpell_PageItem,Ice Gun,"[Item|Page|Action]",PageItemAction.gd
+Mage,MagePassives_PageDefs.def,ChainShockExtend_PageItem,Chain Longer,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MagePassives_PageDefs.def,ChainShockFork_PageItem,Chain Fork,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MagePassives_PageDefs.def,ChainSelectPage,Chain Choice,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MagePassives_PageDefs.def,ColdMagePassive_PageItem,Aqua Mage,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MagePassives_PageDefs.def,HazardSafetyPage,Hazard Saftey,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MagePassives_PageDefs.def,MagBoost_PageItem,Mag Boost,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MagePassives_PageDefs.def,SafteyHazardPage,Saftey Hazard,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MagePassives_PageDefs.def,MergedMagBonus_PageItem,Merged Bonus,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MagePassives_PageDefs.def,DeployedMagBonus_PageItem,Deploy Bonus,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MageShared_PageDefs.def,#BaseEnchantWeapon_PageItem,#Base Weapon Enchant,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MageShared_PageDefs.def,EnchantWeapon_Cold_PageItem,Cold Enchant,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MageShared_PageDefs.def,EnchantWeapon_Fire_PageItem,Fire Enchant,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MageShared_PageDefs.def,EnchantWeapon_Poison_PageItem,Poison Enchant,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MageShared_PageDefs.def,EnchantWeapon_Shock_PageItem,Shock Enchant,"[Item|Page|Passive]",PageItemPassive.gd
+Mage,MageActors_ActorDefs.def,MageTemplate,Mage,"[Actor]",BaseActor.gd
+Priest,PriestWeapons_ItemDefs.def,OldStaff,Old Staff,"[Item|Equipment|Tool|Weapon]",BaseWeaponEquipment.gd
+Priest,PriestActions_PageDefs.def,LightMeleeSpell_PageItem,Light Touch,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,LightMissileSpell_PageItem,Light Missile,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,LightRangedSpell_PageItem,Light Bullet,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,ApplyBlessing_Air_PageItem,Blessing of Air,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,ApplyBlessing_Earth_PageItem,Blessing of Earth,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,ApplyBlessing_Fire_PageItem,Blessing of Fire,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,ApplyBlessing_Water_PageItem,Blessing of Water,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,ApplyHolyArmorAction,Holy Armor,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,ApplyHolyBookAction,Holy Book,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,LightAura_PageItem,Light Aura,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,ApplyPreemtive,Preemtive,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,SustainBlessing_PageItem,Chant,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,HealLargeSpell_PageItem,Restore,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,HealMediumSpell_PageItem,Relieve,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,HealSmallSpell_PageItem,Refresh,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,RemoveAilmentSpell,Remove Ailment,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestActions_PageDefs.def,ReviveSpell_PageItem,Revive,"[Item|Page|Action]",PageItemAction.gd
+Priest,PriestPassives_PageDefs.def,BlessedLimit1_PageItem,Blessed,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestPassives_PageDefs.def,BlessedLimit2_PageItem,More Blessed,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestPassives_PageDefs.def,BlessedLimit3_PageItem,Even Blesseder,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestPassives_PageDefs.def,BlessedMassPage,Mass Bless,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestPassives_PageDefs.def,HaloOfLight_PageItem,Light Halo,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestPassives_PageDefs.def,HarmingLight_PageItem,Harming Light,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestPassives_PageDefs.def,HealingLight_PageItem,Healing Light,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestPassives_PageDefs.def,RemoveMorePage,Remove More,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestPassives_PageDefs.def,RemoveSelectPage,Remove Select,"[Item|Page|Passive]",PageItemPassive.gd
+Priest,PriestActors_ActorDefs.def,PriestTemplate,Priest,"[Actor]",CarrierActor.gd
+Rogue,RogueWeapons_ItemDefs.def,BlackJack,Black Jack,"[Item|Equipment|Tool|Weapon]",BaseWeaponEquipment.gd
+Rogue,RogueWeapons_ItemDefs.def,OldDagger,Old Dagger,"[Item|Equipment|Tool|Weapon]",BaseWeaponEquipment.gd
+Rogue,RogueActions_PageDefs.def,ArmorBreak_PageItem,Armor Break,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,PocketSand_PageItem,Pocket Sand,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,ThrowKnife_PageItem,Throw Knife,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,BeDeadly_PageItem,Be Deadly,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,BeNimble_PageItem,Be Nimble,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,_OLD_BeQuick_PageItem,Be Quick,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,Dodge_PageItem,Dodge,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,CoupDeGraceAttackAction,Coup De Grace,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,DoubleAttack_PageItem,Double Attack,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,GetBehind_PageItem,Get Behind,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RogueActions_PageDefs.def,JumpOver_PageItem,Jump Over,"[Item|Page|Action]",PageItemAction.gd
+Rogue,RoguePassives_PageDefs.def,_OLD_ArtfulDodgerPage,Artful Dodger,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,Serpentine_PageItem,Serpentine,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,Momentum_PageItem,Momentum,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,BackStab_PageItem,Back Stabber,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,Finisher_PageItem,Finisher,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,BeQuick_PageItem,Be Quick,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,Bleeder_PageItem,Bleeder,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,Blinder_PageItem,Blinder,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,Stunner_PageItem,Stunner,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,DualHander_PageItem,Ambidualtrous,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,EvasionAoePage,Evade AOE,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,Evasive_PageItem,Evasive,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,LowAggro_PageItem,Sneaky,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,PhyAmmoBoost_PageItem,Phy Boost,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RoguePassives_PageDefs.def,ExtendDeployment_Rogue_PageItem,Head Start,"[Item|Page|Passive]",PageItemPassive.gd
+Rogue,RogueActors_ActorDefs.def,RogueTemplate,Rogue,"[Actor]",BaseActor.gd
+Soldier,SoldierWeapons_ItemDefs.def,OldSword,Old Sword,"[Item|Equipment|Weapon]",BaseWeaponEquipment.gd
+Soldier,SoldierWeapons_ItemDefs.def,OldShield,Old Shield,"[Item|Equipment|Tool|Shield]",BaseShieldItem.gd
+Soldier,SoldierActions_PageDefs.def,Analize_PageItem,Analize,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,Charge_PageItem,Charge,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,Cleave_PageItem,Cleave,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,FaceFoe_PageItem,Face Foe,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,GuardAction_PageItem,Guard,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,Pommel,Pommel,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,PowerAttack,Power Attack,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,ShieldBash_PageItem,Shield Bash,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,TauntEnemy_PageItem,Taunt,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,TauntEnemyMass_PageItem,Shout,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,ThrowJavelin_PageItem,Javelin,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,WildSwing,Wild Swing,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierActions_PageDefs.def,Recall_PageItem,Recall,"[Item|Page|Action]",PageItemAction.gd
+Soldier,SoldierPassives_PageDefs.def,BlockAoePage,Block AOE,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,CrashBully_PageItem,Bully,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,CrashGentlePage,Gentle,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,CrashRoughPage,Rough,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,HeavyArmorTraining_PageItem,Heavy Armored,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,HeavyFoot_PageItem,Heavy Foot,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,ShieldTraining_PageItem,Shield Training,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,ShieldTutoringPage,Shield Tutoring,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,ShieldWallPage,Wall,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,TakeBruntPage,Take Brunt,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,TwoHandBonus_PageItem,Two Hander,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,UnMovable_PageItem,Unmoveable,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,InStopable_PageItem,Instoppable,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,WideGuardPage,Wide Gaurd,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,ForwardGuard_PageItem,Forward Guard,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierPassives_PageDefs.def,ExtendDeployment_Soldier_PageItem,Long Throw,"[Item|Page|Passive]",PageItemPassive.gd
+Soldier,SoldierActors_ActorDefs.def,SoldierTemplate,Soldier,"[Actor]",CarrierActor.gd
+Title,TitlePassivePages_ItemDefs.def,#BaseTitlePage,Base Title,"[Item|Page|Title]",PageItemTitle.gd
+Title,TitlePassivePages_ItemDefs.def,#BaseLivingTitlePage,Base Player Title,"[Item|Page|Title]",PageItemTitle.gd
+Title,TitlePassivePages_ItemDefs.def,MageTitlePage,Mage,"[Item|Page|Title]",PageItemTitle.gd
+Title,TitlePassivePages_ItemDefs.def,PriestTitlePage,Priest,"[Item|Page|Title]",PageItemTitle.gd
+Title,TitlePassivePages_ItemDefs.def,RogueTitlePage,Rogue,"[Item|Page|Title]",PageItemTitle.gd
+Title,TitlePassivePages_ItemDefs.def,SoldierTitlePage,Soldier,"[Item|Page|Title]",PageItemTitle.gd
+Title,BanditTitles_PageDefs.def,BanditBase_TitlePage,Bandit,"[Item|Page|Title]",PageItemTitle.gd
+Title,BanditTitles_PageDefs.def,BanditArcher_TitlePage,Bandit Archer,"[Item|Page|Title]",PageItemTitle.gd
+Title,BanditTitles_PageDefs.def,BanditCaptain_TitlePage,Bandit Captain,"[Item|Page|Title]",PageItemTitle.gd
+Title,MushroomTitles_PageDefs.def,Mushroom_TitlePage,Roof Shroom,"[Item|Page|Title]",PageItemTitle.gd
+Title,MushroomTitles_PageDefs.def,ShroomGolem_TitlePage,Shroom Golem,"[Item|Page|Title]",PageItemTitle.gd
+Title,SlimeTitles_PageDefs.def,SlimeBase_TitlePage,Slime,"[Item|Page|Title]",PageItemTitle.gd
+Title,SlimeTitles_PageDefs.def,SlimePoison_TitlePage,Poison Slime,"[Item|Page|Title]",PageItemTitle.gd
+Title,SquirrelTtitles_PageDefs.def,BaseSquirrel_TitlePage,Squirrel,"[Item|Page|Title]",PageItemTitle.gd
+Title,SquirrelTtitles_PageDefs.def,SquirrelMag_TitlePage,Squirrcerer,"[Item|Page|Title]",PageItemTitle.gd
+Title,SquirrelTtitles_PageDefs.def,SquirrelPhy_TitlePage,Squirrior,"[Item|Page|Title]",PageItemTitle.gd
+Title,TargetDummyTitle_PageDefs.def,TargetDummy_TitlePage,Target Dummy,"[Item|Page|Title]",PageItemTitle.gd
+Title,UndeadTitles_PageDefs.def,SkeletonMage_TitlePage,Skeleton Mage,"[Item|Page|Title]",PageItemTitle.gd
+Title,UndeadTitles_PageDefs.def,Skeleton_TitlePage,Skeleton,"[Item|Page|Title]",PageItemTitle.gd
+Title,UndeadTitles_PageDefs.def,Zombie_TitlePage,Zombie,"[Item|Page|Title]",PageItemTitle.gd
+Item,Money_ItemDefs.def,MoneyItem,Money,"[Item]",BaseItem.gd
+Action,BaseAttack_PageDefs.def,#BaseInflictAttack,#Base Inflict Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseAttack_PageDefs.def,#BaseMeleeAttack,#Base Melee Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseSpells_PageDefs.def,#BaseMeleeSpell,#Base Melee Spell,"[Item|Page|Action]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,ColdMeleeSpell,Cold Touch,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,FireMeleeSpell,Fire Touch,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,PoisonMeleeSpell,Poison Touch,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,ShockMeleeSpell,Shock Touch,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,BaseAttack_PageDefs.def,#BaseMissileAttack,#Base Missile Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseSpells_PageDefs.def,#BaseMissileSpell,#Base Missile Spell,"[Item|Page|Action]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,ColdMissileSpell,Cold Missile,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,DarkMissileSpell,Dark Missile,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,FireMissileSpell,Fire Missile,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,PoisonMissileSpell,Poison Missile,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,ShockMissileSpell,Shock Missile,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,BaseAttack_PageDefs.def,#BaseRangedAttack,#Base Range Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseSpells_PageDefs.def,#BaseRangedSpell,#Base Range Action,"[Item|Page|Action]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,ColdRangedSpell,Cold Bullet,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,FireRangedSpell,Fire Shot,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,PoisonRangedSpell,Poison Bullet,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,ShockRangedSpell,Shock Bullet,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,BaseAttack_PageDefs.def,#BaseTrapAttack,#Base Trap Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseSpells_PageDefs.def,#BaseTrapSpell,#Base Trap Action,"[Item|Page|Action]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,ColdTrapSpell,Cold Trap,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,PoisonTrapSpell,Poison Trap,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,CommonSpell_PageDefs.def,ShockTrapSpell,Shock Trap,"[Item|Page|Action|Spell]",PageItemAction.gd
+Action,BaseApplyActions_PageDefs.def,#BaseApplyEffectAction,#Base Apply Effect,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseApplyActions_PageDefs.def,#BaseApplyBuffAction,#Base Apply Buff,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseApplyActions_PageDefs.def,#BaseApplySelfBuffAction,#Base Self Buff,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseSpells_PageDefs.def,#BaseAttackZoneSpell,#Base Zone Action,"[Item|Page|Action]",PageItemAction.gd
+Action,BaseSpells_PageDefs.def,#BaseEffectZoneSpell,#Base Zone Action,"[Item|Page|Action]",PageItemAction.gd
+Action,BasicMeleeAttack_PageDefs.def,BasicMeleeAttack,Basic Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,Dash,Dash,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,MoveBack,Move Back,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,MoveForward,Move Forward,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,MoveLeft,Move Left,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,MoveRight,Move Right,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,TurnAround,Turn Around,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,TurnLeft,Turn Left,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,TurnRight,Turn Right,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicMovement_PageDefs.def,Wait,Wait,"[Item|Page|Action|Movement]",PageItemAction.gd
+Action,BasicWeaponAttack_PageDefs.def,BasicWeaponAttack,Weapon Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BasicWeaponAttack_PageDefs.def,FastAttackAction,Fast Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BasicWeaponAttack_PageDefs.def,PowerAttackAction,Power Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,BasicWeaponAttack_PageDefs.def,SlowAttackAction,Slow Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,ItemUsage_PageDefs.def,#BaseThrowItemPage,Throw Bomb,"[Item|Page|Action]",PageItemAction.gd
+Action,ItemUsage_PageDefs.def,ThrowBombPage,Throw Bomb,"[Item|Page|Action]",PageItemAction.gd
+Action,ItemUsage_PageDefs.def,ThrowPotionPage,Throw Potion,"[Item|Page|Action]",PageItemAction.gd
+Action,ItemUsage_PageDefs.def,#UseItemSelf,#Base Use Item,"[Item|Page|Action]",PageItemAction.gd
+Action,ItemUsage_PageDefs.def,ReloadPage,Reload,"[Item|Page|Action]",PageItemAction.gd
+Action,ItemUsage_PageDefs.def,UsePotionSelf,Drink Potion,"[Item|Page|Action]",PageItemAction.gd
+Action,DevActions_PageDefs.def,Dev_ApplyEffect,Any Effect,"[Item|Page|Action|_Dev]",PageItemAction.gd
+Action,DevActions_PageDefs.def,Dev_Damage,Dev Damage,"[Item|Page|Action|_Dev]",PageItemAction.gd
+Action,DevActions_PageDefs.def,Dev_KillAll,Dev Win,"[Item|Page|Action|_Dev]",PageItemAction.gd
+Action,DevActions_PageDefs.def,Dev_Move,Dev Move,"[Item|Page|Action|_Dev]",PageItemAction.gd
+Action,DevActions_PageDefs.def,Dev_SpawnActor,Spawn Actor,"[Item|Page|Action|_Dev]",PageItemAction.gd
+Action,MushroomPages_PageDefs.def,SpreadSpores_ActionPage,Spread Spores,"[Item|Page|Action]",PageItemAction.gd
+Action,SlimePages_PageDefs.def,SlimeSpike_ActionPage,Slime Spike,"[Item|Page|Action]",PageItemAction.gd
+Action,SquirrelPages_PageDefs.def,ChuckAcorn_ActionPage,Chuck Acorn,"[Item|Page|Action]",PageItemAction.gd
+Action,SquirrelPages_PageDefs.def,ChuckAcornFire_ActionPage,Fire Acorn,"[Item|Page|Action]",PageItemAction.gd
+Action,UndeadActions_PageDefs.def,BiteAttack_ActionPage,Bite,"[Item|Page|Action]",PageItemAction.gd
+Passive,TestPages_PageDefs.def,TestingAddedPages,Add Page Test,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,TestPages_PageDefs.def,TestingAddedTag,Active,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,Active_PageItem,Active,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,HeavyWeaponDualHandPage,Dual Heavy,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,MagWeaponOverride_Cold_PageItem,Override: Cold ,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,MagWeaponOverride_Fire_PageItem,Override: Fire ,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,MagWeaponOverride_Poison_PageItem,Override: Poison ,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,MagWeaponOverride_Shock_PageItem,Override: Shock ,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,MediumWeaponDualHandPage,Dual Medium,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,MediumWeaponTwoHandPage,TwoHand Medium,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,MeleeRangeDualHandPage,OffHand Ranged,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,PPRPlus_PageItem,PPR Plus,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,Redundant_PageItem,Redundant,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,Strategic_PageItem,Strategic,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,GenericPassives_PageDefs.def,UnarmedMaster_PageItem,Unarmed Master,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,SlimePages_PageDefs.def,SlimePoisonSkin_PassivePage,Poison Skin ,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,SquirrelPages_PageDefs.def,SquirrelArmor_PassivePage,Squirrel Armor,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,SquirrelPages_PageDefs.def,SquirrelMagic_PassivePage,Squirrel Magic,"[Item|Page|Passive]",PageItemPassive.gd
+Passive,SquirrelPages_PageDefs.def,Squirrely_PassivePage,Squirrely,"[Item|Page|Passive]",PageItemPassive.gd
+Actor,BaseActor_ActorDefs.def,#BaseActor,#Base Actor,"[Actor]",BaseActor.gd
+Actor,BaseActor_ActorDefs.def,#BaseHumanoid,#Base Humanoid,"[Actor]",BaseActor.gd
+Actor,Bandits_ActorDefs.def,Bandit_Armored,Armored Bandit,"[Actor]",BaseActor.gd
+Actor,Bandits_ActorDefs.def,Bandit_Captain,Bandit Captain,"[Actor]",BaseActor.gd
+Actor,Bandits_ActorDefs.def,Bandit_Ranged,Archer Bandit,"[Actor]",BaseActor.gd
+Actor,Muhrooms_ActorDefs.def,MushroomBase,Mushroom,"[Actor]",BaseActor.gd
+Actor,Muhrooms_ActorDefs.def,MushroomRoof,Roof Shroom,"[Actor]",BaseActor.gd
+Actor,Muhrooms_ActorDefs.def,ShroomGolem,Shroom Golem,"[Actor]",BaseActor.gd
+Actor,Objects_ActorDefs.def,#BaseObjectActor,#BaseObjectActor,"[Actor|Object|Rooted]",BaseActor.gd
+Actor,Objects_ActorDefs.def,BarrelActor,Barrel,"[Actor|Object|Rooted]",BaseActor.gd
+Actor,Objects_ActorDefs.def,CrateActor,Crate,"[Actor|Object|Rooted]",BaseActor.gd
+Actor,Objects_ActorDefs.def,LeverActor,Lever,"[Actor|Object|Rooted]",LeverActor.gd
+Actor,Objects_ActorDefs.def,ShrineActor,Shrine,"[Actor|Object|Rooted]",SpawnerActor.gd
+Actor,Objects_ActorDefs.def,StalagmiteActor,Stalagmite,"[Actor|Object|Rooted]",BaseActor.gd
+Actor,Objects_ActorDefs.def,AlterActor,Alter,"[Actor|Object]",AlterActor.gd
+Actor,Slimes_ActorDefs.def,SlimeBasic,Slime,"[Actor]",BaseActor.gd
+Actor,Slimes_ActorDefs.def,SlimePoison,Green Slime,"[Actor]",BaseActor.gd
+Actor,Squirrels_ActorDefs.def,BaseSquirrel,Squirrel,"[Actor]",BaseActor.gd
+Actor,Squirrels_ActorDefs.def,Squirrcerer,Squirrcerer,"[Actor]",BaseActor.gd
+Actor,Squirrels_ActorDefs.def,Squirrior,Squirrior,"[Actor]",BaseActor.gd
+Actor,TargetDummy_ActorDefs.def,TargetDummy,Test Target,"[Actor]",BaseActor.gd
+Actor,TargetDummy_ActorDefs.def,TargetDummy_Mag,Warded Target,"[Actor]",BaseActor.gd
+Actor,TargetDummy_ActorDefs.def,TargetDummy_Moving,Moving Target,"[Actor]",BaseActor.gd
+Actor,TargetDummy_ActorDefs.def,TargetDummy_Phy,Armored Target,"[Actor]",BaseActor.gd
+Actor,Totems_ActorDefs.def,BaseTotem_Actor,Totem,"[Actor]",BaseActor.gd
+Actor,Undead_ActorDefs.def,#BaseUndead,#Base Undead,"[Actor]",BaseActor.gd
+Actor,Undead_ActorDefs.def,Skeleton,Skeleton,"[Actor]",BaseActor.gd
+Actor,Undead_ActorDefs.def,SkeletonMage,Skel Mage,"[Actor]",BaseActor.gd
+Actor,Undead_ActorDefs.def,ZombieBasic,Zombie,"[Actor]",BaseActor.gd

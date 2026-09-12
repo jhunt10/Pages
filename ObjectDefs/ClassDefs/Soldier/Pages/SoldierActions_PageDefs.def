@@ -128,17 +128,17 @@
 					"Speed": 2.0
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 1.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 0.0,
-					"Animation": "Swing",
+					"Animation": "Arch",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -222,17 +222,17 @@
 					"TargetParamKey": "TargetParams1"
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 1.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Swing",
+					"Animation": "Arch",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -354,19 +354,21 @@
 			},
 			"SubActions": {
 				"Animation_Motion": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Motion.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 23.0,
 					"#SubIndex": 0.0,
 					"AnimationSpeed": 1.0,
-					"OffHand": true
+					"MainHand": false,
+					"OffHand": "Always"
 				},
 				"Animation_Ready": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_Animation_Ready.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 1.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"AnimationSpeed": 1.0,
-					"OffHand": true
+					"MainHand": false,
+					"OffHand": "Always"
 				},
 				"ApplyEffect": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Effects/SubAct_GrantEffect.gd",
@@ -479,7 +481,7 @@
 					"#SubIndex": 0.0
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 1.0,
 					"AnimationSpeed": 4.0,
@@ -487,10 +489,10 @@
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -585,17 +587,17 @@
 					"#SubIndex": 0.0
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 1.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "WEAPON_DEFAULT",
+					"Animation": "Default",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -701,17 +703,17 @@
 					"#SubIndex": 0.0
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 2.0,
 					"MainHand": false,
 					"OffHand": "Always"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Stab",
+					"Animation": "Forward",
 					"MainHand": false,
 					"OffHand": "Always"
 				}
@@ -782,17 +784,17 @@
 					"TargetParamKey": "TargetParam1"
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11,
 					"#SubIndex": 0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5,
 					"#SubIndex": 0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -863,17 +865,17 @@
 					"TargetParamKey": "TargetParam1"
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11,
 					"#SubIndex": 0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5,
 					"#SubIndex": 0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -1263,7 +1265,7 @@
 					"#SubIndex": 0.0
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 2.0,
 					"AnimationSpeed": 2.5,
@@ -1271,7 +1273,7 @@
 					"OffHand": "Never"
 				},
 				"WeaponMotionAnimation122": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 12.0,
 					"#SubIndex": 2.0,
 					"AnimationSpeed": 2.5,
@@ -1279,7 +1281,7 @@
 					"OffHand": "Never"
 				},
 				"WeaponMotionAnimation182": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 18.0,
 					"#SubIndex": 2.0,
 					"AnimationSpeed": 2.5,
@@ -1287,7 +1289,7 @@
 					"OffHand": "Never"
 				},
 				"WeaponMotionAnimation62": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 6.0,
 					"#SubIndex": 2.0,
 					"AnimationSpeed": 2.5,
@@ -1295,37 +1297,37 @@
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 1.0,
-					"Animation": "Swing",
+					"Animation": "Arch",
 					"AnimationSpeed": 2.5,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation121": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 12.0,
 					"#SubIndex": 1.0,
-					"Animation": "Swing",
+					"Animation": "Arch",
 					"AnimationSpeed": 2.5,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation181": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 18.0,
 					"#SubIndex": 1.0,
-					"Animation": "Swing",
+					"Animation": "Arch",
 					"AnimationSpeed": 2.5,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation61": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 6.0,
 					"#SubIndex": 1.0,
-					"Animation": "Swing",
+					"Animation": "Arch",
 					"AnimationSpeed": 2.5,
 					"MainHand": true,
 					"OffHand": "Never"

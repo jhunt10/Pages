@@ -93,17 +93,17 @@
 					"#SubIndex": 0.0
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 2.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}

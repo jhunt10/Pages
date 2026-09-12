@@ -92,13 +92,13 @@ func _on_mouse_hover_end(_data):
 	_hide_pop_up(_data)
 	pass
 
-func set_page_item(page:BasePageItem, actor:BaseActor=null):
+func set_page_item(page:BasePageItem, actor:BaseActor=null, include_flavor:bool=true):
 	if not page:
 		self.clear()
 		self.append_text("NULL PAGE")
 		return
 	var merged_def = BaseLoadObjectLibrary._merge_defs(page._data, page._def)
-	set_object(merged_def, page, actor)
+	set_object(merged_def, page, actor, include_flavor)
 
 func set_effect(effect:BaseEffect):
 	if not effect:
@@ -108,10 +108,18 @@ func set_effect(effect:BaseEffect):
 	var merged_def = BaseLoadObjectLibrary._merge_defs(effect._data, effect._def)
 	set_object(merged_def, effect, effect.get_effected_actor())
 
-
-func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor):
+func set_object(object_def:Dictionary, object_inst:BaseLoadObject, actor:BaseActor, include_flavor:bool=true):
 	self.clear()
-	var raw_description = object_def.get("#ObjDetails", {}).get("Description", "")
+	var object_details = object_def.get("#ObjDetails", {})
+	var raw_description = object_details.get("Description", "")
+	if include_flavor:
+		if object_details.keys().has("DescriptionPrefix"):
+			var preamble = object_details['DescriptionPrefix']
+			raw_description = preamble + "\n\n" + raw_description
+		if object_details.keys().has("DescriptionSufix"):
+			var postamble = object_details['DescriptionSufix']
+			raw_description = raw_description + "\n\n" + postamble
+	
 	set_description(raw_description, object_def, object_inst, actor)
 
 func set_description(
@@ -468,6 +476,9 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 			# Get requested DamageData
 			if damage_datas.keys().has(damage_key):
 				damage_data = damage_datas[damage_key]
+			# Get Unarmed Weapon DamageData
+			if damage_datas.keys().has(damage_key+":UnarmedDamage"):
+				damage_data = damage_datas[damage_key+":UnarmedDamage"]
 			# Cache off any extras that came with (probably OffHand Weapon)
 			elif damage_datas.size() > 0:
 				extra_damage_datas = damage_datas.values()

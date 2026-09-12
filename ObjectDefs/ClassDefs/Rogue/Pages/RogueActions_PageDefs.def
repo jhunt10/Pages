@@ -29,17 +29,17 @@
 			},
 			"SubActions":{
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 0.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Stab",
+					"Animation": "Forward",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -368,7 +368,7 @@
 					"#SubIndex": 1.0
 				},
 				"WeaponMotionAnimation1": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 7.0,
 					"#SubIndex": 3.0,
 					"AnimationSpeed": 2.0,
@@ -376,7 +376,7 @@
 					"OffHand": "OnlyIfDuel"
 				},
 				"WeaponMotionAnimation2": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 15.0,
 					"#SubIndex": 1.0,
 					"AnimationSpeed": 2.0,
@@ -384,19 +384,19 @@
 					"OffHand": "OnlyIfDuel"
 				},
 				"WeaponReadyAnimation1": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 0.0,
-					"Animation": "WEAPON_DEFAULT",
+					"Animation": "Default",
 					"AnimationSpeed": 2.0,
 					"MainHand": true,
 					"OffHand": "OnlyIfDuel"
 				},
 				"WeaponReadyAnimation2": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 0.0,
-					"Animation": "WEAPON_DEFAULT",
+					"Animation": "Default",
 					"AnimationSpeed": 2.0,
 					"MainHand": true,
 					"OffHand": "OnlyIfDuel"
@@ -751,17 +751,17 @@
 			},
 			"SubActions": {
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 0.0,
 					"MainHand": true,
 					"OffHand": "OnlyIfDuel"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "WEAPON_DEFAULT",
+					"Animation": "Default",
 					"MainHand": true,
 					"OffHand": "OnlyIfDuel"
 				}

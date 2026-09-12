@@ -43,7 +43,7 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 	var title = action.get_display_name()
 	title_label.text = title
 	title_label._size_dirty = true
-	description_box.set_page_item(action, actor)
+	description_box.set_page_item(action, actor, false)
 	
 	
 	if action.get_tags().has("Attack") or action.has_ammo():

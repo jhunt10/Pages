@@ -3,7 +3,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseApplySelfBuffAction",
 		"#ObjDetails": {
-			"Description": "Channel your magic boosting next spell.",
+			"Description": "Spend time focusing your magic to empower your next spell.\n\nGain @@#Color:Blue:Channel@@: @@#Color:Red:+10%@@@@#Stat:MagAttack@@ per stack (Max @@#Color:Red:5@@) All stacks are consumed on using a @@#Tag:Spell:Spell Page@@.",
 			"DisplayName": "Channel",
 			"LargeIcon": "Sprites/Channel_Icon.png",
 			"ObjectType": "Item",
@@ -50,7 +50,8 @@
 	"CallShockSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Gather ambient @@#Color:DmgColor:Shock@@ energy in the air and release a powerful strike down upon your foe or, you know, something in the general vicinity.\n\nMake a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n@@#EffLine:Effect1@@\n@@#Color:Red:5%@@ chance to re-target an @@#Color:Red:Adj Actor@@ instead.",
+			"Description": "Make a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n@@#EffLine:Effect1@@\n@@#Color:Red:5%@@ chance to re-target an @@#Color:Red:Adj Actor@@ instead.",
+			"DescriptionPrefix": "Gather ambient @@#Color:DmgColor:Shock@@ energy in the air and release a powerful strike down upon your foe or, you know, something in the general vicinity.",
 			"DisplayName": "Call Shock",
 			"LargeIcon": "Sprites/CallShock_Icon.png",
 			"ObjectType": "Item",
@@ -130,17 +131,17 @@
 					"PrimaryTargetOnly": true
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 2.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -175,7 +176,8 @@
 	"ChainShockSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Send out a jolt of @@#Color:DmgColor:Shock@@ energy which archs between helpless enemies and allies who shouldn't have been standing there.\n\nMake a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit and @@#Tag:Chain@@ up to @@#SubAct:GetTarget_Chain:MaxChainCount@@ @@#Color:Red:Actors@@.",
+			"Description": "Make a @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit and @@#Tag:Chain@@ up to @@#SubAct:GetTarget_Chain:MaxChainCount@@ @@#Color:Red:Actors@@.",
+			"DescriptionPrefix": "Send out a jolt of @@#Color:DmgColor:Shock@@ energy which archs between helpless enemies and allies who shouldn't have been standing there.",
 			"DisplayName": "Chain Shock",
 			"LargeIcon": "Sprites/ChainShock_Icon.png",
 			"ObjectType": "Item",
@@ -251,17 +253,17 @@
 					"#SubIndex": 0.0
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 2.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -292,7 +294,8 @@
 	"ShockStormSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Unleash a storm of @@#Color:DmgColor:Shock@@ energy raining powerful strikes down upon an unlucky few. Perfect for those without friends.\n\nMake @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attacks@@ against up to @@#Color:Red:3 Random Actors@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
+			"Description": "Make @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attacks@@ against up to @@#Color:Red:3 Random Actors@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
+			"DescriptionPrefix": "Unleash a storm of @@#Color:DmgColor:Shock@@ energy raining powerful strikes down upon an unlucky few. Perfect for those without friends.",
 			"DisplayName": "Shock Storm",
 			"LargeIcon": "Sprites/ShockStorm_Icon.png",
 			"ObjectType": "Item",
@@ -389,17 +392,17 @@
 					"TargetParamKey": "TargetParam"
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 21.0,
 					"#SubIndex": 1.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 1.0,
 					"#SubIndex": 0.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -433,7 +436,8 @@
 	"DischargeSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Charge/Discharge @@#Color:DmgColor:Shock@@ energy into/from a living batter/person.\n\nTarget an @@#Color:Red:Actor@@ and inflict @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\nIf the target is already @@#EftDef:AilmentShocked:DisplayName@@, end the effect and deal @@#DmgData:RangedDamage@@ to @@#Color:Red:Target@@ and @@#Color:Red:Adj Actors@@.",
+			"Description": "Target an @@#Color:Red:Actor@@ and inflict @@#EftData:InflictEffect:DisplayName@@ for @@#EftData:InflictEffect:Duration@@.\nIf the target is already @@#EftDef:AilmentShocked:DisplayName@@, end the effect and deal @@#DmgData:RangedDamage@@ to @@#Color:Red:Target@@ and @@#Color:Red:Adj Actors@@.",
+			"DescriptionPrefix": "Charge/Discharge @@#Color:DmgColor:Shock@@ energy into/from a living battery/person.",
 			"DisplayName": "(Dis)charge",
 			"LargeIcon": "Sprites/Discharge_Icon.png",
 			"ObjectType": "Item",
@@ -565,17 +569,17 @@
 					"PrimaryTargetOnly": true
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 11.0,
 					"#SubIndex": 2.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 5.0,
 					"#SubIndex": 0.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -621,7 +625,8 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMissileSpell",
 		"#ObjDetails": {
-			"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to all @@#Color:Red:Actors@@ in @@#Tag:AOE@@.\n\n-\"I didn't ask how big the room was...\"",
+			"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to all @@#Color:Red:Actors@@ in @@#Tag:AOE@@.",
+			"DescriptionSufix": "-\"I didn't ask how big the room was...\"",
 			"DisplayName": "Fire Ball",
 			"LargeIcon": "Sprites/FireBall_Icon.png",
 			"ObjectType": "Item",
@@ -711,7 +716,8 @@
 	"FireThrowSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Unleash an @@#Tag:AOE@@ @@#Tag:SpellAtk:Spell Attack@@ dealing @@#DmgData:AoeDamage@@ to all @@#Color:Red:Actors@@ in range.\n\n-\"The air is lava!\"",
+			"Description": "Unleash an @@#Tag:AOE@@ @@#Tag:SpellAtk:Spell Attack@@ dealing @@#DmgData:AoeDamage@@ to all @@#Color:Red:Actors@@ in range.",
+			"DescriptionSufix":"-\"The air is lava!\"",
 			"DisplayName": "Throw Flames",
 			"LargeIcon": "Sprites/ThrowFire_Icon.png",
 			"ObjectType": "Item",
@@ -815,17 +821,17 @@
 					"VfxKey": "ThrowFlameVfx"
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 17.0,
 					"#SubIndex": 0.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 1.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -928,7 +934,8 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseAttackZoneSpell",
 		"#ObjDetails": {
-			"Description": "Create a @@#Tag:Zone@@ of @@#Color:DmgColor:Fire@@ which last for @@#ZoneData:Zone1:Duration@@. All @@#Color:Red:Actors@@ in the @@#Tag:Zone@@ take @@#DmgData:ZoneDamage@@ at @@#Color:Red:End of Turn@@.\n\n-\"The floor is lava!\"",
+			"Description": "Create a @@#Tag:Zone@@ of @@#Color:DmgColor:Fire@@ which last for @@#ZoneData:Zone1:Duration@@. All @@#Color:Red:Actors@@ in the @@#Tag:Zone@@ take @@#DmgData:ZoneDamage@@ at @@#Color:Red:End of Turn@@.",
+			"DescriptionSufix":"-\"The floor is lava!\"",
 			"DisplayName": "Fire Zone",
 			"LargeIcon": "Sprites/FireZone_Icon.png",
 			"ObjectType": "Item",
@@ -1060,7 +1067,8 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "#BaseMissileSpell",
 		"#ObjDetails": {
-			"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n\nOn impact the ball shatters launching @@#Tag:Missile:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n@@#EftChances@@\n-One of many spells banned from professional snowball fights.",
+			"Description": "Launch a @@#Tag:Missile@@ @@#Tag:SpellAtk:Spell Attack@@ at a @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:MissileDamage@@ to any @@#Color:Red:Actor@@ it hits.\n\nOn impact the ball shatters launching @@#Tag:Missile:Missiles@@ at @@#Color:Red:Adj Spots@@, dealing @@#DmgData:SubMissileDamage@@ on hit.\n@@#EftChances@@",
+			"DescriptionSufix":"-One of many spells banned from professional snowball fights.",
 			"DisplayName": "Ice Ball",
 			"LargeIcon": "Sprites/WaterBall_Icon.png",
 			"ObjectType": "Item",
@@ -1120,7 +1128,7 @@
 						],
 						"Rotation": -45.0,
 						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
-						"SpriteName": "SpriteSheets/WaterBall_Missile.png",
+						"SpriteName": "SpriteSheets/IceBall_Missile.png",
 						"SpriteSheetHight": 2.0,
 						"SpriteSheetWidth": 2.0
 					},
@@ -1190,7 +1198,8 @@
 	"WaterBeamSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Spawn a @@#Tag:Beam@@ of ice, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.\n\n-Great for refrigerating food, corpses, and poeple you wish to be corpses.",
+			"Description": "Spawn a @@#Tag:Beam@@ of ice, hitting @@#Color:Red:All Actors@@ in a @@#Color:Red:Line@@ in front of you and dealing @@#DmgData:WaterBeamDamage@@.",
+			"DescriptionSufix": "-Great for refrigerating food, corpses, and poeple you wish to be corpses.",
 			"DisplayName": "Ice Beam",
 			"LargeIcon": "Sprites/ColdMage_Icon.png",
 			"ObjectType": "Item",
@@ -1250,17 +1259,17 @@
 					"BeamNodePath": "res://ObjectDefs/Data/VFXs/WaterJet/ice_beam_vfx_node.tscn"
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 17.0,
 					"#SubIndex": 0.0,
 					"MainHand": true,
 					"OffHand": "Never"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 1.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "Never"
 				}
@@ -1294,7 +1303,8 @@
 	"WaterGunSpell_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Fire a rapid series of @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.\n\n-A more perfect murder. (Looking at you Ice Knife)",
+			"Description": "Fire a rapid series of @@#Tag:Ranged@@ @@#Tag:SpellAtk:Spell Attack@@ against an @@#TrgParm:TargetParam:TargetType@@ in range, dealing @@#DmgData:RangedDamage@@ on hit.",
+			"DescriptionSufix":"-A more perfect murder. (Looking at you Ice Knife)",
 			"DisplayName": "Ice Gun",
 			"LargeIcon": "Sprites/WaterGun_Icon.png",
 			"ObjectType": "Item",
@@ -1405,17 +1415,17 @@
 					"#SubIndex": 1.0
 				},
 				"WeaponMotionAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponMotionAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
 					"#FrameIndex": 18.0,
 					"#SubIndex": 0.0,
 					"MainHand": true,
 					"OffHand": "OnlyIfDuel"
 				},
 				"WeaponReadyAnimation": {
-					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_WeaponReadyAnimation.gd",
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 0.0,
-					"Animation": "Raise",
+					"Animation": "Self",
 					"MainHand": true,
 					"OffHand": "OnlyIfDuel"
 				}

@@ -3,6 +3,7 @@ extends Control
 
 signal menu_closed()
 
+@export var main_container:PanelContainer
 @export var titile_label:Label
 @export var options_container:VBoxContainer
 @export var premade_option_button:OptionSelectButton
@@ -24,6 +25,7 @@ func _ready() -> void:
 	close_button.pressed.connect(self.clear_and_hide)
 	premade_option_button.hide()
 	premade_option_divider.hide()
+	CombatRootControl.Instance.camera.add_no_scroll_node(main_container)
 
 ## Set a list of OnQueOptionsData to be selected one at a time
 func set_options(selecting_key:String, options:Array, on_finish_func:Callable):
