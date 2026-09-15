@@ -219,9 +219,13 @@ func _get_items_removed_if_new_item_added(slot_index:int, item:BaseItem)->Array:
 		
 	return list_all_tools_in_hands()
 
+func _on_items_changed():
+	_actor.sprite_changed.emit()
+
 func _on_item_added_to_slot(item:BaseItem, index:int):
 	super(item, index)
 	auto_order_hand_items()
+	_actor.sprite_changed.emit()
 
 func _on_item_removed(item_id:String, supressing_signals:bool):
 	super(item_id, supressing_signals)
@@ -229,6 +233,7 @@ func _on_item_removed(item_id:String, supressing_signals:bool):
 	if supressing_signals:
 		return
 	auto_order_hand_items()
+	_actor.sprite_changed.emit()
 
 # Correct for toosl in hands and set HandStates after some change
 func auto_order_hand_items(): 
@@ -302,6 +307,19 @@ func auto_order_hand_items():
 			(offhand_weapon.is_melee_weapon() == mainhand_item.is_melee_weapon()
 			or offhand_weapon.is_ranged_weapon() == mainhand_item.is_ranged_weapon())):
 				_is_dual_handing = true
+
+## Returns true if SlotSet of given index will accept Item
+func can_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
+	if not super(item, index, allow_replace):
+		return false
+	# Check for Main Hand logic
+	if index == get_first_hand_index():
+		if not _can_use_tool_in_mainhand(item):
+			return false
+	if list_offhand_indexes().has(index):
+		if not _can_use_tool_in_offhand(item):
+			return false
+	return true
 
 func _can_use_tool_in_mainhand(item:BaseToolEquipment):
 	var hand_conditions = _actor.get_hands_conditions_for_tool(item)

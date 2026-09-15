@@ -411,19 +411,29 @@ func _get_items_removed_if_new_item_added(slot_index:int, _item:BaseItem)->Array
 		return [current_item]
 	return []
 
-func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false)->bool:
+func try_set_item_in_slot(item:BaseItem, index:int, allow_replace:bool=false, supress_signal:bool=true)->bool:
 	if not ItemHelper.transering_items.has(item.Id):
 		printerr("Transfering Item outside of ItemHelper: %s | %s " % [item.Id, _actor.Id])
+	var current_slot = _raw_item_slots.find(item.Id)
+	var already_has_item = current_slot >= 0
+	# Already in slot
+	if current_slot == index:
+		return true
+	
 	if not can_set_item_in_slot(item, index, allow_replace):
 		return false
 	if _raw_item_slots[index] != null:
 		if allow_replace:
-			remove_item(_raw_item_slots[index], true)
+			remove_item(_raw_item_slots[index], supress_signal)
 		else:
 			return false
 	_raw_item_slots[index] = item.Id
 	_slot_validation_states[index] = ValidStates.UnValidated
-	_on_item_added_to_slot(item, index)
+	if already_has_item:
+		_raw_item_slots[current_slot] = null
+		_slot_validation_states[current_slot] = ValidStates.Valid
+	if not supress_signal:
+		_on_item_added_to_slot(item, index)
 	return true
 
 ## Check if given SlotSet data accepts item
@@ -461,6 +471,11 @@ func add_item_to_first_valid_slot(item:BaseItem):
 		return true
 	ItemHelper.transering_items.erase(item.Id)
 	return false
+
+## When something changed but can't easily say what.
+# just put in for ItemHelper.swap_item_holder_slots
+func _on_items_changed():
+	pass
 
 func _on_item_added_to_slot(item:BaseItem, _index:int):
 	item.set_holding_actor(_actor)

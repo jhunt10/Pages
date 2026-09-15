@@ -221,27 +221,40 @@ static func swap_item_holder_slots(holder:BaseItemHolder, slot_a:int, slot_b:int
 	var item_b = holder.get_item_in_slot(slot_b)
 	if !item_a:
 		return
-	#holder.remove_item(item_a.Id)
 	var a_can_go_in_b = holder.can_set_item_in_slot(item_a, slot_b, true)
+	# Item A can not go in Slot B, so bail
 	if not a_can_go_in_b:
-		holder.try_set_item_in_slot(item_a, slot_a)
-		return
-	if !item_b:
-		if not holder.try_set_item_in_slot(item_a, slot_b):
-			holder.try_set_item_in_slot(item_a, slot_a)
-		return
-			
-	var b_can_go_in_a = holder.can_set_item_in_slot(item_b, slot_a, true)
-	if not b_can_go_in_a and not return_b_to_inventory:
-		holder.try_set_item_in_slot(item_a, slot_a)
 		return
 		
-	if b_can_go_in_a:
-		holder.remove_item(item_b.Id)
-		holder.try_set_item_in_slot(item_b, slot_a)
+	transering_items.append(item_a.Id)
+	
+	# Slot B is open, so just move Item A
+	if not item_b:
+		holder._direct_clear_slot(slot_a)
+		holder._direct_set_item_in_slot(slot_b, item_a)
+		holder.validate_items()
+		transering_items.erase(item_a.Id)
+		holder._on_items_changed()
+		return
+	
+	transering_items.append(item_b.Id)
+			
+	var b_can_go_in_a = holder.can_set_item_in_slot(item_b, slot_a, true)
+	# Slot A can not accept Item B
+	if not b_can_go_in_a:
+		if return_b_to_inventory:	
+			try_transfer_item_from_holder_to_inventory(item_b, holder)
+			holder._direct_clear_slot(slot_a)
+			holder._direct_set_item_in_slot(slot_b, item_a)
+	# Swap Items A and B
 	else:
-		try_transfer_item_from_holder_to_inventory(item_b, holder)
-	holder.try_set_item_in_slot(item_a, slot_b)
+		holder._direct_set_item_in_slot(slot_b, item_a)
+		holder._direct_set_item_in_slot(slot_a, item_b)
+	holder.validate_items()
+	transering_items.erase(item_a.Id)
+	transering_items.erase(item_b.Id)
+	holder._on_items_changed()
+	
 		
 static func cant_equip_reasons_to_string(reasons_data:Dictionary)->String:
 	var missing_string = 'Req: '

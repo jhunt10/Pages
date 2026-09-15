@@ -1,4 +1,54 @@
 {
+	"Scratch_ActionPage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"!ParentKey": "BasicMeleeAttack",
+		"#ObjDetails": {
+			"Description": "Scratch at an @@#TrgParm:TargetParam:TargetType@@ with your tiny squirrel claws for @@#DmgData:WeaponDamage@@.",
+			"DisplayName": "Scratch",
+			"LargeIcon": "Sprites/Scratch_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Scratch_Icon.png",
+			"SnippetDesc": "Scratch with claws.",
+			"Tags": [
+				"Attack",
+				"Missile",
+				"Ranged",
+				"Spell"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AmmoData": {
+				"AmmoType": "Mag",
+				"Clip": 3.0,
+				"Cost": 1.0
+			},
+			"AttackDetails": {
+				"ActionVerb": "scratched"
+			},
+			"DamageDatas": {
+				"WeaponDamage": {
+					"AtkPwrBase": 80.0,
+					"AtkPwrRange": 20.0,
+					"AtkStat": "PhyAttack",
+					"BaseDamage": 0.0,
+					"DamageType": "Slash",
+					"DamageVfxKey": "AUTO",
+					"DefenseType": "AUTO"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
 	"ChuckAcornFire_ActionPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"!ParentKey": "ChuckAcorn_ActionPage",
