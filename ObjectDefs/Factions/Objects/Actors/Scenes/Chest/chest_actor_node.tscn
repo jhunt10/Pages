@@ -1,0 +1,245 @@
+[gd_scene format=3 uid="uid://b03numm5d0sqj"]
+
+[ext_resource type="Script" uid="uid://d21aw130vx0bm" path="res://ObjectDefs/Factions/Objects/Actors/Scenes/Chest/chest_actor_node.gd" id="1_2dvm1"]
+[ext_resource type="Texture2D" uid="uid://bpf3ekcbru6vs" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Chest_SpriteSheet.png" id="2_2dvm1"]
+[ext_resource type="Texture2D" uid="uid://b6qodlmcq3u3" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/ChestSilver_SpriteSheet.png" id="2_t674m"]
+[ext_resource type="Script" uid="uid://rfrjp7y63dkq" path="res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/actor_body_sprite.gd" id="3_8bokb"]
+[ext_resource type="Texture2D" uid="uid://bgiuhlw7igs1x" path="res://ObjectDefs/Items/Equipment/Weapons/Sprites/BaseSword_Icon.png" id="5_tk85b"]
+[ext_resource type="Script" uid="uid://bhki82lcc3dqv" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="6_btm2h"]
+[ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="7_y1ro8"]
+[ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="10_bwyip"]
+
+[sub_resource type="Animation" id="Animation_hcvlo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite/TopSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite/ItemSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -10)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite/TopSprite:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite/ItemSprite:self_modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wwvql"]
+_data = {
+&"RESET": SubResource("Animation_hcvlo")
+}
+
+[sub_resource type="Animation" id="Animation_7nc3g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2dvm1"]
+resource_name = "open_chest"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hyh3n"]
+_data = {
+&"RESET": SubResource("Animation_7nc3g"),
+&"open_chest": SubResource("Animation_2dvm1")
+}
+
+[node name="ChestActorNode" type="Node2D" unique_id=1592941832 node_paths=PackedStringArray("item_sprite", "top_sprite", "vfx_holder", "actor_sprite", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
+script = ExtResource("1_2dvm1")
+item_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite/ItemSprite")
+top_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite/TopSprite")
+silver_sprite_sheet = ExtResource("2_t674m")
+vfx_holder = NodePath("ActorMotionNode/VFXHolder")
+actor_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite")
+actor_motion_node = NodePath("ActorMotionNode")
+offset_node = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode")
+damage_animation_player = NodePath("DamageAnimationPlayer")
+body_animation = NodePath("BodyAnimationPlayer")
+
+[node name="ActorMotionNode" type="Node2D" parent="." unique_id=1584517592]
+
+[node name="ActorSpriteNode" type="Node2D" parent="ActorMotionNode" unique_id=1417753642]
+
+[node name="OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode" unique_id=747582932]
+position = Vector2(0, 10)
+
+[node name="ActorSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" unique_id=648687990]
+texture = ExtResource("2_2dvm1")
+offset = Vector2(0, -12)
+hframes = 2
+script = ExtResource("3_8bokb")
+
+[node name="ItemSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite" unique_id=2019637965]
+show_behind_parent = true
+position = Vector2(0, -10)
+texture = ExtResource("5_tk85b")
+
+[node name="TopSprite" type="Sprite2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite" unique_id=1518943005]
+texture = ExtResource("2_2dvm1")
+offset = Vector2(0, -12)
+hframes = 2
+frame = 1
+
+[node name="VFX_OffsetNode" type="Node2D" parent="ActorMotionNode/ActorSpriteNode/OffsetNode" unique_id=938432438]
+
+[node name="VFXHolder" type="Node2D" parent="ActorMotionNode" unique_id=721883193 node_paths=PackedStringArray("actor_node", "flash_text_controller", "offset_node")]
+z_index = 3
+script = ExtResource("6_btm2h")
+actor_node = NodePath("../..")
+flash_text_controller = NodePath("FlashTextController")
+offset_node = NodePath("../ActorSpriteNode/OffsetNode/VFX_OffsetNode")
+
+[node name="FlashTextController" parent="ActorMotionNode/VFXHolder" unique_id=685445320 instance=ExtResource("7_y1ro8")]
+offset_top = -40.0
+offset_bottom = -16.0
+mouse_filter = 2
+
+[node name="DamageAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1574515751]
+libraries/ = SubResource("AnimationLibrary_wwvql")
+libraries/DamageAnimations = ExtResource("10_bwyip")
+
+[node name="BodyAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1764808525]
+libraries/ = SubResource("AnimationLibrary_hyh3n")

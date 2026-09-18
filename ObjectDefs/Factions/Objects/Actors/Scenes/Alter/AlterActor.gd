@@ -1,19 +1,14 @@
 class_name AlterActor
-extends BaseActor
-
-signal triggered(on:bool)
-
-var triggered_already:bool = false
-var state_on:bool
+extends TrigerableActor
 
 func on_combat_start():
 	super()
 	if not CombatRootControl.is_valid():
 		printerr("ObjectActor.on_combat_start: CombatRootControl is not valid")
 		return
-	CombatRootControl.Instance.QueController.end_of_round_with_state.connect(do_thing)
+	CombatRootControl.Instance.QueController.end_of_round_with_state.connect(on_trigger)
 
-func do_thing(game_state:GameStateData):
+func on_trigger(game_state:GameStateData):
 	# Get Spawners
 	var front_spawners = []
 	var back_spawners = []

@@ -46,7 +46,8 @@ func _build_sprite_sheet():
 	#var is_complex_actor = _actor.get_load_val("ScenePath", "").ends_with("complex_actor_node.tscn")
 	
 	var first_cache = (_cached_body_sprite == null)
-	var sprite_sheet_file = _actor.get_load_val("SpriteSheet", null)
+	var sprite_data = _actor.get_load_val("SpriteData", {})
+	var sprite_sheet_file = sprite_data.get("SpriteSheet", null)
 	
 	var sprite_path = ""
 	if sprite_sheet_file == "DEFAULT":

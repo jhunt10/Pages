@@ -30,7 +30,7 @@
 			},
 			"TitleKey": "BaseSquirrel_TitlePage",
 			"ExpValue": 40.0,
-			"Faction": "Squirrels",
+			"Faction": "Squirrel",
 			"MoneyValue": 15.0
 		},
 		"AiData": {
@@ -58,17 +58,18 @@
 			"Scratch_ActionPage",
 			"ChuckAcorn_ActionPage"
 		],
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			-20.0
-		],
-		"SpriteSheet": "Sprites/Squirrel_SpriteSheet.png",
-		"Stats": {
+		"SpriteData": {
+			"SpriteFrameWH": [
+				12.0,
+				4.0
+			],
+			"SpriteOffset": [
+				0.0,
+				-20.0
+			],
+			"SpriteSheet": "Sprites/Squirrel_SpriteSheet.png"
 		},
+		"Stats": {},
 		"_DefVersion": "1"
 	},
 	"Squirrcerer": {
@@ -108,7 +109,7 @@
 				"MoveForward",
 				"TurnLeft",
 				"TurnRight",
-				"BasicMeleeAttack",
+				"Scratch_ActionPage",
 				"ChuckAcornFire_ActionPage"
 			]
 		},
@@ -119,15 +120,17 @@
 		"SpawnItemArr": [],
 		"SpawnPageArr": [
 			"SquirrelMag_TitlePage",
+			"SquirrelMagic_PassivePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
-			"BasicMeleeAttack",
+			"Scratch_ActionPage",
 			"ChuckAcornFire_ActionPage"
 		],
-		"SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png",
-		"Stats": {
+		"SpriteData": {
+			"SpriteSheet": "Sprites/Squirrcerer_SpriteSheet.png"
 		},
+		"Stats": {},
 		"_DefVersion": "1"
 	},
 	"Squirrior": {
@@ -176,14 +179,16 @@
 		"SpawnItemArr": [],
 		"SpawnPageArr": [
 			"SquirrelPhy_TitlePage",
+			"SquirrelArmor_PassivePage",
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
-			"BasicMeleeAttack"
+			"Scratch_ActionPage"
 		],
-		"SpriteSheet": "Sprites/Squirrior_SpriteSheet.png",
-		"Stats": {
+		"SpriteData": {
+			"SpriteSheet": "Sprites/Squirrior_SpriteSheet.png"
 		},
+		"Stats": {},
 		"_DefVersion": "1"
 	}
 }

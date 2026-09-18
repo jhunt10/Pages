@@ -5,6 +5,21 @@
     "MapScene": "testing_map.tscn",
     "SortOrder": 0,
     "StartingPhase": "InitSpawn",
+	"LootData": {
+		"GoldChestMapping": {
+			"TestChest1": "IceKnife",
+			"TestChest2": "FireSword_Weapon"
+		},
+		"SilverDropItemsSet": {
+				"Gen_Ammo": 3,
+				"HealthPotionL": 3,
+				"HealthPotionM": 2,
+				"Mag_Ammo": 2,
+				"Phy_Ammo": 2,
+				"Money:100": 2,
+				"Money:200": 1
+		}
+	},
 	"TeamData": {
 		"Players": {
 			"DisplayName": "Friendly",

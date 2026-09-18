@@ -285,6 +285,17 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 			team_key = "Players"
 		var new_actor = null
 		
+		# Swap Gold and Silver Chests
+		if actor_key == "ChestActor":
+			var is_gold = (actor_id and actor_id != '')
+			if is_gold:
+				if StoryState.get_story_flag("OpenChest:"+actor_id):
+					is_gold = false
+			if  is_gold:
+				actor_key = "GoldChestActor"
+			else:
+				actor_key = "SilverChestActor"
+		
 		# Specific Actor Id was provided
 		if actor_id != "":
 			new_actor = ActorLibrary.get_or_create_actor(actor_key, actor_id,  child.get_actor_data())

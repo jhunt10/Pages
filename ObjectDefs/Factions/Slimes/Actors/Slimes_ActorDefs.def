@@ -60,15 +60,17 @@
 			"MoveRight",
 			"SlimeSpike_ActionPage"
 		],
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			0.0
-		],
-		"SpriteSheet": "Sprites/BlueSlime_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteFrameWH": [
+				12.0,
+				4.0
+			],
+			"SpriteOffset": [
+				0.0,
+				0.0
+			],
+			"SpriteSheet": "Sprites/BlueSlime_SpriteSheet.png"
+		},
 		"_DefVersion": "1"
 	},
 	"SlimePoison": {
@@ -114,7 +116,9 @@
 			"MoveRight",
 			"SlimeSpike_ActionPage"
 		],
-		"SpriteSheet": "Sprites/GreenSlime_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/GreenSlime_SpriteSheet.png"
+		},
 		"Stats": {
 			"Resistance:Poison": 200.0
 		}

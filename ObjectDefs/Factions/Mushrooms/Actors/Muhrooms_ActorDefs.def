@@ -26,9 +26,7 @@
 			"MoneyValue": 5.0,
 			"ShowInArchive": false
 		},
-		"AiData": {
-
-		},
+		"AiData": {},
 		"CorpseSprite": null,
 		"EquipmentSlots": [],
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
@@ -39,15 +37,17 @@
 		"SpawnPageArr": [
 			"Mushroom_TitlePage"
 		],
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			0.0
-		],
-		"SpriteSheet": "Sprites/Mushroom_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteFrameWH": [
+				12.0,
+				4.0
+			],
+			"SpriteOffset": [
+				0.0,
+				0.0
+			],
+			"SpriteSheet": "Sprites/Mushroom_SpriteSheet.png"
+		},
 		"Stats": {
 			"Agility": 1.0,
 			"Armor": 0.0,
@@ -83,7 +83,9 @@
 				"Actor"
 			]
 		},
-		"SpriteSheet": "Sprites/RoofShroom_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/RoofShroom_SpriteSheet.png"
+		},
 		"_DefVersion": "1"
 	},
 	"ShroomGolem": {
@@ -146,15 +148,17 @@
 			"BasicMeleeAttack",
 			"SpreadSpores_ActionPage"
 		],
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			0.0
-		],
-		"SpriteSheet": "Sprites/ShroomGolem_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteFrameWH": [
+				12.0,
+				4.0
+			],
+			"SpriteOffset": [
+				0.0,
+				0.0
+			],
+			"SpriteSheet": "Sprites/ShroomGolem_SpriteSheet.png"
+		},
 		"Stats": {
 			"Agility": 10.0,
 			"Armor": 0.0,

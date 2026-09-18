@@ -22,15 +22,17 @@
 			"TitleKey": "TargetDummy_TitlePage"
 		},
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			-16.0
-		],
-		"SpriteSheet": "Sprites/Target_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteFrameWH": [
+				12.0,
+				4.0
+			],
+			"SpriteOffset": [
+				0.0,
+				-16.0
+			],
+			"SpriteSheet": "Sprites/Target_SpriteSheet.png"
+		},
 		"_DefVersion": "1"
 	},
 	"TargetDummy_Mag": {
@@ -48,7 +50,9 @@
 				"Actor"
 			]
 		},
-		"SpriteSheet": "Sprites/TargetWarded_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/TargetWarded_SpriteSheet.png"
+		},
 		"ActorData": {
 			"OverrideStats": {
 				"Ward": 50.0
@@ -79,8 +83,10 @@
 				"MoveRight"
 			]
 		},
-		"SpriteSheet": "Sprites/TargetMoving_SpriteSheet.png",
-		"ActorData":{
+		"SpriteData": {
+			"SpriteSheet": "Sprites/TargetMoving_SpriteSheet.png"
+		},
+		"ActorData": {
 			"OverrideStats": {
 				"PPR": 4.0,
 				"Speed": 20.0
@@ -103,7 +109,9 @@
 				"Actor"
 			]
 		},
-		"SpriteSheet": "Sprites/TargetArmored_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/TargetArmored_SpriteSheet.png"
+		},
 		"ActorData": {
 			"OverrideStats": {
 				"Armor": 50.0

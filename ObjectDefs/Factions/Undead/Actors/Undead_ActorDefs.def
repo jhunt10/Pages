@@ -136,8 +136,7 @@
 			"ObjectType": "Actor",
 			"SmallIcon": "Sprites/Skeleton_Icon.png",
 			"SnippetDesc": "A Skeleton",
-			"Tags": [
-			],
+			"Tags": [],
 			"Taxonomy": [
 				"Actor"
 			]
@@ -168,7 +167,9 @@
 			"BasicWeaponAttack",
 			"ReloadPage"
 		],
-		"SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "SpriteSheets/Skeleton_SpriteSheet.png"
+		},
 		"UnarmedAttackData": {
 			"DamageDatas": {
 				"UnarmedDamage": {
@@ -200,8 +201,7 @@
 			"ObjectType": "Actor",
 			"SmallIcon": "Sprites/SkeletonMage_Icon.png",
 			"SnippetDesc": "A Skeleton Mage",
-			"Tags": [
-			],
+			"Tags": [],
 			"Taxonomy": [
 				"Actor"
 			]
@@ -233,7 +233,9 @@
 			"BasicWeaponAttack",
 			"ReloadPage"
 		],
-		"SpriteSheet": "SpriteSheets/SkeletonMage_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "SpriteSheets/SkeletonMage_SpriteSheet.png"
+		},
 		"UnarmedAttackData": {
 			"DamageDatas": {
 				"UnarmedDamage": {
@@ -265,8 +267,7 @@
 			"ObjectType": "Actor",
 			"SmallIcon": "Sprites/Zombie_Icon.png",
 			"SnippetDesc": "Zombie",
-			"Tags": [
-			],
+			"Tags": [],
 			"Taxonomy": [
 				"Actor"
 			]
@@ -296,7 +297,9 @@
 			"BasicWeaponAttack",
 			"BiteAttack_ActionPage"
 		],
-		"SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png"
+		},
 		"UnarmedAttackData": {
 			"DamageDatas": {
 				"UnarmedDamage": {

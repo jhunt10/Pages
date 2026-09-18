@@ -22,15 +22,9 @@
 		},
 		"IsPlayer": false,
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/ComplexActorNode/complex_actor_node.tscn",
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			-16.0
-		],
-		"SpriteSheet": "Sprites/BaseActor_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/BaseActor_SpriteSheet.png"
+		},
 		"_Stats": {
 			"Accuracy": 85.0,
 			"AggroMod": 1.0,
@@ -87,8 +81,7 @@
 		},
 		"ActorData": {
 			"EquipmentConstraints": {
-				"ApparelSlots": [
-				],
+				"ApparelSlots": [],
 				"HandConditions": [
 					{
 						"CanMainHand": true,

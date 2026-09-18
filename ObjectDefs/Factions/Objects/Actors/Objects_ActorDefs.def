@@ -19,9 +19,7 @@
 			]
 		},
 		"ActorData": {
-			"DropItemsSet": {
-
-			},
+			"DropItemsSet": {},
 			"ExpValue": 0.0,
 			"Faction": "Objects",
 			"IsAdirectional": true,
@@ -34,15 +32,9 @@
 			"AilmentStun"
 		],
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			-16.0
-		],
-		"SpriteSheet": "Sprites/Barrel_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/Barrel_SpriteSheet.png"
+		},
 		"Stats": {
 			"Armor": 0.0,
 			"Awareness": 0.0,
@@ -77,15 +69,17 @@
 			]
 		},
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
-		"SpriteFrameWH": [
-			1.0,
-			1.0
-		],
-		"SpriteOffset": [
-			16.0,
-			0.0
-		],
-		"SpriteSheet": "Sprites/Alter_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteFrameWH": [
+				1.0,
+				1.0
+			],
+			"SpriteOffset": [
+				16.0,
+				0.0
+			],
+			"SpriteSheet": "Sprites/Alter_SpriteSheet.png"
+		},
 		"Stats": {
 			"HealthMax": 1.0,
 			"Mass": 1.0
@@ -122,15 +116,17 @@
 			}
 		},
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			-16.0
-		],
-		"SpriteSheet": "Sprites/Barrel_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteFrameWH": [
+				12.0,
+				4.0
+			],
+			"SpriteOffset": [
+				0.0,
+				-16.0
+			],
+			"SpriteSheet": "Sprites/Barrel_SpriteSheet.png"
+		},
 		"Stats": {
 			"HealthMax": 10.0,
 			"Mass": 1.0
@@ -167,15 +163,17 @@
 			}
 		},
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
-		"SpriteFrameWH": [
-			12.0,
-			4.0
-		],
-		"SpriteOffset": [
-			0.0,
-			-16.0
-		],
-		"SpriteSheet": "Sprites/Crate_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteFrameWH": [
+				12.0,
+				4.0
+			],
+			"SpriteOffset": [
+				0.0,
+				-16.0
+			],
+			"SpriteSheet": "Sprites/Crate_SpriteSheet.png"
+		},
 		"Stats": {
 			"HealthMax": 10.0,
 			"Mass": 1.0
@@ -203,15 +201,77 @@
 			]
 		},
 		"ScenePath": "Scenes/Lever/lever_actor_node.tscn",
-		"SpriteFrameWH": [
-			1.0,
-			1.0
-		],
-		"SpriteOffset": [
-			0.0,
-			0.0
-		],
-		"SpriteSheet": "Sprites/Lever_SpriteSheet.png",
+		"SpriteData": {
+			"SpriteFrameWH": [
+				1.0,
+				1.0
+			],
+			"SpriteOffset": [
+				0.0,
+				0.0
+			],
+			"SpriteSheet": "Sprites/Lever_SpriteSheet.png"
+		},
+		"Stats": {
+			"HealthMax": 1.0,
+			"Mass": 1.0
+		},
+		"_DefVersion": "1"
+	},
+	"GoldChestActor": {
+		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Chest/ChestActor.gd",
+		"!ParentKey": "#BaseObjectActor",
+		"#ObjDetails": {
+			"Description": "Description",
+			"DisplayName": "Chest",
+			"LargeIcon": "Sprites/Chest_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Chest_Icon.png",
+			"SnippetDesc": "a chest",
+			"Tags": [
+				"Object",
+				"Chest",
+				"Rooted"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ScenePath": "Scenes/Chest/chest_actor_node.tscn",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/Chest_SpriteSheet.png"
+		},
+		"Stats": {
+			"HealthMax": 1.0,
+			"Mass": 1.0
+		},
+		"_DefVersion": "1"
+	},
+	"SilverChestActor": {
+		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Chest/ChestActor.gd",
+		"!ParentKey": "#BaseObjectActor",
+		"#ObjDetails": {
+			"Description": "Description",
+			"DisplayName": "Chest",
+			"LargeIcon": "Sprites/ChestSilver_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/ChestSilver_Icon.png",
+			"SnippetDesc": "a chest",
+			"Tags": [
+				"Object",
+				"Chest",
+				"Rooted"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ScenePath": "Scenes/Chest/chest_actor_node.tscn",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/ChestSilver_SpriteSheet.png"
+		},
 		"Stats": {
 			"HealthMax": 1.0,
 			"Mass": 1.0

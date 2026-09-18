@@ -75,8 +75,9 @@ static func try_pickup_item(actor:BaseActor, item:BaseItem)->Dictionary:
 		ItemLibrary.delete_item(item)
 		return popup_data
 	var item_id = item.Id
-	actor.items.add_item_to_first_valid_slot(item)
-	if actor.items.has_item(item.Id):
+	if actor:
+		actor.items.add_item_to_first_valid_slot(item)
+	if actor and actor.items.has_item(item.Id):
 		popup_data['Message'] += " to Bag"
 	else:
 		PlayerInventory.add_item(item)

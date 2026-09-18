@@ -36,7 +36,7 @@
 			"Stats": {
 				"Level": 1,
 				"PPR": 4,
-				"Attack": 8,
+				"PhyAttack": 8,
 				"HealthMax": 22,
 				"Armor": 0,
 				"Ward": 0,
@@ -56,7 +56,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
 		"!ParentKey": "BaseSquirrel_TitlePage",
 		"#ObjDetails": {
-			"Description": "@@#Color:Red:Squirrcerer@@ are the @@#Tag:Magic@@ users of the @@#Color:Blue:NSO@@.\n\nThey have been trained in the forbidden acornic arts granting access to powerful acorn related @@#Tag:Spell:Hint:Spells@@... well, \"@@#Color:Blue:Spell@@\". They only have one. And all it can do is set an acorn on @@#Color:DmgColor:Fire@@ which they then throw. So I guess really they are just a @@#Color:Red:Squirrel@@ with a lighter that happens to only works on acorns.\n\nStill, they are technically casters so they like to stay on the back line and fair poorly against @@#Tag:Physical:Hint:Physical Attacks@@ or, in their case, being stepped on.",
+			"Description": "@@#Color:Red:Squirrcerer@@ are the @@#Tag:Magical:Magic@@ users of the @@#Color:Blue:NSO@@.\n\nThey have been trained in the forbidden @@#Color:Blue:Acornic Arts@@ granting access to powerful acorn related @@#Tag:Spell:Spells@@... well, \"@@#Tag:Spell@@\". They only have one, and all it can do is set an acorn on @@#Color:DmgColor:Fire@@ which they then throw. So I guess really they are just a @@#Color:Red:Squirrel@@ with a lighter that happens to only works on acorns.\n\nStill, they are technically @@#Tag:Ranged:Spell Casters@@ so they prefer to stay on the back line and fair poorly against @@#Tag:Physical:Hint:Physical Attacks@@ or, in their case, being stepped on.",
 			"DisplayName": "Squirrcerer",
 			"LargeIcon": "Sprites/SquirrcererTitle_Icon.png",
 			"ObjectType": "Item",
@@ -89,7 +89,8 @@
 			"Stats": {
 				"Level": 1,
 				"PPR": 3,
-				"Attack": 15,
+				"PhyAttack": 5,
+				"MagAttack": 5,
 				"HealthMax": 20,
 				"Armor": 0,
 				"Ward": 30,
@@ -109,7 +110,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
 		"!ParentKey": "BaseSquirrel_TitlePage",
 		"#ObjDetails": {
-			"Description": "@@#Color:Red:Squirrior@@ are the @@#Tag:Armor:Hint:Heavy Armored@@ defenders of the @@#Color:Blue:NSO@@.\n\nThey sacrifice their natural squirrelish @@#Stat:Evasion@@ for @@#Stat:Armor@@ to stand as the front line defense.\n\nFollowing the emergence of the @@#Color:Blue:NSO@@, @@#Color:Blue:The Military@@ commissioned researchers at @@#Color:Blue:The Collage@@ to uncover how these tiny fighters were able to achieve such high @@#Color:Red:Armor@@ with such tiny @@#Tag:Appearal@@. After decades of grant funded research, they concluded: \"Probably Magic.\"",
+			"Description": "@@#Color:Red:Squirrior@@ are the @@#Tag:Armor:Hint:Armored@@ defenders of the @@#Color:Blue:NSO@@.\n\nThey sacrifice their natural squirrelish @@#Stat:Evasion@@ for greater @@#Stat:Armor@@ to become an impenetrable wall. Not a very tall wall, mind you. Most people just step over them. But, they try.\n\nFollowing the emergence of the @@#Color:Blue:NSO@@, @@#Color:Blue:The Military@@ commissioned researchers at @@#Color:Blue:The Collage@@ to uncover how these tiny fighters were able to achieve such high @@#Color:Red:Armor@@ with such tiny @@#Tag:Equipment@@. After decades of grant funded research, they concluded: \"Probably Magic\".",
 			"DisplayName": "Squirrior",
 			"LargeIcon": "Sprites/SquirriorTitle_Icon.png",
 			"ObjectType": "Item",
@@ -143,9 +144,9 @@
 			"Stats": {
 				"Level": 1,
 				"PPR": 4,
-				"Attack": 8,
+				"PhyAttack": 8,
 				"HealthMax": 22,
-				"Armor": 30,
+				"Armor": 10,
 				"Ward": 0,
 				"Speed": 30,
 				"Mass": 50,

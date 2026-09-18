@@ -90,13 +90,15 @@ func set_actor(actor:BaseActor, connect_signals=true):
 		actor.on_move.connect(_on_actor_moved)
 		actor.on_death.connect(_on_actor_death)
 		actor.on_revive.connect(_on_actor_revive)
-		
-	var frames = actor.get_load_val("SpriteFrameWH", [1,1])
-	actor_sprite.hframes = frames[0]
-	actor_sprite.vframes = frames[1]
+	var sprite_data = actor.get_load_val("SpriteData") 
+	if sprite_data.keys().has("SpriteFrameWH"):
+		var frames = sprite_data.get("SpriteFrameWH", [1,1])
+		actor_sprite.hframes = frames[0]
+		actor_sprite.vframes = frames[1]
 	
-	var offset = actor.get_load_val("SpriteOffset", [0,0])
-	offset_node.position = Vector2i(offset[0], offset[1])
+	if sprite_data.keys().has("SpriteOffset"):
+		var offset = sprite_data.get("SpriteOffset", [0,0])
+		offset_node.position = Vector2i(offset[0], offset[1])
 	
 	actor_sprite.texture = Actor.sprite.get_body_sprite()
 
