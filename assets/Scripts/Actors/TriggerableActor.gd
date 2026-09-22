@@ -1,5 +1,5 @@
 class_name TrigerableActor
-extends BaseActor
+extends ObjectActor
 
 signal triggered
 

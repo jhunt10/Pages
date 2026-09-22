@@ -1331,6 +1331,7 @@ facing = 2
 map_coor = Vector2i(6, 3)
 
 [node name="SpwanNode_Chest" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1653322244]
+visible = false
 position = Vector2(272, 240)
 texture = ExtResource("13_rsm71")
 script = ExtResource("11_vji11")
@@ -1341,6 +1342,7 @@ facing = 2
 map_coor = Vector2i(8, 7)
 
 [node name="SpwanNode_Chest2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1594389407]
+visible = false
 position = Vector2(208, 240)
 texture = ExtResource("13_rsm71")
 script = ExtResource("11_vji11")
@@ -1423,40 +1425,37 @@ facing = 2
 map_coor = Vector2i(3, 9)
 
 [node name="SpwanNode_TestTarget" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=14861110]
-visible = false
 modulate = Color(1, 0, 0, 1)
-position = Vector2(176, 240)
+position = Vector2(272, 144)
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy"
 spawn_actor_id = "Dummy_1"
 team_key = "Decor"
 facing = 2
-map_coor = Vector2i(5, 7)
+map_coor = Vector2i(8, 4)
 
 [node name="SpwanNode_TestTarget2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1797486070]
-visible = false
 modulate = Color(1, 0, 0, 1)
-position = Vector2(144, 240)
+position = Vector2(240, 144)
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy"
 spawn_actor_id = "Dummy_2"
 team_key = "Decor"
 facing = 2
-map_coor = Vector2i(4, 7)
+map_coor = Vector2i(7, 4)
 
 [node name="SpwanNode_TestTarget3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1911478696]
-visible = false
 modulate = Color(1, 0, 0, 1)
-position = Vector2(112, 240)
+position = Vector2(208, 144)
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
 spawn_actor_key = "TargetDummy"
 spawn_actor_id = "Dummy_3"
 team_key = "Decor"
 facing = 2
-map_coor = Vector2i(3, 7)
+map_coor = Vector2i(6, 4)
 
 [node name="Player_SpwanNode" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1258382622]
 modulate = Color(0.15294118, 1, 0, 1)
@@ -1470,24 +1469,34 @@ is_player = true
 map_coor = Vector2i(7, 7)
 
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=393105718]
-visible = false
-self_modulate = Color(1, 0.1, 0, 1)
-position = Vector2(304, 48)
+self_modulate = Color(0.68646324, 0.4958843, 0.33906457, 1)
+position = Vector2(208, 208)
+rotation = 3.1415927
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
-spawn_actor_key = "ZombieBasic"
-facing = 2
-map_coor = Vector2i(9, 1)
+spawn_actor_key = "BaseSquirrel"
+team_key = "TestNpc"
+map_coor = Vector2i(6, 6)
 
-[node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1483207240]
-visible = false
-self_modulate = Color(1, 0.1, 0, 1)
-position = Vector2(240, 80)
+[node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1786354884]
+self_modulate = Color(0.68646324, 0.4958843, 0.33906457, 1)
+position = Vector2(272, 208)
+rotation = 3.1415927
 texture = ExtResource("10_361jm")
 script = ExtResource("11_vji11")
-spawn_actor_key = "TargetDummy_Armored"
-facing = 2
-map_coor = Vector2i(7, 2)
+spawn_actor_key = "Squirrior"
+team_key = "TestNpc"
+map_coor = Vector2i(8, 6)
+
+[node name="SpwanNode_Enemey3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=766409923]
+self_modulate = Color(0.68646324, 0.4958843, 0.33906457, 1)
+position = Vector2(240, 208)
+rotation = 3.1415927
+texture = ExtResource("10_361jm")
+script = ExtResource("11_vji11")
+spawn_actor_key = "Squirrcerer"
+team_key = "TestNpc"
+map_coor = Vector2i(7, 6)
 
 [node name="SpwanNode_Lever" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=847502462]
 visible = false

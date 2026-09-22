@@ -105,7 +105,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 			if pot_targ == aggroed_actor_id:
 				aggroed_actor_in_target = true
 			var pot_actor = game_state.get_actor(pot_targ)
-			if game_state.are_enemies(pot_actor, actor):
+			if game_state.are_enemies(actor, pot_actor):
 				attack_has_enemy_target = true
 		if not attack_has_enemy_target:
 			continue
@@ -211,7 +211,7 @@ static func try_handle_get_target_sub_action(actor:BaseActor, selection_data:Tar
 		var pp_actor = p_actor
 		if pp_actor is String:
 			pp_actor = ActorLibrary.get_actor(p_actor)
-		if game_state.are_enemies(pp_actor, actor):
+		if game_state.are_enemies(actor, pp_actor):
 			enemy_actors.append(pp_actor)
 	# TODO: Be smart about AOE
 	var targeted_enemy_id = pick_between_enemies(actor, enemy_actors)

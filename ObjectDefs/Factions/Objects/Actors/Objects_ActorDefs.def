@@ -1,6 +1,6 @@
 {
 	"#BaseObjectActor": {
-		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ObjectScript": "res://assets/Scripts/Actors/ObjectActor.gd",
 		"!ParentKey": "#BaseActor",
 		"#ObjDetails": {
 			"Description": "The base Actor for non-Actor Map Objects. Great architecture me!",
@@ -23,7 +23,19 @@
 			"ExpValue": 0.0,
 			"Faction": "Objects",
 			"IsAdirectional": true,
-			"MoneyValue": 0.0
+			"MoneyValue": 0.0,
+			"Stats": {
+				"Armor": 0,
+				"Awareness": 0,
+				"BlockChance": 0,
+				"BlockMod": 0,
+				"Evasion": 0,
+				"HealthMax": 1,
+				"Mass": 10,
+				"PPR": 0,
+				"Resistance:Light": 0,
+				"Speed": 0
+			}
 		},
 		"ImmuneToEffects": [
 			"AilmentBlind",
@@ -34,18 +46,6 @@
 		"ScenePath": "res://Scenes/Combat/MapObjects/Actors/SimpleActorNode/simple_actor_node.tscn",
 		"SpriteData": {
 			"SpriteSheet": "Sprites/Barrel_SpriteSheet.png"
-		},
-		"Stats": {
-			"Armor": 0.0,
-			"Awareness": 0.0,
-			"BlockChance": 0.0,
-			"BlockMod": 0.0,
-			"Evasion": 0.0,
-			"HealthMax": 1.0,
-			"Mass": 10.0,
-			"PPR": 0.0,
-			"Resistance:Light": 0.0,
-			"Speed": 0.0
 		},
 		"_DefVersion": "1"
 	},
@@ -80,17 +80,12 @@
 			],
 			"SpriteSheet": "Sprites/Alter_SpriteSheet.png"
 		},
-		"Stats": {
-			"HealthMax": 1.0,
-			"Mass": 1.0
-		},
 		"_DefVersion": "1"
 	},
 	"BarrelActor": {
-		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
-			"Description": "@@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.",
+			"Description": "@@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring design and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and resulting end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.",
 			"DisplayName": "Barrel",
 			"LargeIcon": "Sprites/Barrel_Icon.png",
 			"ObjectType": "Actor",
@@ -127,17 +122,12 @@
 			],
 			"SpriteSheet": "Sprites/Barrel_SpriteSheet.png"
 		},
-		"Stats": {
-			"HealthMax": 10.0,
-			"Mass": 1.0
-		},
 		"_DefVersion": "1"
 	},
 	"CrateActor": {
-		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
-			"Description": "@@#Color:Red:Crates@@ are like the older more mature sibling of @@#Color:Red:Barrels@@. While @@#Color:Red:Barrels@@ are off rolling down hills and filling themselves with beer, @@#Color:Red:Crates@@ are working diligently storing items in warehouses and working as makeshift tables.\n\nMany of the more euclidean minded folks will argue that @@#Color:Red:Crates@@ are superior due to their greater volume and packability. But honestly if you're just breaking them it's all them same..",
+			"Description": "@@#Color:Red:Crates@@ are like the older more mature sibling of @@#Color:Red:Barrels@@. While @@#Color:Red:Barrels@@ are off rolling down hills and filling themselves with beer, @@#Color:Red:Crates@@ are working diligently storing items in warehouses and working as makeshift tables.\n\nMany of the more euclidean minded folks will argue that @@#Color:Red:Crates@@ are superior due to their greater volume and packability. But honestly if you're just breaking them it's all them same.",
 			"DisplayName": "Crate",
 			"LargeIcon": "Sprites/Crate_Icon.png",
 			"ObjectType": "Actor",
@@ -174,17 +164,13 @@
 			],
 			"SpriteSheet": "Sprites/Crate_SpriteSheet.png"
 		},
-		"Stats": {
-			"HealthMax": 10.0,
-			"Mass": 1.0
-		},
 		"_DefVersion": "1"
 	},
 	"LeverActor": {
 		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Lever/LeverActor.gd",
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
-			"Description": "In an age where buttons and switches have dominated the mechanical control market, many consumers find themselves longing for a more relatable solution. @@#Color:Red:Barrels@@ were first invented as a subsite for @@#Color:Red:Pinatas@@ during the @@#Color:Red:Great Papier-Mache Wars@@. But failed to find popularity among @@#Color:Grey:Children@@ due to their boring appearance and difficulty to break.\n\nAfter the extinction of @@#Color:Grey:Children@@ and subsequent end to all birthday parties, people have found them useful for storing @@#Tag:Supplies@@ and providing a rustic feel.\n\nSome more nostalgic adventurers still prefer to use them for their original purpose.",
+			"Description": "In an age where buttons and switches have dominated the mechanical control market, many consumers find they've been looking for a more reliable solution. They've been looking for @@#Color:Red:The Lever@@!\n\nSuperior to the switch in both durability and dramatic effect, the @@#Color:Red:Levels@@ can be flipped with even the toughest of @@#Tag:Attack:Attacks@@ or @@#Tag:Collision:Collisions@@, and stay @@#Tag:Rooted@@. Each comes standard with our patented @@#Color:Blue:Once per Round@@ safe-guard, so you'll rest easy knowing it stays flipped.\n\nWhether you're a scientist bring life to your homemade monster, or a trolly driver looking to minimise casualties, you can trust a @@#Color:Red:Level@@ to let @@#Color:Blue:The World@@ know you did something.",
 			"DisplayName": "Lever",
 			"LargeIcon": "Sprites/Lever_Icon.png",
 			"ObjectType": "Actor",
@@ -212,40 +198,6 @@
 			],
 			"SpriteSheet": "Sprites/Lever_SpriteSheet.png"
 		},
-		"Stats": {
-			"HealthMax": 1.0,
-			"Mass": 1.0
-		},
-		"_DefVersion": "1"
-	},
-	"GoldChestActor": {
-		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Chest/ChestActor.gd",
-		"!ParentKey": "#BaseObjectActor",
-		"#ObjDetails": {
-			"Description": "Description",
-			"DisplayName": "Chest",
-			"LargeIcon": "Sprites/Chest_Icon.png",
-			"ObjectType": "Actor",
-			"SmallIcon": "Sprites/Chest_Icon.png",
-			"SnippetDesc": "a chest",
-			"Tags": [
-				"Object",
-				"Chest",
-				"Rooted"
-			],
-			"Taxonomy": [
-				"Actor",
-				"Object"
-			]
-		},
-		"ScenePath": "Scenes/Chest/chest_actor_node.tscn",
-		"SpriteData": {
-			"SpriteSheet": "Sprites/Chest_SpriteSheet.png"
-		},
-		"Stats": {
-			"HealthMax": 1.0,
-			"Mass": 1.0
-		},
 		"_DefVersion": "1"
 	},
 	"SilverChestActor": {
@@ -253,7 +205,7 @@
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
 			"Description": "Description",
-			"DisplayName": "Chest",
+			"DisplayName": "Silver Chest",
 			"LargeIcon": "Sprites/ChestSilver_Icon.png",
 			"ObjectType": "Actor",
 			"SmallIcon": "Sprites/ChestSilver_Icon.png",
@@ -272,9 +224,31 @@
 		"SpriteData": {
 			"SpriteSheet": "Sprites/ChestSilver_SpriteSheet.png"
 		},
-		"Stats": {
-			"HealthMax": 1.0,
-			"Mass": 1.0
+		"_DefVersion": "1"
+	},
+	"GoldChestActor": {
+		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Chest/ChestActor.gd",
+		"!ParentKey": "#BaseObjectActor",
+		"#ObjDetails": {
+			"Description": "Description",
+			"DisplayName": "Gold Chest",
+			"LargeIcon": "Sprites/Chest_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Chest_Icon.png",
+			"SnippetDesc": "a chest",
+			"Tags": [
+				"Object",
+				"Chest",
+				"Rooted"
+			],
+			"Taxonomy": [
+				"Actor",
+				"Object"
+			]
+		},
+		"ScenePath": "Scenes/Chest/chest_actor_node.tscn",
+		"SpriteData": {
+			"SpriteSheet": "Sprites/Chest_SpriteSheet.png"
 		},
 		"_DefVersion": "1"
 	},
@@ -307,17 +281,12 @@
 			-16.0
 		],
 		"SpriteSheet": "Sprites/Shrine_SpriteSheet.png",
-		"Stats": {
-			"HealthMax": 1.0,
-			"Mass": 1.0
-		},
 		"_DefVersion": "1"
 	},
 	"StalagmiteActor": {
-		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
-			"Description": "@@#Color:Red:Crates@@ are like the older more mature sibling of @@#Color:Red:Barrels@@. While @@#Color:Red:Barrels@@ are off rolling down hills and filling themselves with beer, @@#Color:Red:Crates@@ are working diligently storing items in warehouses and working as makeshift tables.\n\nMany of the more euclidean minded folks will argue that @@#Color:Red:Crates@@ are superior due to their greater volume and packability. But honestly if you're just breaking them it's all them same..",
+			"Description": "Description",
 			"DisplayName": "Stalagmite",
 			"LargeIcon": "Sprites/Stalagmite_Icon.png",
 			"ObjectType": "Actor",
@@ -356,10 +325,6 @@
 			-12.0
 		],
 		"SpriteSheet": "Sprites/Rocks_SpriteSheet.png",
-		"Stats": {
-			"HealthMax": 15.0,
-			"Mass": 1.0
-		},
 		"_DefVersion": "1"
 	}
 }

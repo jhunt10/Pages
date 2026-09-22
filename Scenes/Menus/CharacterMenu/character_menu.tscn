@@ -437,7 +437,7 @@ _data = {
 &"open_skill_menu": SubResource("Animation_l4r3y")
 }
 
-[node name="CharacterMenu" type="Control" unique_id=2018728110 node_paths=PackedStringArray("name_panel", "stats_panel", "actor_sprite", "equipment_control", "title_slot_button", "tab_container", "page_tab", "bag_tab", "stats_tab", "carrier_control", "inventory_container", "close_button", "previous_character_button", "next_character_button", "details_card_spawn_point", "mouse_control", "inventory_option_button", "skill_tree_control", "skill_tree_menu", "animation_player")]
+[node name="CharacterMenu" type="Control" unique_id=2018728110 node_paths=PackedStringArray("name_panel", "stats_panel", "actor_sprite", "equipment_control", "title_slot_button", "tab_container", "page_tab", "bag_tab", "stats_tab", "carrier_control", "inventory_container", "close_button", "previous_character_button", "next_character_button", "details_card_spawn_point", "mouse_control", "inventory_option_button", "skill_tree_control", "skill_tree_menu", "animation_player", "rot_button_l", "rot_button_r")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -447,7 +447,7 @@ grow_vertical = 2
 script = ExtResource("1_dowqg")
 name_panel = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/Name-PanelContainer")
 stats_panel = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Stats-PanelContainer")
-actor_sprite = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control/ActorNode")
+actor_sprite = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control/CenterContainer/Control/ActorNode")
 equipment_control = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer")
 title_slot_button = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton")
 tab_container = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer")
@@ -465,6 +465,8 @@ inventory_option_button = NodePath("PanelContainer/TwoPagesContainer/RightPageCo
 skill_tree_control = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl")
 skill_tree_menu = NodePath("PanelContainer/TwoPagesContainer/Control/SkillTreeMenu")
 animation_player = NodePath("AnimationPlayer")
+rot_button_l = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control/RotButtonL")
+rot_button_r = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control/RotButtonR")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=202258781]
 layout_mode = 1
@@ -1404,18 +1406,50 @@ mouse_filter = 2
 texture = ExtResource("37_q1lsx")
 stretch_mode = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=17540647]
-custom_minimum_size = Vector2(128, 128)
+[node name="Control" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1628074281]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Control" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer" unique_id=375474259]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control" unique_id=17540647]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control/CenterContainer" unique_id=375474259]
 custom_minimum_size = Vector2(64, 156)
 layout_mode = 2
 
-[node name="ActorNode" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("27_jq4bi")]
+[node name="ActorNode" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control/CenterContainer/Control" unique_id=1834976184 instance=ExtResource("27_jq4bi")]
 position = Vector2(32, 120)
 scale = Vector2(4, 4)
+
+[node name="RotButtonL" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control" unique_id=1521783604]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 18.0
+grow_vertical = 0
+text = "<"
+
+[node name="RotButtonR" type="Button" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control" unique_id=376197048]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = ">"
 
 [node name="GridContainer2" type="GridContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer" unique_id=2067442765]
 layout_mode = 2

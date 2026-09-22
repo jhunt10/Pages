@@ -9,7 +9,6 @@ extends HBoxContainer
 @export var priest_x_icon:TextureRect
 @export var mage_x_icon:TextureRect
 
-
 var buttons = [rogue_button, priest_button, mage_button]
 var x_icons = [rogue_x_icon, priest_x_icon, mage_x_icon]
 

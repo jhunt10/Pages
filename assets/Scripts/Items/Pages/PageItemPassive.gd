@@ -8,6 +8,14 @@ var passive_data:Dictionary:
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)
 
+func get_rarity_background()->Texture2D:
+	if ["Soldier", "Rogue", "Mage", "Priest"].has(self.get_source_title()):
+		var title = self.get_source_title()
+		var sprite_path = "res://assets/Sprites/Paper/"
+		var sprite_file = title + "_Clipped_Background.png"
+		return SpriteCache.get_sprite(sprite_path.path_join(sprite_file))
+	return ItemHelper.get_rarity_background(self.get_item_rarity(), true)
+
 func has_in_combat_effect()->bool:
 	var effect_data:Dictionary = passive_data.get("InCombatEftData", {})
 	var effect_key = effect_data.get("EffectKey", null)

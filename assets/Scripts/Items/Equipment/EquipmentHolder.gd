@@ -61,7 +61,7 @@ func _get_innate_slots_data()->Array:
 			"Key": "Apparel:"+slot,
 			"DisplayName":slot,
 			"Count": 1,
-			"FilterData":{"RequiredTags":["Apparel", slot]}
+			"FilterData":{"RequiredTags":[slot]}
 		}
 	var trinkets = equipment_constraints.get("TrinketCount", 1)
 	if trinkets > 0:
@@ -69,7 +69,7 @@ func _get_innate_slots_data()->Array:
 			"Key": "Trinket",
 			"DisplayName":"Trinket",
 			"Count": trinkets,
-			"FilterData":{"RequiredTags":["Apparel", "Trinket"]}
+			"FilterData":{"RequiredTags":["Trinket"]}
 		}
 	
 		

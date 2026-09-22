@@ -3,7 +3,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
 		"!ParentKey": "BanditBase_TitlePage",
 		"#ObjDetails": {
-			"Description": "@@#Color:Red:Bandit Archers@@ are a subspecies of @@#Color:Red:Bandit@@ who specialize in @@#Tag:Physical@@ @@#Tag:Ranged:Hint:Ranged Attacks@@ with a @@#Color:Red:Bow@@.\n\nThrough years of grueling training in short shorts, these brave few have learned the secrets of the bare leg; sacrificing @@#Stat:Strength@@ and @@#Stat:Armor@@ in favor of higher @@#Stat:Agility@@ and @@#Stat:Speed@@.\n\nNaturally this makes them best suited for attacking from a distance, but despite all their training @@#Color:Red:they still can't hit a moving target@@.",
+			"Description": "@@#Color:Red:Bandit Archers@@ are a subspecies of @@#Color:Red:Bandit@@ who specialize in @@#Tag:Physical@@ @@#Tag:Ranged:Hint:Ranged Attacks@@ with a @@#Color:Red:Bow@@.\n\nThrough years of grueling training in short shorts, these brave few have learned the secrets of the bare leg; sacrificing @@#Stat:Armor@@ in favor of higher @@#Stat:Speed@@.\n\nNaturally, this makes them best suited for attacking from a distance, but despite all their training @@#Color:Red:they still can't hit a moving target@@.",
 			"DisplayName": "Bandit Archer",
 			"LargeIcon": "Sprites/BanditArcherTitle_Icon.png",
 			"ObjectType": "Item",
@@ -25,7 +25,6 @@
 		},
 		"PageData": {
 			"AddTags": [
-				"Bandit"
 			],
 			"PageRequirements": {
 				"ConflictingPages": [],
@@ -52,7 +51,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
 		"!ParentKey": "#BaseTitlePage",
 		"#ObjDetails": {
-			"Description": "@@#Color:Red:Bandits@@ are well rounded @@#Tag:Physical@@ fighter who balances offence and defense. They excel in melee brawls, but struggle against @@#Tag:Ranged@@ @@#Tag:Magic:Hint:Magic Attacks@@ and a crushing guilt of their many sins.",
+			"Description": "@@#Color:Red:Bandits@@ are a common threat to anyone traveling the @@#Color:Red:Cross Roads@@.\n\nMany believe @@#Color:Red:Bandits@@ to be the natural result of commerce. Just as @@#Color:Red:Slimes@@ spawn in areas with high @@#Color:Blue:Magic@@ density, so too will @@#Color:Red:Bandits@@ spawn where @@#Color:Blue:Money@@ flows. But in truth, they're mostly disgruntled veterans who couldn't find a job.\n\nThe average @@#Color:Red:Bandit@@ is a well rounded @@#Tag:Physical@@ fighter who balances offence and defense. They excel in close @@#Tag:Melee:Melee Combat@@, but struggle against @@#Tag:Magical:Magic Attacks@@ and the crushing weight of their many sins.",
 			"DisplayName": "Bandit",
 			"LargeIcon": "Sprites/BanditTitle_Icon.png",
 			"ObjectType": "Item",
@@ -74,7 +73,6 @@
 		},
 		"PageData": {
 			"AddTags": [
-				"Bandit"
 			],
 			"PageRequirements": {
 				"ConflictingPages": [],
@@ -105,7 +103,7 @@
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemTitle.gd",
 		"!ParentKey": "BanditBase_TitlePage",
 		"#ObjDetails": {
-			"Description": "Every ship needs a @@#Color:Red:Captain@@, and while @@#Color:Red:Bandits@@ are not necessarily ships, they do still benefit from well organized leadership.\n\n@@#Color:Red:Bandit Captains@@ earned their @@#Color:Blue:Title@@ thanks to their higher than average @@#Color:Red:Attributes@@. Naturally, they keep the best loot for themselves which means they tend to have better @@#Stat:Armor@@ and @@#Tag:HeavyWeapon:Hint:Heavy Weapons@@.\n\nThey often like to live by the motto:\n\"Carry a big stick, and use it.\"",
+			"Description": "Every ship needs a @@#Color:Red:Captain@@, and while @@#Color:Red:Bandits@@ are not necessarily ships, they do still benefit from well organized leadership.\n\n@@#Color:Red:Bandit Captains@@ earned their @@#Color:Blue:Title@@ thanks to their higher than average @@#Color:Blue:Stats@@. But naturally, they keep the best loot for themselves, which grants them even higher @@#Color:Blue:Stats@@, and the whole thing becomes a vicious cycle.\n\nThey like to live by the motto:\n\"Carry a big stick, and use it.\"",
 			"DisplayName": "Bandit Captain",
 			"LargeIcon": "Sprites/BanditCaptainTitle_Icon.png",
 			"ObjectType": "Item",
@@ -127,7 +125,6 @@
 		},
 		"PageData": {
 			"AddTags": [
-				"Bandit"
 			],
 			"PageRequirements": {
 				"ConflictingPages": [],

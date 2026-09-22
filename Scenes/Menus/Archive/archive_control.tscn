@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://cukfwo131b0bn" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="8_qpbv8"]
 [ext_resource type="Script" uid="uid://d3iqrrlixbjy5" path="res://Scenes/Menus/Archive/resist_container.gd" id="12_d0bpe"]
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="13_qmf4r"]
+[ext_resource type="Texture2D" uid="uid://bkmin2ryysfo" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_Icon.png" id="13_uax76"]
 [ext_resource type="Script" uid="uid://bcf3yo7yhmwwr" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="14_aquqc"]
 [ext_resource type="Texture2D" uid="uid://b68wdq050rrtf" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol.png" id="14_svqfg"]
 [ext_resource type="Script" uid="uid://kdtnendi2wac" path="res://Scenes/Menus/Archive/actor_drop_entry.gd" id="17_7ycef"]
@@ -254,6 +255,7 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 
 [node name="CenterContainer" type="CenterContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/NinePatchRect" unique_id=1444233216]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -273,13 +275,19 @@ scale = Vector2(2, 2)
 position = Vector2(0, 8)
 
 [node name="IconTextureRect" type="TextureRect" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer/NinePatchRect" unique_id=1611336901]
-visible = false
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("13_uax76")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer/BoxContainer/HBoxContainer" unique_id=1155155801]
 layout_mode = 2

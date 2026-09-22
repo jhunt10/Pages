@@ -30,7 +30,8 @@ func sync():
 	item_slot_buttons = [book_button, bag_button, main_hand_button, off_hand_button, trinket_button]
 	super()
 	var title_page = _actor.get_title_page()
-	title_button.set_item(_actor, null, title_page)
+	if title_page:
+		title_button.set_item(_actor, null, title_page)
 	if _actor.equipment.is_two_handing():
 		var primary = _actor.equipment.get_primary_weapon()
 		if primary:

@@ -385,7 +385,7 @@ func _get_subaction(script_key:String)->BaseSubAction:
 	return subaction_script_cache[script_key]
 
 func _on_actor_stat_change(actor:BaseActor):
-	var que_size = actor.Que.get_max_que_size()
+	var que_size = actor.get_max_que_size()
 	var speed = actor.stats.get_stat("Speed", 0)
 	if _cached_actor_speeds.get(actor.Id, null) != speed:
 		_flagged_for_reorder = true

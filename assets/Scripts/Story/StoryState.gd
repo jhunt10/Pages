@@ -37,7 +37,7 @@ func add_actor_to_party(actor)->BaseActor:
 		add_encounter_with_actor(actor)
 		
 		# Add class pages
-		var title = actor.get_title_page().get_display_name()
+		#var title = actor.get_title_page().get_display_name()
 		set_unlocked_skills_for_actor(actor, {})
 		#var has_pages = []
 		#for party_actor:BaseActor in list_party_actors():
@@ -130,9 +130,7 @@ func start_new_story():
 		var item = ItemLibrary.get_item(item_key)
 		if item is BasePageItem and not item_key.begins_with("#"):
 			if item is BasePageItem:
-				var req_title = (item as BasePageItem).page_data.get("SourceTitle")
-				if (#'Soldier' == req_title or 
-					item.get_tags().has("_Dev_Action")):
+				if (item.get_tags().has("_Dev_Action")):
 					PlayerInventory.add_item(item, 1)
 	
 	

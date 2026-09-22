@@ -46,10 +46,10 @@ func add_actor(actor:BaseActor):
 	# Set Team Index
 	if not actor.is_player:
 		var match_count = 0
-		var this_name = actor.get_raw_display_name()
+		var this_name = actor.get_display_name(false)
 		var first_match_actor:BaseActor = null
 		for other_actor:BaseActor in _actors.values():
-			if this_name == other_actor.get_raw_display_name():
+			if this_name == other_actor.get_display_name(false):
 				match_count += 1
 				if first_match_actor == null:
 					first_match_actor = other_actor
@@ -114,10 +114,14 @@ func are_enemies(main_actor, other_actor)->bool:
 		printerr("CombatScene.are_enemies: Failed to find TeamData with key '%s' for Actor: %s" % [other_actor.TeamKey, other_actor.Id])
 		return false
 	
+	print("---------------------------------------------------")
 	print("EnemyCheck: %s & %s " % [main_actor.Id, other_actor.Id])
 	print("EnemyCheck: %s & %s " % [main_actor.TeamKey, other_actor.TeamKey])
 	if main_team_data.get("Enemies", []).has(other_actor.TeamKey):
+		
+		print("- TRUE\n---------------------------------------------------")
 		return true
+	print("- false\n---------------------------------------------------")
 	return false
 
 func are_allies(main_actor, other_actor)->bool:

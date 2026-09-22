@@ -205,7 +205,7 @@
 		"Description": "@@#Color:Blue:Bags@@ are are a type of @@#Tag:Equipment@@ used for holding @@#Tag:Supplies@@.",
 		"DisplayName": "Bag"
 	},
-	"Bandit": {
+	"Bandits": {
 		"Abreviation": "Bandit",
 		"AppliesTo": [
 			"Actor"
@@ -996,6 +996,14 @@
 		"Description": "@@#Color:Blue:Threat@@ is used by @@#Color:Red:Enemy Actors@@ to determine which @@#Color:Green:Player Actor@@ should be the focus of thier attention.\n\nWhen a @@#Color:Green:Player@@ deals damage to an @@#Color:Red:Enemy@@, an equal amout of @@#Color:Blue:Threat@@ is applied between the two.",
 		"DisplayName": "Threat"
 	},
+	"Trinket": {
+		"Abreviation": "Trinket",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "@@#Color:Blue:Trinkets@@ are a type of @@#Tag:Equipment@@ that provide small boons to the @@#Color:Red:Actor@@ carrying it.",
+		"DisplayName": "Trinket"
+	},
 	"Supplies": {
 		"Abreviation": "Supplies",
 		"AppliesTo": [
@@ -1101,12 +1109,12 @@
 		"DisplayName": "Unarmed"
 	},
 	"Undead": {
-		"Abreviation": "Phy",
+		"Abreviation": "Undead",
 		"AppliesTo": [
 			"Actor"
 		],
 		"Description": "@@#Color:Blue:Undead@@ are \"dead\" @@#Color:Red:Actors@@, reactived by the @@#Color:Blue:PAGE@@ System. They sustain thier forms with @@#Color:DmgColor:Dark@@ energy and are @@#Color:Green:healed@@ by further exposure. Inversely, @@#Color:DmgColor:Light@@ has proven highly disruptive to this process.",
-		"DisplayName": "Physical"
+		"DisplayName": "Undead"
 	},
 	"Wand": {
 		"Abreviation": "Wand",

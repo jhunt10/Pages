@@ -50,15 +50,16 @@ func set_actor(actor:BaseActor):
 		if actor_node:
 			actor_node.hide()
 	else:
-		var script = load(actor_node_script)
-		var new_node = script.instantiate()
-		actor_node_parent.add_child(new_node)
-		actor_node.queue_free()
-		actor_node = new_node
-		actor_node.set_actor(actor)
+		var t = true
+		#var script = load(actor_node_script)
+		#var new_node = script.instantiate()
+		#actor_node_parent.add_child(new_node)
+		#actor_node.queue_free()
+		#actor_node = new_node
+		#actor_node.set_actor(actor)
 		# Dumb Hack
-		if not actor_node is LeverActorNode:
-			actor_node.position = Vector2(0,8)
+		#if not actor_node is LeverActorNode:
+			#actor_node.position = Vector2(0,8)
 	icon_rect.texture = actor.get_large_icon()
 	title_label.text = actor.get_display_name()
 	

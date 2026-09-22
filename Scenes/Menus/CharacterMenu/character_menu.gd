@@ -31,6 +31,10 @@ signal closed
 
 @export var animation_player:AnimationPlayer
 
+
+@export var rot_button_l:Button
+@export var rot_button_r:Button
+
 var _current_details_card:ItemDetailsCard
 
 var delay_loading_inventory=true
@@ -91,6 +95,19 @@ func _ready() -> void:
 	skill_tree_menu.skill_menu_closed.connect(close_skill_menu)
 	var first_actor = StoryState.get_party_actor_by_index(current_party_actor_index)
 	set_actor(first_actor)
+	
+	rot_button_l.pressed.connect(rot_button_pressed.bind(true))
+	rot_button_r.pressed.connect(rot_button_pressed.bind(false))
+
+func rot_button_pressed(rot_counter_clock:bool=false):
+	if actor_sprite:
+		var new_dir = actor_sprite.facing_dir as int
+		if rot_counter_clock:
+			new_dir = (new_dir + 1) % 4
+		else:
+			new_dir = (new_dir + 3) % 4
+		actor_sprite.set_facing_dir(new_dir)
+	pass
 
 func set_actor(actor:BaseActor):
 	if _actor:
@@ -104,6 +121,7 @@ func set_actor(actor:BaseActor):
 	_actor.equipment_changed.connect(_sync)
 	_actor.bag_items_changed.connect(_sync)
 	_actor.page_list_changed.connect(_sync)
+	actor_sprite.set_facing_dir(MapPos.Directions.South)
 	_sync()
 	#skill_tree_control.set_actor(_actor)
 	skill_tree_menu.set_actor(_actor)
@@ -197,7 +215,8 @@ func _on_previous_actor_pressed():
 
 func _on_title_button_pressed():
 	var title = _actor.get_title_page()
-	create_details_card(title, no_call, "", true)
+	if title:
+		create_details_card(title, no_call, "", true)
 
 func no_call():
 	pass

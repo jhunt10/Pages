@@ -38,6 +38,8 @@ func set_mod_data(mod_data):
 		else:
 			modded_stat_icon.hide()
 	var mod_value = mod_data.get("Value", 0)
+	if mod_value == round(mod_value):
+		mod_value = int(mod_value)
 	mod_value_label.text = str(mod_value)
 	var dep_stat = mod_data.get("DepStatName", "???")
 	var dep_stat_abbr = StatHelper.get_stat_abbr(dep_stat)

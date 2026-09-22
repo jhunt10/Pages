@@ -66,5 +66,85 @@
 			"Value": 50.0
 		},
 		"_DefVersion": "1"
+	},
+	"SquirrelArmor_Trinket": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseEquipmentItem.gd",
+		"#ObjDetails": {
+			"Description": "A tiny suit of armor once worn by a @@#Color:Red:Squirrior@@. Obviously too small to be worn as proper armor, but you could like put around your arm or something. Wear it like a glove? Or maybe a hat? No, that would look silly.",
+			"DisplayName": "Squirrel Armor",
+			"LargeIcon": "Sprites/SquirrelArmorTrinket_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/SquirrelArmorTrinket_Icon.png",
+			"SnippetDesc": "itty-bitty armor.",
+			"Tags": [
+				"Trinket"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Trinket"
+			]
+		},
+		"EquipmentData": {
+			"EquipSlot": "Trinket",
+			"Requirments": {
+				"ReqStats": {}
+			},
+			"SpriteData": {
+			},
+			"StatMods": {
+				"StatMod1": {
+					"DisplayName": "Squirrel Armor",
+					"ModType": "Add",
+					"StatName": "Armor",
+					"Value": 3
+				}
+			}
+		},
+		"ItemData": {
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
+	},
+	"SquirrelWard_Trinket": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseEquipmentItem.gd",
+		"#ObjDetails": {
+			"Description": "A small hat once worn by a @@#Color:Red:Squirrcerer@@. It still holds faint traces of magic protection and the smell of burnt acorns.",
+			"DisplayName": "Squirrel Ward",
+			"LargeIcon": "Sprites/SquirrelWardTrinket_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/SquirrelWardTrinket_Icon.png",
+			"SnippetDesc": "itty-bitty hat.",
+			"Tags": [
+				"Trinket"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"Trinket"
+			]
+		},
+		"EquipmentData": {
+			"EquipSlot": "Trinket",
+			"Requirments": {
+				"ReqStats": {}
+			},
+			"SpriteData": {
+			},
+			"StatMods": {
+				"StatMod1": {
+					"DisplayName": "Squirrel Ward",
+					"ModType": "Add",
+					"StatName": "Ward",
+					"Value": 3
+				}
+			}
+		},
+		"ItemData": {
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"_DefVersion": "1"
 	}
 }

@@ -112,17 +112,13 @@ func get_node_scene_path()->String:
 	if not actor_node_path.begins_with("res://"):
 		actor_node_path = self.get_load_path().path_join(actor_node_path)
 	return actor_node_path
-	
-func get_raw_display_name()->String:
-	var dets = get_object_details()
-	return dets.get("DisplayName", _id)
 
-func get_display_name()->String:
+func get_display_name(with_letter:bool=true)->String:
 	var dis_name = super()
 	var title = get_title()
 	if title:
 		dis_name = title
-	if enemy_npc_index >= 0:
+	if enemy_npc_index >= 0 and with_letter:
 		dis_name += " " + alphabet[enemy_npc_index]
 	return dis_name
 
@@ -175,7 +171,12 @@ func add_xp(value:int)->bool:
 	if title_page:
 		return title_page.add_xp(value)
 	return false
-	
+
+func get_max_que_size()->int:
+	if Que:
+		return Que.get_max_que_size()
+	return 0
+
 func get_title_page()->PageItemTitle:
 	# TODO: Dumb init load hack
 	if !_title_page:
@@ -215,17 +216,6 @@ func _get_object_specific_tags()->Array:
 	TagHelper.merge_lists(tag_list, effects.get_tags_added_to_actor())
 	TagHelper.merge_lists(tag_list, equipment.get_tags_added_to_actor())
 	return tag_list
-
-
-func get_stat_scaling()->Dictionary:
-	return actor_data.get("StatScaling", 
-	{
-		"STR": 0.25,
-		"AGI": 0.25,
-		"INT": 0.25,
-		"WIS": 0.25,
-	})
-
 
 func _on_stat_change():
 	stats_changed.emit()
@@ -475,17 +465,27 @@ func die():
 	is_dead = true
 	var map_pos = CombatRootControl.Instance.GameState.get_actor_pos(self)
 	if map_pos:
+		var dropped_item_key = ""
+		# Get item for first kill
+		var first_kill = not StoryState._encountered_actors.keys().has(self.ActorKey)
+		if first_kill:
+			dropped_item_key = actor_data.get("FirstDropItemKey", "")
+			StoryState.add_encounter_with_actor(self)
+		
 		# Roll for item drop
-		var drop_items = actor_data.get("DropItemsSet", {})
-		var item_key = Roll.from_set(drop_items)
-		if item_key != "":
-			if item_key.begins_with("Money"):
-				var tokens = item_key.split(':')
-				item_key = "MoneyItem"
-				var item = ItemHelper.spawn_item(item_key, {}, map_pos)
+		if dropped_item_key == "":
+			var drop_items = actor_data.get("DropItemsSet", {})
+			dropped_item_key = Roll.from_set(drop_items)
+		
+		if dropped_item_key != "":
+			# Drop Money
+			if dropped_item_key.begins_with("Money"):
+				var tokens = dropped_item_key.split(':')
+				dropped_item_key = "MoneyItem"
+				var item = ItemHelper.spawn_item(dropped_item_key, {}, map_pos)
 				item.item_data['Value'] = int(tokens[1])
 			else:
-				ItemHelper.spawn_item(item_key, {}, map_pos)
+				ItemHelper.spawn_item(dropped_item_key, {}, map_pos)
 	on_death.emit()
 
 func revive():

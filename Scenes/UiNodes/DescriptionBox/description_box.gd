@@ -551,7 +551,7 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 		
 		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
 		if min_max[0] == min_max[1]:
-			description_line += _to_str(min_max[0]) + damage_type# + " Damage"
+			description_line += _to_str(min_max[0]) + " " + damage_type# + " Damage"
 		else:
 			description_line += _to_str(min_max[0]) + " - " + _to_str(min_max[1]) + " " + damage_type# + " Damage" 
 	

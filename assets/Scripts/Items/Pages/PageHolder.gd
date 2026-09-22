@@ -54,15 +54,6 @@ func get_tags_added_to_actor()->Array:
 		out_list.append_array(added)
 	return out_list
 
-func get_title_page()->PageItemTitle:
-	var first_page = get_item_in_slot(0)
-	if first_page is PageItemTitle:
-		return first_page
-	for item in list_items():
-		if item is PageItemTitle:
-			return item
-	return null
-
 func list_page_keys()->Array:
 	var out_list = []
 	for item in list_items():
