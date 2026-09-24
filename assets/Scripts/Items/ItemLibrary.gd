@@ -80,6 +80,13 @@ static func get_or_create_item(item_id:String, item_key:String, data:Dictionary)
 	
 static func create_item(key:String, data:Dictionary, force_id:String='')->BaseItem:
 	if !Instance: Instance = ItemLibrary.new()
+	# Create data for "Money:[Value]"
+	if key.begins_with("Money:"):
+		var tokens = key.split(':')
+		key = "MoneyItem"
+		if not data.keys().has("ItemData"):
+			data['ItemData'] = {}
+		data['ItemData']['Value'] = int(tokens[1])
 	var item = Instance.create_object(key, force_id, data)
 	if !item:
 		printerr("ItemLibrary.create_item: Failed to make item '%s'." % [key])

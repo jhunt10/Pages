@@ -221,6 +221,10 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 		var cover_bonus = sub_event.defender_cover_bonus
 		net_accuracy = (attack_event.attacker_accuracy * attack_accuracy_mod * cover_penalty) - (sub_event.defender_evasion * cover_bonus)
 	
+	# Defender can not evade
+	if sub_event.defender_evasion < 0:
+		net_accuracy = 100
+	# Clamp Value
 	net_accuracy = max(0, net_accuracy)
 		
 	sub_event.hit_chance = net_accuracy / 100.0
@@ -243,6 +247,9 @@ static func _roll_for_hit(attack_event:AttackEvent, sub_event:AttackSubEvent):
 	if attack_event.attack_details.get("AutoHit", false):
 		sub_event.rolled_evade = false
 		#sub_event.rolled_blocked = false
+	# Just to be sure
+	if sub_event.defender_evasion < 0:
+		sub_event.rolled_evade = false
 
 ## Roll for damage and add DamageEvents to AttackSubEvent for defender.
 ## Will alter can_evade/can_block of AttackSubEvent to account for Healing damage

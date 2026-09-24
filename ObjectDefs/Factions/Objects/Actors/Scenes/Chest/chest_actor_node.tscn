@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bhki82lcc3dqv" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="6_btm2h"]
 [ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="7_y1ro8"]
 [ext_resource type="Animation" uid="uid://dm04n7yx8672p" path="res://animations/open_chest.res" id="8_jlesc"]
-[ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="10_bwyip"]
+[ext_resource type="Animation" uid="uid://drf4n1t1ononj" path="res://Scenes/Combat/MapObjects/Actors/death_effect_animation.res" id="9_jlesc"]
 
 [sub_resource type="Animation" id="Animation_hcvlo"]
 length = 0.001
@@ -101,6 +101,65 @@ tracks/6/keys = {
 _data = {
 &"RESET": SubResource("Animation_hcvlo"),
 &"open_chest": ExtResource("8_jlesc")
+}
+
+[sub_resource type="Animation" id="Animation_hokft"]
+resource_name = "evade_animation"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-6, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_c5e6v"]
+resource_name = "revive_effect"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.25, 0.4, 0.5, 0.65, 0.75, 0.90000004),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_c4hdk"]
+resource_name = "shake_effect"
+length = 0.75
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-3, 0), Vector2(3, 0), Vector2(-2, 0), Vector2(1, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q10ir"]
+_data = {
+&"death_effect": ExtResource("8_jlesc"),
+&"evade_animation": SubResource("Animation_hokft"),
+&"old_death_effect": ExtResource("9_jlesc"),
+&"revive_effect": SubResource("Animation_c5e6v"),
+&"shake_effect": SubResource("Animation_c4hdk")
 }
 
 [sub_resource type="Animation" id="Animation_7nc3g"]
@@ -211,7 +270,7 @@ mouse_filter = 2
 
 [node name="DamageAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1574515751]
 libraries/ = SubResource("AnimationLibrary_wwvql")
-libraries/DamageAnimations = ExtResource("10_bwyip")
+libraries/DamageAnimations = SubResource("AnimationLibrary_q10ir")
 
 [node name="BodyAnimationPlayer" type="AnimationPlayer" parent="." unique_id=1764808525]
 libraries/ = SubResource("AnimationLibrary_hyh3n")

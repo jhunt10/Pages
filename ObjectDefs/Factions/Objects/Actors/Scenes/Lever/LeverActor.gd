@@ -10,7 +10,7 @@ func on_combat_start():
 	CombatRootControl.Instance.QueController.end_of_turn.connect(on_turn_end)
 	CombatRootControl.Instance.QueController.end_of_round.connect(on_round_end)
 
-func on_trigger(game_state:GameStateData):
+func on_trigger(_triggered_by_actor:BaseActor, game_state:GameStateData):
 	if not been_triggered:
 		state_on = !state_on
 		been_triggered = true

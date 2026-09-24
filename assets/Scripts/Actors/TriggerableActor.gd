@@ -12,11 +12,11 @@ func on_combat_start():
 		return
 
 func apply_damage_event(_damage_event:DamageEvent, _trigger_effect:bool=false, game_state:GameStateData=null):
-	on_trigger(game_state)
+	on_trigger(_damage_event.attacker, game_state)
 
 func apply_healing(_value:int, _can_revive:bool=false):
-	on_trigger(CombatRootControl.Instance.GameState)
+	on_trigger(null, CombatRootControl.Instance.GameState)
 
-func on_trigger(_game_state:GameStateData):
+func on_trigger(_triggered_by_actor:BaseActor, _game_state:GameStateData):
 	been_triggered = true
 	triggered.emit()

@@ -491,14 +491,7 @@ func die():
 			dropped_item_key = Roll.from_set(drop_items)
 		
 		if dropped_item_key != "":
-			# Drop Money
-			if dropped_item_key.begins_with("Money"):
-				var tokens = dropped_item_key.split(':')
-				dropped_item_key = "MoneyItem"
-				var item = ItemHelper.spawn_item(dropped_item_key, {}, map_pos)
-				item.item_data['Value'] = int(tokens[1])
-			else:
-				ItemHelper.spawn_item(dropped_item_key, {}, map_pos)
+			ItemHelper.spawn_item(dropped_item_key, {}, map_pos)
 	on_death.emit()
 
 func revive():

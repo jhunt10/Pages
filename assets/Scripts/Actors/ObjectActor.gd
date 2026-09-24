@@ -233,13 +233,7 @@ func die():
 		var drop_items = actor_data.get("DropItemsSet", {})
 		var item_key = Roll.from_set(drop_items)
 		if item_key != "":
-			if item_key.begins_with("Money"):
-				var tokens = item_key.split(':')
-				item_key = "MoneyItem"
-				var item = ItemHelper.spawn_item(item_key, {}, map_pos)
-				item.item_data['Value'] = int(tokens[1])
-			else:
-				ItemHelper.spawn_item(item_key, {}, map_pos)
+			ItemHelper.spawn_item(item_key, {}, map_pos)
 	on_death.emit()
 
 func revive():

@@ -40,7 +40,7 @@ var inventory_path:String:
 
 var item_data:Dictionary:
 	get:
-		return _def.get("ItemData", {})
+		return get_load_val("ItemData", {})
 
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	super(key, def_load_path, def, id, data)

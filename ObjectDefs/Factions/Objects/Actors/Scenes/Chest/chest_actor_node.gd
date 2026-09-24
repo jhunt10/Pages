@@ -25,8 +25,3 @@ func on_triggered():
 			item_sprite.show()
 	# Death Animation is Open Chest Animation
 	pass
-
-#func start_death_animation():
-	##damage_animation_player.play("open_chest")
-	#damage_animation_player.play("DamageAnimations/open_chest")
-	#damage_animation_player.animation_finished.connect(on_death_animation_finished)

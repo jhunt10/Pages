@@ -305,7 +305,8 @@ func play_shake():
 	pass
 
 func start_death_animation():
-	damage_animation_player.play("DamageAnimations/open_chest")
+	damage_animation_player.speed_scale = CombatRootControl.get_time_scale() 
+	damage_animation_player.play("DamageAnimations/death_effect")
 	damage_animation_player.animation_finished.connect(on_death_animation_finished)
 
 func start_move_animation():

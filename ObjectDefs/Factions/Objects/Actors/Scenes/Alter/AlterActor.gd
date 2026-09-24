@@ -8,7 +8,7 @@ func on_combat_start():
 		return
 	CombatRootControl.Instance.QueController.end_of_round_with_state.connect(on_trigger)
 
-func on_trigger(game_state:GameStateData):
+func on_trigger(_triggered_by_actor:BaseActor, game_state:GameStateData):
 	# Get Spawners
 	var front_spawners = []
 	var back_spawners = []
