@@ -2,6 +2,7 @@ class_name SpawnerActor
 extends BaseActor
 
 # emited by Spawner ActorNode at end of spawn animation
+@warning_ignore("unused_signal")
 signal spawn_finished()
 
 var triggered_already:bool = false
@@ -21,7 +22,7 @@ func _spawn_actor():
 		return
 	var game_state = CombatRootControl.Instance.GameState
 	var cur_map_pos = game_state.get_actor_pos(self)
-	var adj_spot = MapHelper.get_adjacent_poses(cur_map_pos)
+	#var adj_spot = MapHelper.get_adjacent_poses(cur_map_pos)
 	var chosen_spot = null
 	var spawn_priority = [[0,-1],[-1,-1],[1,-1],[-1,0],[1,0],[-1,1],[1,1],[0,1]]
 	for perfered_spot in spawn_priority:

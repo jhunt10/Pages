@@ -451,7 +451,6 @@ static func build_mosey_round(actor:BaseActor, game_state:GameStateData):
 	var center_pos = actor.spawn_position
 	var cur_pos = game_state.get_actor_pos(actor)
 	var actions = []
-	var last_action_roll = -1
 	for index in range(max_turns):
 		# 0:Wait
 		# 1:TurnLeft

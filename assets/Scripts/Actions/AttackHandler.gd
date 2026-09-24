@@ -498,19 +498,19 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 	var x_change = defender_pos.x - attacker_pos.x
 	var y_change = defender_pos.y - attacker_pos.y
 	var front_back_change = 0
-	var right_left_change = 0
+	#var right_left_change = 0
 	if defender_pos.dir == MapPos.Directions.North:
 		front_back_change = y_change
-		right_left_change = x_change
+		#right_left_change = x_change
 	elif defender_pos.dir == MapPos.Directions.East:
 		front_back_change = -x_change
-		right_left_change = -y_change
+		#right_left_change = -y_change
 	elif defender_pos.dir == MapPos.Directions.South:
 		front_back_change = -y_change
-		right_left_change = -x_change
+		#right_left_change = -x_change
 	elif defender_pos.dir == MapPos.Directions.West:
 		front_back_change = x_change
-		right_left_change = y_change
+		#right_left_change = y_change
 	
 	# Simplified
 	if front_back_change > 0:
@@ -519,59 +519,59 @@ static func get_relative_attack_direction(attacker_pos:MapPos, defender_pos:MapP
 		return AttackDirection.Back
 	return AttackDirection.Flank
 	
-	var is_side = abs(front_back_change) < abs(right_left_change)
-	var is_diaginal = abs(front_back_change) == abs(right_left_change)
-	var is_forward = not is_side and front_back_change >= 0
-	var is_back = not is_side and front_back_change <= 0
-	if defender_awareness <= -4:
-		return AttackDirection.Back
-	elif defender_awareness == -3:
-		if is_forward and not is_diaginal:
-			return AttackDirection.Flank
-		else:
-			return AttackDirection.Back
-	elif defender_awareness == -2:
-		if is_forward and not is_diaginal:
-			return AttackDirection.Front
-		elif front_back_change > 0:
-			return AttackDirection.Flank
-		else:
-			return AttackDirection.Back
-	elif defender_awareness == -1:
-		if is_forward and not is_diaginal:
-			return AttackDirection.Front
-		elif is_back:
-			return AttackDirection.Back
-		else:
-			return AttackDirection.Flank
-	elif defender_awareness == 0:
-		if is_forward:
-			return AttackDirection.Front
-		elif is_side:
-			return AttackDirection.Flank
-		else:
-			return AttackDirection.Back
-	elif defender_awareness == 1:
-		if is_forward:
-			return AttackDirection.Front
-		elif is_side or is_diaginal:
-			return AttackDirection.Flank
-		else:
-			return AttackDirection.Back
-	elif defender_awareness == 2:
-		if is_back and not is_diaginal:
-			return AttackDirection.Back
-		elif front_back_change < 0:
-			return AttackDirection.Flank
-		else:
-			return AttackDirection.Front
-	elif defender_awareness == 3:
-		if is_back and not is_diaginal:
-			return AttackDirection.Flank
-		else:
-			return AttackDirection.Front
-	else:
-		return AttackDirection.Front
+	#var is_side = abs(front_back_change) < abs(right_left_change)
+	#var is_diaginal = abs(front_back_change) == abs(right_left_change)
+	#var is_forward = not is_side and front_back_change >= 0
+	#var is_back = not is_side and front_back_change <= 0
+	#if defender_awareness <= -4:
+		#return AttackDirection.Back
+	#elif defender_awareness == -3:
+		#if is_forward and not is_diaginal:
+			#return AttackDirection.Flank
+		#else:
+			#return AttackDirection.Back
+	#elif defender_awareness == -2:
+		#if is_forward and not is_diaginal:
+			#return AttackDirection.Front
+		#elif front_back_change > 0:
+			#return AttackDirection.Flank
+		#else:
+			#return AttackDirection.Back
+	#elif defender_awareness == -1:
+		#if is_forward and not is_diaginal:
+			#return AttackDirection.Front
+		#elif is_back:
+			#return AttackDirection.Back
+		#else:
+			#return AttackDirection.Flank
+	#elif defender_awareness == 0:
+		#if is_forward:
+			#return AttackDirection.Front
+		#elif is_side:
+			#return AttackDirection.Flank
+		#else:
+			#return AttackDirection.Back
+	#elif defender_awareness == 1:
+		#if is_forward:
+			#return AttackDirection.Front
+		#elif is_side or is_diaginal:
+			#return AttackDirection.Flank
+		#else:
+			#return AttackDirection.Back
+	#elif defender_awareness == 2:
+		#if is_back and not is_diaginal:
+			#return AttackDirection.Back
+		#elif front_back_change < 0:
+			#return AttackDirection.Flank
+		#else:
+			#return AttackDirection.Front
+	#elif defender_awareness == 3:
+		#if is_back and not is_diaginal:
+			#return AttackDirection.Flank
+		#else:
+			#return AttackDirection.Front
+	#else:
+		#return AttackDirection.Front
 	
 	
 	##if abs(front_back_change) >= abs(right_left_change):

@@ -62,7 +62,7 @@ static func _build_save_meta_data(save_name:String, save_id:String):
 		"SaveId": save_id,
 		"SaveName": save_name,
 		"SaveDate": Time.get_datetime_string_from_system(false, true),
-		"RunTime": Time.get_time_string_from_unix_time(StoryState.get_runtime_untix_time()),
+		"RunTime": Time.get_time_string_from_unix_time(floori(StoryState.get_runtime_untix_time())),
 		"Location": StoryState.get_location(),
 		"Party":party
 	}

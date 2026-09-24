@@ -97,6 +97,6 @@ static func get_direction_between_spots(start_pos, end_pos)->MapPos.Directions:
 		else:
 			return MapPos.Directions.North
 
-static func can_actor_enter_spot(actor:BaseActor, pos:MapPos, game_state:GameStateData):
+static func can_actor_enter_spot(_actor:BaseActor, pos:MapPos, game_state:GameStateData):
 	
 	return game_state.is_spot_open(pos)

@@ -55,7 +55,7 @@ func sync(actor:BaseActor):
 	
 func _on_button_pressed(index:int):
 	# Do nothing in combat mod
-	if CombatRootControl.Instance and CombatRootControl.Instance.is_valid():
+	if CombatRootControl.Instance and CombatRootControl.is_valid():
 		return
 	var players = StoryState.list_party_actors()
 	var soldier:CarrierActor = players[0]

@@ -31,7 +31,7 @@ var is_crit:bool: # Crit is_valid
 
 var attack_direction:AttackDirection
 var defender_has_cover:bool
-var defender_evasion:int
+var defender_evasion:float
 var defender_block_chance:float
 var defender_block_mod:float
 var defender_protection:int

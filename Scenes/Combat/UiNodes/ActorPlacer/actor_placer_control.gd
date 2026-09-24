@@ -39,7 +39,7 @@ func load_and_show(min_actors:int=1, max_actors:int=4):
 		build_actor_buttons(min_actors, max_actors)
 	self.show()
 
-func build_actor_buttons(min_actors:int=1, max_actors:int=4):
+func build_actor_buttons(_min_actors:int=1, _max_actors:int=4):
 	for child in actor_buttons_container.get_children():
 		child.queue_free()
 	#_spawn_tile_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map

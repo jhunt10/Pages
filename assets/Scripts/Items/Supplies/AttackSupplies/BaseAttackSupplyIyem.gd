@@ -32,7 +32,7 @@ func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
 		var vfx_data = attack_data.get("OnUseVfxData").duplicate()
 		vfx_data['LoadPath'] = self.get_load_path()
 		var vfx_key = vfx_data.get("VfxKey", "AttackItemVfx_NoKey")
-		var vfx_node = VfxHelper.create_vfx_at_pos(center_pos, vfx_key, vfx_data, actor)
+		VfxHelper.create_vfx_at_pos(center_pos, vfx_key, vfx_data, actor)
 	
 	var source_tag_chain = SourceTagChain.new()\
 			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
@@ -40,7 +40,7 @@ func use_in_combat(actor:BaseActor, target, game_state:GameStateData):
 	var attack_details = attack_data.get("AttackDetails", {})
 	var damage_datas = attack_data.get("DamageDatas", {})
 	var effect_datas = attack_data.get("EffectDatas", {})
-	var attack_event = AttackHandler.handle_attack(
+	AttackHandler.handle_attack(
 		actor, 
 		target_actors, 
 		attack_details, 

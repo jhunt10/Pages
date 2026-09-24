@@ -193,12 +193,13 @@ func _get_next_part_key():
 			var cases  = next_part_logic.get("Cases", {})
 			if cases.has(flag_val):
 				return cases[flag_val]
-		var flag_val:String = str(StoryState.get_story_flag(flag_name))
-		var cases  = next_part_logic.get("Cases", {})
-		if cases.has(flag_val):
-			return cases[flag_val]
-		elif cases.has('@DEFAULT@'):
-			return cases['@DEFAULT@']
+		else:
+			var flag_val:String = str(StoryState.get_story_flag(flag_name))
+			var cases  = next_part_logic.get("Cases", {})
+			if cases.has(flag_val):
+				return cases[flag_val]
+			elif cases.has('@DEFAULT@'):
+				return cases['@DEFAULT@']
 	return _current_part_data.get("_NextPartKey", null)
 
 
@@ -776,11 +777,11 @@ func force_positions(force_pos_data:Dictionary):
 func _do_move_actor(block_data)->bool:
 	if block_data.has("StopLoopingActors"):
 		for actor_id in block_data.get("StopLoopingActors"):
-			var actor_node = CombatRootControl.get_actor_node(actor_id)
-			if !actor_node:
+			var stopping_actor_node = CombatRootControl.get_actor_node(actor_id)
+			if !stopping_actor_node:
 				printerr("DialogController: MoveActor failed to find actor_node for Target Actor: %s" %[actor_id])
 			else:
-				actor_node._moving_in_loop = false
+				stopping_actor_node._moving_in_loop = false
 		return false
 	var target_actor_id = block_data.get("TargetActorId", null)
 	if !target_actor_id:

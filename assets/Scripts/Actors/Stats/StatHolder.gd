@@ -261,6 +261,14 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 			min_stats[real_stat_name] = _base_stats[stat_name]
 			_base_stats.erase(stat_name)
 	
+	# MaxStats 
+	var max_stats = {}
+	for stat_name:String in _base_stats.keys():
+		if stat_name.begins_with("MaxStat:"):
+			var real_stat_name = stat_name.trim_prefix("MaxStat:")
+			max_stats[real_stat_name] = _base_stats[stat_name]
+			_base_stats.erase(stat_name)
+	
 	# Aggregate all the mods together by stat_name, then type
 	var agg_mods = {}
 	var set_stats = {}
@@ -379,6 +387,8 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 						temp_val = temp_val * val
 			if min_stats.keys().has(stat_name):
 				temp_val = max(temp_val, min_stats[stat_name])
+			if max_stats.keys().has(stat_name):
+				temp_val = min(temp_val, max_stats[stat_name])
 			_cached_stats[stat_name] = temp_val
 			# Health Logic - Set Current Health if not previously set
 			if stat_name == StatHelper.HealthMax:

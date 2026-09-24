@@ -10,7 +10,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 	return ["Grant", "_Dev_Action"]
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
-func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
+func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	var effect_defs = EffectLibrary.list_effect_defs()
 	var options = OnQueOptionsData.new("SelectedEffectKey", "Select Effect:")
 	

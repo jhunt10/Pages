@@ -4,8 +4,6 @@ extends BaseSubEffect
 func get_required_props()->Dictionary:
 	return {"StatModKey": BaseSubEffect.SubEffectPropTypes.StatModKey}
 
-var _stat_mod:BaseStatMod
-
 ## Returns Tags that are automatically added to the parent Effect's Tags
 func get_effect_tags(_subeffect_data:Dictionary, _effect_data:Dictionary, _parent_effect:BaseEffect=null)->Array:
 	return ["StatMod"]

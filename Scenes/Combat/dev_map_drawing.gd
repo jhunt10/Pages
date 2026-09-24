@@ -61,9 +61,11 @@ func draw_astar_map():
 	var astar = AiHandler.astar
 	if astar:
 		for index in astar.get_point_ids():
+			@warning_ignore("static_called_on_instance")
 			var map_pos = astar._index_to_pos(index)
 			var draw_point = get_map_pos_dir_point(map_pos)
 			for connected_index in astar.get_point_connections(index):
+				@warning_ignore("static_called_on_instance")
 				var other_pos = astar._index_to_pos(connected_index)
 				var other_draw_point = get_map_pos_dir_point(other_pos)
 				if other_pos.x == map_pos.x and other_pos.y == map_pos.y:

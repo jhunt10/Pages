@@ -89,11 +89,9 @@ func _get_minimum_size() -> Vector2:
 	if !title_h_box or !entries_v_box:
 		return Vector2(parent_size.x, min_hight)
 	if state == States.Showing:
-		var _size = Vector2(parent_size.x, title_h_box.size.y + entries_v_box.get_minimum_size().y)
-		return _size
+		return Vector2(parent_size.x, title_h_box.size.y + entries_v_box.get_minimum_size().y)
 	if state == States.Hidden:
-		var _size =  Vector2(parent_size.x, min_hight)
-		return _size
+		return Vector2(parent_size.x, min_hight)
 	var percent_done = minf(1.0, grow_timer / grow_time)
 	var size_diff = entries_v_box.get_minimum_size().y
 	var add_size = size_diff * percent_done

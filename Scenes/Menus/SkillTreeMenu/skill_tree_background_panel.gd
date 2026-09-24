@@ -64,7 +64,7 @@ func _draw() -> void:
 					_target_background_fill_x = mid_x
 			last_x = col.global_position.x + col.size.x - self.global_position.x
 	if index-1 < unlocked_count:
-		_target_background_fill_x = (self.size.x as float)
+		_target_background_fill_x = floori(self.size.x)
 	
 	# Draw Lines between nodes
 	var self_global_pos = self.get_global_rect().position

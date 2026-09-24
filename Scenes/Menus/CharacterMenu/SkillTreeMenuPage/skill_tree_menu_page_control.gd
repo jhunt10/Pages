@@ -192,7 +192,6 @@ func get_page_key_if_unlocked(skill_node_key, args):
 	return null
 
 func on_node_button_down(skill_node_key, args):
-	var node_data = get_node_data_for_skill_node(skill_node_key)
 	var page_key = get_page_key_if_unlocked(skill_node_key, args)
 	if page_key:
 		node_button_down.emit("SkillTree", page_key, 0, Vector2.ZERO)
@@ -256,7 +255,7 @@ func on_node_button_up(skill_node_key, args):
 	elif node_data.get("CanUnlock"):
 		confirm_text = "Unlock"
 		disabled = false
-	var detail_card = character_menu.create_details_card(
+	character_menu.create_details_card(
 		page_item, 
 		on_node_confirmed.bind(skill_node_key, args),
 		confirm_text, 

@@ -120,7 +120,7 @@ func redraw_bar():
 		AmmoItem.AmmoTypes.Phy: bar_color = phy_ammo_color
 		AmmoItem.AmmoTypes.Abn: bar_color = abn_ammo_color
 	
-	var temp_val = current_val
+	#var temp_val = current_val
 	for index in range(bar_parts.size()):
 		var reverse_index = bar_parts.size() - index - 1
 		if index >= remaining_uses:
@@ -130,7 +130,7 @@ func redraw_bar():
 			bar_parts[reverse_index].modulate = Color.GRAY
 		else:
 			bar_parts[reverse_index].modulate = bar_color
-		temp_val -= cost_val
+		#temp_val -= cost_val
 
 
 var bar_parts = []

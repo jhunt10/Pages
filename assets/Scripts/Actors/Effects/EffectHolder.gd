@@ -170,7 +170,7 @@ func _on_hosted_effect_ends(limit_type:EffectHelper.LimitedEffectTypes, effect_i
 		else:
 			index += 1
 
-func get_count_limit_for_limited_effect(type:EffectHelper.LimitedEffectTypes)->int:
+func get_count_limit_for_limited_effect(_type:EffectHelper.LimitedEffectTypes)->int:
 	#var str_type = EffectHelper.LimitedEffectTypes.keys()[type]
 	#var stat_name = "LmtEftCount" + ":" + str_type
 	#return _actor.stats.get_stat(stat_name, 1)

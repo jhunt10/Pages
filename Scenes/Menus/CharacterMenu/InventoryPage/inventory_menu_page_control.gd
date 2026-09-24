@@ -28,12 +28,11 @@ var selection_context:String = "Pages"
 @export var premade_inventory_sub_group:InventorySubGroupContainer
 @export var premade_item_button:InventoryItemButton
 
-var _mouse_in_button:InventoryItemButton
 var _item_buttons:Dictionary = {}
 var _item_groups:Dictionary = {}
-var _hover_delay:float = 0.3
-var _hover_timer:float
-var _click_delay:float = 0.4
+#var _hover_delay:float = 0.3
+#var _hover_timer:float
+#var _click_delay:float = 0.4
 var _click_timer:float
 
 var _forced_filters:Array=[]
@@ -81,7 +80,7 @@ func calc_button_size():
 	_cached_size = self.size
 	var container_width = items_container.size.x
 	var seperator = 0
-	var button_width = (seperator/2) + 64
+	var button_width = floori((seperator as float)/2.0) + 64
 	var est_button_count = floori((container_width - seperator) / button_width)
 	var left_over = container_width - (64 * est_button_count)
 	var sep_size = floori(left_over / (est_button_count-1))
@@ -252,7 +251,7 @@ func _on_inv_item_button_down(button:InventoryItemButton):
 	item_button_down.emit(event_context, button._item_id, -1, offset)
 	
 func _on_inv_item_button_up(button:InventoryItemButton):
-	var offset = button.get_local_mouse_position()
+	#var offset = button.get_local_mouse_position()
 	item_button_up.emit(event_context, button._item_id, -1)
 
 func _mouse_enter_button(button:InventoryItemButton):

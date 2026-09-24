@@ -170,6 +170,7 @@ Action,BaseApplyActions_PageDefs.def,#BaseApplySelfBuffAction,#Base Self Buff,"[
 Action,BaseSpells_PageDefs.def,#BaseAttackZoneSpell,#Base Zone Action,"[Item|Page|Action]",PageItemAction.gd
 Action,BaseSpells_PageDefs.def,#BaseEffectZoneSpell,#Base Zone Action,"[Item|Page|Action]",PageItemAction.gd
 Action,BasicMeleeAttack_PageDefs.def,BasicMeleeAttack,Basic Attack,"[Item|Page|Action]",PageItemAction.gd
+Action,SquirrelPages_PageDefs.def,Scratch_ActionPage,Scratch,"[Item|Page|Action]",PageItemAction.gd
 Action,BasicMovement_PageDefs.def,Dash,Dash,"[Item|Page|Action|Movement]",PageItemAction.gd
 Action,BasicMovement_PageDefs.def,MoveBack,Move Back,"[Item|Page|Action|Movement]",PageItemAction.gd
 Action,BasicMovement_PageDefs.def,MoveForward,Move Forward,"[Item|Page|Action|Movement]",PageItemAction.gd
@@ -226,12 +227,14 @@ Actor,Bandits_ActorDefs.def,Bandit_Ranged,Archer Bandit,"[Actor]",BaseActor.gd
 Actor,Muhrooms_ActorDefs.def,MushroomBase,Mushroom,"[Actor]",BaseActor.gd
 Actor,Muhrooms_ActorDefs.def,MushroomRoof,Roof Shroom,"[Actor]",BaseActor.gd
 Actor,Muhrooms_ActorDefs.def,ShroomGolem,Shroom Golem,"[Actor]",BaseActor.gd
-Actor,Objects_ActorDefs.def,#BaseObjectActor,#BaseObjectActor,"[Actor|Object|Rooted]",BaseActor.gd
-Actor,Objects_ActorDefs.def,BarrelActor,Barrel,"[Actor|Object|Rooted]",BaseActor.gd
-Actor,Objects_ActorDefs.def,CrateActor,Crate,"[Actor|Object|Rooted]",BaseActor.gd
+Actor,Objects_ActorDefs.def,#BaseObjectActor,#BaseObjectActor,"[Actor|Object|Rooted]",ObjectActor.gd
+Actor,Objects_ActorDefs.def,BarrelActor,Barrel,"[Actor|Object|Rooted]",ObjectActor.gd
+Actor,Objects_ActorDefs.def,CrateActor,Crate,"[Actor|Object|Rooted]",ObjectActor.gd
 Actor,Objects_ActorDefs.def,LeverActor,Lever,"[Actor|Object|Rooted]",LeverActor.gd
+Actor,Objects_ActorDefs.def,SilverChestActor,Silver Chest,"[Actor|Object|Rooted]",ChestActor.gd
+Actor,Objects_ActorDefs.def,GoldChestActor,Gold Chest,"[Actor|Object|Rooted]",ChestActor.gd
 Actor,Objects_ActorDefs.def,ShrineActor,Shrine,"[Actor|Object|Rooted]",SpawnerActor.gd
-Actor,Objects_ActorDefs.def,StalagmiteActor,Stalagmite,"[Actor|Object|Rooted]",BaseActor.gd
+Actor,Objects_ActorDefs.def,StalagmiteActor,Stalagmite,"[Actor|Object|Rooted]",ObjectActor.gd
 Actor,Objects_ActorDefs.def,AlterActor,Alter,"[Actor|Object]",AlterActor.gd
 Actor,Slimes_ActorDefs.def,SlimeBasic,Slime,"[Actor]",BaseActor.gd
 Actor,Slimes_ActorDefs.def,SlimePoison,Green Slime,"[Actor]",BaseActor.gd

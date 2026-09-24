@@ -25,7 +25,7 @@ func sync():
 	if bag:
 		if bag.Id == _current_bag_item_id:
 			return
-			_current_bag_item_id = bag.Id
+		_current_bag_item_id = bag.Id
 	else:
 		_current_bag_item_id = null
 	

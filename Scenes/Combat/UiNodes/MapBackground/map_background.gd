@@ -17,8 +17,9 @@ func set_map(map_node:MapControllerNode):
 	
 	# Wood Table positioning
 	var map_center = Vector2i(
-		map_paper_patch.position.x + (map_paper_patch.size.x / 2),
-		map_paper_patch.position.y + (map_paper_patch.size.y / 2))
+		floori(map_paper_patch.position.x + floori(map_paper_patch.size.x / 2)),
+		floori(map_paper_patch.position.y + floori(map_paper_patch.size.y / 2))
+	)
 		
 	table_texture_rect.position = Vector2(
 		map_center.x - (table_texture_rect.size.x / 2),

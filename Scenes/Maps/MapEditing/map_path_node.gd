@@ -55,7 +55,7 @@ func _notification(what):
 	if what == NOTIFICATION_TRANSFORM_CHANGED:
 		if last_pos == self.position:
 			return
-		if Input.is_mouse_button_pressed(1):
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			return
 		last_pos = self.position
 		var parent = get_parent()

@@ -73,7 +73,7 @@ static func get_item(item_id:String, error_if_null:bool=true)->BaseItem:
 
 static func get_or_create_item(item_id:String, item_key:String, data:Dictionary)->BaseItem:
 	if !Instance: Instance = ItemLibrary.new()
-	var item = Instance.get_item(item_id, false)
+	var item = ItemLibrary.get_item(item_id, false)
 	if item:
 		return item
 	return create_item(item_key, data, item_id)

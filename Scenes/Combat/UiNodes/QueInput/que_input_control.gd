@@ -35,8 +35,7 @@ signal page_selection_closed
 
 @export var state:States
 var _actor:BaseActor
-var _page_buttons:Dictionary = {} 
-var _resize:bool = true
+var _page_buttons:Dictionary = {}
 var _target_display_key
 var _target_display_action_key
 

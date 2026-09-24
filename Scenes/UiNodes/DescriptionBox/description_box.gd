@@ -570,8 +570,8 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 	# More that one damage data was found, so show total with indiviuals in popup
 	var hint_lines = [hover_line, description_line]
 	var first_min_max = DamageHelper.get_min_max_damage(actor, damage_data)
-	var min = first_min_max[0]
-	var max = first_min_max[1]
+	var min_val = first_min_max[0]
+	var max_val = first_min_max[1]
 	for extra in extra_damage_datas:
 		var other_damage_type = extra.get("DamageType", "???")
 		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
@@ -580,11 +580,11 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 			other_min_max_str = _to_str(min_max[0])
 		var other_line = other_min_max_str + " " + other_damage_type
 		hint_lines.append(other_line)
-		min += min_max[0]
-		max += min_max[1]
-	var min_max_str = _to_str(min) + " - " + _to_str(max)
-	if min == max:
-		min_max_str = _to_str(min)
+		min_val += min_max[0]
+		max_val += min_max[1]
+	var min_max_str = _to_str(min_val) + " - " + _to_str(max_val)
+	if min_val == max_val:
+		min_max_str = _to_str(min_val)
 	var hint_line = "\\n".join(hint_lines)
 	var show_line = get_damage_colored_text(damage_type, min_max_str + " Damage")
 	out_line += "[url={\"text\":\"" + hint_line+ "\"}]" + show_line + "[/url]"

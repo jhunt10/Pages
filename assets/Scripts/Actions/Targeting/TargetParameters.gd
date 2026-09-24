@@ -96,8 +96,8 @@ func is_actor_target_type()->bool:
 
 func is_point_in_area(center:MapPos, point)->bool:
 	var check_point = Vector2i(point.x, point.y)
-	var target_area = target_area.to_map_spots(center)
-	return target_area.has(check_point)
+	var temp_target_area = target_area.to_map_spots(center)
+	return temp_target_area.has(check_point)
 
 ## Returns true if target actor is valid as a selected target
 func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:

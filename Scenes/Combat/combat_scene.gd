@@ -2,6 +2,7 @@ class_name CombatRootControl
 extends Control
 
 signal loading_actor_progressed(count:int, index:int)
+@warning_ignore("unused_signal")
 signal actor_spawned(actor:BaseActor, map_pos:MapPos)
 signal item_spawned(item:BaseItem, map_pos:MapPos)
 
@@ -258,7 +259,6 @@ func get_spawn_node(marker_name)->ActorSpawnNode:
 	return null
 
 func spawn_actors_for_phase(phase_data:Dictionary):
-	var actors = []
 	var phase_map = MapController.get_phase_marker_map(phase_data.get("MarkerMap", ""))
 	var spawn_nodes = []
 	for child in phase_map.get_children():
@@ -775,5 +775,5 @@ func recall_actor(actor_a, actor_b):
 
 func on_recall_finish(deployed_actor, carrier_actor):
 	merge_actors(deployed_actor, carrier_actor)
-	var deployed_node = get_actor_node(deployed_actor)
+	#var deployed_node = get_actor_node(deployed_actor)
 	#deployed_node.damage_animation_player.play()

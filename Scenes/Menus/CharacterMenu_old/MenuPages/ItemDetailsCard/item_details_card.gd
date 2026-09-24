@@ -90,7 +90,7 @@ var is_selling:bool = false
 var item_id:String
 var actor_has_item:bool = false
 var _current_card
-var _actor:BaseActor
+#var _actor:BaseActor
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

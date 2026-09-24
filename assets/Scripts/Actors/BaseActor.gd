@@ -19,12 +19,25 @@ signal bag_items_changed
 signal effacts_changed
 signal health_changed
 
-# Actor holds no references to the current map state so this method is called by set_actor_pos()
-signal on_move(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary)
-signal on_move_failed(cur_pos:MapPos)
+# Actor holds no references to the current map state so this signal  
+signal on_move(old_pos:MapPos, new_pos:MapPos, move_data:Dictionary)# called by MapState.set_actor_pos()
+signal on_move_failed(cur_pos:MapPos)# Called by Move SubAct
 signal on_death()
 signal on_revive()
 signal sprite_changed()
+
+# Method only exist to hide warnings about unused signals
+func __fake_func():
+	if false:
+		turn_starting.emit()
+		turn_ended.emit()
+		effacts_changed.emit()
+		round_starting.emit()
+		round_ended.emit()
+		action_failed.emit()
+		sprite_changed.emit()
+		on_move.emit(null, null, {})
+		on_move_failed.emit(null)
 
 var Que:ActionQueHolder
 #var node:BaseActorNode

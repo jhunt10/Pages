@@ -18,6 +18,9 @@ func _init(actor:BaseActor, on_que:Dictionary) -> void:
 	_actor = actor
 	on_que_data = on_que
 
+func add_attack_event(attack_event:AttackEvent):
+	_attack_events.append(attack_event)
+
 func add_target_for_key(target_key:String, from_target_param, value):
 	var target_param_key = from_target_param
 	if from_target_param is TargetParameters:

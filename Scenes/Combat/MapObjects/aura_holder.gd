@@ -5,3 +5,6 @@ var _actor:BaseActor
 
 func add_aura(zone_node:ZoneNode):
 	self.add_child(zone_node)
+
+func get_actor()->BaseActor:
+	return _actor

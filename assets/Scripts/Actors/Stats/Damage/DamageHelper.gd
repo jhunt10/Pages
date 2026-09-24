@@ -196,10 +196,10 @@ static func roll_for_damage(
 	return damage_event
 	
 
-static func roll_flat_range(min:float, max:float)->float:
-	var diff:float = max - min
+static func roll_flat_range(min_val:float, max_val:float)->float:
+	var diff:float = max_val - min_val
 	var roll = randf()
-	return min + (diff * roll)
+	return min_val + (diff * roll)
 
 static func does_damage_mod_apply(damage_mod:Dictionary, attacker:BaseActor, defender:BaseActor, damage_data:Dictionary, source_tag_chain:SourceTagChain, game_state:GameStateData)->bool:
 	var conditions = damage_mod.get('Conditions', null)

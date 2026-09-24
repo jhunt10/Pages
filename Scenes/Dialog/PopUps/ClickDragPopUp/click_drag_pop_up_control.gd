@@ -60,8 +60,8 @@ func set_dialog_block(parent_dialog_controller, block_data):
 func _on_click():
 	print("Button Down")
 	state = States.Dragging
-	if mimic_drag_data.size() > 0:
-		var offset = target_click_element.get_local_mouse_position()
+	#if mimic_drag_data.size() > 0:
+		#var offset = target_click_element.get_local_mouse_position()
 		#if CharacterMenuControl.Instance:
 			#var item_id = ""
 			#var index = 0

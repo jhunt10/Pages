@@ -24,8 +24,10 @@ func _process(_delta: float) -> void:
 			bar.highlight_x(mouse_pos.x-8)
 	else:
 		var que_control = CombatRootControl.QueController
+		@warning_ignore("integer_division")
 		var section_size = 240 / max_que_size
 		var current_x = que_control.action_index * section_size
+		@warning_ignore("integer_division")
 		current_x += (section_size / 24) * que_control.sub_action_index
 		red_bar.position = Vector2i(current_x,0)
 		for bar in que_bars.values():

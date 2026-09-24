@@ -230,7 +230,7 @@ func _process(delta: float) -> void:
 
 func set_block_data(block_data:Dictionary):
 	var grow_direction_str = block_data.get("GrowDirection", "Center")
-	grow_direction = GrowDirections.keys().find(grow_direction_str)
+	grow_direction = GrowDirections.keys().find(grow_direction_str) as GrowDirections
 	var offset = block_data.get("Offset", [0,-8])
 	self.position = Vector2(offset[0],offset[1])
 	full_text = block_data.get("Text", "null")

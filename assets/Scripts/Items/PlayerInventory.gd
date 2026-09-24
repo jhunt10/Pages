@@ -23,7 +23,6 @@ static func clear_items():
 	_held_unique_items_ids.clear()
 
 static func has_item_id(item_id:String):
-	var item_ids = _stacked_item_id_by_key
 	if _held_unique_items_ids.has(item_id):
 		return true
 	if _stacked_item_id_by_key.values().has(item_id):

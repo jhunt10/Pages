@@ -30,8 +30,8 @@ var item_nodes = {}
 var missile_nodes = {}
 var zone_nodes = {}
 
-var _cached_marker_poses:Dictionary = {}
-var _cached_marker_paths:Dictionary = {}
+#var _cached_marker_poses:Dictionary = {}
+#var _cached_marker_paths:Dictionary = {}
 var _cached_spawn_nodes:Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.

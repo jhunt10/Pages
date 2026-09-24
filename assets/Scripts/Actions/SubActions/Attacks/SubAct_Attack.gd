@@ -169,7 +169,7 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 		target_params.has_area_of_effect(),
 		override_origin_pos,
 		subaction_data.get("CreateVfx", true))
-	turn_data._attack_events.append(attack_event)
+	turn_data.add_attack_event(attack_event)
 	if missed_moved_actor and not hit_any_actor:
 		VfxHelper.create_flash_text(actor, "Miss", BaseFlashTextVfxNode.FlashTextType.Miss)
 	

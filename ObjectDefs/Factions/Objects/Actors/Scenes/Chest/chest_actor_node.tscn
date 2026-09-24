@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bgiuhlw7igs1x" path="res://ObjectDefs/Items/Equipment/Weapons/Sprites/BaseSword_Icon.png" id="5_tk85b"]
 [ext_resource type="Script" uid="uid://bhki82lcc3dqv" path="res://Scenes/Combat/MapObjects/vfx_holder.gd" id="6_btm2h"]
 [ext_resource type="PackedScene" uid="uid://eox4g5msr5a" path="res://Scenes/Combat/Effects/flash_text_controller.tscn" id="7_y1ro8"]
+[ext_resource type="Animation" uid="uid://dm04n7yx8672p" path="res://animations/open_chest.res" id="8_jlesc"]
 [ext_resource type="AnimationLibrary" uid="uid://dx31wifagmnpk" path="res://Scenes/Combat/MapObjects/Actors/damage_animation_library.res" id="10_bwyip"]
 
 [sub_resource type="Animation" id="Animation_hcvlo"]
@@ -98,7 +99,8 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wwvql"]
 _data = {
-&"RESET": SubResource("Animation_hcvlo")
+&"RESET": SubResource("Animation_hcvlo"),
+&"open_chest": ExtResource("8_jlesc")
 }
 
 [sub_resource type="Animation" id="Animation_7nc3g"]
@@ -152,39 +154,9 @@ tracks/3/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_2dvm1"]
-resource_name = "open_chest"
-length = 0.6
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hyh3n"]
 _data = {
-&"RESET": SubResource("Animation_7nc3g"),
-&"open_chest": SubResource("Animation_2dvm1")
+&"RESET": SubResource("Animation_7nc3g")
 }
 
 [node name="ChestActorNode" type="Node2D" unique_id=1592941832 node_paths=PackedStringArray("item_sprite", "top_sprite", "vfx_holder", "actor_sprite", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]

@@ -172,10 +172,10 @@ func start_auto_pan_to_map_pos(map_pos:MapPos):
 	var target_pos = MapHelper.get_map_pos_global_position(map_pos)
 	start_auto_pan(target_pos)
 
-func start_auto_pan_to_actor(actor:BaseActor, lock_to_actor:bool=true):
+func start_auto_pan_to_actor(actor:BaseActor, lock_to_them:bool=true):
 	var target_pos = MapHelper.get_actor_global_position(actor)
 	var actor_node = CombatRootControl.Instance.MapController.actor_nodes.get(actor.Id)
-	if lock_to_actor:	
+	if lock_to_them:	
 		following_actor_node = actor_node
 	start_auto_pan(target_pos)
 

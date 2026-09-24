@@ -30,7 +30,7 @@ func _ready() -> void:
 	CombatRootControl.Instance.QueController.end_of_round.connect(_on_round_end)
 	time_scale_slider.value_changed.connect(on_time_scale_change)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if round_progress_bar.visible:
 		var turn_index = CombatRootControl.Instance.QueController.action_index
 		var frame_index = CombatRootControl.Instance.QueController.sub_action_index 

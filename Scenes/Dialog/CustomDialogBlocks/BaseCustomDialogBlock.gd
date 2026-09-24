@@ -1,5 +1,6 @@
 class_name BaseCustomDialogBlock
 
+@warning_ignore("unused_signal")
 signal finished
 
 ## Returns true if block should be waitied on

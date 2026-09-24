@@ -118,6 +118,12 @@ func set_actor(actor:BaseActor):
 		child.queue_free()
 	for child in action_pages_container.get_children():
 		child.queue_free()
+	#var title = actor.get_title_page()
+	#if title:
+		#var new_entry = item_drop_entry.duplicate()
+		#new_entry.set_item(title.ItemKey)
+		#new_entry.show()
+		#passive_pages_container.add_child(new_entry) 
 	for item_key in  actor.pages.list_passives_keys():
 		if item_key == "":
 			continue

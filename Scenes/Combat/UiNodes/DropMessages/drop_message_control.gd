@@ -35,7 +35,7 @@ func add_card(message:String, icon:Texture2D = null, icon_background:Texture2D =
 	new_card.finished.connect(card_finished.bind(new_card))
 	self.add_child(new_card)
 	current_top -= card_hight
-	new_card.position = Vector2i(0, current_top)
+	new_card.position = Vector2i(0, floori(current_top))
 	new_card.show()
 	new_card.show_time = showtime
 	cards.append(new_card)

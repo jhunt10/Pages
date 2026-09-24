@@ -12,6 +12,6 @@ func play_actor_spawn_animation():
 	if Actor is SpawnerActor:
 		Actor._spawn_actor()
 
-func _on_animation_finish(name):
-	if name == "flash":
+func _on_animation_finish(animation_name):
+	if animation_name == "flash":
 		Actor.spawn_finished.emit()

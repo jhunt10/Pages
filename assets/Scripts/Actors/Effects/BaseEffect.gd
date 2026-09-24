@@ -316,7 +316,7 @@ func get_limited_effect_type()->EffectHelper.LimitedEffectTypes:
 	var limited_effect_str = effect_details.get("LimitedEffectType", "None")
 	var key_index = EffectHelper.LimitedEffectTypes.keys().find(limited_effect_str)
 	if key_index >= 0:
-		return key_index
+		return key_index as EffectHelper.LimitedEffectTypes
 	return EffectHelper.LimitedEffectTypes.None
 
 func _get_sub_effect_script(sub_effect_key:String):

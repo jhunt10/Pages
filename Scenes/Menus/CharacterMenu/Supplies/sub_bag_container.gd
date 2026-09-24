@@ -1,16 +1,20 @@
 class_name SubBagContainer
 extends VBoxContainer
 
+@warning_ignore("unused_signal")
 signal item_button_down(index, offset)
+@warning_ignore("unused_signal")
 signal item_button_up(index)
+@warning_ignore("unused_signal")
 signal mouse_enter_item(index)
+@warning_ignore("unused_signal")
 signal mouse_exit_item(index)
 
 @export var title_label:Label
 var _slot_set_key:String
 var _buttons:Dictionary = {}
 
-func set_sub_bag_data(holder:BaseItemHolder, slot_set_data:Dictionary):
+func set_sub_bag_data(_holder:BaseItemHolder, slot_set_data:Dictionary):
 	_slot_set_key = slot_set_data['Key']
 	title_label.text = slot_set_data.get("DisplayName")
 	var index_offset = slot_set_data['IndexOffset']

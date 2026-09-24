@@ -94,7 +94,7 @@ func _join_damage_values(sub_event:AttackSubEvent)->String:
 		dmg_strings.append("%s %s" % [damage_vals[key], key])
 	return (", ".join(dmg_strings))
 
-func _join_effect_values(attack_event:AttackEvent, sub_event:AttackSubEvent)->String:
+func _join_effect_values(_attack_event:AttackEvent, sub_event:AttackSubEvent)->String:
 	var resisted_effect_names = []
 	var applied_effect_names = []
 	for effect_data_key in sub_event.applied_effect_datas.keys():

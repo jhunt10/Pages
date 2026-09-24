@@ -10,12 +10,6 @@ const WeaponClassTags:Dictionary = {
 
 var target_parmas:TargetParameters
 
-var _loaded_sprites:bool = false
-var _main_hand_sprite:Texture2D
-var _off_hand_sprite:Texture2D
-var _two_hand_sprite:Texture2D
-
-
 var weapon_data:Dictionary:
 	get:
 		return _def.get("WeaponData", {})

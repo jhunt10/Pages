@@ -9,7 +9,7 @@ func _ready() -> void:
 	sprite.hide()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if pointing_to_actor_node:
 		var point_to_pos = pointing_to_actor_node.get_top_of_head_screen_position() 
 		var view_port_rec = get_viewport_rect()
