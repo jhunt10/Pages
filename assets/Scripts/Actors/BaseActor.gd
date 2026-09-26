@@ -514,13 +514,6 @@ func get_action_list()->Array:
 		return list
 	return []
 
-# Used by Ai Handler
-func get_action_key_list()->Array:
-	var list = pages.list_action_keys()
-	if list.size() > 0:
-		return list
-	return get_load_val("AiData", {}).get("ActionsArr", [])
-
 func get_action_page(action_id)->PageItemAction:
 	return ItemLibrary.get_item(action_id)
 

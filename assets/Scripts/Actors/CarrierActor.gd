@@ -69,15 +69,6 @@ func get_action_list()->Array:
 				list.append(sub_action)
 	return list
 
-func get_action_key_list()->Array:
-	var list = super()
-	for child:BaseActor in _held_actors.values():
-		for sub_key in child.get_action_key_list():
-			if not list.has(sub_key):
-				list.append(sub_key)
-	return list
-
-
 func fill_page_ammo(action_id:String=''):
 	super(action_id)
 	for child:BaseActor in _held_actors.values():

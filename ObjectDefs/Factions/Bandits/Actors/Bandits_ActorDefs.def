@@ -1,5 +1,5 @@
 {
-	"Bandit_Armored": {
+	"Bandit_Actor": {
 		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
 		"!ParentKey": "#BaseHumanoid",
 		"#ObjDetails": {
@@ -16,13 +16,15 @@
 			]
 		},
 		"ActorData": {
+			"BucklerShield": "Bandit_PageBook",
 			"DropItemsSet": {
 				"": 10.0,
 				"BanditAxe": 10.0,
+				"BucklerShield": 10,
 				"Bandit_PageBook": 10.0,
 				"HealthPotionM": 5.0,
 				"HealthPotionS": 10.0,
-				"Money:10": 10.0
+				"Money:50": 10.0
 			},
 			"TitleKey": "BanditBase_TitlePage",
 			"ExpValue": 60.0,
@@ -32,7 +34,8 @@
 		"SpawnEquipmentArr": [
 			"Bandit_PageBook",
 			"OldBag_ItemBag",
-			"BanditAxe"
+			"BanditAxe",
+			"BucklerShield"
 		],
 		"SpawnItemArr": [
 			"HealthPotionM",
@@ -42,7 +45,7 @@
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
-			"BasicWeaponAttack",
+			"BasicWeaponAttack_ActionPage",
 			"UsePotionSelf",
 			"ReloadPage"
 		],
@@ -57,56 +60,7 @@
 		],
 		"_DefVersion": "1"
 	},
-	"Bandit_Captain": {
-		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-		"!ParentKey": "#BaseHumanoid",
-		"#ObjDetails": {
-			"Description": "A bandit wearing armor.",
-			"DisplayName": "Bandit Captain",
-			"LargeIcon": "Sprites/BanditCaptain_Icon.png",
-			"ObjectType": "Actor",
-			"SmallIcon": "Sprites/BanditCaptain_Icon.png",
-			"SnippetDesc": "A captian of bandits.",
-			"Tags": [
-			],
-			"Taxonomy": [
-				"Actor"
-			]
-		},
-		"ActorData": {
-			"DropItemsSet": {
-				"Bandit_PageBook": 5.0,
-				"BigMalma": 5.0,
-				"Money:100": 10.0
-			},
-			"TitleKey": "BanditCaptain_TitlePage",
-			"ExpValue": 60.0,
-			"Faction": "Bandits",
-			"MoneyValue": 15.0
-		},
-		"SpawnEquipmentArr": [
-			"Bandit_PageBook",
-			"OldBag_ItemBag",
-			"BigMalma"
-		],
-		"SpawnItemArr": [
-			"HealthPotionM",
-			"HealthPotionM"
-		],
-		"SpawnPageArr": [
-			"MoveForward",
-			"TurnLeft",
-			"TurnRight",
-			"BasicWeaponAttack",
-			"UsePotionSelf",
-			"ReloadPage"
-		],
-		"SpriteData": {
-			"SpriteSheet": "Sprites/BanditCaptain_SpriteSheet"
-		},
-		"_DefVersion": "1"
-	},
-	"Bandit_Ranged": {
+	"BanditArcher_Actor": {
 		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
 		"!ParentKey": "#BaseHumanoid",
 		"#ObjDetails": {
@@ -123,6 +77,7 @@
 			]
 		},
 		"ActorData": {
+			"FirstDropItemKey": "Bandit_PageBook",
 			"DropItemsSet": {
 				"": 5.0,
 				"Bandit_PageBook": 5.0,
@@ -149,7 +104,7 @@
 			"MoveForward",
 			"TurnLeft",
 			"TurnRight",
-			"BasicWeaponAttack",
+			"BasicWeaponAttack_ActionPage",
 			"UsePotionSelf",
 			"ReloadPage"
 		],
@@ -162,6 +117,60 @@
 			24.0,
 			24.0
 		],
+		"_DefVersion": "1"
+	},
+	"BanditCaptain_Actor": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseHumanoid",
+		"#ObjDetails": {
+			"Description": "A bandit wearing authority.",
+			"DisplayName": "Bandit Captain",
+			"LargeIcon": "Sprites/BanditCaptain_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/BanditCaptain_Icon.png",
+			"SnippetDesc": "A captian of bandits.",
+			"Tags": [
+			],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"FirstDropItemKey": "BigMalma",
+			"DropItemsSet": {
+				"Bandit_PageBook": 5.0,
+				"BigMalma": 5.0,
+				"PowerAttack_ActionPage": 5,
+				"Money:200": 5.0,
+				"Money:300": 5.0
+			},
+			"TitleKey": "BanditCaptain_TitlePage",
+			"ExpValue": 60.0,
+			"Faction": "Bandits",
+			"MoneyValue": 15.0
+		},
+		"SpawnEquipmentArr": [
+			"Bandit_PageBook",
+			"OldBag_ItemBag",
+			"BigMalma"
+		],
+		"SpawnItemArr": [
+			"HealthPotionM",
+			"HealthPotionM",
+			"Phy_Ammo"
+		],
+		"SpawnPageArr": [
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack_ActionPage",
+			"PowerAttack_ActionPage",
+			"UsePotionSelf",
+			"ReloadPage"
+		],
+		"SpriteData": {
+			"SpriteSheet": "Sprites/BanditCaptain_SpriteSheet"
+		},
 		"_DefVersion": "1"
 	}
 }
