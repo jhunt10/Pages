@@ -194,7 +194,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Axes@@ are @@#Tag:MedumWeapon:Medium Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ but have @@#Color:Red:High Damage Variance@@ compaired to @@#Tag:Sword:Swords@@.",
+		"Description": "@@#Color:Blue:Axes@@ are @@#Tag:MedWpn:Medium Weapons@@ which deal @@#Color:DmgColor:Slash:Slash Damage@@ but have @@#Color:Red:High Damage Variance@@ compaired to @@#Tag:Sword:Swords@@.",
 		"DisplayName": "Axe"
 	},
 	"Bag": {
@@ -275,7 +275,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Bows@@ are @@#Tag:Ranged@@ @@#Tag:Weapons@@ which are not available because they don't have animations.",
+		"Description": "@@#Color:Blue:Bows@@ are @@#Tag:Ranged@@ @@#Tag:Weapon:Weapons@@ which should not be available because they don't have animations.",
 		"DisplayName": "Bow"
 	},
 	"Buff": {
@@ -315,7 +315,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Clubs@@ are @@#Tag:LgtWpn:Light Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
+		"Description": "@@#Color:Blue:Clubs@@ are @@#Tag:LgtWpn:Light Weapons@@ which deal @@#Color:DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
 		"DisplayName": "Club"
 	},
 	"Cold": {
@@ -372,7 +372,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Daggers@@ are @@#Tag:LgtWpn:Light Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
+		"Description": "@@#Color:Blue:Daggers@@ are @@#Tag:LgtWpn:Light Weapons@@ which deal @@#Color:DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
 		"DisplayName": "Dagger"
 	},
 	"Dark": {
@@ -499,7 +499,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:GreatHammers@@ are @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
+		"Description": "@@#Color:Blue:Great Hammers@@ are @@#Tag:HvyWpn:Heavy Weapons@@ which deal @@#Color:DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
 		"DisplayName": "GreatHammer"
 	},
 	"GreatSword": {
@@ -507,7 +507,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:GreatSwords@@ are @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
+		"Description": "@@#Color:Blue:GreatSwords@@ are @@#Tag:HvyWpn:Heavy Weapons@@ which deal @@#Color:DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
 		"DisplayName": "GreatSword"
 	},
 	"HandMod": {
@@ -558,6 +558,14 @@
 		"Description": "@@#Color:Blue:Inflict Actions@@ make an attempt to apply harmful @@#Tag:Effect:Effects@@ to an enemy @@#Color:Red:Actor@@.",
 		"DisplayName": "Inflict"
 	},
+	"Item": {
+		"Abreviation": "Item",
+		"AppliesTo": [
+			"Page"
+		],
+		"Description": "An @@#Color:Blue:Item@@ is like... a thing... you pick up. Idk, check a dictionary.",
+		"DisplayName": "Item"
+	},
 	"LOS": {
 		"Abreviation": "LOS",
 		"AppliesTo": [
@@ -604,7 +612,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Maces@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
+		"Description": "@@#Color:Blue:Maces@@ are @@#Tag:MedWpn:Medium Weapons@@ which deal @@#Color:DmgColor:Blunt:Blunt Damage@@ with @@#Color:Red:High Damage Variance@@.",
 		"DisplayName": "Mace"
 	},
 	"MagePage": {
@@ -840,7 +848,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Scepters@@ are @@#Tag:Ranged@@ @@#Tag:MediumWeapon:Medium Weapons@@ which deal damage of different types.",
+		"Description": "@@#Color:Blue:Scepters@@ are @@#Tag:Ranged@@ @@#Tag:MedWpn:Medium Weapons@@ which deal damage of different types.",
 		"DisplayName": "Scepter"
 	},
 	"Self": {
@@ -872,7 +880,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Shivs@@ are @@#Tag:LgtWpn:Light Weapons@@ which deal @@DmgColor:Pierce:Pierce Damage@@ with @@#Color:Red:Low Damage Variance@@.",
+		"Description": "@@#Color:Blue:Shivs@@ are @@#Tag:LgtWpn:Light Weapons@@ which deal @@#Color:DmgColor:Pierce:Pierce Damage@@ with @@#Color:Red:Low Damage Variance@@.",
 		"DisplayName": "Shiv"
 	},
 	"Shock": {
@@ -937,7 +945,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Spears@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Pierce:Pierce Damage@@ with @@#Color:Red:Low Damage Variance@@ and an extended range.",
+		"Description": "@@#Color:Blue:Spears@@ are @@#Tag:MedWpn:Medium Weapons@@ which deal @@#Color:DmgColor:Pierce:Pierce Damage@@ with @@#Color:Red:Low Damage Variance@@ and an extended range.",
 		"DisplayName": "Spear"
 	},
 	"Spell": {
@@ -961,7 +969,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Staffs@@ are @@#Tag:Ranged@@ @@#Tag:HeavyWeapon:Heavy Weapons@@ which deal damage of different types.",
+		"Description": "@@#Color:Blue:Staffs@@ are @@#Tag:Ranged@@ @@#Tag:HvyWpn:Heavy Weapons@@ which deal damage of different types.",
 		"DisplayName": "Staff"
 	},
 	"StatMod": {
@@ -1017,7 +1025,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Swords@@ are @@#Tag:MediumWeapon:Medium Weapons@@ which deal @@DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
+		"Description": "@@#Color:Blue:Swords@@ are @@#Tag:MedWpn:Medium Weapons@@ which deal @@#Color:DmgColor:Slash:Slash Damage@@ with @@#Color:Red:Average Damage Variance@@.",
 		"DisplayName": "Sword"
 	},
 	"Tactic": {

@@ -18,7 +18,7 @@ func get_effect_tags(_subeffect_data:Dictionary, _effect_def:Dictionary, _parent
 		tags = ["HOT"]
 	return tags
 
-func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
+func on_effect_trigger(effect:BaseEffect, subeffect_data:Dictionary, _trigger:BaseEffect.EffectTriggers, game_state:GameStateData):
 	var actor = effect.get_effected_actor()
 	var source_tag_chain = SourceTagChain.new()
 	

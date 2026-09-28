@@ -28,7 +28,7 @@ func _ready() -> void:
 	if animation_player:
 		animation_player.speed_scale = 2
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		if test:
 			test = false

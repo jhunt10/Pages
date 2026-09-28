@@ -10,7 +10,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 	return ["Move", "_Dev_Action"]
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
-func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
+func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	var option = OnQueOptionsData.new("DevMoveDir", "Direction")
 	option.append_option("North")
 	option.append_option("East")
@@ -26,7 +26,7 @@ func do_thing(_parent_action:PageItemAction, subaction_data:Dictionary, que_exe_
 	var targets:Array = _find_target_effected_spots(target_key, que_exe_data, game_state, actor)
 	
 	var direction = turn_data.on_que_data['DevMoveDir']
-	var effect_data = {}
+	#var effect_data = {}
 	var target:MapPos = targets[0]
 	if direction == "North":
 		target.dir = MapPos.Directions.North

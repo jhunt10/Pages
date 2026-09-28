@@ -707,6 +707,9 @@ func _parse_stat_mod(mod_data:Dictionary, object_def:Dictionary, object_inst:Bas
 			out_line += color_text(RED_TEXT,  _to_str(value))
 		elif sub_tokens[2] == "ValuePercent":
 			var value = mod_data['Value']
+			out_line += color_text(RED_TEXT, _to_str(value) + "%")
+		elif sub_tokens[2] == "Value100Percent":
+			var value = mod_data['Value']
 			out_line += color_text(RED_TEXT, _to_str(value*100) + "%")
 		elif sub_tokens[2] == "InvertPercent":
 			var value = mod_data['Value']

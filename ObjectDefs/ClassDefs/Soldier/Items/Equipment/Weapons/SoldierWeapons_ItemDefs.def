@@ -80,7 +80,7 @@
 	"OldShield": {
 		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
 		"#ObjDetails": {
-			"Description": "Standard issue shield provided by The Military. Old, but still works.",
+			"Description": "Standard issue @@#Tag:Shield@@ provided by @@#Color:Blue:The Military@@. Old, but still works.\n\nGrants @@#StatMod:BlockChanceMod:ValuePercent@@ chance to reduce incoming damage by @@#StatMod:BlockValueMod:ValuePercent@@.",
 			"DisplayName": "Old Shield",
 			"LargeIcon": "Sprites/OldShield.png",
 			"ObjectType": "Item",
@@ -106,20 +106,20 @@
 				"SpriteSheet": "Sprites/OldShield_SpriteSheet.png"
 			},
 			"StatMods": {
-				"ArmorBonus": {
-					"ModType": "Add",
-					"StatName": "Armor",
-					"Value": 5.0
-				},
-				"StatMod1": {
+				"BlockChanceMod": {
 					"ModType": "Set",
 					"StatName": "BlockChance",
 					"Value": 25.0
 				},
-				"StatMod2": {
+				"BlockValueMod": {
 					"ModType": "Set",
 					"StatName": "BlockMod",
-					"Value": 0.7
+					"Value": 30
+				},
+				"ArmorBonus": {
+					"ModType": "Add",
+					"StatName": "Armor",
+					"Value": 5.0
 				}
 			}
 		},

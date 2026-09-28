@@ -287,7 +287,8 @@ static func _roll_damage_for_attack_event( attack_event:AttackEvent, game_state:
 				continue
 			# Was Blocked
 			elif atk_sub_event.is_blocked:
-				damage_event.final_damage = damage_event.final_damage * atk_sub_event.defender_block_mod
+				var block_redux = (100.0 - atk_sub_event.defender_block_mod) / 100.0
+				damage_event.final_damage = damage_event.final_damage * block_redux
 			# Was Crit
 			elif atk_sub_event.is_crit:
 				damage_event.final_damage = damage_event.final_damage * attack_event.attcker_crit_mod

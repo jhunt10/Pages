@@ -16,11 +16,11 @@
 			]
 		},
 		"ActorData": {
-			"BucklerShield": "Bandit_PageBook",
+			"FirstDropItemKey":"Buckler_Shield",
 			"DropItemsSet": {
 				"": 10.0,
-				"BanditAxe": 10.0,
-				"BucklerShield": 10,
+				"BanditAxe_Weapon": 10.0,
+				"Buckler_Shield": 10,
 				"Bandit_PageBook": 10.0,
 				"HealthPotionM": 5.0,
 				"HealthPotionS": 10.0,
@@ -34,8 +34,8 @@
 		"SpawnEquipmentArr": [
 			"Bandit_PageBook",
 			"OldBag_ItemBag",
-			"BanditAxe",
-			"BucklerShield"
+			"BanditAxe_Weapon",
+			"Buckler_Shield"
 		],
 		"SpawnItemArr": [
 			"HealthPotionM",
@@ -136,11 +136,10 @@
 			]
 		},
 		"ActorData": {
-			"FirstDropItemKey": "BigMalma",
+			"FirstDropItemKey": "BigMalma_Weapon",
 			"DropItemsSet": {
 				"Bandit_PageBook": 5.0,
-				"BigMalma": 5.0,
-				"PowerAttack_ActionPage": 5,
+				"BigMalma_Weapon": 5.0,
 				"Money:200": 5.0,
 				"Money:300": 5.0
 			},
@@ -152,7 +151,7 @@
 		"SpawnEquipmentArr": [
 			"Bandit_PageBook",
 			"OldBag_ItemBag",
-			"BigMalma"
+			"BigMalma_Weapon"
 		],
 		"SpawnItemArr": [
 			"HealthPotionM",
@@ -164,7 +163,6 @@
 			"TurnLeft",
 			"TurnRight",
 			"BasicWeaponAttack_ActionPage",
-			"PowerAttack_ActionPage",
 			"UsePotionSelf",
 			"ReloadPage"
 		],

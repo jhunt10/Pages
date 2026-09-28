@@ -5,7 +5,8 @@ extends Control
 	set(val):
 		#FileStructureBuilder.create_class_def_files("Priest")
 		print("\nSanity Check")
-		FileStructureBuilder.DoThing()
+		block_sim()
+		#FileStructureBuilder.DoThing()
 		#var arr = []
 		#for y in range(-4,5):
 			#for x in range(-4,5):
@@ -98,3 +99,21 @@ func _draw_corrected_line(a:Vector2, b:Vector2, color:Color, width:float):
 	var real_a = Vector2(a.x, self.size.y - a.y)
 	var real_b = Vector2(b.x, self.size.y - b.y)
 	draw_line(real_a, real_b, color, width)
+
+func block_sim():
+	var count = 100000
+	var block_chance = 0.4
+	var block_val = 0.20
+	var total = 0.0
+	var should_be_total = 0.0
+	for i in range(count):
+		var damage = 100.0
+		var blocked = (randf() <= block_chance)
+		if blocked:
+			total += (damage * (1.0-block_val))
+		else:
+			total += damage
+		should_be_total += damage
+	var redux = 1 -total / should_be_total
+	print("---------------------\nBC: %s BV: %s\nTotal:%s SBT:%s\n Redux: %s\n---------------------" % [block_chance, block_val, total, should_be_total, redux])
+	pass

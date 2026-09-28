@@ -49,8 +49,7 @@ func set_actor(actor:BaseActor):
 		printerr("Failed to find actor node script: " + actor_node_script)
 		if actor_node:
 			actor_node.hide()
-	else:
-		var t = true
+	#else:
 		#var script = load(actor_node_script)
 		#var new_node = script.instantiate()
 		#actor_node_parent.add_child(new_node)

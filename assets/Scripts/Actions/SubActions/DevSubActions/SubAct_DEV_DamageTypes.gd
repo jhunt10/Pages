@@ -10,7 +10,7 @@ func get_action_tags(_parent_action:PageItemAction, _subaction_data:Dictionary)-
 	return ["_Dev_Action"]
 
 ## Return a of OnQueOptionsData to select the parent action is qued. 
-func get_on_que_options(parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
+func get_on_que_options(_parent_action:PageItemAction, _subaction_data:Dictionary, _actor:BaseActor, _game_state:GameStateData)->Array:
 	var options = OnQueOptionsData.new("SelectedDamageKey", "Select Effect:")
 	
 	for damage_type in DamageEvent.DamageTypes.keys():
@@ -37,12 +37,12 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 			false
 		)
 	
-	var tag_chain = SourceTagChain.new()\
-			.append_source(SourceTagChain.SourceTypes.Actor, actor)\
-			.append_source(SourceTagChain.SourceTypes.Action, parent_action)
+	#var tag_chain = SourceTagChain.new()\
+			#.append_source(SourceTagChain.SourceTypes.Actor, actor)\
+			#.append_source(SourceTagChain.SourceTypes.Action, parent_action)
 			
 	var damage_type_str = turn_data.on_que_data['SelectedDamageKey']
-	var damage_type = DamageEvent.DamageTypes.get(damage_type_str)
+	#var damage_type = DamageEvent.DamageTypes.get(damage_type_str)
 	var damage_key =  subaction_data.get("DamageKey", '')
 	var damage_data = parent_action.get_damage_data_single(actor, damage_key) 
 	damage_data['DamageType'] = damage_type_str

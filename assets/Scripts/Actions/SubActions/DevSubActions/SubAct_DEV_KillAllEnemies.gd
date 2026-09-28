@@ -32,7 +32,7 @@ func do_thing(parent_action:PageItemAction, _subaction_data:Dictionary, _que_exe
 				}
 			}
 	
-	var attack_event = AttackHandler.handle_attack(
+	AttackHandler.handle_attack(
 		actor, 
 		targets,
 		{}, 
