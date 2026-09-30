@@ -848,7 +848,7 @@
 		"AppliesTo": [
 			"Item"
 		],
-		"Description": "@@#Color:Blue:Scepters@@ are @@#Tag:Ranged@@ @@#Tag:MedWpn:Medium Weapons@@ which deal damage of different types.",
+		"Description": "@@#Color:Blue:Scepters@@ are @@#Tag:Ranged@@ @@#Tag:MedWpn:Medium Weapons@@ which deal @@#Tag:Magical@@ damage of different types.",
 		"DisplayName": "Scepter"
 	},
 	"Self": {
@@ -907,6 +907,24 @@
 		],
 		"Description": "@@#Color:Blue:Slimes@@ are @@#Tag:Magic@@ creatures with high @@#Tag:Resistance@@ to @@#Tag:Physical:Physical Damage@@.",
 		"DisplayName": "Slime"
+	},
+	"NonDir": {
+		"Abreviation": "NonDir",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Non-Directional@@ applies to @@#Color:Red:Actors@@ who lack a @@#Tag:Front@@ or @@#Tag:Behind:Back@@.",
+		"DisplayName": "NonDir"
+
+	},
+	"Resistance": {
+		"Abreviation": "Res",
+		"AppliesTo": [
+			"Actor"
+		],
+		"Description": "@@#Color:Blue:Damage Resistances@@ reduce incoming damage of a specific type.",
+		"DisplayName": "Resistance"
+
 	},
 	"SlimeAtk": {
 		"Abreviation": "SlimeAtk",
@@ -1232,7 +1250,7 @@
 			"Page",
 			"Attack"
 		],
-		"Description": "@@#Color:Blue:Front@@ describes @@#Color:Red:Spots@@ in the direction an @@#Color:Red:Actor@@ is facing.If you are pointing North, then \"Front\" is any position North of yours.",
+		"Description": "@@#Color:Blue:Front@@ describes @@#Color:Red:Spots@@ in the direction an @@#Color:Red:Actor@@ is facing. If you are looking North, then \"Front\" is any position North of yours.",
 		"DisplayName": "Front"
 	},
 	"Behind": {
@@ -1241,7 +1259,7 @@
 			"Page",
 			"Attack"
 		],
-		"Description": "@@#Color:Blue:Behind@@ describes @@#Color:Red:Spots@@ in the oposite direction an @@#Color:Red:Actor@@ is facing.If you are pointing North, then \"Behind\" is any position South of yours.",
+		"Description": "@@#Color:Blue:Behind@@ describes @@#Color:Red:Spots@@ in the oposite direction an @@#Color:Red:Actor@@ is facing. If you are looking North, then \"Behind\" is any position South of yours.",
 		"DisplayName": "Behind"
 	}
 }

@@ -32,6 +32,7 @@ extends BoxContainer
 
 @export var resisances_container:ResistContainer
 @export var weaknesses_container:ResistContainer
+@export var immunity_container:ImmunityContainer
 
 @export var item_drop_entry:ActorDropEntry
 @export var item_drop_container:BoxContainer
@@ -100,6 +101,7 @@ func set_actor(actor:BaseActor):
 	
 	resisances_container.set_values(actor)
 	weaknesses_container.set_values(actor)
+	immunity_container.set_values(actor)
 	
 	for child in item_drop_container.get_children():
 		child.queue_free()

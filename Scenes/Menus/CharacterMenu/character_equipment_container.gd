@@ -36,23 +36,35 @@ func sync():
 		var primary = _actor.equipment.get_primary_weapon()
 		if primary:
 			off_hand_button.set_item(_actor, _actor.equipment, primary)
-	#var page_book = _actor.equipment.get_que_equipment()
-	#book_button.set_item(_actor, _actor.equipment, page_book)
-	#var bag = _actor.equipment.get_bag_equipment()
-	#bag_button.set_item(_actor, _actor.equipment, bag)
-	#var main_hand = _actor.equipment.get_primary_weapon()
-	#main_hand_button.set_item(_actor, _actor.equipment, main_hand)
-	#var off_hand = _actor.equipment.get_offhand_weapon()
-	#off_hand_button.set_item(_actor, _actor.equipment, off_hand)
 
-#func _on_slot_down(index:int):
-	#var pressed_item:BaseItem = null
-	#match index:
-		#0: pressed_item = _actor.get_title_page()
-		#1: pressed_item = _actor.equipment.get_que_equipment()
-		#2: pressed_item = _actor.equipment.get_bag_equipment()
-		## 3: Trinket
-		#4: pressed_item = _actor.equipment.get_primary_weapon()
-		#5: pressed_item = _actor.equipment.get_offhand_weapon()
-	#if pressed_item:
-		#item_pressed.emit(pressed_item)
+# Highjack button logic to point OffHand to MainHand when TwoHand
+func _on_item_button_down(index:int):
+	if _actor.equipment.is_two_handing():
+		if _actor.equipment.list_offhand_indexes().has(index):
+			index = _actor.equipment.list_all_hand_indexes()[0]
+	super(index)
+
+func _on_item_button_up(index:int):
+	if _actor.equipment.is_two_handing():
+		if _actor.equipment.list_offhand_indexes().has(index):
+			index = _actor.equipment.list_all_hand_indexes()[0]
+	super(index)
+
+# When TwoHand, treat both HandSlots as the same
+func highlight_slot(index:int):
+	if _actor.equipment.is_two_handing():
+		var all_hands =  _actor.equipment.list_all_hand_indexes()
+		if all_hands.has(index):
+			for hand_index in all_hands:
+				super(hand_index)
+	else:
+		super(index)
+
+func clear_highlight(index:int):
+	if _actor.equipment.is_two_handing():
+		var all_hands =  _actor.equipment.list_all_hand_indexes()
+		if all_hands.has(index):
+			for hand_index in all_hands:
+				super(hand_index)
+	else:
+		super(index)

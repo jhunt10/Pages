@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://b68wdq050rrtf" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol.png" id="14_svqfg"]
 [ext_resource type="Script" uid="uid://kdtnendi2wac" path="res://Scenes/Menus/Archive/actor_drop_entry.gd" id="17_7ycef"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="18_48ows"]
+[ext_resource type="Script" uid="uid://dwakhr0b71aen" path="res://Scenes/Menus/Archive/immunity_container.gd" id="21_dm6qt"]
 
 [node name="ArchiveControl" type="Control" unique_id=496394588 node_paths=PackedStringArray("exit_button", "actor_details_card", "faction_list_container", "actors_tab_bar", "premade_faction_label")]
 custom_minimum_size = Vector2(1152, 648)
@@ -207,7 +208,7 @@ patch_margin_bottom = 32
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" unique_id=754860298 node_paths=PackedStringArray("icon_rect", "actor_node_parent", "actor_node", "title_label", "tags_box", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "acc_label", "eva_label", "pot_label", "pro_label", "description_box", "resisances_container", "weaknesses_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
+[node name="BoxContainer" type="BoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/ActorMainContainer" unique_id=754860298 node_paths=PackedStringArray("icon_rect", "actor_node_parent", "actor_node", "title_label", "tags_box", "xp_label", "money_label", "strength_label", "agility_label", "int_label", "wisdom_label", "health_label", "ppr_label", "mass_label", "speed_label", "phy_atk_label", "mag_atk_label", "armor_label", "ward_label", "acc_label", "eva_label", "pot_label", "pro_label", "description_box", "resisances_container", "weaknesses_container", "immunity_container", "item_drop_entry", "item_drop_container", "passive_pages_container", "action_pages_container")]
 layout_mode = 2
 vertical = true
 script = ExtResource("3_iek5u")
@@ -237,6 +238,7 @@ pro_label = NodePath("../../VBoxContainer/StatsContainer/BoxContainer/StatsConta
 description_box = NodePath("DescriptionBox")
 resisances_container = NodePath("../../VBoxContainer2/ResitWeakContainer/BoxContainer/ResistContainer")
 weaknesses_container = NodePath("../../VBoxContainer2/ResitWeakContainer/BoxContainer/WeaknessContainer")
+immunity_container = NodePath("../../VBoxContainer2/ResitWeakContainer/BoxContainer/ImmunityContainer")
 item_drop_entry = NodePath("../../VBoxContainer2/DropsContainer/BoxContainer/ActorDropEntry")
 item_drop_container = NodePath("../../VBoxContainer2/DropsContainer/BoxContainer/VBoxContainer")
 passive_pages_container = NodePath("../../VBoxContainer/PagesContainer/BoxContainer/PassivePagesContainer")
@@ -662,7 +664,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="ResitWeakContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=969211031 node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(246, 128)
+custom_minimum_size = Vector2(246, 179)
 layout_mode = 2
 script = ExtResource("1_is6c6")
 background = NodePath("NinePatchRect")
@@ -790,6 +792,39 @@ layout_mode = 2
 theme = ExtResource("7_on4i3")
 text = "%"
 horizontal_alignment = 2
+
+[node name="ImmunityContainer" type="VBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer" unique_id=1891097228 node_paths=PackedStringArray("premade_resistance_label")]
+layout_mode = 2
+script = ExtResource("21_dm6qt")
+premade_resistance_label = NodePath("ImmunityLabel")
+
+[node name="ColorRect6" type="ColorRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ImmunityContainer" unique_id=1623807028]
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+color = Color(0.498039, 0, 0, 1)
+
+[node name="Label2" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ImmunityContainer" unique_id=1800478033]
+layout_mode = 2
+theme = ExtResource("5_3wi5n")
+text = "Immune To"
+text_overrun_behavior = 3
+
+[node name="ImmunityLabel" type="HBoxContainer" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ImmunityContainer" unique_id=119395542]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ImmunityContainer/ImmunityLabel" unique_id=265630651]
+layout_mode = 2
+texture = ExtResource("13_qmf4r")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/ResitWeakContainer/BoxContainer/ImmunityContainer/ImmunityLabel" unique_id=1323561329]
+self_modulate = Color(0.498039, 0, 0, 1)
+layout_mode = 2
+theme = ExtResource("7_on4i3")
+text = "Fire"
+horizontal_alignment = 1
 
 [node name="DropsContainer" type="Container" parent="BoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1756897631 node_paths=PackedStringArray("background", "inner_container")]
 custom_minimum_size = Vector2(258, 100)

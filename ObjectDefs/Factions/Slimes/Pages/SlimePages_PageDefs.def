@@ -2,7 +2,7 @@
 	"SlimePoisonSkin_PassivePage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "@@#Color:Blue:SlimeAtk Pages@@ deal @@#Color:DmgColor:Poison:Poison Damage@@ and have a @@#Color:Red:60%@@ chance to inflict @@#EftDef:AilmentPoisoned:Link@@.",
+			"Description": "@@#Color:Blue:Slime Attack Pages@@ deal @@#Color:DmgColor:Poison:Poison Damage@@ and have a @@#Color:Red:60%@@ chance to inflict @@#EftDef:AilmentPoisoned:Link@@.",
 			"DisplayName": "Poison Skin ",
 			"LargeIcon": "Sprites/SlimePoisonSkin_Icon.png",
 			"ObjectType": "Item",
@@ -75,7 +75,7 @@
 	"SlimeSpike_ActionPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Make a @@#Color:Red:Melee Attack@@ against all @@#Color:Red:Adjacent Actors@@, dealing @@#DmgData:SlimeDamage@@ on hit.",
+			"Description": "Make a @@#Tag:Melee:Melee Attack@@ against all @@#Color:Red:Adjacent Actors@@, dealing @@#DmgData:SlimeDamage@@ on hit.",
 			"DisplayName": "Slime Spike",
 			"LargeIcon": "Sprites/SlimeSpike_Icon.png",
 			"ObjectType": "Item",
@@ -83,8 +83,7 @@
 			"SnippetDesc": "Attack all Adj Actors",
 			"Tags": [
 				"Attack",
-				"Melee",
-				"SlimeAtk"
+				"Melee"
 			],
 			"Taxonomy": [
 				"Item",
@@ -118,7 +117,7 @@
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
 					"#FrameIndex": 0.0,
 					"#SubIndex": 0.0,
-					"Animation": "Default:Self",
+					"Animation": "Self",
 					"AnimationSpeed": 1.0
 				},
 				"Attack": {
@@ -126,7 +125,6 @@
 					"#FrameIndex": 11.0,
 					"#SubIndex": 1.0,
 					"DamageKey": "SlimeDamage",
-					"EffectKeys": "",
 					"TargetKey": "Target1"
 				},
 				"GetTargetAllInArea": {

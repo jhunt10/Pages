@@ -130,6 +130,8 @@ var _last_right_page_index = 0
 func _on_right_page_option_select(index:int):
 	if index < 3:
 		var option = inventory_option_button.get_item_text(index)
+		if option == "Pages":
+			option = "Page"
 		inventory_container.set_character_menu_context(option)
 		inventory_container.show()
 		#skill_tree_control.hide()

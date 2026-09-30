@@ -1,5 +1,5 @@
 {
-	"#BaseUndead": {
+	"#BaseUndead_Actor": {
 		"!ParentKey": "#BaseActor",
 		"#ObjDetails": {
 			"Description": "Description.",
@@ -104,15 +104,15 @@
 			},
 			"ExpValue": 80.0,
 			"Faction": "Undead",
-			"MoneyValue": 15.0
+			"MoneyValue": 15.0,
+			"ImmuneToEffects": [
+				"AilmentBleed",
+				"AilmentPoisoned"
+			]
 		},
 		"AiData": {
 			"AggroRangeLimit": 12.0
 		},
-		"ImmuneToEffects": [
-			"AilmentBleed",
-			"AilmentPoisoned"
-		],
 		"PortraitRect": [
 			12.0,
 			20.0,
@@ -126,9 +126,76 @@
 			"Resistance:Poison": 100.0
 		}
 	},
-	"Skeleton": {
+	"Zombie_Actor": {
 		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-		"!ParentKey": "#BaseUndead",
+		"!ParentKey": "#BaseUndead_Actor",
+		"#ObjDetails": {
+			"Description": "A common form of @@#Tag:Undead@@ created through the reanimation of a @@#Color:Red:Corpse@@. @@#Color:Red:Zombies@@ are peaceful and docile beings almost never resorting to violence, except towards all living creatures whom they will relentlessly attack on sight. They have an innate love of helicopters, gleefully chasing after any they see fly by. But sadly, no one ever let's them ride in one.",
+			"DisplayName": "Zombie",
+			"LargeIcon": "Sprites/Zombie_Icon.png",
+			"ObjectType": "Actor",
+			"SmallIcon": "Sprites/Zombie_Icon.png",
+			"SnippetDesc": "Zombie",
+			"Tags": [],
+			"Taxonomy": [
+				"Actor"
+			]
+		},
+		"ActorData": {
+			"FirstDropItemKey": "BiteAttack_ActionPage",
+			"DropItemsSet": {
+				"": 20.0,
+				"BiteAttack_ActionPage": 5.0,
+				"Money:10": 10.0,
+				"Money:20": 10.0,
+				"Undead_PageBook": 1.0
+			},
+			"TitleKey": "Zombie_TitlePage",
+			"ExpValue": 80.0,
+			"Faction": "Undead",
+			"MoneyValue": 15.0
+		},
+		"SpawnEquipmentArr": [
+			"Undead_PageBook",
+			"ZombieClothes_BodyApparel",
+			"ZombieClothes_LegApparel"
+		],
+		"SpawnItemArr": [],
+		"SpawnPageArr": [
+			"MoveForward",
+			"TurnLeft",
+			"TurnRight",
+			"BasicWeaponAttack_ActionPage",
+			"BiteAttack_ActionPage"
+		],
+		"SpriteData": {
+			"SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png"
+		},
+		"UnarmedAttackData": {
+			"DamageDatas": {
+				"UnarmedDamage": {
+					"AtkPower": 20.0,
+					"AtkStat": "PhyAttack",
+					"DamageType": "Blunt",
+					"DamageVarient": 0.5,
+					"DamageVfxKey": "Blunt_DamageEffect",
+					"DefenseType": "Physical",
+					"DisplayName": "Punch",
+					"FixedBaseDamage": null
+				}
+			},
+			"DefaultAnimation": "Stab",
+			"TargetParams": {
+				"LineOfSight": true,
+				"TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
+				"TargetType": "Actor"
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"Skeleton_Actor": {
+		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
+		"!ParentKey": "#BaseUndead_Actor",
 		"#ObjDetails": {
 			"Description": "A spooky scary @@#Color:Red:Skeleton@@ risen from the dead. This form of reanimation accounts for a lack of muscle tissue by focusing on direct manipulation of bone. This results in an @@#Tag:Undead@@ that is physically weaker, but has the @@#Color:Red:Agility@@ required to use @@#Tag:Ranged:Hint:Ranged Weapons@@.\n\nThier exposed bone is resistant to @@#Color:DmgColor:Slash@@ and @@#Color:DmgColor:Pierce@@, but is quite vulnerable to @@#Color:DmgColor:Blunt@@ and @@#Color:DmgColor:Crash@@. They often remain on back lines using range to attack from afar. But, while some may view them as nightmarish monsters, I like to believe there's a @@#Color:Red:Skeleton@@ inside us all.",
 			"DisplayName": "Skeleton",
@@ -142,9 +209,9 @@
 			]
 		},
 		"ActorData": {
+			"FirstDropItemKey": "Undead_PageBook",
 			"DropItemsSet": {
 				"": 9.0,
-				"BaseBow_Weapon": 5.0,
 				"Money:10": 10.0,
 				"Money:20": 5.0,
 				"Undead_PageBook": 1.0
@@ -191,9 +258,9 @@
 		},
 		"_DefVersion": "1"
 	},
-	"SkeletonMage": {
+	"SkeletonMage_Actor": {
 		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-		"!ParentKey": "Skeleton",
+		"!ParentKey": "Skeleton_Actor",
 		"#ObjDetails": {
 			"Description": "A spooky scary @@#Color:Red:Skeleton@@ risen from the dead.",
 			"DisplayName": "Skel Mage",
@@ -207,12 +274,14 @@
 			]
 		},
 		"ActorData": {
+			"FirstDropItemKey": "BoneWand_Weapon",
 			"DropItemsSet": {
 				"": 9.0,
-				"BoneWand_Weapon": 10.0,
-				"Money:10": 10.0,
-				"Money:20": 5.0,
-				"Undead_PageBook": 1.0
+				"DarkMissileSpell_ActionPage": 10,
+				"BoneWand_Weapon": 10,
+				"Money:100": 5,
+				"Money:200": 5,
+				"Undead_PageBook": 5
 			},
 			"TitleKey": "SkeletonMage_TitlePage",
 			"ExpValue": 100.0,
@@ -221,7 +290,6 @@
 		},
 		"SpawnEquipmentArr": [
 			"Undead_PageBook",
-			"BaseBow_Weapon",
 			"BoneWand_Weapon"
 		],
 		"SpawnItemArr": [],
@@ -231,6 +299,7 @@
 			"TurnLeft",
 			"TurnRight",
 			"BasicWeaponAttack_ActionPage",
+			"DarkMissileSpell_ActionPage",
 			"ReloadPage"
 		],
 		"SpriteData": {
@@ -249,71 +318,6 @@
 					"FixedBaseDamage": null
 				}
 			},
-			"TargetParams": {
-				"LineOfSight": true,
-				"TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",
-				"TargetType": "Actor"
-			}
-		},
-		"_DefVersion": "1"
-	},
-	"ZombieBasic": {
-		"!ObjectScript": "res://assets/Scripts/Actors/BaseActor.gd",
-		"!ParentKey": "#BaseUndead",
-		"#ObjDetails": {
-			"Description": "A common form of @@#Tag:Undead@@ created through the reanimation of a @@#Color:Red:Corpse@@. @@#Color:Red:Zombies@@ are peaceful and docile beings almost never resorting to violence, except towards all living creatures whom they will relentlessly attack on sight. They have an innate love of helicopters, gleefully chasing after any they see fly by. But sadly, no one ever let's them ride in one.",
-			"DisplayName": "Zombie",
-			"LargeIcon": "Sprites/Zombie_Icon.png",
-			"ObjectType": "Actor",
-			"SmallIcon": "Sprites/Zombie_Icon.png",
-			"SnippetDesc": "Zombie",
-			"Tags": [],
-			"Taxonomy": [
-				"Actor"
-			]
-		},
-		"ActorData": {
-			"DropItemsSet": {
-				"": 20.0,
-				"BiteAttack_ActionPage": 5.0,
-				"Money:10": 10.0,
-				"Undead_PageBook": 1.0
-			},
-			"TitleKey": "Zombie_TitlePage",
-			"ExpValue": 80.0,
-			"Faction": "Undead",
-			"MoneyValue": 15.0
-		},
-		"SpawnEquipmentArr": [
-			"Undead_PageBook",
-			"ZombieClothes_BodyApparel",
-			"ZombieClothes_LegApparel"
-		],
-		"SpawnItemArr": [],
-		"SpawnPageArr": [
-			"MoveForward",
-			"TurnLeft",
-			"TurnRight",
-			"BasicWeaponAttack_ActionPage",
-			"BiteAttack_ActionPage"
-		],
-		"SpriteData": {
-			"SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png"
-		},
-		"UnarmedAttackData": {
-			"DamageDatas": {
-				"UnarmedDamage": {
-					"AtkPower": 20.0,
-					"AtkStat": "PhyAttack",
-					"DamageType": "Blunt",
-					"DamageVarient": 0.5,
-					"DamageVfxKey": "Blunt_DamageEffect",
-					"DefenseType": "Physical",
-					"DisplayName": "Punch",
-					"FixedBaseDamage": null
-				}
-			},
-			"DefaultAnimation": "Stab",
 			"TargetParams": {
 				"LineOfSight": true,
 				"TargetArea": "[[-1,0],[-1,1],[0,1],[1,1],[1,0]]",

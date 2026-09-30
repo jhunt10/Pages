@@ -224,6 +224,27 @@
 		},
 		"_DefVersion": "1"
 	},
+	"OldManual_PageBook": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
+		"!ParentKey": "BasePageBook_Mundane",
+		"#ObjDetails": {
+			"Description": "An old combat manual issued by @@#Color:Blue:The Military@@. Old, but still works.",
+			"DisplayName": "Old Manual",
+			"LargeIcon": "Sprites/WarManual.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/WarManual.png",
+			"SnippetDesc": "standard issue combat manual.",
+			"Tags": [
+				"PageBook"
+			],
+			"Taxonomy": [
+				"Item",
+				"Equipment",
+				"PageBook"
+			]
+		},
+		"_DefVersion": "1"
+	},
 	"TravelJournal_PageBook": {
 		"!ObjectScript": "res://assets/Scripts/Items/Equipment/BaseQueEquipment.gd",
 		"!ParentKey": "BasePageBook_Mundane",

@@ -33,11 +33,11 @@
             "NextPhase": "DemoSpawner",
             "MarkerMap": "InitEnemySpawnMap",
             "EnemySet": {
-                "ZombieBasic": {
+                "Zombie_Actor": {
                     "Weight": 10,
                     "IsUnique": false
                 },
-                "Skeleton": {
+                "Skeleton_Actor": {
                     "Weight": 10,
                     "IsUnique": false
                 }
@@ -70,7 +70,7 @@
                         {
                             "BlockType": "TriggerSpawner",
                             "WaitToFinish": false,
-                            "SpawnActorKey": "ZombieBasic",
+                            "SpawnActorKey": "Zombie_Actor",
                             "SpawnerActorId": "FirstShrineActor"
                         }
                     ]

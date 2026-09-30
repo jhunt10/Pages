@@ -1,11 +1,15 @@
 [gd_resource type="Theme" format=3 uid="uid://dwinll8pgdjhc"]
 
 [ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="1_q1jno"]
+[ext_resource type="Texture2D" uid="uid://cii4waj8287cl" path="res://assets/Sprites/UI/BackPatches/DropArrow.png" id="2_5pm3o"]
 [ext_resource type="StyleBox" uid="uid://daurgoe8xio6l" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture.tres" id="2_d2vai"]
 [ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="2_roefl"]
+[ext_resource type="StyleBox" uid="uid://wveyep5o3v34" path="res://assets/Themes/option_button_style_box_texture.tres" id="3_5pm3o"]
 [ext_resource type="StyleBox" uid="uid://kccdhpqrwauq" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture_Highlight.tres" id="3_p76xo"]
 [ext_resource type="StyleBox" uid="uid://i5caf4i4s7ob" path="res://assets/Themes/ScollBar/scroll_grabber_style_box_texture_Pressed.tres" id="4_5pm3o"]
 [ext_resource type="StyleBox" uid="uid://cyxcweatpwetw" path="res://assets/Themes/ScollBar/scroll_bar_style_box_texture.tres" id="5_gcwcg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pm3o"]
 
 [resource]
 default_font = ExtResource("2_roefl")
@@ -13,6 +17,13 @@ default_font_size = 16
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_q1jno")
+OptionButton/colors/font_color = Color(0, 0, 0, 1)
+OptionButton/font_sizes/font_size = 18
+OptionButton/icons/arrow = ExtResource("2_5pm3o")
+OptionButton/styles/hover = ExtResource("3_5pm3o")
+OptionButton/styles/normal = ExtResource("3_5pm3o")
+OptionButton/styles/pressed = ExtResource("3_5pm3o")
+Panel/styles/panel = SubResource("StyleBoxEmpty_5pm3o")
 RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
 VScrollBar/styles/grabber = ExtResource("2_d2vai")
 VScrollBar/styles/grabber_highlight = ExtResource("3_p76xo")

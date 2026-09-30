@@ -7,6 +7,20 @@ enum LimitedEffectTypes {None, Blessing, Curse, Aura, WarCry, Dance, Song}
 
 static var is_creating_effect:bool = false
 
+static func get_effect_icon(effect_key):
+	var effect_def = EffectLibrary.get_effect_def(effect_key)
+	var sprite_path:String = effect_def.get("#ObjDetails", {}).get("LargeIcon", "")
+	var load_path:String = effect_def.get('#LoadPath', "")
+	var full_path = load_path.get_base_dir().path_join(sprite_path)
+	return SpriteCache.get_sprite(full_path)
+
+static func get_effect_display_name(effect_key):
+	var effect_def = EffectLibrary.get_effect_def(effect_key)
+	var name:String = effect_def.get("#ObjDetails", {}).get("DisplayName", "")
+	if name:
+		return name
+	return effect_key
+
 static func create_effect( 
 		actor:BaseActor, 
 		source, 

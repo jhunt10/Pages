@@ -41,7 +41,7 @@ func on_trigger(_triggered_by_actor:BaseActor, game_state:GameStateData):
 		return
 		
 	var roll = randi_range(0,spawner_count-1)
-	var new_actor = ActorLibrary.create_actor("ZombieBasic", {})
+	var new_actor = ActorLibrary.create_actor("Zombie_Actor", {})
 	new_actor.TeamKey = "Enemies"
 	spawners[roll].start_spawning(new_actor)
 	

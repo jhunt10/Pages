@@ -461,7 +461,7 @@ previous_character_button = NodePath("LastActor_TextureButton")
 next_character_button = NodePath("NextActor_TextureButton")
 details_card_spawn_point = NodePath("DetailsCardSpawnPoint")
 mouse_control = NodePath("MouseOverControl")
-inventory_option_button = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/OptionButton")
+inventory_option_button = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer/OptionButton")
 skill_tree_control = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl")
 skill_tree_menu = NodePath("PanelContainer/TwoPagesContainer/Control/SkillTreeMenu")
 animation_player = NodePath("AnimationPlayer")
@@ -1094,6 +1094,7 @@ texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
 [node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton" unique_id=771993028]
+self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1201,6 +1202,7 @@ texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
 [node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Bag_EquipmentSlotButton" unique_id=1299107193]
+self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1481,6 +1483,7 @@ texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
 [node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/Trinket_EquipmentSlotButton" unique_id=711692443]
+self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1588,6 +1591,7 @@ texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
 [node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/MainHand_EquipmentSlotButton" unique_id=1118572945]
+self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1695,6 +1699,7 @@ texture = ExtResource("34_i0ocu")
 expand_mode = 1
 
 [node name="DefaultIcon" type="TextureRect" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer2/OffHand_EquipmentSlotButton" unique_id=1984418854]
+self_modulate = Color(1, 1, 1, 0.5019608)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1783,10 +1788,9 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_vertical = 3
 theme = SubResource("Theme_fevku")
-current_tab = 2
+current_tab = 0
 
 [node name="Pages" type="ScrollContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1886249644 node_paths=PackedStringArray("premade_page_set", "sets_container", "premade_page_button")]
-visible = false
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme = ExtResource("36_xueyn")
@@ -1856,6 +1860,7 @@ text = "Class Pages"
 horizontal_alignment = 1
 
 [node name="Stats" type="ScrollContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=864007836 node_paths=PackedStringArray("parent_menu", "tag_box", "stat_labels", "limit_effect_contaienr", "block_container", "block_chance_label", "block_mod_label", "main_weapon_damage_label", "off_weapon_damage_label", "damage_datas_container", "range_display", "resistances_container")]
+visible = false
 layout_mode = 2
 theme = ExtResource("36_xueyn")
 script = ExtResource("45_0r1b3")
@@ -2495,11 +2500,21 @@ custom_minimum_size = Vector2(356, 0)
 layout_mode = 2
 vertical = true
 
-[node name="OptionButton" type="OptionButton" parent="PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1374530258]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=536280181]
 layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer" unique_id=58109021]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+
+[node name="OptionButton" type="OptionButton" parent="PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer" unique_id=1374530258]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("12_dy5pv")
 selected = 0
 item_count = 4
-popup/item_0/text = "Page"
+popup/item_0/text = "Pages"
 popup/item_0/id = 0
 popup/item_1/text = "Supplies"
 popup/item_1/id = 1
@@ -2507,6 +2522,11 @@ popup/item_2/text = "Equipment"
 popup/item_2/id = 2
 popup/item_3/text = "Skill Tree"
 popup/item_3/id = 3
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer" unique_id=1361373062]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(38, 0)
+layout_mode = 2
 
 [node name="InventoryMenuPage" parent="PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=764217251 instance=ExtResource("39_0run8")]
 custom_minimum_size = Vector2(280, 384)

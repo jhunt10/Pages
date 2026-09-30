@@ -142,18 +142,24 @@ static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, hol
 	var transaction_data = {"AddedItemIds": [], "RemovedItemIds": []}
 	
 	## Tools require special logic since they can auto-switch hands
-	if holder is EquipmentHolder and (holder as EquipmentHolder).list_all_hand_indexes().has(slot_index):
+	var is_hand_slot = (holder is EquipmentHolder and (holder as EquipmentHolder).list_all_hand_indexes().has(slot_index))
+	if is_hand_slot:
 		slot_index = (holder as EquipmentHolder).get_auto_hand_index(source_item, slot_index, allow_replace)
 	
+	# Get items to be replaced
 	var old_items = holder._get_items_removed_if_new_item_added(slot_index, source_item)
 	if old_items.size() > 0 and not allow_replace:
 		print("Slot is occupied")
 		return "Slot is occupied"
+	
+	# Get Item from inventory
 	var inv_item = PlayerInventory.split_item_off_stack(source_item.ItemKey)
 	if !inv_item:
 		print("Item not found")
 		return "Item not found"
 	transering_items.append(inv_item.Id)
+	
+	# Check if Slot will accept item
 	if not holder.can_set_item_in_slot(inv_item, slot_index, allow_replace):
 		PlayerInventory.add_item(inv_item)
 		print("Invalid Item Slot")
@@ -173,10 +179,23 @@ static func try_transfer_item_from_inventory_to_holder(source_item:BaseItem, hol
 		return "Set item failed"
 	
 	for old_item in old_items:
-		if old_item and not holder.has_item(old_item.Id):
-			holder._on_item_removed(old_item.Id, true)
-			transaction_data["RemovedItemIds"].append(old_item.Id)
-			PlayerInventory.add_item(old_item)
+		if old_item:
+			# Old item was replaced, so clean up
+			if not holder.has_item(old_item.Id):
+				holder._on_item_removed(old_item.Id, true)
+				transaction_data["RemovedItemIds"].append(old_item.Id)
+				PlayerInventory.add_item(old_item)
+			elif is_hand_slot:
+				# When adding 2Hand, may need to remove offhand
+				var equipment_holder = holder as EquipmentHolder
+				equipment_holder.auto_order_hand_items()
+				var validity = equipment_holder.get_valid_state_of_item(old_item)
+				if validity != BaseItemHolder.ValidStates.Valid:
+					holder._on_item_removed(old_item.Id, true)
+					transaction_data["RemovedItemIds"].append(old_item.Id)
+					PlayerInventory.add_item(old_item)
+					
+				
 	
 	holder._on_item_added_to_slot(inv_item, slot_index)
 	holder._actor.on_held_items_change(holder.get_holder_name(), transaction_data)
