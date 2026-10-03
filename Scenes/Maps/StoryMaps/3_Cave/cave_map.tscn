@@ -13,9 +13,12 @@
 [ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="9_xk56m"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="10_7khqc"]
 [ext_resource type="Script" uid="uid://ciun3paive04n" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_ukasq"]
-[ext_resource type="Texture2D" uid="uid://nu1hhied14ht" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Rocks_SpriteSheet.png" id="13_he4cr"]
+[ext_resource type="PackedScene" uid="uid://bagk4xi03mtq0" path="res://ObjectDefs/Factions/Objects/Actors/Scenes/Shrine/shrine_actor_node.tscn" id="14_7rv3u"]
+[ext_resource type="PackedScene" uid="uid://b37n2kd20qk3a" path="res://Scenes/Combat/MapObjects/Actors/ObjectActorNode/object_actor_node.tscn" id="15_0qrgm"]
 [ext_resource type="Texture2D" uid="uid://bkmin2ryysfo" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_Icon.png" id="15_gdnlg"]
+[ext_resource type="Texture2D" uid="uid://ljb155nr7j55" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_SpriteSheet.png" id="15_ksnkx"]
 [ext_resource type="Texture2D" uid="uid://c0scdw1u8ayan" path="res://assets/Sprites/TileSets/PlayerSpawnArea_TileSet.png" id="15_q10fo"]
+[ext_resource type="Texture2D" uid="uid://imcshudekvqw" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Stalagmite_SpriteSheet.png" id="16_wthc3"]
 [ext_resource type="Texture2D" uid="uid://b1dlc5j6ue7b5" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Alter_SpriteSheet.png" id="17_b2iww"]
 [ext_resource type="Script" uid="uid://bo8k3i7agonkg" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="18_g601w"]
 [ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="19_p6fio"]
@@ -1348,6 +1351,132 @@ tile_set = SubResource("TileSet_5pode")
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="." unique_id=1231272930]
 tile_set = SubResource("TileSet_5ipcw")
 
+[node name="StalagmiteActorNode" parent="ActorTileMapLayer" unique_id=1433919763 instance=ExtResource("15_0qrgm")]
+position = Vector2(304, 432)
+actor_key = "StalagmiteActor"
+map_coor = Vector2i(9, 13)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode2" parent="ActorTileMapLayer" unique_id=994540300 instance=ExtResource("15_0qrgm")]
+position = Vector2(592, 432)
+actor_key = "StalagmiteActor"
+facing = 2
+map_coor = Vector2i(18, 13)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode3" parent="ActorTileMapLayer" unique_id=860643055 instance=ExtResource("15_0qrgm")]
+position = Vector2(208, 496)
+actor_key = "StalagmiteActor"
+facing = 1
+map_coor = Vector2i(6, 15)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode4" parent="ActorTileMapLayer" unique_id=1723527865 instance=ExtResource("15_0qrgm")]
+position = Vector2(176, 528)
+actor_key = "StalagmiteActor"
+facing = 2
+map_coor = Vector2i(5, 16)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode5" parent="ActorTileMapLayer" unique_id=1046320063 instance=ExtResource("15_0qrgm")]
+position = Vector2(656, 528)
+actor_key = "StalagmiteActor"
+facing = 1
+map_coor = Vector2i(20, 16)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode6" parent="ActorTileMapLayer" unique_id=216188859 instance=ExtResource("15_0qrgm")]
+position = Vector2(432, 560)
+actor_key = "StalagmiteActor"
+map_coor = Vector2i(13, 17)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode7" parent="ActorTileMapLayer" unique_id=1785970431 instance=ExtResource("15_0qrgm")]
+position = Vector2(304, 624)
+actor_key = "StalagmiteActor"
+facing = 2
+map_coor = Vector2i(9, 19)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode8" parent="ActorTileMapLayer" unique_id=2009077182 instance=ExtResource("15_0qrgm")]
+position = Vector2(560, 624)
+actor_key = "StalagmiteActor"
+facing = 1
+map_coor = Vector2i(17, 19)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode9" parent="ActorTileMapLayer" unique_id=676575521 instance=ExtResource("15_0qrgm")]
+position = Vector2(752, 624)
+actor_key = "StalagmiteActor"
+map_coor = Vector2i(23, 19)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode10" parent="ActorTileMapLayer" unique_id=491808436 instance=ExtResource("15_0qrgm")]
+position = Vector2(400, 720)
+actor_key = "StalagmiteActor"
+facing = 2
+map_coor = Vector2i(12, 22)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode11" parent="ActorTileMapLayer" unique_id=30748379 instance=ExtResource("15_0qrgm")]
+position = Vector2(656, 720)
+actor_key = "StalagmiteActor"
+facing = 2
+map_coor = Vector2i(20, 22)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode12" parent="ActorTileMapLayer" unique_id=658301196 instance=ExtResource("15_0qrgm")]
+position = Vector2(688, 720)
+actor_key = "StalagmiteActor"
+facing = 1
+map_coor = Vector2i(21, 22)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode13" parent="ActorTileMapLayer" unique_id=1166712426 instance=ExtResource("15_0qrgm")]
+position = Vector2(176, 752)
+actor_key = "StalagmiteActor"
+facing = 1
+map_coor = Vector2i(5, 23)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode14" parent="ActorTileMapLayer" unique_id=1301192001 instance=ExtResource("15_0qrgm")]
+position = Vector2(592, 784)
+actor_key = "StalagmiteActor"
+facing = 2
+map_coor = Vector2i(18, 24)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="StalagmiteActorNode15" parent="ActorTileMapLayer" unique_id=1191703972 instance=ExtResource("15_0qrgm")]
+position = Vector2(304, 816)
+actor_key = "StalagmiteActor"
+map_coor = Vector2i(9, 25)
+sprite_offset = Vector2i(0, -12)
+actor_sprite_sheet = ExtResource("16_wthc3")
+
+[node name="ShrineActorNode" parent="ActorTileMapLayer" unique_id=531120087 instance=ExtResource("14_7rv3u")]
+position = Vector2(464, 720)
+actor_key = "ShrineActor"
+unique_id = "FirstShrineActor"
+facing = 2
+map_coor = Vector2i(14, 22)
+sprite_offset = Vector2i(0, -9)
+sprite_w_h = Vector2i(7, 0)
+actor_sprite_sheet = ExtResource("15_ksnkx")
+
 [node name="Decor_TileMapLayer" type="TileMapLayer" parent="." unique_id=2014677235]
 visible = false
 tile_map_data = PackedByteArray("AAABAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAABAAAAAAAGAAEAAAABAAAAAAALAAIAAAAAAAAAAAANAAUAAAAAAAAAAAAMAAsAAAABAAAAAAANAAgAAAABAAAAAAAKAAkAAAAAAAAAAAAJAAMAAQACAAEAAAAKAAMAAQADAAEAAAAJAAAAAQAAAAAAAAAJAAEAAQAAAAEAAAAJAAIAAQAAAAIAAAAKAAAAAQABAAAAAAAKAAEAAQABAAEAAAAKAAIAAQABAAIAAAADAAAAAQAAAAAAAAADAAEAAQAAAAEAAAADAAIAAQAAAAIAAAAEAAAAAQABAAAAAAAEAAEAAQABAAEAAAAEAAIAAQABAAIAAAADAAMAAQACAAEAAAAEAAMAAQADAAEAAAAFAAIAAAAAAAAAAAA=")
@@ -1375,186 +1504,6 @@ spawn_actor_key = "Player"
 team_key = "Players"
 is_player = true
 map_coor = Vector2i(14, 26)
-
-[node name="SpwanNode_Stalagmite" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=817687991]
-position = Vector2(592, 784)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-facing = 2
-map_coor = Vector2i(18, 24)
-
-[node name="SpwanNode_Stalagmite2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=481158038]
-position = Vector2(688, 720)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-map_coor = Vector2i(21, 22)
-
-[node name="SpwanNode_Stalagmite3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1708990100]
-position = Vector2(656, 720)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-facing = 2
-map_coor = Vector2i(20, 22)
-
-[node name="SpwanNode_Stalagmite4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1480799361]
-position = Vector2(400, 720)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-facing = 2
-map_coor = Vector2i(12, 22)
-
-[node name="SpwanNode_Stalagmite5" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1592504890]
-position = Vector2(176, 528)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-facing = 2
-map_coor = Vector2i(5, 16)
-
-[node name="SpwanNode_Stalagmite6" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1966355047]
-position = Vector2(208, 496)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-map_coor = Vector2i(6, 15)
-
-[node name="SpwanNode_Stalagmite7" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1097780415]
-position = Vector2(176, 752)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-map_coor = Vector2i(5, 23)
-
-[node name="SpwanNode_Stalagmite8" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=847571947]
-position = Vector2(304, 816)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-map_coor = Vector2i(9, 25)
-
-[node name="SpwanNode_Stalagmite9" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=2000088733]
-position = Vector2(304, 624)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-facing = 2
-map_coor = Vector2i(9, 19)
-
-[node name="SpwanNode_Stalagmite10" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1971770992]
-position = Vector2(432, 560)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-map_coor = Vector2i(13, 17)
-
-[node name="SpwanNode_Stalagmite11" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=271984188]
-position = Vector2(592, 432)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-facing = 2
-map_coor = Vector2i(18, 13)
-
-[node name="SpwanNode_Stalagmite12" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1069762257]
-position = Vector2(560, 624)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-facing = 2
-map_coor = Vector2i(17, 19)
-
-[node name="SpwanNode_Stalagmite13" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1231909292]
-position = Vector2(656, 528)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-map_coor = Vector2i(20, 16)
-
-[node name="SpwanNode_Stalagmite14" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1590541824]
-position = Vector2(752, 624)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-map_coor = Vector2i(23, 19)
-
-[node name="SpwanNode_Stalagmite15" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=753108580]
-position = Vector2(304, 432)
-texture = ExtResource("13_he4cr")
-offset = Vector2(0, -12)
-hframes = 12
-vframes = 4
-frame = 12
-script = ExtResource("11_ukasq")
-spawn_actor_key = "StalagmiteActor"
-team_key = "Decor"
-map_coor = Vector2i(9, 13)
 
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=574221188]
 self_modulate = Color(1, 0.1, 0, 1)
@@ -1598,6 +1547,7 @@ facing = 2
 map_coor = Vector2i(20, 18)
 
 [node name="SpwanNode_Shrine" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1108205485]
+visible = false
 position = Vector2(464, 720)
 texture = ExtResource("15_gdnlg")
 offset = Vector2(0, -12)

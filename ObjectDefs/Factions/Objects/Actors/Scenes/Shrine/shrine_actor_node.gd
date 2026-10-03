@@ -1,12 +1,11 @@
+@tool
 class_name ShrineActorNode
-extends BaseActorNode
-
-func _ready() -> void:
-	super()
-	body_animation.animation_finished.connect(_on_animation_finish)
+extends ObjectActorNode
 
 func start_spawning_animation():
 	body_animation.play("flash")
+	if not body_animation.animation_finished.is_connected(_on_animation_finish):
+		body_animation.animation_finished.connect(_on_animation_finish)
 
 func play_actor_spawn_animation():
 	if Actor is SpawnerActor:

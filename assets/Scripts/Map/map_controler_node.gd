@@ -59,6 +59,13 @@ func get_map_data()->Dictionary:
 	map_data['Gates'] = get_gate_nodes()
 	return map_data
 
+func get_object_actor_nodes()->Array:
+	var out_list = []
+	for child in actor_tile_map.get_children():
+		if child is ObjectActorNode:
+			out_list.append(child)
+	return out_list
+
 func get_gate_nodes():
 	var gates = {}
 	if !gates_map_layer:

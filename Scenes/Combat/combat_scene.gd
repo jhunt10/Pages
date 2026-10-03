@@ -158,6 +158,27 @@ func load_init_state(sub_scene_data:Dictionary):
 	# Build Action Que Controller
 	QueController = ActionQueController.new()
 	
+	# Create Actors for pre-loaded ObjectActorNodes 
+	var object_nodes = MapController.get_object_actor_nodes()
+	for node:ObjectActorNode in object_nodes:
+		if not node.Actor:
+			var actor_key = node.actor_key
+			var unique_id = node.unique_id
+			var actor = null
+			if unique_id:
+				actor = ActorLibrary.get_or_create_actor(actor_key, unique_id, {})
+			else:
+				actor = ActorLibrary.create_actor(actor_key, {}, unique_id)
+			if actor:
+				node.set_actor(actor)
+		if node.Actor:
+			# Have to manualy set mapping for controller, otherwise get_or_create will duplicate the node
+			MapController.actor_nodes[node.Actor.Id] = node
+			self.add_actor(node.Actor, node.get_spawn_map_pos(), false)
+		else:
+			node.hide()
+			printerr("Failed to create Actor for ObjectActorNode: %s" % [node.name])
+	
 	camera.zoom = Vector2(2,2)
 	
 	is_story_map = sub_scene_data.get("IsStoryMap", false)

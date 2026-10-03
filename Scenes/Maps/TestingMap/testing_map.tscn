@@ -11,7 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://bds8rjmyltjys" path="res://assets/Sprites/TileSets/Decor_TileSet.png" id="8_pvt6v"]
 [ext_resource type="Script" uid="uid://o8e7ysggpw5j" path="res://assets/Scripts/Ai/PathTestingMap.gd" id="9_lqmyq"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="10_361jm"]
+[ext_resource type="PackedScene" uid="uid://b37n2kd20qk3a" path="res://Scenes/Combat/MapObjects/Actors/ObjectActorNode/object_actor_node.tscn" id="11_ittbp"]
 [ext_resource type="Script" uid="uid://ciun3paive04n" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_vji11"]
+[ext_resource type="Texture2D" uid="uid://imcshudekvqw" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Stalagmite_SpriteSheet.png" id="12_8jp2m"]
 [ext_resource type="Texture2D" uid="uid://faw2luabjjpb" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Chest_Icon.png" id="13_rsm71"]
 [ext_resource type="Texture2D" uid="uid://c3caau1752f7x" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Barrel_Icon.png" id="13_uv3xj"]
 [ext_resource type="Texture2D" uid="uid://cc1kqm82ckglk" path="res://ObjectDefs/Factions/Objects/Actors/Scenes/Lever/Lever_Icon.png" id="14_v847v"]
@@ -1307,6 +1309,14 @@ terrain_map = NodePath("../TerrainMap")
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="." unique_id=1548151820]
 tile_set = SubResource("TileSet_5ipcw")
 
+[node name="ObjectActorNode" parent="ActorTileMapLayer" unique_id=994540300 instance=ExtResource("11_ittbp")]
+position = Vector2(176, 240)
+actor_key = "StalagmiteActor"
+facing = 2
+map_coor = Vector2i(5, 7)
+sprite_offset = Vector2i(0, -16)
+actor_sprite_sheet = ExtResource("12_8jp2m")
+
 [node name="GatesTileMapLayer" type="TileMapLayer" parent="." unique_id=2064719706]
 tile_set = SubResource("TileSet_5ipcw")
 
@@ -1331,6 +1341,7 @@ facing = 2
 map_coor = Vector2i(6, 3)
 
 [node name="SpwanNode_Chest" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1653322244]
+visible = false
 position = Vector2(272, 240)
 texture = ExtResource("13_rsm71")
 script = ExtResource("11_vji11")
@@ -1341,6 +1352,7 @@ facing = 2
 map_coor = Vector2i(8, 7)
 
 [node name="SpwanNode_Chest2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1594389407]
+visible = false
 position = Vector2(208, 240)
 texture = ExtResource("13_rsm71")
 script = ExtResource("11_vji11")
@@ -1351,6 +1363,7 @@ facing = 2
 map_coor = Vector2i(6, 7)
 
 [node name="SpwanNode_Chest3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=13929341]
+visible = false
 position = Vector2(208, 208)
 texture = ExtResource("13_rsm71")
 script = ExtResource("11_vji11")
@@ -1360,6 +1373,7 @@ facing = 2
 map_coor = Vector2i(6, 6)
 
 [node name="SpwanNode_Chest4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1820103190]
+visible = false
 position = Vector2(240, 208)
 texture = ExtResource("13_rsm71")
 script = ExtResource("11_vji11")
@@ -1369,6 +1383,7 @@ facing = 2
 map_coor = Vector2i(7, 6)
 
 [node name="SpwanNode_Chest5" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=766567585]
+visible = false
 position = Vector2(272, 208)
 texture = ExtResource("13_rsm71")
 script = ExtResource("11_vji11")
