@@ -24,6 +24,7 @@ var que_display:QueInputDisplayControl:
 @export var drop_message_control:DropMessageControl
 @export var actor_placer_control:ActorPlacerControl
 @export var actor_deploy_control:ActorDeploymentControl
+@export var animation_player:AnimationPlayer
 
 
 static var Instance:CombatUiControl

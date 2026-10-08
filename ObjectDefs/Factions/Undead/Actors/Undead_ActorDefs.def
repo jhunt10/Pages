@@ -156,9 +156,7 @@
 			"MoneyValue": 15.0
 		},
 		"SpawnEquipmentArr": [
-			"Undead_PageBook",
-			"ZombieClothes_BodyApparel",
-			"ZombieClothes_LegApparel"
+			"Undead_PageBook"
 		],
 		"SpawnItemArr": [],
 		"SpawnPageArr": [
@@ -172,6 +170,11 @@
 			"SpriteSheet": "SpriteSheets/Zombie_SpriteSheet.png"
 		},
 		"UnarmedAttackData": {
+			"AttackDetails":{
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0,
+				"ActionVerb": "punched"
+			},
 			"DamageDatas": {
 				"UnarmedDamage": {
 					"AtkPower": 20.0,

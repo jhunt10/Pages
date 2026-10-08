@@ -13,7 +13,6 @@ var grid_tile_map:TileMapLayer:
 @export var item_tile_map:TileMapLayer  
 @export var ground_tile_map:TileMapLayer 
 @export var terrain_path_map:TerrainPathingMap
-@export var marker_tile_map:TileMapLayer
 @export var phase_marker_maps_holder:Node2D
 @export var player_spawn_area_tile_map:TileMapLayer
 
@@ -21,9 +20,9 @@ var grid_tile_map:TileMapLayer:
 
 @onready var target_area_display:TargetAreaDisplayNode = $TargetAreaDisplayNode
 
-static var game_state:GameStateData:
-	get:
-		return CombatRootControl.Instance.GameState
+#static var game_state:GameStateData:
+	#get:
+		#return CombatRootControl.Instance.GameState
 
 var actor_nodes = {}
 var item_nodes = {}
@@ -113,6 +112,12 @@ func get_player_spawn_area()->Array[Vector2i]:
 			cached_spawn_area = Array([], TYPE_VECTOR2I, "", null)
 			cached_spawn_area.append(Vector2i.ZERO)
 	return cached_spawn_area
+	
+func get_camera_spawn_position()->Vector2i:
+	var node = phase_marker_maps_holder.get_node("CamraSpawnNode")
+	if node and node is Sprite2D:
+		return (node as Sprite2D).position
+	return Vector2i.ZERO
 	
 
 func get_or_create_actor_node(actor:BaseActor, map_pos:MapPos, wait_to_show:bool=false)->BaseActorNode:
@@ -245,18 +250,18 @@ func _sync_positions():
 			#actor_tile_map.add_child(node)
 		#node.position = local_pos
 
-func _sync_missile_positions():
-	if Engine.is_editor_hint(): return
-	# Clean up old nodes
-	for missile_id in missile_nodes.keys():
-		if !is_instance_valid(missile_nodes[missile_id]):
-			missile_nodes.erase(missile_id)
-	for missile:BaseMissile in game_state.Missiles.values():
-		var node:MissileNode = missile_nodes.get(missile.Id, null)
-		if !node:
-			if LOGGING: printerr("Failed to find node for missile: ", missile.Id)
-			continue
-		node.sync_pos()
+#func _sync_missile_positions():
+	#if Engine.is_editor_hint(): return
+	## Clean up old nodes
+	#for missile_id in missile_nodes.keys():
+		#if !is_instance_valid(missile_nodes[missile_id]):
+			#missile_nodes.erase(missile_id)
+	#for missile:BaseMissile in game_state.Missiles.values():
+		#var node:MissileNode = missile_nodes.get(missile.Id, null)
+		#if !node:
+			#if LOGGING: printerr("Failed to find node for missile: ", missile.Id)
+			#continue
+		#node.sync_pos()
 
 func set_gate_state(gate_key:String, open:bool):
 	var gates = get_gate_nodes()

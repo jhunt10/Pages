@@ -117,15 +117,19 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, que_exe_d
 	# Handle special weapon logic 
 	if using_weapon:
 		var weapon = actor.equipment.get_primary_weapon()
-		# Create missile for ranged weapons
-		var missile_data = (weapon as BaseWeaponEquipment).get_misile_data()
-		if missile_data:
-			_create_weapon_missile()
-			return BaseSubAction.Success
-			
-			
-		var weapon_attack_details = (weapon as BaseWeaponEquipment).get_weapon_attack_details()
-		attack_details = BaseLoadObjectLibrary._merge_defs(weapon_attack_details, attack_details)
+		
+		if weapon:
+			# Create missile for ranged weapons
+			var missile_data = (weapon as BaseWeaponEquipment).get_misile_data()
+			if missile_data:
+				_create_weapon_missile()
+				return BaseSubAction.Success
+				
+			var weapon_attack_details = (weapon as BaseWeaponEquipment).get_weapon_attack_details()
+			attack_details = BaseLoadObjectLibrary._merge_defs(weapon_attack_details, attack_details)
+		else:
+			var weapon_attack_details = actor.get_unarmed_attack_details()
+			attack_details = BaseLoadObjectLibrary._merge_defs(weapon_attack_details, attack_details)
 	
 	var actor_pos = game_state.get_actor_pos(actor)
 	var missed_moved_actor = false

@@ -86,6 +86,60 @@ texture_margin_bottom = 10.0
 [sub_resource type="Theme" id="Theme_akcjn"]
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_uwwmh")
 
+[sub_resource type="Animation" id="Animation_oxcbf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uwwmh"]
+resource_name = "hide_ui"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_akcjn"]
+resource_name = "show_ui"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jdhj7"]
+_data = {
+&"RESET": SubResource("Animation_oxcbf"),
+&"hide_ui": SubResource("Animation_uwwmh"),
+&"show_ui": SubResource("Animation_akcjn")
+}
+
 [node name="CombatRootControl" type="Control" unique_id=238512877 node_paths=PackedStringArray("ui_control", "camera", "start_combat_screen", "map_background", "MapController", "dialog_controller", "GridCursor")]
 custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
@@ -144,7 +198,7 @@ no_scroll_nodes = [NodePath("CanvasLayer/CombatUiControl/ActiveCombatControl/Com
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D" unique_id=837055766]
 
-[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=1138039144 node_paths=PackedStringArray("game_over_screen", "victory_screen", "pause_menu", "actor_pointer", "active_combat_control", "target_input_display", "player_stats_panels_container", "que_input", "combat_control_panel", "stats_collection_display", "option_select_menu", "drop_message_control", "actor_placer_control", "actor_deploy_control")]
+[node name="CombatUiControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=1138039144 node_paths=PackedStringArray("game_over_screen", "victory_screen", "pause_menu", "actor_pointer", "active_combat_control", "target_input_display", "player_stats_panels_container", "que_input", "combat_control_panel", "stats_collection_display", "option_select_menu", "drop_message_control", "actor_placer_control", "actor_deploy_control", "animation_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -169,6 +223,7 @@ option_select_menu = NodePath("../OptionSelectMenu")
 drop_message_control = NodePath("../DropMessageControl")
 actor_placer_control = NodePath("ActorPlacerControl")
 actor_deploy_control = NodePath("ActorDeploymentControl")
+animation_player = NodePath("AnimationPlayer")
 
 [node name="ActorPlacerControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=1888912106 node_paths=PackedStringArray("placed_actor_label", "min_max_actor_label", "confirm_button_label", "confirm_button", "actor_buttons_container", "premade_actor_button")]
 visible = false
@@ -707,6 +762,9 @@ offset_bottom = 40.0
 [node name="QueInputControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl" unique_id=1877056674 instance=ExtResource("14_atc5n")]
 layout_mode = 1
 anchors_preset = -1
+offset_left = -91.5
+offset_top = -189.0
+offset_right = 91.5
 slide_speed = 500.0
 
 [node name="CombatLogBox" type="PanelContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl" unique_id=336077602]
@@ -837,11 +895,14 @@ text = "Refill Ammo"
 
 [node name="SpawnButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl/TestingConbatPanel/BoxContainer" unique_id=1494832706]
 layout_mode = 2
-text = "Spawn Enemy"
+text = "Spawn Actor"
 
 [node name="RecallButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl/TestingConbatPanel/BoxContainer" unique_id=875675297]
 layout_mode = 2
 text = "Recall All"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=972246867]
+libraries/ = SubResource("AnimationLibrary_jdhj7")
 
 [node name="TargetInputControl" parent="MoveableCamera2D/CanvasLayer" unique_id=1327304093 instance=ExtResource("27_4pyrd")]
 visible = false

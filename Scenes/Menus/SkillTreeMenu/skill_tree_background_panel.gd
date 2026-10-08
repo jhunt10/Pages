@@ -65,6 +65,8 @@ func _draw() -> void:
 			last_x = col.global_position.x + col.size.x - self.global_position.x
 	if index-1 < unlocked_count:
 		_target_background_fill_x = floori(self.size.x)
+	if _current_background_fill_x < 0:
+		_current_background_fill_x = _target_background_fill_x
 	
 	# Draw Lines between nodes
 	var self_global_pos = self.get_global_rect().position
@@ -103,6 +105,7 @@ func set_actor(actor:BaseActor):
 			background_fill_color = MageBGColor
 
 func set_background_progresss(value:int, total:int):
-	var percent_full = minf(value+2, total+1) / ((total+1) as float)
-	_target_background_fill_x = round(self.size.x * percent_full)
-	_current_background_fill_x = _target_background_fill_x
+	#var percent_full = minf(value+2, total+1) / ((total+1) as float)
+	#_target_background_fill_x = round(self.size.x * percent_full)
+	#_current_background_fill_x = _target_background_fill_x
+	_current_background_fill_x = -1

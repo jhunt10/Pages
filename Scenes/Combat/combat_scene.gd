@@ -22,6 +22,7 @@ var combat_map_data:Dictionary = {}
 var _current_phase_key:String = ""
 var GameState:GameStateData
 
+static var is_testing_map:bool = false
 static var is_paused:bool = false
 static var auto_targeting_enabled:bool = true
 static var _current_player_index:int = 0
@@ -126,6 +127,7 @@ func load_init_state(sub_scene_data:Dictionary):
 		return
 	
 	combat_map_data = MapLoader.get_map_data(map_key)
+	is_testing_map = combat_map_data.get("IsTestingMap", false)
 	
 	if !Instance: Instance = self
 	elif Instance != self: 
@@ -172,6 +174,7 @@ func load_init_state(sub_scene_data:Dictionary):
 			if actor:
 				node.set_actor(actor)
 		if node.Actor:
+			node.Actor.TeamKey = node.team_key
 			# Have to manualy set mapping for controller, otherwise get_or_create will duplicate the node
 			MapController.actor_nodes[node.Actor.Id] = node
 			self.add_actor(node.Actor, node.get_spawn_map_pos(), false)
@@ -180,6 +183,9 @@ func load_init_state(sub_scene_data:Dictionary):
 			printerr("Failed to create Actor for ObjectActorNode: %s" % [node.name])
 	
 	camera.zoom = Vector2(2,2)
+	camera.position = MapController.get_camera_spawn_position()
+	if combat_map_data.get("StartWithUiHidden", false):
+		ui_control.modulate = Color(1,1,1,0)
 	
 	is_story_map = sub_scene_data.get("IsStoryMap", false)
 	var starting_phase = combat_map_data.get("StartingPhase")

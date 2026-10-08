@@ -91,6 +91,18 @@ func _start_round():
 	sub_action_timer = 0
 	
 	var game_state = CombatRootControl.Instance.GameState
+	
+	
+	var had_chance = false
+	if _flagged_for_reorder:
+		_order_ques_by_speed(true)
+		had_chance = true
+	if _flagged_for_repadding:
+		_pad_ques(true)
+		had_chance = true
+	if had_chance:
+		que_ordering_changed.emit()
+	
 	AiHandler.build_action_ques()
 	#for actor:BaseActor in game_state.list_actors():
 		#if actor.use_ai:

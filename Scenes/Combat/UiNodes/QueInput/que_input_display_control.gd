@@ -87,7 +87,8 @@ func _sync_icons():
 	for action:PageItemAction in _actor.Que.list_qued_actions():
 		if _real_slots.size() > index:
 			var slot:QueDisplayButton = _real_slots[index]
-			slot.set_action(index, _actor, action)
+			var turn_index = _actor.Que.que_index_to_turn_index(index)
+			slot.set_action(turn_index, _actor, action)
 			index += 1
 		
 	for n in range(index, _actor.Que.get_max_que_size()):

@@ -40,5 +40,5 @@ func handle_input(event):
 						var index = CombatRootControl.get_player_index_of_actor(actor)
 						if index >= 0:
 							CombatRootControl.Instance.set_player_index(index)
-					else:
+					elif CombatRootControl.is_testing_map:
 						CombatRootControl.Instance.set_non_player_actor(actor)

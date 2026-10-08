@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bemdpvi328wf"]
 
-[ext_resource type="Script" uid="uid://2hjg217cyw6p" path="res://assets/Scripts/Map/map_controler_node.gd" id="1_qi44j"]
+[ext_resource type="Script" uid="uid://sd3gnp2t7btb" path="res://Scenes/Maps/StoryMaps/3_Cave/cave_map_controller.gd" id="1_xugj2"]
 [ext_resource type="Texture2D" uid="uid://b21igxb5gcqlc" path="res://assets/Sprites/TileSets/CaveFloor_TileSheet.png" id="2_4k04i"]
 [ext_resource type="Texture2D" uid="uid://dxan6lyrg8db3" path="res://assets/Sprites/TileSets/GrassPath_TileSheet.png" id="2_qobhx"]
 [ext_resource type="Texture2D" uid="uid://cws63rlm6rfno" path="res://assets/Sprites/TileSets/TerrainEditingTileSet.png" id="3_60tfp"]
@@ -15,12 +15,16 @@
 [ext_resource type="Script" uid="uid://ciun3paive04n" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_ukasq"]
 [ext_resource type="PackedScene" uid="uid://bagk4xi03mtq0" path="res://ObjectDefs/Factions/Objects/Actors/Scenes/Shrine/shrine_actor_node.tscn" id="14_7rv3u"]
 [ext_resource type="PackedScene" uid="uid://b37n2kd20qk3a" path="res://Scenes/Combat/MapObjects/Actors/ObjectActorNode/object_actor_node.tscn" id="15_0qrgm"]
-[ext_resource type="Texture2D" uid="uid://bkmin2ryysfo" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_Icon.png" id="15_gdnlg"]
 [ext_resource type="Texture2D" uid="uid://ljb155nr7j55" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Shrine_SpriteSheet.png" id="15_ksnkx"]
 [ext_resource type="Texture2D" uid="uid://c0scdw1u8ayan" path="res://assets/Sprites/TileSets/PlayerSpawnArea_TileSet.png" id="15_q10fo"]
+[ext_resource type="Shader" uid="uid://djkcxaf7mx0sw" path="res://Scenes/Maps/StoryMaps/3_Cave/magic_barrier_shader.gdshader" id="16_88jl5"]
 [ext_resource type="Texture2D" uid="uid://imcshudekvqw" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Stalagmite_SpriteSheet.png" id="16_wthc3"]
-[ext_resource type="Texture2D" uid="uid://b1dlc5j6ue7b5" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Alter_SpriteSheet.png" id="17_b2iww"]
+[ext_resource type="PackedScene" uid="uid://dqxauhjmwxfw6" path="res://Scenes/Maps/DecoreNodes/Gates/gate_sprite_node.tscn" id="16_xugj2"]
+[ext_resource type="Texture2D" uid="uid://ffcinumbjgxr" path="res://ObjectDefs/Factions/Undead/Actors/SpriteSheets/BarrierTexture.png" id="17_hpggs"]
+[ext_resource type="Texture2D" uid="uid://bufjp4d3xrcpx" path="res://Scenes/Maps/MapEditing/CameraSprite.png" id="17_wthc3"]
+[ext_resource type="PackedScene" uid="uid://s63mns1njwe7" path="res://Scenes/Maps/StoryMaps/4_Sewer/bridge_sprite_node.tscn" id="17_x2r1n"]
 [ext_resource type="Script" uid="uid://bo8k3i7agonkg" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="18_g601w"]
+[ext_resource type="Script" uid="uid://cnfqwo2sskeoe" path="res://Scenes/Maps/DecoreNodes/Bridge/bridge_sprite_node.gd" id="18_kv46f"]
 [ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="19_p6fio"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0gfa0"]
@@ -942,6 +946,48 @@ tile_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_5ipcw"]
 tile_size = Vector2i(32, 32)
 
+[sub_resource type="TileSet" id="TileSet_o3eqe"]
+tile_size = Vector2i(32, 32)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8lgs3"]
+shader = ExtResource("16_88jl5")
+
+[sub_resource type="Animation" id="Animation_xugj2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x2r1n"]
+resource_name = "open_gate"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kv46f"]
+_data = {
+&"RESET": SubResource("Animation_xugj2"),
+&"open_gate": SubResource("Animation_x2r1n")
+}
+
 [sub_resource type="TileSet" id="TileSet_eodif"]
 tile_size = Vector2i(32, 32)
 
@@ -1300,15 +1346,13 @@ glow_intensity = 3.0
 glow_bloom = 0.1
 glow_hdr_threshold = 0.9
 
-[node name="MapNode" type="Node2D" unique_id=421402345 node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
-script = ExtResource("1_qi44j")
-map_name = "Cave"
+[node name="MapNode" type="Node2D" unique_id=421402345 node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
+script = ExtResource("1_xugj2")
 zone_tile_map = NodePath("ZoneTileMapLayer")
 actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 ground_tile_map = NodePath("CaveWalls_TileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
-marker_tile_map = NodePath("PhaseController/InitEnemySpawnMap")
 phase_marker_maps_holder = NodePath("PhaseController")
 player_spawn_area_tile_map = NodePath("PlayerSpawnAreaMapLayer")
 
@@ -1471,11 +1515,192 @@ actor_sprite_sheet = ExtResource("16_wthc3")
 position = Vector2(464, 720)
 actor_key = "ShrineActor"
 unique_id = "FirstShrineActor"
+team_key = "EnemyObjects"
 facing = 2
 map_coor = Vector2i(14, 22)
 sprite_offset = Vector2i(0, -9)
 sprite_w_h = Vector2i(7, 0)
 actor_sprite_sheet = ExtResource("15_ksnkx")
+
+[node name="ShrineActorNode2" parent="ActorTileMapLayer" unique_id=272825546 instance=ExtResource("14_7rv3u")]
+position = Vector2(112, 592)
+actor_key = "ShrineActor"
+team_key = "EnemyObjects"
+facing = 2
+map_coor = Vector2i(3, 18)
+sprite_offset = Vector2i(0, -9)
+sprite_w_h = Vector2i(7, 0)
+actor_sprite_sheet = ExtResource("15_ksnkx")
+
+[node name="ShrineActorNode3" parent="ActorTileMapLayer" unique_id=929036969 instance=ExtResource("14_7rv3u")]
+position = Vector2(560, 432)
+actor_key = "ShrineActor"
+team_key = "EnemyObjects"
+facing = 2
+map_coor = Vector2i(17, 13)
+sprite_offset = Vector2i(0, -9)
+sprite_w_h = Vector2i(7, 0)
+actor_sprite_sheet = ExtResource("15_ksnkx")
+
+[node name="ShrineActorNode4" parent="ActorTileMapLayer" unique_id=1741366711 instance=ExtResource("14_7rv3u")]
+position = Vector2(336, 432)
+actor_key = "ShrineActor"
+team_key = "EnemyObjects"
+facing = 2
+map_coor = Vector2i(10, 13)
+sprite_offset = Vector2i(0, -9)
+sprite_w_h = Vector2i(7, 0)
+actor_sprite_sheet = ExtResource("15_ksnkx")
+
+[node name="BackShrine_A" parent="ActorTileMapLayer" unique_id=244656731 instance=ExtResource("14_7rv3u")]
+position = Vector2(336, 272)
+actor_key = "ShrineActor"
+unique_id = "BackShrine_A"
+team_key = "EnemyObjects"
+facing = 2
+map_coor = Vector2i(10, 8)
+sprite_offset = Vector2i(0, -9)
+sprite_w_h = Vector2i(7, 0)
+actor_sprite_sheet = ExtResource("15_ksnkx")
+
+[node name="BackShrine_B" parent="ActorTileMapLayer" unique_id=1567402974 instance=ExtResource("14_7rv3u")]
+position = Vector2(560, 272)
+actor_key = "ShrineActor"
+unique_id = "BackShrine_B"
+team_key = "EnemyObjects"
+facing = 2
+map_coor = Vector2i(17, 8)
+sprite_offset = Vector2i(0, -9)
+sprite_w_h = Vector2i(7, 0)
+actor_sprite_sheet = ExtResource("15_ksnkx")
+
+[node name="BackShrine_C" parent="ActorTileMapLayer" unique_id=87099473 instance=ExtResource("14_7rv3u")]
+position = Vector2(336, 112)
+actor_key = "ShrineActor"
+unique_id = "BackShrine_C"
+team_key = "EnemyObjects"
+facing = 2
+map_coor = Vector2i(10, 3)
+sprite_offset = Vector2i(0, -9)
+sprite_w_h = Vector2i(7, 0)
+actor_sprite_sheet = ExtResource("15_ksnkx")
+
+[node name="BackShrine_D" parent="ActorTileMapLayer" unique_id=713037889 instance=ExtResource("14_7rv3u")]
+position = Vector2(560, 112)
+actor_key = "ShrineActor"
+unique_id = "BackShrine_D"
+team_key = "EnemyObjects"
+facing = 2
+map_coor = Vector2i(17, 3)
+sprite_offset = Vector2i(0, -9)
+sprite_w_h = Vector2i(7, 0)
+actor_sprite_sheet = ExtResource("15_ksnkx")
+
+[node name="GatesTileMapLayer" type="TileMapLayer" parent="." unique_id=993446212]
+tile_set = SubResource("TileSet_o3eqe")
+
+[node name="RedGate" parent="GatesTileMapLayer" unique_id=1925801041 instance=ExtResource("16_xugj2")]
+visible = false
+modulate = Color(1, 0.25098, 0.25098, 1)
+position = Vector2(240, 256)
+offset = Vector2(0, -16)
+gate_key = "RedGate"
+
+[node name="GreenGate" parent="GatesTileMapLayer" unique_id=87164784 instance=ExtResource("16_xugj2")]
+visible = false
+modulate = Color(0.25098, 0.752941, 0.25098, 1)
+position = Vector2(544, 240)
+offset = Vector2(-16, 0)
+gate_key = "GreenGate"
+map_coor = Vector2i(17, 7)
+
+[node name="BridgeSpriteNode" parent="GatesTileMapLayer" unique_id=2022832271 instance=ExtResource("17_x2r1n")]
+visible = false
+position = Vector2(400, 336)
+
+[node name="BarrierNode" type="Node2D" parent="GatesTileMapLayer" unique_id=158484112]
+visible = false
+position = Vector2(400, 48)
+script = ExtResource("18_kv46f")
+map_coor = Vector2i(12, 1)
+
+[node name="Sprite2D" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode" unique_id=1593591159]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(0, -1)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D2" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode" unique_id=1912405051]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(32, -1)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D3" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode" unique_id=1766842860]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(64, -1)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D4" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode" unique_id=1611666474]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(96, -1)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="BarrierNode2" type="Node2D" parent="GatesTileMapLayer" unique_id=578143592]
+visible = false
+position = Vector2(368, 752)
+script = ExtResource("18_kv46f")
+map_coor = Vector2i(11, 23)
+
+[node name="Sprite2D" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode2" unique_id=1764728493]
+material = SubResource("ShaderMaterial_8lgs3")
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D2" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode2" unique_id=1326276587]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(0, 32)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D3" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode2" unique_id=1562467051]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(0, 64)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D4" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode2" unique_id=861535149]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(160, 0)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D5" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode2" unique_id=2097729172]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(160, 32)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Sprite2D6" type="Sprite2D" parent="GatesTileMapLayer/BarrierNode2" unique_id=1653195771]
+material = SubResource("ShaderMaterial_8lgs3")
+position = Vector2(160, 64)
+texture = ExtResource("17_hpggs")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GatesTileMapLayer/BarrierNode2" unique_id=285135332]
+libraries/ = SubResource("AnimationLibrary_kv46f")
 
 [node name="Decor_TileMapLayer" type="TileMapLayer" parent="." unique_id=2014677235]
 visible = false
@@ -1490,6 +1715,10 @@ tile_map_data = PackedByteArray("AAANABkAAAAIAAAAAAANABoAAAAIAAMAAAAOABkAAAALAAA
 tile_set = SubResource("TileSet_56yt5")
 
 [node name="PhaseController" type="Node2D" parent="." unique_id=389176260]
+
+[node name="CamraSpawnNode" type="Sprite2D" parent="PhaseController" unique_id=198837651]
+position = Vector2(464, 848)
+texture = ExtResource("17_wthc3")
 
 [node name="InitEnemySpawnMap" type="TileMapLayer" parent="PhaseController" unique_id=2119819355]
 tile_set = SubResource("TileSet_o1yif")
@@ -1525,17 +1754,6 @@ team_key = "Enemies"
 facing = 2
 map_coor = Vector2i(7, 15)
 
-[node name="SpwanNode_Enemey3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=934661831]
-self_modulate = Color(1, 0.1, 0, 1)
-position = Vector2(432, 176)
-texture = ExtResource("10_7khqc")
-script = ExtResource("11_ukasq")
-spawn_actor_key = "SkeletonMage"
-spawn_actor_id = "SkeletonMageBoss"
-team_key = "Enemies"
-facing = 2
-map_coor = Vector2i(13, 5)
-
 [node name="SpwanNode_Enemey4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1381738063]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(656, 592)
@@ -1546,101 +1764,17 @@ team_key = "Enemies"
 facing = 2
 map_coor = Vector2i(20, 18)
 
-[node name="SpwanNode_Shrine" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1108205485]
-visible = false
-position = Vector2(464, 720)
-texture = ExtResource("15_gdnlg")
-offset = Vector2(0, -12)
+[node name="SpwanNode_Boss" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=934661831]
+self_modulate = Color(1, 0.1, 0, 1)
+position = Vector2(432, 176)
+texture = ExtResource("10_7khqc")
 script = ExtResource("11_ukasq")
-spawn_actor_key = "ShrineActor"
-spawn_actor_id = "FirstShrineActor"
-team_key = "EnemyObjects"
+marker_name = "Boss"
+spawn_actor_key = "SkeletonMage_Actor"
+spawn_actor_id = "SkeletonMageBoss"
+team_key = "Enemies"
 facing = 2
-map_coor = Vector2i(14, 22)
-
-[node name="SpwanNode_Shrine2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1612931946]
-position = Vector2(112, 592)
-texture = ExtResource("15_gdnlg")
-offset = Vector2(0, -12)
-script = ExtResource("11_ukasq")
-spawn_actor_key = "ShrineActor"
-team_key = "EnemyObjects"
-facing = 2
-map_coor = Vector2i(3, 18)
-
-[node name="SpwanNode_Shrine3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1628266643]
-position = Vector2(560, 432)
-texture = ExtResource("15_gdnlg")
-offset = Vector2(0, -12)
-script = ExtResource("11_ukasq")
-spawn_actor_key = "ShrineActor"
-team_key = "EnemyObjects"
-facing = 2
-map_coor = Vector2i(17, 13)
-
-[node name="SpwanNode_Shrine4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1792535717]
-position = Vector2(336, 432)
-texture = ExtResource("15_gdnlg")
-offset = Vector2(0, -12)
-script = ExtResource("11_ukasq")
-spawn_actor_key = "ShrineActor"
-team_key = "EnemyObjects"
-facing = 2
-map_coor = Vector2i(10, 13)
-
-[node name="SpwanNode_Shrine5" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=740802882]
-position = Vector2(336, 272)
-texture = ExtResource("15_gdnlg")
-offset = Vector2(0, -12)
-script = ExtResource("11_ukasq")
-spawn_actor_key = "ShrineActor"
-spawn_actor_id = "BackShrine_A"
-team_key = "EnemyObjects"
-facing = 2
-map_coor = Vector2i(10, 8)
-
-[node name="SpwanNode_Shrine6" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=174764989]
-position = Vector2(560, 272)
-texture = ExtResource("15_gdnlg")
-offset = Vector2(0, -12)
-script = ExtResource("11_ukasq")
-spawn_actor_key = "ShrineActor"
-spawn_actor_id = "BackShrine_B"
-team_key = "EnemyObjects"
-facing = 2
-map_coor = Vector2i(17, 8)
-
-[node name="SpwanNode_Shrine7" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=2135753976]
-position = Vector2(336, 112)
-texture = ExtResource("15_gdnlg")
-offset = Vector2(0, -12)
-script = ExtResource("11_ukasq")
-spawn_actor_key = "ShrineActor"
-spawn_actor_id = "BackShrine_C"
-team_key = "EnemyObjects"
-facing = 2
-map_coor = Vector2i(10, 3)
-
-[node name="SpwanNode_Shrine8" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=639052576]
-position = Vector2(560, 112)
-texture = ExtResource("15_gdnlg")
-offset = Vector2(0, -12)
-script = ExtResource("11_ukasq")
-spawn_actor_key = "ShrineActor"
-spawn_actor_id = "BackShrine_D"
-team_key = "EnemyObjects"
-facing = 2
-map_coor = Vector2i(17, 3)
-
-[node name="SpwanNode_Shrine9" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1895942362]
-position = Vector2(432, 144)
-texture = ExtResource("17_b2iww")
-offset = Vector2(16, 0)
-script = ExtResource("11_ukasq")
-spawn_actor_key = "AlterActor"
-team_key = "EnemyObjects"
-facing = 2
-map_coor = Vector2i(13, 4)
+map_coor = Vector2i(13, 5)
 
 [node name="DemoSpawnerPhaseMap" type="TileMapLayer" parent="PhaseController" unique_id=780465232]
 tile_set = SubResource("TileSet_4vtjy")

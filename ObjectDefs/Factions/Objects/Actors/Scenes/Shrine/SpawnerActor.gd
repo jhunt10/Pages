@@ -39,3 +39,7 @@ func _spawn_actor():
 	CombatLogController.log_event("%s spawned %s" % [self.get_display_name(), spawning_actor.get_display_name()])
 	last_spawned_actor_id = spawning_actor.Id
 	spawning_actor = null
+	# Put in for the Shrines spawning Zomines
+	# This gets called after round ends, and turn orders are only updated on turn end / round start
+	if not CombatRootControl.QueController.execution_state == ActionQueController.ActionStates.Running:
+		CombatRootControl.QueController.clear_and_check_ques()

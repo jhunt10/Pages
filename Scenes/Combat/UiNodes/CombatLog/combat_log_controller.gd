@@ -69,6 +69,7 @@ static func log_event(event):
 		text_box.text = event
 		Instance.entries_container.add_child(text_box)
 		text_box.show()
+		Instance.auto_scroll_delayed = true
 
 func log_attack_event(event:AttackEvent):
 	var new_entry:AttackLogEntry = load("res://Scenes/Combat/UiNodes/CombatLog/Entries/attack_log_entry.tscn").instantiate()

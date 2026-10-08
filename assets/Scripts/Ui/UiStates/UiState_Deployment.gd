@@ -108,7 +108,8 @@ func start_state():
 func end_state():
 	if _logging: print("End UiState: DeployingActor")
 	deployment_control.hide()
-	deploying_actor_node.queue_free()
+	if deploying_actor_node:
+		deploying_actor_node.queue_free()
 	CombatRootControl.Instance.MapController.player_spawn_area_tile_map.hide()
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
 	
@@ -140,6 +141,8 @@ func _on_actor_selected(actor_id):
 	pass
 
 func _mouse_moved_into_spot(spot):
+	if not deploying_actor_node:
+		return
 	if state == States.Placing:
 		var is_spot_valid = _is_spot_valid(spot)
 		if is_spot_valid:

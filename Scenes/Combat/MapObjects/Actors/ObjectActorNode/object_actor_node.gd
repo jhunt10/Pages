@@ -4,6 +4,7 @@ extends BaseActorNode
 
 @export var actor_key:String
 @export var unique_id:String
+@export var team_key:String
 
 @export var facing:MapPos.Directions:
 	set(val):
@@ -27,8 +28,8 @@ extends BaseActorNode
 	set(val):
 		sprite_w_h = val
 		if actor_sprite:
-			actor_sprite.hframes = val.x
-			actor_sprite.vframes = val.y
+			actor_sprite.hframes = max(1, val.x)
+			actor_sprite.vframes = max(1, val.y)
 
 @export var actor_sprite_sheet:Texture2D:
 	set(val):

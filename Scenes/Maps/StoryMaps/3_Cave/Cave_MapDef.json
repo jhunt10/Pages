@@ -5,6 +5,7 @@
     "MapScene": "cave_map.tscn",
     "SortOrder": 3,
     "StartingPhase": "InitSpawn",
+    "StartWithUiHidden": true,
 	"TeamData": {
 		"Players": {
 			"DisplayName": "Heros",
@@ -72,6 +73,11 @@
                             "WaitToFinish": false,
                             "SpawnActorKey": "Zombie_Actor",
                             "SpawnerActorId": "FirstShrineActor"
+                        },
+                        {
+                            "BlockType": "ShowHideCombatUi",
+                            "Show": true,
+                            "WaitToFinish": false
                         }
                     ]
                 }

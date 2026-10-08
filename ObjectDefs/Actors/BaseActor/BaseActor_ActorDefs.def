@@ -40,8 +40,14 @@
 			"Speed": 0.0
 		},
 		"UnarmedAttackData": {
+			"AttackDetails":{
+				"AccuracyMod": 1.0,
+				"PotencyMod": 1.0,
+				"ActionVerb": "punched"
+			},
 			"DamageDatas": {
 				"UnarmedDamage": {
+					"IsWeaponDamage": true,
 					"DisplayName": "Punch",
 					"AtkPwrBase": 30.0,
 					"AtkPwrRange": 20.0,

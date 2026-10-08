@@ -22,7 +22,8 @@ enum BlockTypes {
 	AnimateNode,
 	StartCombat,
 	DecrementStoryIndex,
-	TriggerSpawner
+	TriggerSpawner,
+	ShowHideCombatUi
 }
 
 @export var scene_root:Node
@@ -618,6 +619,21 @@ func _handle_block(block_data:Dictionary)->bool:
 				CombatRootControl.Instance.start_combat_screen.screen_blacked_out.connect(_on_combat_start_blackout)
 			CombatRootControl.Instance.start_combat_animation()
 			_block_states["StartCombat"] = BlockStates.Playing
+			return true
+		return false
+	
+	#----------------------------------
+	#          Show/Hide Combat Ui
+	# Options:
+	#		Show: bool
+	#----------------------------------
+	if block_type == BlockTypes.ShowHideCombatUi:
+		if CombatRootControl.Instance:
+			var animation_player = CombatRootControl.Instance.ui_control.animation_player
+			if block_data.get("Show", false):
+				animation_player.play("show_ui")
+			else:
+				animation_player.play("hide_ui")
 			return true
 		return false
 	

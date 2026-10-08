@@ -6,9 +6,13 @@ extends PanelContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	refill_ammo_button.pressed.connect(refill_ammo)
-	spawn_button.pressed.connect(open_spawn_menu)
-	recall_button.pressed.connect(recall_all_actors)
+	if CombatRootControl.is_testing_map:
+		self.show()
+		refill_ammo_button.pressed.connect(refill_ammo)
+		spawn_button.pressed.connect(open_spawn_menu)
+		recall_button.pressed.connect(recall_all_actors)
+	else:
+		self.hide()
 
 func refill_ammo():
 	for actor_id in CombatRootControl.Instance.GameState._actors.keys():

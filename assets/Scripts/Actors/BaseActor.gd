@@ -195,7 +195,8 @@ func get_title_page()->PageItemTitle:
 	if !_title_page:
 		var title_key = actor_data.get("TitleKey")
 		if !title_key:
-			printerr("No Title Key found for Actor: %s" % [self.Id])
+			if not actor_data.get("IsTitleLess", false):
+				printerr("No Title Key found for Actor: %s" % [self.Id])
 			return null
 		_title_page = ItemLibrary.create_item(title_key, {})
 	return _title_page
@@ -544,6 +545,9 @@ func get_weapon_attack_target_params(target_param_key)->TargetParameters:
 func get_unarmed_attack_weapon_animation():
 	var unarmed_data = get_load_val("UnarmedAttackData")
 	return unarmed_data.get("DefaultAnimation", "")
+
+func get_unarmed_attack_details()->Dictionary:
+	return get_load_val("UnarmedAttackData", {}).get("AttackDetails", {})
 
 ## Get damage data for equippted weapon(s)
 ## If no weapons are equipt, default to Unarmed Damage Data from Actor Def

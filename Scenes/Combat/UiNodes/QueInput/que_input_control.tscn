@@ -240,11 +240,13 @@ grow_vertical = 2
 [node name="BoxContainer" type="BoxContainer" parent="." unique_id=764588661]
 layout_mode = 2
 alignment = 1
+vertical = true
 
 [node name="TabBar" type="TabBar" parent="BoxContainer" unique_id=634043456]
 layout_mode = 2
-current_tab = 0
+current_tab = 2
 clip_tabs = false
+close_with_middle_mouse = false
 tab_count = 3
 tab_0/title = "All"
 tab_1/title = "Soldier"
@@ -356,6 +358,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="FillQueButton" type="Button" parent="QueInputBackPatchContainer/Control" unique_id=247272302]
+visible = false
 layout_mode = 0
 offset_left = 270.0
 offset_top = -63.0
