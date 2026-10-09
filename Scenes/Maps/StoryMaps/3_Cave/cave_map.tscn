@@ -943,6 +943,9 @@ sources/1 = SubResource("TileSetAtlasSource_3hxgx")
 [sub_resource type="TileSet" id="TileSet_5pode"]
 tile_size = Vector2i(32, 32)
 
+[sub_resource type="TileSet" id="TileSet_eodif"]
+tile_size = Vector2i(32, 32)
+
 [sub_resource type="TileSet" id="TileSet_5ipcw"]
 tile_size = Vector2i(32, 32)
 
@@ -987,9 +990,6 @@ _data = {
 &"RESET": SubResource("Animation_xugj2"),
 &"open_gate": SubResource("Animation_x2r1n")
 }
-
-[sub_resource type="TileSet" id="TileSet_eodif"]
-tile_size = Vector2i(32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0bt41"]
 texture = ExtResource("15_q10fo")
@@ -1392,6 +1392,9 @@ tile_set = SubResource("TileSet_5pode")
 
 [node name="TargetAreaDisplayNode" parent="." unique_id=1875673446 instance=ExtResource("9_xk56m")]
 
+[node name="ItemTileMapLayer" type="TileMapLayer" parent="." unique_id=1935260253]
+tile_set = SubResource("TileSet_eodif")
+
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="." unique_id=1231272930]
 tile_set = SubResource("TileSet_5ipcw")
 
@@ -1706,9 +1709,6 @@ libraries/ = SubResource("AnimationLibrary_kv46f")
 visible = false
 tile_map_data = PackedByteArray("AAABAAQAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAABAAAAAAAGAAEAAAABAAAAAAALAAIAAAAAAAAAAAANAAUAAAAAAAAAAAAMAAsAAAABAAAAAAANAAgAAAABAAAAAAAKAAkAAAAAAAAAAAAJAAMAAQACAAEAAAAKAAMAAQADAAEAAAAJAAAAAQAAAAAAAAAJAAEAAQAAAAEAAAAJAAIAAQAAAAIAAAAKAAAAAQABAAAAAAAKAAEAAQABAAEAAAAKAAIAAQABAAIAAAADAAAAAQAAAAAAAAADAAEAAQAAAAEAAAADAAIAAQAAAAIAAAAEAAAAAQABAAAAAAAEAAEAAQABAAEAAAAEAAIAAQABAAIAAAADAAMAAQACAAEAAAAEAAMAAQADAAEAAAAFAAIAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_i35ih")
-
-[node name="ItemTileMapLayer" type="TileMapLayer" parent="." unique_id=1935260253]
-tile_set = SubResource("TileSet_eodif")
 
 [node name="PlayerSpawnAreaMapLayer" type="TileMapLayer" parent="." unique_id=862030743]
 tile_map_data = PackedByteArray("AAANABkAAAAIAAAAAAANABoAAAAIAAMAAAAOABkAAAALAAAAAAAOABoAAAALAAMAAAA=")

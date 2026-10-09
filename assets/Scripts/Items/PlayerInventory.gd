@@ -8,6 +8,8 @@ static var _stacked_item_count_by_key:Dictionary
 static var _stacked_item_id_by_key:Dictionary
 static var _held_unique_items_ids:Array
 
+static var _new_items:Array = []
+
 static var _inst:PlayerInventory
 static var Instance:PlayerInventory:
 	get:
@@ -39,17 +41,20 @@ static func spawn_item(item_key:String, count):
 	if item:
 		add_item(item, count)
 
-static func add_item(item, count:int=1):
+static func add_item(item, count:int=1, mark_as_new:bool=false):
 	var item_key = item
 	if item is BaseItem:
 		item_key = item.ItemKey
 	
 	if LOGGING: print("PlayerInventory.AddItem: Item: %s" % [item_key])
+	# Check if key exist in stacks
 	if not _stacked_item_count_by_key.keys().has(item_key):
 		var inv_item = ItemLibrary.get_static_inst_of_item(item_key)
 		if LOGGING: print("-- New Stacking Item")
 		_stacked_item_count_by_key[item_key] = count
 		_stacked_item_id_by_key[item_key] = inv_item.Id
+		if mark_as_new and not _new_items.has(item_key):
+			_new_items.append(item_key)
 	else:
 		_stacked_item_count_by_key[item_key] += count
 	if item is BaseItem and not item.Id.begins_with("INNATE:"):
@@ -88,7 +93,7 @@ static func reduce_stack_count(item_key:String, take_count:int=1):
 	var item = ItemLibrary.get_item(item_id)
 	ItemLibrary.delete_item(item)
 	_stacked_item_id_by_key.erase(item_key)
-	_stacked_item_count_by_key.erase(item_key)
+	_stacked_item_count_by_key[item_key] = 0
 	Instance.inventory_changed.emit()
 
 ## Create a new item of key and reduce stack count in Player Inventory
@@ -121,7 +126,7 @@ static func delete_item_from_inventory(item:BaseItem):
 	if not _stacked_item_id_by_key.values().has(item.Id):
 		return
 	_stacked_item_id_by_key.erase(item.ItemKey)
-	_stacked_item_count_by_key.erase(item.ItemKey)
+	_stacked_item_count_by_key[item.ItemKey] = 0
 	#else:
 		#var index = _held_unique_items_ids.find(item.Id)
 		#if index < 0:
@@ -184,4 +189,12 @@ static func build_save_data()->Dictionary:
 		save_data['StackCount'] = _stacked_item_count_by_key.get(item.ItemKey, 0)
 		out_dict[item_id] = save_data
 	return out_dict
+	
+static func is_item_new(item_key:String)->bool:
+	var temp = _new_items.duplicate()
+	return _new_items.has(item_key)
+	
+static func mark_new_item_as_seen(item_key:String):
+	if _new_items.has(item_key):
+		_new_items.erase(item_key)
 	

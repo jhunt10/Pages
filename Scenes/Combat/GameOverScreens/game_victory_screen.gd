@@ -72,7 +72,7 @@ func collect_dropped_items():
 			items_datas[item_type][item_name]['Count'] += 1
 		
 		if not (item.get_item_type() == BaseItem.ItemTypes.Money):
-			PlayerInventory.add_item(item)
+			PlayerInventory.add_item(item, 1, true)
 		CombatRootControl.Instance.GameState.delete_item(item)
 	
 	if pickup_money > 0:

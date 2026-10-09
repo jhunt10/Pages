@@ -15,14 +15,16 @@
 [ext_resource type="Texture2D" uid="uid://c46ah48rf6j3w" path="res://Scenes/Menus/CharacterMenu/Sprites/TabBackground.png" id="12_w8sf7"]
 [ext_resource type="Texture2D" uid="uid://bkps664mkkmfn" path="res://assets/Sprites/UI/DevTools/small_x.png" id="13_g3hhf"]
 [ext_resource type="Texture2D" uid="uid://5po6bgsyxtl8" path="res://Scenes/Menus/SaveLoadMenu/ButtonPressed_Patch_32_6.png" id="13_kp4n1"]
-[ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="14_ql31q"]
 [ext_resource type="Script" uid="uid://grp0e87mwv4e" path="res://Scenes/Menus/SaveLoadMenu/save_as_box.gd" id="15_1toay"]
-[ext_resource type="Texture2D" uid="uid://b0kicr71nqhmi" path="res://Scenes/Menus/StartCharacterSelectMenu/Button.png" id="16_k3e7j"]
-[ext_resource type="Texture2D" uid="uid://bn3rws8kuwp30" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonPressed.png" id="17_6a5ey"]
-[ext_resource type="Texture2D" uid="uid://gemu0x8hrvub" path="res://Scenes/Menus/StartCharacterSelectMenu/ButtonHover.png" id="18_tmbc6"]
 [ext_resource type="Script" uid="uid://bhas48yuo6t2w" path="res://Scenes/Menus/SaveLoadMenu/message_box.gd" id="19_cf6ly"]
 [ext_resource type="Script" uid="uid://b8j7ib0k44t3g" path="res://Scenes/Menus/SaveLoadMenu/comfirm_box.gd" id="21_fldcx"]
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="21_pnjmg"]
 [ext_resource type="Script" uid="uid://d0usmsabrnabv" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="22_d8lqj"]
+[ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="22_vhu4l"]
+[ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="23_mmf77"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="24_bbkjq"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="25_x2tv4"]
+[ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="29_vhu4l"]
 
 [sub_resource type="GDScript" id="GDScript_bswgy"]
 script/source = "extends TextureRect
@@ -59,11 +61,11 @@ sel_save_date_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/V
 sel_save_loaction_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/LocationContainer/LocationNameLabel")
 sel_runtime_label = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/TimeDateContainer/RuntmieLabel")
 sel_party_container = NodePath("ScaleControl/SaveDetailsControl/NinePatchRect2/VBoxContainer/PartyContainer")
-message_box = NodePath("ScaleControl/MessageBox")
-save_popup = NodePath("ScaleControl/SaveAsBox")
+message_box = NodePath("ScaleControl/MessageBoxlContainer")
+save_popup = NodePath("ScaleControl/SaveAsContainer")
 save_button = NodePath("ScaleControl/SaveDetailsControl/SaveButton")
 delete_button = NodePath("ScaleControl/SaveDetailsControl/DeleteButton")
-confirm_box = NodePath("ScaleControl/ComfirmBox")
+confirm_box = NodePath("ScaleControl/ConfirmBoxContainer")
 save_mode = true
 
 [node name="BackgroundShade" type="ColorRect" parent="." unique_id=1757059512]
@@ -772,130 +774,190 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SaveAsBox" type="NinePatchRect" parent="ScaleControl" unique_id=928971062 node_paths=PackedStringArray("name_input", "save_button", "back_button")]
+[node name="SaveAsContainer" type="PanelContainer" parent="ScaleControl" unique_id=1084273047 node_paths=PackedStringArray("name_input", "save_button", "back_button")]
 visible = false
-z_index = 1
-custom_minimum_size = Vector2(300, 150)
+custom_minimum_size = Vector2(248, 120)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -150.0
-offset_top = 64.0
-offset_right = 150.0
-offset_bottom = 214.0
-grow_horizontal = 2
-texture = ExtResource("14_ql31q")
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
-script = ExtResource("15_1toay")
-name_input = NodePath("VBoxContainer/LineEdit")
-save_button = NodePath("VBoxContainer/HBoxContainer/YesButton")
-back_button = NodePath("VBoxContainer/HBoxContainer/NoButton")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/SaveAsBox" unique_id=707582992]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_right = -12.0
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -58.0
+offset_right = 124.0
+offset_bottom = 58.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+theme = ExtResource("21_pnjmg")
+script = ExtResource("15_1toay")
+name_input = NodePath("VBoxContainer/LineEdit")
+save_button = NodePath("VBoxContainer/ButtonsContainer/OkButton")
+back_button = NodePath("VBoxContainer/ButtonsContainer/CancelButton")
 
-[node name="Label" type="Label" parent="ScaleControl/SaveAsBox/VBoxContainer" unique_id=1175338652]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/SaveAsContainer" unique_id=1257019059]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+
+[node name="Control" type="Control" parent="ScaleControl/SaveAsContainer/VBoxContainer" unique_id=743819323]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScaleControl/SaveAsContainer/VBoxContainer/Control" unique_id=995437799]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("21_pnjmg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../save"
+
+[node name="CloseButton" type="TextureButton" parent="ScaleControl/SaveAsContainer/VBoxContainer/Control" unique_id=286590093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("22_vhu4l")
+texture_pressed = ExtResource("23_mmf77")
+
+[node name="InfoButton" type="TextureButton" parent="ScaleControl/SaveAsContainer/VBoxContainer/Control" unique_id=1295525169]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("24_bbkjq")
+texture_pressed = ExtResource("25_x2tv4")
+
+[node name="Label" type="Label" parent="ScaleControl/SaveAsContainer/VBoxContainer" unique_id=1175338652]
+layout_mode = 2
 text = "Save as"
 horizontal_alignment = 1
 
-[node name="LineEdit" type="LineEdit" parent="ScaleControl/SaveAsBox/VBoxContainer" unique_id=1958603193]
+[node name="LineEdit" type="LineEdit" parent="ScaleControl/SaveAsContainer/VBoxContainer" unique_id=1958603193]
 layout_mode = 2
 alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/SaveAsBox/VBoxContainer" unique_id=2106343700]
+[node name="ButtonsContainer" type="HBoxContainer" parent="ScaleControl/SaveAsContainer/VBoxContainer" unique_id=1299773834]
 layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
+size_flags_vertical = 10
 
-[node name="NoButton" type="TextureButton" parent="ScaleControl/SaveAsBox/VBoxContainer/HBoxContainer" unique_id=595481975]
+[node name="VSeparator" type="VSeparator" parent="ScaleControl/SaveAsContainer/VBoxContainer/ButtonsContainer" unique_id=1405469559]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("16_k3e7j")
-texture_pressed = ExtResource("17_6a5ey")
-texture_hover = ExtResource("18_tmbc6")
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="ScaleControl/SaveAsBox/VBoxContainer/HBoxContainer/NoButton" unique_id=955439026]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 24
-text = "Back"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="YesButton" type="TextureButton" parent="ScaleControl/SaveAsBox/VBoxContainer/HBoxContainer" unique_id=1991318048]
+[node name="CancelButton" type="Button" parent="ScaleControl/SaveAsContainer/VBoxContainer/ButtonsContainer" unique_id=2142163461]
+custom_minimum_size = Vector2(67, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("16_k3e7j")
-texture_pressed = ExtResource("17_6a5ey")
-texture_hover = ExtResource("18_tmbc6")
+size_flags_horizontal = 3
+theme = ExtResource("21_pnjmg")
+text = " Cancel "
 
-[node name="Label" type="Label" parent="ScaleControl/SaveAsBox/VBoxContainer/HBoxContainer/YesButton" unique_id=1751590073]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 24
-text = "Save"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/SaveAsContainer/VBoxContainer/ButtonsContainer" unique_id=2061223208]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="ComfirmBox" type="NinePatchRect" parent="ScaleControl" unique_id=1521656424 node_paths=PackedStringArray("message_label", "confirm_button", "cancel_button")]
+[node name="OkButton" type="Button" parent="ScaleControl/SaveAsContainer/VBoxContainer/ButtonsContainer" unique_id=848218759]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("21_pnjmg")
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="ScaleControl/SaveAsContainer/VBoxContainer/ButtonsContainer" unique_id=1453275349]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ConfirmBoxContainer" type="PanelContainer" parent="ScaleControl" unique_id=757016187 node_paths=PackedStringArray("message_label", "confirm_button", "cancel_button")]
 visible = false
-z_index = 1
-custom_minimum_size = Vector2(300, 150)
+custom_minimum_size = Vector2(248, 120)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -150.0
-offset_top = 64.0
-offset_right = 150.0
-offset_bottom = 214.0
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -58.0
+offset_right = 124.0
+offset_bottom = 58.0
 grow_horizontal = 2
-texture = ExtResource("14_ql31q")
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
+grow_vertical = 2
+theme = ExtResource("21_pnjmg")
 script = ExtResource("21_fldcx")
 message_label = NodePath("VBoxContainer/FitScaleLabel")
-confirm_button = NodePath("VBoxContainer/HBoxContainer/YesButton")
-cancel_button = NodePath("VBoxContainer/HBoxContainer/NoButton")
+confirm_button = NodePath("VBoxContainer/ButtonsContainer/OkButton")
+cancel_button = NodePath("VBoxContainer/ButtonsContainer/CancelButton")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/ComfirmBox" unique_id=669655139]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/ConfirmBoxContainer" unique_id=1215140018]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer" unique_id=755242713]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/Control" unique_id=51362733]
 layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 12.0
-offset_right = -12.0
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("21_pnjmg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../delete_save"
 
-[node name="FitScaleLabel" type="Control" parent="ScaleControl/ComfirmBox/VBoxContainer" unique_id=996371449 node_paths=PackedStringArray("label")]
+[node name="CloseButton" type="TextureButton" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/Control" unique_id=1301602753]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("22_vhu4l")
+texture_pressed = ExtResource("23_mmf77")
+
+[node name="InfoButton" type="TextureButton" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/Control" unique_id=885088673]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("24_bbkjq")
+texture_pressed = ExtResource("25_x2tv4")
+
+[node name="Label" type="Label" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer" unique_id=1724892516]
+layout_mode = 2
+text = "Delete save file?"
+horizontal_alignment = 1
+
+[node name="FitScaleLabel" type="Control" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer" unique_id=996371449 node_paths=PackedStringArray("label")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("22_d8lqj")
@@ -903,96 +965,164 @@ label = NodePath("Label3")
 text = "Delete: Save"
 center_x = true
 
-[node name="Label3" type="Label" parent="ScaleControl/ComfirmBox/VBoxContainer/FitScaleLabel" unique_id=470289774]
+[node name="Label3" type="Label" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/FitScaleLabel" unique_id=470289774]
 layout_mode = 0
-offset_left = 43.0
-offset_top = 6.0
-offset_right = 232.0
-offset_bottom = 51.0
+offset_left = 51.0
+offset_right = 251.0
+offset_bottom = 45.0
+scale = Vector2(0.6888889, 0.6888889)
 size_flags_vertical = 3
 theme_override_font_sizes/font_size = 32
-text = "Delete: Save"
+text = "Save Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScaleControl/ComfirmBox/VBoxContainer" unique_id=1800392565]
+[node name="ButtonsContainer" type="HBoxContainer" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer" unique_id=1969377536]
 layout_mode = 2
-theme_override_constants/separation = 16
-alignment = 1
 
-[node name="NoButton" type="TextureButton" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer" unique_id=1712642732]
+[node name="VSeparator" type="VSeparator" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/ButtonsContainer" unique_id=287439758]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("16_k3e7j")
-texture_pressed = ExtResource("17_6a5ey")
-texture_hover = ExtResource("18_tmbc6")
+size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer/NoButton" unique_id=888425582]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 24
-text = "No"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="YesButton" type="TextureButton" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer" unique_id=836046228]
+[node name="CancelButton" type="Button" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/ButtonsContainer" unique_id=1996547332]
+custom_minimum_size = Vector2(67, 0)
 layout_mode = 2
-size_flags_horizontal = 4
-texture_normal = ExtResource("16_k3e7j")
-texture_pressed = ExtResource("17_6a5ey")
-texture_hover = ExtResource("18_tmbc6")
+size_flags_horizontal = 3
+theme = ExtResource("21_pnjmg")
+text = " Cancel "
 
-[node name="Label" type="Label" parent="ScaleControl/ComfirmBox/VBoxContainer/HBoxContainer/YesButton" unique_id=788564177]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 24
-text = "Yes"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/ButtonsContainer" unique_id=1062570191]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="MessageBox" type="NinePatchRect" parent="ScaleControl" unique_id=1256666936 node_paths=PackedStringArray("message_label")]
+[node name="OkButton" type="Button" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/ButtonsContainer" unique_id=575343006]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("21_pnjmg")
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="ScaleControl/ConfirmBoxContainer/VBoxContainer/ButtonsContainer" unique_id=523306526]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MessageBoxlContainer" type="PanelContainer" parent="ScaleControl" unique_id=1765769425 node_paths=PackedStringArray("message_label")]
 visible = false
-z_index = 1
-custom_minimum_size = Vector2(300, 150)
+custom_minimum_size = Vector2(248, 120)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -150.0
-offset_top = 64.0
-offset_right = 150.0
-offset_bottom = 214.0
+anchor_bottom = 0.5
+offset_left = -124.0
+offset_top = -60.5
+offset_right = 124.0
+offset_bottom = 59.5
 grow_horizontal = 2
-texture = ExtResource("14_ql31q")
-patch_margin_left = 12
-patch_margin_top = 12
-patch_margin_right = 12
-patch_margin_bottom = 12
+grow_vertical = 2
+theme = ExtResource("21_pnjmg")
 script = ExtResource("19_cf6ly")
 message_label = NodePath("VBoxContainer/Label")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/MessageBox" unique_id=1155197475]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="ScaleControl/MessageBoxlContainer" unique_id=1489976390]
+layout_mode = 2
 
-[node name="Label" type="Label" parent="ScaleControl/MessageBox/VBoxContainer" unique_id=1897463628]
+[node name="Control" type="Control" parent="ScaleControl/MessageBoxlContainer/VBoxContainer" unique_id=1367202751]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScaleControl/MessageBoxlContainer/VBoxContainer/Control" unique_id=1320726764]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("21_pnjmg")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../save"
+
+[node name="CloseButton" type="TextureButton" parent="ScaleControl/MessageBoxlContainer/VBoxContainer/Control" unique_id=529506266]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("22_vhu4l")
+texture_pressed = ExtResource("23_mmf77")
+
+[node name="InfoButton" type="TextureButton" parent="ScaleControl/MessageBoxlContainer/VBoxContainer/Control" unique_id=2015544739]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("24_bbkjq")
+texture_pressed = ExtResource("25_x2tv4")
+
+[node name="Label" type="Label" parent="ScaleControl/MessageBoxlContainer/VBoxContainer" unique_id=1897463628]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("29_vhu4l")
 theme_override_font_sizes/font_size = 24
 text = "Game Saved"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ScaleControl/MessageBoxlContainer/VBoxContainer" unique_id=280832836]
+visible = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("21_pnjmg")
+text = "Message"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="ScaleControl/MessageBoxlContainer/VBoxContainer" unique_id=875402192]
+visible = false
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="ScaleControl/MessageBoxlContainer/VBoxContainer/ButtonsContainer" unique_id=1864115287]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="ScaleControl/MessageBoxlContainer/VBoxContainer/ButtonsContainer" unique_id=66204831]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("21_pnjmg")
+text = " Cancel "
+
+[node name="VSeparator2" type="VSeparator" parent="ScaleControl/MessageBoxlContainer/VBoxContainer/ButtonsContainer" unique_id=1542863956]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OkButton" type="Button" parent="ScaleControl/MessageBoxlContainer/VBoxContainer/ButtonsContainer" unique_id=276979068]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("21_pnjmg")
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="ScaleControl/MessageBoxlContainer/VBoxContainer/ButtonsContainer" unique_id=1333593109]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3

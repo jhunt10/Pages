@@ -24,6 +24,7 @@ var selection_context:String = "Pages"
 @export var scroll_bar:VScrollBar
 @export var inventory_box_highlight:NinePatchRect
 @export var filter_option_button:LoadedOptionButton
+@export var tab_control:CustTabContainer
 
 @export var premade_inventory_sub_group:InventorySubGroupContainer
 @export var premade_item_button:InventoryItemButton
@@ -38,6 +39,7 @@ var _click_timer:float
 var _forced_filters:Array=[]
 var _menu_context:String='Page'
 var _sub_filters:Array = []
+var _new_item_groups:Dictionary = {}
 
 var _cached_size
 
@@ -124,17 +126,27 @@ func build_item_slots():
 		if not should_item_be_visible(item, ''):
 			continue
 		var sub_group_key = _get_sub_group_key(item)
+		print("SUBGROUP KEY: " + sub_group_key)
 		var button = _get_or_create_button(item)
 		var group = _get_or_create_sub_group_container(sub_group_key)
 		if not group.get_inner_container().get_children().has(button):
 			group.add_item_button(button)
+		
+		# Check if new item
+		var main_group = sub_group_key.split(":")[0]
+		if not _new_item_groups.keys().has(main_group):
+			_new_item_groups[main_group] = []
+		if not _new_item_groups[main_group].has(item.ItemKey):
+			if PlayerInventory.is_item_new(item.ItemKey):
+				_new_item_groups[main_group].append(item.ItemKey)
 		#items_container.add_child(button)
 		
 		#if item.can_stack:
 		button.set_count(PlayerInventory.get_item_stack_count(item.ItemKey))
 		
 		button.visible =  true#should_item_be_visible(item, '')
-	
+	if tab_control:
+		tab_control.set_new_item_groups(_new_item_groups)
 	# Remove and resort Item Groups
 	for sub_group_key in _item_groups.keys():
 		items_container.remove_child(_item_groups[sub_group_key])
@@ -255,7 +267,18 @@ func _on_inv_item_button_up(button:InventoryItemButton):
 	item_button_up.emit(event_context, button._item_id, -1)
 
 func _mouse_enter_button(button:InventoryItemButton):
-	mouse_enter_item.emit(event_context, button._item_id, -1)
+	var item_id = button._item_id
+	mouse_enter_item.emit(event_context, item_id, -1)
+	if PlayerInventory.is_item_new(item_id):
+		PlayerInventory.mark_new_item_as_seen(item_id)
+		for group_key in _new_item_groups.keys():
+			var index = _new_item_groups[group_key].find(item_id)
+			if index >= 0:
+				_new_item_groups[group_key].remove_at(index)
+		button.equipt_icon.hide()
+		if tab_control:
+			tab_control.set_new_item_groups(_new_item_groups)
+
 func _mouse_exit_button(button:InventoryItemButton):
 	mouse_exit_item.emit(event_context, button._item_id, -1)
 

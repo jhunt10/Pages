@@ -34,30 +34,30 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 			MainRootNode.Instance.open_save_menu()
 		elif menu == "CampMain":
 			CampMenu.Instance._sub_menu_open("")
-		else:
-			if not CharacterMenuControl.Instance:
-				var actor = StoryState.get_player_actor()
-				if actor:
-					var camp_menu = dialog_control.get_parent()
-					camp_menu.remove_child(dialog_control)
-					MainRootNode.Instance.open_character_sheet(actor, camp_menu)
-					camp_menu.add_child(dialog_control)
-			CharacterMenuControl.Instance.on_tab_pressed(menu)
+		#else:
+			#if not CharacterMenuControl.Instance:
+				#var actor = StoryState.get_player_actor()
+				#if actor:
+					#var camp_menu = dialog_control.get_parent()
+					#camp_menu.remove_child(dialog_control)
+					#MainRootNode.Instance.open_character_sheet(actor, camp_menu)
+					#camp_menu.add_child(dialog_control)
+			#CharacterMenuControl.Instance.on_tab_pressed(menu)
 	
-	if block_data.has("CloseMenu"):
-		var menu = block_data.get("CloseMenu")
-		if menu == "Equipment":
-			CharacterMenuControl.Instance.close_menu()
-		if menu == "ItemDetails":
-			CharacterMenuControl.Instance._current_details_card.start_hide()
+	#if block_data.has("CloseMenu"):
+		#var menu = block_data.get("CloseMenu")
+		#if menu == "Equipment":
+			#CharacterMenuControl.Instance.close_menu()
+		#if menu == "ItemDetails":
+			#CharacterMenuControl.Instance._current_details_card.start_hide()
 		
-	if block_data.has("EquipmentItem"):
-		var item_key = block_data.get("EquipmentItem")
-		var item = PlayerInventory.split_item_off_stack(item_key)
-		if item:
-			var actor = StoryState.get_player_actor()
-			actor.equipment.add_item_to_first_valid_slot(item)
-		CharacterMenuControl.Instance._current_details_card.start_hide()
+	#if block_data.has("EquipmentItem"):
+		#var item_key = block_data.get("EquipmentItem")
+		#var item = PlayerInventory.split_item_off_stack(item_key)
+		#if item:
+			#var actor = StoryState.get_player_actor()
+			#actor.equipment.add_item_to_first_valid_slot(item)
+		#CharacterMenuControl.Instance._current_details_card.start_hide()
 		
 	if block_data.has("EquipPage"):
 		var item_key = block_data.get("EquipPage")
@@ -68,8 +68,8 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 			var current_item = actor.pages.get_item_in_slot(slot_index)
 			actor.pages.try_set_item_in_slot(item, slot_index, true)
 			PlayerInventory.add_item(current_item)
-			if CharacterMenuControl.Instance and CharacterMenuControl.Instance._current_details_card:
-				CharacterMenuControl.Instance._current_details_card.start_hide()
+			#if CharacterMenuControl.Instance and CharacterMenuControl.Instance._current_details_card:
+				#CharacterMenuControl.Instance._current_details_card.start_hide()
 	
 	if block_data.has("RemoveEquipment"):
 		var index = block_data.get("RemoveEquipment")
@@ -86,14 +86,14 @@ func handle_block(dialog_control:DialogController, block_data:Dictionary)->bool:
 			if check_id.begins_with(item_key):
 				item_id = check_id
 				break
-		if item_id == "":
-			for check_id:String in CharacterMenuControl.Instance._actor.pages.list_item_ids():
-				if check_id.begins_with(item_key):
-					item_id = check_id
-					break
-		var item = ItemLibrary.get_item(item_id, false)
-		if item:
-			CharacterMenuControl.Instance.create_details_card(item)
+		#if item_id == "":
+			#for check_id:String in CharacterMenuControl.Instance._actor.pages.list_item_ids():
+				#if check_id.begins_with(item_key):
+					#item_id = check_id
+					#break
+		#var item = ItemLibrary.get_item(item_id, false)
+		#if item:
+			#CharacterMenuControl.Instance.create_details_card(item)
 			#var page_control = context_to_page_control(context)
 			#if page_control:
 				#page_control.highlight_slot(index)

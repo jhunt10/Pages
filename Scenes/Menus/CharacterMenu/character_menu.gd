@@ -26,6 +26,7 @@ signal closed
 @export var details_card_spawn_point:Control
 @export var mouse_control:CharacterMenuMouseControl
 @export var inventory_option_button:OptionButton
+@export var inventory_tab_bar:CustTabContainer
 @export var skill_tree_control:SkillTreePageControl
 @export var skill_tree_menu:SkillTreeMenu
 
@@ -64,7 +65,8 @@ func _ready() -> void:
 	bag_tab.parent_menu = self
 	
 	if inventory_container:
-		inventory_option_button.item_selected.connect(_on_right_page_option_select)
+		inventory_tab_bar.tab_selected.connect(_on_right_page_option_select)
+		#inventory_option_button.item_selected.connect(_on_right_page_option_select)
 		inventory_container.parent_menu = self
 		inventory_container.item_button_down.connect(on_item_button_down)
 		inventory_container.item_button_up.connect(on_item_button_up)
@@ -87,7 +89,7 @@ func _ready() -> void:
 	equipment_control.mouse_enter_item.connect(on_mouse_enter_slot)
 	equipment_control.mouse_exit_item.connect(on_mouse_exit_slot)
 	
-	name_panel.xp_bar.level_up_button_pressed.connect(_on_right_page_option_select.bind(3))
+	name_panel.xp_bar.level_up_button_pressed.connect(open_skill_menu)
 	
 	
 	skill_tree_menu.node_button_down.connect(on_item_button_down)
@@ -127,30 +129,27 @@ func set_actor(actor:BaseActor):
 	skill_tree_menu.set_actor(_actor)
 
 var _last_right_page_index = 0
-func _on_right_page_option_select(index:int):
-	if index < 3:
-		var option = inventory_option_button.get_item_text(index)
-		if option == "Pages":
-			option = "Page"
-		inventory_container.set_character_menu_context(option)
-		inventory_container.show()
-		#skill_tree_control.hide()
-		#skill_tree_menu.hide()
-		if skill_tree_menu.visible:
-			animation_player.play("close_skill_menu")
-		if inventory_option_button.selected != index:
-			inventory_option_button.selected = index
-	if index == 3:
-		inventory_option_button.selected = _last_right_page_index
-		#inventory_container.hide()
-		#skill_tree_control.show()
-		#skill_tree_menu.show()
-		if skill_tree_menu._actor != _actor:
-			skill_tree_menu.set_actor(_actor)
-		skill_tree_menu.sync(true)
-		if not skill_tree_menu.visible:
-			animation_player.play("open_skill_menu")
-	_last_right_page_index = index
+func _on_right_page_option_select(index:int, key:String):
+	inventory_container.set_character_menu_context(key)
+	#if index < 3:
+		#var option = inventory_option_button.get_item_text(index)
+		#if option == "Pages":
+			#option = "Page"
+		#inventory_container.set_character_menu_context(option)
+		#inventory_container.show()
+		##skill_tree_control.hide()
+		##skill_tree_menu.hide()
+		#if skill_tree_menu.visible:
+			#animation_player.play("close_skill_menu")
+		#if inventory_option_button.selected != index:
+			#inventory_option_button.selected = index
+
+func open_skill_menu():
+	if skill_tree_menu._actor != _actor:
+		skill_tree_menu.set_actor(_actor)
+	skill_tree_menu.sync(true)
+	if not skill_tree_menu.visible:
+		animation_player.play("open_skill_menu")
 
 func close_skill_menu():
 	animation_player.play("close_skill_menu")
@@ -194,15 +193,16 @@ func _on_close():
 	closed.emit()
 
 func _on_tab_change(index:int):
-	if inventory_option_button.selected != 3:
-		inventory_option_button.select(index)
 	match index:
 		0:
 			inventory_container.set_character_menu_context("Page")
+			inventory_tab_bar.set_tab_by_key("Page")
 		1:
 			inventory_container.set_character_menu_context("Supplies")
+			inventory_tab_bar.set_tab_by_key("Supplies")
 		2:
 			inventory_container.set_character_menu_context("Equipment")
+			inventory_tab_bar.set_tab_by_key("Equipment")
 
 func _on_next_actor_pressed():
 	current_party_actor_index = (current_party_actor_index + 1) % StoryState.list_party_actors().size()

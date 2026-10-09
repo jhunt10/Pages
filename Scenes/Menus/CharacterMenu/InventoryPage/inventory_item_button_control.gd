@@ -34,7 +34,7 @@ func set_item(item:BaseItem, count:int=0):
 	_item_id = item.Id
 	name_label.text = item.get_display_name()
 	item_icon_rect.texture = item.get_large_icon()
-	equipt_icon.visible = false
+	equipt_icon.visible = PlayerInventory.is_item_new(item.ItemKey)
 	background.texture = item.get_rarity_background()
 	set_count(count)
 

@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b81lqrxyq30xy" path="res://assets/Sprites/Paper/Legend_Background.png" id="12_3vc4t"]
 [ext_resource type="Texture2D" uid="uid://cm3afo1rfa56g" path="res://assets/Sprites/Paper/PaperButton_64.png" id="13_ywwr8"]
 [ext_resource type="Texture2D" uid="uid://d28r048mh6136" path="res://assets/Sprites/UnknownSprite.png" id="14_2qokj"]
-[ext_resource type="Texture2D" uid="uid://bkjy2j6ra337v" path="res://assets/Sprites/UI/SymbolIcons/EquiptIcon.png" id="15_4btnv"]
+[ext_resource type="Texture2D" uid="uid://bjwxan8isfhak" path="res://assets/Sprites/UI/SymbolIcons/NewItemIcon.png" id="15_7yna8"]
 [ext_resource type="Texture2D" uid="uid://0wkhsf2kgce1" path="res://assets/Sprites/UI/BackPatches/Patch_12_4_Dark.png" id="16_7ntf8"]
 [ext_resource type="Script" uid="uid://d0usmsabrnabv" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.gd" id="17_go085"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="18_330nc"]
@@ -140,7 +140,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("8_q22wh")
 item_icon_rect = NodePath("ItemIcon")
-equipt_icon = NodePath("EquiptIcon")
+equipt_icon = NodePath("NewItemtIcon")
 count_label = NodePath("CountLabel")
 button = NodePath("Button")
 name_label = NodePath("NinePatchRect/FitScaleLabel")
@@ -170,17 +170,18 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("14_2qokj")
 
-[node name="EquiptIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton" unique_id=1945494195]
+[node name="NewItemtIcon" type="TextureRect" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton" unique_id=1945494195]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -15.0
-offset_top = 49.0
-offset_right = 3.0
-offset_bottom = 70.0
+offset_left = -64.0
+offset_top = 4.0
+offset_right = -40.0
+offset_bottom = 28.0
 grow_horizontal = 0
-texture = ExtResource("15_4btnv")
+texture = ExtResource("15_7yna8")
+stretch_mode = 5
 
 [node name="CountLabel" type="Label" parent="BoxBackground/ScrollContainer/VBoxContainer/SubGroupContainer/FlowContainer/InventoryItemButton" unique_id=1866941036]
 layout_direction = 3

@@ -1,5 +1,5 @@
 class_name SaveLoadMessageBox
-extends NinePatchRect
+extends PanelContainer
 
 signal message_done
 

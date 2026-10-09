@@ -23,4 +23,4 @@ func add_items():
 		if not new_item:
 			printerr("Failed to make new item: " + item_key)
 			return
-		PlayerInventory.add_item(new_item)
+		PlayerInventory.add_item(new_item, count, true)

@@ -80,7 +80,7 @@ static func try_pickup_item(actor:BaseActor, item:BaseItem)->Dictionary:
 	if actor and actor.items.has_item(item.Id):
 		popup_data['Message'] += " to Bag"
 	else:
-		PlayerInventory.add_item(item)
+		PlayerInventory.add_item(item, 1, true)
 		popup_data['Message'] += " to Inv"
 	CombatRootControl.Instance.remove_item(item_id)
 	return popup_data

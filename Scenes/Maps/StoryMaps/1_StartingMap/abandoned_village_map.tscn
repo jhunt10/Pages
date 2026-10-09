@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cua25mnwds3kq" path="res://assets/Sprites/TileSets/House_Abandoned_TileSet.png" id="8_43d4r"]
 [ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="9_ch5r0"]
 [ext_resource type="Texture2D" uid="uid://c0scdw1u8ayan" path="res://assets/Sprites/TileSets/PlayerSpawnArea_TileSet.png" id="10_kk2ir"]
+[ext_resource type="Texture2D" uid="uid://bufjp4d3xrcpx" path="res://Scenes/Maps/MapEditing/CameraSprite.png" id="11_7u4gm"]
 [ext_resource type="Texture2D" uid="uid://c3caau1752f7x" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Barrel_Icon.png" id="11_tpwtn"]
 [ext_resource type="Texture2D" uid="uid://qhjmuxtltq5p" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Crate_Icon.png" id="13_r045x"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="14_pqc0r"]
@@ -1227,7 +1228,7 @@ sources/0 = SubResource("TileSetAtlasSource_0766f")
 [sub_resource type="TileSet" id="TileSet_o1yif"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" unique_id=950023944 node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
+[node name="MapNode" type="Node2D" unique_id=950023944 node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
 script = ExtResource("1_apokt")
 map_name = "AbandonedCabin"
 zone_tile_map = NodePath("ZoneTileMapLayer")
@@ -1235,7 +1236,6 @@ actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 ground_tile_map = NodePath("GroundTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
-marker_tile_map = NodePath("PhaseController/InitEnemySpawnMap")
 phase_marker_maps_holder = NodePath("PhaseController")
 player_spawn_area_tile_map = NodePath("PlayerSpawnAreaMapLayer")
 
@@ -1279,6 +1279,10 @@ tile_map_data = PackedByteArray("AAAFAAoAAAAAAAMAAAA=")
 tile_set = SubResource("TileSet_5dfvr")
 
 [node name="PhaseController" type="Node2D" parent="." unique_id=297953617]
+
+[node name="CamraSpawnNode" type="Sprite2D" parent="PhaseController" unique_id=1169494262]
+position = Vector2(176, 336)
+texture = ExtResource("11_7u4gm")
 
 [node name="InitEnemySpawnMap" type="TileMapLayer" parent="PhaseController" unique_id=564971024]
 tile_set = SubResource("TileSet_o1yif")

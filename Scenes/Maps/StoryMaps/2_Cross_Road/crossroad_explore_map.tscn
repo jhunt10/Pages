@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bpurspf6xbf1h" path="res://Scenes/Combat/UiNodes/TargetAreaDisplay/target_area_display_node.tscn" id="11_4c4kd"]
 [ext_resource type="Texture2D" uid="uid://c3caau1752f7x" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Barrel_Icon.png" id="13_6yk14"]
 [ext_resource type="Texture2D" uid="uid://qhjmuxtltq5p" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Crate_Icon.png" id="13_es6ns"]
+[ext_resource type="Texture2D" uid="uid://bufjp4d3xrcpx" path="res://Scenes/Maps/MapEditing/CameraSprite.png" id="13_hjipn"]
 [ext_resource type="Script" uid="uid://bo8k3i7agonkg" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="14_l6hdh"]
 [ext_resource type="Texture2D" uid="uid://c0scdw1u8ayan" path="res://assets/Sprites/TileSets/PlayerSpawnArea_TileSet.png" id="14_lt07o"]
 [ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="15_dp35v"]
@@ -1274,10 +1275,10 @@ sources/1 = SubResource("TileSetAtlasSource_3hxgx")
 [sub_resource type="TileSet" id="TileSet_ph8nr"]
 tile_size = Vector2i(32, 32)
 
-[sub_resource type="TileSet" id="TileSet_5ipcw"]
+[sub_resource type="TileSet" id="TileSet_eodif"]
 tile_size = Vector2i(32, 32)
 
-[sub_resource type="TileSet" id="TileSet_eodif"]
+[sub_resource type="TileSet" id="TileSet_5ipcw"]
 tile_size = Vector2i(32, 32)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iwdtl"]
@@ -1625,7 +1626,7 @@ sources/0 = SubResource("TileSetAtlasSource_iwdtl")
 [sub_resource type="TileSet" id="TileSet_o1yif"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" unique_id=1825867633 node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
+[node name="MapNode" type="Node2D" unique_id=1825867633 node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "phase_marker_maps_holder", "player_spawn_area_tile_map")]
 script = ExtResource("1_jto15")
 map_name = "CrossRoad"
 zone_tile_map = NodePath("ZoneTileMapLayer")
@@ -1633,7 +1634,6 @@ actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 ground_tile_map = NodePath("GroundTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
-marker_tile_map = NodePath("PhaseController/InitEnemySpawnMap")
 phase_marker_maps_holder = NodePath("PhaseController")
 player_spawn_area_tile_map = NodePath("PlayerSpawnAreaMapLayer")
 
@@ -1670,6 +1670,9 @@ tile_set = SubResource("TileSet_ph8nr")
 
 [node name="TargetAreaDisplayNode" parent="." unique_id=1490131393 instance=ExtResource("11_4c4kd")]
 
+[node name="ItemTileMapLayer" type="TileMapLayer" parent="." unique_id=1534550715]
+tile_set = SubResource("TileSet_eodif")
+
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="." unique_id=1463078617]
 tile_set = SubResource("TileSet_5ipcw")
 
@@ -1678,15 +1681,16 @@ visible = false
 tile_map_data = PackedByteArray("AAAOAAgAAAAAAAEAAAAHAAgAAAAAAAAAAAAPAAkAAAAAAAEAAAAOAA4AAAAAAAAAAAAQAA0AAAAAAAEAAAAGAAwAAAAAAAEAAAAMAAgAAAAAAAAAAAANAAgAAAAAAAAAAAA=")
 tile_set = SubResource("TileSet_i35ih")
 
-[node name="ItemTileMapLayer" type="TileMapLayer" parent="." unique_id=1534550715]
-tile_set = SubResource("TileSet_eodif")
-
 [node name="PlayerSpawnAreaMapLayer" type="TileMapLayer" parent="." unique_id=1517757885]
 visible = false
 tile_map_data = PackedByteArray("AAALAAsAAAADAAMAAAAKAAsAAAABAAMAAAA=")
 tile_set = SubResource("TileSet_m2avc")
 
 [node name="PhaseController" type="Node2D" parent="." unique_id=1612386414]
+
+[node name="CamraSpawnNode" type="Sprite2D" parent="PhaseController" unique_id=308535]
+position = Vector2(336, 368)
+texture = ExtResource("13_hjipn")
 
 [node name="InitEnemySpawnMap" type="TileMapLayer" parent="PhaseController" unique_id=696627238]
 tile_set = SubResource("TileSet_o1yif")

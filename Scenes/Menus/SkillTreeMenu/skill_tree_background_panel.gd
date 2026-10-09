@@ -10,7 +10,7 @@ const MageBGColor = Color("E08686")
 @export var parent_control:SkillTreeMenu
 @export var background_fill_speed:int = 200
 var _target_background_fill_x:int
-var _current_background_fill_x:int
+var _current_background_fill_x:int = -1
 
 var background_fill_color = SoldierBGColor
 
@@ -65,7 +65,7 @@ func _draw() -> void:
 			last_x = col.global_position.x + col.size.x - self.global_position.x
 	if index-1 < unlocked_count:
 		_target_background_fill_x = floori(self.size.x)
-	if _current_background_fill_x < 0:
+	if _current_background_fill_x <= 0:
 		_current_background_fill_x = _target_background_fill_x
 	
 	# Draw Lines between nodes

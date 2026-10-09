@@ -348,7 +348,7 @@ func load_save_data(data:Dictionary):
 			printerr("StoryStateData.load_save_data: Item with id '%s' is invalid: %s" % [item_id, invalid_reason])
 			continue
 		if item:
-			PlayerInventory.add_item(item, inv_data[item_id].get('StackCount', 1))
+			PlayerInventory.add_item(item, inv_data[item_id].get('StackCount', 1), false)
 		else:
 			printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
 	

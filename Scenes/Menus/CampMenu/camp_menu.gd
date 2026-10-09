@@ -51,8 +51,8 @@ func _ready() -> void:
 		shop_button.disabled = true
 	if StoryState.get_story_flag("CampScribeDisabled"):
 		system_button.disabled = true
-	StoryState.title_skills_changed.connect(check_levels)
-	check_levels()
+	StoryState.title_skills_changed.connect(check_for_new_stuff)
+	check_for_new_stuff()
 	
 	#var location = StoryState.get_location()
 	#if location != "":
@@ -65,14 +65,20 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 var _showed_level_up_already = false
-func check_levels():
-	var can_level = false
+func check_for_new_stuff():
+	var has_new_thing = false
+	var can_level_up = false
 	for actor:BaseActor in StoryState.list_party_actors():
 		if actor.get_unspent_skill_points() > 0:
-			can_level = true
+			can_level_up = true
 			break
-	if can_level and not _showed_level_up_already:
+	if can_level_up and not _showed_level_up_already:
+		has_new_thing = true
+	if PlayerInventory._new_items.size() > 0:
+		has_new_thing = true
+	if has_new_thing:
 		character_button.text = "+ Party"
+		_showed_level_up_already = true
 	else:
 		_showed_level_up_already = true
 		character_button.text = "Party"
@@ -112,7 +118,8 @@ func _on_explore_button():
 	MainRootNode.Instance.open_map_selection_menu()
 
 func _on_prepare_button():
-	MainRootNode.Instance.open_character_sheet()
+	var menu = MainRootNode.Instance.open_character_sheet()
+	menu.closed.connect(on_char_menu_closed)
 	#if character_menu and CharacterMenuControl.Instance != null:
 		#character_menu.show_menu()
 	#else:
@@ -121,7 +128,7 @@ func _on_prepare_button():
 		#character_menu.menu_closed.connect(on_char_menu_closed)
 
 func on_char_menu_closed():
-	check_levels()
+	check_for_new_stuff()
 	pass
 
 func _on_records():

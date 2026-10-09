@@ -1,0 +1,52 @@
+[gd_resource type="Theme" format=3 uid="uid://bmpl5mlcnchsm"]
+
+[ext_resource type="FontFile" uid="uid://0kbg00s43xf0" path="res://assets/Fonts/8bit.ttf" id="1_2er3t"]
+[ext_resource type="Texture2D" uid="uid://7x0clyrtcupf" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18.png" id="2_425pv"]
+[ext_resource type="Texture2D" uid="uid://30ow80fhsx2f" path="res://assets/Sprites/UI/BackPatches/FancyBackPatch_64_18_tab_tab.png" id="3_0h45c"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1084u"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+texture = ExtResource("2_425pv")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+texture_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hvqxb"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+texture = ExtResource("3_0h45c")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_brc4x"]
+content_margin_left = 20.0
+content_margin_top = 5.0
+content_margin_right = 20.0
+texture = ExtResource("3_0h45c")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ynpcx"]
+content_margin_left = 15.0
+content_margin_top = 5.0
+content_margin_right = 15.0
+texture = ExtResource("3_0h45c")
+texture_margin_left = 18.0
+texture_margin_top = 18.0
+texture_margin_right = 18.0
+
+[resource]
+TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)
+TabContainer/colors/font_unselected_color = Color(0.49803922, 0, 0, 1)
+TabContainer/fonts/font = ExtResource("1_2er3t")
+TabContainer/styles/panel = SubResource("StyleBoxTexture_1084u")
+TabContainer/styles/tab_hovered = SubResource("StyleBoxTexture_hvqxb")
+TabContainer/styles/tab_selected = SubResource("StyleBoxTexture_brc4x")
+TabContainer/styles/tab_unselected = SubResource("StyleBoxTexture_ynpcx")

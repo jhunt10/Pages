@@ -91,7 +91,7 @@ func items_to_inventory():
 			if !new_item:
 				printerr("DevTools.items_to_inventory: Failed to create item '%s'." % [new_item_id])
 			else:
-				PlayerInventory.add_item(new_item)
+				PlayerInventory.add_item(new_item, 1, true)
 			
 
 func add_xp_to_party():

@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b37n2kd20qk3a" path="res://Scenes/Combat/MapObjects/Actors/ObjectActorNode/object_actor_node.tscn" id="11_ittbp"]
 [ext_resource type="Script" uid="uid://ciun3paive04n" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="11_vji11"]
 [ext_resource type="Texture2D" uid="uid://imcshudekvqw" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Stalagmite_SpriteSheet.png" id="12_8jp2m"]
+[ext_resource type="Texture2D" uid="uid://bufjp4d3xrcpx" path="res://Scenes/Maps/MapEditing/CameraSprite.png" id="13_8jp2m"]
 [ext_resource type="Texture2D" uid="uid://faw2luabjjpb" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Chest_Icon.png" id="13_rsm71"]
 [ext_resource type="Texture2D" uid="uid://c3caau1752f7x" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Barrel_Icon.png" id="13_uv3xj"]
 [ext_resource type="Texture2D" uid="uid://cc1kqm82ckglk" path="res://ObjectDefs/Factions/Objects/Actors/Scenes/Lever/Lever_Icon.png" id="14_v847v"]
@@ -1254,14 +1255,13 @@ sources/0 = SubResource("TileSetAtlasSource_jyrfs")
 [sub_resource type="TileSet" id="TileSet_r8ipj"]
 tile_size = Vector2i(32, 32)
 
-[node name="MapNode" type="Node2D" unique_id=165261821 node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "marker_tile_map", "phase_marker_maps_holder", "player_spawn_area_tile_map", "gates_map_layer")]
+[node name="MapNode" type="Node2D" unique_id=165261821 node_paths=PackedStringArray("zone_tile_map", "actor_tile_map", "item_tile_map", "ground_tile_map", "terrain_path_map", "phase_marker_maps_holder", "player_spawn_area_tile_map", "gates_map_layer")]
 script = ExtResource("1_mpwod")
 zone_tile_map = NodePath("ZoneTileMapLayer")
 actor_tile_map = NodePath("ActorTileMapLayer")
 item_tile_map = NodePath("ItemTileMapLayer")
 ground_tile_map = NodePath("GroundTileMapLayer")
 terrain_path_map = NodePath("TerrainMap")
-marker_tile_map = NodePath("PhaseController/InitEnemySpawnMap")
 phase_marker_maps_holder = NodePath("PhaseController")
 player_spawn_area_tile_map = NodePath("PlayerSpawnAreaMapLayer")
 gates_map_layer = NodePath("GatesTileMapLayer")
@@ -1326,6 +1326,10 @@ tile_set = SubResource("TileSet_5ipcw")
 
 [node name="PhaseController" type="Node2D" parent="." unique_id=2145328190]
 
+[node name="CamraSpawnNode" type="Sprite2D" parent="PhaseController" unique_id=1370528622]
+position = Vector2(240, 240)
+texture = ExtResource("13_8jp2m")
+
 [node name="InitEnemySpawnMap" type="TileMapLayer" parent="PhaseController" unique_id=1391768509]
 tile_set = SubResource("TileSet_5ipcw")
 
@@ -1341,7 +1345,6 @@ facing = 2
 map_coor = Vector2i(6, 3)
 
 [node name="SpwanNode_Chest" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1653322244]
-visible = false
 position = Vector2(272, 240)
 texture = ExtResource("13_rsm71")
 script = ExtResource("11_vji11")
