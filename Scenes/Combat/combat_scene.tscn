@@ -25,15 +25,18 @@
 [ext_resource type="Texture2D" uid="uid://cwsvq3qu6228n" path="res://assets/Sprites/UI/QueInputAndDisplay/page_button.png" id="24_5fn7e"]
 [ext_resource type="Script" uid="uid://dgtpyae06p7u1" path="res://Scenes/Combat/GameOverScreens/game_over_screen.gd" id="25_byrc6"]
 [ext_resource type="Script" uid="uid://b44rluk4ssyrk" path="res://Scenes/Combat/UiNodes/CameraLock/camera_lock_control.gd" id="25_ig6gl"]
+[ext_resource type="PackedScene" uid="uid://b31qsbkqtucn1" path="res://Scenes/Combat/UiNodes/ActorDeployer/deploy_actor_button_control.tscn" id="25_jdhj7"]
 [ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="25_oxcbf"]
 [ext_resource type="Texture2D" uid="uid://b22scetewh1tj" path="res://ObjectDefs/Items/Supplies/Potions/HealthPotions/Sprites/HealthPotion_M_L.png" id="25_q2xye"]
 [ext_resource type="Script" uid="uid://cgp1jmgsjdtko" path="res://Scenes/Combat/GameOverScreens/game_victory_screen.gd" id="26_1uhkb"]
+[ext_resource type="Texture2D" uid="uid://crkmao7mrw884" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/RogueIcon.png" id="26_akcjn"]
 [ext_resource type="Texture2D" uid="uid://e0lb1vqlst3i" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Locked.png" id="26_muuhh"]
-[ext_resource type="Texture2D" uid="uid://b6u5htxioouqh" path="res://Scenes/Dialog/DialogBox/UnknownSpeakerPort.png" id="26_uwwmh"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="27_3mvka"]
 [ext_resource type="PackedScene" uid="uid://dom8hfmbknird" path="res://Scenes/Combat/UiNodes/TargetInputControl/target_input_control.tscn" id="27_4pyrd"]
 [ext_resource type="Script" uid="uid://t6ngc1cjue4l" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_control.gd" id="27_7037i"]
 [ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
+[ext_resource type="Texture2D" uid="uid://q6vde2mfu8cc" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/PriestIcon.png" id="27_jdhj7"]
+[ext_resource type="Texture2D" uid="uid://cx5xeyhkwqh0s" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/MageIcon.png" id="28_igf72"]
 [ext_resource type="Script" uid="uid://bfotnok8fnfyt" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_card.gd" id="28_lvk4q"]
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
 [ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="29_vvabq"]
@@ -473,8 +476,7 @@ offset_bottom = 40.0
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="ActorDeploymentControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=741335626 node_paths=PackedStringArray("close_button", "cancel_button", "sub_actors_container", "sub_actors_options_container", "premade_sub_actor_option")]
-visible = false
+[node name="ActorDeploymentControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=741335626 node_paths=PackedStringArray("close_button", "cancel_button", "sub_actors_container", "sub_actors_options_container", "premade_sub_actor_option", "actor_buttons_control")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -483,11 +485,12 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("19_4pyrd")
-close_button = NodePath("VBoxContainer/PanelContainer2/VBoxContainer/Control/CloseButton")
-cancel_button = NodePath("VBoxContainer/PanelContainer2/VBoxContainer/ButtonsContainer/CancelButton")
-sub_actors_container = NodePath("VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer")
-sub_actors_options_container = NodePath("VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer")
-premade_sub_actor_option = NodePath("VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer/SubDeployActorOptionContainer")
+close_button = NodePath("VBoxContainer/PanelContainer/MainContainer/Control/CloseButton")
+cancel_button = NodePath("VBoxContainer/PanelContainer/MainContainer/ButtonsContainer/CancelButton")
+sub_actors_container = NodePath("VBoxContainer/PanelContainer/MainContainer/SubActorsContainer")
+sub_actors_options_container = NodePath("VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer")
+premade_sub_actor_option = NodePath("VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/SubDeployActorOptionContainer")
+actor_buttons_control = NodePath("VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/DeployActorButtonControl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl" unique_id=1336410232]
 layout_mode = 1
@@ -507,19 +510,19 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer" unique_id=1084273047]
+[node name="PanelContainer" type="PanelContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer" unique_id=1084273047]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("43_igf72")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2" unique_id=1257019059]
+[node name="MainContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer" unique_id=1257019059]
 layout_mode = 2
 
-[node name="Control" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=743819323]
+[node name="Control" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer" unique_id=743819323]
 custom_minimum_size = Vector2(240, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/Control" unique_id=995437799]
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/Control" unique_id=995437799]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -534,7 +537,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "P:/.../deploy_actor.exe"
 
-[node name="CloseButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/Control" unique_id=286590093]
+[node name="CloseButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/Control" unique_id=286590093]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -546,7 +549,7 @@ grow_horizontal = 0
 texture_normal = ExtResource("49_8qg5x")
 texture_pressed = ExtResource("50_a7rqi")
 
-[node name="InfoButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/Control" unique_id=1295525169]
+[node name="InfoButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/Control" unique_id=1295525169]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -559,46 +562,52 @@ grow_horizontal = 0
 texture_normal = ExtResource("48_h3d2t")
 texture_pressed = ExtResource("49_gn1mm")
 
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1370215681]
+[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer" unique_id=1370215681]
 layout_mode = 2
 text = "Select Spot to deploy. 
 Click and drag to rotate. "
 horizontal_alignment = 1
 
-[node name="SubActorsContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1288752718]
+[node name="SubActorsContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer" unique_id=1288752718]
 layout_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer" unique_id=324930952]
+[node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer" unique_id=324930952]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
-[node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer" unique_id=1998102073]
+[node name="DeployActorButtonControl" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer" unique_id=1899481888 instance=ExtResource("25_jdhj7")]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer" unique_id=1998102073]
+visible = false
 layout_mode = 2
 text = "Deploy with:"
 horizontal_alignment = 1
 
-[node name="SubOptionsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer" unique_id=653984510]
+[node name="SubOptionsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer" unique_id=653984510]
+visible = false
 layout_mode = 2
 alignment = 1
 
-[node name="SubDeployActorOptionContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer" unique_id=1274161607]
+[node name="SubDeployActorOptionContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=1274161607]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="CheckBox" type="CheckBox" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer/SubDeployActorOptionContainer" unique_id=106320017]
+[node name="VBoxContainer" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=1110263049]
 layout_mode = 2
-flat = true
+alignment = 1
 
-[node name="PortraitBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer/SubDeployActorOptionContainer" unique_id=179561401]
+[node name="PortraitBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer" unique_id=179561401]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("25_oxcbf")
-expand_mode = 5
+expand_mode = 3
 stretch_mode = 5
 
-[node name="PortraitTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer/SubDeployActorOptionContainer/PortraitBackground" unique_id=1067474361]
+[node name="PortraitTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer/PortraitBackground" unique_id=1067474361]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -609,26 +618,26 @@ offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("26_uwwmh")
+texture = ExtResource("26_akcjn")
 expand_mode = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer" unique_id=2125021228]
+[node name="CheckBox" type="CheckBox" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer" unique_id=106320017]
 layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="CheckBox2" type="CheckBox" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer/HBoxContainer2" unique_id=1528387014]
-layout_mode = 2
+size_flags_horizontal = 4
 flat = true
 
-[node name="PortraitBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer/HBoxContainer2" unique_id=1505248729]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=1264508262]
+layout_mode = 2
+alignment = 1
+
+[node name="PortraitBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer2" unique_id=1785455493]
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("25_oxcbf")
-expand_mode = 5
+expand_mode = 3
 stretch_mode = 5
 
-[node name="PortraitTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer/SubOptionsContainer/HBoxContainer2/PortraitBackground" unique_id=1091124742]
+[node name="PortraitTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer2/PortraitBackground" unique_id=228970558]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -639,41 +648,76 @@ offset_right = -1.0
 offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("26_uwwmh")
+texture = ExtResource("27_jdhj7")
 expand_mode = 1
 
-[node name="ColorRect2" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/SubActorsContainer" unique_id=759835681]
+[node name="CheckBox" type="CheckBox" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer2" unique_id=1192226784]
+layout_mode = 2
+size_flags_horizontal = 4
+flat = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=1760070495]
+layout_mode = 2
+alignment = 1
+
+[node name="PortraitBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer3" unique_id=485213894]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("25_oxcbf")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PortraitTextureRect" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer3/PortraitBackground" unique_id=576668396]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("28_igf72")
+expand_mode = 1
+
+[node name="CheckBox" type="CheckBox" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer3" unique_id=892406767]
+layout_mode = 2
+size_flags_horizontal = 4
+flat = true
+
+[node name="ColorRect2" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/SubActorsContainer" unique_id=759835681]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 color = Color(0.29803923, 0.29803923, 0.29803923, 1)
 
-[node name="HSeparator" type="HSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=692153727]
+[node name="HSeparator" type="HSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer" unique_id=692153727]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="ButtonsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1299773834]
+[node name="ButtonsContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer" unique_id=1299773834]
 layout_mode = 2
 
-[node name="VSeparator" type="VSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=1405469559]
+[node name="VSeparator" type="VSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/ButtonsContainer" unique_id=1405469559]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CancelButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=2142163461]
+[node name="CancelButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/ButtonsContainer" unique_id=2142163461]
 custom_minimum_size = Vector2(67, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("43_igf72")
 text = " Cancel "
 
-[node name="VSeparator2" type="VSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=2061223208]
+[node name="VSeparator2" type="VSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/ButtonsContainer" unique_id=2061223208]
 visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="OkButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=848218759]
+[node name="OkButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/ButtonsContainer" unique_id=848218759]
 visible = false
 custom_minimum_size = Vector2(67, 0)
 layout_mode = 2
@@ -681,12 +725,12 @@ size_flags_horizontal = 3
 theme = ExtResource("43_igf72")
 text = "Ok"
 
-[node name="VSeparator3" type="VSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer/ButtonsContainer" unique_id=1453275349]
+[node name="VSeparator3" type="VSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/ButtonsContainer" unique_id=1453275349]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HSeparator2" type="HSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer2/VBoxContainer" unique_id=1870044746]
+[node name="HSeparator2" type="HSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer" unique_id=1870044746]
 visible = false
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
@@ -706,6 +750,7 @@ offset_right = -8.0
 grow_horizontal = 0
 
 [node name="ActiveCombatControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=1385019995]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

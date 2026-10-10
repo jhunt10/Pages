@@ -8,6 +8,7 @@ signal cancled
 @export var sub_actors_container:BoxContainer
 @export var sub_actors_options_container:BoxContainer
 @export var premade_sub_actor_option:BoxContainer
+@export var actor_buttons_control:DeployActorButtons
 var sub_actor_check_boxes:Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
@@ -30,20 +31,21 @@ func set_deploying_actor(carrier:CarrierActor, actor:BaseActor):
 		if not child == premade_sub_actor_option:
 			child.queue_free()
 	
-	if actor is CarrierActor:
-		sub_actors_container.show()
-		for child:BaseActor in carrier.list_carried_actors():
-			if child == actor:
-				continue
-			var option = premade_sub_actor_option.duplicate()
-			var portarit :TextureRect= option.get_node("PortraitBackground/PortraitTextureRect")
-			portarit.texture = child.get_small_icon()
-			var check_box = option.get_node("CheckBox")
-			sub_actor_check_boxes[child.Id] = check_box
-			sub_actors_options_container.add_child(option)
-			option.show()
-	else:
-		sub_actors_container.hide()
+	sub_actors_container.show()
+	#if actor is CarrierActor:
+		#sub_actors_container.show()
+		#for child:BaseActor in carrier.list_carried_actors():
+			#if child == actor:
+				#continue
+			#var option = premade_sub_actor_option.duplicate()
+			#var portarit :TextureRect= option.get_node("PortraitBackground/PortraitTextureRect")
+			#portarit.texture = child.get_small_icon()
+			#var check_box = option.get_node("CheckBox")
+			#sub_actor_check_boxes[child.Id] = check_box
+			#sub_actors_options_container.add_child(option)
+			#option.show()
+	#else:
+		#sub_actors_container.hide()
 
 func list_selected_sub_actor_ids()->Array:
 	var out_list = []

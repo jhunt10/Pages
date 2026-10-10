@@ -1,0 +1,79 @@
+{
+	"Deploy_ActionPage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
+		"#ObjDetails": {
+			"Description": "Deploy a carried ally.",
+			"DisplayName": "Deploy",
+			"LargeIcon": "Sprites/Deploy_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Deploy_Icon.png",
+			"SnippetDesc": "deploy",
+			"Tags": [
+				"Deploy"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"ActionVerb": "deployed"
+			},
+			"DamageDatas": {
+			},
+			"Preview": {
+				"PreviewDamageKey": "WeaponDamage",
+				"PreviewTargetKey": "Deployment"
+			},
+			"SubActions": {
+				"WeaponMotionAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
+					"#FrameIndex": 11.0,
+					"#SubIndex": 2.0,
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				},
+				"WeaponReadyAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
+					"#FrameIndex": 5.0,
+					"#SubIndex": 0.0,
+					"Animation": "Default",
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				},
+				"GetDeploymentTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Deployment/SubAct_DeploymentTarget.gd",
+					"#FrameIndex": 10.0,
+					"#SubIndex": 0.0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": true,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam1"
+				}
+			},
+			"TargetParams": {
+				"TargetParam1": {
+					"LineOfSight": true,
+					"TargetArea": "[[-1,1],[0,1],[1,1]]",
+					"TargetType": "Actor"
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	}
+}

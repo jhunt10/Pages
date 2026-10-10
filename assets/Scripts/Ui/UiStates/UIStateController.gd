@@ -1,6 +1,6 @@
 class_name UiStateController
 
-enum UiStates {ActionInput, ExecRound, PauseMenu, CharacterSheet, PlaceActors, DeployActor, EndScreen, SpawnActor}
+enum UiStates {ActionInput, ExecRound, PauseMenu, CharacterSheet, PlaceActors, DeployActor, DeployOnQue, EndScreen, SpawnActor}
 
 var _state_scripts = {
 	UiStates.ActionInput: "res://assets/Scripts/Ui/UiStates/UiState_ActionInput.gd",
@@ -9,6 +9,7 @@ var _state_scripts = {
 	UiStates.CharacterSheet: "res://assets/Scripts/Ui/UiStates/UiState_CharacterSheet.gd",
 	UiStates.PlaceActors: "res://assets/Scripts/Ui/UiStates/UiState_PlaceActors.gd",
 	UiStates.DeployActor: "res://assets/Scripts/Ui/UiStates/UiState_Deployment.gd",
+	UiStates.DeployOnQue: "res://assets/Scripts/Ui/UiStates/UiState_DeploymentOnQue.gd",
 	UiStates.EndScreen: "res://assets/Scripts/Ui/UiStates/UiState_EndScreen.gd",
 	UiStates.SpawnActor: "res://assets/Scripts/Ui/UiStates/UiState_SpawnActor.gd"
 }
@@ -69,6 +70,17 @@ func open_options_menu(actor:BaseActor, selecting_key:String, option_sets, quein
 		option_sets = option_sets.values()
 	if not option_sets is Array:
 		option_sets = [option_sets]
+	
+	if option_sets.size() == 1:
+		var option:OnQueOptionsData = option_sets[0]
+		if option.option_key == "DeployActor":
+			var ui_state_data = {
+				"CarrierActor" = actor.Id
+			}
+			set_ui_state(UiStateController.UiStates.DeployOnQue, ui_state_data)
+			return
+			
+	
 	var args = {
 		"ActorId": actor.Id,
 		"SelectionKey": selecting_key,

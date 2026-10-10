@@ -1,0 +1,371 @@
+[gd_scene format=3 uid="uid://ksd3827r2cdg"]
+
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="1_0rdi7"]
+[ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="2_d7lc3"]
+[ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="3_7512l"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="4_n8dxg"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="5_h1fvf"]
+[ext_resource type="Texture2D" uid="uid://deqwpr7qu8fp2" path="res://assets/Sprites/UI/CharacterEdit/InventorySlotBackground.png" id="6_856gi"]
+[ext_resource type="Script" uid="uid://djxn1axc6ngya" path="res://Scenes/Combat/UiNodes/ActorDeployer/DeployActorsButtons.gd" id="6_7512l"]
+[ext_resource type="Texture2D" uid="uid://crkmao7mrw884" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/RogueIcon.png" id="7_7st7q"]
+[ext_resource type="Texture2D" uid="uid://bo48mvjtdxh7g" path="res://Scenes/Combat/UiNodes/ActorDeployer/GroupOutline.png" id="7_h1fvf"]
+[ext_resource type="Texture2D" uid="uid://dhumtwl4df607" path="res://Scenes/Combat/UiNodes/ActorDeployer/SimplePatch_32_2.png" id="7_n8dxg"]
+[ext_resource type="Texture2D" uid="uid://q6vde2mfu8cc" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/PriestIcon.png" id="8_8pbit"]
+[ext_resource type="Texture2D" uid="uid://cx5xeyhkwqh0s" path="res://ObjectDefs/ClassDefs/TitlePages/Sprites/MageIcon.png" id="9_ou5od"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=2043598272]
+size_flags_horizontal = 4
+theme = ExtResource("1_0rdi7")
+
+[node name="MainContainer" type="VBoxContainer" parent="." unique_id=2090977394]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="MainContainer" unique_id=2053358623]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/Control" unique_id=1227391831]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("1_0rdi7")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../deploy_actor.exe"
+
+[node name="CloseButton" type="TextureButton" parent="MainContainer/Control" unique_id=400636423]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("2_d7lc3")
+texture_pressed = ExtResource("3_7512l")
+
+[node name="InfoButton" type="TextureButton" parent="MainContainer/Control" unique_id=1349981187]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("4_n8dxg")
+texture_pressed = ExtResource("5_h1fvf")
+
+[node name="Label" type="Label" parent="MainContainer" unique_id=834405556]
+layout_mode = 2
+text = "Select Spot to deploy. 
+Click and drag to rotate. "
+horizontal_alignment = 1
+
+[node name="SubActorsContainer" type="VBoxContainer" parent="MainContainer" unique_id=1334501525]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="MainContainer/SubActorsContainer" unique_id=41342025]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="Label2" type="Label" parent="MainContainer/SubActorsContainer" unique_id=323240884]
+visible = false
+layout_mode = 2
+text = "Deploy with:"
+horizontal_alignment = 1
+
+[node name="SubOptionsContainer" type="HBoxContainer" parent="MainContainer/SubActorsContainer" unique_id=885236879]
+layout_mode = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=2129631476 node_paths=PackedStringArray("group_outline", "rogue_button", "priest_port", "priest_button", "mage_port", "mage_button")]
+custom_minimum_size = Vector2(196, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("6_7512l")
+group_outline = NodePath("NinePatchRect")
+rogue_button = NodePath("RoguePort/Button")
+priest_port = NodePath("PriestPort/PortraitTextureRect")
+priest_button = NodePath("PriestPort/Button")
+mage_port = NodePath("MagePort/PortraitTextureRect")
+mage_button = NodePath("MagePort/Button")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control" unique_id=803556458]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.0
+offset_top = -38.0
+offset_right = 106.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_h1fvf")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="RoguePort" type="NinePatchRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control" unique_id=616571935]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -32.0
+offset_right = -36.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_n8dxg")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Button" type="Button" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control/RoguePort" unique_id=980802996]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+
+[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control/RoguePort" unique_id=1938496204]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_7st7q")
+expand_mode = 1
+
+[node name="PriestPort" type="NinePatchRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control" unique_id=1858020594]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_n8dxg")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Button" type="Button" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control/PriestPort" unique_id=1737586414]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+
+[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control/PriestPort" unique_id=166395946]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_8pbit")
+expand_mode = 1
+
+[node name="MagePort" type="NinePatchRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control" unique_id=1060240601]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 36.0
+offset_top = -32.0
+offset_right = 100.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("7_n8dxg")
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+
+[node name="Button" type="Button" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control/MagePort" unique_id=1933765719]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+
+[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/Control/MagePort" unique_id=1115362315]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("9_ou5od")
+expand_mode = 1
+
+[node name="SubDeployActorOptionContainer" type="HBoxContainer" parent="MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=1387745914]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=1735462458]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="PortraitBackground" type="TextureRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer" unique_id=1263900742]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_856gi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="CheckBox" type="CheckBox" parent="MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer" unique_id=603667423]
+layout_mode = 2
+size_flags_horizontal = 4
+flat = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=855870253]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="PortraitBackground" type="TextureRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer2" unique_id=2081104814]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_856gi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer2/PortraitBackground" unique_id=325893948]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_8pbit")
+expand_mode = 1
+
+[node name="CheckBox" type="CheckBox" parent="MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer2" unique_id=1670733764]
+layout_mode = 2
+size_flags_horizontal = 4
+flat = true
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="MainContainer/SubActorsContainer/SubOptionsContainer" unique_id=2052140333]
+visible = false
+layout_mode = 2
+alignment = 1
+
+[node name="PortraitBackground" type="TextureRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer3" unique_id=1716910636]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_856gi")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="PortraitTextureRect" type="TextureRect" parent="MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer3/PortraitBackground" unique_id=981089498]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_ou5od")
+expand_mode = 1
+
+[node name="CheckBox" type="CheckBox" parent="MainContainer/SubActorsContainer/SubOptionsContainer/VBoxContainer3" unique_id=1150909781]
+layout_mode = 2
+size_flags_horizontal = 4
+flat = true
+
+[node name="ColorRect2" type="ColorRect" parent="MainContainer/SubActorsContainer" unique_id=27305103]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+color = Color(0.29803923, 0.29803923, 0.29803923, 1)
+
+[node name="HSeparator" type="HSeparator" parent="MainContainer" unique_id=1032868085]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="MainContainer" unique_id=1310766001]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="MainContainer/ButtonsContainer" unique_id=145861696]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="MainContainer/ButtonsContainer" unique_id=513420467]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0rdi7")
+text = " Cancel "
+
+[node name="VSeparator2" type="VSeparator" parent="MainContainer/ButtonsContainer" unique_id=853430476]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OkButton" type="Button" parent="MainContainer/ButtonsContainer" unique_id=54410523]
+visible = false
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_0rdi7")
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="MainContainer/ButtonsContainer" unique_id=1162937598]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="MainContainer" unique_id=1883194321]
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
