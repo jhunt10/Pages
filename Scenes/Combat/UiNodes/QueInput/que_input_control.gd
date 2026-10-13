@@ -82,7 +82,11 @@ func show_start_button():
 	if supress_start:
 		return
 	var all_ready = true
-	for player:BaseActor in CombatRootControl.list_player_actors(false):
+	for player:BaseActor in CombatRootControl.list_player_actors(true):
+		if player.is_dead:
+			continue
+		if player.is_being_carried() and not player.Que.is_qued_for_deploy():
+			continue
 		if not player.Que.is_ready():
 			all_ready = false
 	var que_display_size = que_display_control.size.x
@@ -136,7 +140,8 @@ func on_carried_actor_change():
 
 func _build_tab_bar():
 	if _actor is CarrierActor: 
-		_actor.carried_actors_changed.connect(on_carried_actor_change)
+		if not _actor.carried_actors_changed.is_connected(on_carried_actor_change):
+			_actor.carried_actors_changed.connect(on_carried_actor_change)
 		if _actor.list_carried_actor_ids().size() > 0:
 			tab_bar.clear_tabs()
 			tab_bar.add_tab("All")
@@ -165,9 +170,17 @@ func _build_buttons():
 	for action:PageItemAction in _actor.get_action_list():
 		var action_key = action.ItemKey
 		var action_id = action.Id
-		
-		if _filtered_actor_id and action.holding_actor_id != _filtered_actor_id:
+		var action_owner = action.get_holding_actor()
+		# Limit to actions with owner matching filter
+		if _filtered_actor_id and action_owner.Id != _filtered_actor_id:
 			continue 
+		# Check actions provided by carried actor
+		if _actor.Id != action_owner.Id:
+			if action_owner.Que.is_qued_for_deploy():
+				continue
+			if action_owner.Que.is_qued_for_transfer():
+				if action_owner.Que.is_tansfering_away_from(_actor.Id):
+					continue
 		
 		if known_keys.has(action_key) and not action.is_duplicated_when_merged():
 			continue
@@ -217,7 +230,7 @@ func show_preview_target_area(action:PageItemAction):
 		printerr("QueInputControl._mouse_entered_page_button: %s Failed to find preview TargetParams ." % [action.ActionKey])
 	else:
 		clear_preview_display()
-		var preview_pos = _actor.Que.get_movement_preview_pos()
+		var preview_pos = _actor.Que.get_movement_preview_final_pos()
 		var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
 		_target_display_action_key = action.ActionKey
 		_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)
@@ -244,6 +257,8 @@ func _page_button_pressed(_index, key_name):
 		page_special_selected.emit(key_name)
 		hide_page_selection()
 		return
+	if _actor.Que.is_ready():
+		return
 	print("DCX: PageButtonPressed: " + key_name)
 	var action:PageItemAction = _actor.get_action_page(key_name)
 	var on_que_options = action.get_on_que_options(_actor, CombatRootControl.Instance.GameState)
@@ -253,12 +268,16 @@ func _page_button_pressed(_index, key_name):
 		_actor.Que.que_action(action)
 
 func _start_button_pressed():
-	for player_actor:BaseActor in CombatRootControl.list_player_actors(false):
-		if not player_actor.Que.is_ready() and CombatRootControl.Instance.is_deployed(player_actor) and not player_actor.is_dead:
+	for player_actor:BaseActor in CombatRootControl.list_player_actors(true):
+		if not player_actor.Que.is_ready():
+			if player_actor.is_dead:
+				continue
+			if player_actor.is_being_carried() and not player_actor.Que.is_qued_for_deploy():
+				continue
 			CombatRootControl.Instance.set_current_player_actor(player_actor)
 			hide_start_button()
 			return
-	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound, {}, true)
+	CombatRootControl.Instance.begin_combat_execution_round()
 
 func _round_start():
 	hide_start_button()

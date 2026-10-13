@@ -34,7 +34,7 @@ func set_action(index:int, actor:BaseActor, action:PageItemAction):
 		#print("QueMiniSlotIcon: Setting Action: %s | %s" % [action.ActionKey, index])
 		acttion_key = action.ActionKey
 		_page_icon.show()
-		_page_icon.texture = action.get_qued_icon(index, actor.Que)
+		_page_icon.texture = action.get_qued_icon(index, actor.Que, actor)
 	else:
 		#print("QueMiniSlotIcon: Setting Action: 'NULL' | %s" % [index])
 		acttion_key = 'Null'
@@ -46,3 +46,6 @@ func set_highlight(val:bool):
 
 func mark_as_dead():
 	dead_icon.visible = true
+
+func unmark_as_dead():
+	dead_icon.visible = false

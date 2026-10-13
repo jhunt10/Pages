@@ -20,6 +20,27 @@ func _ready() -> void:
 	mage_button.pressed.connect(on_button.bind(2))
 	pass # Replace with function body.
 
+func set_carrier(carrier_actor:CarrierActor):
+	var party_ids = StoryState.list_party_actors_ids()
+	var held_actors = carrier_actor.list_carried_actor_ids()
+	var has_rogue = held_actors.has(party_ids[1])
+	var has_priest = held_actors.has(party_ids[2])
+	var has_mage = held_actors.has(party_ids[3])
+	
+	rogue_button.disabled = not has_rogue
+	rogue_button.visible = true
+	rogue_port.visible = has_rogue
+	priest_button.disabled = not has_priest
+	priest_port.visible = has_priest
+	mage_button.disabled = not has_mage
+	mage_port.visible = has_mage
+	clear_buttons()
+
+func clear_buttons():
+	group_outline.hide()
+	rogue_button.button_pressed = false
+	priest_button.button_pressed = false
+	mage_button.button_pressed = false 
 
 func on_button(index:int):
 	if index == 1: # Priest
@@ -27,8 +48,9 @@ func on_button(index:int):
 			group_outline.show()
 		else:
 			group_outline.hide()
-			rogue_button.button_pressed = false
-			mage_button.button_pressed = false 
+			if rogue_button.button_pressed and mage_button.button_pressed:
+				rogue_button.button_pressed = false
+				mage_button.button_pressed = false 
 	elif index == 0: # Rogue
 		if rogue_button.button_pressed and not priest_button.button_pressed:
 			mage_button.button_pressed = false
@@ -40,3 +62,23 @@ func on_button(index:int):
 		priest_button.button_pressed,
 		mage_button.button_pressed
 	])
+
+func get_select_deploy_actor_id()->String:
+	var party_ids = StoryState.list_party_actors_ids()
+	if priest_button.button_pressed:
+		return party_ids[2]
+	if rogue_button.button_pressed:
+		return party_ids[1]
+	if mage_button.button_pressed:
+		return party_ids[3]
+	return ""
+
+func get_select_transfer_actor_ids()->Array:
+	var out_list = []
+	var party_ids = StoryState.list_party_actors_ids()
+	if priest_button.button_pressed:
+		if rogue_button.button_pressed:
+			out_list.append(party_ids[1])
+		if mage_button.button_pressed:
+			out_list.append(party_ids[3])
+	return out_list

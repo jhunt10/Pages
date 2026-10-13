@@ -19,6 +19,7 @@ var carrier_actor:CarrierActor
 var carrier_actor_node:BaseActorNode
 var state:States
 var carrier_actor_id:String = ""
+var queing_page_id:String = ""
 #var deploying_actor_id:String = ''
 var deploying_position
 var mouse_down_spot
@@ -31,6 +32,7 @@ func _get_debug_name()->String:
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	carrier_actor_id = args.get("CarrierActor")
+	queing_page_id = args.get("ActionId")
 	carrier_actor = ActorLibrary.get_actor(carrier_actor_id)
 	if carrier_actor_id:
 		state = States.Placing
@@ -40,7 +42,7 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	#deploying_actor_node = CombatRootControl.create_temp_actor_node(deploying_actor_id)
 	carrier_actor_node = CombatRootControl.get_actor_node(carrier_actor_id)
 	spawn_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
-	var center = CombatRootControl.Instance.GameState.get_actor_pos(carrier_actor)
+	var center = carrier_actor.Que.get_movement_preview_final_pos()
 	CombatRootControl.Instance.camera.snap_to_map_pos(center)
 	
 	var spawn_area_arg = args.get("SpawnArea", null)
@@ -80,12 +82,13 @@ func get_extra_path_arrow()->Sprite2D:
 		return _extra_path_arrow
 	_extra_path_arrow = carrier_actor_node.path_arrow.duplicate()
 	_extra_path_arrow.modulate = Color(1,1,1,0.5)
+	_extra_path_arrow.rotation_degrees = 0
 	carrier_actor_node.add_child(_extra_path_arrow)
 	_extra_path_arrow.show()
 	return _extra_path_arrow
 
 func _build_spawn_area():
-	var center = carrier_actor.Que.get_movement_preview_pos()
+	var center = carrier_actor.Que.get_movement_preview_final_pos()
 	var center_vec = center.to_vector2i()
 	var spawn_spot = center_vec
 	spawn_map.clear()
@@ -108,24 +111,27 @@ func _build_spawn_area():
 
 func start_state():
 	if _logging: print("Start UiState: DeployingActor")
-	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Spawning")
+	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Que Deploy")
 	spawn_map.show()
 	CombatRootControl.Instance.ui_control.active_combat_control.hide()
+	deployment_control.deployment_ui_state = self
 	#deployment_control.set_deploying_actor(carrier_actor, ActorLibrary.get_actor(deploying_actor_id))
+	deployment_control.actor_buttons_control.set_carrier(carrier_actor)
 	deployment_control.show()
 	if not deployment_control.cancled.is_connected(_on_canceled):
 		deployment_control.cancled.connect(_on_canceled)
+	if not deployment_control.confirmed.is_connected(_on_confirm):
+		deployment_control.confirmed.connect(_on_confirm)
 	if not deployment_control.actor_buttons_control.button_states_changed.is_connected(_on_actors_change):
 		deployment_control.actor_buttons_control.button_states_changed.connect(_on_actors_change)
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingActor)
+	deployment_control.check_comfirm_button_enabled()
 	
 func end_state():
 	if _logging: print("End UiState: DeployingActor")
 	deployment_control.hide()
 	if _extra_path_arrow:
 		_extra_path_arrow.queue_free()
-	#if deploying_actor_node:
-		#deploying_actor_node.queue_free()
 	CombatRootControl.Instance.MapController.player_spawn_area_tile_map.hide()
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
 	
@@ -150,36 +156,46 @@ func ui_button_pressed():
 func _on_canceled():
 	CombatRootControl.Instance.ui_control.ui_state_controller.back_to_last_state()
 
+func _on_confirm():
+	if !deploying_position:
+		return
+	var page = ItemLibrary.get_item(queing_page_id)
+	var deploying_actor_id = deployment_control.actor_buttons_control.get_select_deploy_actor_id()
+	var transfer_actor_ids = deployment_control.actor_buttons_control.get_select_transfer_actor_ids()
+	var center = carrier_actor.Que.get_movement_preview_final_pos()
+	var relative_pos = MapPos.new(
+		deploying_position.x - center.x,
+		deploying_position.y - center.y,
+		center.z,
+		deploying_position.dir
+	)
+	DeploymentHelper.deploy_actor(deploying_actor_id, deploying_position, transfer_actor_ids, true)
+	if deploying_actor_id:
+		carrier_actor.Que.que_to_deploy_other_actor(page, deploying_actor_id, relative_pos, transfer_actor_ids)
+	CombatRootControl.Instance.ui_control.ui_state_controller.back_to_last_state()
+	pass
+
 func _on_actors_change(values:Array):
 	var path_arrow = get_extra_path_arrow()
+	var player_actors = StoryState.list_party_actors_ids()
 	if values[1]:
-		path_arrow.modulate = Color.WHITE
+		path_arrow.modulate = StoryState.get_player_color(player_actors[2])
 	elif values[0]:
-		path_arrow.modulate = Color.GREEN
+		path_arrow.modulate = StoryState.get_player_color(player_actors[1])
 	elif values[2]:
-		path_arrow.modulate = Color.RED
+		path_arrow.modulate = StoryState.get_player_color(player_actors[3])
 	else:
 		path_arrow.modulate = Color(1,1,1,0.5)
-		
-	pass
-
-func _on_actor_selected(actor_id):
-	#deploying_actor_id = actor_id
-	state = States.Placing
-	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingActor)
-	pass
+	deployment_control.check_comfirm_button_enabled()
 
 func _mouse_moved_into_spot(spot):
-	#if not deploying_actor_node:
-		#return
 	if state == States.Placing:
 		var is_spot_valid = _is_spot_valid(spot)
 		if is_spot_valid:
 			var path_arrow = get_extra_path_arrow()
 			path_arrow.global_position = spawn_map.map_to_local(spot)
-			#deploying_actor_node.show()
-		#else:
-			#deploying_actor_node.hide()
+			deploying_position = MapPos.Parse(spot)
+			
 	
 	elif state == States.Dragging:
 		var dir = MapPos.Directions.North
@@ -201,7 +217,6 @@ func _mouse_moved_into_spot(spot):
 				dir = MapPos.Directions.North
 				path_arrow.rotation_degrees = 0
 		deploying_position.dir = dir
-		#deploying_actor_node.set_facing_dir(dir)
 		if x_diff == 0 and y_diff == 0:
 			CombatRootControl.Instance.GridCursor.lock_position = true
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.PlacingDragCenter)
@@ -214,16 +229,18 @@ func _mouse_moved_into_spot(spot):
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingTile)
 		else:
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
+	
+	deployment_control.check_comfirm_button_enabled()
 
 func _mouse_button_down_in_spot(spot):
-	if state == States.Placing:
+	if state == States.Placing || state == States.Waiting:
 		if _is_spot_valid(spot):
 			mouse_down_spot = spot
 			deploying_position = MapPos.new(
 				mouse_down_spot.x, 
 				mouse_down_spot.y, 
 				0, 
-				MapPos.Directions.South)
+				MapPos.Directions.North)
 			state = States.Dragging
 			CombatRootControl.Instance.camera.freeze_camera()
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.PlacingDragCenter)
@@ -234,28 +251,6 @@ func _mouse_button_up_in_spot(_spot):
 	CombatRootControl.Instance.GridCursor.lock_position = false
 	if state == States.Dragging:
 		state = States.Waiting
-		#deploy_actor()
-
-func deploy_actor():
-	var sub_actors = deployment_control.list_selected_sub_actor_ids()
-	var game_state = CombatRootControl.Instance.GameState
-	
-	var transfer_to_actor:CarrierActor = null
-	var other_actors = game_state.get_actors_at_pos(deploying_position)
-	if other_actors.size() > 0:
-		for other_actor:BaseActor in other_actors:
-			if other_actor is CarrierActor and other_actor.TeamKey == carrier_actor.TeamKey:
-				transfer_to_actor = other_actor
-				break
-	## Transfering to another carrier
-	#if transfer_to_actor:
-		#CombatRootControl.Instance.transfer_actor(deploying_actor_id, transfer_to_actor)
-	## Deploying to open spot
-	#else:
-		#CombatRootControl.Instance.deploy_actor(deploying_actor_id, deploying_position, sub_actors)
-		#var actor_node = CombatRootControl.get_actor_node(deploying_actor_id)
-		#VfxHelper.create_vfx_on_actor(actor_node.Actor, "DeployActorVfx", {}, carrier_actor)
-	CombatRootControl.Instance.ui_control.ui_state_controller.back_to_last_state()
 
 func _is_spot_valid(spot):
 	if not spawn_poses.has(spot):

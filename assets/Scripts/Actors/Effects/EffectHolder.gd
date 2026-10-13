@@ -18,7 +18,7 @@ func _init(actor:BaseActor) -> void:
 		_triggers_to_effect_ids[t] = []
 	
 	# Connect signals
-func on_combat_start():
+func on_enter_combat():
 	if CombatRootControl.Instance and not CombatRootControl.Instance.QueController.start_of_turn_with_state.is_connected(_on_turn_start):
 		CombatRootControl.Instance.QueController.start_of_turn_with_state.connect(_on_turn_start)
 		CombatRootControl.Instance.QueController.end_of_turn_with_state.connect(_on_turn_end)
@@ -26,7 +26,7 @@ func on_combat_start():
 		CombatRootControl.Instance.QueController.end_of_round_with_state.connect(_on_round_end)
 		self._trigger_effects(BaseEffect.EffectTriggers.OnCombatStart, CombatRootControl.Instance.GameState)
 	else:
-		printerr("EffectHolder.on_combat_start: No CombatRootControl found")
+		printerr("EffectHolder.on_enter_combat: No CombatRootControl found")
 
 func on_combat_end(game_state):
 	self._trigger_effects(BaseEffect.EffectTriggers.OnCombatEnd, game_state)

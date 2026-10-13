@@ -74,7 +74,7 @@ func build_player_stats_panels():
 			player_stats_panels_container.add_child(panel)
 			panel.pressed.connect(on_player_stat_clicked.bind(index))
 			panel.deployment_pressed.connect(on_deployment)
-		panel.set_is_deployed(CombatRootControl.Instance.is_deployed(actor))
+		panel.set_is_deployed(DeploymentHelper.is_deployed(actor))
 		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

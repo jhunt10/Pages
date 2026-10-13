@@ -5,10 +5,10 @@ signal triggered
 
 var been_triggered:bool = false
 
-func on_combat_start():
+func on_enter_combat():
 	super()
 	if not CombatRootControl.is_valid():
-		printerr("TrigerableActor.on_combat_start: CombatRootControl is not valid")
+		printerr("TrigerableActor.on_enter_combat: CombatRootControl is not valid")
 		return
 
 func apply_damage_event(_damage_event:DamageEvent, _trigger_effect:bool=false, game_state:GameStateData=null):

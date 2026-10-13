@@ -26,6 +26,12 @@ static func get_map_pos_screen_position(map_pos)->Vector2:
 static func get_actor_global_position(actor:BaseActor)->Vector2:
 	var map_pos = CombatRootControl.Instance.GameState.get_actor_pos(actor)
 	if !map_pos:
+		if actor.Que.is_qued_for_deploy():
+			map_pos = CombatRootControl.get_actor_node(actor).cur_map_pos
+		elif actor.is_being_carried():
+			map_pos = CombatRootControl.Instance.GameState.get_actor_pos(actor.get_carrier_actor())
+		
+	if !map_pos:
 		printerr("MapHelper.get_actor_local_position: Failed to find actor's MapPos")
 		return Vector2.ZERO
 	var map_control = CombatRootControl.Instance.MapController

@@ -62,11 +62,16 @@ func hide_all_highlights():
 		slot.set_highlight(false)
 		
 func _sync_que():
+	if _actor.is_being_carried() and not _actor.Que.is_qued_for_deploy():
+		self.hide()
+	else:
+		self.show()
 	_sync_icons()
 
 func set_actor(actor:BaseActor):
 	_actor = actor
 	actor.Que.action_que_changed.connect(_sync_que)
+	actor.action_failed.connect(_sync_que)
 	is_ai_actor = !actor.is_player
 	if portrait:
 		portrait.texture = actor.sprite.get_portrait_sprite()
@@ -120,3 +125,8 @@ func _sync_icons():
 		slot.set_is_gap(is_gap)
 		var action = _actor.Que.get_action_for_turn(turn_index)
 		slot.set_action(turn_index, _actor, action)
+		slot.unmark_as_dead()
+		var turn_data = _actor.Que.get_data_for_turn(turn_index)
+		if turn_data:
+			if turn_data.turn_failed:
+				slot.mark_as_dead()

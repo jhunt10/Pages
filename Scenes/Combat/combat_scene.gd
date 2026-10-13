@@ -84,7 +84,7 @@ func _ready() -> void:
 		#MapController.grid_tile_map.hide()
 	
 	for actor:BaseActor in GameState._actors.values():
-		actor.on_combat_start()
+		actor.on_enter_combat()
 	
 	camera.cach_camera_bounds()
 
@@ -236,13 +236,43 @@ func start_phase(phase_key):
 			}
 			ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.PlaceActors, ui_state_data)
 		"Combat":
-			if not combat_started:
-				start_combat_animation()
-			CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.ActionInput, {}, true)
+			_begin_combat_input_round()
 		"Dialog":
 			var dialog_data = phase_data.get("DialogData")
 			dialog_controller.load_dialog_data(dialog_data)
 			pass
+
+var _cached_game_state:GameStateData
+var _cached_player_carrier_mapping:Dictionary = {}
+func _begin_combat_input_round():
+	if not combat_started:
+		start_combat_animation()
+		
+	_cached_game_state = GameState
+	GameState = _cached_game_state.duplicate()
+	_cached_player_carrier_mapping.clear()
+	for player_actor:BaseActor in list_player_actors(true):
+		if player_actor is CarrierActor:
+			_cached_player_carrier_mapping[player_actor.Id] = player_actor.list_carried_actor_ids()
+		elif player_actor.is_being_carried():
+			_cached_player_carrier_mapping[player_actor.Id] = player_actor.get_carrier_actor_id()
+	
+	CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(
+		UiStateController.UiStates.ActionInput, {}, true)
+
+func begin_combat_execution_round():
+	GameState = _cached_game_state
+	
+	# Pack up preview deploys
+	for actor in list_player_actors(true):
+		if actor is CarrierActor:
+			var carried_actors_list = _cached_player_carrier_mapping[actor.Id]
+			for carried_actor_id in carried_actors_list:
+				if not actor.is_carrying_actor(carried_actor_id):
+					DeploymentHelper.merge_actors(actor, carried_actor_id, true)
+	
+	CombatRootControl.Instance.QueController.clear_and_check_ques()
+	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound, {}, true)
 
 func trigger_spawners():
 	var phase_datas = combat_map_data.get("PhaseDatas", {})
@@ -339,17 +369,13 @@ func spawn_actors_for_phase(phase_data:Dictionary):
 		loading_actor_progressed.emit(total_count, index)
 		if new_actor:
 			new_actor.TeamKey = team_key
-			add_actor(new_actor, actor_pos, new_actor.is_player)
-			
+			# Add carried actors to soldier
 			if actor_key.begins_with("Player"):
 				for party_actor in StoryState.list_party_actors():
 					if party_actor.Id == new_actor.Id:
 						continue
 					add_carried_actor(party_actor, new_actor)
-					#var display_name = new_actor.get_display_name()
-					#if not npcs_to_name.keys().has(display_name):
-						#npcs_to_name[display_name] = []
-					#npcs_to_name[display_name].append(new_actor)
+			add_actor(new_actor, actor_pos, new_actor.is_player)
 	pass
 
 func _get_random_enemy_key(map_data)->String:
@@ -362,9 +388,6 @@ func _get_random_enemy_key(map_data)->String:
 	
 
 func start_combat_animation():
-	#start_combat_screen.show()
-	#start_combat_screen.start_combat_animation()
-	#
 	_on_combat_screen_blackout()
 	combat_started = true
 
@@ -440,14 +463,16 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false, play_spawn_ani
 	GameState.add_actor(actor)
 	if actor.Que.get_max_que_size() > 0:
 		QueController.add_action_que(actor.Que)
+		#if actor is CarrierActor:
+			#for sub_actor in actor.list_carried_actors():
+				#QueController.add_action_que(sub_actor.Que)
 	GameState.set_actor_pos(actor, pos)
 	
 	# Add to player list if player
 	if is_player and not _player_actor_ids.has(actor.Id):
 		_player_actor_ids.append(actor.Id)
 	
-	if combat_started:
-		actor.on_combat_start()
+	actor.on_enter_combat()
 	
 	if play_spawn_animation:
 		actor_node.start_spawn_animation()
@@ -477,8 +502,7 @@ func add_carried_actor(actor:BaseActor, carrier:CarrierActor):
 	if is_player and not _player_actor_ids.has(actor.Id):
 		_player_actor_ids.append(actor.Id)
 	
-	if combat_started:
-		actor.on_combat_start()
+	actor.on_enter_combat()
 	
 
 func add_item(item:BaseItem, pos:MapPos):
@@ -647,7 +671,7 @@ static func list_player_actors(include_un_deployed:bool=true)->Array:
 	var out_list = []
 	for id in list_player_actor_ids():
 		var actor = ActorLibrary.get_actor(id)
-		if include_un_deployed or Instance.is_deployed(actor):
+		if include_un_deployed or DeploymentHelper.is_deployed(actor):
 				out_list.append(actor)
 	return out_list
 
@@ -692,115 +716,6 @@ func get_next_player_index(use_index:int=-1)->int:
 	if next_index == 0:
 		return next_index
 	## Skip undeployed
-	elif not is_deployed(_player_actor_ids[next_index]):
+	elif not DeploymentHelper.is_deployed(_player_actor_ids[next_index]):
 		return get_next_player_index(next_index)
 	return next_index
-
-func is_deployed(actor)->bool:
-	var check_actor = actor
-	if actor is String:
-		check_actor = GameState.get_actor(actor)
-	if check_actor:
-		return check_actor.parent_carrier_actor_id == null
-	return false
-
-func deploy_actor(actor, pos:MapPos, take_with:Array=[]):
-	var deploying_actor:BaseActor = null
-	if actor is String:
-		deploying_actor = GameState.get_actor(actor)
-	if actor is BaseActor:
-		deploying_actor = actor
-	var carrier_actor_id = deploying_actor.parent_carrier_actor_id
-	var carrier_actor = GameState.get_actor(carrier_actor_id)
-	if !carrier_actor:
-		printerr("CombatRootControl.deploy_actor: Carrier Actor '%s' not found." % [carrier_actor_id])
-		return
-	if not GameState.map_data.is_spot_open(pos):
-		printerr("CombatRootControl.deploy_actor: Invalid MapPosition '%s'." % [pos])
-		return
-	GameState.set_actor_pos(deploying_actor, pos)
-	var actor_node = get_actor_node(deploying_actor)
-	actor_node.visible = true
-	QueController.add_action_que(deploying_actor.Que)
-	var confirmed_take = []
-	for sub_actor_id in take_with:
-		if carrier_actor.is_carrying_actor(sub_actor_id):
-			carrier_actor.remove_held_actor(sub_actor_id, true)
-			confirmed_take.append(sub_actor_id)
-	carrier_actor.remove_held_actor(deploying_actor)
-	for actor_id in confirmed_take:
-		deploying_actor.add_carried_actor(actor_id)
-	deploying_actor.effects._trigger_effects(BaseEffect.EffectTriggers.OnDeployed, GameState)
-	ui_control.build_player_stats_panels()
-
-func merge_actors(actor_a, actor_b):
-	var deployed_actor = actor_a
-	if deployed_actor is String:
-		deployed_actor = GameState.get_actor(deployed_actor)
-	var carrier_actor = actor_b
-	if carrier_actor is String:
-		carrier_actor = GameState.get_actor(carrier_actor)
-	
-	# Check if we need to swap parent anc child
-	if deployed_actor is CarrierActor:
-		# actor_a is only carrier
-		if (not carrier_actor is CarrierActor
-		# or actor_a has lower carrier priority
-		or deployed_actor.get_carrier_priority() < carrier_actor.get_carrier_priority()):
-			var temp = deployed_actor
-			deployed_actor = carrier_actor
-			carrier_actor = temp
-	
-	var deployed_node = get_actor_node(deployed_actor)
-	deployed_node.cancel_move_animation()
-	GameState.remove_actor_from_map(deployed_actor)
-	deployed_node.visible = false
-	QueController.remove_action_que(deployed_actor.Que)
-	
-	carrier_actor.add_carried_actor(deployed_actor)
-	
-	
-	deployed_actor.effects._trigger_effects(BaseEffect.EffectTriggers.OnMerged, GameState)
-	
-	ui_control.build_player_stats_panels()
-	if deployed_actor == get_current_player_actor():
-		set_current_player_actor(carrier_actor, true)
-
-func transfer_actor(actor, new_carrier):
-	var deploying_actor = actor
-	if deploying_actor is String:
-		deploying_actor = GameState.get_actor(deploying_actor)
-	
-	var new_carrier_actor = new_carrier
-	if new_carrier_actor is String:
-		new_carrier_actor = GameState.get_actor(new_carrier_actor)
-	
-	var carrier_actor_id = deploying_actor.parent_carrier_actor_id
-	var carrier_actor = GameState.get_actor(carrier_actor_id)
-	if !carrier_actor:
-		printerr("CombatRootControl.deploy_actor: Carrier Actor '%s' not found." % [carrier_actor_id])
-		return
-	if carrier_actor.is_carrying_actor(deploying_actor):
-		carrier_actor.remove_held_actor(deploying_actor, true)
-	new_carrier_actor.add_carried_actor(deploying_actor)
-	ui_control.build_player_stats_panels()
-	
-
-func recall_actor(actor_a, actor_b):
-	var deployed_actor = actor_a
-	if deployed_actor is String:
-		deployed_actor = GameState.get_actor(deployed_actor)
-	var carrier_actor = actor_b
-	if carrier_actor is String:
-		carrier_actor = GameState.get_actor(carrier_actor)
-	
-	var deployed_node = get_actor_node(deployed_actor)
-	deployed_node.cancel_move_animation()
-	#var carrier_node = get_actor_node(carrier_actor)
-	var vfx = VfxHelper.create_vfx_on_actor(carrier_actor, "RecallActorVfx", {}, deployed_actor)
-	vfx.finished.connect(on_recall_finish.bind(deployed_actor, carrier_actor))
-
-func on_recall_finish(deployed_actor, carrier_actor):
-	merge_actors(deployed_actor, carrier_actor)
-	#var deployed_node = get_actor_node(deployed_actor)
-	#deployed_node.damage_animation_player.play()

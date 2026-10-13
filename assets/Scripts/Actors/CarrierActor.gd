@@ -43,6 +43,7 @@ func add_carried_actor(actor, supress_change:bool=false):
 		stats.recache_stats()
 		self.page_list_changed.emit()
 		carried_actors_changed.emit()
+		self.Que.action_que_changed.emit()
 
 func remove_held_actor(actor, supress_change:bool=false):
 	if actor is String:

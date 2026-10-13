@@ -58,8 +58,8 @@ func back_to_last_state():
 		current_ui_state.end_state()
 		current_ui_state = null
 	current_ui_state = last_state
-	state_stack.remove_at(state_stack.size()-1)
 	current_ui_state.start_state()
+	state_stack.remove_at(state_stack.size()-1)
 
 func clear_states():
 	state_stack.clear()
@@ -75,7 +75,8 @@ func open_options_menu(actor:BaseActor, selecting_key:String, option_sets, quein
 		var option:OnQueOptionsData = option_sets[0]
 		if option.option_key == "DeployActor":
 			var ui_state_data = {
-				"CarrierActor" = actor.Id
+				"CarrierActor" = actor.Id,
+				"ActionId" = queing_action_id
 			}
 			set_ui_state(UiStateController.UiStates.DeployOnQue, ui_state_data)
 			return

@@ -3,7 +3,7 @@ extends TrigerableActor
 
 var state_on:bool
 
-func on_combat_start():
+func on_enter_combat():
 	super()
 	if not CombatRootControl.is_valid():
 		return

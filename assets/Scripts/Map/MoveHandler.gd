@@ -84,7 +84,7 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 				game_state.set_actor_pos(moving_actor, new_pos, simulated)
 			else:
 				deployable.on_move_failed.emit(new_pos)
-			CombatRootControl.Instance.merge_actors(deployable, carrier)
+			DeploymentHelper.merge_actors(deployable, carrier)
 			return true
 		if not PushableMovement.has(move_type):
 			if LOGGING: print("\t\tPush NotAllowed")

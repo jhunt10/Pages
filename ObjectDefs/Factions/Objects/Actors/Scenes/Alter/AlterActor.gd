@@ -1,10 +1,10 @@
 class_name AlterActor
 extends TrigerableActor
 
-func on_combat_start():
+func on_enter_combat():
 	super()
 	if not CombatRootControl.is_valid():
-		printerr("ObjectActor.on_combat_start: CombatRootControl is not valid")
+		printerr("ObjectActor.on_enter_combat: CombatRootControl is not valid")
 		return
 	CombatRootControl.Instance.QueController.end_of_round_with_state.connect(on_trigger)
 

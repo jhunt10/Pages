@@ -213,10 +213,10 @@ func deploy_actor():
 				break
 	# Transfering to another carrier
 	if transfer_to_actor:
-		CombatRootControl.Instance.transfer_actor(deploying_actor_id, transfer_to_actor)
+		DeploymentHelper.transfer_actor(deploying_actor_id, transfer_to_actor)
 	# Deploying to open spot
 	else:
-		CombatRootControl.Instance.deploy_actor(deploying_actor_id, deploying_position, sub_actors)
+		DeploymentHelper.deploy_actor(deploying_actor_id, deploying_position, sub_actors)
 		var actor_node = CombatRootControl.get_actor_node(deploying_actor_id)
 		VfxHelper.create_vfx_on_actor(actor_node.Actor, "DeployActorVfx", {}, carrier_actor)
 	CombatRootControl.Instance.ui_control.ui_state_controller.back_to_last_state()

@@ -295,13 +295,21 @@ func start_spawn_animation():
 			offset_node.material = spawn_shader_material
 	shader_val = 0
 	self.body_animation.play("spawn_in")
+	self.body_animation.speed_scale = CombatRootControl.get_time_scale() 
+	self.body_animation.animation_started.connect(spawn_animation_finished_trigger)
+	self.body_animation.animation_finished.connect(spawn_animation_finished_trigger)
 
+func spawn_animation_finished_trigger(_animation_name):
+	if self.body_animation.animation_started.is_connected(spawn_animation_finished_trigger):
+		self.body_animation.animation_started.disconnect(spawn_animation_finished_trigger)
+	finish_spawn_animation()
+	
 func finish_spawn_animation():
-	self.material = null
+	offset_node.material = null
 
 func play_shake():
 	if damage_animation_player.current_animation != "DamageAnimations/death_effect":
-		damage_animation_player.play("DamageAnimations/shake_effect")
+		damage_animation_player.play("DamageAnimations/shake_effect",)
 	pass
 
 func start_death_animation():

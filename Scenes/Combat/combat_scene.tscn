@@ -476,7 +476,7 @@ offset_bottom = 40.0
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="ActorDeploymentControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=741335626 node_paths=PackedStringArray("close_button", "cancel_button", "sub_actors_container", "sub_actors_options_container", "premade_sub_actor_option", "actor_buttons_control")]
+[node name="ActorDeploymentControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=741335626 node_paths=PackedStringArray("close_button", "cancel_button", "confirm_button", "sub_actors_container", "sub_actors_options_container", "premade_sub_actor_option", "actor_buttons_control")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -487,6 +487,7 @@ mouse_filter = 2
 script = ExtResource("19_4pyrd")
 close_button = NodePath("VBoxContainer/PanelContainer/MainContainer/Control/CloseButton")
 cancel_button = NodePath("VBoxContainer/PanelContainer/MainContainer/ButtonsContainer/CancelButton")
+confirm_button = NodePath("VBoxContainer/PanelContainer/MainContainer/ButtonsContainer/OkButton")
 sub_actors_container = NodePath("VBoxContainer/PanelContainer/MainContainer/SubActorsContainer")
 sub_actors_options_container = NodePath("VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer")
 premade_sub_actor_option = NodePath("VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/SubOptionsContainer/SubDeployActorOptionContainer")
@@ -712,17 +713,16 @@ theme = ExtResource("43_igf72")
 text = " Cancel "
 
 [node name="VSeparator2" type="VSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/ButtonsContainer" unique_id=2061223208]
-visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="OkButton" type="Button" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/ButtonsContainer" unique_id=848218759]
-visible = false
 custom_minimum_size = Vector2(67, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("43_igf72")
+disabled = true
 text = "Ok"
 
 [node name="VSeparator3" type="VSeparator" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/ButtonsContainer" unique_id=1453275349]

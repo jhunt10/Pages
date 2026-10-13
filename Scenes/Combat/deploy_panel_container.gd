@@ -35,7 +35,7 @@ func _on_deploy(actor_id):
 	var pos = CombatRootControl.Instance.GameState.get_actor_pos(main_actor)
 	pos = pos.apply_relative_pos(MapPos.new(0,-1,0,0))
 	
-	CombatRootControl.Instance.deploy_actor(actor, pos)
+	DeploymentHelper.deploy_actor(actor, pos)
 	_sync_deployable_actors()
 	
 	

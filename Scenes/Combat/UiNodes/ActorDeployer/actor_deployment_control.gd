@@ -1,9 +1,12 @@
 class_name ActorDeploymentControl
 extends Control
+
 signal cancled
+signal confirmed
 
 @export var close_button:TextureButton
 @export var cancel_button:Button
+@export var confirm_button:Button
 
 @export var sub_actors_container:BoxContainer
 @export var sub_actors_options_container:BoxContainer
@@ -11,10 +14,13 @@ signal cancled
 @export var actor_buttons_control:DeployActorButtons
 var sub_actor_check_boxes:Dictionary = {}
 
+var deployment_ui_state:UiState_DeploymentOnQue
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	close_button.pressed.connect(on_canceled_button)
 	cancel_button.pressed.connect(on_canceled_button)
+	confirm_button.pressed.connect(on_confirm)
 	for child in sub_actors_options_container.get_children():
 		if not child == premade_sub_actor_option:
 			child.queue_free()
@@ -25,13 +31,16 @@ func _ready() -> void:
 func on_canceled_button():
 	cancled.emit()
 
+func on_confirm():
+	confirmed.emit()
+
 func set_deploying_actor(carrier:CarrierActor, actor:BaseActor):
-	sub_actor_check_boxes.clear()
-	for child in sub_actors_options_container.get_children():
-		if not child == premade_sub_actor_option:
-			child.queue_free()
-	
-	sub_actors_container.show()
+	#sub_actor_check_boxes.clear()
+	#for child in sub_actors_options_container.get_children():
+		#if not child == premade_sub_actor_option:
+			#child.queue_free()
+	check_comfirm_button_enabled()
+	sub_actors_container.hide()
 	#if actor is CarrierActor:
 		#sub_actors_container.show()
 		#for child:BaseActor in carrier.list_carried_actors():
@@ -54,3 +63,13 @@ func list_selected_sub_actor_ids()->Array:
 		if check_box.button_pressed:
 			out_list.append(actor_id)
 	return out_list
+
+func check_comfirm_button_enabled():
+	var should_be_disabled = false
+	var actors = list_selected_sub_actor_ids()
+	if actors.size() < 0:
+		should_be_disabled = true
+	if !deployment_ui_state or !deployment_ui_state.deploying_position:
+		should_be_disabled = true
+	confirm_button.disabled = should_be_disabled
+	

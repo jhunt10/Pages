@@ -29,10 +29,15 @@ func _ready():
 		_build_slots()
 		_sync()
 
+var last_seen_max_que
 func _sync():
+	if _actor:
+		var que_size = _actor.Que.get_max_que_size()
+		if que_size != last_seen_max_que:
+			_build_slots()
 	_sync_icons()
 	if CombatRootControl.QueController.execution_state == CombatRootControl.QueController.ActionStates.Waiting:
-		preview_que_path()
+		movement_preview_pos = _actor.Que.get_movement_preview_final_pos()
 	# Delete old target area display
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key)
@@ -62,7 +67,9 @@ func mark_as_dead():
 
 func _build_slots():
 	if not _actor or not premade_que_button:
+		last_seen_max_que = 0
 		return
+	last_seen_max_que = _actor.Que.get_max_que_size()
 	for child in slots_container.get_children():
 		if child != premade_que_button:
 			child.queue_free()
@@ -84,7 +91,7 @@ func _build_slots():
 
 func _sync_icons():
 	var index = 0
-	for action:PageItemAction in _actor.Que.list_qued_actions():
+	for action:PageItemAction in _actor.Que.list_qued_actions(false):
 		if _real_slots.size() > index:
 			var slot:QueDisplayButton = _real_slots[index]
 			var turn_index = _actor.Que.que_index_to_turn_index(index)
@@ -97,26 +104,12 @@ func _sync_icons():
 			slot.set_action(n, _actor, null)
 	
 func _slot_pressed(index:int):
+	var action = _actor.Que.get_action_for_turn(index)
+	if action: 
+		if action.ActionKey == "WaitToBeDeployed_ActionPage" or action.ActionKey == "BeDeployed_ActionPage":
+			return
 	_actor.Que.delete_at_turn_index(index)
 
 func _hide_preview():
 	if _target_display_key:
 		CombatRootControl.Instance.MapController.target_area_display.clear_display(_target_display_key)
-
-func preview_que_path(add_movement:MapPos=null):
-	if !_actor or !_actor_node:
-		return
-	var actor_pos = CombatRootControl.Instance.GameState.get_actor_pos(_actor)
-	var preview_pos = _actor.Que.get_movement_preview_pos()
-	if add_movement:
-		preview_pos = preview_pos.apply_relative_pos(add_movement)
-	if !preview_pos:
-		_actor_node.hide_path_arrow()
-		return
-	if preview_pos.equals(actor_pos):
-		_actor_node.hide_path_arrow()
-		return
-		
-	_actor_node.set_path_arrow_pos(preview_pos)
-	movement_preview_pos = preview_pos
-	_actor_node.show_path_arrow()

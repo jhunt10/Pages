@@ -2,6 +2,7 @@ class_name UiState_ActionInput
 extends BaseUiState
 
 var first_actor_index:int
+var been_started:bool = false
 
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
@@ -16,7 +17,13 @@ func start_state():
 	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Action Input")
 	CombatRootControl.Instance.ui_control.active_combat_control.show()
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
-	CombatRootControl.Instance.QueController.clear_and_check_ques()
+	if not been_started:
+		been_started = true
+		CombatRootControl.Instance.ui_control.que_input.resync_ammo_pages()
+		CombatRootControl.Instance.QueController.clear_and_check_ques()
+		CombatRootControl.Instance.QueController.que_ordering_changed.emit()
+		for player:BaseActor in CombatRootControl.Instance.list_player_actors(true):
+			player.Que.action_que_changed.connect(_sync_que_previews)
 	if first_actor_index < 0:
 		var living_actors = CombatRootControl.list_player_actors()
 		if living_actors.size() > 0:
@@ -42,3 +49,35 @@ func handle_input(event):
 							CombatRootControl.Instance.set_player_index(index)
 					elif CombatRootControl.is_testing_map:
 						CombatRootControl.Instance.set_non_player_actor(actor)
+
+func update(_delta:float):
+	if _qued_for_sync:
+		_sync_que_previews(true)
+	pass
+
+var _qued_for_sync = true
+func _sync_que_previews(do_now:bool=false):
+	if not do_now:
+		_qued_for_sync = true
+		return
+	_qued_for_sync = false
+	
+	for player:BaseActor in CombatRootControl.list_player_actors(true):
+		var node:BaseActorNode = CombatRootControl.get_actor_node(player)
+		if !node:
+			continue
+		if player.is_being_carried() and not player.Que.is_qued_for_deploy():
+			node.hide()
+			continue
+		# Self Path Arrow
+		var actor_pos = node.cur_map_pos
+		if !actor_pos:
+			continue
+		var preview_pos = player.Que.get_movement_preview_final_pos(actor_pos)
+		if (!preview_pos) and not player.is_being_carried():
+			node.set_path_arrow_pos(actor_pos)
+			node.hide_path_arrow()
+			continue
+		node.set_path_arrow_pos(preview_pos)
+		
+	

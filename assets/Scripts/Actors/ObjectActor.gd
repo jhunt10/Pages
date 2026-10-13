@@ -28,14 +28,6 @@ func get_faction_key()->String:
 		return "Player"
 	return actor_data.get("Faction", "NO_FACTION")
 
-func is_being_carried()->bool:
-	return parent_carrier_actor_id != null
-
-func get_carrier_actor()->CarrierActor:
-	if is_being_carried():
-		return ActorLibrary.get_actor(parent_carrier_actor_id)
-	return null
-
 func get_title()->String:
 	return ""
 
@@ -197,10 +189,10 @@ func clean_state():
 	fill_page_ammo()
 	stats.reset_health()
 
-func on_combat_start():
+func on_enter_combat():
 	clean_state()
 	pages.sync_passive_page_effects()
-	effects.on_combat_start()
+	effects.on_enter_combat()
 
 func on_delete():
 	if is_deleted:

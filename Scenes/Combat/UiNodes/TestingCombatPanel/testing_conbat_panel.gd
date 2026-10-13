@@ -60,4 +60,4 @@ func recall_all_actors():
 			continue
 		if player.is_being_carried():
 			continue
-		CombatRootControl.Instance.recall_actor(player, soldier)
+		DeploymentHelper.recall_actor(player, soldier)

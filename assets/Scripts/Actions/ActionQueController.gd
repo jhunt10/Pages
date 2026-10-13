@@ -63,7 +63,7 @@ var max_que_size = 0
 var _action_ques:Dictionary = {}
 var _que_order:Array = []
 var _cached_actor_speeds:Dictionary = {}
-var _cached_actor_ppr:Dictionary = {}
+var _cached_que_ppr:Dictionary = {}
 var subaction_script_cache:Dictionary = {}
 
 # Ques that have been removed durring execution
@@ -91,7 +91,6 @@ func _start_round():
 	sub_action_timer = 0
 	
 	var game_state = CombatRootControl.Instance.GameState
-	
 	
 	var had_chance = false
 	if _flagged_for_reorder:
@@ -135,11 +134,14 @@ func _end_round():
 			
 	execution_suspended.emit()
 	_cleanup_dead_ques()
-	_clear_ques()
-	if _flagged_for_repadding:
-		if _flagged_for_reorder:
-			_order_ques_by_speed()
-		_pad_ques()
+	for que:ActionQueHolder in _action_ques.values():
+		que.clear_que(true)
+	if true or _flagged_for_repadding:
+		clear_and_check_ques()
+		#_cached_que_ppr.clear()
+		#if _flagged_for_reorder:
+			#_order_ques_by_speed()
+		#_pad_ques()
 	after_round.emit()
 
 func _on_turn_start(game_state):
@@ -188,20 +190,25 @@ func pause_execution():
 
 func add_action_que(new_que:ActionQueHolder):
 	if _action_ques.has(new_que.Id):
+		#_cached_que_ppr[new_que.Id] = new_que.get_max_que_size()
 		return
 	# Don't add ques mid turn
 	if execution_state != ActionStates.Waiting:
 		_to_add_actor_ques.append(new_que)
 		return
 	_action_ques[new_que.Id] = new_que
-	new_que.actor.stats_changed.connect(_on_actor_stat_change.bind(new_que.actor))
+	_cached_que_ppr[new_que.Id] = new_que.get_max_que_size()
+	if not new_que.actor.stats_changed.is_connected(_on_actor_stat_change):
+		new_que.actor.stats_changed.connect(_on_actor_stat_change.bind(new_que.actor))
 	_flagged_for_reorder = true
 	_flagged_for_repadding = true
 
-func remove_action_que(que:ActionQueHolder):
+func remove_action_que(que:ActionQueHolder, clean_now=false):
 	if not _dead_ques.has(que.Id):
 		_dead_ques.append(que.Id)
 		que_marked_as_dead.emit(que.Id)
+	if clean_now:
+		_cleanup_dead_ques(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func update(delta: float) -> void:
@@ -251,6 +258,12 @@ func update(delta: float) -> void:
 			
 			# All subactions for turn have finished
 			if sub_action_index >= PageItemAction.SUB_ACTIONS_PER_ACTION:
+				# Mark turns as executed
+				for que:ActionQueHolder in _action_ques.values():
+					var turn_data = que.get_data_for_turn(action_index)
+					if turn_data:
+						turn_data.turn_executed = true
+					
 				_on_turn_end(game_state)
 						
 				# Reset / Increment values
@@ -274,18 +287,19 @@ func update(delta: float) -> void:
 				if DEEP_LOGGING: print("\taction_index reach max_que_size")
 				_end_round()
 
-func _clear_ques():
-	for que:ActionQueHolder in _action_ques.values():
-		que.clear_que()
 
-func _cleanup_dead_ques():
+func _cleanup_dead_ques(clear_on_remove:bool=true):
 	if _dead_ques.size() == 0:
 		return
 	for dead_que_id in _dead_ques:
 		var dead_que = _action_ques.get(dead_que_id, null)
 		if dead_que:
-			dead_que.clear_que()
+			if clear_on_remove:
+				dead_que.clear_que()
+			var actor_id = dead_que.Id
+			_cached_actor_speeds.erase(actor_id)
 		_action_ques.erase(dead_que_id)
+		_cached_que_ppr.erase(dead_que_id)
 	_dead_ques.clear()
 	_flagged_for_reorder = true
 	_flagged_for_repadding = true
@@ -377,7 +391,7 @@ func _execute_turn_frames(game_state:GameStateData, que:ActionQueHolder, turn_in
 			return
 		sub_sub_action_index += 1
 	if DEEP_LOGGING: print("SubSubActions finished")
-	# All sub actions completed
+	# All sub actions for this frame completed
 	sub_sub_action_index = 0
 
 # Get script either load script or retreave from cache 
@@ -397,20 +411,22 @@ func _get_subaction(script_key:String)->BaseSubAction:
 	return subaction_script_cache[script_key]
 
 func _on_actor_stat_change(actor:BaseActor):
-	var que_size = actor.get_max_que_size()
 	var speed = actor.stats.get_stat("Speed", 0)
 	if _cached_actor_speeds.get(actor.Id, null) != speed:
 		_flagged_for_reorder = true
-	if _cached_actor_ppr.get(actor.Id, 0) != que_size:
-		_flagged_for_repadding = true
+	#var que_size = actor.get_max_que_size()
+	#if _cached_actor_ppr.get(actor.Id, 0) != que_size:
+		#_flagged_for_repadding = true
 
 func clear_and_check_ques():
 	for que:ActionQueHolder in _action_ques.values():
 		var actor = que.actor
 		if _cached_actor_speeds.get(actor.Id, null) != actor.stats.get_stat(StatHelper.Speed, 0):
 			_flagged_for_reorder = true
-		if _cached_actor_ppr.get(actor.Id, null) != actor.stats.get_stat(StatHelper.PPR, 0):
-			_flagged_for_repadding = true
+		if !_cached_que_ppr.keys().has(que.Id):
+			_cached_que_ppr[que.Id] = que.get_max_que_size()
+		#if _cached_actor_ppr.get(actor.Id, null) != actor.stats.get_stat(StatHelper.PPR, 0):
+			#_flagged_for_repadding = true
 	
 	var had_chance = false
 	if _flagged_for_reorder:
@@ -449,12 +465,12 @@ func _order_ques_by_speed(supress_signal=false):
 func _pad_ques(supress_signal=false):
 	var new_max_que_size = -1
 	var max_que_last_index = 0
-	_cached_actor_ppr.clear()
+	#_cached_actor_ppr.clear()
 	for index in range(_que_order.size()):
 		var que_id = _que_order[index]
 		var que:ActionQueHolder = _action_ques[que_id]
-		var que_size = que.get_max_que_size()
-		_cached_actor_ppr[que.actor.Id] = que.get_max_que_size()
+		var que_size = _cached_que_ppr[que_id] #que.get_max_que_size()
+		#_cached_actor_ppr[que.actor.Id] = que.get_max_que_size()
 		if que_size >= new_max_que_size:
 			new_max_que_size = que_size
 			max_que_last_index = index
@@ -463,7 +479,8 @@ func _pad_ques(supress_signal=false):
 		var que_id = _que_order[index]
 		var que:ActionQueHolder = _action_ques[que_id]
 		var is_slow = index >= max_que_last_index
-		var que_gaps = _get_premade_que_gaps(que.get_max_que_size(), max_que_size, is_slow)
+		var que_size = _cached_que_ppr[que_id] 
+		var que_gaps = _get_premade_que_gaps(que_size, max_que_size, is_slow)
 		que._set_turn_padding(que_gaps)
 	_flagged_for_repadding = false
 	if not supress_signal:

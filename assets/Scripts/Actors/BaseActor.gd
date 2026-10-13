@@ -80,9 +80,14 @@ var is_dead:bool = false
 
 var parent_carrier_actor_id
 
+func _print_test():
+	printerr(self.get_display_name() + " Turn Ended")
+
 func _init(key:String, load_path:String, def:Dictionary, id:String, data:Dictionary) -> void:
 	super(key, load_path, def, id, data)
 	spawn_map_layer = _def.get('SpawnOnMapLayer', 0)
+	
+	turn_ended.connect(_print_test)
 	
 	var stat_data = _def.get("Stats", {})
 	ai_def = get_load_val("AiData", {})
@@ -143,6 +148,9 @@ func get_faction_key()->String:
 func is_being_carried()->bool:
 	return parent_carrier_actor_id != null
 
+func get_carrier_actor_id()->String:
+	return parent_carrier_actor_id
+
 func get_carrier_actor()->CarrierActor:
 	if is_being_carried():
 		return ActorLibrary.get_actor(parent_carrier_actor_id)
@@ -184,11 +192,6 @@ func add_xp(value:int)->bool:
 	if title_page:
 		return title_page.add_xp(value)
 	return false
-
-func get_max_que_size()->int:
-	if Que:
-		return Que.get_max_que_size()
-	return 0
 
 func get_title_page()->PageItemTitle:
 	# TODO: Dumb init load hack
@@ -233,8 +236,6 @@ func _get_object_specific_tags()->Array:
 
 func _on_stat_change():
 	stats_changed.emit()
-	if CombatRootControl.is_valid():
-		Que.get_max_que_size()
 
 func _on_health_change():
 	health_changed.emit()
@@ -447,10 +448,10 @@ func clean_state():
 	fill_page_ammo()
 	stats.reset_health()
 
-func on_combat_start():
+func on_enter_combat():
 	clean_state()
 	pages.sync_passive_page_effects()
-	effects.on_combat_start()
+	effects.on_enter_combat()
 
 func on_delete():
 	if is_deleted:
