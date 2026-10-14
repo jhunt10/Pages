@@ -87,10 +87,15 @@ func on_player_stat_clicked(index):
 func on_deployment(actor_id):
 	if CombatRootControl.QueController.execution_state != ActionQueController.ActionStates.Waiting:
 		return
+	var actor = ActorLibrary.get_actor(actor_id)
+	var carrier_id = actor.get_carrier_actor_id()
+	if !carrier_id:
+		return
 	var ui_state_data = {
-		"DeployingActor" = actor_id
+		"CarrierActor" = carrier_id,
+		"DeployingActorIds" = [actor_id]
 	}
-	ui_state_controller.set_ui_state(UiStateController.UiStates.DeployActor, ui_state_data)
+	ui_state_controller.set_ui_state(UiStateController.UiStates.DeployOnQue, ui_state_data)
 
 # Should only be called by CombatRootControl
 func set_player_actor(player_actor):

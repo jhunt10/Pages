@@ -71,7 +71,14 @@ func get_last_qued_action()->PageItemAction:
 func que_action(action:PageItemAction, data:Dictionary={}):
 	if action == null:
 		return
-	if _current_que.que_action(action, data):
+	var was_success = _current_que.que_action(action, data)
+		
+	if was_success:
+		if action.ActionKey == "Merge_ActionPage":
+			var room_left = true
+			var wait_page = ItemLibrary.get_item("WaitToBeDeployed_ActionPage")
+			while room_left:
+				room_left = _current_que.que_action(wait_page, {})
 		action_que_changed.emit()
 		action.ammo_changed.emit()
 
@@ -134,40 +141,54 @@ func clear_que(supress_signals:bool=false):
 	if not supress_signals:
 		action_que_changed.emit()
 
-func delete_at_index(que_index):
+func delete_at_que_index(que_index):
 	var turn_index = _current_que.que_index_to_turn_index(que_index)
 	self.delete_at_turn_index(turn_index)
 
 func delete_at_turn_index(turn_index):
 	var available_action_pages_changed = false
-	var action_id = _current_que.get_action_id_for_turn(turn_index)
+	var deleted_action_id = _current_que.get_action_id_for_turn(turn_index)
 	
 	# Check if deployment action is being deleted
-	if action_id.begins_with("Deploy_ActionPage"):
+	if deleted_action_id.begins_with("Deploy_ActionPage"):
 		_delete_qued_deploy_action(turn_index)
 		# Unqueing deploy action changes actions available to carrier
 		available_action_pages_changed = true
+	
+	# Clear WaitPages added after Merge page
+	if deleted_action_id.begins_with("Merge_ActionPage"):
+		for offset in range(_current_que._max_turn_count - turn_index):
+			var check_index = _current_que._max_turn_count - offset
+			printerr("MergeDElete: Index: " + str(check_index))
+			var check_action_id = _current_que.get_action_id_for_turn(check_index)
+			if check_action_id == "WaitToBeDeployed_ActionPage":
+					_current_que.delete_at_turn_index(check_index)
 	
 	# Delete Action
 	_current_que.delete_at_turn_index(turn_index)
 	
 	# Check for shifted deploy_actions
-	for offset in range(_current_que._max_que_size - turn_index):
-		var check_index = turn_index + offset
-		var check_action_id = _current_que.get_action_id_for_turn(check_index)
-		if check_action_id.begins_with("Deploy_ActionPage"):
-			var turn_data = _current_que.get_data_for_turn(check_index)
-			# Rebuild deployment que for actors that will be deployed
-			var deploying_actor_id = turn_data.on_que_data.get("DeployingActorId", "")
-			var deploying_actor = ActorLibrary.get_actor(deploying_actor_id)
-			if deploying_actor:
-				deploying_actor.Que.build_deployment_que(check_index)
-			# Update transer data for actors that will be transfered
-			var transfer_actor_ids = turn_data.on_que_data.get("TransferActorIds", "")
-			for transfer_actor_id in transfer_actor_ids:
-				var transfer_actor = ActorLibrary.get_actor(transfer_actor_id)
-				if transfer_actor:
-					transfer_actor.Que.que_for_transfer(deploying_actor_id, check_index)
+	var remaining_actions = _current_que.list_qued_actions(true)
+	if remaining_actions.has("Deploy_ActionPage"):
+		for offset in range(_current_que._max_turn_count - turn_index):
+			var check_index = turn_index + offset
+			var check_action_id = _current_que.get_action_id_for_turn(check_index)
+			if check_action_id.begins_with("Deploy_ActionPage"):
+				var turn_data = _current_que.get_data_for_turn(check_index)
+				# Rebuild deployment que for actors that will be deployed
+				var deploying_actor_id = turn_data.on_que_data.get("DeployingActorId", "")
+				var deploying_actor = ActorLibrary.get_actor(deploying_actor_id)
+				if deploying_actor:
+					deploying_actor.Que.build_deployment_que(check_index)
+				# Update transer data for actors that will be transfered
+				var transfer_actor_ids = turn_data.on_que_data.get("TransferActorIds", "")
+				for transfer_actor_id in transfer_actor_ids:
+					var transfer_actor = ActorLibrary.get_actor(transfer_actor_id)
+					if transfer_actor:
+						transfer_actor.Que.que_for_transfer(deploying_actor_id, check_index)
+	
+	#if remaining_actions.has("Deploy_ActionPage"):
+		
 	if available_action_pages_changed:
 		actor.page_list_changed.emit()
 	action_que_changed.emit()

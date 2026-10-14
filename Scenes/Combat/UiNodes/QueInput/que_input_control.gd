@@ -167,10 +167,25 @@ func _build_buttons():
 		_page_buttons.clear()
 	var index = 0
 	var known_keys = []
+	# If Carrier with passengers, add deploy page
+	if _actor is CarrierActor:
+		if _actor.list_carried_actor_ids().size() > 0:
+			var action = ItemLibrary.get_item("Deploy_ActionPage")
+			_create_new_button(index, action)
+			index += 1
+	# If not player 1, add merge page
+	var player_list = StoryState.list_party_actors_ids()
+	if player_list[0] != _actor.Id:
+		var action = ItemLibrary.get_item("Merge_ActionPage")
+		_create_new_button(index, action)
+		index += 1
+		
 	for action:PageItemAction in _actor.get_action_list():
 		var action_key = action.ItemKey
 		var action_id = action.Id
 		var action_owner = action.get_holding_actor()
+		if _page_buttons.keys().has(action_id):
+			continue
 		# Limit to actions with owner matching filter
 		if _filtered_actor_id and action_owner.Id != _filtered_actor_id:
 			continue 
@@ -185,21 +200,24 @@ func _build_buttons():
 		if known_keys.has(action_key) and not action.is_duplicated_when_merged():
 			continue
 		known_keys.append(action_key)
-			
-		var new_button:QueInputButtonControl = page_button_prefab.duplicate()
-		new_button.name = "PageSlot" + str(index)
-		input_buttons_container.add_child(new_button)
-		new_button.visible = true
-		new_button.set_page(_actor, action)
-		if not MainRootNode.is_mobile:
-			new_button.button.mouse_entered.connect(_mouse_entered_page_button.bind(index, action_id))
-			new_button.button.mouse_exited.connect(_mouse_exited_page_button.bind(index, action_id))
-		new_button.button.pressed.connect(_page_button_pressed.bind(index, action_id))
 		
-		_page_buttons[action_id] = new_button
+		_create_new_button(index, action)
 		index += 1
 	input_buttons_container.columns = min(MAX_INPUT_BUTTON_WIDTH, index)
 	_on_que_change()
+
+func _create_new_button(index, action)->QueInputButtonControl:
+	var new_button:QueInputButtonControl = page_button_prefab.duplicate()
+	new_button.name = "PageSlot" + str(index)
+	input_buttons_container.add_child(new_button)
+	new_button.visible = true
+	new_button.set_page(_actor, action)
+	if not MainRootNode.is_mobile:
+		new_button.button.mouse_entered.connect(_mouse_entered_page_button.bind(0, action.Id))
+		new_button.button.mouse_exited.connect(_mouse_exited_page_button.bind(0, action.Id))
+	new_button.button.pressed.connect(_page_button_pressed.bind(0, action.Id))
+	_page_buttons[action.Id] = new_button
+	return new_button
 
 func _on_que_change():
 	var execution_state = CombatRootControl.Instance.QueController.execution_state

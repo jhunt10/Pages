@@ -20,8 +20,6 @@ func start_state():
 	if not been_started:
 		been_started = true
 		CombatRootControl.Instance.ui_control.que_input.resync_ammo_pages()
-		CombatRootControl.Instance.QueController.clear_and_check_ques()
-		CombatRootControl.Instance.QueController.que_ordering_changed.emit()
 		for player:BaseActor in CombatRootControl.Instance.list_player_actors(true):
 			player.Que.action_que_changed.connect(_sync_que_previews)
 	if first_actor_index < 0:

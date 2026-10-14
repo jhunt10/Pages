@@ -96,15 +96,16 @@ func que_action(action:PageItemAction, on_que_data:Dictionary, turn_execution_da
 	var queing_turn_data = _turns_data[_qued_turn_index]
 	queing_turn_data['ActionId'] = action.Id
 	queing_turn_data['TurnExecData'] = turn_execution_data
+	
 	return true
 
-func delete_at_index(que_index:int):
+func delete_at_que_index(que_index:int):
 	var turn_index = _turn_to_que_index_mapping.find(que_index+1)
 	delete_at_turn_index(turn_index)
 
 func delete_at_turn_index(turn_index:int):
 	if turn_index < 0 or turn_index >= _turns_data.size():
-		printerr("ActionQueData.delete_at_index: Invalid turn_index: %s" % [turn_index])
+		printerr("ActionQueData.delete_at_turn_index: Invalid turn_index: %s" % [turn_index])
 		return
 	var old_action_turn_data = []
 	# Collect old turn data

@@ -70,22 +70,22 @@ static func handle_movement(game_state:GameStateData, moving_actor:BaseActor,
 			printerr("!!!Simulated Push!!!")
 		
 		# Merge
-		if (not simulated and (blocking_actor is CarrierActor or moving_actor is CarrierActor) 
-			and (blocking_actor.is_player and moving_actor.is_player)):
-			var carrier:CarrierActor = null
-			var deployable:BaseActor = null
-			if blocking_actor is CarrierActor:
-				carrier = blocking_actor
-				deployable = moving_actor
-			else:
-				carrier = moving_actor
-				deployable = blocking_actor
-			if moving_actor == carrier:
-				game_state.set_actor_pos(moving_actor, new_pos, simulated)
-			else:
-				deployable.on_move_failed.emit(new_pos)
-			DeploymentHelper.merge_actors(deployable, carrier)
-			return true
+		#if (not simulated and (blocking_actor is CarrierActor or moving_actor is CarrierActor) 
+			#and (blocking_actor.is_player and moving_actor.is_player)):
+			#var carrier:CarrierActor = null
+			#var deployable:BaseActor = null
+			#if blocking_actor is CarrierActor:
+				#carrier = blocking_actor
+				#deployable = moving_actor
+			#else:
+				#carrier = moving_actor
+				#deployable = blocking_actor
+			#if moving_actor == carrier:
+				#game_state.set_actor_pos(moving_actor, new_pos, simulated)
+			#else:
+				#deployable.on_move_failed.emit(new_pos)
+			#DeploymentHelper.merge_actors(deployable, carrier)
+			#return true
 		if not PushableMovement.has(move_type):
 			if LOGGING: print("\t\tPush NotAllowed")
 			#game_state.set_actor_pos(moving_actor, actor_pos, simulated)

@@ -5,6 +5,13 @@ signal  carried_actors_changed
 
 var _held_actors:Dictionary = {}
 
+# Virtutal func to get tags specific to Object class
+func _get_object_specific_tags()->Array:
+	var out_list = super()
+	if not out_list.has("Carrier"):
+		out_list.append("Carrier")
+	return out_list
+
 # Lowest Priority is favored
 func get_carrier_priority()->int:
 	return actor_data.get("CarryPriority", 999)

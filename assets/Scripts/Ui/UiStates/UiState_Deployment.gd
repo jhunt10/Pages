@@ -201,7 +201,7 @@ func _mouse_button_up_in_spot(_spot):
 		deploy_actor()
 
 func deploy_actor():
-	var sub_actors = deployment_control.list_selected_sub_actor_ids()
+	var sub_actors = []#deployment_control.list_selected_sub_actor_ids()
 	var game_state = CombatRootControl.Instance.GameState
 	
 	var transfer_to_actor:CarrierActor = null

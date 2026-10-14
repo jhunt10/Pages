@@ -65,6 +65,98 @@
 		},
 		"_DefVersion": "1"
 	},
+	"Merge_ActionPage": {
+		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction_Deployment.gd",
+		"#ObjDetails": {
+			"Description": "Merge with a carrier ally.",
+			"DisplayName": "Merge",
+			"LargeIcon": "Sprites/Merge_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/Merge_Icon.png",
+			"SnippetDesc": "deploy",
+			"Tags": [
+				"Deploy"
+			],
+			"Taxonomy": [
+				"Item",
+				"Page",
+				"Action"
+			]
+		},
+		"ActionData": {
+			"AttackDetails": {
+				"ActionVerb": "merged"
+			},
+			"DamageDatas": {
+			},
+			"Preview": {
+				"PreviewTargetKey": "TargetParam"
+			},
+			"SubActions": {
+				"WeaponMotionAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Motion.gd",
+					"#FrameIndex": 11,
+					"#SubIndex": 0,
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				},
+				"GetTarget": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Targeting/SubAct_GetTarget.gd",
+					"#FrameIndex": 10,
+					"#SubIndex": 0,
+					"AllowAlreadyTargeted": false,
+					"AllowAutoTarget": true,
+					"SetTargetKey": "Target1",
+					"TargetParamKey": "TargetParam"
+				},
+				"WeaponReadyAnimation": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",
+					"#FrameIndex": 5,
+					"#SubIndex": 0,
+					"Animation": "Raise",
+					"MainHand": true,
+					"OffHand": "OnlyIfDuel"
+				},
+				"MergeActor": {
+					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Deployment/SubAct_Merge.gd",
+					"#FrameIndex": 10,
+					"#SubIndex": 1,
+					"TargetKey": "Target1"
+				}
+			},
+			"TargetParams": {
+				"TargetParam": {
+					"LineOfSight": true,
+					"TargetArea": "[[-1,-1],[0,-1],[1,-1],[-1,0],[1,0],[-1,1],[0,1],[1,1]]",
+					"TargetType": "Ally",
+					"TargetConditions": {
+						"TagFilters": [
+							{
+								"RequireAllTags": [
+									"Carrier"
+								]
+							}
+						],
+						"TagFiltersReqAll": true
+					}
+				}
+			}
+		},
+		"ItemData": {
+			"ItemType": "Page",
+			"Rarity": "Common",
+			"Value": 50.0
+		},
+		"PageData": {
+			"PageRequirements": {
+				"ConflictingPages": [],
+				"IncompatiblePages": [],
+				"TitleReq": "None"
+			},
+			"SourceTitle": ""
+		},
+		"_DefVersion": "1"
+	},
 	"WaitToBeDeployed_ActionPage": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {

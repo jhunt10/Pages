@@ -296,12 +296,12 @@ func start_spawn_animation():
 	shader_val = 0
 	self.body_animation.play("spawn_in")
 	self.body_animation.speed_scale = CombatRootControl.get_time_scale() 
-	self.body_animation.animation_started.connect(spawn_animation_finished_trigger)
-	self.body_animation.animation_finished.connect(spawn_animation_finished_trigger)
+	self.body_animation.animation_started.connect(spawn_animation_trigger)
+	self.body_animation.animation_finished.connect(spawn_animation_trigger)
 
-func spawn_animation_finished_trigger(_animation_name):
-	if self.body_animation.animation_started.is_connected(spawn_animation_finished_trigger):
-		self.body_animation.animation_started.disconnect(spawn_animation_finished_trigger)
+func spawn_animation_trigger(_animation_name):
+	if self.body_animation.animation_started.is_connected(spawn_animation_trigger):
+		self.body_animation.animation_started.disconnect(spawn_animation_trigger)
 	finish_spawn_animation()
 	
 func finish_spawn_animation():

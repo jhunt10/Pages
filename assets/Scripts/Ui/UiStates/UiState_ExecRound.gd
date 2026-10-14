@@ -37,4 +37,4 @@ func end_state():
 func _on_round_end():
 	_round_ended = true
 	if not CombatRootControl.Instance.check_end_conditions():
-		ui_controller.set_ui_state(UiStateController.UiStates.ActionInput, {}, true)
+		CombatRootControl.Instance.begin_combat_input_round()

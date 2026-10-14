@@ -126,7 +126,6 @@ func build_item_slots():
 		if not should_item_be_visible(item, ''):
 			continue
 		var sub_group_key = _get_sub_group_key(item)
-		print("SUBGROUP KEY: " + sub_group_key)
 		var button = _get_or_create_button(item)
 		var group = _get_or_create_sub_group_container(sub_group_key)
 		if not group.get_inner_container().get_children().has(button):

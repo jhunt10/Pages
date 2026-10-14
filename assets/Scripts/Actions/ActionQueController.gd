@@ -418,7 +418,10 @@ func _on_actor_stat_change(actor:BaseActor):
 	#if _cached_actor_ppr.get(actor.Id, 0) != que_size:
 		#_flagged_for_repadding = true
 
-func clear_and_check_ques():
+func clear_and_check_ques(clear_cached_ppr:bool=false):
+	if clear_cached_ppr:
+		_cached_que_ppr.clear()
+		_flagged_for_repadding = true
 	for que:ActionQueHolder in _action_ques.values():
 		var actor = que.actor
 		if _cached_actor_speeds.get(actor.Id, null) != actor.stats.get_stat(StatHelper.Speed, 0):

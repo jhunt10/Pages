@@ -13,7 +13,7 @@ layout_mode = 3
 anchors_preset = 0
 size_flags_horizontal = 3
 script = ExtResource("1_mreua")
-group_outline = NodePath("NinePatchRect")
+group_outline = NodePath("GroupOutline")
 rogue_port = NodePath("RoguePort/PortraitTextureRect")
 rogue_button = NodePath("RoguePort/Button")
 priest_port = NodePath("PriestPort/PortraitTextureRect")
@@ -21,8 +21,7 @@ priest_button = NodePath("PriestPort/Button")
 mage_port = NodePath("MagePort/PortraitTextureRect")
 mage_button = NodePath("MagePort/Button")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1569964631]
-visible = false
+[node name="GroupOutline" type="NinePatchRect" parent="." unique_id=1569964631]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5

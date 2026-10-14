@@ -101,10 +101,10 @@ static func merge_actors(actor_a, actor_b, preview_deployment:bool=false):
 		if deployed_node:
 			deployed_node.cancel_move_animation()
 		CombatRootControl.Instance.QueController.remove_action_que(deployed_actor.Que)
-	else:
-		var deployed_node = CombatRootControl.get_actor_node(deployed_actor)
-		if deployed_node:
-			deployed_node.hide()
+	
+	var deployed_node = CombatRootControl.get_actor_node(deployed_actor)
+	if deployed_node:
+		deployed_node.hide()
 	
 	carrier_actor.add_carried_actor(deployed_actor)
 	
@@ -145,11 +145,11 @@ static func recall_actor(actor_a, actor_b):
 	var deployed_node = CombatRootControl.get_actor_node(deployed_actor)
 	deployed_node.cancel_move_animation()
 	#var carrier_node = get_actor_node(carrier_actor)
+	merge_actors(deployed_actor, carrier_actor)
 	var vfx = VfxHelper.create_vfx_on_actor(carrier_actor, "RecallActorVfx", {}, deployed_actor)
 	vfx.finished.connect(on_recall_finish.bind(deployed_actor, carrier_actor))
 
 static func on_recall_finish(deployed_actor, carrier_actor):
-	merge_actors(deployed_actor, carrier_actor)
 	CombatRootControl.Instance.QueController.clear_and_check_ques()
 	#var deployed_node = get_actor_node(deployed_actor)
 	#deployed_node.damage_animation_player.play()

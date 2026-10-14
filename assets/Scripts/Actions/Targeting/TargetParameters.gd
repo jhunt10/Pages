@@ -102,10 +102,10 @@ func is_point_in_area(center:MapPos, point)->bool:
 ## Returns true if target actor is valid as a selected target
 func is_valid_target_actor(actor:BaseActor, target:BaseActor, game_state:GameStateData)->bool:
 	if _conditions.size() > 0:
-		if _conditions.has("TagFilers"):
+		if _conditions.keys().has("TagFilters"):
 			if not TagHelper.check_tag_filters("TagFilters", _conditions, target):
 				return false
-		if _conditions.has("HealthPercentBelow"):
+		if _conditions.keys().has("HealthPercentBelow"):
 			var targ_cur_hp = target.stats.current_health
 			var targ_max_hp = target.stats.max_health
 			var targ_percent = float(targ_cur_hp) / float(targ_max_hp)

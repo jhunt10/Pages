@@ -26,19 +26,26 @@ var mouse_down_spot
 #var deploying_actor_node:BaseActorNode
 var spawn_map:TileMapLayer
 
+var pre_selected_actor_ids:Array = []
+
 func _get_debug_name()->String: 
 	return "DeployingActor"
 	
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	carrier_actor_id = args.get("CarrierActor")
-	queing_page_id = args.get("ActionId")
+	queing_page_id = args.get("ActionId", "Deploy_ActionPage")
+	pre_selected_actor_ids = args.get("DeployingActorIds", [])
 	carrier_actor = ActorLibrary.get_actor(carrier_actor_id)
 	if carrier_actor_id:
 		state = States.Placing
 		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingActor)
 	else:
 		printerr("UiState_Deployment: No DeployingActor id provided")
+	
+	
+	
+	
 	#deploying_actor_node = CombatRootControl.create_temp_actor_node(deploying_actor_id)
 	carrier_actor_node = CombatRootControl.get_actor_node(carrier_actor_id)
 	spawn_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
@@ -112,18 +119,20 @@ func _build_spawn_area():
 func start_state():
 	if _logging: print("Start UiState: DeployingActor")
 	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Que Deploy")
-	spawn_map.show()
+	if spawn_map:
+		spawn_map.show()
 	CombatRootControl.Instance.ui_control.active_combat_control.hide()
 	deployment_control.deployment_ui_state = self
 	#deployment_control.set_deploying_actor(carrier_actor, ActorLibrary.get_actor(deploying_actor_id))
-	deployment_control.actor_buttons_control.set_carrier(carrier_actor)
+	deployment_control.actor_buttons_control.set_carrier(carrier_actor, pre_selected_actor_ids)
 	deployment_control.show()
 	if not deployment_control.cancled.is_connected(_on_canceled):
 		deployment_control.cancled.connect(_on_canceled)
 	if not deployment_control.confirmed.is_connected(_on_confirm):
 		deployment_control.confirmed.connect(_on_confirm)
-	if not deployment_control.actor_buttons_control.button_states_changed.is_connected(_on_actors_change):
-		deployment_control.actor_buttons_control.button_states_changed.connect(_on_actors_change)
+	if not deployment_control.actor_buttons_control.button_states_changed.is_connected(_on_selected_deploying_actors_change):
+		deployment_control.actor_buttons_control.button_states_changed.connect(_on_selected_deploying_actors_change)
+	_on_selected_deploying_actors_change(deployment_control.actor_buttons_control.get_select_deploy_actor_ids())
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingActor)
 	deployment_control.check_comfirm_button_enabled()
 	
@@ -160,30 +169,28 @@ func _on_confirm():
 	if !deploying_position:
 		return
 	var page = ItemLibrary.get_item(queing_page_id)
-	var deploying_actor_id = deployment_control.actor_buttons_control.get_select_deploy_actor_id()
-	var transfer_actor_ids = deployment_control.actor_buttons_control.get_select_transfer_actor_ids()
-	var center = carrier_actor.Que.get_movement_preview_final_pos()
-	var relative_pos = MapPos.new(
-		deploying_position.x - center.x,
-		deploying_position.y - center.y,
-		center.z,
-		deploying_position.dir
-	)
-	DeploymentHelper.deploy_actor(deploying_actor_id, deploying_position, transfer_actor_ids, true)
-	if deploying_actor_id:
-		carrier_actor.Que.que_to_deploy_other_actor(page, deploying_actor_id, relative_pos, transfer_actor_ids)
+	var deploying_actor_ids = deployment_control.actor_buttons_control.get_select_deploy_actor_ids()
+	if deploying_actor_ids.size() > 0:
+		var main_deploy_id = deploying_actor_ids[0]
+		var transfer_actor_ids:Array = deploying_actor_ids
+		transfer_actor_ids.erase(main_deploy_id)
+		var center = carrier_actor.Que.get_movement_preview_final_pos()
+		var relative_pos = MapPos.new(
+			deploying_position.x - center.x,
+			deploying_position.y - center.y,
+			center.z,
+			deploying_position.dir
+		)
+		DeploymentHelper.deploy_actor(main_deploy_id, deploying_position, transfer_actor_ids, true)
+		carrier_actor.Que.que_to_deploy_other_actor(page, main_deploy_id, relative_pos, transfer_actor_ids)
 	CombatRootControl.Instance.ui_control.ui_state_controller.back_to_last_state()
 	pass
 
-func _on_actors_change(values:Array):
+func _on_selected_deploying_actors_change(selected_actor_ids:Array):
 	var path_arrow = get_extra_path_arrow()
 	var player_actors = StoryState.list_party_actors_ids()
-	if values[1]:
-		path_arrow.modulate = StoryState.get_player_color(player_actors[2])
-	elif values[0]:
-		path_arrow.modulate = StoryState.get_player_color(player_actors[1])
-	elif values[2]:
-		path_arrow.modulate = StoryState.get_player_color(player_actors[3])
+	if selected_actor_ids.size() > 0 and player_actors.has(selected_actor_ids[0]):
+		path_arrow.modulate = StoryState.get_player_color(selected_actor_ids[0])
 	else:
 		path_arrow.modulate = Color(1,1,1,0.5)
 	deployment_control.check_comfirm_button_enabled()
@@ -195,6 +202,7 @@ func _mouse_moved_into_spot(spot):
 			var path_arrow = get_extra_path_arrow()
 			path_arrow.global_position = spawn_map.map_to_local(spot)
 			deploying_position = MapPos.Parse(spot)
+			deployment_control.check_comfirm_button_enabled()
 			
 	
 	elif state == States.Dragging:
@@ -229,8 +237,6 @@ func _mouse_moved_into_spot(spot):
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingTile)
 		else:
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
-	
-	deployment_control.check_comfirm_button_enabled()
 
 func _mouse_button_down_in_spot(spot):
 	if state == States.Placing || state == States.Waiting:
@@ -245,6 +251,10 @@ func _mouse_button_down_in_spot(spot):
 			CombatRootControl.Instance.camera.freeze_camera()
 			CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.PlacingDragCenter)
 			CombatRootControl.Instance.GridCursor.lock_position = true
+			
+			var path_arrow = get_extra_path_arrow()
+			path_arrow.global_position = spawn_map.map_to_local(spot)
+			path_arrow.rotation_degrees = 0
 
 func _mouse_button_up_in_spot(_spot):
 	CombatRootControl.Instance.camera.unfreeze_camera()

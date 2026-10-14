@@ -73,7 +73,7 @@ func get_party_actor_by_index(index:int)->BaseActor:
 	return null
 
 func list_party_actors_ids()->Array:
-	return _party_actor_ids.duplicate()
+	return _party_actor_ids
 
 func list_party_actors()->Array:
 	var out_list = []

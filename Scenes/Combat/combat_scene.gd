@@ -236,7 +236,7 @@ func start_phase(phase_key):
 			}
 			ui_control.ui_state_controller.set_ui_state(UiStateController.UiStates.PlaceActors, ui_state_data)
 		"Combat":
-			_begin_combat_input_round()
+			begin_combat_input_round()
 		"Dialog":
 			var dialog_data = phase_data.get("DialogData")
 			dialog_controller.load_dialog_data(dialog_data)
@@ -244,7 +244,7 @@ func start_phase(phase_key):
 
 var _cached_game_state:GameStateData
 var _cached_player_carrier_mapping:Dictionary = {}
-func _begin_combat_input_round():
+func begin_combat_input_round():
 	if not combat_started:
 		start_combat_animation()
 		
@@ -257,7 +257,10 @@ func _begin_combat_input_round():
 		elif player_actor.is_being_carried():
 			_cached_player_carrier_mapping[player_actor.Id] = player_actor.get_carrier_actor_id()
 	
-	CombatRootControl.Instance.ui_control.ui_state_controller.set_ui_state(
+	QueController.clear_and_check_ques(true)
+	QueController.que_ordering_changed.emit()
+	
+	ui_control.ui_state_controller.set_ui_state(
 		UiStateController.UiStates.ActionInput, {}, true)
 
 func begin_combat_execution_round():

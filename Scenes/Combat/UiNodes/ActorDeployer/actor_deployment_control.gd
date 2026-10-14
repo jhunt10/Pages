@@ -8,9 +8,6 @@ signal confirmed
 @export var cancel_button:Button
 @export var confirm_button:Button
 
-@export var sub_actors_container:BoxContainer
-@export var sub_actors_options_container:BoxContainer
-@export var premade_sub_actor_option:BoxContainer
 @export var actor_buttons_control:DeployActorButtons
 var sub_actor_check_boxes:Dictionary = {}
 
@@ -21,10 +18,6 @@ func _ready() -> void:
 	close_button.pressed.connect(on_canceled_button)
 	cancel_button.pressed.connect(on_canceled_button)
 	confirm_button.pressed.connect(on_confirm)
-	for child in sub_actors_options_container.get_children():
-		if not child == premade_sub_actor_option:
-			child.queue_free()
-	premade_sub_actor_option.hide()
 		
 	pass # Replace with function body.
 
@@ -40,7 +33,6 @@ func set_deploying_actor(carrier:CarrierActor, actor:BaseActor):
 		#if not child == premade_sub_actor_option:
 			#child.queue_free()
 	check_comfirm_button_enabled()
-	sub_actors_container.hide()
 	#if actor is CarrierActor:
 		#sub_actors_container.show()
 		#for child:BaseActor in carrier.list_carried_actors():
@@ -56,18 +48,10 @@ func set_deploying_actor(carrier:CarrierActor, actor:BaseActor):
 	#else:
 		#sub_actors_container.hide()
 
-func list_selected_sub_actor_ids()->Array:
-	var out_list = []
-	for actor_id in sub_actor_check_boxes.keys():
-		var check_box:CheckBox = sub_actor_check_boxes[actor_id]
-		if check_box.button_pressed:
-			out_list.append(actor_id)
-	return out_list
-
 func check_comfirm_button_enabled():
 	var should_be_disabled = false
-	var actors = list_selected_sub_actor_ids()
-	if actors.size() < 0:
+	var selected_actor_ids = actor_buttons_control.get_select_deploy_actor_ids()
+	if selected_actor_ids.size() == 0:
 		should_be_disabled = true
 	if !deployment_ui_state or !deployment_ui_state.deploying_position:
 		should_be_disabled = true
