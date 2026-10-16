@@ -31,9 +31,14 @@ static var _player_actor_ids:Array = []
 static func is_valid()->bool:
 	return is_instance_valid(Instance)
 
-static func get_player_index_of_actor(actor:BaseActor)->int:
+static func get_player_index_of_actor(actor)->int:
+	var actor_id:String = ""
+	if actor is BaseActor:
+		actor_id = actor.Id
+	if actor is String:
+		actor_id = actor
 	for index in range(_player_actor_ids.size()):
-		if actor.Id == _player_actor_ids[index]:
+		if actor_id == _player_actor_ids[index]:
 			return index
 	return -1
 

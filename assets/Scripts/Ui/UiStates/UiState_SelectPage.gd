@@ -5,17 +5,18 @@ func _get_debug_name()->String:
 	return "Targeting"
 	
 var _selectable_action_keys:Array = []
-var _actor_index:int = 0
+var _selecting_for_actor_id:String
 	
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	_selectable_action_keys = args.get("SelectablePages", [])
-	_actor_index = args.get("PlayerActorIndex", 0)
+	_selecting_for_actor_id = args.get("ActorId", "")
 	pass
 	
 func start_state():
 	if _logging: print("Start UiState: Refill Ammo")
-	CombatRootControl.Instance.set_player_index(_actor_index)
+	var player_index = CombatRootControl.get_player_index_of_actor(_selecting_for_actor_id)
+	CombatRootControl.Instance.set_player_index(player_index)
 	var que_input = CombatRootControl.Instance.ui_control.que_input
 	que_input.showing = true
 	que_input.show_page_selection(_selectable_action_keys)

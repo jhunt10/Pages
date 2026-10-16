@@ -9,6 +9,9 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 
 var _round_ended
 
+func allow_pause_menu()->bool:
+	return true
+
 func start_state():
 	if _logging: print("Start UiState: Exec Round")
 	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Executing")
@@ -26,6 +29,13 @@ func start_state():
 
 func update(_delta:float):
 	pass
+
+func handle_input(event):
+	# Escape Key Pressed
+	if event is InputEventKey:
+		if (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
+			ui_controller.set_ui_state(UiStateController.UiStates.PauseMenu)
+			
 
 func end_state():
 	if not _round_ended:

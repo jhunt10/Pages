@@ -102,14 +102,8 @@ func set_player_actor(player_actor):
 	if player_actor:
 		que_input.set_actor(player_actor)
 
-func _input(event: InputEvent) -> void:
-	# Escape Key Pressed
-	if event is InputEventKey and (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
-		if not pause_menu.visible:
-			if ui_state_controller.current_ui_state and ui_state_controller.current_ui_state.allow_pause_menu():
-				ui_state_controller.set_ui_state(UiStateController.UiStates.PauseMenu)
-		else:
-			ui_state_controller.back_to_last_state()
+func _input(_event: InputEvent) -> void:
+	pass
 
 var dragging = false
 var mouse_drag_start:Vector2 

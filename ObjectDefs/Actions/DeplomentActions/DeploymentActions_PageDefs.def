@@ -107,7 +107,10 @@
 					"AllowAlreadyTargeted": false,
 					"AllowAutoTarget": true,
 					"SetTargetKey": "Target1",
-					"TargetParamKey": "TargetParam"
+					"TargetParamKey": "TargetParam",
+					"AutoTargetHints": {
+						"AutoSelectOne": true
+					}
 				},
 				"WeaponReadyAnimation": {
 					"!SubActionScript": "res://assets/Scripts/Actions/SubActions/Animations/SubAct_ActionAnimation_Ready.gd",

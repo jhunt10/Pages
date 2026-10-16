@@ -58,6 +58,24 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 		
 	var selection_data = TargetSelectionData.new(target_params, setting_target_key, actor, game_state, exclude_targets)
 	var potential_target_count = selection_data.get_potential_target_count()
+	
+	
+	# Target hints
+	var target_hints:Dictionary = subaction_data.get("AutoTargetHints", {})
+	if actor.is_player:
+		if target_hints.keys().has("SkipAllies"):
+			var target_actor_ids = selection_data.list_potential_targets()
+			pass
+		if target_hints.keys().has("AutoSelectOne"):
+			if potential_target_count == 1:
+				var target_actor = selection_data.list_potential_targets()[0]
+				turn_data.add_target_for_key(
+					selection_data.setting_target_key, 
+					selection_data.target_params, 
+					target_actor)
+				return BaseSubAction.Success
+			
+	
 	# No valid targets
 	if potential_target_count == 0:
 		VfxHelper.create_flash_text(actor, "No Target", BaseFlashTextVfxNode.FlashTextType.NoTarget)
@@ -74,7 +92,10 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 	if allow_auto and CombatRootControl.Instance.auto_targeting_enabled: 
 		# Get viable targets
 		var auto_targets = TargetingHelper.get_auto_targets_for_page(selection_data, parent_action, actor, game_state)
-		
+		if auto_targets.size() == 0:
+			VfxHelper.create_flash_text(actor, "No Target", BaseFlashTextVfxNode.FlashTextType.NoTarget)
+			return BaseSubAction.Failed
+			
 		# Get last targeted Actor
 		var last_target_record = CombatRootControl.Instance.last_target_records.get(actor.Id, {})
 		var last_target_actor_id = last_target_record.get("ActorId", null)

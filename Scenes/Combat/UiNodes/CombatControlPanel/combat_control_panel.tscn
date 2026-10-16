@@ -70,7 +70,7 @@ texture_margin_bottom = 4.0
 [sub_resource type="Theme" id="Theme_hgp41"]
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_4il04")
 
-[node name="CombatControlPanel" type="PanelContainer" unique_id=1084273047 node_paths=PackedStringArray("min_button", "max_button", "menu_button", "book_button", "round_label", "turn_label", "status_label", "round_progress_bar", "turns_container", "time_scale_label", "time_scale_slider")]
+[node name="CombatControlPanel" type="PanelContainer" unique_id=1084273047 node_paths=PackedStringArray("min_button", "max_button", "menu_button", "book_button", "round_label", "turn_label", "status_label", "round_progress_bar", "turns_container", "time_scale_label", "time_scale_slider", "auto_target_title", "auto_target_button")]
 custom_minimum_size = Vector2(206, 0)
 offset_right = 40.0
 offset_bottom = 40.0
@@ -87,6 +87,8 @@ round_progress_bar = NodePath("VBoxContainer/StatusContainer/NinePatchRect/Round
 turns_container = NodePath("VBoxContainer/TurnOrderContainer")
 time_scale_label = NodePath("VBoxContainer/TimeScaleContainer/TimeScaleValueLabel")
 time_scale_slider = NodePath("VBoxContainer/TimeScaleContainer/HSlider")
+auto_target_title = NodePath("VBoxContainer/AutoTargetContainer/AutoTargetTitleLabel")
+auto_target_button = NodePath("VBoxContainer/AutoTargetContainer/Button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1257019059]
 layout_mode = 2
@@ -352,20 +354,48 @@ rounded = true
 tick_count = 6
 ticks_on_borders = true
 
-[node name="TurnOrderContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1501039013 node_paths=PackedStringArray("ques_container", "ques_scroll_container", "premade_que_container")]
-layout_mode = 2
-script = ExtResource("16_emua7")
-ques_container = NodePath("ScrollContainer/QuesContainer")
-ques_scroll_container = NodePath("ScrollContainer")
-premade_que_container = NodePath("ScrollContainer/QuesContainer/QueDisplayPanelContainer")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer/TurnOrderContainer" unique_id=1989442724]
+[node name="DividerNinePatchRect3" type="NinePatchRect" parent="VBoxContainer" unique_id=894310880]
 layout_mode = 2
 texture = ExtResource("13_qas4w")
 patch_margin_left = 2
 patch_margin_top = 1
 patch_margin_right = 2
 patch_margin_bottom = 1
+
+[node name="AutoTargetContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=428374186]
+layout_mode = 2
+alignment = 1
+
+[node name="AutoTargetTitleLabel" type="Label" parent="VBoxContainer/AutoTargetContainer" unique_id=2038722498]
+layout_mode = 2
+theme = ExtResource("14_pakc7")
+theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
+theme_override_font_sizes/font_size = 12
+text = "Auto Target"
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/AutoTargetContainer" unique_id=1923172893]
+visible = false
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer/AutoTargetContainer" unique_id=2039818794]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "Disabled"
+
+[node name="DividerNinePatchRect4" type="NinePatchRect" parent="VBoxContainer" unique_id=1244223426]
+layout_mode = 2
+texture = ExtResource("13_qas4w")
+patch_margin_left = 2
+patch_margin_top = 1
+patch_margin_right = 2
+patch_margin_bottom = 1
+
+[node name="TurnOrderContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1501039013 node_paths=PackedStringArray("ques_container", "ques_scroll_container", "premade_que_container")]
+layout_mode = 2
+script = ExtResource("16_emua7")
+ques_container = NodePath("ScrollContainer/QuesContainer")
+ques_scroll_container = NodePath("ScrollContainer")
+premade_que_container = NodePath("ScrollContainer/QuesContainer/QueDisplayPanelContainer")
 
 [node name="Label3" type="Label" parent="VBoxContainer/TurnOrderContainer" unique_id=198817936]
 layout_mode = 2

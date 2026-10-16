@@ -1,11 +1,13 @@
 class_name UiState_CharacterSheet
 extends BaseUiState
 
+var _character_menu:CharacterMenu
+
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	var actor = CombatRootControl.Instance.get_current_player_actor()
-	var menu:CharacterMenu = MainRootNode.Instance.open_character_sheet(actor, CombatUiControl.Instance.camera.canvas_layer)
-	menu.closed.connect(on_menu_closed)
+	_character_menu = MainRootNode.Instance.open_character_sheet(actor, CombatUiControl.Instance.camera.canvas_layer)
+	_character_menu.closed.connect(on_menu_closed)
 	
 	
 
@@ -21,8 +23,8 @@ func end_state():
 	CombatRootControl.Instance.camera.unfreeze_camera()
 	CombatRootControl.resume_combat()
 
-func handle_input(_event):
-	pass
-
-func allow_pause_menu()->bool:
-	return false
+func handle_input(event):
+	# Escape Key Pressed
+	if event is InputEventKey:
+		if (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
+			_character_menu._on_close()

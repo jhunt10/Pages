@@ -49,6 +49,8 @@ static func build_action_ques(clear_existing_ques:bool=false):
 			
 			var current_pos = turn_state.get_actor_pos(actor)
 			# Enable current Actor's Position for Pathing
+			if not current_pos:
+				continue
 			astar.set_pos_disabled(current_pos, false)
 			
 			var action = _choose_page_for_actor(actor, turn_state)

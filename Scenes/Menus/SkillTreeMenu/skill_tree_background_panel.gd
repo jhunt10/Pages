@@ -14,6 +14,8 @@ var _current_background_fill_x:int = -1
 
 var background_fill_color = SoldierBGColor
 
+var force_fill = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -36,13 +38,9 @@ func _draw() -> void:
 	
 	 #Progress Fill Background
 	var unlocked_count = parent_control._unlocked_skills.size() + 1
-	#var column_count = parent_control.tree_data.size()
-	#var percent_full = minf(unlocked_count+1, column_count) / (column_count as float)
-	#_target_background_fill_x = round(self.size.x * percent_full)
 	draw_rect(Rect2(0,0,_current_background_fill_x, self.size.y), background_fill_color)
 	
 	# Dashed lines between columns
-	#var column_count = 0
 	var last_x = -1
 	var index = -1
 	for col in parent_control.grid_main_container.get_children():
@@ -65,8 +63,11 @@ func _draw() -> void:
 			last_x = col.global_position.x + col.size.x - self.global_position.x
 	if index-1 < unlocked_count:
 		_target_background_fill_x = floori(self.size.x)
-	if _current_background_fill_x <= 0:
+	if force_fill:
 		_current_background_fill_x = _target_background_fill_x
+		force_fill = false
+	
+	#printerr("STB: TArgetFill: %s      Current: %s" % [_target_background_fill_x, _current_background_fill_x])
 	
 	# Draw Lines between nodes
 	var self_global_pos = self.get_global_rect().position
@@ -109,3 +110,4 @@ func set_background_progresss(value:int, total:int):
 	#_target_background_fill_x = round(self.size.x * percent_full)
 	#_current_background_fill_x = _target_background_fill_x
 	_current_background_fill_x = -1
+	pass

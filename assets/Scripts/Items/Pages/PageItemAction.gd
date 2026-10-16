@@ -165,7 +165,7 @@ func get_qued_icon(turn_index:int, que:ActionQueHolder, override_actor:BaseActor
 # Actor specific Actions like "Weapon Attack" should be duplicated
 func is_duplicated_when_merged()->bool:
 	if action_data.get("Preview", {}).get("UseEquipmentIcon", null) != null:
-		return true
+		return false
 	return false
 
 func use_equipment_icon()->bool:

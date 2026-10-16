@@ -19,6 +19,9 @@ signal book_button_pressed
 @export var time_scale_label:Label
 @export var time_scale_slider:HSlider
 
+@export var auto_target_title:Label
+@export var auto_target_button:Button
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	min_button.pressed.connect(_on_min_button)
@@ -28,7 +31,11 @@ func _ready() -> void:
 	CombatRootControl.Instance.QueController.start_of_turn.connect(_on_turn_start)
 	CombatRootControl.Instance.QueController.start_of_round.connect(_on_round_start)
 	CombatRootControl.Instance.QueController.end_of_round.connect(_on_round_end)
-	time_scale_slider.value_changed.connect(on_time_scale_change)
+	time_scale_slider.value_changed.connect(_on_time_scale_change)
+	sync_scale_change()
+	auto_target_button.pressed.connect(_on_auto_target_pressed)
+	CombatRootControl.Instance.auto_targeting_enabled = !CombatRootControl.Instance.auto_targeting_enabled
+	_on_auto_target_pressed()
 
 func _process(_delta: float) -> void:
 	if round_progress_bar.visible:
@@ -70,7 +77,24 @@ func _on_round_end():
 func set_status(val:String):
 	status_label.text = val
 
-func on_time_scale_change(index:int):
+func _on_time_scale_change(index:int):
 	var values = [0.5, 0.75, 1, 1.5, 2, 3]
 	CombatRootControl._time_scale = values[index]
 	time_scale_label.text = str(CombatRootControl.Instance._time_scale).trim_suffix(".0")
+
+func sync_scale_change():
+	var values = [0.5, 0.75, 1.0, 1.5, 2.0, 3.0]
+	var cur_val = CombatRootControl._time_scale
+	var index = values.find(cur_val)
+	if index >= 0:
+		time_scale_label.text = str(CombatRootControl.Instance._time_scale).trim_suffix(".0")
+		time_scale_slider.set_value_no_signal(index)
+
+func _on_auto_target_pressed():
+	var auto_target_enabled = !CombatRootControl.Instance.auto_targeting_enabled
+	CombatRootControl.Instance.auto_targeting_enabled = auto_target_enabled
+	if auto_target_enabled:
+		#TODO: Translation
+		auto_target_button.text = "Enabled"
+	else:
+		auto_target_button.text = "Disabled"

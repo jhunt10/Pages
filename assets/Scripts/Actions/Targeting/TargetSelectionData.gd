@@ -6,7 +6,7 @@ var focused_actor:BaseActor
 var actor_pos:MapPos
 var exclude_targets:Array
 var _los_mapping:Dictionary
-## Dictionary of potenial coors to actors in that spot
+## Dictionary of potenial coors to actor_ids in that spot
 var _potential_target_dictray:Dictionary
 var _potential_target_count:int
 
@@ -41,7 +41,7 @@ func get_selectable_coords()->Array:
 func is_coor_selectable(coor:Vector2i)->bool:
 	return _potential_target_dictray.keys().has(coor)
 
-## Returns list of Actors or MapSpots depending on Targeting Type
+## Returns list of Actors Id or MapSpots depending on Targeting Type
 func list_potential_targets()->Array:
 	return TargetingHelper.dicarry_to_values(_potential_target_dictray)
 

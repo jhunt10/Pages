@@ -9,6 +9,7 @@ extends HBoxContainer
 @export var priest_x_icon:TextureRect
 @export var mage_x_icon:TextureRect
 
+var _actor
 var buttons = [rogue_button, priest_button, mage_button]
 var x_icons = [rogue_x_icon, priest_x_icon, mage_x_icon]
 
@@ -20,10 +21,14 @@ func _ready() -> void:
 func sync(actor:BaseActor):
 	var players = StoryState.list_party_actors()
 	if not actor is CarrierActor or players.size() <= 1:
+		_actor = null
 		self.hide()
-		return
 	else:
+		_actor = actor
 		self.show()
+	if !_actor:
+		return
+	
 	if players.size() > 1:
 		rogue_button.show()
 		if actor.list_carried_actor_ids().has(players[1].Id):
@@ -34,7 +39,7 @@ func sync(actor:BaseActor):
 		rogue_button.hide()
 	
 	
-	if players.size() > 2:
+	if players.size() > 2 and actor.Id != players[2].Id:
 		priest_button.show()
 		if actor.list_carried_actor_ids().has(players[2].Id):
 			priest_x_icon.hide()
@@ -57,13 +62,14 @@ func _on_button_pressed(index:int):
 	# Do nothing in combat mod
 	if CombatRootControl.Instance and CombatRootControl.is_valid():
 		return
+	if !_actor:
+		return
 	var players = StoryState.list_party_actors()
-	var soldier:CarrierActor = players[0]
 	var other_actor:BaseActor = players[index]
-	if soldier.list_carried_actor_ids().has(other_actor.Id):
-		soldier.remove_held_actor(other_actor)
+	if _actor.list_carried_actor_ids().has(other_actor.Id):
+		_actor.remove_held_actor(other_actor)
 	else:
-		soldier.add_carried_actor(other_actor)
-	self.sync(soldier)
+		_actor.add_carried_actor(other_actor)
+	self.sync(_actor)
 	
 	

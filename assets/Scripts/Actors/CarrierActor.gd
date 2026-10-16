@@ -16,10 +16,20 @@ func _get_object_specific_tags()->Array:
 func get_carrier_priority()->int:
 	return actor_data.get("CarryPriority", 999)
 
-func list_carried_actor_ids()->Array:
-	return _held_actors.keys()
+func list_carried_actor_ids(order_by_party_index:bool=false)->Array:
+	var actor_ids = _held_actors.keys()
+	if is_player and order_by_party_index:
+		actor_ids.sort()
+	return actor_ids
 
-func list_carried_actors()->Array:
+func list_carried_actors(order_by_party_index:bool=false)->Array:
+	if is_player and order_by_party_index:
+		var out_list = []
+		var actor_ids = _held_actors.keys()
+		actor_ids.sort()
+		for actor_id in actor_ids:
+			out_list.append(_held_actors[actor_id])
+		return out_list
 	return _held_actors.values()
 
 func is_carrying_actor(actor):
@@ -30,21 +40,32 @@ func is_carrying_actor(actor):
 	return false
 
 func add_carried_actor(actor, supress_change:bool=false):
+	var adding_actor:BaseActor
 	if actor is String:
-		actor = ActorLibrary.get_actor(actor)
-	if _held_actors.keys().has(actor.Id):
-		return # Already Added
-	if actor is CarrierActor:
-		for sub_child in actor.list_carried_actors():
-			actor.remove_held_actor(sub_child, true)
-			self.add_carried_actor(sub_child, true)
-		actor.sprite._build_sprite_sheet()
-		actor.stats.recache_stats()
-		actor.page_list_changed.emit()
+		adding_actor = ActorLibrary.get_actor(actor)
+	if actor is BaseActor:
+		adding_actor = actor
+	if !actor:
+		return
 	
-	_held_actors[actor.Id] = actor
-	actor.parent_carrier_actor_id = self.Id
-	actor.page_list_changed.connect(self.page_list_changed.emit)
+	if _held_actors.keys().has(adding_actor.Id):
+		return # Already Added
+	
+	if adding_actor is CarrierActor:
+		for sub_child in adding_actor.list_carried_actors():
+			adding_actor.remove_held_actor(sub_child, true)
+			self.add_carried_actor(sub_child, true)
+		adding_actor.sprite._build_sprite_sheet()
+		adding_actor.stats.recache_stats()
+		adding_actor.page_list_changed.emit()
+	
+	if adding_actor.is_being_carried():
+		var other_carrier = adding_actor.get_carrier_actor()
+		other_carrier.remove_held_actor(adding_actor)
+	
+	_held_actors[adding_actor.Id] = adding_actor
+	adding_actor.parent_carrier_actor_id = self.Id
+	adding_actor.page_list_changed.connect(self.page_list_changed.emit)
 	if not supress_change:
 		sprite._build_sprite_sheet()
 		stats.recache_stats()

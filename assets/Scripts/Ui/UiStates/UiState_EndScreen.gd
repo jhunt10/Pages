@@ -15,9 +15,3 @@ func end_state():
 	CombatRootControl.Instance.camera.unfreeze_camera()
 	CombatRootControl.resume_combat()
 	pass
-
-func handle_input(_event):
-	pass
-
-func allow_pause_menu()->bool:
-	return false

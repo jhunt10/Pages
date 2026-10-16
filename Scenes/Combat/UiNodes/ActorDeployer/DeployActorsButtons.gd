@@ -28,7 +28,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func set_carrier(carrier_actor:CarrierActor, pre_selected_actor_ids:Array):
-	var carried_actors = carrier_actor.list_carried_actors()
+	var carried_actors = carrier_actor.list_carried_actors(true)
 	carried_actor_ids.clear()
 	is_sub_carrier.clear()
 	group_outline.hide()
@@ -92,8 +92,8 @@ func get_select_deploy_actor_ids()->Array:
 		var is_pressed = buttons[index].button_pressed
 		if is_pressed:
 			out_list.append(actor_id)
-		if is_sub_carrier[index]:
-			carrier_actor_id = actor_id
+			if is_sub_carrier[index]:
+				carrier_actor_id = actor_id
 	if carrier_actor_id:
 		out_list.erase(carrier_actor_id)
 		out_list.push_front(carrier_actor_id)

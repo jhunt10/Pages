@@ -39,7 +39,7 @@ func do_thing(_parent_action:PageItemAction, _subaction_data:Dictionary, metadat
 	{
 		"ConsumeItemId": item_id,
 		"SelectablePages": page_that_use_ammo,
-		"PlayerActorIndex": CombatRootControl.get_player_index_of_actor(actor)
+		"ActorId": actor.Id
 	})
 	turn_data.data_cache['ReloadDone'] = true
 	return BaseSubAction.Success

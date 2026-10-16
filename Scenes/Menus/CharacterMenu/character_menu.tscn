@@ -63,7 +63,6 @@
 [ext_resource type="Script" uid="uid://bqumm45yxb7l" path="res://Scenes/Menus/CharacterMenu/Stats/limited_effect_container.gd" id="56_d0duj"]
 [ext_resource type="Script" uid="uid://2dqdth8xwfg3" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/StatsMenuPage/resistances_container.gd" id="57_c2vjq"]
 [ext_resource type="Texture2D" uid="uid://b3atdgr5fajkj" path="res://assets/Sprites/UI/SymbolIcons/DmgSymbol_Fire.png" id="58_i62ke"]
-[ext_resource type="PackedScene" uid="uid://deon0fff5iq41" path="res://Scenes/Menus/CharacterMenu/SkillTreeMenuPage/skill_tree_page_control.tscn" id="58_iofuq"]
 [ext_resource type="Theme" uid="uid://cj4l86kt21jf" path="res://assets/Themes/inventory_tab_bar_theme.tres" id="63_0onh7"]
 [ext_resource type="Script" uid="uid://c8jheyrbbjxrh" path="res://Scenes/Menus/CharacterMenu/MouseOverControl/character_menu_mouse_control.gd" id="63_7egd2"]
 [ext_resource type="Script" uid="uid://dclkkjlbe423l" path="res://Scenes/Menus/CharacterMenu/CustTabControl/cust_tab_container.gd" id="63_jq4bi"]
@@ -430,7 +429,7 @@ details_card_spawn_point = NodePath("DetailsCardSpawnPoint")
 mouse_control = NodePath("MouseOverControl")
 inventory_option_button = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer/OptionButton")
 inventory_tab_bar = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/InventoryTabContainer")
-skill_tree_control = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/SkillTreePageControl")
+skill_tree_control = NodePath("")
 skill_tree_menu = NodePath("PanelContainer/TwoPagesContainer/Control/SkillTreeMenu")
 animation_player = NodePath("AnimationPlayer")
 rot_button_l = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control/RotButtonL")
@@ -1260,7 +1259,6 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
 [node name="CarrierControl" type="HBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1313591486 node_paths=PackedStringArray("rogue_button", "priest_button", "mage_button", "rogue_x_icon", "priest_x_icon", "mage_x_icon")]
-visible = false
 layout_mode = 2
 alignment = 1
 script = ExtResource("34_djw0b")
@@ -2677,11 +2675,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_control = NodePath("../../InventoryTabContainer")
-
-[node name="SkillTreePageControl" parent="PanelContainer/TwoPagesContainer/RightPageContainer" unique_id=1862006629 node_paths=PackedStringArray("character_menu") instance=ExtResource("58_iofuq")]
-visible = false
-layout_mode = 2
-character_menu = NodePath("../../../..")
 
 [node name="CloseHolderControl" type="Control" parent="PanelContainer/TwoPagesContainer" unique_id=1441164572]
 layout_mode = 2

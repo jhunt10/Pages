@@ -22,3 +22,9 @@ func end_state():
 	CombatUiControl.Instance.pause_menu.visible = false
 	pass
 	
+func handle_input(event):
+	# Escape Key Pressed
+	if event is InputEventKey:
+		if (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
+			ui_controller.back_to_last_state()
+			

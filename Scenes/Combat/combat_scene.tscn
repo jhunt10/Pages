@@ -483,7 +483,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("19_4pyrd")
-close_button = NodePath("VBoxContainer/PanelContainer/MainContainer/Control/CloseButton")
+close_button = NodePath("VBoxContainer/PanelContainer/MainContainer/Control/InfoButton/CloseButton")
 cancel_button = NodePath("VBoxContainer/PanelContainer/MainContainer/ButtonsContainer/CancelButton")
 confirm_button = NodePath("VBoxContainer/PanelContainer/MainContainer/ButtonsContainer/OkButton")
 actor_buttons_control = NodePath("VBoxContainer/PanelContainer/MainContainer/SubActorsContainer/DeployActorButtonControl")
@@ -533,18 +533,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "P:/.../deploy_actor.exe"
 
-[node name="CloseButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/Control" unique_id=286590093]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -17.0
-offset_top = -20.0
-offset_bottom = -3.0
-grow_horizontal = 0
-texture_normal = ExtResource("49_8qg5x")
-texture_pressed = ExtResource("50_a7rqi")
-
 [node name="InfoButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/Control" unique_id=1295525169]
 layout_mode = 1
 anchors_preset = 1
@@ -557,6 +545,18 @@ offset_bottom = -3.0
 grow_horizontal = 0
 texture_normal = ExtResource("48_h3d2t")
 texture_pressed = ExtResource("49_gn1mm")
+
+[node name="CloseButton" type="TextureButton" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer/Control/InfoButton" unique_id=286590093]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 2.0
+offset_right = 19.0
+offset_bottom = 17.0
+grow_horizontal = 0
+texture_normal = ExtResource("49_8qg5x")
+texture_pressed = ExtResource("50_a7rqi")
 
 [node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActorDeploymentControl/VBoxContainer/PanelContainer/MainContainer" unique_id=1370215681]
 layout_mode = 2

@@ -313,6 +313,9 @@ func play_shake():
 	pass
 
 func start_death_animation():
+	var actor_sprite_node = offset_node.get_parent()
+	if actor_sprite_node:
+		actor_sprite_node.modulate = Color(1,1,1,0.5)
 	damage_animation_player.speed_scale = CombatRootControl.get_time_scale() 
 	damage_animation_player.play("DamageAnimations/death_effect")
 	damage_animation_player.animation_finished.connect(on_death_animation_finished)
@@ -371,12 +374,14 @@ func _get_animation_dir_sufix()->String:
 ##		Triggers
 ##############################
 func _on_pause_animations():
+	if is_dieing:
+		return
 	paused = true
 	damage_animation_player.pause()
 
 func _on_resume_animations():
 	paused = false
-	if current_body_animation_action:
+	if damage_animation_player:
 		if damage_animation_player.current_animation:
 			damage_animation_player.play()
 
@@ -418,6 +423,7 @@ func _on_actor_revive():
 	damage_animation_player.play("DamageAnimations/revive_effect")
 
 func on_death_animation_finished(_animation_name:String):
+	
 	pass
 
 ##############################

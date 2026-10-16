@@ -11,6 +11,8 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 func _get_debug_name()->String: 
 	return "Action Input State"
 
+func allow_pause_menu()->bool:
+	return true
 
 func start_state():
 	if _logging: print("Start UiState: Action Input")
@@ -34,6 +36,11 @@ func end_state():
 	pass
 
 func handle_input(event):
+	# Escape Key Pressed
+	if event is InputEventKey:
+		if (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
+			ui_controller.set_ui_state(UiStateController.UiStates.PauseMenu)
+			
 	if event is InputEventMouseButton and (event as InputEventMouseButton).pressed:
 		if (event as InputEventMouseButton).button_index == 1:
 			## Select player actor on click

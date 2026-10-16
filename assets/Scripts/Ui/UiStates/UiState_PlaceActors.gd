@@ -22,6 +22,9 @@ var mouse_down_spot
 func _get_debug_name()->String: 
 	return "PlaceActors"
 	
+func allow_pause_menu()->bool:
+	return true
+	
 func _init(controler:UiStateController, args:Dictionary) -> void:
 	super(controler, args)
 	actor_placer_control = CombatRootControl.Instance.ui_control.actor_placer_control

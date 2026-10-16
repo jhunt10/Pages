@@ -48,6 +48,12 @@ func on_option_menu_closed():
 func end_state():
 	pass
 	
+func handle_input(event):
+	# Escape Key Pressed
+	if event is InputEventKey:
+		if (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
+			var option_menu = CombatRootControl.Instance.ui_control.option_select_menu
+			option_menu.clear_and_hide()
 #func handle_input(event):
 	#pass
 

@@ -173,7 +173,7 @@ func sync(skip_animations:bool=false):
 		point_seperator_label.hide()
 	
 	if skip_animations:
-		background_panel.set_background_progresss(spent_points, total_title_points)
+		background_panel.force_fill = true
 	
 		
 		

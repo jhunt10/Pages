@@ -145,6 +145,11 @@ func end_state():
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.Default)
 	
 func handle_input(event):
+	# Escape Key Pressed
+	if event is InputEventKey:
+		if (event as InputEventKey).keycode == KEY_ESCAPE and (event as InputEventKey).pressed:
+			_on_canceled()
+	
 	if event is InputEventMouseMotion:
 		var spot = CombatRootControl.Instance.GridCursor.mouse_spot
 		_mouse_moved_into_spot(spot)

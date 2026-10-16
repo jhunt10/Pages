@@ -26,4 +26,4 @@ func handle_input(_event):
 	pass
 
 func allow_pause_menu()->bool:
-	return true
+	return false
