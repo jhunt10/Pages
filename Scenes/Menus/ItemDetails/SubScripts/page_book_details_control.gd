@@ -1,4 +1,4 @@
-class_name PageQueDetailsControl
+class_name PageBookDetailsControl
 extends BoxContainer
 
 @export var parent_card_control:ItemDetailsCard

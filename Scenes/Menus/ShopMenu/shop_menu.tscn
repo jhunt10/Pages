@@ -31,8 +31,8 @@
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="32_sa4l8"]
 [ext_resource type="Script" uid="uid://cxlvn68pxork" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="33_5t8yh"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="34_pcliu"]
-[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="35_uh67f"]
-[ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_sb2uy"]
+[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/ItemDetails/Sprites/Button_Patch_32_6.png" id="35_uh67f"]
+[ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/ItemDetails/Sprites/ButtonPressed_Patch_32_6.png" id="36_sb2uy"]
 
 [node name="ShopMenu" type="Control" unique_id=1448878564 node_paths=PackedStringArray("dialog_box", "item_menu_controller", "details_card_spawn_point", "confirm_popup", "buy_button", "sell_button", "close_button", "scroll_container")]
 layout_mode = 3
@@ -666,12 +666,10 @@ scale = Vector2(1.5, 1.5)
 mouse_filter = 1
 
 [node name="ItemDetailsCard" parent="DetaiolCardSpawnPoint" unique_id=1504310930 instance=ExtResource("23_gkgvs")]
-visible = false
 layout_mode = 0
 offset_bottom = 379.0
 showing = true
 state = 2
-grow_timer = 0.5
 
 [node name="ConfirmPopUp" type="NinePatchRect" parent="." unique_id=1587672757 node_paths=PackedStringArray("title_label", "item_background", "item_icon", "item_label", "price_label", "count_label", "total_label", "money_label", "after_label", "cancel_button", "confirm_button")]
 visible = false

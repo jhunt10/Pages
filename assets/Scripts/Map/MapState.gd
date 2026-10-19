@@ -56,7 +56,12 @@ func _init(game_state, map_data:Dictionary, wait_for_pos_data:bool=false) -> voi
 			var spot = get_map_spot(coor)
 			if spot:
 				spot.add_gate(gate_key)
-			
+
+func has_spot(pos)->bool:
+	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
+		return false
+	return true
+
 func get_map_spot(pos)->MapSpot:
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
 		#printerr("MapState.get_map_spot Invalid Position: " + str(pos))

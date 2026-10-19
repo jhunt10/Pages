@@ -5,56 +5,106 @@ extends Node2D
 func _ready() -> void:
 	pass # Replace with function body.
 
-
+var _mouse_coor = null
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	queue_redraw()
+	var actor_tile_map = CombatRootControl.Instance.MapController.actor_tile_map
+	if !actor_tile_map:
+		return
+	var mouse_pos = actor_tile_map.get_local_mouse_position()
+	var mouse_coor = actor_tile_map.local_to_map(mouse_pos)
+	if mouse_coor != _mouse_coor:
+		_mouse_coor = mouse_coor
+		queue_redraw()
 	pass
 
+var path_finder:PathFinder
 
 func _draw() -> void:
+	if !_mouse_coor:
+		return
 	
-	draw_astar_map()
-	 #Draw Paths
-	for action_que:ActionQueHolder in CombatRootControl.QueController._action_ques.values():
-		var actor_node = CombatRootControl.get_actor_node(action_que.actor.Id)
-		if not actor_node:
-			continue
-		var tile_map:TileMapLayer = actor_node.get_parent()
-		var last_coor = actor_node.position 
-		var last_pos = actor_node.cur_map_pos 
-		var previw_path = action_que.get_movement_preview_path()
-		for pos:MapPos in previw_path:
-			var coor = tile_map.map_to_local(pos.to_vector2i()) 
-			draw_line(last_coor, coor, Color.BLUE, 4.0)
-			last_coor = coor
-			last_pos = pos
-		
-		var facing_coor = last_coor
-		if last_pos.dir == MapPos.Directions.North:
-			facing_coor.y -= 16
-		if last_pos.dir == MapPos.Directions.South:
-			facing_coor.y += 16
-		if last_pos.dir == MapPos.Directions.West:
-			facing_coor.x -= 16
-		if last_pos.dir == MapPos.Directions.East:
-			facing_coor.x += 16
-		draw_line(last_coor, facing_coor, Color.RED, 4.0)
+	if _mouse_coor.x < 0 or _mouse_coor.x > 14:
+		return
+	if _mouse_coor.y < 0 or _mouse_coor.y > 14:
+		return
+	var actor_tile_map = CombatRootControl.Instance.MapController.actor_tile_map
+	var actor = CombatRootControl.list_player_actors()[0]
+	var actor_pos = CombatRootControl.Instance.GameState.get_actor_pos(actor)
 	
-	for actor in CombatRootControl.Instance.GameState.list_actors():
-		if not actor or actor.is_player:
-			continue
-		var actor_node = CombatRootControl.get_actor_node(actor.Id)
-		if not actor_node:
-			continue
-		var aggro_id = actor.aggro.get_current_aggroed_actor_id()
-		if aggro_id == '':
-			continue
-		var aggro_node = CombatRootControl.get_actor_node(aggro_id)
-		if not aggro_node:
-			continue
-		
-		draw_dashed_line(actor_node.position, aggro_node.position, Color(1,0,0,0.5), 4.0, 2)
+	var draw_coor = actor_tile_map.map_to_local(_mouse_coor)
+	draw_circle(draw_coor, 3, Color.RED)
+	
+	if !path_finder:
+		path_finder = PathFinder.build_path_finder(CombatRootControl.Instance.GameState)
+	var to_pos = MapPos.new(_mouse_coor.x, _mouse_coor.y, 0, MapPathNode.Direction.North)
+	var path = path_finder.get_pos_path(actor_pos, to_pos)
+	var action_path = path_finder.get_move_action_path(actor_pos, to_pos)
+	if path.size() > 0:
+		for index in range(path.size()):
+			var spot = path[index]
+			var pos = actor_tile_map.map_to_local(Vector2i(spot.x, spot.y))
+			#draw_circle(pos, 5, Color.BLUE)
+			if index < action_path.size():
+				var action = action_path[index]
+				if action == "TurnLeft":
+					draw_circle(pos, 5, Color.RED)
+					#draw_line(pos, pos + Vector2(10,0), Color.GREEN, 5)
+				if action == "TurnRight":
+					draw_circle(pos, 5, Color.GREEN)
+					#draw_line(pos, pos + Vector2(-10,0), Color.BLUE, 5)
+				if action == "Forward":
+					draw_circle(pos, 10, Color.BLUE, false, 3)
+					#draw_line(pos, pos + Vector2(0,10), Color.RED, 5)
+		printerr("PathTest: Found Size %s" % [action_path.size()])
+		printerr(path)
+		printerr(action_path)
+	else:
+		draw_circle(draw_coor, 15, Color.RED, false)
+		var t = true
+	
+	pass
+	#draw_astar_map()
+	 ##Draw Paths
+	#for action_que:ActionQueHolder in CombatRootControl.QueController._action_ques.values():
+		#var actor_node = CombatRootControl.get_actor_node(action_que.actor.Id)
+		#if not actor_node:
+			#continue
+		#var tile_map:TileMapLayer = actor_node.get_parent()
+		#var last_coor = actor_node.position 
+		#var last_pos = actor_node.cur_map_pos 
+		#var previw_path = action_que.get_movement_preview_path()
+		#for pos:MapPos in previw_path:
+			#var coor = tile_map.map_to_local(pos.to_vector2i()) 
+			#draw_line(last_coor, coor, Color.BLUE, 4.0)
+			#last_coor = coor
+			#last_pos = pos
+		#
+		#var facing_coor = last_coor
+		#if last_pos.dir == MapPos.Directions.North:
+			#facing_coor.y -= 16
+		#if last_pos.dir == MapPos.Directions.South:
+			#facing_coor.y += 16
+		#if last_pos.dir == MapPos.Directions.West:
+			#facing_coor.x -= 16
+		#if last_pos.dir == MapPos.Directions.East:
+			#facing_coor.x += 16
+		#draw_line(last_coor, facing_coor, Color.RED, 4.0)
+	#
+	#for actor in CombatRootControl.Instance.GameState.list_actors():
+		#if not actor or actor.is_player:
+			#continue
+		#var actor_node = CombatRootControl.get_actor_node(actor.Id)
+		#if not actor_node:
+			#continue
+		#var aggro_id = actor.aggro.get_current_aggroed_actor_id()
+		#if aggro_id == '':
+			#continue
+		#var aggro_node = CombatRootControl.get_actor_node(aggro_id)
+		#if not aggro_node:
+			#continue
+		#
+		#draw_dashed_line(actor_node.position, aggro_node.position, Color(1,0,0,0.5), 4.0, 2)
 		
 	
 func draw_astar_map():

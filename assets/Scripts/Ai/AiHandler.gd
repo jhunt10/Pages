@@ -392,6 +392,8 @@ static func _translate_next_point_to_movement(current_pos:MapPos, move_to:Vector
 	
 	return result
 
+
+
 static func build_path_finder(game_state:GameStateData)->AStar2D:
 	var star = CustAStar.new()
 	star.reserve_space(game_state.map_hight * game_state.map_width * MapPos.Directions.keys().size())

@@ -84,13 +84,6 @@ func _ready() -> void:
 	
 	map_background.set_map(MapController)
 	
-	#if dialog_controller:
-		#ui_control.hide()
-		#MapController.grid_tile_map.hide()
-	
-	for actor:BaseActor in GameState._actors.values():
-		actor.on_enter_combat()
-	
 	camera.cach_camera_bounds()
 
 func _process(delta: float) -> void:

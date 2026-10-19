@@ -730,7 +730,6 @@ offset_right = -8.0
 grow_horizontal = 0
 
 [node name="ActiveCombatControl" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatUiControl" unique_id=1385019995]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2078,6 +2077,5 @@ texture = ExtResource("7_7lt4y")
 script = ExtResource("8_wf3xb")
 
 [node name="DEV_MapDrawing" type="Node2D" parent="." unique_id=1487234787]
-visible = false
 z_index = 100
 script = ExtResource("37_fh4f7")

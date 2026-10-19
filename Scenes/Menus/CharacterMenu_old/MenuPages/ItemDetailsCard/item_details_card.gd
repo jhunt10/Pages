@@ -72,7 +72,7 @@ var is_selling:bool = false
 @export var armor_details:ArmorDetailsControl
 @export var action_details:ActionDetailsControl
 @export var effect_page_details:EffectPageDetailsControl
-@export var page_que_details:PageQueDetailsControl
+@export var page_que_details:PageBookDetailsControl
 @export var default_details:DefaultItemDetailsControl
 @export var tag_label:Label
 @export var tag_box:TagsContainer
@@ -188,9 +188,6 @@ func set_detail_card_item(actor:BaseActor, item:BaseItem, confirm_button_text:St
 		#tag_string += ", " + tag
 	##var tag_label_text = ("[%s]: %s" % [item.ItemKey, tag_string.trim_prefix(", ")])
 	#tag_label.text = tag_string.trim_prefix(", ")
-	
-	#DELETEME:
-	item.dirty_tags()
 	
 	tag_box.set_tags(item.get_tags())
 	default_details.hide()

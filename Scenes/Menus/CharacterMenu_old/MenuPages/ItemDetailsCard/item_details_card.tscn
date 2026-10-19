@@ -7,18 +7,18 @@
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="4_xmy3g"]
 [ext_resource type="PackedScene" uid="uid://c1bs8grs7gsc1" path="res://Scenes/UiNodes/MiniRangeDisplay/mini_range_display.tscn" id="5_jmtol"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="6_do8nn"]
-[ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/ExitButton.png" id="6_folnv"]
-[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/Button_Patch_32_6.png" id="7_850b7"]
-[ext_resource type="Script" uid="uid://b71ogkbbo16lc" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/weapon_details_control.gd" id="7_sv4xn"]
+[ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/ItemDetails/Sprites/ExitButton.png" id="6_folnv"]
+[ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/ItemDetails/Sprites/Button_Patch_32_6.png" id="7_850b7"]
+[ext_resource type="Script" uid="uid://b71ogkbbo16lc" path="res://Scenes/Menus/ItemDetails/SubScripts/weapon_details_control.gd" id="7_sv4xn"]
 [ext_resource type="Texture2D" uid="uid://diy8q5lpvpw1u" path="res://assets/Sprites/UI/SymbolIcons/PhyDamageSymbol.png" id="8_v2bx5"]
 [ext_resource type="Texture2D" uid="uid://b201kpuib7q5k" path="res://assets/Sprites/UI/SymbolIcons/MagDamageSymbol.png" id="9_0f8c5"]
 [ext_resource type="Script" uid="uid://bcf3yo7yhmwwr" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="9_1ue73"]
-[ext_resource type="Script" uid="uid://drh2bv6oh7wkq" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/tag_container.gd" id="10_xpx0y"]
-[ext_resource type="Texture2D" uid="uid://cmsfac2sl2iuy" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/TagsPlusIcon.png" id="11_tuu4e"]
-[ext_resource type="Script" uid="uid://1avbudpko86d" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/action_details_card.gd" id="12_fd6vk"]
-[ext_resource type="Script" uid="uid://6kxiipq6hsr2" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/default_item_details_control.gd" id="12_gvhwc"]
-[ext_resource type="Script" uid="uid://dnm2858aothe6" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/armor_details_control.gd" id="12_rxuc0"]
-[ext_resource type="Texture2D" uid="uid://hhvgr1kn3vit" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/TagsMinusIcon.png" id="12_utq40"]
+[ext_resource type="Script" uid="uid://drh2bv6oh7wkq" path="res://Scenes/Menus/ItemDetails/tag_container.gd" id="10_utq40"]
+[ext_resource type="Texture2D" uid="uid://cmsfac2sl2iuy" path="res://Scenes/Menus/ItemDetails/Sprites/TagsPlusIcon.png" id="11_tuu4e"]
+[ext_resource type="Script" uid="uid://1avbudpko86d" path="res://Scenes/Menus/ItemDetails/SubScripts/action_page_details_control.gd" id="12_fd6vk"]
+[ext_resource type="Script" uid="uid://6kxiipq6hsr2" path="res://Scenes/Menus/ItemDetails/SubScripts/default_item_details_control.gd" id="12_gvhwc"]
+[ext_resource type="Script" uid="uid://dnm2858aothe6" path="res://Scenes/Menus/ItemDetails/SubScripts/armor_details_control.gd" id="12_rxuc0"]
+[ext_resource type="Texture2D" uid="uid://hhvgr1kn3vit" path="res://Scenes/Menus/ItemDetails/Sprites/TagsMinusIcon.png" id="12_utq40"]
 [ext_resource type="Script" uid="uid://kd25wgnxxnmi" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/cost_container.gd" id="13_an536"]
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="13_t6qv2"]
 [ext_resource type="Texture2D" uid="uid://d17k5iaed0gdg" path="res://assets/Sprites/UI/SymbolIcons/WardSymbol.png" id="14_4xeqv"]
@@ -27,11 +27,11 @@
 [ext_resource type="Texture2D" uid="uid://ckym0e60eik1k" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Phy.png" id="15_pvoju"]
 [ext_resource type="Script" uid="uid://dvytl6yl136b3" path="res://Scenes/UiNodes/StatModLabelContainer/stat_mod_label_container.gd" id="16_hvsyk"]
 [ext_resource type="Texture2D" uid="uid://cexlfs7svl17c" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Mag.png" id="16_i15u4"]
-[ext_resource type="Script" uid="uid://v78grpc8aed6" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/effect_page_details_control.gd" id="16_tp5cp"]
+[ext_resource type="Script" uid="uid://v78grpc8aed6" path="res://Scenes/Menus/ItemDetails/SubScripts/passive_page_details_control.gd" id="16_tp5cp"]
 [ext_resource type="Texture2D" uid="uid://cnhd7e5hwrxoy" path="res://assets/Sprites/UI/SymbolIcons/AbnormDamageSymbol.png" id="17_cevb5"]
 [ext_resource type="Texture2D" uid="uid://cyt5q4hutdp6y" path="res://assets/Sprites/UI/SymbolIcons/AmmoSymbol_Abn.png" id="17_n5nnh"]
 [ext_resource type="Texture2D" uid="uid://br058igskmkwd" path="res://assets/Sprites/UI/SymbolIcons/AccuracySymbol.png" id="18_jpfgp"]
-[ext_resource type="Script" uid="uid://df8rl3chm7amw" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/page_que_details_control.gd" id="18_oic72"]
+[ext_resource type="Script" uid="uid://df8rl3chm7amw" path="res://Scenes/Menus/ItemDetails/SubScripts/page_book_details_control.gd" id="18_oic72"]
 [ext_resource type="Theme" uid="uid://cayt153s5ro4a" path="res://assets/Themes/standard_theme_red.tres" id="18_wsrou"]
 [ext_resource type="Texture2D" uid="uid://bujky44hog2jm" path="res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png" id="19_aca8o"]
 [ext_resource type="Texture2D" uid="uid://b10pvly4exem2" path="res://assets/Sprites/UI/SymbolIcons/_S_Symbole.png" id="20_lxkdx"]
@@ -43,7 +43,7 @@
 [ext_resource type="Script" uid="uid://cfgkiry7nw377" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/buy_controller.gd" id="34_t0s17"]
 [ext_resource type="Script" uid="uid://cxlvn68pxork" path="res://Scenes/UiNodes/PatchButton/PatchButton.gd" id="35_416rl"]
 [ext_resource type="Texture2D" uid="uid://cat1gts1f5feu" path="res://assets/Sprites/UI/SymbolIcons/PageActionSymbol.png" id="35_fq86f"]
-[ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/ButtonPressed_Patch_32_6.png" id="36_0dsaw"]
+[ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/ItemDetails/Sprites/ButtonPressed_Patch_32_6.png" id="36_0dsaw"]
 [ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="38_3cp6b"]
 
 [node name="ItemDetailsCard" type="Control" unique_id=283174588 node_paths=PackedStringArray("offset_control", "offset_point", "icon", "icon_background", "title_lable", "rarity_lable", "description_box", "exit_button", "weapon_details", "armor_details", "action_details", "effect_page_details", "page_que_details", "default_details", "tag_label", "tag_box", "confirm_button_background", "confirm_button", "confirm_label", "buy_controller")]
@@ -54,10 +54,12 @@ offset_right = 300.0
 offset_bottom = 340.0
 mouse_filter = 1
 script = ExtResource("1_vq5a0")
+state = 3
 offset_control = NodePath("OffsetControl")
 offset_point = NodePath("OffestPoint")
 vertical = true
 time_to_show = 0.5
+grow_timer = 0.5
 speed = 500.0
 icon = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/IconBackground/Icon")
 icon_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/TitleContainer/IconBackground")
@@ -195,7 +197,7 @@ script = ExtResource("9_1ue73")
 [node name="TagsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1426239430 node_paths=PackedStringArray("premade_tag", "tags_container", "tags_show_hide_button", "tags_title_container", "tags_plus_minus_icon")]
 layout_mode = 2
 vertical = true
-script = ExtResource("10_xpx0y")
+script = ExtResource("10_utq40")
 premade_tag = NodePath("TagsFlowContainer/TagsBox")
 tags_container = NodePath("TagsFlowContainer")
 tags_show_hide_button = NodePath("TagsFlowContainer/HBoxContainer/TextureRect/TagsShowHidButton")
@@ -323,6 +325,7 @@ layout_mode = 2
 size_flags_vertical = 0
 
 [node name="ActionPageDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=201084818 node_paths=PackedStringArray("parent_card_control", "description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
+visible = false
 layout_mode = 2
 vertical = true
 script = ExtResource("12_fd6vk")
@@ -886,6 +889,7 @@ theme_override_font_sizes/font_size = 16
 text = "Tag"
 
 [node name="DefaultDetailsContainer" type="BoxContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=435877942 node_paths=PackedStringArray("description_box", "stat_mods_container", "premade_stat_mod_label")]
+visible = false
 layout_mode = 2
 script = ExtResource("12_gvhwc")
 description_box = NodePath("../DescriptionBox")
