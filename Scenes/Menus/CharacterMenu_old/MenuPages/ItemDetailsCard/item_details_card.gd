@@ -59,23 +59,8 @@ var is_selling:bool = false
 @export var grow_timer:float
 
 @export var speed:float
-@export var icon:TextureRect
-@export var icon_background:TextureRect
-@export var title_lable:FitScaleLabel
-@export var rarity_lable:Label
-@export var description_box:RichTextLabel
-@export var exit_button:Button
-#@export var equip_button:Button
-#@export var button_label:Label
 
-@export var weapon_details:WeaponDetailsControl
-@export var armor_details:ArmorDetailsControl
-@export var action_details:ActionDetailsControl
-@export var effect_page_details:EffectPageDetailsControl
-@export var page_que_details:PageBookDetailsControl
-@export var default_details:DefaultItemDetailsControl
-@export var tag_label:Label
-@export var tag_box:TagsContainer
+@export var item_details_container:ItemDetailsContainer
 
 
 @export var confirm_button_background:NinePatchRect
@@ -84,7 +69,6 @@ var is_selling:bool = false
 @export var confirm_button_texture:Texture2D
 @export var confirm_button_pressed_texture:Texture2D
 
-@export var buy_controller:BuyController
 #enum AnimationStates {In, Showing, Out, Hidden}
 #var animation_state:AnimationStates
 var item_id:String
@@ -96,7 +80,7 @@ var _current_card
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	exit_button.pressed.connect(_on_exit_button)
+	item_details_container.exit_button.pressed.connect(_on_exit_button)
 	offset_control.size = self.size
 	if vertical:
 		offset_point.position = Vector2(self.size.x,0)
@@ -178,76 +162,10 @@ func start_hide():
 
 func set_detail_card_item(actor:BaseActor, item:BaseItem, confirm_button_text:String, disable_confirm:bool=false):
 	item_id = item.Id
-	icon_background.texture = item.get_rarity_background()
-	icon.texture = item.get_small_icon()
-	title_lable.text = item.get_display_name()
-	rarity_lable.text = item.get_rarity_string() + " " + item.get_taxonomy_leaf()
-	#description_box.text = item.get_description()
-	#var tag_string = ''
-	#for tag in item.get_tags():
-		#tag_string += ", " + tag
-	##var tag_label_text = ("[%s]: %s" % [item.ItemKey, tag_string.trim_prefix(", ")])
-	#tag_label.text = tag_string.trim_prefix(", ")
+	item_details_container.set_detail_container_item(actor, item)
 	
-	tag_box.set_tags(item.get_tags())
-	default_details.hide()
-	weapon_details.hide()
-	armor_details.hide()
-	action_details.hide()
-	effect_page_details.hide()
-	page_que_details.hide()
-	
-	actor_has_item = false
-	if item is BaseWeaponEquipment:
-		var weapon = (item as BaseWeaponEquipment)
-		weapon_details.set_weapon(actor, weapon)
-		if actor:
-			actor_has_item = actor.equipment.has_item(item_id)
-		_current_card = weapon_details
-		weapon_details.show()
-	elif item is BaseApparelEquipment:
-		var armor = (item as BaseApparelEquipment)
-		armor_details.set_armor(actor, armor)
-		if actor:
-			actor_has_item = actor.equipment.has_item(item_id)
-		_current_card = armor_details
-		armor_details.show()
-	elif item is BasePageItem:
-		var page = (item as BasePageItem)
-		if item is PageItemAction:
-			action_details.set_action(actor, page)
-			if actor:
-				actor_has_item = actor.pages.has_item(item_id)
-			_current_card = action_details
-			action_details.show()
-		else:
-			effect_page_details.set_action(actor, page)
-			if actor:
-				actor_has_item = actor.pages.has_item(item_id)
-			_current_card = effect_page_details
-			effect_page_details.show()
-			#default_details.set_item(item)
-			#default_details.show()
-	elif item is BaseQueEquipment:
-		page_que_details.set_item(actor, item)
-		if actor:
-			actor_has_item = actor.equipment.has_item(item_id)
-		_current_card = page_que_details
-		page_que_details.show()
-	else:
-		default_details.set_item(item)
-		if actor:
-			actor_has_item = actor.equipment.has_item(item_id)
-		_current_card = default_details
-		default_details.show()
-	
-	# Shop controls
-	if MainRootNode.Instance.current_scene is ShopMenuController:
-		buy_controller.set_item(item, is_selling)
-		buy_controller.show()
-		confirm_button_background.hide()
 	# Hide Confirm Button in combat
-	elif MainRootNode.Instance.current_scene is CombatRootControl:
+	if MainRootNode.Instance.current_scene is CombatRootControl:
 		confirm_button_background.hide()
 	else:
 		# Hide Confirm Button for Titles

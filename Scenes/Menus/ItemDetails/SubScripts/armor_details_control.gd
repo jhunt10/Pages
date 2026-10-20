@@ -1,7 +1,6 @@
 class_name ArmorDetailsControl
 extends BoxContainer
 
-@export var parent_card_control:ItemDetailsCard
 @export var slot_label:Label
 @export var phy_icon:TextureRect
 @export var mag_icon:TextureRect
@@ -35,14 +34,6 @@ func set_armor(actor:BaseActor, armor:BaseApparelEquipment):
 		mag_icon.hide()
 		ward_label.hide()
 	description_box.text = armor.get_description()
-	if _actor:
-		if _actor.equipment.has_item(_item.Id):
-			parent_card_control.confirm_label.text = "Remove"	
-		#elif _actor.equipment.can_equip_item(_item):
-		else:
-			parent_card_control.confirm_label.text = "Equip"
-		#else:
-			#parent_card_control.equip_button_background.hide()
 	
 	var stat_mods = armor.get_load_val("StatMods", {})
 	for mod_data in stat_mods.values():
@@ -52,9 +43,3 @@ func set_armor(actor:BaseActor, armor:BaseApparelEquipment):
 		new_mod.set_mod_data(mod_data)
 		stat_mods_container.add_child(new_mod)
 		new_mod.show()
-
-func on_eqiup_button_pressed():
-	if _actor.equipment.has_item(_item.Id):
-		ItemHelper.try_transfer_item_from_actor_to_inventory(_item, _actor)
-	elif ItemHelper.try_transfer_item_from_inventory_to_actor(_item, _actor) == "":
-		parent_card_control.start_hide()

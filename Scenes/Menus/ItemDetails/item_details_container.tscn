@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="3_wp3fa"]
 [ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/ItemDetails/Sprites/ExitButton.png" id="4_3jk7o"]
 [ext_resource type="Script" uid="uid://bcf3yo7yhmwwr" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="5_h82qm"]
+[ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="6_30ftv"]
 [ext_resource type="Script" uid="uid://drh2bv6oh7wkq" path="res://Scenes/Menus/ItemDetails/tag_container.gd" id="6_dpwbh"]
 [ext_resource type="Texture2D" uid="uid://cmsfac2sl2iuy" path="res://Scenes/Menus/ItemDetails/Sprites/TagsPlusIcon.png" id="7_ait4a"]
 [ext_resource type="Texture2D" uid="uid://hhvgr1kn3vit" path="res://Scenes/Menus/ItemDetails/Sprites/TagsMinusIcon.png" id="8_4l34f"]
@@ -40,19 +41,31 @@
 [ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="37_tyjiy"]
 [ext_resource type="Script" uid="uid://cukfwo131b0bn" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="38_714sk"]
 
-[node name="ItemDetailsContainer" type="BoxContainer" unique_id=1465221446 node_paths=PackedStringArray("icon", "icon_background", "title_lable", "rarity_lable", "tag_container", "description_box", "exit_button", "weapon_details", "armor_details", "action_page_details", "passive_page_details", "page_book_details", "default_details")]
-custom_minimum_size = Vector2(268, 300)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_30ftv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pitxf"]
+
+[sub_resource type="Theme" id="Theme_3amsk"]
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_30ftv")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_pitxf")
+
+[node name="ItemDetailsContainer" type="BoxContainer" unique_id=1465221446 node_paths=PackedStringArray("icon", "icon_background", "title_lable", "rarity_lable", "value_icon", "value_lable", "tag_container", "description_box", "exit_button_texture", "exit_button", "weapon_details", "armor_details", "action_page_details", "passive_page_details", "page_book_details", "default_details")]
+custom_minimum_size = Vector2(268, 264)
 offset_right = 40.0
 offset_bottom = 40.0
+theme = ExtResource("37_tyjiy")
 vertical = true
 script = ExtResource("1_ryo66")
 icon = NodePath("ObjectDetailsContainer/TitleContainer/IconBackground/Icon")
 icon_background = NodePath("ObjectDetailsContainer/TitleContainer/IconBackground")
-title_lable = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/FitScaleLabel")
-rarity_lable = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/RarityTypeLabel")
+title_lable = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2/FitScaleLabel")
+rarity_lable = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer/RarityTypeLabel")
+value_icon = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer/ValueIcon")
+value_lable = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer/ValueLabel")
 tag_container = NodePath("ObjectDetailsContainer/TagsContainer")
-description_box = NodePath("DescriptionBox")
-exit_button = NodePath("ObjectDetailsContainer/TitleContainer/ExitButton/Button")
+description_box = NodePath("HBoxContainer/DescriptionBox")
+exit_button_texture = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2/ExitButton")
+exit_button = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2/ExitButton/Button")
 weapon_details = NodePath("WeaponDetailsContainer")
 armor_details = NodePath("ArmorDetailsContainer")
 action_page_details = NodePath("ActionPageDetailsContainer")
@@ -84,42 +97,30 @@ expand_mode = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="ObjectDetailsContainer/TitleContainer" unique_id=382704554]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 2
+alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=1182605760]
+visible = false
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 
-[node name="FitScaleLabel" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=817864636 instance=ExtResource("2_ryo66")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=513795663]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="FitScaleLabel" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2" unique_id=817864636 instance=ExtResource("2_ryo66")]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ColorRect" type="ColorRect" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=446496642]
-self_modulate = Color(0.470588, 0, 0, 1)
-custom_minimum_size = Vector2(2, 1)
-layout_mode = 2
-
-[node name="RarityTypeLabel" type="Label" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=1935930922]
-layout_mode = 2
-theme = ExtResource("3_wp3fa")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
-theme_override_font_sizes/font_size = 14
-text = "Mundane Item"
-vertical_alignment = 1
-text_overrun_behavior = 3
-ellipsis_char = "+"
-
-[node name="HSeparator2" type="HSeparator" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=568979242]
-modulate = Color(1, 1, 1, 0)
-layout_mode = 2
-
-[node name="ExitButton" type="TextureRect" parent="ObjectDetailsContainer/TitleContainer" unique_id=416535617]
+[node name="ExitButton" type="TextureRect" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2" unique_id=416535617]
 layout_mode = 2
 size_flags_vertical = 0
 texture = ExtResource("4_3jk7o")
 stretch_mode = 3
 
-[node name="Button" type="Button" parent="ObjectDetailsContainer/TitleContainer/ExitButton" unique_id=1586888767]
+[node name="Button" type="Button" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2/ExitButton" unique_id=1586888767]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -128,11 +129,50 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=446496642]
+self_modulate = Color(0.470588, 0, 0, 1)
+custom_minimum_size = Vector2(2, 1)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=1461558553]
+layout_mode = 2
+
+[node name="RarityTypeLabel" type="Label" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer" unique_id=1935930922]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource("3_wp3fa")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "Mundane Item"
+
+[node name="ValueIcon" type="TextureRect" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer" unique_id=291577639]
+modulate = Color(0.47058824, 0, 0, 1)
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+texture = ExtResource("6_30ftv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ValueLabel" type="Label" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer" unique_id=1961822068]
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("3_wp3fa")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+theme_override_font_sizes/font_size = 14
+text = "100"
+vertical_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=568979242]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
 [node name="TagsContainer" type="BoxContainer" parent="ObjectDetailsContainer" unique_id=318838398 node_paths=PackedStringArray("premade_tag", "tags_container", "tags_show_hide_button", "tags_title_container", "tags_plus_minus_icon")]
 layout_mode = 2
 vertical = true
 script = ExtResource("6_dpwbh")
-premade_tag = NodePath("TagsFlowContainer/TagsBox")
+premade_tag = NodePath("TagsFlowContainer/PremadeTagRichTextLabel")
 tags_container = NodePath("TagsFlowContainer")
 tags_show_hide_button = NodePath("TagsFlowContainer/HBoxContainer/TextureRect/TagsShowHidButton")
 tags_title_container = NodePath("TagsFlowContainer/HBoxContainer")
@@ -165,17 +205,17 @@ offset_right = 41.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TagLabel" type="Label" parent="ObjectDetailsContainer/TagsContainer/TagsFlowContainer/HBoxContainer" unique_id=1313514892]
+[node name="TagTitleLabel" type="Label" parent="ObjectDetailsContainer/TagsContainer/TagsFlowContainer/HBoxContainer" unique_id=1313514892]
 layout_mode = 2
 theme = ExtResource("3_wp3fa")
 theme_override_font_sizes/font_size = 14
 text = "Tags:"
 vertical_alignment = 1
 
-[node name="TagsBox" type="RichTextLabel" parent="ObjectDetailsContainer/TagsContainer/TagsFlowContainer" unique_id=666957286]
+[node name="PremadeTagRichTextLabel" type="RichTextLabel" parent="ObjectDetailsContainer/TagsContainer/TagsFlowContainer" unique_id=666957286]
 visible = false
 layout_mode = 2
-theme = ExtResource("3_wp3fa")
+theme = SubResource("Theme_3amsk")
 theme_override_font_sizes/normal_font_size = 14
 text = "Human"
 fit_content = true
@@ -183,24 +223,12 @@ scroll_active = false
 autowrap_mode = 0
 script = ExtResource("5_h82qm")
 
-[node name="TagsBox" type="RichTextLabel" parent="." unique_id=125277306]
-visible = false
-clip_contents = false
-layout_mode = 2
-theme = ExtResource("3_wp3fa")
-theme_override_font_sizes/normal_font_size = 14
-text = "Human, Actor, Living, Unarmed, Attack, Spell, Page, Action"
-fit_content = true
-scroll_active = false
-autowrap_mode = 2
-script = ExtResource("5_h82qm")
-
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1360031874]
 self_modulate = Color(0.470588, 0, 0, 1)
 custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
-[node name="WeaponDetailsContainer" type="BoxContainer" parent="." unique_id=341349175 node_paths=PackedStringArray("weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "range_display")]
+[node name="WeaponDetailsContainer" type="BoxContainer" parent="." unique_id=341349175 node_paths=PackedStringArray("weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
 visible = false
 layout_mode = 2
 script = ExtResource("9_y1a8j")
@@ -209,6 +237,7 @@ phy_damage_icon = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/PhyDamIco
 mag_damage_icon = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/MagDamIcon")
 attack_power_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/AttackPowerLabel")
 damage_type_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/DamageTypeLabel")
+description_box = NodePath("../HBoxContainer/DescriptionBox")
 range_display = NodePath("HBoxContainer/MiniRangeDisplay")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WeaponDetailsContainer" unique_id=1619147261]
@@ -268,11 +297,11 @@ text = "Dmg"
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="ActionPageDetailsContainer" type="BoxContainer" parent="." unique_id=1441184551 node_paths=PackedStringArray("target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
-visible = false
+[node name="ActionPageDetailsContainer" type="BoxContainer" parent="." unique_id=1441184551 node_paths=PackedStringArray("description_box", "target_type_label", "cost_container", "range_display", "damage_label", "damage_container", "accuracy_icon", "accuracy_label", "potency_icon", "potency_label", "modded_by_container", "modded_by_label")]
 layout_mode = 2
 vertical = true
 script = ExtResource("14_lw7ax")
+description_box = NodePath("../HBoxContainer/DescriptionBox")
 target_type_label = NodePath("HBoxContainer/AmmoDamageContainer/HBoxContainer/TargetTypeLabel")
 cost_container = NodePath("HBoxContainer/AmmoDamageContainer/HBoxContainer/AmmoContainer")
 range_display = NodePath("HBoxContainer/MiniRangeDisplay")
@@ -466,11 +495,12 @@ self_modulate = Color(0.470588, 0, 0, 1)
 custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
-[node name="PassivePageDetailsContainer" type="BoxContainer" parent="." unique_id=874709223 node_paths=PackedStringArray("stat_mods_container", "premade_stat_mod_label")]
+[node name="PassivePageDetailsContainer" type="BoxContainer" parent="." unique_id=874709223 node_paths=PackedStringArray("description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
 layout_mode = 2
 vertical = true
 script = ExtResource("24_lprkk")
+description_box = NodePath("../HBoxContainer/DescriptionBox")
 stat_mods_container = NodePath("FlowContainer")
 premade_stat_mod_label = NodePath("FlowContainer/StatModLabel")
 
@@ -551,7 +581,7 @@ text = "1.2"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="ArmorDetailsContainer" type="BoxContainer" parent="." unique_id=1370127067 node_paths=PackedStringArray("slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "stat_mods_container", "premade_stat_mod_label")]
+[node name="ArmorDetailsContainer" type="BoxContainer" parent="." unique_id=1370127067 node_paths=PackedStringArray("slot_label", "phy_icon", "mag_icon", "armor_label", "ward_label", "description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
 layout_mode = 2
 script = ExtResource("28_yiq6s")
@@ -560,6 +590,7 @@ phy_icon = NodePath("FlowContainer/HBoxContainer/PhyIcon")
 mag_icon = NodePath("FlowContainer/HBoxContainer/MagIcon")
 armor_label = NodePath("FlowContainer/HBoxContainer/ArmorLabel")
 ward_label = NodePath("FlowContainer/HBoxContainer/WardLabel")
+description_box = NodePath("../HBoxContainer/DescriptionBox")
 stat_mods_container = NodePath("FlowContainer")
 premade_stat_mod_label = NodePath("FlowContainer/StatModLabel")
 
@@ -688,7 +719,7 @@ text = "1.2"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="PageBookDetailsContainer" type="BoxContainer" parent="." unique_id=2024370245 node_paths=PackedStringArray("ppr_label", "passive_count_label", "action_count_label", "page_sets_container", "premade_page_set_label")]
+[node name="PageBookDetailsContainer" type="BoxContainer" parent="." unique_id=2024370245 node_paths=PackedStringArray("ppr_label", "passive_count_label", "action_count_label", "page_sets_container", "premade_page_set_label", "description_box")]
 visible = false
 layout_mode = 2
 vertical = true
@@ -698,6 +729,7 @@ passive_count_label = NodePath("HBoxContainer3/PassiveCountContainer/PassiveCoun
 action_count_label = NodePath("HBoxContainer3/ActionCountContainer/ActionCountLabel")
 page_sets_container = NodePath("HBoxContainer4")
 premade_page_set_label = NodePath("HBoxContainer4/PageSetLabel")
+description_box = NodePath("../HBoxContainer/DescriptionBox")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="PageBookDetailsContainer" unique_id=2051052247]
 layout_mode = 2
@@ -824,10 +856,11 @@ theme = ExtResource("10_cinw4")
 theme_override_font_sizes/font_size = 16
 text = "Tag"
 
-[node name="DefaultDetailsContainer" type="BoxContainer" parent="." unique_id=2052629862 node_paths=PackedStringArray("stat_mods_container", "premade_stat_mod_label")]
+[node name="DefaultDetailsContainer" type="BoxContainer" parent="." unique_id=2052629862 node_paths=PackedStringArray("description_box", "stat_mods_container", "premade_stat_mod_label")]
 visible = false
 layout_mode = 2
 script = ExtResource("36_rp34f")
+description_box = NodePath("../HBoxContainer/DescriptionBox")
 stat_mods_container = NodePath("FlowContainer")
 premade_stat_mod_label = NodePath("FlowContainer/StatModLabel")
 
@@ -907,11 +940,14 @@ text = "1.2"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="DescriptionBox" type="RichTextLabel" parent="." unique_id=69351088]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=715602856]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DescriptionBox" type="RichTextLabel" parent="HBoxContainer" unique_id=69351088]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource("37_tyjiy")
 bbcode_enabled = true
 text = "lorem ipsum dolor sit amet consectetur adipiscing elit aliqua qui fugiat laborum pariatur ullamco quos pariatur in enim imperdiet cum irure quas rerum qui fugiat odio laborum quis reprehenderit ad occaecat ad sint quidem distinctio laborum tempor est duis exercitation pariatur placeat accusamus sed qui et ut nam nisi omnis"
 script = ExtResource("38_714sk")

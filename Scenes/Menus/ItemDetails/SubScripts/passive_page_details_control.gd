@@ -1,7 +1,6 @@
 class_name EffectPageDetailsControl
 extends BoxContainer
 
-@export var parent_card_control:ItemDetailsCard
 @export var description_box:DescriptionBox
 @export var stat_mods_container:Container
 @export var premade_stat_mod_label:StatModLabelContainer

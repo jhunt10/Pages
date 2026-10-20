@@ -31,9 +31,12 @@ static func has_item_id(item_id:String):
 		return true
 	return false
 
-static func has_item(item:BaseItem):
+static func has_item(item_or_key):
+	var item_key = item_or_key
+	if item_or_key is BaseItem:
+		item_key = item_or_key.ItemKey
 	#if item.can_stack:
-	return _stacked_item_count_by_key.keys().has(item.ItemKey)
+	return _stacked_item_count_by_key.keys().has(item_key)
 	#return _held_unique_items_ids.has(item.Id)
 
 static func spawn_item(item_key:String, count):

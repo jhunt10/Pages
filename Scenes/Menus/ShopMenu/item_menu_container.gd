@@ -19,19 +19,23 @@ func _ready() -> void:
 	back_button.pressed.connect(back_button_pressed.emit)
 	scroll_bar.share(scroll_container.get_v_scroll_bar())
 
+func clear_sold_items():
+	for sub_list:ShopSubItemList in _catagory_sub_lists.values():
+		sub_list.clear_sold_items()
+
 func set_data(data:Dictionary):
 	for old_cat in _catagory_sub_lists.keys():
 		if not data.keys().has(old_cat):
 			
-			print("Deleteing Cat: " + str(old_cat))
+			print("SHOP_IMC Deleteing Cat: " + str(old_cat))
 			_catagory_sub_lists[old_cat].queue_free()
 			_catagory_sub_lists.erase(old_cat)
 		else:
-			print("Keeping Cat: " + str(old_cat))
+			print("SHOP_IMCKeeping Cat: " + str(old_cat))
 			entries_container.remove_child(_catagory_sub_lists[old_cat])
 	
 	for cat in data.keys():
-		print("Creating Cat: " + str(cat))
+		print("SHOP_IMC Creating Cat: " + str(cat))
 		var item_id_list = data[cat]
 		var sub_list:ShopSubItemList = null
 		if _catagory_sub_lists.keys().has(cat):

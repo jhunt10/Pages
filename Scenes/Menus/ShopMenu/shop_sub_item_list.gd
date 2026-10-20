@@ -51,7 +51,7 @@ enum States {Hidden, Growing, Showing, Shrinking}
 @export var entries_v_box:VBoxContainer
 @export var premade_item_button:Control
 
-var parent_controller:ShopItemMenuController
+var parent_controller#:ShopItemMenuController
 var _item_buttons_by_id:Dictionary = {}
 
 # Called when the node enters the scene tree for the first time.
@@ -61,6 +61,21 @@ func _ready() -> void:
 	premade_item_button.hide()
 	#title_button.pressed.connect(_toggle_show)
 	pass # Replace with function body.
+
+func clear_sold_items():
+	var item_ids = _item_buttons_by_id.keys()
+	for item_id:String in item_ids:
+		var button:ShopItemButton = _item_buttons_by_id[item_id]
+		if not button.is_visible_in_tree():
+			continue
+		if item_id.begins_with("SHOP:"):
+			continue
+		if PlayerInventory.get_item_stack_count(item_id) > 0:
+			continue
+		entries_v_box.remove_child(button)
+		button.queue_free()
+		_item_buttons_by_id.erase(item_id)
+		self.state = States.Growing
 
 func _toggle_show():
 	showing = !showing

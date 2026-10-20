@@ -12,6 +12,7 @@ enum SpeakerSubjects {Greeting, Buying, Selling, ConfirmBuy, BuySuccess, BuyCanc
 @export var sell_button:Button
 @export var close_button:Button
 @export var scroll_container:ScrollContainer
+@export var buy_panel_container:BuyPanelContainer
 
 var _current_details_card
 var _state:States
@@ -32,6 +33,8 @@ func _ready() -> void:
 	sell_button.pressed.connect(load_items_to_sell)
 	buy_button.pressed.connect(load_items_to_buy)
 	LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_gone)
+	buy_panel_container.hide()
+	buy_panel_container.trade_confirmed.connect(_on_trade_confirmed)
 
 func _on_load_screen_gone():
 	load_greeting()
@@ -43,8 +46,8 @@ func close_menu():
 func load_greeting():
 	_state = States.Buy
 	item_menu_controller.hide()
-	if _current_details_card:
-		_current_details_card.start_hide()
+	if buy_panel_container.visible:
+		buy_panel_container.close_panel()
 	_load_text(SpeakerSubjects.Greeting)
 	
 
@@ -123,27 +126,23 @@ func on_details_card_freed():
 	_current_details_card = null
 
 func create_details_card(item:BaseItem):
-	if not item:
-		printerr("ShopMenu.create_details_card: Null Item")
-		return
-	if _current_details_card:
-		if _current_details_card.item_id == item.Id:
-			_current_details_card.show()
-			return
-		_current_details_card.hide_done.disconnect(on_details_card_freed)
-		_current_details_card.start_hide()
-	_current_details_card = load("res://Scenes/Menus/CharacterMenu/MenuPages/ItemDetailsCard/item_details_card.tscn").instantiate()
-	_current_details_card.custom_minimum_size = details_card_spawn_point.size
-	details_card_spawn_point.add_child(_current_details_card)
-	_current_details_card.hide_done.connect(on_details_card_freed)
-	_current_details_card.shop_mode = true
-	_current_details_card.is_selling = _state == States.Sell
-	var confirm_text = "Buy"
-	if _state == States.Sell:
-		confirm_text = "Sell"
-	_current_details_card.set_detail_card_item(null, item, confirm_text)
-	_current_details_card.start_show()
-	_current_details_card.buy_controller.buy_button_pressed.connect(_show_confirm_popup)
+	buy_panel_container.set_item(item, _state == States.Sell)
+	buy_panel_container.show()
+
+func _on_trade_confirmed(item_key:String, count:int, cost:int, selling:bool):
+	printerr("TRADED: %s %s %s %s" % [item_key, count, cost, selling])
+	if selling:
+		if PlayerInventory.get_item_stack_count(item_key) >= count:
+			PlayerInventory.reduce_stack_count(item_key, count)
+			StoryState.spend_money(-cost)
+			_load_text(SpeakerSubjects.SellSuccess)
+	else:
+		if StoryState.get_current_money() >= cost:
+			StoryState.spend_money(cost)
+			PlayerInventory.add_item(item_key, count)
+			_load_text(SpeakerSubjects.BuySuccess)
+	buy_panel_container.close_panel()
+	item_menu_controller.clear_sold_items()
 
 func _show_confirm_popup(item_key:String, count:int, _cost:int):
 	if not confirm_popup.trade_confirmed.is_connected(_on_trade_confirmed):
@@ -159,7 +158,7 @@ func _show_confirm_popup(item_key:String, count:int, _cost:int):
 	if _current_details_card:
 		_current_details_card.start_hide()
 
-func _on_trade_confirmed(accepted:bool):
+func _on_trade_confirmed_old(accepted:bool):
 	if _state == States.Buy:
 		if accepted:
 			_load_text(SpeakerSubjects.BuySuccess)
@@ -309,5 +308,5 @@ func _build_dialog_entries(arr:Array):
 					"Text": line,
 					"NewLine": true
 				})
-	#dialog_box.add_entries(new_entries)
+	dialog_box.add_entries(new_entries)
 			

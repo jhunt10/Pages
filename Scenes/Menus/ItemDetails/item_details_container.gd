@@ -5,8 +5,11 @@ extends BoxContainer
 @export var icon_background:TextureRect
 @export var title_lable:FitScaleLabel
 @export var rarity_lable:Label
+@export var value_icon:TextureRect
+@export var value_lable:Label
 @export var tag_container:TagsContainer
 @export var description_box:RichTextLabel
+@export var exit_button_texture:TextureRect
 @export var exit_button:Button
 #@export var equip_button:Button
 #@export var button_label:Label
@@ -22,12 +25,21 @@ var _item_id
 var actor_has_item
 var _current_card
 
-func set_detail_card_item(actor:BaseActor, item:BaseItem, confirm_button_text:String, disable_confirm:bool=false):
+func set_detail_container_item(actor:BaseActor, item:BaseItem):
 	_item_id = item.Id
 	icon_background.texture = item.get_rarity_background()
 	icon.texture = item.get_small_icon()
 	title_lable.text = item.get_display_name()
 	rarity_lable.text = item.get_rarity_string() + " " + item.get_taxonomy_leaf()
+	var item_value:int = item.get_item_value()
+	if item_value > 0:
+		value_lable.text = str(item_value)
+		value_icon.show()
+		value_lable.show()
+	else:
+		value_lable.text = "000"
+		value_icon.hide()
+		value_lable.hide()
 	
 	tag_container.set_tags(item.get_tags())
 	default_details.hide()

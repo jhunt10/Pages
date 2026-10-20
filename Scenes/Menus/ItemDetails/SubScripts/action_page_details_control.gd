@@ -1,7 +1,6 @@
 class_name ActionDetailsControl
 extends BoxContainer
 
-@export var parent_card_control:ItemDetailsCard
 @export var description_box:DescriptionBox
 @export var target_type_label:Label
 @export var cost_container:PageDetailsCard_CostContaienr
