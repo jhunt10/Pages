@@ -94,9 +94,10 @@ func set_action(actor:BaseActor, page_item:BasePageItem):
 		damage_label.hide()
 		damage_line.hide()
 	
-	var target_params = action.get_preview_target_params(actor)
-	if target_params:
-		target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
+	if action.has_preview_target_params():
+		var target_params = action.get_preview_target_params(actor)
+		if target_params:
+			target_type_label.text = TargetParameters.TargetTypes.keys()[target_params.target_type]
 	
 	
 func show_self():

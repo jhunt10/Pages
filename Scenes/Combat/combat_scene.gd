@@ -22,8 +22,10 @@ var combat_map_data:Dictionary = {}
 var _current_phase_key:String = ""
 var GameState:GameStateData
 
+
 static var is_testing_map:bool = false
 static var is_paused:bool = false
+static var input_round:bool = false
 static var auto_targeting_enabled:bool = true
 static var _current_player_index:int = 0
 static var _player_actor_ids:Array = []
@@ -161,6 +163,10 @@ func load_init_state(sub_scene_data:Dictionary):
 	# Create Actors for pre-loaded ObjectActorNodes 
 	var object_nodes = MapController.get_object_actor_nodes()
 	for node:ObjectActorNode in object_nodes:
+		# Skip if hidden
+		if not node.visible:
+			continue
+		# Create actor if doesn't exist
 		if not node.Actor:
 			var actor_key = node.actor_key
 			var unique_id = node.unique_id
@@ -171,6 +177,7 @@ func load_init_state(sub_scene_data:Dictionary):
 				actor = ActorLibrary.create_actor(actor_key, {}, unique_id)
 			if actor:
 				node.set_actor(actor)
+		# Add Actor to GameState
 		if node.Actor:
 			node.Actor.TeamKey = node.team_key
 			# Have to manualy set mapping for controller, otherwise get_or_create will duplicate the node
@@ -245,7 +252,7 @@ var _cached_player_carrier_mapping:Dictionary = {}
 func begin_combat_input_round():
 	if not combat_started:
 		start_combat_animation()
-		
+	input_round = true
 	_cached_game_state = GameState
 	GameState = _cached_game_state.duplicate()
 	_cached_player_carrier_mapping.clear()
@@ -263,7 +270,8 @@ func begin_combat_input_round():
 
 func begin_combat_execution_round():
 	GameState = _cached_game_state
-	
+	_cached_game_state = null
+	input_round = false
 	# Pack up preview deploys
 	for actor in list_player_actors(true):
 		if actor is CarrierActor:
@@ -468,6 +476,11 @@ func add_actor(actor:BaseActor, pos:MapPos, is_player:bool=false, play_spawn_ani
 			#for sub_actor in actor.list_carried_actors():
 				#QueController.add_action_que(sub_actor.Que)
 	GameState.set_actor_pos(actor, pos)
+	
+	# Add actor to cached game state if doesn't exist (probably means spawning NPC mid Input)
+	if _cached_game_state and not _cached_game_state._actors.keys().has(actor.Id):
+		_cached_game_state.add_actor(actor)
+		_cached_game_state.set_actor_pos(actor, pos)
 	
 	# Add to player list if player
 	if is_player and not _player_actor_ids.has(actor.Id):

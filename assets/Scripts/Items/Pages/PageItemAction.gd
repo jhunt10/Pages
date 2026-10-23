@@ -232,7 +232,7 @@ func get_preview_move_offset()->MapPos:
 	_cached_preview_move_offset = MapPos.new(pre_move_arr[0],pre_move_arr[1],pre_move_arr[2],pre_move_arr[3])
 	return _cached_preview_move_offset
 
-func has_preview_target()->bool:
+func has_preview_target_params()->bool:
 	var preview_data:Dictionary = action_data.get("Preview", {})
 	var preview_key = preview_data.get("PreviewTargetKey", null)
 	return preview_key and preview_key != ''

@@ -195,7 +195,7 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 				{"SpeakerPort":"VeryHappy"},
 				"Welcome back!",
 				{"Delay":0.8},
-				{"SpeakerPort":"Happy"},
+				{"SpeakerPort":"Neutral"},
 				"You lookin to @Color:Red@Buy@Clear@ or @Color:Red@Sell@Clear@? "
 			])
 	elif subject == SpeakerSubjects.Buying:
@@ -211,13 +211,13 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 			return
 		else:
 			_build_dialog_entries([
-				{"SpeakerPort":"Happy"},
+				{"SpeakerPort":"Neutral"},
 				"You lookin for @Color:Red@Potions@Clear@ or @Color:Red@Ammo@Clear@?"
 			])
 			return
 	elif subject == SpeakerSubjects.Selling:
 			_build_dialog_entries([
-				{"SpeakerPort":"Happy"},
+				{"SpeakerPort":"Neutral"},
 				"Got some @Color:Red@Loot@Clear@ to unload?",
 			])
 			return
@@ -242,8 +242,8 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 		#if item:
 			#item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
 		_build_dialog_entries([
-			{"SpeakerPort":"Happy"},
-			"Pleasure doing business with you.",
+			{"SpeakerPort":"VeryHappy"},
+			"Pleasure doing business with you!",
 			"WaitToRead",
 			"WaitToRead",
 			"Clear",
@@ -287,7 +287,7 @@ func _build_dialog_entries(arr:Array):
 				{
 					"EntryType": "Speaker",
 					"SpeakerName": "FMrc",
-					"SpeakerPort": "res://defs/Actors/NPCs/FishMerch/Portraits/FishMerch_" + emotion + ".png"
+					"SpeakerPort": "res://notes/NPCs/FishMerch/Portraits/FishMerch_" + emotion + ".png"
 				})
 		elif line is String:
 			if line == "WaitToRead":

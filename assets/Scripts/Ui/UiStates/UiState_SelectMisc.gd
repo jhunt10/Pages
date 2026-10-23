@@ -23,12 +23,6 @@ func on_option_menu_closed():
 	var option_menu = CombatRootControl.Instance.ui_control.option_select_menu
 	option_menu.menu_closed.disconnect(on_option_menu_closed)
 	CombatUiControl.ui_state_controller.back_to_last_state()
-	CombatRootControl.Instance.camera.unfreeze_camera()
 
 func end_state():
-	pass
-	
-func handle_input(event):
-	pass
-
-	#CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound)
+	CombatRootControl.Instance.camera.unfreeze_camera()

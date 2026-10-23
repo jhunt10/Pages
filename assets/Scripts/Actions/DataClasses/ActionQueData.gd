@@ -189,6 +189,14 @@ func get_action_for_turn(turn_index : int)->PageItemAction:
 
 func get_last_qued_action()->PageItemAction:
 	var qued_actions = list_qued_actions()
+	var index = 0
+	while index < qued_actions.size():
+		var action:PageItemAction = qued_actions[index]
+		if action.ActionKey == "WaitToBeDeployed_ActionPage":
+			qued_actions.remove_at(index)
+		else:
+			index += 1
+			
 	if qued_actions.size() > 0:
 		return qued_actions[qued_actions.size()-1]
 	return null

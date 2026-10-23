@@ -24,7 +24,8 @@ func _start_outro_animation():
 	LoadManager._load_screen = null
 
 func _combat_actor_loaded(count, index):
-	var val = (float(index) / float(count * 2)) * 100
-	progress_bar.set_value_no_signal(val + load_scale)
+	pass
+	#var val = (float(index) / float(count * 2)) * 100
+	#progress_bar.set_value_no_signal(val + load_scale)
 	#await get_tree().process_frame
 	#print("Actor Loaded: %s / %s = %s" % [index, count, val])

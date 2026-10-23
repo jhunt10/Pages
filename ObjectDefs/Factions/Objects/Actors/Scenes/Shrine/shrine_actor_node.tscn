@@ -362,6 +362,7 @@ sources/0 = SubResource("TileSetAtlasSource_3o8la")
 
 [node name="ShrineActorNode" type="Node2D" unique_id=531120087 node_paths=PackedStringArray("vfx_holder", "aura_holder", "actor_sprite", "path_arrow", "actor_motion_node", "offset_node", "damage_animation_player", "body_animation")]
 script = ExtResource("1_aqb7c")
+actor_sprite_sheet = ExtResource("2_tbw1l")
 vfx_holder = NodePath("ActorMotionNode/VFXHolder")
 aura_holder = NodePath("AuraHolder")
 actor_sprite = NodePath("ActorMotionNode/ActorSpriteNode/OffsetNode/ActorSprite")

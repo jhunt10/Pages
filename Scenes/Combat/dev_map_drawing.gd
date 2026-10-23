@@ -21,6 +21,7 @@ func _process(_delta: float) -> void:
 var path_finder:PathFinder
 
 func _draw() -> void:
+	return
 	if !_mouse_coor:
 		return
 	

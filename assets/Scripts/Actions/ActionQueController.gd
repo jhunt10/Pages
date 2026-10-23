@@ -200,6 +200,7 @@ func add_action_que(new_que:ActionQueHolder):
 	_cached_que_ppr[new_que.Id] = new_que.get_max_que_size()
 	if not new_que.actor.stats_changed.is_connected(_on_actor_stat_change):
 		new_que.actor.stats_changed.connect(_on_actor_stat_change.bind(new_que.actor))
+	new_que.actor.connect_to_que_controller(self)
 	_flagged_for_reorder = true
 	_flagged_for_repadding = true
 
@@ -207,6 +208,7 @@ func remove_action_que(que:ActionQueHolder, clean_now=false):
 	if not _dead_ques.has(que.Id):
 		_dead_ques.append(que.Id)
 		que_marked_as_dead.emit(que.Id)
+	que.actor.disconnect_from_que_controller(self)
 	if clean_now:
 		_cleanup_dead_ques(false)
 
@@ -235,7 +237,11 @@ func update(delta: float) -> void:
 			
 			# Do all actions for frame
 			for q_index in range(que_index, _action_ques.size()):
-				var que = _action_ques[_que_order[q_index]]
+				var que:ActionQueHolder = _action_ques[_que_order[q_index]]
+				if not game_state.get_actor(que.actor.Id):
+					printerr("Tried to execute Que for Actor who is not in GameState: '%s'" % [que.actor.Id])
+					continue
+				
 				_execute_turn_frames(game_state, que, action_index, sub_action_index)
 				
 				# Check if the last action stopped execution

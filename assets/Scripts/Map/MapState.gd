@@ -22,7 +22,8 @@ func duplicate(new_game_state)->MapStateData:
 	var map_data = {
 		'Width': max_width,
 		'Hight': max_hight,
-		'Terrain': terrain_data.duplicate(true)
+		'Terrain': terrain_data.duplicate(true),
+		'Gates': _gates_data
 	}
 	var new_map = MapStateData.new(new_game_state, map_data, true)
 	for spot:MapSpot in _position_data:
@@ -44,18 +45,18 @@ func _init(game_state, map_data:Dictionary, wait_for_pos_data:bool=false) -> voi
 	max_hight = map_data['Hight']
 	_position_data = []
 	terrain_data = map_data['Terrain']
+	_gates_data = map_data.get("Gates", {})
 	if not wait_for_pos_data:
 		for y in range(max_hight):
 			for x in range(max_width):
 				_position_data.append(MapSpot.new(x,y,terrain_data[y][x], self))
 	
-	_gates_data = map_data.get("Gates", {})
-	for gate_key in _gates_data.keys():
-		var gate_data = _gates_data[gate_key]
-		for coor:Vector2i in gate_data.get("MapCoors"):
-			var spot = get_map_spot(coor)
-			if spot:
-				spot.add_gate(gate_key)
+		for gate_key in _gates_data.keys():
+			var gate_data = _gates_data[gate_key]
+			for coor:Vector2i in gate_data.get("MapCoors"):
+				var spot = get_map_spot(coor)
+				if spot:
+					spot.add_gate(gate_key)
 
 func has_spot(pos)->bool:
 	if pos.x < 0 or pos.x >= max_width or pos.y < 0 or pos.y >= max_hight:
@@ -100,10 +101,6 @@ func is_spot_traversable(pos, _actor=null)->bool:
 		return false
 	# Check Gates
 	for gate_key in spot.get_gate_keys():
-		#TODO: Remove Hack
-		if gate_key == "BlueGate":
-			continue
-		#################
 		var gate_data = _gates_data.get(gate_key)
 		if not gate_data.get("IsOpen"):
 			return false

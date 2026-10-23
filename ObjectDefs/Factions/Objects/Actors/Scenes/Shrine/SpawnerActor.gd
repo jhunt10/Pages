@@ -12,14 +12,7 @@ var last_spawned_actor_id:String = ''
 
 func start_spawning(actor:BaseActor):
 	self.spawning_actor = actor
-	var actor_node = CombatRootControl.get_actor_node(self.Id)
-	actor_node.start_spawning_animation()
 	
-
-# Called by ActorNode when animation is ready
-func _spawn_actor():
-	if spawning_actor == null:
-		return
 	var game_state = CombatRootControl.Instance.GameState
 	var cur_map_pos = game_state.get_actor_pos(self)
 	#var adj_spot = MapHelper.get_adjacent_poses(cur_map_pos)
@@ -35,11 +28,20 @@ func _spawn_actor():
 	if !chosen_spot:
 		printerr("ShrineActorNode: No Open Spots found")
 		return
+		
 	CombatRootControl.Instance.add_actor(spawning_actor, chosen_spot, false, true)
+	var actor_node = CombatRootControl.get_actor_node(self.Id)
+	actor_node.start_spawning_animation()
+	
+
+# Called by ActorNode when animation is ready
+func _spawn_actor():
+	if spawning_actor == null:
+		return
 	CombatLogController.log_event("%s spawned %s" % [self.get_display_name(), spawning_actor.get_display_name()])
 	last_spawned_actor_id = spawning_actor.Id
 	spawning_actor = null
 	# Put in for the Shrines spawning Zomines
 	# This gets called after round ends, and turn orders are only updated on turn end / round start
-	if not CombatRootControl.QueController.execution_state == ActionQueController.ActionStates.Running:
-		CombatRootControl.QueController.clear_and_check_ques()
+	#if not CombatRootControl.QueController.execution_state == ActionQueController.ActionStates.Running:
+		#CombatRootControl.QueController.clear_and_check_ques()

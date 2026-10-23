@@ -9,7 +9,7 @@ static var cached_move_sets:Dictionary={}
 static func build_action_ques(clear_existing_ques:bool=false):
 	var init_game_state = CombatRootControl.Instance.GameState.duplicate()
 	var turn_states = []
-	var actors = CombatRootControl.Instance.QueController.list_actors_by_order()
+	var actors = init_game_state.list_actors()
 	var turn_count = CombatRootControl.Instance.QueController.max_que_size
 	astar = null
 	if not astar:
@@ -17,14 +17,13 @@ static func build_action_ques(clear_existing_ques:bool=false):
 	astar.enable_all_points()
 	
 	# Pre-Pass on Actors
-	var actionable_actors = []
 	for actor:BaseActor in actors:
 		# Clear Ques
 		if clear_existing_ques and not actor.is_player:
 			actor.Que.clear_que()
 		
-		if actor.ai_def.has("PrebuiltQueArr"):
-			var action_keys_que = actor.ai_def['PrebuiltQueArr']
+		if actor.ai_data.has("PrebuiltQueArr"):
+			var action_keys_que = actor.ai_data['PrebuiltQueArr']
 			for action_key in action_keys_que:
 				var action = ItemLibrary.get_item(action_key)
 				actor.Que.que_action(action)
@@ -33,10 +32,8 @@ static func build_action_ques(clear_existing_ques:bool=false):
 		var pos = init_game_state.get_actor_pos(actor)
 		if pos:
 			astar.set_pos_disabled(pos, true)
-		
-		if actor.stats.get_stat(StatHelper.PPR) > 0:
-			actionable_actors.append(actor)
 	
+	var actionable_actors = CombatRootControl.Instance.QueController.list_actors_by_order()
 	for turn in range(turn_count):
 		# Build duplicate GameState as new Turn State
 		var turn_state = init_game_state
@@ -82,7 +79,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	var aggroed_actor_id = actor.aggro.get_current_aggroed_actor_id()
 	var current_pos = game_state.get_actor_pos(actor)
 	var options = _get_actor_action_options_data(actor)
-	for attack_id in options['Attacks']:
+	for attack_id in options['Attacks'].keys():
 		var item = ItemLibrary.get_item(attack_id)
 		if not item is PageItemAction:
 			printerr('AiHandler._choose_page_for_actor: Non-Action Page found: %s' % [attack_id])
@@ -136,7 +133,7 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	var path_moves = path.get('Moves', [])
 	
 	if path_moves.size() > 0:
-		var max_aggro_distance = actor.ai_def.get("AggroRangeLimit", 9999)
+		var max_aggro_distance = actor.ai_data.get("AggroRangeLimit", 9999)
 		if path_moves.size() < max_aggro_distance:
 			var move_action = ItemLibrary.get_item(path_moves[0])
 			if move_action:
@@ -152,9 +149,10 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 		return cached_move_sets[actor.Id]
 	var data = {
 		"Moves":[],
-		"Attacks":[]
+		"Attacks":{}
 	}
 	var action_list = actor.get_action_list()
+	var attack_weights = actor.ai_data.get("AttackWeights", {})
 	for action:PageItemAction in action_list:
 		if not action is PageItemAction:
 			printerr('AiHandler._get_actor_action_options_data: Non-Action Page found: %s' % [action.Id])
@@ -162,7 +160,7 @@ static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:
 		if action.has_preview_move_offset():
 			data['Moves'].append(action.Id)
 		if action.get_tags().has("Attack"):
-			data['Attacks'].append(action.Id)
+			data['Attacks'][action.Id] = attack_weights.get(action.ActionKey, 1)
 	cached_move_sets[actor.Id] = data
 	return data
 
@@ -173,6 +171,8 @@ static func get_closest_enemy(actor:BaseActor, game_state:GameStateData)->BaseAc
 	var closest_actor = null
 	for enemy:BaseActor in game_state.list_actors():
 		if enemy.Id == actor.Id:
+			continue
+		if enemy.is_being_carried():
 			continue
 		if not game_state.are_enemies(actor, enemy):
 			continue
@@ -475,9 +475,15 @@ static func build_mosey_round(actor:BaseActor, game_state:GameStateData):
 			else:
 				action_roll = randi() % 3
 		if action_roll == 1:
+			if actor.is_adirectional():
+				return "MoveLeft"
+			else:
 				actions.append("TurnLeft")
 				return "TurnLeft"
 		if action_roll == 2:
+			if actor.is_adirectional():
+				return "MoveRight"
+			else:
 				actions.append("TurnRight")
 				return "TurnRight"
 		if action_roll == 0:

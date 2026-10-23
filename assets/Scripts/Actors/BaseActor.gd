@@ -70,8 +70,8 @@ var _title_page:PageItemTitle
 var spawn_map_layer
 
 var use_ai:bool: 
-	get: return ai_def.size() > 0
-var ai_def:Dictionary = {}
+	get: return ai_data.size() > 0
+var ai_data:Dictionary = {}
 
 var is_player:bool:
 	get:
@@ -90,7 +90,7 @@ func _init(key:String, load_path:String, def:Dictionary, id:String, data:Diction
 	turn_ended.connect(_print_test)
 	
 	var stat_data = _def.get("Stats", {})
-	ai_def = get_load_val("AiData", {})
+	ai_data = get_load_val("AiData", {})
 	aggro = AggroHandler.new(self)
 	sprite = ActorSpriteHolder.new(self)
 	stats = StatHolder.new(self, stat_data)
@@ -453,6 +453,12 @@ func on_enter_combat():
 	pages.sync_passive_page_effects()
 	effects.on_enter_combat()
 
+func connect_to_que_controller(que_controller:ActionQueController):
+	effects.connect_to_que_controller(que_controller)
+	
+func disconnect_from_que_controller(que_controller:ActionQueController):
+	effects.disconnect_from_que_controller(que_controller)
+	
 func on_delete():
 	if is_deleted:
 		return

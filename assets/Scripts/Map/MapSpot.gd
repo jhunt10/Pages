@@ -25,6 +25,7 @@ func duplicate(new_parent:MapStateData)->MapSpot:
 	new_spot._zone_ids = _zone_ids.duplicate()
 	new_spot.item_ids = item_ids.duplicate()
 	new_spot._layer_to_actor_ids = _layer_to_actor_ids.duplicate(true)
+	new_spot._gate_keys = _gate_keys.duplicate()
 	return new_spot
 
 func _init(x:int, y:int, terrain_val:TerrainType, parent:MapStateData) -> void:

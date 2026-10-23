@@ -233,7 +233,8 @@ static func get_line_of_sight_for_spots(from_point, to_point, game_state:GameSta
 	if in_line_is_unbroken:
 		check_cache[to_point] = LOS_VALUE.Open
 	elif out_line_is_unbroken:
-		check_cache[to_point] = LOS_VALUE.Cover
+		check_cache[to_point] = LOS_VALUE.Open
+		#check_cache[to_point] = LOS_VALUE.Cover
 	else:
 		check_cache[to_point] = LOS_VALUE.Blocked
 	#if logging: print("# OutLine %s: %s" % [p, out_line_is_unbroken])

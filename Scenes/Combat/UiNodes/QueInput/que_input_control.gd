@@ -121,7 +121,8 @@ func set_actor(actor:BaseActor):
 	_build_tab_bar()
 	_build_buttons()
 	clear_preview_display()
-	show_last_qued_target_area()
+	if CombatRootControl.input_round:
+		show_last_qued_target_area()
 	que_display_control.set_actor(_actor)
 
 var _filtered_actor_id
@@ -249,15 +250,16 @@ func show_preview_target_area(action:PageItemAction):
 	else:
 		clear_preview_display()
 		var preview_pos = _actor.Que.get_movement_preview_final_pos()
-		var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
-		_target_display_action_key = action.ActionKey
-		_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)
+		if preview_pos:
+			var target_selection_data = TargetSelectionData.new(target_parms, 'Preview', _actor, CombatRootControl.Instance.GameState, [], preview_pos)
+			_target_display_action_key = action.ActionKey
+			_target_display_key = CombatRootControl.Instance.MapController.target_area_display.build_from_target_selection_data(target_selection_data)
 
 func show_last_qued_target_area():
 	# Display last page's target area for mobile
 	if _actor and _actor.Que:
 		var last_page:PageItemAction = _actor.Que.get_last_qued_action()
-		if last_page and last_page.has_preview_target():
+		if last_page and last_page.has_preview_target_params():
 			show_preview_target_area(last_page)
 
 func _mouse_entered_page_button(_index, key_name):
