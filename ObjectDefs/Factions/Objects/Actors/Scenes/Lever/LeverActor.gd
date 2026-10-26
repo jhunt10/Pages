@@ -22,9 +22,9 @@ func on_trigger(_triggered_by_actor:BaseActor, game_state:GameStateData):
 		
 
 func on_round_end():
-	been_triggered = false
+	#been_triggered = false
 	pass
 
 func on_turn_end():
-	been_triggered = false
+	#been_triggered = false
 	pass

@@ -10,7 +10,7 @@ func set_actor(actor:BaseActor, connect_signals=true):
 		printerr("None LeverActor set on LevelActorNode")
 		self.queue_free()
 
-func on_lever_triggered():
+func on_lever_triggered(state_on):
 	var on = Actor.been_triggered
 	if on:
 		body_animation.play("toggle_lever_on")

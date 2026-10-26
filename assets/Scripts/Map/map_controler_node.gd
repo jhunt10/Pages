@@ -68,7 +68,7 @@ func get_object_actor_nodes()->Array:
 func get_gate_nodes():
 	var gates = {}
 	var nodes = actor_tile_map.get_children()
-	if !gates_map_layer:
+	if gates_map_layer:
 		nodes.append_array(gates_map_layer.get_children())
 	for child in nodes:
 		if child is GateSpriteNode:

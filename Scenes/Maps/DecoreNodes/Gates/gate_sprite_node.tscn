@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqxauhjmwxfw6"]
+[gd_scene format=3 uid="uid://dqxauhjmwxfw6"]
 
-[ext_resource type="Script" path="res://Scenes/Maps/DecoreNodes/Gates/gate_sprite_node.gd" id="1_x02ue"]
+[ext_resource type="Script" uid="uid://dsk4wqh0n80dj" path="res://Scenes/Maps/DecoreNodes/Gates/gate_sprite_node.gd" id="1_x02ue"]
 [ext_resource type="Texture2D" uid="uid://jlr4yr6r78hb" path="res://Scenes/Maps/DecoreNodes/Gates/Gate_SpriteSheet.png" id="2_l6e1m"]
+[ext_resource type="Texture2D" uid="uid://bear46ct2hilw" path="res://Scenes/Maps/DecoreNodes/Gates/Gate_Left.png" id="3_5yce3"]
+[ext_resource type="Texture2D" uid="uid://djkuafrq51lkc" path="res://Scenes/Maps/DecoreNodes/Gates/Gate_Right.png" id="4_y8tx0"]
 
 [sub_resource type="Animation" id="Animation_f37le"]
 length = 0.001
@@ -28,6 +30,42 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(32, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LeftGateSprite2:region_rect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(3, 0, 29, 36)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RightGateSprite2:region_rect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 32, 36)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RightGateSprite2:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_kp8oe"]
@@ -59,6 +97,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_50bg8"]
 resource_name = "open_gate"
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -83,30 +122,82 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(32, 0), Vector2(58, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LeftGateSprite2:region_rect")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(3, 0, 29, 36), Rect2(28, 0, 4, 36)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RightGateSprite2:region_rect")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Rect2(0, 0, 32, 36), Rect2(0, 0, 4, 36)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RightGateSprite2:offset")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(25, 0)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gwh6b"]
 _data = {
-"RESET": SubResource("Animation_f37le"),
-"close_gate": SubResource("Animation_kp8oe"),
-"open_gate": SubResource("Animation_50bg8")
+&"RESET": SubResource("Animation_f37le"),
+&"close_gate": SubResource("Animation_kp8oe"),
+&"open_gate": SubResource("Animation_50bg8")
 }
 
-[node name="GateSpriteNode" type="Node2D" node_paths=PackedStringArray("animation_player")]
+[node name="GateSpriteNode" type="Node2D" unique_id=1635158279 node_paths=PackedStringArray("animation_player")]
 script = ExtResource("1_x02ue")
 animation_player = NodePath("AnimationPlayer")
 map_coor = Vector2i(7, 8)
 
-[node name="LeftGateSprite" type="Sprite2D" parent="."]
+[node name="LeftGateSprite" type="Sprite2D" parent="." unique_id=409139226]
+visible = false
 texture = ExtResource("2_l6e1m")
 hframes = 2
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 36)
 
-[node name="RightGateSprite" type="Sprite2D" parent="."]
+[node name="RightGateSprite" type="Sprite2D" parent="." unique_id=3112486]
+visible = false
 position = Vector2(32, 0)
 texture = ExtResource("2_l6e1m")
 hframes = 2
 frame = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_gwh6b")
-}
+[node name="LeftGateSprite2" type="Sprite2D" parent="." unique_id=1497202157]
+position = Vector2(-13, -18)
+texture = ExtResource("3_5yce3")
+centered = false
+region_enabled = true
+region_rect = Rect2(3, 0, 29, 36)
+
+[node name="RightGateSprite2" type="Sprite2D" parent="." unique_id=1157061307]
+position = Vector2(16, -18)
+texture = ExtResource("4_y8tx0")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 36)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2069761376]
+libraries/ = SubResource("AnimationLibrary_gwh6b")

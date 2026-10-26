@@ -2684,62 +2684,48 @@ texture = ExtResource("22_3n68y")
 tile_set = SubResource("TileSet_o1yif")
 
 [node name="SpwanNode_Enemey" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=970711163]
-visible = false
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(368, 496)
-rotation = 1.5707964
+rotation = 3.1415927
 texture = ExtResource("19_pm0qq")
 script = ExtResource("20_tixpt")
 spawn_actor_key = "RandomEnemy"
 team_key = "Enemies"
-facing = 3
 map_coor = Vector2i(11, 15)
 
 [node name="SpwanNode_Enemey2" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1525526546]
 self_modulate = Color(1, 0.1, 0, 1)
-position = Vector2(240, 240)
+position = Vector2(240, 208)
+rotation = 3.1415927
 texture = ExtResource("19_pm0qq")
 script = ExtResource("20_tixpt")
 spawn_actor_key = "RandomEnemy"
 team_key = "Enemies"
-facing = 2
-map_coor = Vector2i(7, 7)
-
-[node name="SpwanNode_Enemey5" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=2093558964]
-self_modulate = Color(1, 0.1, 0, 1)
-position = Vector2(240, 272)
-texture = ExtResource("19_pm0qq")
-script = ExtResource("20_tixpt")
-spawn_actor_key = "RandomEnemy"
-team_key = "Enemies"
-facing = 2
-map_coor = Vector2i(7, 8)
+map_coor = Vector2i(7, 6)
 
 [node name="SpwanNode_Enemey3" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1365539591]
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(560, 368)
-rotation = 1.5707964
+rotation = 3.1415927
 texture = ExtResource("19_pm0qq")
 script = ExtResource("20_tixpt")
 spawn_actor_key = "RandomEnemy"
 team_key = "Enemies"
-facing = 3
 map_coor = Vector2i(17, 11)
 
 [node name="SpwanNode_Enemey4" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1570083267]
-visible = false
 self_modulate = Color(1, 0.1, 0, 1)
 position = Vector2(240, 336)
+rotation = 3.1415927
 texture = ExtResource("19_pm0qq")
 script = ExtResource("20_tixpt")
 spawn_actor_key = "RandomEnemy"
 team_key = "Enemies"
-facing = 2
 map_coor = Vector2i(7, 10)
 
 [node name="SpwanNode_RedLever" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1443676334]
 self_modulate = Color(1, 0.25098, 0.25098, 1)
-position = Vector2(176, 560)
+position = Vector2(400, 496)
 texture = ExtResource("24_3l3ap")
 script = ExtResource("25_n03cb")
 gate_key = "RedGate"
@@ -2748,7 +2734,7 @@ spawn_actor_key = "LeverActor"
 spawn_actor_id = "Lever_RedGate"
 team_key = "Decor"
 facing = 2
-map_coor = Vector2i(5, 17)
+map_coor = Vector2i(12, 15)
 
 [node name="SpwanNode_GreenLever" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=887622707]
 self_modulate = Color(0.25098, 0.752941, 0.25098, 1)
@@ -2765,7 +2751,7 @@ map_coor = Vector2i(17, 15)
 
 [node name="SpwanNode_BridgeLever" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1873186330]
 self_modulate = Color(0.427451, 0.501961, 1, 1)
-position = Vector2(176, 496)
+position = Vector2(304, 176)
 texture = ExtResource("24_3l3ap")
 script = ExtResource("25_n03cb")
 gate_key = "Bridge"
@@ -2774,7 +2760,7 @@ spawn_actor_key = "LeverActor"
 spawn_actor_id = "Lever_Bridge"
 team_key = "Decor"
 facing = 2
-map_coor = Vector2i(5, 15)
+map_coor = Vector2i(9, 5)
 
 [node name="Player_SpwanNode" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1863885325]
 modulate = Color(0.15294118, 1, 0, 1)
