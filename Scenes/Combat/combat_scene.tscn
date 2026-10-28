@@ -76,6 +76,8 @@
 [ext_resource type="Texture2D" uid="uid://ca1ypobn53bm5" path="res://Scenes/Combat/UiNodes/AutoTargetButton/ManualIcon.png" id="51_g4xop"]
 [ext_resource type="Texture2D" uid="uid://bl04mrkk5c0wp" path="res://Scenes/Combat/UiNodes/AutoTargetButton/TragetIcon.png" id="52_sx3df"]
 [ext_resource type="Script" uid="uid://38du1ijq0ww" path="res://Scenes/Combat/UiNodes/MapBackground/map_background.gd" id="61_qkysa"]
+[ext_resource type="Script" uid="uid://dqbm37il7gbge" path="res://Scenes/Combat/CombatTutorial/combat_tutorial_control.gd" id="73_akcjn"]
+[ext_resource type="PackedScene" uid="uid://c5bvnrv5jl68g" path="res://Scenes/Combat/UiNodes/ComputerPopupPanel/com_pop_container.tscn" id="74_jdhj7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uwwmh"]
 texture = ExtResource("13_a7rqi")
@@ -2067,6 +2069,317 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CombatTutorialControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=2083220831 node_paths=PackedStringArray("que_input_contol", "combat_panel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("73_akcjn")
+que_input_contol = NodePath("../CombatUiControl/ActiveCombatControl/QueInputControl")
+combat_panel = NodePath("../CombatUiControl/CombatControlPanel")
+
+[node name="First_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=188010683 instance=ExtResource("74_jdhj7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Intro_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1698741321 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -108.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Congratulations.txt"
+text = "Congratulations on your purchase of a subscription to the [color=blue]P.A.G.E[/color] System. 
+This text based guide will walk you through the basics of using [color=darkred]Action Pages[/color] to build [color=blue]Scripts[/color]."
+
+[node name="Actions_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=587904860 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 1
+title_text = "Actions.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "These are your [color=blue]Action Pages[/color]. 
+Each represents an [color=red]Action[/color] which takes one [color=red]Turn[/color] to preform.  "
+
+[node name="Script_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1689984058 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 2
+title_text = "Script.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "This is your [color=blue]Script[/color]. 
+It holds an ordered list of [color=red]Actions[/color] you will preform     during the next [color=blue]Round[/color]. "
+
+[node name="APR_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=802767348 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 2
+title_text = "APR.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "The number of [color=red]Actions[/color] that the [color=blue]Script[/color] can hold is limited by your [img]res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png[/img][color=red]APR[/color] (Actions per Round). "
+
+[node name="ScriptInput_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=278031753 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 3
+title_text = "Script_Input.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "Clicking an [color=red]Action[/color] will que it to first open slot of the [color=blue]Script[/color].
+Clicking the [color=blue]Script[/color] will delete    the [color=red]Action[/color] from the que."
+
+[node name="ScriptSubmit_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=764641844 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 3
+title_text = "Script_Input.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "Fill all slots in your [color=blue]Script[/color], then press [color=darkred]Start[/color] to begine the [color=blue]Round[/color]."
+
+[node name="RoundStart_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=112023264 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Round_Start.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "All Actors have submitted      their [color=blue]Scripts[/color] which means        the [color=blue]Round[/color] will soon begin.
+"
+
+[node name="Turns_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1604221565 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -74.0
+offset_right = 136.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 4
+title_text = "Turns.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "The [color=blue]Round[/color] is divided into [color=red]Turns[/color] set by the  highest [img]res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png[/img][color=red]APR[/color].
+Each [color=red]Turn[/color], Actors will preform the next [color=red]Action[/color] in their [color=blue]Script[/color]."
+
+[node name="Speed_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1115610637 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -109.0
+offset_right = 136.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 4
+title_text = "Turns.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "All [color=red]Actions[/color] are executed simultaneously, but processed by ordered of the Actor's  [img]res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png[/img][color=red]SPD[/color] (Speed)
+Faster Actors will Move and Attack slightly before others."
+
+[node name="Control" type="Control" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl/Speed_ComPopContainer" unique_id=22753662]
+visible = false
+layout_mode = 2
+
+[node name="Gaps_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1032382987 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -108.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 5
+title_text = "Gap_Turns.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "When Actors have less [img]res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png[/img][color=red]APR[/color] than there are [color=red]Turns[/color] in a [color=blue]Round[/color], their [color=blue]Script[/color] will be padded with [color=Red]Gap Turns[/color] to make up the difference."
+
+[node name="Gaps_ComPopContainer2" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=306425276 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -95.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 5
+title_text = "Gap_Order.txt"
+comfirm_button_text = "Done"
+show_cancel_button = false
+text = "The position of [color=red]Gap Turns[/color] changes based on [img]res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png[/img][color=red]SPD[/color]
+Notice how faster [color=darkred]Squirrels[/color] start with a [color=red]Gap[/color] while slower [color=darkred]Squirriors[/color] end with one. "
+
+[node name="Gaps_ComPopContainer3" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=174342595 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -95.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 5
+title_text = "Gap_Order.txt"
+comfirm_button_text = "Done"
+show_cancel_button = false
+text = "The position of [color=red]Gap Turns[/color] changes based on [img]res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png[/img][color=red]SPD[/color]
+Notice how faster [color=darkred]Squirrels[/color] start with a [color=red]Gap[/color] while slower [color=darkred]Squirriors[/color] end with one. "
+
+[node name="End_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=569357572 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -95.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Gap_Order.txt"
+comfirm_button_text = "Done"
+show_cancel_button = false
+text = "Tutorial End"
+
+[node name="Deploy_Question_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1887993841 instance=ExtResource("74_jdhj7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = " new_player2.alert"
+text = "Another New Player Detected
+Would you like to start the       Deployment Guide?
+"
 
 [node name="MapNode" parent="." unique_id=2071614997 instance=ExtResource("49_lque7")]
 visible = false

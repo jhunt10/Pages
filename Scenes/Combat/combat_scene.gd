@@ -281,6 +281,7 @@ func begin_combat_execution_round():
 					DeploymentHelper.merge_actors(actor, carried_actor_id, true)
 	
 	CombatRootControl.Instance.QueController.clear_and_check_ques()
+	AiHandler.build_action_ques()
 	CombatUiControl.ui_state_controller.set_ui_state(UiStateController.UiStates.ExecRound, {}, true)
 
 func trigger_spawners():

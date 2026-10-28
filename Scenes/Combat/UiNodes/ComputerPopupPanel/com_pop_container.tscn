@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://c5bvnrv5jl68g"]
+
+[ext_resource type="Theme" uid="uid://bnlswrbqh03wx" path="res://assets/Themes/ComputerPanels/computer_theme.tres" id="1_heetp"]
+[ext_resource type="Script" uid="uid://bo74msli80l0y" path="res://Scenes/Combat/UiNodes/ComputerPopupPanel/com_pop_panel_container.gd" id="2_t2r1n"]
+[ext_resource type="Texture2D" uid="uid://bcg2fbretmi10" path="res://assets/Themes/ComputerPanels/ExitButton.png" id="3_qe4ig"]
+[ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="4_sqycy"]
+[ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="5_kvmeb"]
+[ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="6_xcrxf"]
+
+[node name="ComPopContainer" type="PanelContainer" unique_id=188010683 node_paths=PackedStringArray("close_button", "info_button", "confirm_button", "cancel_button", "cancel_spacer", "title_label", "text_box")]
+offset_right = 272.0
+offset_bottom = 146.0
+theme = ExtResource("1_heetp")
+script = ExtResource("2_t2r1n")
+title_prefix = "P:/.../"
+title_text = " new_player.alert"
+comfirm_button_text = "Ok"
+show_cancel_button = true
+text = "New Player Detected
+Would you like to start the       New User Guide?
+"
+close_button = NodePath("VBoxContainer/Control/CloseButton")
+info_button = NodePath("VBoxContainer/Control/InfoButton")
+confirm_button = NodePath("VBoxContainer/ButtonsContainer/OkButton")
+cancel_button = NodePath("VBoxContainer/ButtonsContainer/CancelButton")
+cancel_spacer = NodePath("VBoxContainer/ButtonsContainer/CancelSeparator")
+title_label = NodePath("VBoxContainer/Control/Label")
+text_box = NodePath("VBoxContainer/RichTextLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1815745023]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1258858098]
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Control" unique_id=212095246]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -19.0
+offset_right = 154.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme = ExtResource("1_heetp")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "P:/.../ new_player.alert"
+
+[node name="CloseButton" type="TextureButton" parent="VBoxContainer/Control" unique_id=1331489747]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -17.0
+offset_top = -20.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("3_qe4ig")
+texture_pressed = ExtResource("4_sqycy")
+
+[node name="InfoButton" type="TextureButton" parent="VBoxContainer/Control" unique_id=906303194]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -36.0
+offset_top = -20.0
+offset_right = -19.0
+offset_bottom = -3.0
+grow_horizontal = 0
+texture_normal = ExtResource("5_kvmeb")
+texture_pressed = ExtResource("6_xcrxf")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=323438675]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("1_heetp")
+theme_override_constants/paragraph_separation = 8
+bbcode_enabled = true
+text = "New Player Detected
+Would you like to start the       New User Guide?
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1567300304]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ButtonsContainer" unique_id=1270244560]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelSeparator" type="VSeparator" parent="VBoxContainer/ButtonsContainer" unique_id=2110230599]
+visible = false
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=1649710019]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_heetp")
+text = " Cancel "
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/ButtonsContainer" unique_id=1597094495]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OkButton" type="Button" parent="VBoxContainer/ButtonsContainer" unique_id=825013078]
+custom_minimum_size = Vector2(67, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_heetp")
+text = "Ok"
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/ButtonsContainer" unique_id=414750618]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 3

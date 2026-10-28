@@ -14,7 +14,7 @@ signal book_button_pressed
 @export var status_label:Label
 @export var round_progress_bar:ProgressBar
 
-@export var turns_container:Container
+@export var turns_container:QueCollectionControl
 
 @export var time_scale_label:Label
 @export var time_scale_slider:HSlider

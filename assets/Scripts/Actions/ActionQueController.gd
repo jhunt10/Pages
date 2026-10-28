@@ -102,7 +102,6 @@ func _start_round():
 	if had_chance:
 		que_ordering_changed.emit()
 	
-	AiHandler.build_action_ques()
 	#for actor:BaseActor in game_state.list_actors():
 		#if actor.use_ai:
 			#actor.auto_build_que(0)
