@@ -13,6 +13,7 @@ signal book_button_pressed
 @export var turn_label:Label
 @export var status_label:Label
 @export var round_progress_bar:ProgressBar
+@export var goal_label:RichTextLabel
 
 @export var turns_container:QueCollectionControl
 
@@ -98,3 +99,6 @@ func _on_auto_target_pressed():
 		auto_target_button.text = "Enabled"
 	else:
 		auto_target_button.text = "Disabled"
+
+func set_goal(val:String):
+	goal_label.text = "[color=#303030]Goal:[/color] " + val

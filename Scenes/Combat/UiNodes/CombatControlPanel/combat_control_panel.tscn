@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://cq1gkq6upl513" path="res://assets/Fonts/8bit-2.ttf" id="10_0m67q"]
 [ext_resource type="StyleBox" uid="uid://dc0c1uqu7guxm" path="res://assets/Themes/ComputerPanels/button_normal_box_texture.tres" id="11_c5xl8"]
 [ext_resource type="StyleBox" uid="uid://dqbqmnmbl322s" path="res://assets/Themes/ComputerPanels/button_pressed_style_box_texture.tres" id="12_7b346"]
+[ext_resource type="Theme" uid="uid://ealowginwmmi" path="res://assets/Themes/universal_page_theme.tres" id="13_lhfpo"]
 [ext_resource type="Texture2D" uid="uid://b0ppbwvsr2mvy" path="res://assets/Themes/ComputerPanels/HDivider.png" id="13_qas4w"]
 [ext_resource type="Theme" uid="uid://dwinll8pgdjhc" path="res://assets/Themes/standard_theme.tres" id="14_pakc7"]
 [ext_resource type="Texture2D" uid="uid://cand1e8p22oc8" path="res://assets/Themes/ComputerPanels/SubPanel.png" id="15_t460y"]
@@ -26,7 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://coojsfckia2jk" path="res://Scenes/Combat/UiNodes/QueDisplay/UnknownPageSlotIcon.png" id="24_4q4kx"]
 [ext_resource type="Texture2D" uid="uid://b4rsuuvrkee14" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_dead_slot.png" id="25_wqa4v"]
 [ext_resource type="Texture2D" uid="uid://seyoqmlx4o78" path="res://assets/Sprites/UI/QueInputAndDisplay/mini_page_slot_highlight.png" id="26_b0rvi"]
-[ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="27_7h8gv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoafv"]
 bg_color = Color(1, 1, 1, 0)
@@ -70,7 +70,7 @@ texture_margin_bottom = 4.0
 [sub_resource type="Theme" id="Theme_hgp41"]
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_4il04")
 
-[node name="CombatControlPanel" type="PanelContainer" unique_id=1084273047 node_paths=PackedStringArray("min_button", "max_button", "menu_button", "book_button", "round_label", "turn_label", "status_label", "round_progress_bar", "turns_container", "time_scale_label", "time_scale_slider", "auto_target_title", "auto_target_button")]
+[node name="CombatControlPanel" type="PanelContainer" unique_id=1084273047 node_paths=PackedStringArray("min_button", "max_button", "menu_button", "book_button", "round_label", "turn_label", "status_label", "round_progress_bar", "goal_label", "turns_container", "time_scale_label", "time_scale_slider", "auto_target_title", "auto_target_button")]
 custom_minimum_size = Vector2(206, 0)
 offset_right = 40.0
 offset_bottom = 40.0
@@ -84,11 +84,12 @@ round_label = NodePath("VBoxContainer/RoundTurnContainer/RoundLabel2")
 turn_label = NodePath("VBoxContainer/RoundTurnContainer/TurnLabel2")
 status_label = NodePath("VBoxContainer/StatusContainer/NinePatchRect/StatusLabel")
 round_progress_bar = NodePath("VBoxContainer/StatusContainer/NinePatchRect/RoundProgressBar")
+goal_label = NodePath("VBoxContainer/GaolLabel")
 turns_container = NodePath("VBoxContainer/TurnOrderContainer")
 time_scale_label = NodePath("VBoxContainer/TimeScaleContainer/TimeScaleValueLabel")
 time_scale_slider = NodePath("VBoxContainer/TimeScaleContainer/HSlider")
 auto_target_title = NodePath("VBoxContainer/AutoTargetContainer/AutoTargetTitleLabel")
-auto_target_button = NodePath("VBoxContainer/AutoTargetContainer/Button")
+auto_target_button = NodePath("VBoxContainer/AutoTargetContainer/HBoxContainer/Button")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1257019059]
 layout_mode = 2
@@ -204,13 +205,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_iww8d")
 
-[node name="DividerNinePatchRect" type="NinePatchRect" parent="VBoxContainer" unique_id=763836712]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=162690493]
 layout_mode = 2
-texture = ExtResource("13_qas4w")
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 2
-patch_margin_bottom = 1
+
+[node name="GaolLabel" type="RichTextLabel" parent="VBoxContainer" unique_id=2099260078]
+layout_mode = 2
+theme = ExtResource("13_lhfpo")
+bbcode_enabled = true
+text = "[color=#303030]Goal:[/color] "
+fit_content = true
+horizontal_alignment = 1
+
+[node name="HSeparator5" type="HSeparator" parent="VBoxContainer" unique_id=1420595256]
+layout_mode = 2
 
 [node name="Blank_DividerNinePatchRect" type="NinePatchRect" parent="VBoxContainer" unique_id=995444680]
 self_modulate = Color(1, 1, 1, 0)
@@ -317,13 +324,8 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DividerNinePatchRect2" type="NinePatchRect" parent="VBoxContainer" unique_id=651315065]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=1058100203]
 layout_mode = 2
-texture = ExtResource("13_qas4w")
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 2
-patch_margin_bottom = 1
 
 [node name="TimeScaleContainer" type="BoxContainer" parent="VBoxContainer" unique_id=1071023978]
 layout_mode = 2
@@ -354,41 +356,8 @@ rounded = true
 tick_count = 6
 ticks_on_borders = true
 
-[node name="DividerNinePatchRect3" type="NinePatchRect" parent="VBoxContainer" unique_id=894310880]
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer" unique_id=654533277]
 layout_mode = 2
-texture = ExtResource("13_qas4w")
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 2
-patch_margin_bottom = 1
-
-[node name="AutoTargetContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=428374186]
-layout_mode = 2
-alignment = 1
-
-[node name="AutoTargetTitleLabel" type="Label" parent="VBoxContainer/AutoTargetContainer" unique_id=2038722498]
-layout_mode = 2
-theme = ExtResource("14_pakc7")
-theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
-theme_override_font_sizes/font_size = 12
-text = "Auto Target"
-
-[node name="CheckButton" type="CheckButton" parent="VBoxContainer/AutoTargetContainer" unique_id=1923172893]
-visible = false
-layout_mode = 2
-
-[node name="Button" type="Button" parent="VBoxContainer/AutoTargetContainer" unique_id=2039818794]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-text = "Disabled"
-
-[node name="DividerNinePatchRect4" type="NinePatchRect" parent="VBoxContainer" unique_id=1244223426]
-layout_mode = 2
-texture = ExtResource("13_qas4w")
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 2
-patch_margin_bottom = 1
 
 [node name="TurnOrderContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1501039013 node_paths=PackedStringArray("ques_container", "ques_scroll_container", "premade_que_container")]
 layout_mode = 2
@@ -541,108 +510,29 @@ texture = ExtResource("26_b0rvi")
 [node name="SlotsContainer" type="HBoxContainer" parent="VBoxContainer/TurnOrderContainer/ScrollContainer/QuesContainer/QueDisplayPanelContainer/QueContainer" unique_id=964893336]
 layout_mode = 2
 
-[node name="NinePatchRect4" type="NinePatchRect" parent="VBoxContainer" unique_id=1446384159]
-visible = false
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer" unique_id=403289466]
 layout_mode = 2
-texture = ExtResource("13_qas4w")
-patch_margin_left = 2
-patch_margin_top = 1
-patch_margin_right = 2
-patch_margin_bottom = 1
 
-[node name="Label4" type="Label" parent="VBoxContainer" unique_id=1170781507]
-visible = false
+[node name="AutoTargetContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=428374186]
+layout_mode = 2
+
+[node name="AutoTargetTitleLabel" type="Label" parent="VBoxContainer/AutoTargetContainer" unique_id=2038722498]
 layout_mode = 2
 theme = ExtResource("14_pakc7")
 theme_override_colors/font_outline_color = Color(0.33333334, 0.33333334, 0.33333334, 1)
 theme_override_font_sizes/font_size = 12
-text = "Action Log:"
+text = "Auto Target:"
 
-[node name="BoxContainer" type="BoxContainer" parent="VBoxContainer" unique_id=1658071080]
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/AutoTargetContainer" unique_id=1923172893]
 visible = false
-custom_minimum_size = Vector2(248, 120)
-layout_mode = 2
-vertical = true
-
-[node name="Control" type="Control" parent="VBoxContainer/BoxContainer" unique_id=832624315]
-visible = false
-custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/BoxContainer/Control" unique_id=327127967]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = -19.0
-offset_right = 154.0
-offset_bottom = 4.0
-grow_vertical = 0
-theme = ExtResource("1_lhfpo")
-theme_override_font_sizes/font_size = 12
-text = "P:/.../combat_log.txt"
-
-[node name="MinButton" type="TextureButton" parent="VBoxContainer/BoxContainer/Control" unique_id=917373240]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -17.0
-offset_top = -20.0
-offset_bottom = -3.0
-grow_horizontal = 0
-texture_normal = ExtResource("3_lmxbm")
-texture_pressed = ExtResource("4_5bqcd")
-
-[node name="MaxButton" type="TextureButton" parent="VBoxContainer/BoxContainer/Control" unique_id=1559173965]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -17.0
-offset_top = -20.0
-offset_bottom = -3.0
-grow_horizontal = 0
-texture_normal = ExtResource("5_vr7gu")
-texture_pressed = ExtResource("6_pjvtl")
-
-[node name="InfoButton" type="TextureButton" parent="VBoxContainer/BoxContainer/Control" unique_id=1768019429]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -36.0
-offset_top = -20.0
-offset_right = -19.0
-offset_bottom = -3.0
-grow_horizontal = 0
-texture_normal = ExtResource("7_dl1ko")
-texture_pressed = ExtResource("8_gfjnj")
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/BoxContainer" unique_id=1282645835]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/AutoTargetContainer" unique_id=338920859]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-vertical_scroll_mode = 2
+alignment = 1
 
-[node name="LogEntriesContainer" type="VBoxContainer" parent="VBoxContainer/BoxContainer/ScrollContainer" unique_id=1654567007]
-custom_minimum_size = Vector2(240, 0)
+[node name="Button" type="Button" parent="VBoxContainer/AutoTargetContainer/HBoxContainer" unique_id=2039818794]
+custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer/BoxContainer/ScrollContainer/LogEntriesContainer" unique_id=1527010391]
-visible = false
-modulate = Color(0.617455, 0.617455, 0.617455, 1)
-layout_mode = 2
-
-[node name="TextLogEntry" type="RichTextLabel" parent="VBoxContainer/BoxContainer/ScrollContainer/LogEntriesContainer" unique_id=932535517]
-custom_minimum_size = Vector2(240, 0)
-layout_mode = 2
-theme = ExtResource("27_7h8gv")
-theme_override_font_sizes/normal_font_size = 17
-bbcode_enabled = true
-text = "Someone did something to someone else and it had some kind of effect."
-fit_content = true
-scroll_active = false
+text = "Disabled"

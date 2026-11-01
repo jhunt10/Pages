@@ -2080,8 +2080,10 @@ grow_vertical = 2
 script = ExtResource("73_akcjn")
 que_input_contol = NodePath("../CombatUiControl/ActiveCombatControl/QueInputControl")
 combat_panel = NodePath("../CombatUiControl/CombatControlPanel")
+panel_index = 17
 
 [node name="First_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=188010683 instance=ExtResource("74_jdhj7")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2110,29 +2112,10 @@ offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
 title_text = "Congratulations.txt"
-text = "Congratulations on your purchase of a subscription to the [color=blue]P.A.G.E[/color] System. 
-This text based guide will walk you through the basics of using [color=darkred]Action Pages[/color] to build [color=blue]Scripts[/color]."
-
-[node name="Actions_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=587904860 instance=ExtResource("74_jdhj7")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -136.0
-offset_top = -73.0
-offset_right = 136.0
-offset_bottom = 73.0
-grow_horizontal = 2
-grow_vertical = 2
-highlight_target = 1
-title_text = "Actions.txt"
 comfirm_button_text = "Next"
 show_cancel_button = false
-text = "These are your [color=blue]Action Pages[/color]. 
-Each represents an [color=red]Action[/color] which takes one [color=red]Turn[/color] to preform.  "
+text = "Congratulations on your purchase of a subscription to the [color=blue]P.A.G.E[/color] System. 
+This text based guide will walk you through the basics of using [color=darkred]Action Pages[/color] to build [color=blue]Scripts[/color]."
 
 [node name="Script_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1689984058 instance=ExtResource("74_jdhj7")]
 visible = false
@@ -2153,7 +2136,7 @@ title_text = "Script.txt"
 comfirm_button_text = "Next"
 show_cancel_button = false
 text = "This is your [color=blue]Script[/color]. 
-It holds an ordered list of [color=red]Actions[/color] you will preform     during the next [color=blue]Round[/color]. "
+It holds an ordered list of [color=darkred]Actions[/color] you will preform     during the next [color=blue]Round[/color]. "
 
 [node name="APR_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=802767348 instance=ExtResource("74_jdhj7")]
 visible = false
@@ -2173,7 +2156,91 @@ highlight_target = 2
 title_text = "APR.txt"
 comfirm_button_text = "Next"
 show_cancel_button = false
-text = "The number of [color=red]Actions[/color] that the [color=blue]Script[/color] can hold is limited by your [img]res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png[/img][color=red]APR[/color] (Actions per Round). "
+text = "The number of [color=darkred]Actions[/color] that the [color=blue]Script[/color] can hold is limited by your [img]res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png[/img][color=darkred]APR[/color] (Actions per Round). "
+
+[node name="Actions_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=587904860 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 1
+title_text = "Actions.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "These are your [color=blue]Action Pages[/color]. 
+Each represents an [color=darkred]Action[/color] which takes one [color=darkred]Turn[/color] to preform.  "
+
+[node name="Actions_Move_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=680451245 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 6
+title_text = "Move_Actions.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "[color=blue]Move Actions[/color] change the position of your Actor. 
+"
+
+[node name="Actions_Atk_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=83268635 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 7
+title_text = "Attack_Actions.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "[color=blue]Attack Actions[/color] attempt to deal damage to  Actors within their [color=darkred]Target Area[/color]."
+
+[node name="Actions_Ammo_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=776303888 instance=ExtResource("74_jdhj7")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 8
+title_text = "Ammo.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "Some [color=darkred]Actions[/color] consume [color=blue]Ammo[/color].
+The [color=darkred]Reload Action[/color] will use items from your [color=blue]Bag[/color] to refill an [color=darkred]Action[/color].
+"
 
 [node name="ScriptInput_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=278031753 instance=ExtResource("74_jdhj7")]
 visible = false
@@ -2214,7 +2281,7 @@ highlight_target = 3
 title_text = "Script_Input.txt"
 comfirm_button_text = "Next"
 show_cancel_button = false
-text = "Fill all slots in your [color=blue]Script[/color], then press [color=darkred]Start[/color] to begine the [color=blue]Round[/color]."
+text = "Fill all slots in your [color=blue]Script[/color], then press [color=darkred]Start[/color] to begin the [color=blue]Round[/color]."
 
 [node name="RoundStart_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=112023264 instance=ExtResource("74_jdhj7")]
 visible = false
@@ -2272,7 +2339,7 @@ offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 highlight_target = 4
-title_text = "Turns.txt"
+title_text = "Speed.txt"
 comfirm_button_text = "Next"
 show_cancel_button = false
 text = "All [color=red]Actions[/color] are executed simultaneously, but processed by ordered of the Actor's  [img]res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png[/img][color=red]SPD[/color] (Speed)
@@ -2320,10 +2387,10 @@ highlight_target = 5
 title_text = "Gap_Order.txt"
 comfirm_button_text = "Done"
 show_cancel_button = false
-text = "The position of [color=red]Gap Turns[/color] changes based on [img]res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png[/img][color=red]SPD[/color]
-Notice how faster [color=darkred]Squirrels[/color] start with a [color=red]Gap[/color] while slower [color=darkred]Squirriors[/color] end with one. "
+text = "The position of [color=red]Gap Turns[/color] changes based on [img]res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png[/img][color=darkred]SPD[/color]
+Notice how slower Actor's start their [color=blue]Script[/color] with a [color=red]Gap[/color], while faster Actors end with one. "
 
-[node name="Gaps_ComPopContainer3" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=174342595 instance=ExtResource("74_jdhj7")]
+[node name="Objective_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=771116848 instance=ExtResource("74_jdhj7")]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -2332,17 +2399,15 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -136.0
-offset_top = -95.0
+offset_top = -73.0
 offset_right = 136.0
 offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
-highlight_target = 5
-title_text = "Gap_Order.txt"
+title_text = "Objective.txt"
 comfirm_button_text = "Done"
 show_cancel_button = false
-text = "The position of [color=red]Gap Turns[/color] changes based on [img]res://assets/Sprites/UI/SymbolIcons/SpeedSymbol.png[/img][color=red]SPD[/color]
-Notice how faster [color=darkred]Squirrels[/color] start with a [color=red]Gap[/color] while slower [color=darkred]Squirriors[/color] end with one. "
+text = "Complete the [color=blue]Goal[/color] to                finish [color=red]Combat[/color] "
 
 [node name="End_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=569357572 instance=ExtResource("74_jdhj7")]
 visible = false
@@ -2380,6 +2445,83 @@ title_text = " new_player2.alert"
 text = "Another New Player Detected
 Would you like to start the       Deployment Guide?
 "
+
+[node name="Party_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1688346245 instance=ExtResource("74_jdhj7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -104.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Party_TOS.txt"
+comfirm_button_text = "Accept"
+show_cancel_button = false
+text = "Your premium subscription to [color=blue]P.A.G.E[/color] grants you access to  our new [color=darkred]Party[/color] feature. 
+This account sharing program  now allows multiple users to synergize as one Actor.
+[font_size=8]By reading this guide you have agreed to waive all rights to litigation in the event of a catastrophic failure of the Party system resulting in permanent fusing of consciousnesses.[/font_size]"
+
+[node name="PartyHost_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=123011179 instance=ExtResource("74_jdhj7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -113.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Party_Host.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "Your [color=blue]Soldier[/color] is a [color=blue]Host[/color] able to [color=darkred]Merge[/color] with other Actors. 
+This allows your [color=darkred]Party[/color] to move and act as a single Actor executiong one [color=blue]Script[/color]."
+
+[node name="PartyMerge_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=764655944 instance=ExtResource("74_jdhj7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -113.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Party_Merge.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "While [color=darkred]Merged[/color], the [color=blue]Host[/color] gains increased [color=darkred]Stats[/color], and can use [color=blue]Items[/color] and [color=blue]Pages[/color] from any Actor(s) they carry.
+The carried Actors can not take damage or preform [color=darkred]Actions[/color]."
+
+[node name="PartyDeploy_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=268937762 instance=ExtResource("74_jdhj7")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -113.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Party_Merge.txt"
+comfirm_button_text = "Next"
+show_cancel_button = false
+text = "While [color=darkred]Merged[/color], the [color=blue]Host[/color] gains increased [color=darkred]Stats[/color], and can use [color=blue]Items[/color] and [color=blue]Pages[/color] from any Actor(s) they carry.
+The carried Actors can not take damage or preform [color=darkred]Actions[/color]."
 
 [node name="MapNode" parent="." unique_id=2071614997 instance=ExtResource("49_lque7")]
 visible = false

@@ -2,7 +2,8 @@
 class_name CombatTutorialControl
 extends Control
 
-enum HighlightTargets {None, Actions, ScriptInput, QueInput, TurnOrder, Gaps, Deploy}
+enum HighlightTargets {None, Actions, ScriptInput, QueInput, TurnOrder, Gaps, 
+	MoveActions, AttackAction, AmmoActions, Objective, Deploy}
 
 @export var highlight_target:HighlightTargets:
 	set(val):
@@ -31,6 +32,11 @@ enum HighlightTargets {None, Actions, ScriptInput, QueInput, TurnOrder, Gaps, De
 				if combat_panel:
 					highlight_node = combat_panel.turns_container
 					darken_screen = true
+			HighlightTargets.Objective:
+				if combat_panel:
+					highlight_node = combat_panel.goal_label
+					darken_screen = true
+
 @export var darken_screen:bool
 @export var highlight_node:Control
 
@@ -70,7 +76,8 @@ var highlight_arr:Array = [
 	HighlightTargets.ScriptInput, # APR
 	HighlightTargets.QueInput, # Script Input
 	HighlightTargets.QueInput, # Script Submit
-	HighlightTargets.TurnOrder
+	HighlightTargets.TurnOrder,
+	
 ]
 
 # Called when the node enters the scene tree for the first time.
@@ -82,6 +89,8 @@ func _ready() -> void:
 	if done_tutorial:
 		self.queue_free()
 		return
+	else:
+		panel_index = 0
 	
 	for child in get_children():
 		if child is ComPopContainer:
@@ -154,8 +163,14 @@ func _draw() -> void:
 		else:
 			draw_rect(self.get_global_rect(), darken_color)
 	if not Engine.is_editor_hint():
+		# Highlight Gaps
 		if highlight_target == HighlightTargets.Gaps:
 			_highlight_gaps()
+			
+		if (highlight_target == HighlightTargets.MoveActions
+			or highlight_target == HighlightTargets.AttackAction
+			or highlight_target == HighlightTargets.AmmoActions) :
+			_highlight_actions()
 
 func _highlight_gaps():
 	var que_collection:QueCollectionControl = CombatRootControl.Instance.ui_control.combat_control_panel.turns_container
@@ -164,3 +179,24 @@ func _highlight_gaps():
 			if slot.is_gap:
 				var rect = slot.get_global_rect()
 				draw_rect(rect, Color.BLUE, false, 6)
+
+func _highlight_actions():
+	for action_id:String in que_input_contol._page_buttons.keys():
+		var button:QueInputButtonControl =  que_input_contol._page_buttons[action_id]
+		var action = ItemLibrary.get_item(action_id)
+		var highlight = false
+		
+		if (highlight_target == HighlightTargets.MoveActions
+			and action.get_tags().has("Move")):
+				highlight = true
+		if (highlight_target == HighlightTargets.AttackAction
+			and action.get_tags().has("Attack")):
+				highlight = true
+		if highlight_target == HighlightTargets.AmmoActions:
+			var tags = action.get_tags()
+			if tags.has("PhyAmmo") or tags.has("Reload"):
+				highlight = true
+		if highlight:
+				var rect = button.get_global_rect()
+				draw_rect(rect, Color.BLUE, false, 6)
+			

@@ -216,8 +216,11 @@ func start_phase(phase_key):
 		return
 	_current_phase_key = phase_key
 	
-	var phase_data = phase_datas[_current_phase_key]
+	var phase_data:Dictionary = phase_datas[_current_phase_key]
 	var phase_type = phase_data.get("PhaseType", "")
+	
+	if phase_data.keys().has("GoalText"):
+		ui_control.combat_control_panel.set_goal(phase_data.get("GoalText"))
 	
 	# Clear and cache markers for this phase
 	_cached_markers.clear()
