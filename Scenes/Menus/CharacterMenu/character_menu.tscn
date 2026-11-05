@@ -77,6 +77,8 @@
 [ext_resource type="Texture2D" uid="uid://12me8t62hvjl" path="res://assets/Themes/ComputerPanels/ExitButtonPressed.png" id="68_33hv0"]
 [ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="69_d5hf8"]
 [ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="70_xee8u"]
+[ext_resource type="PackedScene" uid="uid://c5bvnrv5jl68g" path="res://Scenes/Combat/UiNodes/ComputerPopupPanel/com_pop_container.tscn" id="78_jq4bi"]
+[ext_resource type="Script" uid="uid://l6rno8su73nn" path="res://Scenes/Menus/CharacterMenu/character_menu_tutorial_control.gd" id="78_psmk2"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j63nq"]
 texture = ExtResource("2_l2wto")
@@ -403,7 +405,7 @@ _data = {
 &"open_skill_menu": SubResource("Animation_l4r3y")
 }
 
-[node name="CharacterMenu" type="Control" unique_id=2018728110 node_paths=PackedStringArray("name_panel", "stats_panel", "actor_sprite", "equipment_control", "title_slot_button", "tab_container", "page_tab", "bag_tab", "stats_tab", "carrier_control", "inventory_container", "close_button", "previous_character_button", "next_character_button", "details_card_spawn_point", "mouse_control", "inventory_option_button", "inventory_tab_bar", "skill_tree_control", "skill_tree_menu", "animation_player", "rot_button_l", "rot_button_r")]
+[node name="CharacterMenu" type="Control" unique_id=2018728110 node_paths=PackedStringArray("name_panel", "stats_panel", "actor_sprite", "equipment_control", "title_slot_button", "tab_container", "page_tab", "bag_tab", "stats_tab", "carrier_control", "inventory_container", "close_button", "previous_character_button", "next_character_button", "details_card_spawn_point", "mouse_control", "inventory_option_button", "inventory_tab_bar", "skill_tree_menu", "animation_player", "rot_button_l", "rot_button_r")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -418,7 +420,7 @@ equipment_control = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer
 title_slot_button = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Title_EquipmentSlotButton")
 tab_container = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer")
 page_tab = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages")
-bag_tab = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies")
+bag_tab = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Supplies")
 stats_tab = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Stats")
 carrier_control = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/CarrierControl")
 inventory_container = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/PanelContainer/InventoryMenuPage")
@@ -429,7 +431,6 @@ details_card_spawn_point = NodePath("DetailsCardSpawnPoint")
 mouse_control = NodePath("MouseOverControl")
 inventory_option_button = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/HBoxContainer/OptionButton")
 inventory_tab_bar = NodePath("PanelContainer/TwoPagesContainer/RightPageContainer/InventoryTabContainer")
-skill_tree_control = NodePath("")
 skill_tree_menu = NodePath("PanelContainer/TwoPagesContainer/Control/SkillTreeMenu")
 animation_player = NodePath("AnimationPlayer")
 rot_button_l = NodePath("PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/VBoxContainer/Control/RotButtonL")
@@ -1796,7 +1797,7 @@ theme_override_constants/v_separation = 0
 [node name="PageSlotButton" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages/SlotSetsContainer/PageSlotSetContainer/FlowContainer" unique_id=371516115 instance=ExtResource("37_cdohk")]
 layout_mode = 2
 
-[node name="Suplies" type="ScrollContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1618710617 node_paths=PackedStringArray("premade_sub_container", "sub_container")]
+[node name="Supplies" type="ScrollContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer" unique_id=1618710617 node_paths=PackedStringArray("premade_sub_container", "sub_container")]
 visible = false
 layout_mode = 2
 theme = ExtResource("36_xueyn")
@@ -1805,19 +1806,19 @@ premade_sub_container = NodePath("VBoxContainer/SubBagContainer")
 sub_container = NodePath("VBoxContainer")
 metadata/_tab_index = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies" unique_id=994099262]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Supplies" unique_id=994099262]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SubBagContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies/VBoxContainer" unique_id=787792717 node_paths=PackedStringArray("title_label")]
+[node name="SubBagContainer" type="VBoxContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Supplies/VBoxContainer" unique_id=787792717 node_paths=PackedStringArray("title_label")]
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("46_hu50l")
 title_label = NodePath("Label")
 
-[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Suplies/VBoxContainer/SubBagContainer" unique_id=1996139343]
+[node name="Label" type="Label" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Supplies/VBoxContainer/SubBagContainer" unique_id=1996139343]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("12_dy5pv")
@@ -2879,3 +2880,213 @@ mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1184494876]
 libraries/ = SubResource("AnimationLibrary_8e5eg")
+
+[node name="TutorialControl" type="Control" parent="." unique_id=831041514 node_paths=PackedStringArray("left_page_tab_container", "equipment_container", "page_book_slot", "pages_tab")]
+z_index = 4
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("78_psmk2")
+left_page_tab_container = NodePath("../PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer")
+equipment_container = NodePath("../PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer")
+page_book_slot = NodePath("../PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer/Character-VBoxContainer/HBoxContainer/GridContainer/Book_EquipmentSlotButton")
+pages_tab = NodePath("../PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/TabContainer/Pages")
+
+[node name="First_ComPopContainer" parent="TutorialControl" unique_id=188010683 instance=ExtResource("78_jq4bi")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.0
+offset_top = -73.0
+offset_right = 136.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = " new_user.alert"
+text = "New User Detected
+Would you like to start the       [color=blue]PageBook[/color] User Guide?
+"
+
+[node name="PageBook_ComPopContainer" parent="TutorialControl" unique_id=2118830701 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -99.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "PageBook.txt"
+show_cancel_button = false
+text = "This is a [color=blue]PageBook[/color], the main interface to the [color=blue]P.A.G.E[/color] System.
+It allow for management of [color=blue]Equipment[/color], [color=blue]Supplies[/color], and most importantly, [color=blue]Pages[/color]."
+
+[node name="Pages_ComPopContainer" parent="TutorialControl" unique_id=1897393904 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -99.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 2
+title_text = "PageBook.txt"
+show_cancel_button = false
+text = "[color=blue]Pages[/color] are  held in these slots.
+Some slots are reserved for [color=blue]Passive Pages[/color], while the rest are used for [color=darkred]Action Pages[/color]."
+
+[node name="Passives_ComPopContainer" parent="TutorialControl" unique_id=645318982 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -99.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 3
+title_text = "Pages.txt"
+show_cancel_button = false
+text = "[color=blue]Passive Pages[/color] provide passive buffs to your Actor. 
+They can boost [color=darkred]Stats[/color], grant [color=blue]Effects[/color], and even alter the properties of [color=darkred]Action Pages[/color]."
+
+[node name="Action_ComPopContainer" parent="TutorialControl" unique_id=347991048 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -99.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 1
+title_text = "ActionPages.txt"
+show_cancel_button = false
+text = "[color=darkred]Action Pages[/color] allow your Actor to preform actions in [color=darkred]Combat[/color]. 
+This includes [color=Blue]Moveing[/color], [color=darkred]Attacking[/color], applying [color=blue]Effects[/color], and consuming [color=blue]Supply Items[/color]."
+
+[node name="Supplies_ComPopContainer" parent="TutorialControl" unique_id=1237523936 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -99.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 4
+title_text = "ActionPages.txt"
+show_cancel_button = false
+text = "[color=blue]Supply Items[/color] are consumable items such as [color=blue]Ammo[/color] and [color=blue]Potions[/color].
+To be used in [color=darkred]Combat[/color], they must be included in your Actor's [color=blue]Bag[/color]."
+
+[node name="Equipment_ComPopContainer" parent="TutorialControl" unique_id=696715632 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -99.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 5
+title_text = "Equipment.txt"
+show_cancel_button = false
+text = "[color=blue]Equipment[/color] is held in these slots.
+Each slot is limited by the type  of [color=blue]Equipment[/color] it can hold."
+
+[node name="PageBook2_ComPopContainer" parent="TutorialControl" unique_id=1958303935 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -113.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+highlight_target = 9
+title_text = "Equipment.txt"
+show_cancel_button = false
+text = "The [color=blue]PageBook[/color] itself is                     a type of [color=blue]Equipment[/color].
+It sets the number of [color=darkRed]Action[/color] and [color=blue]Passive[/color] slots you have and also determines your Actor's [img]res://assets/Sprites/UI/SymbolIcons/PPRSymbol.png[/img][color=darkred]APR[/color] (Actions per Round)"
+
+[node name="PageBook3_ComPopContainer" parent="TutorialControl" unique_id=1682976691 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -113.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Input.txt"
+comfirm_button_text = "Done"
+show_cancel_button = false
+text = "You can see more information about an [color=blue]Item[/color] by clicking it.
+And can add or remove by [color=darkred]clicking and dragging[/color]"
+
+[node name="End_ComPopContainer" parent="TutorialControl" unique_id=142487364 instance=ExtResource("78_jq4bi")]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 49.0
+offset_top = -113.0
+offset_right = 321.0
+offset_bottom = 72.0
+grow_horizontal = 2
+grow_vertical = 2
+title_text = "Input.txt"
+comfirm_button_text = "Done"
+show_cancel_button = false
+text = "Tutorial End"

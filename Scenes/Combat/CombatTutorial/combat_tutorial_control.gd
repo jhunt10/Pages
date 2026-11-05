@@ -8,11 +8,18 @@ enum HighlightTargets {None, Actions, ScriptInput, QueInput, TurnOrder, Gaps,
 @export var highlight_target:HighlightTargets:
 	set(val):
 		highlight_target = val
+		_set_highlight_target()
+
+func _set_highlight_target():
 		match highlight_target:
 			HighlightTargets.None:
 				highlight_node = null
 				darken_screen = false
 			HighlightTargets.Actions:
+				if que_input_contol:
+					highlight_node = que_input_contol.get_node("QueInputBackPatchContainer")
+					darken_screen = true
+			HighlightTargets.Deploy:
 				if que_input_contol:
 					highlight_node = que_input_contol.get_node("QueInputBackPatchContainer")
 					darken_screen = true
@@ -59,79 +66,78 @@ enum HighlightTargets {None, Actions, ScriptInput, QueInput, TurnOrder, Gaps,
 				if child_index == panel_index:
 					current_child = child
 		if current_child:
-			print(current_child.name)
 			highlight_target = current_child.highlight_target
-			print("SetHighlight Target: " +  str(highlight_target))
 		self.queue_redraw()
-		
-		#if panel_index >= 0 and highlight_arr.size() < panel_index:
-			#highlight_target = highlight_arr[panel_index]
-		#else:
-			#highlight_target = HighlightTargets.None
 
-var highlight_arr:Array = [
-	HighlightTargets.None, # Question
-	HighlightTargets.Actions, # Actions
-	HighlightTargets.ScriptInput, # Script
-	HighlightTargets.ScriptInput, # APR
-	HighlightTargets.QueInput, # Script Input
-	HighlightTargets.QueInput, # Script Submit
-	HighlightTargets.TurnOrder,
-	
-]
+var current_tutorial:String = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	
-	var done_tutorial = StoryState.get_story_flag("TutorialDone")
-	if done_tutorial:
-		self.queue_free()
-		return
-	else:
+	var done_tutorial = StoryState.get_story_flag("FirstTutorialDone")
+	if not done_tutorial:
 		panel_index = 0
+		current_tutorial = "First"
+	else:
+		var deploy_tutorial = StoryState.get_story_flag("DeployTutorialDone")
+		if not deploy_tutorial and StoryState.list_party_actors().size() > 1:
+			panel_index = 11
+		current_tutorial = "Deploy"
+		
+	if current_tutorial == "":
+		self.queue_free()
+	else:
+		for child in get_children():
+			if child is ComPopContainer:
+				child.confirmed.connect(_on_next)
+				child.canceled.connect(_on_cancel)
 	
-	for child in get_children():
-		if child is ComPopContainer:
-			child.confirmed.connect(_on_next)
-			child.canceled.connect(_on_cancel)
-	
-	CombatRootControl.Instance.QueController.execution_active.connect(_on_round_start)
+	#CombatRootControl.Instance.QueController.execution_active.connect(_on_round_start)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if pause_round:
-		pause_round = false
-		paused_before = true
-		CombatRootControl.pause_combat()
-		self.show()
-	pass
+## Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(_delta: float) -> void:
+	#if pause_round:
+		#pause_round = false
+		#paused_before = true
+		#CombatRootControl.pause_combat()
+		#self.show()
+	#pass
 
-var pause_round = false
-var paused_before = false
-func _on_round_start():
-	if not paused_before:
-		pause_round = true
-		paused_before = true
+#var pause_round = false
+#var paused_before = false
+#func _on_round_start():
+	#if not paused_before:
+		#pause_round = true
+		#paused_before = true
 
 func _on_cancel():
-	self.hide()
-	StoryState.set_story_flag("TutorialDone", true)
+	self.queue_free()
+	if current_tutorial == "First":
+		StoryState.set_story_flag("FirstTutorialDone", true)
+	elif current_tutorial == "Deploy":
+		StoryState.set_story_flag("DeployTutorialDone", true)
+		
 
 func _on_next():
+	var old_panel = _get_current_pop_up()
 	panel_index += 1
 	var current_panel = _get_current_pop_up()
-	if current_panel.name == "RoundStart_ComPopContainer": # Wait for input
-		self.hide()
-	if current_panel.name == "End_ComPopContainer": # Gaps2
-		_on_last_card()
-		CombatRootControl.resume_combat()
-
-func _on_last_card():
-	self.queue_free()
-	StoryState.set_story_flag("TutorialDone", true)
+	
+	if old_panel and current_panel:
+		var old_panel_bot_right = old_panel.position + old_panel.size
+		var new_panel_pos = old_panel_bot_right - current_panel.size
+		current_panel.safe_set_position(new_panel_pos)
+	
+	if current_panel.name == "First_End_ComPopContainer": 
+		StoryState.set_story_flag("FirstTutorialDone", true)
+		self.queue_free()
+	
+	if current_panel.name == "Party_End_ComPopContainer": 
+		StoryState.set_story_flag("DeployTutorialDone", true)
+		self.queue_free()
 
 func _get_current_pop_up()->ComPopContainer:
 	var children = get_children()
@@ -162,15 +168,20 @@ func _draw() -> void:
 			node_space.size.x + boarder + boarder, node_space.size.y + boarder + boarder), Color.RED, false, 3)
 		else:
 			draw_rect(self.get_global_rect(), darken_color)
-	if not Engine.is_editor_hint():
-		# Highlight Gaps
-		if highlight_target == HighlightTargets.Gaps:
-			_highlight_gaps()
-			
-		if (highlight_target == HighlightTargets.MoveActions
-			or highlight_target == HighlightTargets.AttackAction
-			or highlight_target == HighlightTargets.AmmoActions) :
-			_highlight_actions()
+		_draw_extra()
+
+func _draw_extra():
+	if Engine.is_editor_hint():
+		return
+	# Highlight Gaps
+	if highlight_target == HighlightTargets.Gaps:
+		_highlight_gaps()
+		
+	if (highlight_target == HighlightTargets.MoveActions
+		or highlight_target == HighlightTargets.AttackAction
+		or highlight_target == HighlightTargets.AmmoActions
+		or highlight_target == HighlightTargets.Deploy) :
+		_highlight_actions()
 
 func _highlight_gaps():
 	var que_collection:QueCollectionControl = CombatRootControl.Instance.ui_control.combat_control_panel.turns_container
@@ -191,6 +202,9 @@ func _highlight_actions():
 				highlight = true
 		if (highlight_target == HighlightTargets.AttackAction
 			and action.get_tags().has("Attack")):
+				highlight = true
+		if (highlight_target == HighlightTargets.Deploy
+			and action.get_tags().has("Deploy")):
 				highlight = true
 		if highlight_target == HighlightTargets.AmmoActions:
 			var tags = action.get_tags()

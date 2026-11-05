@@ -46,7 +46,6 @@ static func create_effect(
 	var effect_def = EffectLibrary.get_merged_effect_def(effect_key, effect_data)
 	var effect_details = effect_def.get("EffectData").get("EffectDetails", {})
 	#var effect_potency = effect_def.get("AppliedPotency", 1)
-	print(effect_def)
 	# Build Id
 	if force_id == '':
 		if effect_details.get("CanHaveMultiple", false):

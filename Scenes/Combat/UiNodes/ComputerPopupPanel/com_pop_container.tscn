@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://31ys4mlnj8a8" path="res://assets/Themes/ComputerPanels/InfoButton.png" id="5_kvmeb"]
 [ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="6_xcrxf"]
 
-[node name="ComPopContainer" type="PanelContainer" unique_id=188010683 node_paths=PackedStringArray("close_button", "info_button", "confirm_button", "cancel_button", "cancel_spacer", "title_label", "text_box")]
+[node name="ComPopContainer" type="PanelContainer" unique_id=188010683 node_paths=PackedStringArray("close_button", "info_button", "click_drag_button", "confirm_button", "cancel_button", "cancel_spacer", "title_label", "text_box")]
 offset_right = 272.0
 offset_bottom = 146.0
 theme = ExtResource("1_heetp")
@@ -21,6 +21,7 @@ Would you like to start the       New User Guide?
 "
 close_button = NodePath("VBoxContainer/Control/CloseButton")
 info_button = NodePath("VBoxContainer/Control/InfoButton")
+click_drag_button = NodePath("VBoxContainer/Control/ClickDragButton")
 confirm_button = NodePath("VBoxContainer/ButtonsContainer/OkButton")
 cancel_button = NodePath("VBoxContainer/ButtonsContainer/CancelButton")
 cancel_spacer = NodePath("VBoxContainer/ButtonsContainer/CancelSeparator")
@@ -48,6 +49,14 @@ theme = ExtResource("1_heetp")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 12
 text = "P:/.../ new_player.alert"
+
+[node name="ClickDragButton" type="Button" parent="VBoxContainer/Control" unique_id=841521018]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -4.0
+offset_top = -24.0
+offset_right = 266.0
+offset_bottom = -1.0
 
 [node name="CloseButton" type="TextureButton" parent="VBoxContainer/Control" unique_id=1331489747]
 layout_mode = 1
