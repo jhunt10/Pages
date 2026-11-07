@@ -22,11 +22,14 @@ var _session_start_unix_time
 #var _cached_save_name
 
 func add_actor_to_party(actor)->BaseActor:
+	# Find actor from Sting
 	if actor is String:
+		# Assume Id and check if actor exists 
 		var existing_actor = ActorLibrary.get_actor(actor)
 		if existing_actor:
 			actor = existing_actor
 		else:
+			# Assume Actor Key and create actor from def
 			var actor_def = ActorLibrary.get_actor_def(actor)
 			if actor_def.size() > 0:
 				var player_id = "Player_" + str(_party_actor_ids.size()) + ":" + str(ResourceUID.create_id())
@@ -35,23 +38,7 @@ func add_actor_to_party(actor)->BaseActor:
 	if actor and actor is BaseActor:
 		_party_actor_ids.append(actor.Id)
 		add_encounter_with_actor(actor)
-		
-		# Add class pages
-		#var title = actor.get_title_page().get_display_name()
 		set_unlocked_skills_for_actor(actor, {})
-		#var has_pages = []
-		#for party_actor:BaseActor in list_party_actors():
-			#has_pages.append_array(party_actor.pages.list_page_keys())
-		#for item_key:String in ItemLibrary.list_all_item_keys():
-			#if has_pages.has(item_key):
-				#continue
-			#var item = ItemLibrary.get_item(item_key)
-			#if item is BasePageItem and not item_key.begins_with("#"):
-				#if item is BasePageItem:
-					#var req_title = (item as BasePageItem).page_data.get("SourceTitle")
-					#var match_str = (item as BasePageItem).page_data.get("PageRequirements", {}).get("TitleReq")
-					#if  title == req_title and match_str != 'Shared':
-						#PlayerInventory.add_item(item, 1)
 						
 		return actor
 	else:
@@ -364,10 +351,10 @@ func get_location()->String:
 func set_story_flag(key:String, val):
 	_story_flags[key] = val
 
-func get_story_flag(key:String):
+func get_story_flag(key:String, default=null):
 	if _story_flags.keys().has(key):
 		return _story_flags[key]
-	return null
+	return default
 
 func get_current_money()->int:
 	return _money

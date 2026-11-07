@@ -55,6 +55,7 @@ func _ready() -> void:
 	if not done_tutorial:
 		panel_index = 0
 		current_tutorial = "Book"
+		self.show()
 	else:
 		self.queue_free()
 	

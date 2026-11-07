@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://o1ybx66q24xn" path="res://assets/Themes/ComputerPanels/InfoButtonPressed.png" id="12_6bkn7"]
 [ext_resource type="Script" uid="uid://bj7jkk160o6ut" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_divider.gd" id="13_1y6kt"]
 
-[node name="OptionSelectMenu" type="Control" unique_id=585481039 node_paths=PackedStringArray("main_container", "titile_label", "options_container", "premade_option_button", "premade_option_divider", "close_button", "cancel_button", "confrim_button")]
+[node name="OptionSelectMenu" type="Control" unique_id=585481039 node_paths=PackedStringArray("main_container", "titile_label", "options_container", "premade_option_button", "premade_option_divider", "close_button", "cancel_button", "confrim_button", "scroll_container")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,6 +30,7 @@ premade_option_divider = NodePath("CenterContainer/PanelContainer2/VBoxContainer
 close_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/Control/CloseButton")
 cancel_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer/CancelButton")
 confrim_button = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ButtonsContainer/OkButton")
+scroll_container = NodePath("CenterContainer/PanelContainer2/VBoxContainer/ScrollContainer")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=1948466789]
 layout_mode = 1

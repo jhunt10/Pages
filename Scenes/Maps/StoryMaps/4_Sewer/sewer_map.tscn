@@ -2659,6 +2659,7 @@ frame = 1
 tile_set = SubResource("TileSet_eodif")
 
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="." unique_id=211215313]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_5ipcw")
 
 [node name="RedGate" parent="ActorTileMapLayer" unique_id=909068249 instance=ExtResource("18_fffxw")]

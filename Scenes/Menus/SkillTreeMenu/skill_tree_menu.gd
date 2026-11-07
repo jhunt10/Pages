@@ -277,7 +277,7 @@ func on_node_button_up(skill_node_key, args):
 	node_button_up.emit("SkillTree", page_key, 0)
 	if was_dragging:
 		return
-	
+	var can_unlock = node_data.get("CanUnlock")
 	var confirm_text = "-LOCKED-"
 	var disabled = true
 	var is_unlocked = _unlocked_skills.keys().has(skill_node_key)  or node_data.get("AlwaysUnlocked")
@@ -294,10 +294,17 @@ func on_node_button_up(skill_node_key, args):
 			is_unlocked = false
 		elif unlocked_index == index:
 			is_unlocked = true
-		else:
-			is_unlocked = false
-			confirm_text = "Swap"
-			disabled = false
+		else: # Clicking non-unlocked node in pair with unlocked node
+			if node_data['PairType'] == "Or":
+				is_unlocked = false
+				confirm_text = "Swap"
+				disabled = false
+				can_unlock = false
+			else:
+				is_unlocked = false
+				confirm_text = "-LOCKED-"
+				disabled = true
+				can_unlock = false
 	
 	
 	# Always Unlocked
@@ -333,7 +340,7 @@ func on_node_button_up(skill_node_key, args):
 		else:
 			confirm_text = "Can't Refund" 
 			disabled = true
-	elif node_data.get("CanUnlock"):
+	elif can_unlock:
 		confirm_text = "Unlock"
 		disabled = false
 	if Input.is_key_pressed(KEY_CTRL):
@@ -347,17 +354,28 @@ func on_node_button_up(skill_node_key, args):
 		)
 
 func on_node_confirmed(_item:BaseItem, skill_node_key, args={}):
+	args = args.duplicate(true)
 	var node_data = get_node_data_for_skill_node(skill_node_key)
 	var node_key = node_data.get("SkillNodeKey", "")
+	# Refunding currently Unlocked Skill
 	if _unlocked_skills.keys().has(skill_node_key):
-		#if node_data.keys().has("PairType"):
-			#var unlocked_index = node_data.get("Index", -1)
-			#var selected_index = args.get("Index", -1)
-			#if unlocked_index != selected_index:
-				#transaction type should just be passed in args
-		_unlocked_skills.erase(skill_node_key)
+		if node_data.keys().has("PairType") and node_data['PairType'] == "Or":
+			var unlocked_index = _unlocked_skills[skill_node_key].get("Index", -1)
+			var selected_index = args.get("Index", -1)
+			if unlocked_index == selected_index: 
+				_unlocked_skills.erase(skill_node_key)# Same index as current: Refund
+			else:
+				_unlocked_skills[skill_node_key] = args # Different index as current: Swap
+		else:
+			_unlocked_skills.erase(skill_node_key)
+	# Unlocking currently locked Skill
 	elif node_key != '':
+		if node_data.keys().has("PairType"):
+			if node_data['PairType'] == "And":
+				
+				args['Index'] = 0 # Always only unlock main node
 		_unlocked_skills[skill_node_key] = args
+		
 	if _current_details_card:
 		_current_details_card.start_hide()
 	sync()

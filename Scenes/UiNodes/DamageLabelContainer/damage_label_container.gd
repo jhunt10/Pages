@@ -91,7 +91,6 @@ enum DamageTypes {
 @export var max_damage_label:Label
 
 @export var damage_type_label:Label
-@export var multiplier_label:Label
 @export var count_label:Label
 
 @export var atk_stat_icon:TextureRect
@@ -129,10 +128,20 @@ func _on_mouse_exit():
 
 func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1):
 	if damage_data.has("DisplayName"):
-		display_name_label.text = damage_data.get("DisplayName")
+		var display_name = damage_data.get("DisplayName")
+		if damage_data.get("IsWeaponDamage", false) and damage_data.get("AtkPwrScale", 1) != 1:
+			display_name += "x"+ str(floori(damage_data.get("AtkPwrScale", 1) * 100)) + "%"
+		display_name_label.text = display_name
 		display_name_label.show()
 	else:
 		display_name_label.hide()
+	
+	if count > 1:
+		count_label.text = str(int(count)) + "x"
+		count_label.show()
+	else:
+		count_label.hide()
+	
 	if damage_data.get("ActorlessWeapon", false):
 		attack_scale = damage_data.get("AtkPwrScale", 1)
 		atk_stat_icon.hide()
@@ -144,11 +153,10 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 		percent_label.hide()
 		vs_lable.hide()
 		min_max_damage_container.hide()
-		damage_type_label.text = "Weapon Damage"
+		var damage_text = "Weapon Damage"
 		if attack_scale != 1:
-			damage_type_label.text += " X " + str(attack_scale)
-		multiplier_label.hide()
-		count_label.hide()
+			damage_text = str(floori(attack_scale*100)) + "% " + damage_text
+		damage_type_label.text = damage_text
 		effect_container.hide()
 		return
 	
@@ -157,11 +165,6 @@ func set_damage_data(damage_data:Dictionary, actor:BaseActor = null,  count = 1)
 	attack_variant = int(damage_data.get("AtkPwrRange", 0))
 	attack_scale = damage_data.get("AtkPwrScale", 1)
 	
-	if count > 1:
-		count_label.text = str(int(count)) + "x"
-		count_label.show()
-	else:
-		count_label.hide()
 	
 	if damage_data.get("AtkStat") == "Fixed":
 		plus_minus_label.hide()

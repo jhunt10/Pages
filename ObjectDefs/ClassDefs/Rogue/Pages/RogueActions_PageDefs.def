@@ -281,7 +281,7 @@
 	"DoubleAttack_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemAction.gd",
 		"#ObjDetails": {
-			"Description": "Make one @@#Tag:Quick@@ and one @@#Tag:Slow@@ @@#Tag:WpnAtk:Weapon Attacks@@ against an @@#Color:Red:Enemy@@ for @@#DmgData:WeaponDamage@@.",
+			"Description": "Make one @@#Tag:Quick@@ and one @@#Tag:Slow@@ @@#Tag:WpnAtk:Weapon Attacks@@ against an @@#Color:Red:Enemy@@ for @@#DmgData:WeaponDamage@@ each.",
 			"DisplayName": "Double Attack",
 			"LargeIcon": "Sprites/AttackDouble_Icon.png",
 			"ObjectType": "Item",
@@ -307,7 +307,7 @@
 			},
 			"DamageDatas": {
 				"WeaponDamage": {
-					"AtkPwrScale": 1.0,
+					"AtkPwrScale": 0.75,
 					"WeaponFilter": {
 						"FallbackToUnarmed": true,
 						"IncludeSlots": [
@@ -318,7 +318,7 @@
 					}
 				},
 				"WeaponDamage2": {
-					"AtkPwrScale": 1.0,
+					"AtkPwrScale": 0.75,
 					"WeaponFilter": {
 						"FallbackToUnarmed": true,
 						"IncludeSlots": [

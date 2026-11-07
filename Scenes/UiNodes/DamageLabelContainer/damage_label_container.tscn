@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dq2cad8orar4p" path="res://assets/Sprites/UI/SymbolIcons/ArmorSymbol.png" id="9_6dh7h"]
 [ext_resource type="Script" uid="uid://cukfwo131b0bn" path="res://Scenes/UiNodes/DescriptionBox/description_box.gd" id="10_55w4d"]
 
-[node name="DamageContainer" type="BoxContainer" unique_id=699045547 node_paths=PackedStringArray("display_name_label", "atk_power_and_scale_container", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "min_max_damage_container", "min_damage_label", "avg_damage_label", "max_damage_label", "damage_type_label", "multiplier_label", "count_label", "atk_stat_icon", "vs_lable", "defense_stat_icon", "defense_stat_label", "popup_container", "popup_message", "effect_container", "effect_change_label", "effect_name_label", "effect_duration_value_label", "effect_duration_type_label")]
+[node name="DamageContainer" type="BoxContainer" unique_id=699045547 node_paths=PackedStringArray("display_name_label", "atk_power_and_scale_container", "atk_power_label", "plus_minus_label", "percent_label", "variant_label", "min_max_damage_container", "min_damage_label", "avg_damage_label", "max_damage_label", "damage_type_label", "count_label", "atk_stat_icon", "vs_lable", "defense_stat_icon", "defense_stat_label", "popup_container", "popup_message", "effect_container", "effect_change_label", "effect_name_label", "effect_duration_value_label", "effect_duration_type_label")]
 offset_right = 218.0
 offset_bottom = 20.0
 theme_override_constants/separation = 0
@@ -30,7 +30,6 @@ min_damage_label = NodePath("MainContainer/MinMaxContainer/MinDamageLabel")
 avg_damage_label = NodePath("MainContainer/MinMaxContainer/AvgDamageLabel")
 max_damage_label = NodePath("MainContainer/MinMaxContainer/MaxDamageLabel")
 damage_type_label = NodePath("MainContainer/DamageTypeLabel")
-multiplier_label = NodePath("MainContainer/MultiplierLabel")
 count_label = NodePath("MainContainer/CountLabel")
 atk_stat_icon = NodePath("MainContainer/AtkStatIcon")
 vs_lable = NodePath("MainContainer/VsDefenseContainer/VsLabel")
@@ -200,13 +199,6 @@ layout_mode = 2
 theme = ExtResource("4_xveyi")
 theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
 text = " ARM"
-
-[node name="MultiplierLabel" type="Label" parent="MainContainer" unique_id=2058218443]
-visible = false
-layout_mode = 2
-theme = ExtResource("4_xveyi")
-theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
-text = "x"
 
 [node name="EffectChanceContainer" type="HBoxContainer" parent="." unique_id=838081536]
 layout_mode = 2

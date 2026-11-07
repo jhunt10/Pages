@@ -298,7 +298,7 @@ advance_expression = "grow_index == 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ct5k"]
 advance_mode = 2
-advance_expression = "grow_index == -1"
+advance_expression = "grow_index != 0"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_umqfp"]
 switch_mode = 2
@@ -310,7 +310,7 @@ advance_expression = "grow_index == 1"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wjhw6"]
 advance_mode = 2
-advance_expression = "grow_index == -1"
+advance_expression = "grow_index != 1"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1j6xv"]
 switch_mode = 2

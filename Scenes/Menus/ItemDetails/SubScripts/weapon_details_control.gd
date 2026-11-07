@@ -9,6 +9,10 @@ extends BoxContainer
 @export var damage_type_label:Label
 @export var description_box:DescriptionBox
 @export var range_display:MiniRangeDisplay
+@export var vs_armor_container:HBoxContainer
+@export var vs_ward_container:HBoxContainer
+@export var flow_container:FlowContainer
+@export var stat_mod_label:StatModLabelContainer
 
 var _item:BaseWeaponEquipment
 var _actor:BaseActor
@@ -25,7 +29,7 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	damage_data =damage_data.values()[0]
 	var defense_type = damage_data.get("DefenseType", null)
 	
-	var damage_type = damage_data.get("DamageType")
+	var damage_type:String = damage_data.get("DamageType")
 	if defense_type == "AUTO":
 		if DamageHelper.ElementalDamageTypes_Strings.has(damage_type):
 			defense_type = "Ward"
@@ -33,13 +37,18 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 			defense_type = "Armor"
 		else:
 			defense_type = "None"
-		
+	
 	if defense_type == "Ward":
 		mag_damage_icon.show()
 		phy_damage_icon.hide()
+		vs_armor_container.hide()
+		vs_ward_container.show()
 	else:
 		phy_damage_icon.show()
 		mag_damage_icon.hide()
+		vs_armor_container.show()
+		vs_ward_container.hide()
+	
 	var base_power = damage_data.get("AtkPwrBase", 0)
 	var power_range = damage_data.get("AtkPwrRange", 0)
 	var power_scale = damage_data.get("AtkPwrScale", 1)
@@ -50,3 +59,10 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	description_box.set_object(weapon._def, weapon, actor)
 	range_display.load_area_matrix(weapon.target_parmas.target_area)
 	
+	var mods = weapon.get_passive_stat_mods()
+	stat_mod_label.hide()
+	for mod in mods:
+		var lab = stat_mod_label.duplicate()
+		flow_container.add_child(lab)
+		lab.show()
+		lab.set_mod_data(mod)

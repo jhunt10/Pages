@@ -35,16 +35,13 @@
 [ext_resource type="PackedScene" uid="uid://dom8hfmbknird" path="res://Scenes/Combat/UiNodes/TargetInputControl/target_input_control.tscn" id="27_4pyrd"]
 [ext_resource type="Script" uid="uid://t6ngc1cjue4l" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_control.gd" id="27_7037i"]
 [ext_resource type="Texture2D" uid="uid://88hhiituab5b" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Unlocked.png" id="27_cweuh"]
-[ext_resource type="Script" uid="uid://bfotnok8fnfyt" path="res://Scenes/Combat/UiNodes/DropMessages/drop_message_card.gd" id="28_lvk4q"]
 [ext_resource type="Texture2D" uid="uid://dx5cq5wifod2g" path="res://Scenes/Combat/UiNodes/CameraLock/CameraLock_Following.png" id="28_mng7g"]
 [ext_resource type="Script" uid="uid://b82mb4dyp17ng" path="res://Scenes/UiNodes/back_patch_container.gd" id="29_vvabq"]
-[ext_resource type="Texture2D" uid="uid://5hu0ttx4jxuo" path="res://assets/Sprites/UI/BackPatches/PaperPatch_64x92_16.png" id="30_emljn"]
 [ext_resource type="Script" uid="uid://cpghrmast4q1u" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_control.gd" id="31_i5f6p"]
 [ext_resource type="Texture2D" uid="uid://bibqsudhjw4qe" path="res://assets/Sprites/Paper/Mundane_Background.png" id="31_rn36e"]
 [ext_resource type="Texture2D" uid="uid://io35wpu802fp" path="res://assets/Sprites/UI/BackPatches/Patch_64_12.png" id="32_f81f5"]
 [ext_resource type="Texture2D" uid="uid://ccwj8ucsjhl6w" path="res://assets/Sprites/UI/BackPatches/Patch_64_12_Dark.png" id="32_h43dd"]
 [ext_resource type="Texture2D" uid="uid://bau63162pa376" path="res://ObjectDefs/ClassDefs/Soldier/Actors/Sprites/SoldierIcon.png" id="33_0bnqe"]
-[ext_resource type="Texture2D" uid="uid://d041ymvcqbc8f" path="res://notes/TemplatePageIcon.png" id="33_a1r5m"]
 [ext_resource type="Script" uid="uid://b1akgv3jk1q85" path="res://Scenes/Combat/UiNodes/ActorPlacer/actor_placer_button.gd" id="33_lhmsf"]
 [ext_resource type="Script" uid="uid://dkailnjyay32w" path="res://Scenes/Combat/GameOverScreens/game_unlock_screen.gd" id="33_ucts4"]
 [ext_resource type="PackedScene" uid="uid://dqruidykupjgt" path="res://Scenes/Combat/UiNodes/OptionSelectMenu/option_select_menu.tscn" id="34_6y7uw"]
@@ -936,7 +933,7 @@ visible = false
 [node name="OptionSelectMenu" parent="MoveableCamera2D/CanvasLayer" unique_id=1384795652 instance=ExtResource("34_6y7uw")]
 visible = false
 
-[node name="DropMessageControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=1629217137 node_paths=PackedStringArray("premade_drop_card")]
+[node name="DropMessageControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=1629217137]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -945,62 +942,7 @@ offset_top = 64.0
 offset_bottom = 64.0
 grow_horizontal = 2
 script = ExtResource("27_7037i")
-premade_drop_card = NodePath("DropMessageCard")
-drop_speed = 350.0
-
-[node name="DropMessageCard" type="Control" parent="MoveableCamera2D/CanvasLayer/DropMessageControl" unique_id=179714229 node_paths=PackedStringArray("icon_background", "icon_rect", "label")]
-visible = false
-custom_minimum_size = Vector2(0, 48)
-anchors_preset = 0
-offset_bottom = 48.0
-script = ExtResource("28_lvk4q")
-icon_background = NodePath("BackPatchContainer/HBoxContainer/IconBackground")
-icon_rect = NodePath("BackPatchContainer/HBoxContainer/IconBackground/Icon")
-label = NodePath("BackPatchContainer/HBoxContainer/Label")
-
-[node name="BackPatchContainer" type="Container" parent="MoveableCamera2D/CanvasLayer/DropMessageControl/DropMessageCard" unique_id=1127870445 node_paths=PackedStringArray("background", "inner_container")]
-custom_minimum_size = Vector2(160, 48)
-layout_mode = 0
-offset_left = -80.0
-offset_right = 80.0
-offset_bottom = 48.0
-script = ExtResource("29_vvabq")
-background = NodePath("NinePatchRect")
-inner_container = NodePath("HBoxContainer")
-center_in_parent = true
-
-[node name="NinePatchRect" type="NinePatchRect" parent="MoveableCamera2D/CanvasLayer/DropMessageControl/DropMessageCard/BackPatchContainer" unique_id=1396888103]
-layout_mode = 2
-texture = ExtResource("30_emljn")
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MoveableCamera2D/CanvasLayer/DropMessageControl/DropMessageCard/BackPatchContainer" unique_id=2068882214]
-layout_mode = 2
-
-[node name="IconBackground" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/DropMessageControl/DropMessageCard/BackPatchContainer/HBoxContainer" unique_id=724075980]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("31_rn36e")
-expand_mode = 1
-
-[node name="Icon" type="TextureRect" parent="MoveableCamera2D/CanvasLayer/DropMessageControl/DropMessageCard/BackPatchContainer/HBoxContainer/IconBackground" unique_id=264624478]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("33_a1r5m")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="MoveableCamera2D/CanvasLayer/DropMessageControl/DropMessageCard/BackPatchContainer/HBoxContainer" unique_id=1026743852]
-layout_mode = 2
-theme = ExtResource("27_3mvka")
-text = "Item Name +1"
+drop_speed = 200.0
 
 [node name="ActorPointerControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=957088050 node_paths=PackedStringArray("sprite")]
 layout_mode = 3
@@ -2173,7 +2115,6 @@ grow_vertical = 2
 script = ExtResource("73_akcjn")
 que_input_contol = NodePath("../CombatUiControl/ActiveCombatControl/QueInputControl")
 combat_panel = NodePath("../CombatUiControl/CombatControlPanel")
-panel_index = 16
 
 [node name="First_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=188010683 instance=ExtResource("74_jdhj7")]
 visible = false

@@ -11,6 +11,7 @@ signal menu_closed()
 @export var close_button:TextureButton
 @export var cancel_button:Button
 @export var confrim_button:Button
+@export var scroll_container:ScrollContainer
 
 var _selecting_key:String
 var _options_to_show:Array
@@ -18,6 +19,8 @@ var _current_option_data:OnQueOptionsData
 var _selected_options:Dictionary
 
 var _on_all_options_selected:Callable
+var _last_scroll_pos
+var _last_selection_key
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,7 +39,10 @@ func set_options(selecting_key:String, options:Array, on_finish_func:Callable):
 		_current_option_data = _options_to_show[0]
 		_options_to_show.remove_at(0)
 		_build_option_buttons(_current_option_data)
+	_last_selection_key = selecting_key
 	self.show()
+	if selecting_key == "SpawnEnemy" and _last_scroll_pos:
+		scroll_container.scroll_vertical = _last_scroll_pos
 
 func _build_option_buttons(option_data):
 	for child in options_container.get_children():
@@ -73,6 +79,9 @@ func on_option_selected(index):
 	_selected_options[_current_option_data.option_key] = option_data['Value']
 	if option_data.has("Icon"):
 		_selected_options['OverrideQueIcon'] = option_data['Icon']
+	
+	if _selecting_key == "SpawnEnemy" and _options_to_show.size() == 1:
+		_last_scroll_pos = scroll_container.scroll_vertical
 	
 	# More options to be selected
 	if _options_to_show.size() > 0:

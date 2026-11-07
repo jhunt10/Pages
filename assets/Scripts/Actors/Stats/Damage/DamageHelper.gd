@@ -89,6 +89,7 @@ static func get_min_max_damage(actor:BaseActor, damage_data:Dictionary)->Array:
 		var crit_mod = actor.stats.get_stat(StatHelper.CritMod, 1)
 		min_dam = floori(float(min_dam) * crit_mod)
 		max_dam = ceili(float(max_dam) * crit_mod)
+	print("%s | %s | %s = %s - %s" % [base_damage, attack_power_range, attack_power_scale, min_dam, max_dam])
 	return [min_dam, max_dam]
 
 ## Roll damage and return a DamageEvent. 

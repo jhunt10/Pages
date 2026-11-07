@@ -1307,6 +1307,7 @@ map_controller = NodePath("..")
 terrain_map = NodePath("../TerrainMap")
 
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="." unique_id=1548151820]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_5ipcw")
 
 [node name="ObjectActorNode" parent="ActorTileMapLayer" unique_id=994540300 instance=ExtResource("11_ittbp")]

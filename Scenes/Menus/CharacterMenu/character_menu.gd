@@ -23,12 +23,16 @@ signal closed
 @export var close_button:TextureButton
 @export var previous_character_button:TextureButton
 @export var next_character_button:TextureButton
+@export var previous_character_button_flasher:NewActorArrowControl
+@export var next_character_button_flasher:NewActorArrowControl
 @export var details_card_spawn_point:Control
 @export var mouse_control:CharacterMenuMouseControl
 @export var inventory_option_button:OptionButton
 @export var inventory_tab_bar:CustTabContainer
 @export var skill_tree_control:SkillTreePageControl
 @export var skill_tree_menu:SkillTreeMenu
+@export var level_up_button:LevelUpButtonControl
+@export var level_up_button2:LevelUpButtonControl
 
 @export var animation_player:AnimationPlayer
 
@@ -90,7 +94,8 @@ func _ready() -> void:
 	equipment_control.mouse_exit_item.connect(on_mouse_exit_slot)
 	
 	name_panel.xp_bar.level_up_button_pressed.connect(open_skill_menu)
-	
+	level_up_button.pressed.connect(open_skill_menu)
+	level_up_button2.pressed.connect(open_skill_menu)
 	
 	skill_tree_menu.node_button_down.connect(on_item_button_down)
 	skill_tree_menu.node_button_up.connect(on_item_button_up)
@@ -118,6 +123,22 @@ func set_actor(actor:BaseActor):
 		_actor.bag_items_changed.disconnect(_sync)
 		_actor.page_list_changed.disconnect(_sync)
 		
+	# Flash arrows for new actor flashing logic
+	var max_seen_index = StoryState.get_story_flag("CharacterMenuMaxSeenIndex", 0)
+	var max_player_count = StoryState.list_party_actors_ids().size()
+	if current_party_actor_index == 0 and  max_player_count > max_seen_index + 1:
+		previous_character_button_flasher.flashing = true
+	else:
+		previous_character_button_flasher.flashing = false
+	if current_party_actor_index + 1 == max_player_count -1  and  max_player_count > max_seen_index + 1:
+		next_character_button_flasher.flashing = true
+	else:
+		next_character_button_flasher.flashing = false
+		
+	if current_party_actor_index > max_seen_index:
+		StoryState.set_story_flag("CharacterMenuMaxSeenIndex", current_party_actor_index)
+	
+	
 	_actor = actor
 	_actor.stats_changed.connect(_sync)
 	_actor.equipment_changed.connect(_sync)
@@ -127,6 +148,8 @@ func set_actor(actor:BaseActor):
 	_sync()
 	#skill_tree_control.set_actor(_actor)
 	skill_tree_menu.set_actor(_actor)
+	level_up_button.set_actor(_actor)
+	level_up_button2.set_actor(_actor)
 
 var _last_right_page_index = 0
 func _on_right_page_option_select(index:int, key:String):
@@ -165,6 +188,8 @@ func _sync():
 	bag_tab.sync()
 	stats_tab.sync()
 	inventory_container.sync()
+	level_up_button.sync()
+	level_up_button2.sync()
 
 func _process(_delta: float) -> void:
 	# Delay loading Inventory

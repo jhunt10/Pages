@@ -84,7 +84,7 @@ func _ready() -> void:
 		var deploy_tutorial = StoryState.get_story_flag("DeployTutorialDone")
 		if not deploy_tutorial and StoryState.list_party_actors().size() > 1:
 			panel_index = 11
-		current_tutorial = "Deploy"
+			current_tutorial = "Deploy"
 		
 	if current_tutorial == "":
 		self.queue_free()

@@ -228,20 +228,24 @@ self_modulate = Color(0.470588, 0, 0, 1)
 custom_minimum_size = Vector2(2, 1)
 layout_mode = 2
 
-[node name="WeaponDetailsContainer" type="BoxContainer" parent="." unique_id=341349175 node_paths=PackedStringArray("weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display")]
-visible = false
+[node name="WeaponDetailsContainer" type="BoxContainer" parent="." unique_id=341349175 node_paths=PackedStringArray("weapon_class_label", "phy_damage_icon", "mag_damage_icon", "attack_power_label", "damage_type_label", "description_box", "range_display", "vs_armor_container", "vs_ward_container", "flow_container", "stat_mod_label")]
 layout_mode = 2
 script = ExtResource("9_y1a8j")
 weapon_class_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer/WeaponClassLabel")
-phy_damage_icon = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/PhyDamIcon")
-mag_damage_icon = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/MagDamIcon")
-attack_power_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/AttackPowerLabel")
-damage_type_label = NodePath("HBoxContainer/VBoxContainer/HBoxContainer2/DamageTypeLabel")
+phy_damage_icon = NodePath("HBoxContainer/VBoxContainer/AttackDataContainer/PhyDamIcon")
+mag_damage_icon = NodePath("HBoxContainer/VBoxContainer/AttackDataContainer/MagDamIcon")
+attack_power_label = NodePath("HBoxContainer/VBoxContainer/AttackDataContainer/AttackPowerLabel")
+damage_type_label = NodePath("HBoxContainer/VBoxContainer/AttackDataContainer/DamageTypeLabel")
 description_box = NodePath("../HBoxContainer/DescriptionBox")
 range_display = NodePath("HBoxContainer/MiniRangeDisplay")
+vs_armor_container = NodePath("HBoxContainer/VBoxContainer/AttackDataContainer/VsArmorContainer")
+vs_ward_container = NodePath("HBoxContainer/VBoxContainer/AttackDataContainer/VsWardContainer")
+flow_container = NodePath("HBoxContainer/VBoxContainer/FlowContainer")
+stat_mod_label = NodePath("HBoxContainer/VBoxContainer/FlowContainer/StatModLabel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="WeaponDetailsContainer" unique_id=1619147261]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="WeaponDetailsContainer/HBoxContainer" unique_id=866173143]
 layout_mode = 2
@@ -263,35 +267,153 @@ layout_mode = 2
 theme = ExtResource("10_cinw4")
 text = "Weapon"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer" unique_id=224995098]
+[node name="FlowContainer" type="FlowContainer" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer" unique_id=584435095]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 8
+
+[node name="StatModLabel" type="HBoxContainer" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer" unique_id=1545986493 node_paths=PackedStringArray("modded_stat_icon", "modded_stat_name_label", "mod_value_label", "dep_stat_label", "dep_stat_icon", "plus_label", "times_label")]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("25_bpc2m")
+modded_stat_icon = NodePath("ModdedStatIcon")
+modded_stat_name_label = NodePath("ModdedStatNameLabel")
+mod_value_label = NodePath("ModValueLabel")
+dep_stat_label = NodePath("HBoxContainer/DepStatNameLabel")
+dep_stat_icon = NodePath("HBoxContainer/DepStatIcon")
+plus_label = NodePath("SignLabel")
+times_label = NodePath("SignLabel2")
+
+[node name="ModdedStatIcon" type="TextureRect" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer/StatModLabel" unique_id=312187353]
+layout_mode = 2
+texture = ExtResource("26_j0n3e")
+
+[node name="ModdedStatNameLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer/StatModLabel" unique_id=430078841]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("21_wp4oe")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "STR"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SignLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer/StatModLabel" unique_id=1925692693]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("21_wp4oe")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "+"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer/StatModLabel" unique_id=1724958941]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="DepStatIcon" type="TextureRect" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=1731065462]
+layout_mode = 2
+texture = ExtResource("27_igjyj")
+stretch_mode = 3
+
+[node name="DepStatNameLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer/StatModLabel/HBoxContainer" unique_id=797782684]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("21_wp4oe")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "TR"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="SignLabel2" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer/StatModLabel" unique_id=1412406865]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("21_wp4oe")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "x"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="ModValueLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/FlowContainer/StatModLabel" unique_id=87462734]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("21_wp4oe")
+theme_override_colors/font_color = Color(0.470588, 0, 0, 1)
+text = "1.2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="AttackDataContainer" type="HBoxContainer" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer" unique_id=224995098]
 layout_mode = 2
 
-[node name="PhyDamIcon" type="TextureRect" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=347126312]
+[node name="PhyDamIcon" type="TextureRect" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer" unique_id=347126312]
 layout_mode = 2
 texture = ExtResource("11_y1lwh")
 
-[node name="MagDamIcon" type="TextureRect" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=945436077]
+[node name="MagDamIcon" type="TextureRect" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer" unique_id=945436077]
 visible = false
 layout_mode = 2
 texture = ExtResource("12_m7iq4")
 
-[node name="AttackPowerLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=75305285]
+[node name="AttackPowerLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer" unique_id=75305285]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("10_cinw4")
 text = "100±30"
 
-[node name="DamageTypeLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=807445268]
+[node name="DamageTypeLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer" unique_id=807445268]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("10_cinw4")
 text = "Slash"
 
-[node name="DamageTypeLabel2" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1409392797]
+[node name="DamageTypeLabel2" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer" unique_id=1409392797]
+visible = false
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 2
 theme = ExtResource("10_cinw4")
 text = "Dmg"
+
+[node name="VsArmorContainer" type="HBoxContainer" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer" unique_id=1445753196]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="VsLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer/VsArmorContainer" unique_id=1040275505]
+layout_mode = 2
+theme = ExtResource("10_cinw4")
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+text = " vs "
+
+[node name="DefenseStatIcon" type="TextureRect" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer/VsArmorContainer" unique_id=1996736585]
+layout_mode = 2
+texture = ExtResource("29_3ch6u")
+expand_mode = 3
+
+[node name="DefenseStatLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer/VsArmorContainer" unique_id=1826503120]
+layout_mode = 2
+theme = ExtResource("10_cinw4")
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+text = " ARM"
+
+[node name="VsWardContainer" type="HBoxContainer" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer" unique_id=1033755214]
+layout_mode = 2
+theme_override_constants/separation = -2
+
+[node name="VsLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer/VsWardContainer" unique_id=163006437]
+layout_mode = 2
+theme = ExtResource("10_cinw4")
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+text = " vs "
+
+[node name="DefenseStatIcon" type="TextureRect" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer/VsWardContainer" unique_id=1020097177]
+layout_mode = 2
+texture = ExtResource("30_r5qy8")
+expand_mode = 3
+
+[node name="DefenseStatLabel" type="Label" parent="WeaponDetailsContainer/HBoxContainer/VBoxContainer/AttackDataContainer/VsWardContainer" unique_id=1525630956]
+layout_mode = 2
+theme = ExtResource("10_cinw4")
+theme_override_colors/font_color = Color(0.237539, 0.237539, 0.237539, 1)
+text = " WRD"
 
 [node name="MiniRangeDisplay" parent="WeaponDetailsContainer/HBoxContainer" unique_id=589088971 instance=ExtResource("13_uc6sa")]
 layout_mode = 2

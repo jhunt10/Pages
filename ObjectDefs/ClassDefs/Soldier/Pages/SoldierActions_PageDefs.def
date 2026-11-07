@@ -654,8 +654,9 @@
 			},
 			"DamageDatas": {
 				"Damage1": {
-					"AtkPwrBase": 100.0,
-					"AtkPwrRange": 10.0,
+					"AtkPwrBase": 1.0,
+					"AtkPwrRange": 0.0,
+					"AtkPwrScale": 0.02,
 					"AtkPwrStat": "BlockMod",
 					"AtkStat": "PhyAttack",
 					"BaseDamage": 0.0,
@@ -937,7 +938,7 @@
 			},
 			"DamageDatas": {
 				"Damage1": {
-					"AtkPwrBase": 50.0,
+					"AtkPwrBase": 100.0,
 					"AtkPwrRange": 20.0,
 					"AtkStat": "PhyAttack",
 					"BaseDamage": 0.0,

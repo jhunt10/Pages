@@ -508,9 +508,9 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 		_is_weapon_damage = true
 		var atk_scale = damage_data.get("AtkPwrScale", 1)
 		if atk_scale == 1:
-			description_line += "Weapon Damage"
+			description_line += color_text(RED_TEXT, "Weapon Damage")
 		else:
-			description_line += _to_str(atk_scale) + " x Weapon Damage"
+			description_line += color_text(RED_TEXT, _to_str(atk_scale * 100) + "% Weapon Damage")
 	# Parse Fixed as "100+10 Fire Damage"
 	elif damage_data.get("AtkStat") == "Fixed":
 		var atk_power = damage_data.get("AtkPwrBase", 0)
@@ -558,6 +558,11 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 	
 	if extra_damage_datas.size() == 0:
 		if description_line != '':
+			
+			if damage_type == "???": # Bad Logic: Catching Actorless Weapon case
+				out_line += description_line
+				return out_line
+			
 			#description_line = description_line.replace(damage_type, "[/color]" + get_damage_colored_text(damage_type) + RED_TEXT)
 			
 			if hover_line != '':
@@ -574,7 +579,7 @@ func _parse_damage_data(tokens:Array, object_def:Dictionary, object_inst:BaseLoa
 	var max_val = first_min_max[1]
 	for extra in extra_damage_datas:
 		var other_damage_type = extra.get("DamageType", "???")
-		var min_max = DamageHelper.get_min_max_damage(actor, damage_data)
+		var min_max = DamageHelper.get_min_max_damage(actor, extra)
 		var other_min_max_str = _to_str(min_max[0]) + " - " + _to_str(min_max[1])
 		if min_max[0] == min_max[1]:
 			other_min_max_str = _to_str(min_max[0])
@@ -829,11 +834,11 @@ func get_effect_datas_from_def(def:Dictionary)->Dictionary:
 
 func get_stat_mods_from_def(def:Dictionary)->Dictionary:
 	if def.has("PageData"):
-		var mods = def['PageData'].get("StatMods", {})
+		var mods = def['PageData'].get("StatMods", {}).duplicate()
 		var merged_mods = def['PageData'].get("MergedStatMods")
 		if merged_mods:
 			for key in merged_mods.keys():
-				mods[key] = merged_mods
+				mods[key] = merged_mods[key]
 		return mods
 	if def.has("EffectData"):
 		return def['EffectData'].get("StatMods", {})

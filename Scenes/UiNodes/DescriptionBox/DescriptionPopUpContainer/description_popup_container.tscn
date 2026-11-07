@@ -20,22 +20,23 @@ description_box = NodePath("BackPatch/BoxContainer/DescriptionBox")
 
 [node name="BackPatch" type="Container" parent="." unique_id=2130885393 node_paths=PackedStringArray("background", "inner_container")]
 z_index = 1
-custom_minimum_size = Vector2(282, 117)
+custom_minimum_size = Vector2(262, 97)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -141.0
-offset_top = -117.0
-offset_right = 141.0
+offset_left = -131.0
+offset_top = -97.0
+offset_right = 131.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 0
 script = ExtResource("1_3wnk0")
 background = NodePath("NinePatchRect")
 inner_container = NodePath("BoxContainer")
+margin_override = 6
 center_in_parent = true
 center_from = 1
 
@@ -81,4 +82,5 @@ bbcode_enabled = true
 text = "[color=#460000]Fast Actions[/color] are preformed sooner in the [color=#460000]Turn[/color] than most other [color=#460000]Actions[/color] regardless of [color=#460000]SPD[/color], usually before other [color=#460000]Actors[/color] move."
 fit_content = true
 autowrap_mode = 2
+horizontal_alignment = 1
 script = ExtResource("6_36tku")

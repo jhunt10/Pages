@@ -322,7 +322,7 @@
 	"ShieldTraining_PageItem": {
 		"!ObjectScript": "res://assets/Scripts/Items/Pages/PageItemPassive.gd",
 		"#ObjDetails": {
-			"Description": "Formal training allows you to use a Shield to full effect.\n\n@@#Tag:Block:Blocking@@ with @@#Tag:Shield:Shields@@ reduce damage by an additional @@#Color:Red:20%@@",
+			"Description": "Formal training allows you to use a Shield to full effect.\n\n@@#Tag:Block:Blocking@@ with @@#Tag:Shield:Shields@@ reduce damage by an additional @@#Color:Red:10%@@",
 			"DisplayName": "Shield Training",
 			"LargeIcon": "Sprites/ShieldTraining.png",
 			"ObjectType": "Item",
@@ -355,7 +355,7 @@
 				"BlockModMod": {
 					"ModType": "Add",
 					"StatName": "BlockMod",
-					"Value": -0.2
+					"Value": 10
 				}
 			}
 		},

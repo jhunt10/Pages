@@ -23,7 +23,8 @@ func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:
 
 ## Returns what sub data has Mods
 func get_data_containing_mods()->Dictionary:
-	return page_data
+	var t_data = page_data
+	return t_data
 
 func get_tags()->Array:
 	var tags = []

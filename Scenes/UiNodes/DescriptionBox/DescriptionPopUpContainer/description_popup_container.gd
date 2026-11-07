@@ -20,18 +20,19 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if self.visible and not pinned:
-		var screen_size = DisplayServer.window_get_size()
-		var popup_size = back_patch.size
+		var screen_size = get_viewport_rect().size
+		var popup_size = back_patch.get_global_rect().size
 		var mouse_pos = self.get_global_mouse_position()
 		if !mouse_start_pos:
 			mouse_start_pos = mouse_pos
 		var self_pos = mouse_pos
+		## X is haved because we are centered on bottom edge
 		# Bound Right
-		if self_pos.x - (popup_size.x / 2) < 0:
+		if self_pos.x - (popup_size.x) < 0:
 			self_pos.x = 0 - (popup_size.x / 2)
 		# Bound Left
-		elif self_pos.x + (popup_size.x / 2) > screen_size.x:
-			self_pos.x = screen_size.x - (popup_size.x / 2)
+		elif self_pos.x + (popup_size.x /2) > screen_size.x:
+			self_pos.x = screen_size.x - (popup_size.x/2)
 			
 		#Bound Top
 		if self_pos.y - popup_size.y - 8 < 0:
