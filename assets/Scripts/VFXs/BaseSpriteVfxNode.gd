@@ -23,11 +23,11 @@ func set_vfx_data(new_id:String, data:Dictionary):
 				printerr("BaseSpriteVfxNode.set_vfx_data: Failed to find file '%s'." % [sprite_path])
 				sprite.texture = load(NO_SPRITE_PATH)
 	
-	# Load Audio
-	if audio_player:
-		var sound_effect = _data.get("SFXFilePath", null)
-		if sound_effect:
-			audio_player.stream = load(sound_effect)
+	## Load Audio
+	#if audio_player:
+		#var sound_effect = _data.get("SFXFilePath", null)
+		#if sound_effect:
+			#audio_player.stream = load(sound_effect)
 	
 	# Hide sprite until started
 	if sprite:
@@ -69,8 +69,8 @@ func _on_start():
 			animation.speed_scale = _data.get("AnimationSpeed", 1) * CombatRootControl.get_time_scale()
 			animation.animation_finished.connect(_on_animation_finish)
 	
-	if audio_player:
-		audio_player.play()
+	#if audio_player:
+		#audio_player.play()
 	
 	if sprite:
 		sprite.visible = true

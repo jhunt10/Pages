@@ -14,9 +14,15 @@ func show_game_result():
 	var story_index = StoryState._story_stage_index
 	var new_actor_key = ""
 	match story_index:
-		0: new_actor_key = "RogueTemplate"
-		1: new_actor_key = "PriestTemplate"
-		2: new_actor_key = "MageTemplate"
+		0: 
+			new_actor_key = "RogueTemplate"
+			StoryState.set_story_flag("ShopIndex", 1)
+		1: 
+			new_actor_key = "PriestTemplate"
+			StoryState.set_story_flag("ShopIndex", 2)
+		2: 
+			new_actor_key = "MageTemplate"
+			StoryState.set_story_flag("ShopIndex", 3)
 	if new_actor_key:
 		var new_actor:BaseActor = StoryState.add_actor_to_party(new_actor_key)
 		new_actor_name_label.text = new_actor.get_display_name()

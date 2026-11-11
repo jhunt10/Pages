@@ -582,6 +582,8 @@ func check_end_conditions()->bool:
 			living_actor_by_team[actor.TeamKey] = 0
 		if actor.is_dead:
 			continue
+		if actor.is_being_carried():
+			continue
 		living_actor_by_team[actor.TeamKey] += 1
 		
 	# All Players dead, Game Over

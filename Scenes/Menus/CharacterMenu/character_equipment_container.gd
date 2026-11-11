@@ -61,10 +61,9 @@ func highlight_slot(index:int):
 		super(index)
 
 func clear_highlight(index:int):
-	if _actor.equipment.is_two_handing():
-		var all_hands =  _actor.equipment.list_all_hand_indexes()
-		if all_hands.has(index):
-			for hand_index in all_hands:
-				super(hand_index)
+	var all_hands =  _actor.equipment.list_all_hand_indexes()
+	if all_hands.has(index):
+		for hand_index in all_hands:
+			super(hand_index)
 	else:
 		super(index)

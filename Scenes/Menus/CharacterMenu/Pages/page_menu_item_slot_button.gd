@@ -27,7 +27,7 @@ func set_item(actor:BaseActor, holder:BaseItemHolder, item:BaseItem):
 		if page.use_equipment_icon():
 			item_icon_rect.texture = page.get_large_page_icon(actor)
 			if not actor.equipment_changed.is_connected(_on_equipment_changed):
-				actor.equipment_changed.connect(_on_equipment_changed.bind(actor.Id, page.ItemKey))
+				actor.equipment_changed.connect(_on_equipment_changed)
 	
 	
 

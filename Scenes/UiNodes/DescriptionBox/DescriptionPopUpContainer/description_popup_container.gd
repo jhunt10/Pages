@@ -26,21 +26,22 @@ func _process(_delta: float) -> void:
 		if !mouse_start_pos:
 			mouse_start_pos = mouse_pos
 		var self_pos = mouse_pos
-		## X is haved because we are centered on bottom edge
-		# Bound Right
-		if self_pos.x - (popup_size.x) < 0:
-			self_pos.x = 0 - (popup_size.x / 2)
-		# Bound Left
-		elif self_pos.x + (popup_size.x /2) > screen_size.x:
-			self_pos.x = screen_size.x - (popup_size.x/2)
-			
-		#Bound Top
-		if self_pos.y - popup_size.y - 8 < 0:
-			self_pos.y = popup_size.y
+		set_screen_safe_position(mouse_pos - Vector2(0, 8))
+		### X is haved because we are centered on bottom edge
+		## Bound Right
+		#if self_pos.x - (popup_size.x) < 0:
+			#self_pos.x = 0 - (popup_size.x / 2)
+		## Bound Left
+		#elif self_pos.x + (popup_size.x /2) > screen_size.x:
+			#self_pos.x = screen_size.x - (popup_size.x/2)
+			#
+		##Bound Top
+		#if self_pos.y - popup_size.y - 8 < 0:
+			#self_pos.y = popup_size.y
 		# Bound Bottom ( Not Posiible since always above point)
 		#elif self_pos.y + (popup_size.y / 2) > screen_size.y:
 			#self_pos.y = screen_size.y - (popup_size.y / 2)
-		self.global_position = self_pos - Vector2(0, 8)
+		#self.global_position = self_pos - Vector2(0, 8)
 		
 		if mouse_start_pos:
 			var mouse_moved = mouse_pos.distance_to(mouse_start_pos)
@@ -76,3 +77,16 @@ func set_description(
 func pin_in_place():
 	pinned = true
 	close_button.show()
+
+func set_screen_safe_position(pos):
+	var self_rec = get_rect()
+	var screen_rect = get_viewport_rect().size
+	if pos.x < 0: 
+		pos.x = 0
+	if pos.x > screen_rect.x - self_rec.size.x:
+		pos.x = screen_rect.x - self_rec.size.x
+	if pos.y < 0: 
+		pos.y = 0
+	if pos.y > screen_rect.y - self_rec.size.y:
+		pos.y = screen_rect.y - self_rec.size.y
+	self.global_position = pos

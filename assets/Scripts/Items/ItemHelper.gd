@@ -1,6 +1,6 @@
 class_name ItemHelper
 
-const LOGGING = false
+const LOGGING = true
 
 static func spawn_item(item_key:String, item_data:Dictionary, pos:MapPos)->BaseItem:
 	var item = ItemLibrary.create_item(item_key, item_data)
@@ -99,6 +99,7 @@ static func try_delete_item_from_holder(item:BaseItem, actor:BaseActor):
 		holder = actor.items
 	if holder.has_item(item):
 		holder.remove_item(item.Id)
+		transaction_data['RemovedItemIds'].append(item.Id)
 		holder._actor.on_held_items_change(holder.get_holder_name(), transaction_data)
 	
 
@@ -222,7 +223,8 @@ static func try_transfer_item_from_actor_to_inventory(item:BaseItem, actor:BaseA
 	return try_transfer_item_from_holder_to_inventory(item, holder)
 
 static func try_transfer_item_from_holder_to_inventory(item:BaseItem, holder:BaseItemHolder)->String:
-	if LOGGING: print("ItemHlp: Transfer %s from %s to INV" % [item.ItemKey, holder._actor.Id])
+	if LOGGING: 
+		print("ItemHlp: Transfer %s from %s to INV" % [item.ItemKey, holder._actor.Id])
 	var item_id = item.Id
 	if !holder.has_item(item_id):
 		return "Item not found"

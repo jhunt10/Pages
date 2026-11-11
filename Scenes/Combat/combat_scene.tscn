@@ -1450,7 +1450,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameUnlockScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/EndScreensControl" unique_id=935128400 node_paths=PackedStringArray("new_actor_name_label", "new_actor_icon", "camp_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1584,6 +1583,24 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TitleLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameUnlockScreen/CenterContainer/VBoxContainer" unique_id=2047559837]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = " "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleLabel2" type="Label" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameUnlockScreen/CenterContainer/VBoxContainer" unique_id=1700412935]
+layout_mode = 2
+theme = ExtResource("27_3mvka")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = " Shop Has Been Unlocked!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TitleLabel3" type="Label" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameUnlockScreen/CenterContainer/VBoxContainer" unique_id=1806512696]
 layout_mode = 2
 theme = ExtResource("27_3mvka")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -2392,11 +2409,11 @@ offset_right = 136.0
 offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
-title_text = "Party_Host.txt"
+title_text = "Party_Carrier.txt"
 comfirm_button_text = "Next"
 show_cancel_button = false
-text = "Your [color=blue]Soldier[/color] is a [color=blue]Host[/color] able to [color=darkred]Merge[/color] with other Actors. 
-While [color=darkred]Merged[/color], the [color=blue]Host[/color] gains increased [color=darkred]Stats[/color], and can use [color=blue]Items[/color] and [color=blue]Pages[/color] from any Actor(s) they carry."
+text = "Your [color=blue]Soldier[/color] is a [color=blue]Carrier[/color] able to [color=darkred]Merge[/color] with other Actors. 
+While [color=darkred]Merged[/color], the [color=blue]Carrier[/color] gains increased [color=darkred]Stats[/color], and can use [color=blue]Items[/color] and [color=blue]Pages[/color] from any Actor(s) they carry."
 
 [node name="PartyDeploy_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=268937762 instance=ExtResource("74_jdhj7")]
 visible = false
@@ -2416,7 +2433,7 @@ highlight_target = 10
 title_text = "Deployment.txt"
 comfirm_button_text = "Next"
 show_cancel_button = false
-text = "The [color=darkred]Deploy[/color] [color=blue]Action Page[/color] can be used to seperate [color=darkred]Merged[/color]  Actors from the [color=blue]Host[/color].
+text = "The [color=darkred]Deploy[/color] [color=blue]Action Page[/color] can be used to seperate [color=darkred]Merged[/color]  Actors from the [color=blue]Carrier[/color].
 This will add the [color=darkred]Deployed[/color] Actor to the [color=blue]Map[/color] and allow them to submit their own [color=blue]Scripts[/color]."
 
 [node name="PartyMerge_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=928518115 instance=ExtResource("74_jdhj7")]
@@ -2436,7 +2453,7 @@ grow_vertical = 2
 title_text = "Merge.txt"
 comfirm_button_text = "Done"
 show_cancel_button = false
-text = "While [color=darkred]Deployed[/color], your Actors will recieve a [color=darkred]Merge[/color] [color=blue]Action Page[/color], which allows them to re-merge with a [color=blue]Host[/color] Actor in range."
+text = "While [color=darkred]Deployed[/color], your Actors will recieve a [color=darkred]Merge[/color] [color=blue]Action Page[/color], which allows them to re-merge with a [color=blue]Carrier[/color] Actor in range."
 
 [node name="Party_End_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1732908891 instance=ExtResource("74_jdhj7")]
 visible = false

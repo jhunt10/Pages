@@ -55,8 +55,8 @@ func _process(delta: float) -> void:
 			self.finish()
 
 func is_ready_to_delete()->bool:
-	if audio_player:
-		return not audio_player.playing
+	#if audio_player:
+		#return not audio_player.playing
 	return true
 
 func finish():

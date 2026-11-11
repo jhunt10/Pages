@@ -632,6 +632,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 
 [node name="Stats-PanelContainer" type="PanelContainer" parent="PanelContainer/TwoPagesContainer/LeftPageContainer/ActorPreivewContainer/StatsAndActorContainer" unique_id=106545721]
+z_index = 4
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("3_iofuq")
@@ -2775,7 +2776,7 @@ mouse_filter = 2
 
 [node name="MouseOverControl" type="Control" parent="." unique_id=462370816 node_paths=PackedStringArray("drag_item_background", "drag_item_icon")]
 visible = false
-z_index = 2
+z_index = 5
 custom_minimum_size = Vector2(64, 64)
 anchors_preset = 0
 offset_right = 64.0
@@ -2914,7 +2915,7 @@ highlight_target = 1
 title_text = "ActionPages.txt"
 show_cancel_button = false
 text = "[color=darkred]Action Pages[/color] allow your Actor to preform actions in [color=darkred]Combat[/color]. 
-This includes [color=Blue]Moveing[/color], [color=darkred]Attacking[/color], applying [color=blue]Effects[/color], and consuming [color=blue]Supply Items[/color]."
+This includes [color=Blue]Moving[/color], [color=darkred]Attacking[/color], applying [color=blue]Effects[/color], and consuming [color=blue]Supply Items[/color]."
 
 [node name="Supplies_ComPopContainer" parent="TutorialControl" unique_id=1237523936 instance=ExtResource("78_jq4bi")]
 visible = false

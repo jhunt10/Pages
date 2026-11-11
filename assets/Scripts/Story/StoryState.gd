@@ -114,8 +114,10 @@ func start_new_story():
 	for item_key:String in ItemLibrary.list_all_item_keys():
 		if has_pages.has(item_key):
 			continue
-		var item = ItemLibrary.get_item(item_key)
-		if item is BasePageItem and not item_key.begins_with("#"):
+		if not not item_key.begins_with("#"):
+			continue
+		var item = ItemLibrary.get_static_inst_of_item(item_key)
+		if item is BasePageItem:
 			if item is BasePageItem:
 				if (item.get_tags().has("_Dev_Action")):
 					PlayerInventory.add_item(item, 1)
@@ -176,15 +178,6 @@ func load_skill_trees():
 	var data = JSON.parse_string(text)
 	if data is Dictionary:
 		_skill_trees_data = data
-		#for title in _skill_trees_data.keys():
-			#for row in _skill_trees_data[title]:
-				#for node_data:Dictionary in row:
-					#if node_data.keys().has("PairType"):
-						#var page_item_id_1 = node_data.get("PageItemId1")
-						#ItemLibrary.get_or_create_item("INNATE:"+page_item_id_1, page_item_id_1, {})
-						#
-					#var page_item_id = node_data.get("PageItemId")
-					#ItemLibrary.get_or_create_item("INNATE:"+page_item_id, page_item_id, {})
 
 func get_skill_tree_data_for_actor(actor:BaseActor)->Array:
 	if _skill_trees_data.size() == 0:
@@ -220,8 +213,10 @@ func set_unlocked_skills_for_actor(actor:BaseActor, setting_skills:Dictionary):
 	var items_to_move = {
 		"AddToInventory":[],
 		"RemoveFromInventory":[],
-		"RemoveFromPlayer":[]
+		"RemoveFromPlayer":{actor:[]}
 	}
+	var not_unlocked_page_keys = []
+	var all_page_keys = []
 	var x_index = -1
 	var y_index = -1
 	for row in tree_data:
@@ -244,6 +239,7 @@ func set_unlocked_skills_for_actor(actor:BaseActor, setting_skills:Dictionary):
 				var page_key = page_list[page_index]
 				if !page_key:
 					continue
+				all_page_keys.append(page_key)
 				var is_unlocked = ( 
 						node_data.get("AlwaysUnlocked", false)  # Always Unlocked Pages
 						or setting_skills.keys().has(skill_node_key) # Skill is unlocked
@@ -252,26 +248,49 @@ func set_unlocked_skills_for_actor(actor:BaseActor, setting_skills:Dictionary):
 				if setting_skills.keys().has(skill_node_key) and node_data.get("PairType", "").to_lower() == "or":
 					is_unlocked = setting_skills[skill_node_key].get("Index", -1) == page_index
 					
-					
-				var has_page_in_book = actor.pages.list_items_with_key(page_key).size() > 0
-				var has_page_in_inventory = PlayerInventory.get_item_stack_count(page_key) > 0
-				print("SSST: %s : Unlocked: %s       InBook: %s      InInv: %s" % [page_key, is_unlocked, has_page_in_book, has_page_in_inventory])
 				# Add Unlocked and Always skills to list
 				if is_unlocked:
 					if node_data.get("AlwaysUnlocked"):
 						always_skills.append(skill_node_key)
 					else:
 						unlocked_skills[skill_node_key] = setting_skills[skill_node_key]
-			
-				# Add or remove item from player inventory or actor pages
-				if is_unlocked:
-					if not has_page_in_book and not has_page_in_inventory:
-						items_to_move["AddToInventory"].append(page_key)
 				else:
-					if has_page_in_book:
-						items_to_move["RemoveFromPlayer"].append(page_key)
-					if has_page_in_inventory:
-						items_to_move["RemoveFromInventory"].append(page_key)
+					not_unlocked_page_keys.append(page_key)
+	
+	for page_key in all_page_keys:
+		var has_page_in_book = actor.pages.list_items_with_key(page_key).size() > 0
+		var has_page_in_inventory = PlayerInventory.get_item_stack_count(page_key) > 0
+		
+		var item_inst:BasePageItem = ItemLibrary.get_static_inst_of_item(page_key)
+		var held_by_other_actor:BaseActor = null
+		if item_inst.is_shareble(): # Check other actors
+			for other_actor:BaseActor in list_party_actors():
+				if other_actor == actor:
+					continue
+				if other_actor.pages.list_items_with_key(page_key).size() > 0:
+					held_by_other_actor = other_actor
+					break
+				
+		if page_key == "HaloOfLight_PageItem":
+			var t = true
+		# Is Unlocked
+		if not not_unlocked_page_keys.has(page_key):
+			# Mark to add to inventory
+			if( not has_page_in_book and not has_page_in_inventory
+				and not held_by_other_actor):
+				items_to_move["AddToInventory"].append(page_key)
+		# Add or remove item from player inventory or actor pages
+		# If not unlocked, find where page is and log it to remove
+		else:
+			if has_page_in_book:
+				items_to_move["RemoveFromPlayer"][actor].append(page_key)
+			elif has_page_in_inventory:
+				items_to_move["RemoveFromInventory"].append(page_key)
+			# Not in book or inventory, must be on other actor
+			elif held_by_other_actor:
+				if not items_to_move["RemoveFromPlayer"].keys().has(held_by_other_actor):
+					items_to_move["RemoveFromPlayer"][held_by_other_actor] = []
+				items_to_move["RemoveFromPlayer"][held_by_other_actor].append(page_key)
 						
 	# This need to be set before we start triggering recaches by moving items
 	_party_skills_data[actor_id] = {
@@ -281,10 +300,12 @@ func set_unlocked_skills_for_actor(actor:BaseActor, setting_skills:Dictionary):
 	
 	for page_key in items_to_move["AddToInventory"]:
 		PlayerInventory.add_item(page_key)
-	for page_key in items_to_move["RemoveFromPlayer"]:
-		var items = actor.pages.list_items_with_key(page_key)
-		for item in items:
-			ItemHelper.try_delete_item_from_holder(item, actor)
+	for remove_from_actor:BaseActor in items_to_move["RemoveFromPlayer"].keys():
+		for page_key in items_to_move["RemoveFromPlayer"][remove_from_actor]:
+			var items = remove_from_actor.pages.list_items_with_key(page_key)
+			for item in items:
+				ItemHelper.try_delete_item_from_holder(item, remove_from_actor)
+	
 	for page_key in items_to_move["RemoveFromInventory"]:
 			var item = ItemLibrary.get_item(page_key)
 			PlayerInventory.delete_item_from_inventory(item)
@@ -326,18 +347,7 @@ func load_save_data(data:Dictionary):
 	ActorLibrary.load_actors(actors_data)
 	
 	var inv_data = data['PlayerInventory']
-	for item_id in inv_data.keys():
-		var item_data = inv_data[item_id]
-		var item_key = item_data.get('ObjectKey')
-		var item = ItemLibrary.get_or_create_item(item_id, item_key, item_data)
-		var invalid_reason = ItemLibrary.validate_object(item)
-		if invalid_reason != '':
-			printerr("StoryStateData.load_save_data: Item with id '%s' is invalid: %s" % [item_id, invalid_reason])
-			continue
-		if item:
-			PlayerInventory.add_item(item, inv_data[item_id].get('StackCount', 1), false)
-		else:
-			printerr("StoryStateData.load_save_data: Failed to find item with id '%s'." % [item_id])
+	PlayerInventory.load_save_data(inv_data)
 	
 	_encountered_actors = data.get("Encounters", {})
 	_party_skills_data = data.get("PartySkillData", {})

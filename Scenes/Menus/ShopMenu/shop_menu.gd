@@ -35,6 +35,11 @@ func _ready() -> void:
 	LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_gone)
 	buy_panel_container.hide()
 	buy_panel_container.trade_confirmed.connect(_on_trade_confirmed)
+	
+	var shop_index = StoryState.get_story_flag("ShopIndex", 0)
+	var shop_index_max = StoryState.get_story_flag("ShopIndexSeen", 0)
+	if shop_index > shop_index_max:
+		StoryState.set_story_flag("ShopIndexSeen", shop_index)
 
 func _on_load_screen_gone():
 	load_greeting()
@@ -172,23 +177,22 @@ func _on_trade_confirmed_old(accepted:bool):
 
 static var _said_lines:Array=[]
 func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
+	var shop_index = StoryState.get_story_flag("ShopIndex")
 	if subject == SpeakerSubjects.Greeting:
-		if _said_greeting:
+		if _said_lines.has("Greeting"):
 			_build_dialog_entries([
 				{"SpeakerPort":"Happy"},
 				"Need anything else? "
 			])
 			return
-		_said_greeting = true
-		if not StoryState.get_story_flag("BeenToShop"):
-			StoryState.set_story_flag("BeenToShop", true)
+		_said_lines.append("Greeting")
+		if shop_index == 1:
 			_build_dialog_entries([
 				{"SpeakerPort":"VeryHappy"},
-				"Welcome to the @Color:Red@Shop@Clear@!",
+				"Thanks dealing with those @Color:Red@Bandits@Clear@!",
 				{"Delay":0.8},
 				{"SpeakerPort":"Happy"},
-				"It ain't what it used to be, ",
-				"but we're still in business. ",
+				"Now how about a little shopping?",
 			])
 		else:
 			_build_dialog_entries([
@@ -196,7 +200,8 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 				"Welcome back!",
 				{"Delay":0.8},
 				{"SpeakerPort":"Neutral"},
-				"You lookin to @Color:Red@Buy@Clear@ or @Color:Red@Sell@Clear@? "
+				"You lookin to @Color:Red@Buy@Clear@ or @Color:Red@Sell@Clear@? ",
+				"WaitToRead"
 			])
 	elif subject == SpeakerSubjects.Buying:
 		if not _said_lines.has("BanditsTook"):

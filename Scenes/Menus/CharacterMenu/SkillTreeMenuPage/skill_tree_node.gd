@@ -52,7 +52,7 @@ func set_skill_node_data(node_data:Dictionary, index_data:Dictionary={}):
 	if node_data.has("Pages"):
 		var index = index_data.get("Index", 0)
 		_page_id = node_data.get("Pages", [])[index]
-	var page = ItemLibrary.get_item(_page_id)
+	var page = ItemLibrary.get_static_inst_of_item(_page_id)
 	if !page:
 		printerr("SkillNode: Failed to find Page with ItemId '%s'." %[_page_id])
 		return
@@ -64,7 +64,7 @@ func set_skill_node_data(node_data:Dictionary, index_data:Dictionary={}):
 
 func set_page(page_id:String):
 	self._page_id = page_id
-	var page = ItemLibrary.get_item(page_id)
+	var page = ItemLibrary.get_static_inst_of_item(page_id)
 	if !page:
 		printerr("SkillNode: Failed to find Page with ItemId '%s'." %[page_id])
 		return

@@ -11,6 +11,11 @@ var object_details:Dictionary:
 	get:
 		return get_load_val("#ObjDetails", {}, false)
 
+## This object is a static representation of it's type and should not be deleted or modified
+var is_static_inst:bool:
+	get:
+		return self._id == self._key
+
 func _init(key:String, def_load_path:String, def:Dictionary, id:String='', data:Dictionary={}) -> void:
 	if id != '':
 		self._id = id

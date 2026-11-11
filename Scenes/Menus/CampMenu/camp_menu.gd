@@ -30,22 +30,22 @@ static var Instance:CampMenu
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Instance = self
-	character_button.button.pressed.connect(_on_prepare_button)
-	quest_button.button.pressed.connect(_on_quest_button)
-	shop_button.button.pressed.connect(_on_shop_button)
-	explort_button.button.pressed.connect(_on_explore_button)
-	records_button.button.pressed.connect(_sub_menu_open.bind("Records"))
-	system_button.button.pressed.connect(_sub_menu_open.bind("System"))
-	sys_back_button.button.pressed.connect(_sub_menu_open.bind("Main"))
-	sys_save_button.button.pressed.connect(_on_save_button)
-	sys_load_button.button.pressed.connect(_on_load_button)
-	sys_debug_button.button.pressed.connect(_on_debug_button)
-	sys_quit_button.button.pressed.connect(_on_quit)
+	character_button.pressed.connect(_on_prepare_button)
+	quest_button.pressed.connect(_on_quest_button)
+	shop_button.pressed.connect(_on_shop_button)
+	explort_button.pressed.connect(_on_explore_button)
+	records_button.pressed.connect(_sub_menu_open.bind("Records"))
+	system_button.pressed.connect(_sub_menu_open.bind("System"))
+	sys_back_button.pressed.connect(_sub_menu_open.bind("Main"))
+	sys_save_button.pressed.connect(_on_save_button)
+	sys_load_button.pressed.connect(_on_load_button)
+	sys_debug_button.pressed.connect(_on_debug_button)
+	sys_quit_button.pressed.connect(_on_quit)
 	
-	rec_back_button.button.pressed.connect(_sub_menu_open.bind("Main"))
-	rec_cards_button.button.pressed.connect(_on_records)
-	rec_pages_button.button.pressed.connect(_on_pages)
-	rec_actors_button.button.pressed.connect(_on_actors)
+	rec_back_button.pressed.connect(_sub_menu_open.bind("Main"))
+	rec_cards_button.pressed.connect(_on_records)
+	rec_pages_button.pressed.connect(_on_pages)
+	rec_actors_button.pressed.connect(_on_actors)
 	
 	if StoryState.get_story_flag("CampShopDisabled"):
 		shop_button.disabled = true
@@ -82,7 +82,17 @@ func check_for_new_stuff():
 	else:
 		_showed_level_up_already = true
 		character_button.text = "Party"
-		
+	
+	var shop_index = StoryState.get_story_flag("ShopIndex", 0)
+	var shop_max_seen_index = StoryState.get_story_flag("ShopIndexSeen", 0)
+	#if shop_index == 0:
+		#shop_button.disabled = true
+	#else:
+		#shop_button.disabled = false
+	if shop_index > shop_max_seen_index:
+		shop_button.text = "+ Shop"
+	else:
+		shop_button.text = "Shop"
 
 func load_dialog(dialog_script:String):
 	dialog_control.load_dialog_script(dialog_script)

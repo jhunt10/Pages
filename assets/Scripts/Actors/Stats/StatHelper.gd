@@ -17,6 +17,12 @@ const BasicStats:Array = [
 	Awareness, CritChance, CritMod, BlockChance, BlockMod,
 	BlocksLOS
 ]
+
+## Stats which use highest when merged
+const MergableStats:Array = [
+	HealthMax, PPR, Armor, Ward, PhyAttack, MagAttack
+]
+
 #const Level = "Level"
 #const Experience = "Experience"
 const Strength = "Strength"

@@ -2,17 +2,19 @@
 class_name CampOptionButton
 extends FitScaleLabel
 
+signal pressed
+
 @export var button:Button
 @export var under_line:Node
 @export var highlight:Node
 @export var disabled:bool:
 	set(val):
 		disabled = val
-		#if label:
-			#if disabled:
-				#label.self_modulate = Color.DIM_GRAY
-			#else:
-				#label.self_modulate = Color("780000")
+		if label:
+			if disabled:
+				label.add_theme_color_override("font_color", Color.DIM_GRAY)
+			else:
+				label.remove_theme_color_override("font_color")
 
 
 @export var is_highlighted:bool:
@@ -46,6 +48,7 @@ func _button_up():
 	if disabled: return
 	if not is_highlighted:
 		highlight.hide()
+	pressed.emit()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

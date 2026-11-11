@@ -151,6 +151,8 @@ func _on_item_added_to_slot(item:BaseItem, index:int):
 			var new_effect = EffectHelper.create_effect(_actor, item, effect_key, effect_def)
 			item_id_to_effect_id[item.Id] = new_effect.Id
 	_cache_action_mods()
+	if page is PageItemAction and page.has_ammo():
+		page.refill_ammo()
 
 func _on_item_removed(item_id:String, _supressing_signals:bool):
 	super(item_id, _supressing_signals)

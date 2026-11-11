@@ -1,6 +1,6 @@
 class_name AttackEvent
 
-const LOGGING = true
+const LOGGING = false
 enum AttackStage 
 {
 	## Attack Event has just been created

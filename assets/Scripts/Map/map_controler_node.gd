@@ -2,7 +2,7 @@
 class_name MapControllerNode
 extends Node2D
 
-const LOGGING = true
+const LOGGING = false
 
 var grid_tile_map:TileMapLayer:
 	get:

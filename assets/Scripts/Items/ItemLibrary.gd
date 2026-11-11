@@ -19,10 +19,11 @@ func is_object_static(object_def:Dictionary)->bool:
 	return object_def.get("IsStatic", false)
 
 func _get_staticly_loaded_object_keys()->Array:
-	var out_list = []
-	for object_key in _object_defs.keys():
-		out_list.append(object_key)
-	return out_list
+	return super()
+	#var out_list = []
+	#for object_key in _object_defs.keys():
+		#out_list.append(object_key)
+	#return out_list
 
 func get_object_script_path(object_def:Dictionary)->String:
 	var script = super(object_def)
@@ -107,6 +108,9 @@ static func delete_item(item):
 	if item is String:
 		item = get_item(item)
 	if !item:
+		return
+	if Instance._static_objects.keys().has(item.Id):
+		printerr("Attempted to delete static instance of item " + item.Id)
 		return
 	if !item.is_deleted:
 		item.on_delete()

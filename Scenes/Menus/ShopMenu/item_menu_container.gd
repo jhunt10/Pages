@@ -61,6 +61,7 @@ func _on_show_catagory(selected_catagory:String):
 			# Hide if currently selected
 			if _last_selected_catagory == selected_catagory:
 				sub_list.showing = false
+				_last_selected_catagory = null
 			else:
 				sub_list.showing = true
 				_last_selected_catagory = selected_catagory

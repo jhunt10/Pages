@@ -441,7 +441,6 @@ func _build_spawn_items(item_list:Array, holder:BaseItemHolder):
 		var slot = holder.get_first_valid_slot_for_item(item, false)
 		if slot >= 0:
 			holder._direct_set_item_in_slot(slot, item)
-			print("Spawned Item '%s' into slot %s." % [item.Id, slot])
 
 func clean_state():
 	self.is_dead = false
@@ -471,6 +470,8 @@ func leaves_corpse()->bool:
 	return is_player
 
 func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, game_state:GameStateData=null):
+	if is_player:
+		var t = true
 	if aggro:
 		aggro.add_threat_from_actor(damage_event.attacker, damage_event.final_damage, game_state)
 	if stats:

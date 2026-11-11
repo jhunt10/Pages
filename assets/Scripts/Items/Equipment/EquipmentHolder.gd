@@ -192,11 +192,11 @@ func get_auto_hand_index(item:BaseItem, requested_slot_index:int, _allow_replace
 				is_going_to_mainhand = false
 		
 	else: # Requested OffHand slot
-		# Non-OffHand Tool, push to MainHand
-		if not _can_use_tool_in_offhand(tool):
-			return firsthand_index
 		# Could MainHand and MainHand is empty, push to MainHand
 		if _can_use_tool_in_mainhand(tool) and _raw_item_slots[firsthand_index] == null:
+			return firsthand_index
+		# Non-OffHand Tool, push to MainHand
+		if not _can_use_tool_in_offhand(tool):
 			return firsthand_index
 		# We are 2Hand and current tool can't be 1hand, Push to main
 		if is_two_handing():
@@ -268,8 +268,15 @@ func auto_order_hand_items():
 	# Check OffHands are valid
 	for offhand_index in list_offhand_indexes():
 		var offhand_item = get_item_in_slot(offhand_index)
-		if offhand_item and not _can_use_tool_in_offhand(offhand_item):
-			_slot_validation_states[offhand_index] = ValidStates.Unacceptable
+		if offhand_item:
+			# Main and Off hand items are the same
+			if mainhand_item and mainhand_item == offhand_item:
+				# If it can't be TwoHand, then remove from Offhand slot
+				if not _can_use_tool_in_two_hands(mainhand_item):
+					_raw_item_slots[offhand_index] = null
+					_slot_validation_states[offhand_index] = ValidStates.Valid
+			if not _can_use_tool_in_offhand(offhand_item):
+				_slot_validation_states[offhand_index] = ValidStates.Unacceptable
 	
 	# Clear out HandStates
 	_is_unarmed = false
@@ -335,6 +342,8 @@ func _can_use_tool_in_offhand(item:BaseToolEquipment):
 		return false
 	
 	var main_hand_tool = get_first_hand_tool()
+	#if not main_hand_tool: # Coming in late, not sure about this, trying to prevent null error in TagHelper.check_tag_filters
+		#return false
 	for offhand_req in hand_conditions.get("OffHandReq", []):
 		if not TagHelper.check_tag_filters("MainHandTagFilters", offhand_req, main_hand_tool):
 			return false

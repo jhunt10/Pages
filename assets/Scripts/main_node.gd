@@ -223,7 +223,7 @@ func go_to_main_menu():
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed():
-		if event.keycode == KEY_U:
+		if event.keycode == KEY_U and Input.is_key_pressed(KEY_CTRL):
 			if dev_tools_menu:
 				dev_tools_menu.close_menu()
 				dev_tools_menu = null

@@ -25,7 +25,7 @@ static func build_action_ques(clear_existing_ques:bool=false):
 		if actor.ai_data.has("PrebuiltQueArr"):
 			var action_keys_que = actor.ai_data['PrebuiltQueArr']
 			for action_key in action_keys_que:
-				var action = ItemLibrary.get_item(action_key)
+				var action = ItemLibrary.get_static_inst_of_item(action_key)
 				actor.Que.que_action(action)
 		
 		# Disable positions
@@ -135,13 +135,13 @@ static func _choose_page_for_actor(actor:BaseActor, game_state:GameStateData)->P
 	if path_moves.size() > 0:
 		var max_aggro_distance = actor.ai_data.get("AggroRangeLimit", 9999)
 		if path_moves.size() < max_aggro_distance:
-			var move_action = ItemLibrary.get_item(path_moves[0])
+			var move_action = ItemLibrary.get_static_inst_of_item(path_moves[0])
 			if move_action:
 				return move_action
 	elif path_moves.size() == 0:
 		printerr("No Path found for actor: %s trying to reach %s" % [actor.Id, target_enemy.Id])
 	var mosey_action = build_mosey_round(actor, game_state)
-	var wait_action = ItemLibrary.get_item(mosey_action)
+	var wait_action = ItemLibrary.get_static_inst_of_item(mosey_action)
 	return wait_action
 
 static func _get_actor_action_options_data(actor:BaseActor)->Dictionary:

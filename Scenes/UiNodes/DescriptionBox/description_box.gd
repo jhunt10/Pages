@@ -33,9 +33,7 @@ func _show_pop_up(data_str):
 		#self.get_parent_control()
 		self.add_child(popup_container)
 	var data = JSON.parse_string(data_str)
-	var mouse_pos = self.get_global_mouse_position()
 	popup_container.show()
-	popup_container.global_position = mouse_pos
 	popup_container.parent_description_box = self
 	
 	if data:
@@ -67,6 +65,8 @@ func _show_pop_up(data_str):
 				if line is Texture2D:
 					popup_container.description_box.add_image(line, 0, 0, Color(1,1,1,1), INLINE_ALIGNMENT_BOTTOM)
 		#elif data.has("")
+	var mouse_pos = self.get_global_mouse_position()
+	popup_container.set_screen_safe_position(mouse_pos)
 	#var content_scale = get_window().content_scale_factor
 	#popup_container.scale  = Vector2.ONE
 	#if content_scale != 1:

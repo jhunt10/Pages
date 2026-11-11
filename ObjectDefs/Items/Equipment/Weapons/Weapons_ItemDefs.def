@@ -52,7 +52,7 @@
 		"EquipmentData": {
 			"StatMods": {
 				"AttackBonus": {
-					"Value": 10.0
+					"Value": 6.0
 				}
 			}
 		},
@@ -60,7 +60,7 @@
 			"AttackData": {
 				"DamageDatas": {
 					"WeaponDamage": {
-						"AtkPwrBase": 50.0,
+						"AtkPwrBase": 60.0,
 						"AtkPwrRange": 10.0,
 						"DamageType": "Blunt"
 					}
@@ -90,7 +90,7 @@
 		"EquipmentData": {
 			"StatMods": {
 				"AttackBonus": {
-					"Value": 10.0
+					"Value": 5.0
 				}
 			}
 		},
@@ -98,7 +98,7 @@
 			"AttackData": {
 				"DamageDatas": {
 					"WeaponDamage": {
-						"AtkPwrBase": 50.0,
+						"AtkPwrBase": 60.0,
 						"AtkPwrRange": 8.0,
 						"DamageType": "Slash"
 					}
@@ -256,7 +256,7 @@
 		"EquipmentData": {
 			"StatMods": {
 				"AttackBonus": {
-					"Value": 10.0
+					"Value": 5.0
 				}
 			}
 		},
@@ -264,9 +264,9 @@
 			"AttackData": {
 				"DamageDatas": {
 					"WeaponDamage": {
-						"AtkPwrBase": 50.0,
+						"AtkPwrBase": 60.0,
 						"AtkPwrRange": 5.0,
-						"DamageType": "Slash"
+						"DamageType": "Pierce"
 					}
 				}
 			},
@@ -443,9 +443,14 @@
 				"ReqStats": {}
 			},
 			"StatMods": {
-				"AttackBonus": {
+				"PhyAttackBonus": {
 					"ModType": "Add",
 					"StatName": "PhyAttack",
+					"Value": 5.0
+				},
+				"MagAttackBonus": {
+					"ModType": "Add",
+					"StatName": "MagAttack",
 					"Value": 5.0
 				}
 			}
@@ -467,7 +472,7 @@
 				],
 				"DamageDatas": {
 					"WeaponDamage": {
-						"AtkPwrBase": 50.0,
+						"AtkPwrBase": 60.0,
 						"AtkPwrRange": 5.0,
 						"AtkStat": "PhyAttack",
 						"DamageType": "Cold",

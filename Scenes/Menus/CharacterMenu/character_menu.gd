@@ -348,6 +348,8 @@ func start_dragging_item():
 		print("StartDragging: SelectedItem: %s" % [_pressed_item.Id])
 
 func stop_dragging():
+	if not _dragging:
+		return
 	_dragging = false
 	_pressed_item = null
 	_button_down_pos = null

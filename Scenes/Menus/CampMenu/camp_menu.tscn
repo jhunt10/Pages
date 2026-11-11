@@ -154,11 +154,10 @@ grow_vertical = 2
 texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/QuestOptionButton" unique_id=606248266]
-self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
 offset_right = 198.0
 offset_bottom = 60.0
-scale = Vector2(0.9166667, 0.9166667)
+scale = Vector2(1e-05, 1e-05)
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Tutorial"
@@ -208,11 +207,10 @@ grow_vertical = 2
 texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ExplorOptionButton" unique_id=1680603401]
-self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 3.0
 offset_right = 198.0
-offset_bottom = 60.0
-scale = Vector2(0.9166667, 0.9166667)
+offset_bottom = 63.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Fight"
@@ -264,9 +262,9 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/PrepareOptionButton" unique_id=1140783258]
 self_modulate = Color(0.498039, 0, 0, 1)
 layout_mode = 0
+offset_top = 3.0
 offset_right = 258.0
-offset_bottom = 60.0
-scale = Vector2(0.9166667, 0.9166667)
+offset_bottom = 63.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Party"
@@ -316,11 +314,10 @@ grow_vertical = 2
 texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ShopOptionButton" unique_id=486816799]
-self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
+offset_top = 3.0
 offset_right = 141.0
-offset_bottom = 60.0
-scale = Vector2(0.93333334, 0.93333334)
+offset_bottom = 63.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Shop"
@@ -372,9 +369,9 @@ texture = ExtResource("7_hs7sy")
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/RecordsOptionButton" unique_id=1099427208]
 self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
+offset_top = 3.0
 offset_right = 210.0
-offset_bottom = 60.0
-scale = Vector2(0.9166667, 0.9166667)
+offset_bottom = 63.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "Records"
@@ -424,11 +421,10 @@ grow_vertical = 2
 texture = ExtResource("7_hs7sy")
 
 [node name="TitleLabel" type="Label" parent="CampOptionsContainer/MainOptionsContainer/ScribeOptionButton" unique_id=1263236860]
-self_modulate = Color(0.470588, 0, 0, 1)
 layout_mode = 0
+offset_top = 4.0
 offset_right = 270.0
-offset_bottom = 60.0
-scale = Vector2(0.93333334, 0.93333334)
+offset_bottom = 64.0
 theme = ExtResource("3_ufdhk")
 theme_override_font_sizes/font_size = 48
 text = "System"

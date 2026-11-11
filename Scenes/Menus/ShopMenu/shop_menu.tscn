@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dd5xsv3bqcqi2" path="res://Scenes/Menus/CampMenu/camp_option_button.gd" id="7_36qs6"]
 [ext_resource type="Texture2D" uid="uid://c2vu13v8elej6" path="res://Scenes/Menus/ShopMenu/wood_frame_Black_Patch_124_16.png" id="8_6e5du"]
 [ext_resource type="Texture2D" uid="uid://567vutk12a12" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/SlotHighlight.png" id="8_g50yr"]
+[ext_resource type="Theme" uid="uid://bwctwaslfjw4k" path="res://assets/Themes/shop_option_label_button_theme.tres" id="9_d8eub"]
 [ext_resource type="Texture2D" uid="uid://dter0pgnswchk" path="res://Scenes/Menus/CampMenu/_B_Icon.png" id="9_sbhuk"]
 [ext_resource type="Theme" uid="uid://dkopxykqxg6jl" path="res://assets/Themes/scroll_bar_theme.tres" id="10_frlib"]
 [ext_resource type="Script" uid="uid://ro5drlf0sksf" path="res://Scenes/Menus/ShopMenu/item_menu_container.gd" id="13_3e5hi"]
@@ -168,6 +169,7 @@ script = ExtResource("6_l23p1")
 [node name="BuyOptionButton" type="Control" parent="ShopOptionsContainer/MainOptionsContainer" unique_id=1447075731 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+theme = ExtResource("9_d8eub")
 script = ExtResource("7_36qs6")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
@@ -188,9 +190,6 @@ texture = ExtResource("8_g50yr")
 layout_mode = 0
 offset_right = 114.0
 offset_bottom = 60.0
-theme = ExtResource("5_5483j")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 48
 text = " Buy"
 
 [node name="ColorRect" type="ColorRect" parent="ShopOptionsContainer/MainOptionsContainer/BuyOptionButton/TitleLabel" unique_id=2059106001]
@@ -218,6 +217,7 @@ grow_vertical = 2
 [node name="SellOptionButton" type="Control" parent="ShopOptionsContainer/MainOptionsContainer" unique_id=132334267 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+theme = ExtResource("9_d8eub")
 script = ExtResource("7_36qs6")
 button = NodePath("Button")
 under_line = NodePath("TitleLabel/ColorRect")
@@ -240,9 +240,7 @@ texture = ExtResource("8_g50yr")
 layout_mode = 0
 offset_right = 108.0
 offset_bottom = 60.0
-theme = ExtResource("5_5483j")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 48
 text = " Sell "
 
 [node name="ColorRect" type="ColorRect" parent="ShopOptionsContainer/MainOptionsContainer/SellOptionButton/TitleLabel" unique_id=1745835648]
@@ -270,6 +268,7 @@ grow_vertical = 2
 [node name="BackOptionButton" type="Control" parent="ShopOptionsContainer/MainOptionsContainer" unique_id=503630978 node_paths=PackedStringArray("button", "under_line", "highlight", "label")]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+theme = ExtResource("9_d8eub")
 script = ExtResource("7_36qs6")
 button = NodePath("ToCampButton")
 under_line = NodePath("TitleLabel/ColorRect")
@@ -292,9 +291,7 @@ texture = ExtResource("8_g50yr")
 layout_mode = 0
 offset_right = 144.0
 offset_bottom = 60.0
-theme = ExtResource("5_5483j")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 48
 text = " Back"
 
 [node name="ColorRect" type="ColorRect" parent="ShopOptionsContainer/MainOptionsContainer/BackOptionButton/TitleLabel" unique_id=215528613]
@@ -539,6 +536,7 @@ offset_top = -82.0
 offset_right = 274.0
 offset_bottom = -18.0
 grow_vertical = 0
+theme = ExtResource("9_d8eub")
 script = ExtResource("7_36qs6")
 button = NodePath("ItemListBackButton")
 under_line = NodePath("TitleLabel/ColorRect")
@@ -562,9 +560,6 @@ texture = ExtResource("8_g50yr")
 layout_mode = 1
 offset_right = 144.0
 offset_bottom = 60.0
-theme = ExtResource("5_5483j")
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 48
 text = " Back"
 
 [node name="ColorRect" type="ColorRect" parent="ItemMenuContainer/BackOptionButton/TitleLabel" unique_id=2136700108]

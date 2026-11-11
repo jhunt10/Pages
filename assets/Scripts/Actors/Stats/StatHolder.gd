@@ -169,8 +169,8 @@ func apply_damage_event(damage_event:DamageEvent, trigger_effect:bool=false, gam
 	var damage = damage_event.final_damage
 	var cur_hp = current_health 
 	var new_hp = max(min(cur_hp - damage, max_health), 0)
-	if LOGGING:
-		print("Taking Damage %s: Current: %s | Damage: %s | new: %s" % [ _actor.Id, cur_hp, damage, new_hp])
+	#if LOGGING:
+	print("Taking Damage %s: Current: %s | Damage: %s | new: %s" % [ _actor.Id, cur_hp, damage, new_hp])
 	_cached_stats[StatHelper.HealthCurrent] = new_hp
 	if current_health <= 0 and CombatRootControl.Instance:
 		CombatRootControl.Instance.kill_actor(_actor)
@@ -399,7 +399,32 @@ func _calc_cache_stats(should_emit_signal:bool=true, override_attribute_levels=n
 			# Remove from temp_stats as we cache them
 			temp_stats.erase(stat_name)
 	
-	
+	# Carrier Check
+	if _actor is CarrierActor:
+		var stat_merge_mapping = {}
+		var my_name = _actor.get_display_name()
+		for stat_key in StatHelper.MergableStats:
+			var replace_value = _cached_stats.get(stat_key, 0)
+			var replace_with_actor:BaseActor = null
+			for carried_actor:BaseActor in _actor.list_carried_actors():
+				var their_stat = carried_actor.stats.get_stat(stat_key, 0)
+				if their_stat > replace_value:
+					replace_with_actor = carried_actor
+					replace_value = their_stat
+			if replace_with_actor:
+				_cached_stats[stat_key] = replace_value
+				if not _cached_mods.keys().has(stat_key):
+					_cached_mods[stat_key] = []
+				_cached_mods[stat_key].clear()
+				_cached_mods[stat_key].append(
+					BaseStatMod.new(
+						_actor.Id, 
+						stat_key, 
+						"Merged w/ " + replace_with_actor.get_display_name(), 
+						BaseStatMod.ModTypes.Set,
+						replace_value
+					))
+				_cached_mods[stat_key].append_array(replace_with_actor.stats._cached_mods.get(stat_key, []))
 	
 	if LOGGING: print("--- Done Caching Stats")
 	if safety_limit <= 0:

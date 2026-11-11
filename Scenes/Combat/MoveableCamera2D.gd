@@ -1,7 +1,7 @@
 class_name MoveableCamera2D
 extends Camera2D
 
-const LOGGING = true
+const LOGGING = false
 
 signal panning_finished
 
