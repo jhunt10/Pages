@@ -85,10 +85,10 @@ func check_for_new_stuff():
 	
 	var shop_index = StoryState.get_story_flag("ShopIndex", 0)
 	var shop_max_seen_index = StoryState.get_story_flag("ShopIndexSeen", 0)
-	#if shop_index == 0:
-		#shop_button.disabled = true
-	#else:
-		#shop_button.disabled = false
+	if shop_index == 0:
+		shop_button.disabled = true
+	else:
+		shop_button.disabled = false
 	if shop_index > shop_max_seen_index:
 		shop_button.text = "+ Shop"
 	else:

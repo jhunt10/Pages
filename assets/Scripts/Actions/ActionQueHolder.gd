@@ -76,7 +76,7 @@ func que_action(action:PageItemAction, data:Dictionary={}):
 	if was_success:
 		if action.ActionKey == "Merge_ActionPage":
 			var room_left = true
-			var wait_page = ItemLibrary.get_item("WaitToBeDeployed_ActionPage")
+			var wait_page = ItemLibrary.get_static_inst_of_item("Merge_ActionPage")
 			while room_left:
 				room_left = _current_que.que_action(wait_page, {})
 		action_que_changed.emit()
@@ -146,6 +146,7 @@ func delete_at_que_index(que_index):
 	self.delete_at_turn_index(turn_index)
 
 func delete_at_turn_index(turn_index):
+	print("Delete at :" + str(turn_index))
 	var available_action_pages_changed = false
 	var deleted_action_id = _current_que.get_action_id_for_turn(turn_index)
 	
@@ -155,20 +156,23 @@ func delete_at_turn_index(turn_index):
 		# Unqueing deploy action changes actions available to carrier
 		available_action_pages_changed = true
 	
-	# Clear WaitPages added after Merge page
-	if deleted_action_id.begins_with("Merge_ActionPage"):
-		for offset in range(_current_que._max_turn_count - turn_index):
-			var check_index = _current_que._max_turn_count - offset
-			printerr("MergeDElete: Index: " + str(check_index))
-			var check_action_id = _current_que.get_action_id_for_turn(check_index)
-			if check_action_id == "WaitToBeDeployed_ActionPage":
-					_current_que.delete_at_turn_index(check_index)
 	
 	# Delete Action
 	_current_que.delete_at_turn_index(turn_index)
 	
+	# Delete all instances of Merge action
+	if deleted_action_id.begins_with("Merge_ActionPage"):
+		var check_index = 0
+		while check_index < _current_que._max_turn_count:
+			var check_action_id = _current_que.get_action_id_for_turn(check_index)
+			print("ASFASF Turn: %s Action: %s " % [ check_index , check_action_id])
+			if check_action_id == "Merge_ActionPage":
+				_current_que.delete_at_turn_index(check_index)
+			else:
+				check_index += 1
+	
 	# Check for shifted deploy_actions
-	var remaining_actions = _current_que.list_qued_actions(true)
+	var remaining_actions = _current_que.list_qued_action_ids()
 	if remaining_actions.has("Deploy_ActionPage"):
 		for offset in range(_current_que._max_turn_count - turn_index):
 			var check_index = turn_index + offset

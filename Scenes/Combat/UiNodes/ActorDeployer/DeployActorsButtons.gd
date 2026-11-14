@@ -39,10 +39,12 @@ func set_carrier(carrier_actor:CarrierActor, pre_selected_actor_ids:Array):
 	for index in range(buttons.size()):
 		var button:Button = buttons[index]
 		var port:TextureRect = portraits[index]
+		# Outside Bounds
 		if index >= carried_actors.size():
 			port.visible = false
 			button.button_pressed = false
 			button.disabled = true
+		# Set Actor for button
 		else:
 			var carried_actor:BaseActor = carried_actors[index]
 			var title = carried_actor.get_title_page()

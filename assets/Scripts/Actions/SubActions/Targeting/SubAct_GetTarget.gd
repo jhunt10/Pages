@@ -92,24 +92,21 @@ func do_thing(parent_action:PageItemAction, subaction_data:Dictionary, metadata,
 	if allow_auto and CombatRootControl.Instance.auto_targeting_enabled: 
 		# Get viable targets
 		var auto_targets = TargetingHelper.get_auto_targets_for_page(selection_data, parent_action, actor, game_state)
-		if auto_targets.size() == 0:
-			VfxHelper.create_flash_text(actor, "No Target", BaseFlashTextVfxNode.FlashTextType.NoTarget)
-			return BaseSubAction.Failed
-			
-		# Get last targeted Actor
-		var last_target_record = CombatRootControl.Instance.last_target_records.get(actor.Id, {})
-		var last_target_actor_id = last_target_record.get("ActorId", null)
-		# Select last actor if locked on and can be targeted again 
-		if last_target_actor_id and last_target_record.get("LockOn", false):
-			for target:BaseActor in auto_targets:
-				if target.Id == last_target_actor_id:
-					turn_data.add_target_for_key(setting_target_key, target_params, target)
-					return BaseSubAction.Success
-		# Auto-Select single target if only one Actor in range 
-		if auto_targets.size() == 1:
-			turn_data.add_target_for_key(setting_target_key, target_params, auto_targets[0])
-			CombatRootControl.Instance.last_target_records[actor.Id] = {"ActorId": auto_targets[0].Id, "LockOn": false}
-			return BaseSubAction.Success
+		if auto_targets.size() > 0:
+			# Get last targeted Actor
+			var last_target_record = CombatRootControl.Instance.last_target_records.get(actor.Id, {})
+			var last_target_actor_id = last_target_record.get("ActorId", null)
+			# Select last actor if locked on and can be targeted again 
+			if last_target_actor_id and last_target_record.get("LockOn", false):
+				for target:BaseActor in auto_targets:
+					if target.Id == last_target_actor_id:
+						turn_data.add_target_for_key(setting_target_key, target_params, target)
+						return BaseSubAction.Success
+			# Auto-Select single target if only one Actor in range 
+			if auto_targets.size() == 1:
+				turn_data.add_target_for_key(setting_target_key, target_params, auto_targets[0])
+				CombatRootControl.Instance.last_target_records[actor.Id] = {"ActorId": auto_targets[0].Id, "LockOn": false}
+				return BaseSubAction.Success
 	
 	CombatRootControl.pause_combat()
 	

@@ -194,7 +194,7 @@ process_mode = 3
 position = Vector2(576, 324)
 script = ExtResource("17_7dull")
 canvas_layer = NodePath("CanvasLayer")
-no_scroll_nodes = [NodePath("CanvasLayer/CombatUiControl/ActiveCombatControl/CombatLogBox"), NodePath("CanvasLayer/CombatUiControl/CombatControlPanel")]
+no_scroll_nodes = [NodePath("CanvasLayer/CombatUiControl/ActiveCombatControl/CombatLogBox"), NodePath("CanvasLayer/CombatUiControl/CombatControlPanel"), NodePath("CanvasLayer/CombatTutorialControl/Party_ComPopContainer")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D" unique_id=837055766]
 
@@ -961,6 +961,7 @@ texture = ExtResource("44_8qg5x")
 offset = Vector2(0, -28)
 
 [node name="EndScreensControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=823660565]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1450,6 +1451,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameUnlockScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/EndScreensControl" unique_id=935128400 node_paths=PackedStringArray("new_actor_name_label", "new_actor_icon", "camp_button")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -2375,7 +2377,6 @@ Would you like to start the        [color=blue]Deployment[/color] Guide?
 "
 
 [node name="Party_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1688346245 instance=ExtResource("74_jdhj7")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

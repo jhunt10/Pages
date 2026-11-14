@@ -121,17 +121,21 @@ func start_state():
 	CombatRootControl.Instance.ui_control.combat_control_panel.set_status("Que Deploy")
 	if spawn_map:
 		spawn_map.show()
+	# Hide Active Combat Controls and show Deployment Controls
 	CombatRootControl.Instance.ui_control.active_combat_control.hide()
 	deployment_control.deployment_ui_state = self
 	#deployment_control.set_deploying_actor(carrier_actor, ActorLibrary.get_actor(deploying_actor_id))
 	deployment_control.actor_buttons_control.set_carrier(carrier_actor, pre_selected_actor_ids)
 	deployment_control.show()
+	
+	# Connect Signals
 	if not deployment_control.cancled.is_connected(_on_canceled):
 		deployment_control.cancled.connect(_on_canceled)
 	if not deployment_control.confirmed.is_connected(_on_confirm):
 		deployment_control.confirmed.connect(_on_confirm)
 	if not deployment_control.actor_buttons_control.button_states_changed.is_connected(_on_selected_deploying_actors_change):
 		deployment_control.actor_buttons_control.button_states_changed.connect(_on_selected_deploying_actors_change)
+	
 	_on_selected_deploying_actors_change(deployment_control.actor_buttons_control.get_select_deploy_actor_ids())
 	CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingActor)
 	deployment_control.check_comfirm_button_enabled()

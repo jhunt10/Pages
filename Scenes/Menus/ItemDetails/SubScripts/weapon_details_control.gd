@@ -61,6 +61,9 @@ func set_weapon(actor:BaseActor, weapon:BaseWeaponEquipment):
 	
 	var mods = weapon.get_passive_stat_mods()
 	stat_mod_label.hide()
+	for child in flow_container.get_children():
+		if not child == stat_mod_label:
+			child.queue_free()
 	for mod in mods:
 		var lab = stat_mod_label.duplicate()
 		flow_container.add_child(lab)
