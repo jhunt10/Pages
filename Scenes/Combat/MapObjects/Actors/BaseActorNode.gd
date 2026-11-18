@@ -437,31 +437,39 @@ func hide_path_arrow():
 func show_path_arrow():
 	if not path_arrow:
 		return
-	path_arrow.visible = true
+	if Actor.is_dead:
+		path_arrow.visible = false
+	else:
+		path_arrow.visible = true
 
 func reset_path_arrow():
 	if not path_arrow:
 		return
-	path_arrow.visible = true
-	path_arrow.position = Vector2.ZERO
-	if facing_dir == 0: path_arrow.set_rotation_degrees(0) 
-	if facing_dir == 1: path_arrow.set_rotation_degrees(90) 
-	if facing_dir == 2: path_arrow.set_rotation_degrees(180) 
-	if facing_dir == 3: path_arrow.set_rotation_degrees(270) 
+	if Actor.is_dead:
+		path_arrow.visible = false
+	else:
+		path_arrow.visible = true
+		path_arrow.position = Vector2.ZERO
+		if facing_dir == 0: path_arrow.set_rotation_degrees(0) 
+		if facing_dir == 1: path_arrow.set_rotation_degrees(90) 
+		if facing_dir == 2: path_arrow.set_rotation_degrees(180) 
+		if facing_dir == 3: path_arrow.set_rotation_degrees(270) 
 
 func set_path_arrow_pos(pos:MapPos):
 	if not path_arrow:
 		return
-	if not path_arrow.visible:
+	if Actor.is_dead:
+		path_arrow.visible = false
+	else:
 		path_arrow.visible = true
-	var tile_map = get_parent() as TileMapLayer
-	var local_pos = tile_map.map_to_local(Vector2i(pos.x, pos.y)) - self.position
-	path_arrow.position = local_pos
-	path_arrow.visible = true
-	if pos.dir == 0: path_arrow.set_rotation_degrees(0) 
-	if pos.dir == 1: path_arrow.set_rotation_degrees(90) 
-	if pos.dir == 2: path_arrow.set_rotation_degrees(180) 
-	if pos.dir == 3: path_arrow.set_rotation_degrees(270) 
+		var tile_map = get_parent() as TileMapLayer
+		var local_pos = tile_map.map_to_local(Vector2i(pos.x, pos.y)) - self.position
+		path_arrow.position = local_pos
+		path_arrow.visible = true
+		if pos.dir == 0: path_arrow.set_rotation_degrees(0) 
+		if pos.dir == 1: path_arrow.set_rotation_degrees(90) 
+		if pos.dir == 2: path_arrow.set_rotation_degrees(180) 
+		if pos.dir == 3: path_arrow.set_rotation_degrees(270) 
 
 ##############################
 ##		Get Positions

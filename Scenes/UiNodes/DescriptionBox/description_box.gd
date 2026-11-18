@@ -154,7 +154,22 @@ func _build_bbcode_array(
 		if not token.begins_with("#"):
 			out_line += token
 			continue
-		var sub_tokens = token.split(":")
+		# Need to split and recombine to account for "\:"
+		var split_tokens = token.split(':')
+		var sub_tokens = []
+		var building_token:String = ""
+		while split_tokens.size() > 0:
+			var cur_token = split_tokens[0]
+			split_tokens.remove_at(0)
+			building_token += cur_token.trim_suffix("\\")
+			if cur_token.ends_with("\\"):
+				building_token += ":"
+				continue
+			else:
+				sub_tokens.append(building_token)
+				building_token = ""
+				
+			
 		match sub_tokens[0]:
 			'#EftChances':
 				out_arr.append(out_line)

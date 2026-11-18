@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://qhjmuxtltq5p" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Crate_Icon.png" id="13_r045x"]
 [ext_resource type="Texture2D" uid="uid://kh2uekpf4sb8" path="res://Scenes/Maps/MapEditing/ActorSpawnSprite.png" id="14_pqc0r"]
 [ext_resource type="Script" uid="uid://ciun3paive04n" path="res://Scenes/Maps/MapEditing/actor_spawn_node.gd" id="15_1we1f"]
+[ext_resource type="Texture2D" uid="uid://faw2luabjjpb" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Chest_Icon.png" id="16_r6x6m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lwpvo"]
 texture = ExtResource("2_f8g6a")
@@ -1272,6 +1273,7 @@ tile_set = SubResource("TileSet_vn2n0")
 tile_set = SubResource("TileSet_eodif")
 
 [node name="ActorTileMapLayer" type="TileMapLayer" parent="." unique_id=1918737634]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_5ipcw")
 
 [node name="PlayerSpawnAreaMapLayer" type="TileMapLayer" parent="." unique_id=1397102842]
@@ -1457,3 +1459,13 @@ spawn_actor_key = "Player"
 team_key = "Players"
 is_player = true
 map_coor = Vector2i(5, 10)
+
+[node name="SpwanNode_Chest" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1772138305]
+position = Vector2(464, 144)
+texture = ExtResource("16_r6x6m")
+script = ExtResource("15_1we1f")
+spawn_actor_key = "ChestActor"
+spawn_actor_id = "VillageChest"
+team_key = "Decor"
+facing = 2
+map_coor = Vector2i(14, 4)

@@ -21,6 +21,7 @@ func refill_ammo():
 		var actor = CombatRootControl.Instance.GameState.get_actor(actor_id)
 		if actor:
 			actor.pages.fill_page_ammo()
+	CombatRootControl.Instance.ui_control.que_input.resync_ammo_pages()
 
 
 func open_spawn_menu():
@@ -59,5 +60,7 @@ func recall_all_actors():
 		if player == soldier:
 			continue
 		if player.is_being_carried():
+			continue
+		if player.is_dead:
 			continue
 		DeploymentHelper.recall_actor(player, soldier)

@@ -152,6 +152,18 @@ func _draw() -> void:
 		var boarder = 5
 		if highlight_node:
 			var node_space = highlight_node.get_global_rect()
+			if highlight_target == HighlightTargets.QueInput:
+				node_space = Rect2(0,0,0,0)
+				if que_input_contol:
+					var que_input_node = que_input_contol.get_node("QueInputBackPatchContainer")
+					var que_display_node = que_input_contol.que_display_control
+					var input_rect:Rect2 = que_input_node.get_global_rect()
+					var display_rect:Rect2 = que_display_node.get_global_rect()
+					node_space.position = display_rect.position
+					node_space.size.x = max(display_rect.size.x, input_rect.size.x)
+					node_space.size.y = (display_rect.size.y + input_rect.size.y + 
+					(input_rect.position.y - (display_rect.position.y + display_rect.size.y)))
+				
 			# Left side
 			draw_rect(Rect2(0,0, node_space.position.x - boarder, self.size.y), darken_color)
 			# Right Side

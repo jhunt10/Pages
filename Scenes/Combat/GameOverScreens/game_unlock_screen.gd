@@ -5,6 +5,7 @@ extends Control
 @export var new_actor_name_label:Label
 @export var new_actor_icon:TextureRect
 @export var camp_button:Button
+@export var shop_unlock_label:Label
 
 func _ready() -> void:
 	self.hide()
@@ -13,10 +14,12 @@ func _ready() -> void:
 func show_game_result():
 	var story_index = StoryState._story_stage_index
 	var new_actor_key = ""
+	shop_unlock_label.hide()
 	match story_index:
 		0: 
 			new_actor_key = "RogueTemplate"
 			StoryState.set_story_flag("ShopIndex", 1)
+			shop_unlock_label.show()
 		1: 
 			new_actor_key = "PriestTemplate"
 			StoryState.set_story_flag("ShopIndex", 2)

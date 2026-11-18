@@ -769,10 +769,30 @@
 				}
 			},
 			"MissileDatas": {
-				"SpellMissile": {
+				"Missile1": {
 					"DamageDataKey": "MissileDamage",
 					"FramesPerTile": 3.0,
-					"MissileVfxKey": "LightBall"
+					"MissileVfxKey": "LightBall",
+					"MissileVfxData": {
+						"AnimationName": "4_sprites_250ms_frames_loop",
+						"AnimationSpeed": 1.0,
+						"RandomOffsets": [
+							0.0,
+							0.0
+						],
+						"RandomRotation": [
+							0.0,
+							0.0
+						],
+						"Scale": [
+							1.0,
+							1.0
+						],
+						"ScenePath": "res://assets/Scripts/VFXs/MissileVfx/missile_vfx_node.tscn",
+						"SpriteName": "Sprites/Missiles/LightBall.png",
+						"SpriteSheetHight": 2.0,
+						"SpriteSheetWidth": 2.0
+					}
 				}
 			}
 		},
@@ -812,7 +832,7 @@
 			"AttackDetails": {
 				"AccuracyMod": 1.0,
 				"AttackVfxData": {
-
+					"SpriteName": "Sprites/Missiles/LightBullet.png"
 				},
 				"AttackVfxKey": "LightBolt",
 				"PotencyMod": 1.0

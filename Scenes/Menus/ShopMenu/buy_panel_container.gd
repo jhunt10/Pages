@@ -17,7 +17,6 @@ func _ready() -> void:
 func set_item(item:BaseItem, selling:bool=false):
 	sell_mode = selling
 	item_details_container.set_detail_container_item(null, item)
-	item_details_container.exit_button_texture.hide()
 	buy_controller.set_item(item, selling)
 
 func close_panel():

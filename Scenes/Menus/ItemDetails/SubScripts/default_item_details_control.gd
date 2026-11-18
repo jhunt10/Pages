@@ -12,6 +12,11 @@ func set_item(item:BaseItem):
 	for mod_data in stat_mods.values():
 		if mod_data.get("DisplayName", "") == "Base Stats":
 			continue
+		var stat_name:String = mod_data.get("StatName", "")
+		if stat_name.begins_with("DirMod_"):
+			continue
+		#if stat_name.begins_with("Block"):
+			#continue
 		var new_mod:StatModLabelContainer = premade_stat_mod_label.duplicate()
 		new_mod.set_mod_data(mod_data)
 		stat_mods_container.add_child(new_mod)

@@ -83,8 +83,8 @@ const stat_abbrs:Dictionary = {
 	
 	CritChance: "CrtC",
 	CritMod: "CrtM",
-	BlockChance: "Block.C",
-	BlockMod: "Block.M"
+	BlockChance: "BChc",
+	BlockMod: "BMod"
 }
 
 const stat_icon_paths:Dictionary = {

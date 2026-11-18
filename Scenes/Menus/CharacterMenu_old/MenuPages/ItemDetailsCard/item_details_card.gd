@@ -68,6 +68,7 @@ var is_selling:bool = false
 @export var confirm_label:FitScaleLabel
 @export var confirm_button_texture:Texture2D
 @export var confirm_button_pressed_texture:Texture2D
+@export var exit_button:Button
 
 #enum AnimationStates {In, Showing, Out, Hidden}
 #var animation_state:AnimationStates
@@ -80,7 +81,7 @@ var _current_card
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
-	item_details_container.exit_button.pressed.connect(_on_exit_button)
+	exit_button.pressed.connect(_on_exit_button)
 	offset_control.size = self.size
 	if vertical:
 		offset_point.position = Vector2(self.size.x,0)

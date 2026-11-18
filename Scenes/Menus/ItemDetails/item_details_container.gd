@@ -9,8 +9,6 @@ extends BoxContainer
 @export var value_lable:Label
 @export var tag_container:TagsContainer
 @export var description_box:RichTextLabel
-@export var exit_button_texture:TextureRect
-@export var exit_button:Button
 #@export var equip_button:Button
 #@export var button_label:Label
 

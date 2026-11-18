@@ -25,6 +25,7 @@
 [ext_resource type="Script" uid="uid://bo8k3i7agonkg" path="res://Scenes/Maps/MapEditing/map_path_node.gd" id="18_g601w"]
 [ext_resource type="Script" uid="uid://cnfqwo2sskeoe" path="res://Scenes/Maps/DecoreNodes/Bridge/bridge_sprite_node.gd" id="18_kv46f"]
 [ext_resource type="Texture2D" uid="uid://d1rfl5p8pk2qv" path="res://Scenes/Maps/MapEditing/MapMarker.png" id="19_p6fio"]
+[ext_resource type="Texture2D" uid="uid://faw2luabjjpb" path="res://ObjectDefs/Factions/Objects/Actors/Sprites/Chest_Icon.png" id="24_8lgs3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0gfa0"]
 texture = ExtResource("2_4k04i")
@@ -1767,6 +1768,16 @@ spawn_actor_id = "SkeletonMageBoss"
 team_key = "Enemies"
 facing = 2
 map_coor = Vector2i(13, 5)
+
+[node name="SpwanNode_Chest" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=1194409254]
+position = Vector2(656, 784)
+texture = ExtResource("24_8lgs3")
+script = ExtResource("11_ukasq")
+spawn_actor_key = "ChestActor"
+spawn_actor_id = "CaveChest"
+team_key = "Decor"
+facing = 2
+map_coor = Vector2i(20, 24)
 
 [node name="DemoSpawnerPhaseMap" type="TileMapLayer" parent="PhaseController" unique_id=780465232]
 tile_set = SubResource("TileSet_4vtjy")

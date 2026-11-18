@@ -227,7 +227,9 @@ func get_stat_mods_granted_to_carrier()->Array:
 
 func _get_object_specific_tags()->Array:
 	var tag_list = []
-	tag_list.append(self.get_faction_key())
+	var faction = self.get_faction_key()
+	if faction != "Objects":
+		tag_list.append(faction)
 	TagHelper.merge_lists(tag_list, super())
 	TagHelper.merge_lists(tag_list, pages.get_tags_added_to_actor())
 	TagHelper.merge_lists(tag_list, effects.get_tags_added_to_actor())

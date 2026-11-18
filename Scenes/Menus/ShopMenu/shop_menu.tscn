@@ -666,6 +666,7 @@ patch_margin_right = 48
 patch_margin_bottom = 48
 
 [node name="DetaiolCardSpawnPoint" type="Control" parent="." unique_id=280638178]
+visible = false
 clip_contents = true
 custom_minimum_size = Vector2(300, 260)
 anchors_preset = 0
@@ -674,7 +675,7 @@ offset_top = 65.0
 offset_right = 602.0
 offset_bottom = 445.0
 scale = Vector2(1.5, 1.5)
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="ItemDetailsCard" parent="DetaiolCardSpawnPoint" unique_id=1504310930 instance=ExtResource("23_gkgvs")]
 visible = false
@@ -991,6 +992,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BuyPanelContainer" type="PanelContainer" parent="." unique_id=1084273047 node_paths=PackedStringArray("close_button", "item_details_container", "buy_controller")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

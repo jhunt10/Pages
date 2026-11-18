@@ -1,61 +1,13 @@
 {
-	"TowerShield": {
+	"#BaseShield": {
 		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
 		"#ObjDetails": {
-			"Description": "A large wooden shield which provides... wait, no. This is just half a barrel. Guess it still works though.",
-			"DisplayName": "Tower Shield",
-			"LargeIcon": "Sprites/TowerShield_Icon.png",
-			"ObjectType": "Item",
-			"SmallIcon": "Sprites/TowerShield_Icon.png",
-			"SnippetDesc": "A large wooden shield.",
-			"Tags": [
-				"Equipment",
-				"OffHand",
-				"Shield"
-			],
-			"Taxonomy": [
-				"Item",
-				"Equipment",
-				"Tool",
-				"Shield"
-			]
-		},
-		"EquipmentData": {
-			"EquipSlot": "OffHand",
-			"Requirments": {
-				"ReqStats": {}
-			},
-			"SpriteData": {
-				"SpriteSheet": "Sprites/TowerShield_SpriteSheet.png"
-			},
-			"StatMods": {
-				"StatMod1": {
-					"ModType": "Set",
-					"StatName": "BlockChance",
-					"Value": 50.0
-				},
-				"StatMod2": {
-					"ModType": "Set",
-					"StatName": "BlockMod",
-					"Value": 0.5
-				}
-			}
-		},
-		"ItemData": {
-			"Rarity": "Mundane",
-			"Value": 50.0
-		},
-		"_DefVersion": "1"
-	},
-	"WoodenShield": {
-		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
-		"#ObjDetails": {
-			"Description": "A simple wooden shield. Lighter than most shields, it's easy to block with but offers less defense.",
-			"DisplayName": "Wooden Shield",
+			"Description": "A basic @@#Tag:Shield@@ for blocking attacks.\n\nGrants @@#StatMod:BlockChanceMod:ValuePercent@@ chance to reduce incoming damage by @@#StatMod:BlockValueMod:ValuePercent@@.",
+			"DisplayName": "Base Shield",
 			"LargeIcon": "Sprites/WoodenShield_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/WoodenShield_Icon.png",
-			"SnippetDesc": "A wooden Shield.",
+			"SnippetDesc": "A Shield.",
 			"Tags": [
 				"Equipment",
 				"OffHand",
@@ -71,80 +23,138 @@
 		"EquipmentData": {
 			"EquipSlot": "OffHand",
 			"Requirments": {
-				"ReqStats": {}
 			},
 			"SpriteData": {
 				"SpriteSheet": "Sprites/WoodenShield_SpriteSheet.png"
 			},
 			"StatMods": {
-				"StatMod1": {
+				"BlockChanceMod": {
 					"ModType": "Set",
 					"StatName": "BlockChance",
-					"Value": 50.0
+					"Value": 25.0
 				},
-				"StatMod2": {
+				"BlockValueMod": {
 					"ModType": "Set",
 					"StatName": "BlockMod",
-					"Value": 0.4
+					"Value": 30
+				},
+				"ArmorBonus": {
+					"ModType": "Add",
+					"StatName": "Armor",
+					"Value": 5.0
 				}
 			}
 		},
 		"ItemData": {
 			"Rarity": "Mundane",
-			"Value": 50.0
+			"Value": 0.0
+		},
+		"_DefVersion": "1"
+	},
+	"TowerShield": {
+		"!ParentKey": "#BaseShield",
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
+		"#ObjDetails": {
+			"Description": "A large metal shield which provides superior damage reduction and a greater chance to block, assuming you're facing them.\n\nGrants @@#StatMod:BlockChanceMod:ValuePercent@@ chance to reduce @@#Tag:Attack@@ damage by @@#StatMod:BlockValueMod:ValuePercent@@, but can not block attacks from @@#Tag:Behind@@.",
+			"DisplayName": "Tower Shield",
+			"LargeIcon": "Sprites/TowerShield_Icon.png",
+			"SmallIcon": "Sprites/TowerShield_Icon.png",
+			"SnippetDesc": "A large wooden shield."
+		},
+		"EquipmentData": {
+			"SpriteData": {
+				"SpriteSheet": "Sprites/TowerShield_SpriteSheet.png"
+			},
+			"StatMods": {
+				"BlockChanceMod": {
+					"Value": 50
+				},
+				"BlockValueMod": {
+					"Value": 30
+				},
+				"ArmorBonus": {
+					"Value": 10
+				},
+				"BackBlockMod": {
+					"ModType": "Set",
+					"StatName": "DirMod_Back:BlockChance",
+					"Value": 0
+				}
+			}
+		},
+		"ItemData": {
+			"Rarity": "Rare",
+			"Value": 300.0
+		},
+		"_DefVersion": "1"
+	},
+	"WoodenShield": {
+		"!ParentKey": "#BaseShield",
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
+		"#ObjDetails": {
+			"Description": "A simple wooden shield. Lighter than most shields, it's easy to block with but offers less defense.\n\nGrants @@#StatMod:BlockChanceMod:ValuePercent@@ chance to reduce incoming damage by @@#StatMod:BlockValueMod:ValuePercent@@.",
+			"DisplayName": "Wooden Shield",
+			"LargeIcon": "Sprites/WoodenShield_Icon.png",
+			"SmallIcon": "Sprites/WoodenShield_Icon.png",
+			"SnippetDesc": "A wooden Shield."
+		},
+		"EquipmentData": {
+			"SpriteData": {
+				"SpriteSheet": "Sprites/WoodenShield_SpriteSheet.png"
+			},
+			"StatMods": {
+				"BlockChanceMod": {
+					"Value": 50
+				},
+				"BlockValueMod": {
+					"Value": 15
+				},
+				"ArmorBonus": {
+					"Value": 3
+				}
+			}
+		},
+		"ItemData": {
+			"Rarity": "Common",
+			"Value": 100
 		},
 		"_DefVersion": "1"
 	},
 	"WoodenTower": {
+		"!ParentKey": "#BaseShield",
 		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseShieldItem.gd",
 		"#ObjDetails": {
-			"Description": "A large wooden shield which provides... wait, no. This is just half a barrel. Guess it still works though.",
+			"Description": "A large wooden shield which provides... wait, no. This is just half a barrel. Guess it still works though.\n\nGrants @@#StatMod:BlockChanceMod:ValuePercent@@ chance to reduce @@#Tag:Attack@@ damage by @@#StatMod:BlockValueMod:ValuePercent@@, but can not block attacks from @@#Tag:Behind@@.",
 			"DisplayName": "Wooden Tower",
 			"LargeIcon": "Sprites/WoodenTower_Icon.png",
 			"ObjectType": "Item",
 			"SmallIcon": "Sprites/WoodenTower_Icon.png",
-			"SnippetDesc": "A large wooden shield.",
-			"Tags": [
-				"Equipment",
-				"OffHand",
-				"Shield"
-			],
-			"Taxonomy": [
-				"Item",
-				"Equipment",
-				"Tool",
-				"Shield"
-			]
+			"SnippetDesc": "A large wooden shield."
 		},
 		"EquipmentData": {
-			"EquipSlot": "OffHand",
-			"Requirments": {
-				"ReqStats": {}
-			},
 			"SpriteData": {
 				"SpriteSheet": "Sprites/WoodenTower_SpriteSheet.png"
 			},
 			"StatMods": {
-				"StatMod1": {
-					"ModType": "Set",
-					"StatName": "BlockChance",
-					"Value": 50.0
+				"BlockChanceMod": {
+					"Value": 50
 				},
-				"StatMod2": {
-					"ModType": "Set",
-					"StatName": "BlockMod",
-					"Value": 0.5
+				"BlockValueMod": {
+					"Value": 30
 				},
-				"StatMod3": {
-					"ModType": "Add",
-					"StatName": "Speed",
-					"Value": -1.0
+				"ArmorBonus": {
+					"Value": 5
+				},
+				"BackBlockMod": {
+					"ModType": "Set",
+					"StatName": "DirMod_Back:BlockChance",
+					"Value": 0
 				}
 			}
 		},
 		"ItemData": {
-			"Rarity": "Mundane",
-			"Value": 50.0
+			"Rarity": "Common",
+			"Value": 200
 		},
 		"_DefVersion": "1"
 	}

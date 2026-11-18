@@ -203,7 +203,7 @@
 		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Chest/ChestActor.gd",
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
-			"Description": "Description",
+			"Description": "@@#Color:Red:Chests@@ are one of the greatest mystories of @@#Color:Blue:The World@@. They appear in remote locations, open with the slightest @@#Color:Red:Attack@@, then disapear leaving behind only a single @@#Color:Blue:Item@@.\n\nMany have speculated about thier origin.\nWho builds them? Who fills them? Are they a reward from @@#Color:Blue:Heaven@@ or temptation from @@#Color:Blue:Hell@@?\n\nThese are the things that we will never know.\n\n@@#Color:Grey:Dev Note\\: Every Chest is a baby Mimic, but they never get to level up because they spawn with 1 HP and everyone opens boxes by hitting them \\:(@@",
 			"DisplayName": "Silver Chest",
 			"LargeIcon": "Sprites/ChestSilver_Icon.png",
 			"ObjectType": "Actor",
@@ -229,7 +229,7 @@
 		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Chest/ChestActor.gd",
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
-			"Description": "Description",
+			"Description": "While @@#Color:Red:Silver Chest@@ may be common enough, only ancient legends tell of the elusive @@#Color:Red:Gold Chest@@.\n\nThese prized containers are said to hold the rarest of @@#Color:Red:Loot@@, but will only spawn in the presence of the fabled @@#Color:Blue:Heros@@ and once claimed, shall never spawn again.",
 			"DisplayName": "Gold Chest",
 			"LargeIcon": "Sprites/Chest_Icon.png",
 			"ObjectType": "Actor",
@@ -255,7 +255,7 @@
 		"!ObjectScript": "res://ObjectDefs/Factions/Objects/Actors/Scenes/Shrine/SpawnerActor.gd",
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
-			"Description": "Description",
+			"Description": "These @@#Color:Red:Shrines@@ serve as a protective barrier guarding the old entrance to @@#Color:Blue:The City@@.\n\nConcerned by the prospect of @@#Color:Red:Monsters@@ attacking through @@#Color:Blue:The Cave@@ connected to @@#Color:Blue:The Sewers@@, @@#Color:Blue:The Military@@ asked @@#Color:Blue:The Church@@ to erect a magical barrier.\n\nThe @@#Color:Red:Priests@@ at @@#Color:Blue:The Church@@ didn't want to addmit they couldn't do that (since it's more of a @@#Color:Red:Mage@@ thing), so instead they built @@#Color:Red:Shrines@@ to summon @@#Color:Red:Zombies@@ as guards.\n\nTampering with these @@#Color:Red:Shrines@@ is a capital offence punishable by life in prison or penalty of death. Which is kind of the same thing.",
 			"DisplayName": "Shrine",
 			"LargeIcon": "Sprites/Shrine_Icon.png",
 			"ObjectType": "Actor",
@@ -285,14 +285,15 @@
 	"StalagmiteActor": {
 		"!ParentKey": "#BaseObjectActor",
 		"#ObjDetails": {
-			"Description": "Description",
 			"DisplayName": "Stalagmite",
+			"Description": "@@#Color:Red:Stalagmites@@ are rock formations that rises from the floor of @@#Color:Blue:The Cave@@ through the accumulation of minerals in one @@#Color:Blue:Spot@@. While made of natural stone, they are actually quite brittle and occationally contain @@#Color:Blue:Items@@ for some reason.\n\nResearchers at @@#Color:Blue:The Collage@@ theorize that @@#Color:Red:Stalagmites@@ are formed by the dripping of mineral rich water from @@#Color:Grey:Stalactites@@ attached to the ceiling of @@#Color:Blue:The Cave@@. But these theories can not be confirmed as no one has ever observed this so called \"ceiling\".",
 			"LargeIcon": "Sprites/Stalagmite_Icon.png",
 			"ObjectType": "Actor",
 			"SmallIcon": "Sprites/Stalagmite_Icon.png",
 			"SnippetDesc": "a stalagmite",
 			"Tags": [
-				"Object"
+				"Object",
+				"Rooted"
 			],
 			"Taxonomy": [
 				"Actor",

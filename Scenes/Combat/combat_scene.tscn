@@ -898,10 +898,10 @@ scroll_active = false
 
 [node name="TestingConbatPanel" type="PanelContainer" parent="MoveableCamera2D/CanvasLayer/CombatUiControl/ActiveCombatControl" unique_id=1688100550 node_paths=PackedStringArray("refill_ammo_button", "spawn_button", "recall_button")]
 layout_mode = 1
-offset_left = 759.0
-offset_top = 8.0
-offset_right = 893.0
-offset_bottom = 92.0
+offset_left = 8.0
+offset_top = 361.0
+offset_right = 142.0
+offset_bottom = 480.0
 theme = ExtResource("34_a7rqi")
 script = ExtResource("35_oxcbf")
 refill_ammo_button = NodePath("BoxContainer/AmmoButton")
@@ -961,7 +961,6 @@ texture = ExtResource("44_8qg5x")
 offset = Vector2(0, -28)
 
 [node name="EndScreensControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=823660565]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -1451,7 +1450,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="GameUnlockScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/EndScreensControl" unique_id=935128400 node_paths=PackedStringArray("new_actor_name_label", "new_actor_icon", "camp_button")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1593,12 +1591,12 @@ text = " "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TitleLabel2" type="Label" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameUnlockScreen/CenterContainer/VBoxContainer" unique_id=1700412935]
+[node name="ShopUnlockedLabel" type="Label" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameUnlockScreen/CenterContainer/VBoxContainer" unique_id=1700412935]
 layout_mode = 2
 theme = ExtResource("27_3mvka")
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
-text = " Shop Has Been Unlocked!"
+text = " The Shop has been unlocked!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -2257,7 +2255,6 @@ text = "Clicking an [color=red]Action[/color] will que it to first open slot of 
 Clicking the [color=blue]Script[/color] will delete    the [color=red]Action[/color] from the que."
 
 [node name="ScriptSubmit_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=764641844 instance=ExtResource("74_jdhj7")]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -2274,7 +2271,7 @@ highlight_target = 3
 title_text = "Script_Input.txt"
 comfirm_button_text = "Next"
 show_cancel_button = false
-text = "One all slots in your [color=blue]Script[/color] are filled, a [color=darkred]\"Start\"[/color] button will appear and you can begin the [color=blue]Round[/color]."
+text = "Once all slots in your [color=blue]Script[/color] are filled, a [color=darkred]\"Start\"[/color] button will appear and you can begin the [color=blue]Round[/color]."
 
 [node name="Turns_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1604221565 instance=ExtResource("74_jdhj7")]
 visible = false
@@ -2377,6 +2374,7 @@ Would you like to start the        [color=blue]Deployment[/color] Guide?
 "
 
 [node name="Party_ComPopContainer" parent="MoveableCamera2D/CanvasLayer/CombatTutorialControl" unique_id=1688346245 instance=ExtResource("74_jdhj7")]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

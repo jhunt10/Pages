@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://vma30emau146" path="res://Scenes/Menus/ItemDetails/item_details_container.gd" id="1_ryo66"]
 [ext_resource type="PackedScene" uid="uid://c4p8fix52jdyq" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.tscn" id="2_ryo66"]
 [ext_resource type="Theme" uid="uid://bfce41la62bs6" path="res://assets/Themes/readable_theme.tres" id="3_wp3fa"]
-[ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/ItemDetails/Sprites/ExitButton.png" id="4_3jk7o"]
 [ext_resource type="Script" uid="uid://bcf3yo7yhmwwr" path="res://Scenes/UiNodes/DescriptionBox/tags_box.gd" id="5_h82qm"]
 [ext_resource type="Texture2D" uid="uid://cb8k5gxes3iaj" path="res://assets/Sprites/UI/SymbolIcons/MoneySymbol_White.png" id="6_30ftv"]
 [ext_resource type="Script" uid="uid://drh2bv6oh7wkq" path="res://Scenes/Menus/ItemDetails/tag_container.gd" id="6_dpwbh"]
@@ -49,7 +48,7 @@
 RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_30ftv")
 RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_pitxf")
 
-[node name="ItemDetailsContainer" type="BoxContainer" unique_id=1465221446 node_paths=PackedStringArray("icon", "icon_background", "title_lable", "rarity_lable", "value_icon", "value_lable", "tag_container", "description_box", "exit_button_texture", "exit_button", "weapon_details", "armor_details", "action_page_details", "passive_page_details", "page_book_details", "default_details")]
+[node name="ItemDetailsContainer" type="BoxContainer" unique_id=1465221446 node_paths=PackedStringArray("icon", "icon_background", "title_lable", "rarity_lable", "value_icon", "value_lable", "tag_container", "description_box", "weapon_details", "armor_details", "action_page_details", "passive_page_details", "page_book_details", "default_details")]
 custom_minimum_size = Vector2(268, 264)
 offset_right = 40.0
 offset_bottom = 40.0
@@ -64,8 +63,6 @@ value_icon = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxC
 value_lable = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer/ValueLabel")
 tag_container = NodePath("ObjectDetailsContainer/TagsContainer")
 description_box = NodePath("HBoxContainer/DescriptionBox")
-exit_button_texture = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2/ExitButton")
-exit_button = NodePath("ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2/ExitButton/Button")
 weapon_details = NodePath("WeaponDetailsContainer")
 armor_details = NodePath("ArmorDetailsContainer")
 action_page_details = NodePath("ActionPageDetailsContainer")
@@ -114,20 +111,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ExitButton" type="TextureRect" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2" unique_id=416535617]
+[node name="ExitButtonSpacer" type="ColorRect" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2" unique_id=58794036]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
-size_flags_vertical = 0
-texture = ExtResource("4_3jk7o")
-stretch_mode = 3
-
-[node name="Button" type="Button" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer/HBoxContainer2/ExitButton" unique_id=1586888767]
-self_modulate = Color(1, 1, 1, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+color = Color(1, 1, 1, 0)
 
 [node name="ColorRect" type="ColorRect" parent="ObjectDetailsContainer/TitleContainer/VBoxContainer" unique_id=446496642]
 self_modulate = Color(0.470588, 0, 0, 1)

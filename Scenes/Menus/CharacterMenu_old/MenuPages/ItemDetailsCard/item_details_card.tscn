@@ -4,11 +4,26 @@
 [ext_resource type="Texture2D" uid="uid://bqmtfkh0uj2bk" path="res://Scenes/Menus/CharacterMenu_old/MenuPages/ItemDetailsCard/DetailsCard_Background_working.png" id="2_7ol1j"]
 [ext_resource type="PackedScene" uid="uid://c4p8fix52jdyq" path="res://Scenes/UiNodes/FitScaleLabel/fit_scale_label.tscn" id="4_34k8o"]
 [ext_resource type="PackedScene" uid="uid://kh1ivicm7afu" path="res://Scenes/Menus/ItemDetails/item_details_container.tscn" id="5_sp7jh"]
+[ext_resource type="Texture2D" uid="uid://b7yikap63psbv" path="res://Scenes/Menus/ItemDetails/Sprites/ExitButton.png" id="5_v7373"]
 [ext_resource type="Texture2D" uid="uid://dbag7m6cb83vp" path="res://Scenes/Menus/ItemDetails/Sprites/Button_Patch_32_6.png" id="7_850b7"]
 [ext_resource type="Texture2D" uid="uid://bmv0v2cnpvjh4" path="res://Scenes/Menus/ItemDetails/Sprites/ButtonPressed_Patch_32_6.png" id="36_0dsaw"]
 
-[node name="ItemDetailsCard" type="Control" unique_id=283174588 node_paths=PackedStringArray("offset_control", "offset_point", "item_details_container", "confirm_button_background", "confirm_button", "confirm_label", "buy_controller")]
-custom_minimum_size = Vector2(300, 340)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h4qgq"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 24.0
+texture = ExtResource("2_7ol1j")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 24.0
+texture_margin_bottom = 25.0
+
+[sub_resource type="Theme" id="Theme_v7373"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_h4qgq")
+
+[node name="ItemDetailsCard" type="Control" unique_id=283174588 node_paths=PackedStringArray("offset_control", "offset_point", "item_details_container", "confirm_button_background", "confirm_button", "confirm_label", "exit_button")]
+custom_minimum_size = Vector2(300, 360)
 layout_mode = 3
 anchors_preset = 0
 offset_right = 300.0
@@ -22,13 +37,13 @@ vertical = true
 time_to_show = 0.5
 grow_timer = 0.5
 speed = 500.0
-item_details_container = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ItemDetailsContainer")
-confirm_button_background = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground")
-confirm_button = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground/ConfirmButton")
-confirm_label = NodePath("OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground/ConfirmFitScaleLabel")
+item_details_container = NodePath("OffsetControl/PanelContainer/VBoxContainer/ItemDetailsContainer")
+confirm_button_background = NodePath("OffsetControl/PanelContainer/VBoxContainer/ConfirmButtonBackground")
+confirm_button = NodePath("OffsetControl/PanelContainer/VBoxContainer/ConfirmButtonBackground/ConfirmButton")
+confirm_label = NodePath("OffsetControl/PanelContainer/VBoxContainer/ConfirmButtonBackground/ConfirmFitScaleLabel")
 confirm_button_texture = ExtResource("7_850b7")
 confirm_button_pressed_texture = ExtResource("36_0dsaw")
-buy_controller = NodePath("")
+exit_button = NodePath("OffsetControl/PanelContainer/Control/ExitButton/Button")
 
 [node name="OffestPoint" type="Node2D" parent="." unique_id=1974372322]
 position = Vector2(300, 0)
@@ -40,36 +55,21 @@ offset_left = 300.0
 offset_right = 600.0
 offset_bottom = 340.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl" unique_id=1058602436]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_7ol1j")
-patch_margin_left = 14
-patch_margin_top = 28
-patch_margin_right = 18
-patch_margin_bottom = 24
+[node name="PanelContainer" type="PanelContainer" parent="OffsetControl" unique_id=806973165]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_v7373")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/NinePatchRect" unique_id=564038358]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -24.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="VBoxContainer" type="VBoxContainer" parent="OffsetControl/PanelContainer" unique_id=564038358]
+layout_mode = 2
 
-[node name="ItemDetailsContainer" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1465221446 instance=ExtResource("5_sp7jh")]
+[node name="ItemDetailsContainer" parent="OffsetControl/PanelContainer/VBoxContainer" unique_id=1465221446 instance=ExtResource("5_sp7jh")]
+custom_minimum_size = Vector2(268, 270)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ConfirmButtonBackground" type="NinePatchRect" parent="OffsetControl/NinePatchRect/VBoxContainer" unique_id=1998403763]
+[node name="ConfirmButtonBackground" type="NinePatchRect" parent="OffsetControl/PanelContainer/VBoxContainer" unique_id=1998403763]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 texture = ExtResource("7_850b7")
@@ -78,7 +78,7 @@ patch_margin_top = 8
 patch_margin_right = 8
 patch_margin_bottom = 8
 
-[node name="ConfirmFitScaleLabel" parent="OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground" unique_id=827272961 instance=ExtResource("4_34k8o")]
+[node name="ConfirmFitScaleLabel" parent="OffsetControl/PanelContainer/VBoxContainer/ConfirmButtonBackground" unique_id=827272961 instance=ExtResource("4_34k8o")]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -92,7 +92,7 @@ size_flags_horizontal = 3
 text = "Confirm"
 center_x = true
 
-[node name="ConfirmButton" type="Button" parent="OffsetControl/NinePatchRect/VBoxContainer/ConfirmButtonBackground" unique_id=1518205121]
+[node name="ConfirmButton" type="Button" parent="OffsetControl/PanelContainer/VBoxContainer/ConfirmButtonBackground" unique_id=1518205121]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -100,3 +100,42 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Control" type="Control" parent="OffsetControl/PanelContainer" unique_id=2071142690]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ExitButton" type="TextureRect" parent="OffsetControl/PanelContainer/Control" unique_id=1192997534]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 32.0
+grow_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_v7373")
+stretch_mode = 3
+
+[node name="Button" type="Button" parent="OffsetControl/PanelContainer/Control/ExitButton" unique_id=1810269149]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="OffsetControl" unique_id=1058602436]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7ol1j")
+patch_margin_left = 14
+patch_margin_top = 28
+patch_margin_right = 18
+patch_margin_bottom = 24

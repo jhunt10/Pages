@@ -128,7 +128,7 @@
 		"EquipmentData": {
 			"StatMods": {
 				"AttackBonus": {
-					"Value": 200.0
+					"Value": 10.0
 				}
 			}
 		},
@@ -417,7 +417,38 @@
 		},
 		"_DefVersion": "1"
 	},
-	"IceKnife": {
+	"StoneClub_Weapon": {
+		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
+		"!ParentKey": "BaseGreatHammer_Weapon",
+		"#ObjDetails": {
+			"Description": "An ancient weapon forged by nature itself.  Smelted in magma deep beneath the surface, it was forced out by fiery erruptions, then slowly carved by water and wind.\n\nWhich is technically true of any igneous rock.",
+			"DisplayName": "Stone Club",
+			"LargeIcon": "Sprites/StoneClub_Icon.png",
+			"ObjectType": "Item",
+			"SmallIcon": "Sprites/StoneClub_Icon.png",
+			"SnippetDesc": "a stone club",
+			"Tags": [
+				"Club",
+				"Magical"
+			]
+		},
+		"ItemData": {
+			"Rarity": "Rare",
+			"Value": 500.0
+		},
+		"WeaponData": {
+			"AttackData": {
+				"DamageDatas": {
+					"WeaponDamage": {
+						"DamageType": "Crash",
+						"DefenseType": "Armor"
+					}
+				}
+			}
+		},
+		"_DefVersion": "1"
+	},
+	"IceKnife_Weapon": {
 		"!ObjectScript": "res://assets/Scripts/Items/Equipment/Tools/BaseWeaponEquipment.gd",
 		"#ObjDetails": {
 			"Description": "It was supposed to be the perfect murder. Stab the victim, knife melts, no evidence. But turns out magic ice doesn't melt, so here we are.",

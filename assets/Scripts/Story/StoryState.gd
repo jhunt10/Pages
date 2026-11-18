@@ -125,8 +125,8 @@ func start_new_story():
 	
 	
 	# Add Supplies
-	for item_key in ItemLibrary.get_item_keys_with_tag("Supply"):
-		PlayerInventory.add_item(item_key, 3)
+	#for item_key in ItemLibrary.get_item_keys_with_tag("Supply"):
+		#PlayerInventory.add_item(item_key, 3)
 		
 	# Add all Equipment
 	#var has_equipment = []

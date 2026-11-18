@@ -16,7 +16,10 @@ enum SpeakerSubjects {Greeting, Buying, Selling, ConfirmBuy, BuySuccess, BuyCanc
 
 var _current_details_card
 var _state:States
-var _said_greeting = false
+## Current State of the shop based on story progress
+var _shop_index:int
+## Is first time seeing shop at this stage
+var _first_time_on_index:bool
 
 ## Items created for shop keyed by ItemKey
 var _loaded_items_by_key:Dictionary
@@ -36,10 +39,9 @@ func _ready() -> void:
 	buy_panel_container.hide()
 	buy_panel_container.trade_confirmed.connect(_on_trade_confirmed)
 	
-	var shop_index = StoryState.get_story_flag("ShopIndex", 0)
-	var shop_index_max = StoryState.get_story_flag("ShopIndexSeen", 0)
-	if shop_index > shop_index_max:
-		StoryState.set_story_flag("ShopIndexSeen", shop_index)
+	_shop_index = StoryState.get_story_flag("ShopIndex", 0)
+	var shop_index_max = StoryState.get_story_flag("ShopIndexSeen", -1)
+	_first_time_on_index = _shop_index > shop_index_max
 
 func _on_load_screen_gone():
 	load_greeting()
@@ -47,6 +49,8 @@ func _on_load_screen_gone():
 
 func close_menu():
 	MainRootNode.Instance.open_camp_menu()
+	if _first_time_on_index:
+		StoryState.set_story_flag("ShopIndexSeen", _shop_index)
 
 func load_greeting():
 	_state = States.Buy
@@ -105,6 +109,23 @@ func load_items_to_sell():
 	item_menu_controller.show()
 
 func get_shop_data()->Dictionary:
+	var shop_index = StoryState.get_story_flag("ShopIndex")
+	# Befroe/After Squirrels
+	if shop_index == 0 or shop_index == 1:
+		return {
+			"Ammo": ["Phy_Ammo"],
+			"Potions": ["HealthPotionS"],
+			"Pages": ["UsePotionSelf", "ReloadPage", "Wait", "MoveForward","TurnLeft","TurnRight"]
+		}
+	# After Bandits
+	elif shop_index == 2:
+		return {
+			"Ammo": ["Phy_Ammo", "Mag_Ammo"],
+			"Potions": ["HealthPotionS", "HealthPotionM"],
+			"Pages": ["UsePotionSelf", "ReloadPage","MoveForward","TurnLeft","TurnRight", "Wait", "TurnAround", "Dash"],
+			"Weapons": ["BaseClub_Weapon", "BaseShiv_Weapon", "BaseMace_Weapon", "BaseSpear_Weapon", "BaseGreatSword_Weapon", "BaseGreatHammer_Weapon"],
+			"Shields": ["WoodenShield", "WoodenTower"]
+		}
 	return {
 		"Ammo": ["Phy_Ammo", "Mag_Ammo", "Gen_Ammo", ],
 		"Potions": ["HealthPotionS", "HealthPotionM", "HealthPotionL"],
@@ -175,10 +196,62 @@ func _on_trade_confirmed_old(accepted:bool):
 		else:
 			_load_text(SpeakerSubjects.SellCancel)
 
-static var _said_lines:Array=[]
+var _said_lines:Array=[]
+
+# Translates an array of simple strings and dicts to dialog box entries
+func _build_dialog_entries(arr:Array):
+	var new_entries = [
+		{
+			"EntryType": "Clear",
+			"ClearSpeaker": false
+		}
+	]
+	for line in arr:
+		if line is Dictionary:
+			if line.has("Delay"):
+				new_entries.append(
+				{
+					"EntryType": "Delay",
+					"Delay": line.get("Delay",0)
+				})
+			elif line.has("SpeakerPort"):
+				var emotion = line['SpeakerPort']
+				new_entries.append(
+				{
+					"EntryType": "Speaker",
+					"SpeakerName": "FMrc",
+					"SpeakerPort": "res://notes/NPCs/FishMerch/Portraits/FishMerch_" + emotion + ".png"
+				})
+		elif line is String:
+			if line == "WaitToRead":
+				new_entries.append(
+				{
+					"EntryType": "WaitToRead"
+				})
+			elif line == "Clear":
+				new_entries.append(
+				{
+					"EntryType": "Clear",
+					"ClearSpeaker": false
+				})
+			else:
+				new_entries.append(
+				{
+					"EntryType": "Text",
+					"Text": line,
+					"NewLine": true,
+					#"LetterDelay": 0.1
+				})
+	dialog_box.add_entries(new_entries)
+			
+
+
 func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
-	var shop_index = StoryState.get_story_flag("ShopIndex")
+	# --------------------------------------
+	# Greeting - Root Buy/Sell options
+	# --------------------------------------
 	if subject == SpeakerSubjects.Greeting:
+		# Already said greeting this session 
 		if _said_lines.has("Greeting"):
 			_build_dialog_entries([
 				{"SpeakerPort":"Happy"},
@@ -186,15 +259,67 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 			])
 			return
 		_said_lines.append("Greeting")
-		if shop_index == 1:
-			_build_dialog_entries([
-				{"SpeakerPort":"VeryHappy"},
-				"Thanks dealing with those @Color:Red@Bandits@Clear@!",
-				{"Delay":0.8},
-				{"SpeakerPort":"Happy"},
-				"Now how about a little shopping?",
-			])
-		else:
+		
+		# First time seeing shop on this index
+		if true or _first_time_on_index:
+			match _shop_index:
+				0: # Greeting Before Shop is Unlocked
+					_build_dialog_entries([
+						{"SpeakerPort":"Annoyed"},
+						"Hmm...",
+						{"Delay":0.8},
+						"You shouldn't be here yet.",
+						{"Delay":0.8},
+						{"SpeakerPort":"Happy"},
+						"Oh well, want to shop?",
+						"WaitToRead"
+					])
+				1: # Greeting After Squirrles
+					_build_dialog_entries([
+						{"SpeakerPort":"VeryHappy"},
+						"Welcome to my @Color:Red@Shop@Clear@!",
+						"WaitToRead",
+						{"SpeakerPort":"Sad"},
+						"Most of my stuff was stolen by @Color:Red@Bandits@Clear@...",
+						"WaitToRead",
+						{"Delay":0.5},
+						{"SpeakerPort":"Happy"},
+						"But I'm still open for business.",
+						"WaitToRead"
+					])
+				2: # Greeting After Bandits
+					_build_dialog_entries([
+						{"SpeakerPort":"VeryHappy"},
+						"Great job beating those @Color:Red@Bandits@Clear@!",
+						"WaitToRead",
+						{"SpeakerPort":"Happy"},
+						"I even managed to get some of my inventory back.",
+						"WaitToRead",
+						{"SpeakerPort":"VeryHappy"},
+						"Which means new @Color:Blue@Items@Clear@ for sell!",
+						"WaitToRead",
+					])
+				3: # Greeting After Cave
+					_build_dialog_entries([
+						{"SpeakerPort":"VeryHappy"},
+						"I'm glad to be out of that @Color:Blue@Cave@Clear@!",
+						"WaitToRead",
+						{"SpeakerPort":"Annoyed"},
+						"@Color:Blue@Zombies@Clear@ never buy anything.",
+						"WaitToRead"
+					])
+				4: # Greeting After Sewer
+					_build_dialog_entries([
+						{"SpeakerPort":"VeryHappy"},
+						"Welcome ba-",
+						{"SpeakerPort":"Annoyed"},
+						"Wow you smell bad!",
+						"WaitToRead",
+						"Where the hell have you been?",
+						"WaitToRead",
+					])
+			return
+		else: # Returning to shop between story stages
 			_build_dialog_entries([
 				{"SpeakerPort":"VeryHappy"},
 				"Welcome back!",
@@ -203,17 +328,67 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 				"You lookin to @Color:Red@Buy@Clear@ or @Color:Red@Sell@Clear@? ",
 				"WaitToRead"
 			])
+	
+	# --------------------------------------
+	# Buying - 
+	# --------------------------------------
 	elif subject == SpeakerSubjects.Buying:
-		if not _said_lines.has("BanditsTook"):
-			_said_lines.append("BanditsTook")
+		# Already said buying this session 
+		if _said_lines.has("Buying"):
 			_build_dialog_entries([
-				{"SpeakerPort":"Sad"},
-				"@Color:Red@Bandits@Clear@ took most of it.",
-				{"Delay":0.8},
 				{"SpeakerPort":"Happy"},
-				"But I still got some @Color:Red@Potions@Clear@ and @Color:Red@Ammo@Clear@ in stock. "
+				"Still looking to buy?"
 			])
 			return
+		_said_lines.append("Buying")
+		# First time seeing shop on this index
+		if true or _first_time_on_index:
+			match _shop_index:
+				0: # Buying - Before Shop is Unlocked
+					_build_dialog_entries([
+						{"SpeakerPort":"Happy"},
+						"Ok, but seriously how did you get here?",
+						"WaitToRead"
+					])
+				1: # Buying - After Squirrles
+					_build_dialog_entries([
+						{"SpeakerPort":"Sad"},
+						"I'm down to just the basics,",
+						"WaitToRead",
+						{"Delay":0.5},
+						{"SpeakerPort":"Happy"},
+						"But I'll have more to sell later.",
+						"WaitToRead"
+					])
+				2: # Buying - After Bandits
+					_build_dialog_entries([
+						{"SpeakerPort":"VeryHappy"},
+						"I've got new @Color:Blue@Weapons@Clear@ and @Color:Blue@Pages@Clear@!",
+						"WaitToRead",
+						{"SpeakerPort":"Happy"},
+						"And I already stocked up @Color:Blue@Mag Ammo@Clear@ for our new @Color:Blue@Priest@Clear@ friend.",
+						"WaitToRead",
+						"WaitToRead",
+					])
+				3: # Buying - After Cave
+					_build_dialog_entries([
+						{"SpeakerPort":"Happy"},
+						"I just found a stash of @Color:Blue@Bombs@Clear@ in the back.",
+						"WaitToRead",
+						{"SpeakerPort":"Neutral"},
+						"(@Color:Blue@Throw Bomb Page@Clear@ sold seperately)",
+						"WaitToRead",
+						{"Delay":0.5},
+						{"SpeakerPort":"Happy"},
+						"Wanna give them a try?",
+						"WaitToRead",
+					])
+				4: # After Sewer
+					_build_dialog_entries([
+						{"SpeakerPort":"Neutral"},
+						"Please don't touch anything.",
+						"WaitToRead"
+					])
 		else:
 			_build_dialog_entries([
 				{"SpeakerPort":"Neutral"},
@@ -269,49 +444,3 @@ func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
 			"Is there anything else you need?",
 		])
 		
-
-# Translates an array of simple strings and dicts to dialog box entries
-func _build_dialog_entries(arr:Array):
-	var new_entries = [
-		{
-			"EntryType": "Clear",
-			"ClearSpeaker": false
-		}
-	]
-	for line in arr:
-		if line is Dictionary:
-			if line.has("Delay"):
-				new_entries.append(
-				{
-					"EntryType": "Delay",
-					"Delay": line.get("Delay",0)
-				})
-			elif line.has("SpeakerPort"):
-				var emotion = line['SpeakerPort']
-				new_entries.append(
-				{
-					"EntryType": "Speaker",
-					"SpeakerName": "FMrc",
-					"SpeakerPort": "res://notes/NPCs/FishMerch/Portraits/FishMerch_" + emotion + ".png"
-				})
-		elif line is String:
-			if line == "WaitToRead":
-				new_entries.append(
-				{
-					"EntryType": "WaitToRead"
-				})
-			elif line == "Clear":
-				new_entries.append(
-				{
-					"EntryType": "Clear",
-					"ClearSpeaker": false
-				})
-			else:
-				new_entries.append(
-				{
-					"EntryType": "Text",
-					"Text": line,
-					"NewLine": true
-				})
-	dialog_box.add_entries(new_entries)
-			
