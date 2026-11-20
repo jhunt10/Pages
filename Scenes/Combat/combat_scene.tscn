@@ -194,7 +194,7 @@ process_mode = 3
 position = Vector2(576, 324)
 script = ExtResource("17_7dull")
 canvas_layer = NodePath("CanvasLayer")
-no_scroll_nodes = [NodePath("CanvasLayer/CombatUiControl/ActiveCombatControl/CombatLogBox"), NodePath("CanvasLayer/CombatUiControl/CombatControlPanel"), NodePath("CanvasLayer/CombatTutorialControl/Party_ComPopContainer")]
+no_scroll_nodes = [NodePath("CanvasLayer/CombatUiControl/ActiveCombatControl/CombatLogBox"), NodePath("CanvasLayer/CombatUiControl/CombatControlPanel")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="MoveableCamera2D" unique_id=837055766]
 
@@ -956,9 +956,8 @@ script = ExtResource("43_4pyrd")
 sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="MoveableCamera2D/CanvasLayer/ActorPointerControl" unique_id=1683779774]
-visible = false
 texture = ExtResource("44_8qg5x")
-offset = Vector2(0, -28)
+offset = Vector2(0, -14)
 
 [node name="EndScreensControl" type="Control" parent="MoveableCamera2D/CanvasLayer" unique_id=823660565]
 layout_mode = 3
@@ -1449,7 +1448,7 @@ text = "Continue"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameUnlockScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/EndScreensControl" unique_id=935128400 node_paths=PackedStringArray("new_actor_name_label", "new_actor_icon", "camp_button")]
+[node name="GameUnlockScreen" type="Control" parent="MoveableCamera2D/CanvasLayer/EndScreensControl" unique_id=935128400 node_paths=PackedStringArray("new_actor_name_label", "new_actor_icon", "camp_button", "shop_unlock_label")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1460,6 +1459,7 @@ script = ExtResource("33_ucts4")
 new_actor_name_label = NodePath("CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer/NameLabel")
 new_actor_icon = NodePath("CenterContainer/VBoxContainer/NewActorContainer/NewActorContainer/PageBackground/PageIcon")
 camp_button = NodePath("CenterContainer/VBoxContainer/CampButton")
+shop_unlock_label = NodePath("CenterContainer/VBoxContainer/ShopUnlockedLabel")
 
 [node name="ColorRect" type="ColorRect" parent="MoveableCamera2D/CanvasLayer/EndScreensControl/GameUnlockScreen" unique_id=773318553]
 layout_mode = 1

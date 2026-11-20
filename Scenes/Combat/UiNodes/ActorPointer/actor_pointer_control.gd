@@ -17,12 +17,15 @@ func _process(_delta: float) -> void:
 		if view_port_rec.has_point(point_to_pos):
 			sprite.position = point_to_pos
 			sprite.rotation_degrees = 0
+			var camera_zoom = CombatRootControl.Instance.camera.zoom
+			sprite.scale = camera_zoom
 		# Off Screen
 		else:
 			var center_pos = view_port_rec.get_center()
 			sprite.position = get_screen_edge_intersection(center_pos, point_to_pos)
 			sprite.look_at(point_to_pos)
 			sprite.rotation_degrees -= 90
+			sprite.scale = Vector2(2,2)
 		
 
 func set_pointing_to_actor(actor):

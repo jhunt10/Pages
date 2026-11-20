@@ -79,16 +79,15 @@ func _on_deployment_pressed(actor_id):
 	deployment_pressed.emit(actor_id)
 
 func set_is_deployed(is_deployed):
-	self.show()
-	#if is_deployed:
-		## TODO:Lazy Hack
-		#self.show()
-		##deploy_button.hide()
-		##health_bar.show()
-	#else:
-		#self.hide()
-		##deploy_button.show()
-		##health_bar.hide()
+	if is_deployed:
+		# TODO:Lazy Hack
+		self.show()
+		#deploy_button.hide()
+		#health_bar.show()
+	else:
+		self.hide()
+		#deploy_button.show()
+		#health_bar.hide()
 
 func _process(_delta: float) -> void:
 	if _resize:

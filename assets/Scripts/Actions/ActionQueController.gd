@@ -237,6 +237,12 @@ func update(delta: float) -> void:
 			# Do all actions for frame
 			for q_index in range(que_index, _action_ques.size()):
 				var que:ActionQueHolder = _action_ques[_que_order[q_index]]
+				
+				# Skip Ques for Actors who died this Round
+				if que.actor.is_dead:
+					continue
+				
+				# Check that Actor still exist in GameState
 				if not game_state.get_actor(que.actor.Id):
 					printerr("Tried to execute Que for Actor who is not in GameState: '%s'" % [que.actor.Id])
 					continue

@@ -1,7 +1,7 @@
 {
     "MapKey": "CrossRoad",
     "MapName": "Cross Road",
-    "Description": "A cross road on the way to The City.",
+    "Description": "A cross road on the way to The City. Frequented by both Merchants and Bandits.",
     "MapScene": "crossroad_explore_map.tscn",
     "SortOrder": 2,
     "StartingPhase": "InitSpawn",
@@ -127,6 +127,7 @@
             "NextPhase": "CombatPhase1"
         },
         "CombatPhase1": {
+			"GoalText": "Kill all [color=blue]Bandits[/color]",
             "PhaseType": "Combat",
             "NextPhase": "SpawnCaptain",
             "CombatCondition": {
@@ -206,6 +207,7 @@
             }
         },
         "CombatPhase2": {
+			"GoalText": "Kill the [color=blue]Bandit Captain[/color]",
             "PhaseType": "Combat",
             "NextPhase": "END",
             "CombatCondition": {

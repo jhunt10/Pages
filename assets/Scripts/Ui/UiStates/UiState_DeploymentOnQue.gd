@@ -37,16 +37,18 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 	queing_page_id = args.get("ActionId", "Deploy_ActionPage")
 	pre_selected_actor_ids = args.get("DeployingActorIds", [])
 	carrier_actor = ActorLibrary.get_actor(carrier_actor_id)
+	
+	if pre_selected_actor_ids.size() == 0:
+		var carried_actor_ids = carrier_actor.list_carried_actor_ids()
+		if carried_actor_ids.size() == 1:
+			pre_selected_actor_ids = carried_actor_ids
+	
 	if carrier_actor_id:
 		state = States.Placing
 		CombatRootControl.Instance.GridCursor.set_cursor(GridCursorNode.Cursors.SelectingActor)
 	else:
 		printerr("UiState_Deployment: No DeployingActor id provided")
 	
-	
-	
-	
-	#deploying_actor_node = CombatRootControl.create_temp_actor_node(deploying_actor_id)
 	carrier_actor_node = CombatRootControl.get_actor_node(carrier_actor_id)
 	spawn_map = CombatRootControl.Instance.MapController.player_spawn_area_tile_map
 	var center = carrier_actor.Que.get_movement_preview_final_pos()
@@ -77,11 +79,6 @@ func _init(controler:UiStateController, args:Dictionary) -> void:
 			spawn_area = [[0,1],[0,-1],[-1,0],[1,0]]
 			
 	_build_spawn_area()
-	#if !deploying_actor_node:
-		#CombatRootControl.Instance.add_actor(ActorLibrary.get_actor(deploying_actor_id), center, true, false)
-		#deploying_actor_node = CombatRootControl.create_temp_actor_node(deploying_actor_id)
-	#deploying_actor_node.set_facing_dir(MapPos.Directions.South)
-	#spawn_map.add_child(deploying_actor_node)
 
 var _extra_path_arrow:Sprite2D
 func get_extra_path_arrow()->Sprite2D:

@@ -11,11 +11,6 @@ enum States {Hidden, Growing, Showing, Shrinking}
 			state = States.Growing
 		if not showing and (state == States.Showing or state == States.Growing):
 			state = States.Shrinking
-		if symbole_texture_rect:
-			if showing:
-				symbole_texture_rect.texture = minus_icon
-			else:
-				symbole_texture_rect.texture = plus_icon
 
 @export var title:String:
 	set(val):
@@ -28,10 +23,14 @@ enum States {Hidden, Growing, Showing, Shrinking}
 		state = val
 		if state == States.Hidden:
 			grow_timer = 0
+			if symbole_texture_rect:
+				symbole_texture_rect.texture = minus_icon
 			self.custom_minimum_size = _get_minimum_size()
 			minimum_size_changed.emit()
 		elif state == States.Showing:
 			grow_timer = grow_time
+			if symbole_texture_rect:
+				symbole_texture_rect.texture = plus_icon
 			self.custom_minimum_size = _get_minimum_size()
 			minimum_size_changed.emit()
 		#item_rect_changed.emit()
@@ -136,5 +135,4 @@ func set_item_list(catagory:String, items:Array):
 			_item_buttons_by_id[item_id] = button
 		entries_v_box.add_child(button)
 		button.set_item(item)
-		print("Added Item: " + item_id)
 		button.show()

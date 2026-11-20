@@ -72,7 +72,7 @@ static func load_save_data(save_id:String, go_to_camp:bool=true):
 	StoryState.load_save_data(data)
 	
 	if go_to_camp:
-		MainRootNode.Instance.open_camp_menu()
+		MainRootNode.Instance.open_camp_menu("", true)
 
 static func delete_save(save_name:String):
 	var saves_dic = read_saves_meta_data()

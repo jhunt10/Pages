@@ -35,7 +35,12 @@ func do_thing(parent_action:PageItemAction, _subaction_data:Dictionary, _que_exe
 	AttackHandler.handle_attack(
 		actor, 
 		targets,
-		{}, 
+		{
+			"AccuracyMod": 100.0,
+			"CanEvade": false,
+			"CanBlock": false,
+			"CanCrit": false
+		}, 
 		damage_data, 
 		{}, 
 		tag_chain, 

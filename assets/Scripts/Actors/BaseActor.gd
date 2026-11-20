@@ -80,14 +80,9 @@ var is_dead:bool = false
 
 var parent_carrier_actor_id
 
-func _print_test():
-	printerr(self.get_display_name() + " Turn Ended")
-
 func _init(key:String, load_path:String, def:Dictionary, id:String, data:Dictionary) -> void:
 	super(key, load_path, def, id, data)
 	spawn_map_layer = _def.get('SpawnOnMapLayer', 0)
-	
-	turn_ended.connect(_print_test)
 	
 	var stat_data = _def.get("Stats", {})
 	ai_data = get_load_val("AiData", {})

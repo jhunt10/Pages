@@ -52,9 +52,9 @@ func _init( parent:AttackEvent,
 	attack_direction = direction_of_attack
 	defender_has_cover = defender_is_under_cover
 	
-	can_evade = true
-	can_block = true
-	can_crit = true
+	can_evade = parent.attack_details.get("CanEvade", true)
+	can_block = parent.attack_details.get("CanBlock", true)
+	can_crit =  parent.attack_details.get("CanCrit", true)
 	
 	defender_evasion = StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.Evasion)
 	defender_block_chance = (StatHelper.get_defense_stat_for_attack_direction(defending_actor, attack_direction, StatHelper.BlockChance) / 100.0)

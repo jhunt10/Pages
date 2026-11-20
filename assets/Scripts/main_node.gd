@@ -102,10 +102,10 @@ func open_load_menu():
 		save_scene.scale_control.scale = Vector2(1.5, 1.5)
 	self.add_child(save_scene)
 
-func open_camp_menu(dialog_script:String=''):
-	if current_scene is CampMenu and dialog_script == '':
-		
-		return
+func open_camp_menu(dialog_script:String='', force_reload:bool=false):
+	if not force_reload:
+		if current_scene is CampMenu and dialog_script == '':
+			return
 	#prune_objects()
 	var data = {}
 	if dialog_script != '':

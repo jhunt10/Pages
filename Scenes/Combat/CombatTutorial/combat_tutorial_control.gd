@@ -17,11 +17,11 @@ func _set_highlight_target():
 				darken_screen = false
 			HighlightTargets.Actions:
 				if que_input_contol:
-					highlight_node = que_input_contol.get_node("QueInputBackPatchContainer")
+					highlight_node = que_input_contol.get_node("BoxContainer")
 					darken_screen = true
 			HighlightTargets.Deploy:
 				if que_input_contol:
-					highlight_node = que_input_contol.get_node("QueInputBackPatchContainer")
+					highlight_node = que_input_contol.get_node("BoxContainer")
 					darken_screen = true
 			HighlightTargets.ScriptInput:
 				if que_input_contol:
@@ -135,6 +135,11 @@ func _on_next():
 		StoryState.set_story_flag("FirstTutorialDone", true)
 		self.queue_free()
 	
+	if current_panel.name == "Party_ComPopContainer": 
+		CombatRootControl.Instance.camera.add_no_scroll_node(current_panel)
+	if old_panel.name == "Party_ComPopContainer":
+		CombatRootControl.Instance.camera.remove_no_scroll_node(old_panel)
+		
 	if current_panel.name == "Party_End_ComPopContainer": 
 		StoryState.set_story_flag("DeployTutorialDone", true)
 		self.queue_free()
@@ -155,7 +160,7 @@ func _draw() -> void:
 			if highlight_target == HighlightTargets.QueInput:
 				node_space = Rect2(0,0,0,0)
 				if que_input_contol:
-					var que_input_node = que_input_contol.get_node("QueInputBackPatchContainer")
+					var que_input_node = que_input_contol.get_node("BoxContainer")
 					var que_display_node = que_input_contol.que_display_control
 					var input_rect:Rect2 = que_input_node.get_global_rect()
 					var display_rect:Rect2 = que_display_node.get_global_rect()

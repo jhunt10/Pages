@@ -21,8 +21,9 @@
         ],
         [
             {
-                "SkillNodeKey":"Analize",
-                "PageKey": "Analize_PageItem"
+                "Spacer":true,
+                "_SkillNodeKey":"Analize",
+                "_PageKey": "Analize_PageItem"
             },
             {
                 "SkillNodeKey": "HeavyArmorTraining",
@@ -127,13 +128,13 @@
         ],
         [
             {
+                "SkillNodeKey": "Blinder",
+                "PageKey": "Blinder_PageItem"
+            },
+            {
                 "SkillNodeKey": "BeNimbleBeQuick",
                 "PairType": "And",
                 "Pages": ["BeNimble_PageItem", "BeQuick_PageItem"]
-            },
-            {
-                "SkillNodeKey": "Blinder",
-                "PageKey": "Blinder_PageItem"
             },
             {
                 "SkillNodeKey": "PhyAmmoBoost",
@@ -152,10 +153,6 @@
             {
                 "SkillNodeKey": "DoubleAttack",
                 "PageKey": "DoubleAttack_PageItem"
-            },
-            {
-                "SkillNodeKey": "ExtendDeploy_Rogue",
-                "PageKey": "ExtendDeployment_Rogue_PageItem"
             }
         ],
         [

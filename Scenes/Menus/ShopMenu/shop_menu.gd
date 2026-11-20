@@ -27,420 +27,427 @@ var _loaded_items_by_key:Dictionary
 var _item_ids_by_catagories:Dictionary
 
 func _ready() -> void:
-	confirm_popup.hide()
-	item_menu_controller.hide()
-	item_menu_controller.item_button_pressed.connect(_on_item_button_pressed)
-	item_menu_controller.catagory_selected.connect(_on_catagory_selected)
-	item_menu_controller.back_button_pressed.connect(load_greeting)
-	close_button.pressed.connect(close_menu)
-	sell_button.pressed.connect(load_items_to_sell)
-	buy_button.pressed.connect(load_items_to_buy)
-	LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_gone)
-	buy_panel_container.hide()
-	buy_panel_container.trade_confirmed.connect(_on_trade_confirmed)
-	
-	_shop_index = StoryState.get_story_flag("ShopIndex", 0)
-	var shop_index_max = StoryState.get_story_flag("ShopIndexSeen", -1)
-	_first_time_on_index = _shop_index > shop_index_max
+    confirm_popup.hide()
+    item_menu_controller.hide()
+    item_menu_controller.item_button_pressed.connect(_on_item_button_pressed)
+    item_menu_controller.catagory_selected.connect(_on_catagory_selected)
+    item_menu_controller.back_button_pressed.connect(load_greeting)
+    close_button.pressed.connect(close_menu)
+    sell_button.pressed.connect(load_items_to_sell)
+    buy_button.pressed.connect(load_items_to_buy)
+    LoadManager._load_screen.loading_screen_fully_gone.connect(_on_load_screen_gone)
+    buy_panel_container.hide()
+    buy_panel_container.trade_confirmed.connect(_on_trade_confirmed)
+    
+    _shop_index = StoryState.get_story_flag("ShopIndex", 0)
+    var shop_index_max = StoryState.get_story_flag("ShopIndexSeen", -1)
+    _first_time_on_index = _shop_index > shop_index_max
 
 func _on_load_screen_gone():
-	load_greeting()
+    load_greeting()
 
 
 func close_menu():
-	MainRootNode.Instance.open_camp_menu()
-	if _first_time_on_index:
-		StoryState.set_story_flag("ShopIndexSeen", _shop_index)
+    if _first_time_on_index:
+        StoryState.set_story_flag("ShopIndexSeen", _shop_index)
+    MainRootNode.Instance.open_camp_menu()
 
 func load_greeting():
-	_state = States.Buy
-	item_menu_controller.hide()
-	if buy_panel_container.visible:
-		buy_panel_container.close_panel()
-	_load_text(SpeakerSubjects.Greeting)
-	
+    _state = States.Buy
+    item_menu_controller.hide()
+    if buy_panel_container.visible:
+        buy_panel_container.close_panel()
+    _load_text(SpeakerSubjects.Greeting)
+    
 
 func load_items_to_buy():
-	_state = States.Buy
-	_load_text(SpeakerSubjects.Buying)
-	var shop_data = get_shop_data()
-	for cat in shop_data.keys():
-		if not _item_ids_by_catagories.has(cat):
-			_item_ids_by_catagories[cat] = []
-		for item_key in shop_data.get(cat):
-			if _item_ids_by_catagories[cat].has("SHOP:"+item_key):
-				continue
-			var new_item = ItemLibrary.get_or_create_item("SHOP:"+item_key, item_key,  {})
-			if not new_item:
-				printerr("Shop.load_items: Failed to find item: %s" % [item_key])
-				continue
-			_item_ids_by_catagories[cat].append(new_item.Id)
-			_loaded_items_by_key[item_key] = new_item
-	item_menu_controller.set_data(_item_ids_by_catagories)
-	item_menu_controller.show()
+    _state = States.Buy
+    _load_text(SpeakerSubjects.Buying)
+    var shop_data = get_shop_data()
+    for cat in shop_data.keys():
+        # Skip Empty Catagories
+        if shop_data[cat].size() == 0:
+            continue
+        if not _item_ids_by_catagories.has(cat):
+            _item_ids_by_catagories[cat] = []
+        for item_key in shop_data.get(cat):
+            if _item_ids_by_catagories[cat].has("SHOP:"+item_key):
+                continue
+            var new_item = ItemLibrary.get_or_create_item("SHOP:"+item_key, item_key,  {})
+            if not new_item:
+                printerr("Shop.load_items: Failed to find item: %s" % [item_key])
+                continue
+            _item_ids_by_catagories[cat].append(new_item.Id)
+            _loaded_items_by_key[item_key] = new_item
+    item_menu_controller.set_data(_item_ids_by_catagories)
+    item_menu_controller.show()
 
 func load_items_to_sell():
-	_state = States.Sell
-	_load_text(SpeakerSubjects.Selling)
-	var catagories = {}
-	var selling_items_data = {}
-	for item:BaseItem in PlayerInventory.list_all_held_items():
-		var type = item.get_item_type()
-		# Skip Pages with source Titles
-		if type == BaseItem.ItemTypes.Page:
-			var source_title = (item as BasePageItem).get_source_title()
-			if source_title:
-				continue
-			if item.get_tags().has("_Dev_Action"):
-				continue
-		if not catagories.keys().has(type):
-			catagories[type] = []
-		catagories[type].append(item.Id)
-	for cat in catagories:
-		if cat == BaseItem.ItemTypes.KeyItem:
-			continue
-		var cat_name = BaseItem.ItemTypes.keys()[cat]
-		if not selling_items_data.has(cat_name):
-			selling_items_data[cat_name] = []
-		for item_id in catagories.get(cat):
-			var item = ItemLibrary.get_item(item_id)
-			selling_items_data[cat_name].append(item.Id)
-	item_menu_controller.set_data(selling_items_data)
-	item_menu_controller.show()
+    _state = States.Sell
+    _load_text(SpeakerSubjects.Selling)
+    var catagories = {}
+    var selling_items_data = {}
+    for item:BaseItem in PlayerInventory.list_all_held_items():
+        var type = item.get_item_type()
+        # Skip Pages with source Titles
+        if type == BaseItem.ItemTypes.Page:
+            var source_title = (item as BasePageItem).get_source_title()
+            if source_title:
+                continue
+            if item.get_tags().has("_Dev_Action"):
+                continue
+        if not catagories.keys().has(type):
+            catagories[type] = []
+        catagories[type].append(item.Id)
+    for cat in catagories:
+        if cat == BaseItem.ItemTypes.KeyItem:
+            continue
+        var cat_name = BaseItem.ItemTypes.keys()[cat]
+        if not selling_items_data.has(cat_name):
+            selling_items_data[cat_name] = []
+        for item_id in catagories.get(cat):
+            var item = ItemLibrary.get_item(item_id)
+            selling_items_data[cat_name].append(item.Id)
+    item_menu_controller.set_data(selling_items_data)
+    item_menu_controller.show()
 
 func get_shop_data()->Dictionary:
-	var shop_index = StoryState.get_story_flag("ShopIndex")
-	# Befroe/After Squirrels
-	if shop_index == 0 or shop_index == 1:
-		return {
-			"Ammo": ["Phy_Ammo"],
-			"Potions": ["HealthPotionS"],
-			"Pages": ["UsePotionSelf", "ReloadPage", "Wait", "MoveForward","TurnLeft","TurnRight"]
-		}
-	# After Bandits
-	elif shop_index == 2:
-		return {
-			"Ammo": ["Phy_Ammo", "Mag_Ammo"],
-			"Potions": ["HealthPotionS", "HealthPotionM"],
-			"Pages": ["UsePotionSelf", "ReloadPage","MoveForward","TurnLeft","TurnRight", "Wait", "TurnAround", "Dash"],
-			"Weapons": ["BaseClub_Weapon", "BaseShiv_Weapon", "BaseMace_Weapon", "BaseSpear_Weapon", "BaseGreatSword_Weapon", "BaseGreatHammer_Weapon"],
-			"Shields": ["WoodenShield", "WoodenTower"]
-		}
-	return {
-		"Ammo": ["Phy_Ammo", "Mag_Ammo", "Gen_Ammo", ],
-		"Potions": ["HealthPotionS", "HealthPotionM", "HealthPotionL"],
-		"Bombs":["BombBasicItem", "BombColdItem", "BombFireItem", "BombShockItem", "BombPoisonItem", "BombGreaseItem"],
-		"Pages": ["UsePotionSelf", "ThrowPotionPage", "ThrowBombPage", "ReloadPage","MoveForward","TurnLeft","TurnRight", "Wait", "MoveLeft", "MoveRight", "TurnAround", "Dash"],
-		"Weapons": ["BaseClub_Weapon", "BaseShiv_Weapon", "BaseMace_Weapon", "BaseSpear_Weapon", "BaseGreatSword_Weapon", "BaseGreatHammer_Weapon", "FireSword_Weapon", "IceKnife_Weapon"],
-		"Shields": ["WoodenShield", "WoodenTower", "TowerShield"]
-	}
+    var shop_index = StoryState.get_story_flag("ShopIndex")
+    var shop_data = {
+            "Ammo": ["Phy_Ammo"],
+            "Potions": ["HealthPotionS"],
+            "Bombs": [],
+            "Weapons": [],
+            "Shields": [],
+            "Utility Pages": ["UsePotionSelf", "ReloadPage","BasicWeaponAttack_ActionPage"],
+            "Move Pages": ["Wait", "MoveForward","TurnLeft","TurnRight"]
+        }
+    ## Befroe/After Squirrels
+    #if shop_index == 0 or shop_index == 1:
+        #return shop_data
+    # After Bandits
+    if shop_index >= 2:
+        shop_data['Ammo'].append("Mag_Ammo")
+        shop_data['Potions'].append("HealthPotionM")
+        shop_data['Weapons'] = ["BaseClub_Weapon", "BaseDagger_Weapon", "BaseMace_Weapon", "BaseSpear_Weapon", "BaseGreatSword_Weapon", "BaseGreatHammer_Weapon"]
+        shop_data['Shields'] = ["WoodenShield", "WoodenTower"]
+        shop_data['Utility Pages'].append_array(["ThrowPotionPage"])
+        shop_data['Move Pages'].append_array(["TurnAround", "Dash"])
+    # After Cave
+    if shop_index >= 3:
+        shop_data['Ammo'].append("Gen_Ammo")
+        shop_data['Potions'].append("HealthPotionL")
+        shop_data['Bombs'] = ["BombBasicItem", "BombColdItem", "BombFireItem", "BombShockItem", "BombPoisonItem", "BombGreaseItem"]
+        shop_data['Weapons'].append_array(["StoneClub_Weapon", "FireSword_Weapon", "IceKnife_Weapon"])
+        shop_data['Shields'].append("TowerShield")
+        shop_data['Utility Pages'].append("ThrowBombPage")
+    return shop_data
 
 func _on_catagory_selected(sub_list:ShopSubItemList):
-	scroll_container.ensure_control_visible(sub_list)
+    scroll_container.ensure_control_visible(sub_list)
 
 func _on_item_button_pressed(item_key):
-	if _state == States.Buy:
-		var item = _loaded_items_by_key[item_key]
-		create_details_card(item)
-	if _state == States.Sell:
-		var item = PlayerInventory.get_item_by_key(item_key)
-		create_details_card(item)
-	printerr("Pressed " + item_key)
+    if _state == States.Buy:
+        var item = _loaded_items_by_key[item_key]
+        create_details_card(item)
+    if _state == States.Sell:
+        var item = PlayerInventory.get_item_by_key(item_key)
+        create_details_card(item)
 
 func on_details_card_freed():
-	_current_details_card.queue_free()
-	_current_details_card = null
+    _current_details_card.queue_free()
+    _current_details_card = null
 
 func create_details_card(item:BaseItem):
-	buy_panel_container.set_item(item, _state == States.Sell)
-	buy_panel_container.show()
+    buy_panel_container.set_item(item, _state == States.Sell)
+    buy_panel_container.show()
 
 func _on_trade_confirmed(item_key:String, count:int, cost:int, selling:bool):
-	printerr("TRADED: %s %s %s %s" % [item_key, count, cost, selling])
-	if selling:
-		if PlayerInventory.get_item_stack_count(item_key) >= count:
-			PlayerInventory.reduce_stack_count(item_key, count)
-			StoryState.spend_money(-cost)
-			_load_text(SpeakerSubjects.SellSuccess)
-	else:
-		if StoryState.get_current_money() >= cost:
-			StoryState.spend_money(cost)
-			PlayerInventory.add_item(item_key, count)
-			_load_text(SpeakerSubjects.BuySuccess)
-	buy_panel_container.close_panel()
-	item_menu_controller.clear_sold_items()
+    printerr("TRADED: %s %s %s %s" % [item_key, count, cost, selling])
+    if selling:
+        if PlayerInventory.get_item_stack_count(item_key) >= count:
+            PlayerInventory.reduce_stack_count(item_key, count)
+            StoryState.spend_money(-cost)
+            _load_text(SpeakerSubjects.SellSuccess)
+    else:
+        if StoryState.get_current_money() >= cost:
+            StoryState.spend_money(cost)
+            PlayerInventory.add_item(item_key, count)
+            _load_text(SpeakerSubjects.BuySuccess)
+    buy_panel_container.close_panel()
+    item_menu_controller.clear_sold_items()
 
 func _show_confirm_popup(item_key:String, count:int, _cost:int):
-	if not confirm_popup.trade_confirmed.is_connected(_on_trade_confirmed):
-		confirm_popup.trade_confirmed.connect(_on_trade_confirmed)
-	if _state == States.Buy:
-		var item = _loaded_items_by_key[item_key]
-		confirm_popup.set_item(false, item, count)
-		_load_text(SpeakerSubjects.ConfirmBuy, item, count)
-	else:
-		var item = PlayerInventory.get_item_by_key(item_key)
-		confirm_popup.set_item(true, item, count)
-		_load_text(SpeakerSubjects.ConfirmSell, item, count)
-	if _current_details_card:
-		_current_details_card.start_hide()
+    if not confirm_popup.trade_confirmed.is_connected(_on_trade_confirmed):
+        confirm_popup.trade_confirmed.connect(_on_trade_confirmed)
+    if _state == States.Buy:
+        var item = _loaded_items_by_key[item_key]
+        confirm_popup.set_item(false, item, count)
+        _load_text(SpeakerSubjects.ConfirmBuy, item, count)
+    else:
+        var item = PlayerInventory.get_item_by_key(item_key)
+        confirm_popup.set_item(true, item, count)
+        _load_text(SpeakerSubjects.ConfirmSell, item, count)
+    if _current_details_card:
+        _current_details_card.start_hide()
 
 func _on_trade_confirmed_old(accepted:bool):
-	if _state == States.Buy:
-		if accepted:
-			_load_text(SpeakerSubjects.BuySuccess)
-		else:
-			_load_text(SpeakerSubjects.BuyCancel)
-	else:
-		if accepted:
-			_load_text(SpeakerSubjects.SellSuccess)
-		else:
-			_load_text(SpeakerSubjects.SellCancel)
+    if _state == States.Buy:
+        if accepted:
+            _load_text(SpeakerSubjects.BuySuccess)
+        else:
+            _load_text(SpeakerSubjects.BuyCancel)
+    else:
+        if accepted:
+            _load_text(SpeakerSubjects.SellSuccess)
+        else:
+            _load_text(SpeakerSubjects.SellCancel)
 
 var _said_lines:Array=[]
 
 # Translates an array of simple strings and dicts to dialog box entries
 func _build_dialog_entries(arr:Array):
-	var new_entries = [
-		{
-			"EntryType": "Clear",
-			"ClearSpeaker": false
-		}
-	]
-	for line in arr:
-		if line is Dictionary:
-			if line.has("Delay"):
-				new_entries.append(
-				{
-					"EntryType": "Delay",
-					"Delay": line.get("Delay",0)
-				})
-			elif line.has("SpeakerPort"):
-				var emotion = line['SpeakerPort']
-				new_entries.append(
-				{
-					"EntryType": "Speaker",
-					"SpeakerName": "FMrc",
-					"SpeakerPort": "res://notes/NPCs/FishMerch/Portraits/FishMerch_" + emotion + ".png"
-				})
-		elif line is String:
-			if line == "WaitToRead":
-				new_entries.append(
-				{
-					"EntryType": "WaitToRead"
-				})
-			elif line == "Clear":
-				new_entries.append(
-				{
-					"EntryType": "Clear",
-					"ClearSpeaker": false
-				})
-			else:
-				new_entries.append(
-				{
-					"EntryType": "Text",
-					"Text": line,
-					"NewLine": true,
-					#"LetterDelay": 0.1
-				})
-	dialog_box.add_entries(new_entries)
-			
+    var new_entries = [
+        {
+            "EntryType": "Clear",
+            "ClearSpeaker": false
+        }
+    ]
+    for line in arr:
+        if line is Dictionary:
+            if line.has("Delay"):
+                new_entries.append(
+                {
+                    "EntryType": "Delay",
+                    "Delay": line.get("Delay",0)
+                })
+            elif line.has("SpeakerPort"):
+                var emotion = line['SpeakerPort']
+                new_entries.append(
+                {
+                    "EntryType": "Speaker",
+                    "SpeakerName": "FMrc",
+                    "SpeakerPort": "res://notes/NPCs/FishMerch/Portraits/FishMerch_" + emotion + ".png"
+                })
+        elif line is String:
+            if line == "WaitToRead":
+                new_entries.append(
+                {
+                    "EntryType": "WaitToRead"
+                })
+            elif line == "Clear":
+                new_entries.append(
+                {
+                    "EntryType": "Clear",
+                    "ClearSpeaker": false
+                })
+            else:
+                new_entries.append(
+                {
+                    "EntryType": "Text",
+                    "Text": line,
+                    "NewLine": true,
+                    #"LetterDelay": 0.1
+                })
+    dialog_box.add_entries(new_entries)
+            
 
 
 func _load_text(subject:SpeakerSubjects, item:BaseItem=null, count:int=0):
-	# --------------------------------------
-	# Greeting - Root Buy/Sell options
-	# --------------------------------------
-	if subject == SpeakerSubjects.Greeting:
-		# Already said greeting this session 
-		if _said_lines.has("Greeting"):
-			_build_dialog_entries([
-				{"SpeakerPort":"Happy"},
+    # --------------------------------------
+    # Greeting - Root Buy/Sell options
+    # --------------------------------------
+    if subject == SpeakerSubjects.Greeting:
+        # Already said greeting this session 
+        if _said_lines.has("Greeting"):
+            _build_dialog_entries([
+                {"SpeakerPort":"Happy"},
 				"Need anything else? "
-			])
-			return
-		_said_lines.append("Greeting")
-		
-		# First time seeing shop on this index
-		if true or _first_time_on_index:
-			match _shop_index:
-				0: # Greeting Before Shop is Unlocked
-					_build_dialog_entries([
-						{"SpeakerPort":"Annoyed"},
-						"Hmm...",
-						{"Delay":0.8},
-						"You shouldn't be here yet.",
-						{"Delay":0.8},
-						{"SpeakerPort":"Happy"},
-						"Oh well, want to shop?",
+            ])
+            return
+        _said_lines.append("Greeting")
+        
+        # First time seeing shop on this index
+        if _first_time_on_index:
+            match _shop_index:
+                0: # Greeting Before Shop is Unlocked
+                    _build_dialog_entries([
+                        {"SpeakerPort":"Annoyed"},
+                        "Hmm...",
+                        {"Delay":0.8},
+                        "You shouldn't be here yet.",
+                        {"Delay":0.8},
+                        {"SpeakerPort":"Happy"},
+                        "Oh well, want to shop?",
 						"WaitToRead"
-					])
-				1: # Greeting After Squirrles
-					_build_dialog_entries([
-						{"SpeakerPort":"VeryHappy"},
-						"Welcome to my @Color:Red@Shop@Clear@!",
-						"WaitToRead",
-						{"SpeakerPort":"Sad"},
-						"Most of my stuff was stolen by @Color:Red@Bandits@Clear@...",
-						"WaitToRead",
-						{"Delay":0.5},
-						{"SpeakerPort":"Happy"},
-						"But I'm still open for business.",
+                    ])
+                1: # Greeting After Squirrles
+                    _build_dialog_entries([
+                        {"SpeakerPort":"VeryHappy"},
+                        "Welcome to my @Color:Red@Shop@Clear@!",
+                        "WaitToRead",
+                        {"SpeakerPort":"Sad"},
+                        "Most of my stuff was stolen by @Color:Red@Bandits@Clear@...",
+                        "WaitToRead",
+                        {"Delay":0.5},
+                        {"SpeakerPort":"Happy"},
+                        "But I'm still open for business.",
 						"WaitToRead"
-					])
-				2: # Greeting After Bandits
-					_build_dialog_entries([
-						{"SpeakerPort":"VeryHappy"},
-						"Great job beating those @Color:Red@Bandits@Clear@!",
-						"WaitToRead",
-						{"SpeakerPort":"Happy"},
-						"I even managed to get some of my inventory back.",
-						"WaitToRead",
-						{"SpeakerPort":"VeryHappy"},
-						"Which means new @Color:Blue@Items@Clear@ for sell!",
-						"WaitToRead",
-					])
-				3: # Greeting After Cave
-					_build_dialog_entries([
-						{"SpeakerPort":"VeryHappy"},
-						"I'm glad to be out of that @Color:Blue@Cave@Clear@!",
-						"WaitToRead",
-						{"SpeakerPort":"Annoyed"},
-						"@Color:Blue@Zombies@Clear@ never buy anything.",
+                    ])
+                2: # Greeting After Bandits
+                    _build_dialog_entries([
+                        {"SpeakerPort":"VeryHappy"},
+                        "Great job beating those @Color:Red@Bandits@Clear@!",
+                        "WaitToRead",
+                        {"SpeakerPort":"Happy"},
+                        "I even managed to get some of my inventory back.",
+                        "WaitToRead",
+                        {"SpeakerPort":"VeryHappy"},
+                        "Which means new @Color:Blue@Items@Clear@ for sell!",
+                        "WaitToRead",
+                    ])
+                3: # Greeting After Cave
+                    _build_dialog_entries([
+                        {"SpeakerPort":"VeryHappy"},
+                        "I'm glad to be out of that @Color:Blue@Cave@Clear@!",
+                        "WaitToRead",
+                        {"SpeakerPort":"Annoyed"},
+                        "@Color:Blue@Zombies@Clear@ never buy anything.",
 						"WaitToRead"
-					])
-				4: # Greeting After Sewer
-					_build_dialog_entries([
-						{"SpeakerPort":"VeryHappy"},
-						"Welcome ba-",
-						{"SpeakerPort":"Annoyed"},
-						"Wow you smell bad!",
-						"WaitToRead",
-						"Where the hell have you been?",
-						"WaitToRead",
-					])
-			return
-		else: # Returning to shop between story stages
-			_build_dialog_entries([
-				{"SpeakerPort":"VeryHappy"},
-				"Welcome back!",
-				{"Delay":0.8},
-				{"SpeakerPort":"Neutral"},
-				"You lookin to @Color:Red@Buy@Clear@ or @Color:Red@Sell@Clear@? ",
+                    ])
+                4: # Greeting After Sewer
+                    _build_dialog_entries([
+                        {"SpeakerPort":"VeryHappy"},
+                        "Welcome ba-",
+                        {"SpeakerPort":"Annoyed"},
+                        "Wow you smell bad!",
+                        "WaitToRead",
+                        "Where the hell have you been?",
+                        "WaitToRead",
+                    ])
+            return
+        else: # Returning to shop between story stages
+            _build_dialog_entries([
+                {"SpeakerPort":"VeryHappy"},
+                "Welcome back!",
+                {"Delay":0.8},
+                {"SpeakerPort":"Neutral"},
+                "You lookin to @Color:Red@Buy@Clear@ or @Color:Red@Sell@Clear@? ",
 				"WaitToRead"
-			])
-	
-	# --------------------------------------
-	# Buying - 
-	# --------------------------------------
-	elif subject == SpeakerSubjects.Buying:
-		# Already said buying this session 
-		if _said_lines.has("Buying"):
-			_build_dialog_entries([
-				{"SpeakerPort":"Happy"},
+            ])
+    
+    # --------------------------------------
+    # Buying - 
+    # --------------------------------------
+    elif subject == SpeakerSubjects.Buying:
+        # Already said buying this session 
+        if _said_lines.has("Buying"):
+            _build_dialog_entries([
+                {"SpeakerPort":"Happy"},
 				"Still looking to buy?"
-			])
-			return
-		_said_lines.append("Buying")
-		# First time seeing shop on this index
-		if true or _first_time_on_index:
-			match _shop_index:
-				0: # Buying - Before Shop is Unlocked
-					_build_dialog_entries([
-						{"SpeakerPort":"Happy"},
-						"Ok, but seriously how did you get here?",
+            ])
+            return
+        _said_lines.append("Buying")
+        # First time seeing shop on this index
+        if _first_time_on_index:
+            match _shop_index:
+                0: # Buying - Before Shop is Unlocked
+                    _build_dialog_entries([
+                        {"SpeakerPort":"Happy"},
+                        "Ok, but seriously how did you get here?",
 						"WaitToRead"
-					])
-				1: # Buying - After Squirrles
-					_build_dialog_entries([
-						{"SpeakerPort":"Sad"},
-						"I'm down to just the basics,",
-						"WaitToRead",
-						{"Delay":0.5},
-						{"SpeakerPort":"Happy"},
-						"But I'll have more to sell later.",
+                    ])
+                1: # Buying - After Squirrles
+                    _build_dialog_entries([
+                        {"SpeakerPort":"Sad"},
+                        "I'm down to just the basics,",
+                        "WaitToRead",
+                        {"Delay":0.5},
+                        {"SpeakerPort":"Happy"},
+                        "But I'll have more to sell later.",
 						"WaitToRead"
-					])
-				2: # Buying - After Bandits
-					_build_dialog_entries([
-						{"SpeakerPort":"VeryHappy"},
-						"I've got new @Color:Blue@Weapons@Clear@ and @Color:Blue@Pages@Clear@!",
-						"WaitToRead",
-						{"SpeakerPort":"Happy"},
-						"And I already stocked up @Color:Blue@Mag Ammo@Clear@ for our new @Color:Blue@Priest@Clear@ friend.",
-						"WaitToRead",
-						"WaitToRead",
-					])
-				3: # Buying - After Cave
-					_build_dialog_entries([
-						{"SpeakerPort":"Happy"},
-						"I just found a stash of @Color:Blue@Bombs@Clear@ in the back.",
-						"WaitToRead",
-						{"SpeakerPort":"Neutral"},
-						"(@Color:Blue@Throw Bomb Page@Clear@ sold seperately)",
-						"WaitToRead",
-						{"Delay":0.5},
-						{"SpeakerPort":"Happy"},
-						"Wanna give them a try?",
-						"WaitToRead",
-					])
-				4: # After Sewer
-					_build_dialog_entries([
-						{"SpeakerPort":"Neutral"},
-						"Please don't touch anything.",
+                    ])
+                2: # Buying - After Bandits
+                    _build_dialog_entries([
+                        {"SpeakerPort":"VeryHappy"},
+                        "I've got new @Color:Blue@Weapons@Clear@ and @Color:Blue@Pages@Clear@!",
+                        "WaitToRead",
+                        {"SpeakerPort":"Happy"},
+                        "And I already stocked up @Color:Blue@Mag Ammo@Clear@ for our new @Color:Blue@Priest@Clear@ friend.",
+                        "WaitToRead",
+                        "WaitToRead",
+                    ])
+                3: # Buying - After Cave
+                    _build_dialog_entries([
+                        {"SpeakerPort":"Happy"},
+                        "I just found a stash of @Color:Blue@Bombs@Clear@ in the back.",
+                        "WaitToRead",
+                        {"SpeakerPort":"Neutral"},
+                        "(@Color:Blue@Throw Bomb Page@Clear@ sold seperately)",
+                        "WaitToRead",
+                        {"Delay":0.5},
+                        {"SpeakerPort":"Happy"},
+                        "Wanna give them a try?",
+                        "WaitToRead",
+                    ])
+                4: # After Sewer
+                    _build_dialog_entries([
+                        {"SpeakerPort":"Neutral"},
+                        "Please don't touch anything.",
 						"WaitToRead"
-					])
-		else:
-			_build_dialog_entries([
-				{"SpeakerPort":"Neutral"},
+                    ])
+        else:
+            _build_dialog_entries([
+                {"SpeakerPort":"Neutral"},
 				"You lookin for @Color:Red@Potions@Clear@ or @Color:Red@Ammo@Clear@?"
-			])
-			return
-	elif subject == SpeakerSubjects.Selling:
-			_build_dialog_entries([
-				{"SpeakerPort":"Neutral"},
-				"Got some @Color:Red@Loot@Clear@ to unload?",
-			])
-			return
-	elif subject == SpeakerSubjects.ConfirmBuy:
-		var item_name = "of these"
-		if item:
-			item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
-		_build_dialog_entries([
-			{"SpeakerPort":"Happy"},
-			"So you want " + str(count) + " " + item_name + "?",
-		])
-	elif subject == SpeakerSubjects.ConfirmSell:
-		var item_name = "of these"
-		if item:
-			item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
-		_build_dialog_entries([
-			{"SpeakerPort":"Happy"},
-			"So you wanna sell " + str(count) + " " + item_name + "?",
-		])
-	elif subject == SpeakerSubjects.BuySuccess or subject == SpeakerSubjects.SellSuccess:
-		#var item_name = "of these"
-		#if item:
-			#item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
-		_build_dialog_entries([
-			{"SpeakerPort":"VeryHappy"},
-			"Pleasure doing business with you!",
-			"WaitToRead",
-			"WaitToRead",
-			"Clear",
-			{"SpeakerPort":"Happy"},
-			"Is there anything else you need?",
-		])
-	elif subject == SpeakerSubjects.BuyCancel or subject == SpeakerSubjects.SellCancel:
-		#var item_name = "of these"
-		#if item:
-			#item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
-		_build_dialog_entries([
-			{"SpeakerPort":"Neutral"},
-			"Too bad.",
-			"WaitToRead",
-			"WaitToRead",
-			"Clear",
-			{"SpeakerPort":"Happy"},
-			"Is there anything else you need?",
-		])
-		
+            ])
+            return
+    elif subject == SpeakerSubjects.Selling:
+            _build_dialog_entries([
+                {"SpeakerPort":"Neutral"},
+                "Got some @Color:Red@Loot@Clear@ to unload?",
+            ])
+            return
+    elif subject == SpeakerSubjects.ConfirmBuy:
+        var item_name = "of these"
+        if item:
+            item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
+        _build_dialog_entries([
+            {"SpeakerPort":"Happy"},
+            "So you want " + str(count) + " " + item_name + "?",
+        ])
+    elif subject == SpeakerSubjects.ConfirmSell:
+        var item_name = "of these"
+        if item:
+            item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
+        _build_dialog_entries([
+            {"SpeakerPort":"Happy"},
+            "So you wanna sell " + str(count) + " " + item_name + "?",
+        ])
+    elif subject == SpeakerSubjects.BuySuccess or subject == SpeakerSubjects.SellSuccess:
+        #var item_name = "of these"
+        #if item:
+            #item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
+        _build_dialog_entries([
+            {"SpeakerPort":"VeryHappy"},
+            "Pleasure doing business with you!",
+            "WaitToRead",
+            "WaitToRead",
+            "Clear",
+            {"SpeakerPort":"Happy"},
+            "Is there anything else you need?",
+        ])
+    elif subject == SpeakerSubjects.BuyCancel or subject == SpeakerSubjects.SellCancel:
+        #var item_name = "of these"
+        #if item:
+            #item_name = "@Color:Red@"+item.get_display_name()+"@Clear@"
+        _build_dialog_entries([
+            {"SpeakerPort":"Neutral"},
+            "Too bad.",
+            "WaitToRead",
+            "WaitToRead",
+            "Clear",
+            {"SpeakerPort":"Happy"},
+            "Is there anything else you need?",
+        ])
+        

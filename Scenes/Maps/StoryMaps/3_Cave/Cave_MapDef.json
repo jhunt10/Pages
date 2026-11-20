@@ -1,7 +1,7 @@
 {
     "MapKey": "Cave",
     "MapName": "Cave",
-    "Description": "A cave leading to The City?",
+    "Description": "A cave leading to The Sewers. Beware of Undead!",
     "MapScene": "cave_map.tscn",
     "SortOrder": 3,
     "StartingPhase": "InitSpawn",
@@ -95,6 +95,7 @@
             }
         },
         "CombatPhase1": {
+			"GoalText": "Kill the [color=blue]Skeleton Mage[/color]",
             "PhaseType": "Combat",
             "NextPhase": "END",
             "CombatCondition": {

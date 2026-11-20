@@ -65,10 +65,10 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_15ib3"]
 _data = {
-"RESET": SubResource("Animation_1bnbf")
+&"RESET": SubResource("Animation_1bnbf")
 }
 
-[node name="DialogControl" type="Control" node_paths=PackedStringArray("next_button", "skip_button", "auto_button", "top_speech_box", "bot_speech_box", "blackout_control", "dialog_popup_controller", "input_blocker")]
+[node name="DialogControl" type="Control" unique_id=1842548389 node_paths=PackedStringArray("next_button", "skip_button", "auto_button", "top_speech_box", "bot_speech_box", "blackout_control", "dialog_popup_controller", "input_blocker")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,7 +86,7 @@ blackout_control = NodePath("BlackOutControl")
 dialog_popup_controller = NodePath("PopupController")
 input_blocker = NodePath("InputBlocker")
 
-[node name="InputBlocker" type="Control" parent="."]
+[node name="InputBlocker" type="Control" parent="." unique_id=1785666299]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,7 +94,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BlackOutControl" type="ColorRect" parent="."]
+[node name="BlackOutControl" type="ColorRect" parent="." unique_id=821974344]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -107,7 +107,7 @@ color = Color(0, 0, 0, 1)
 script = ExtResource("2_g02yb")
 _state = 2
 
-[node name="PopupController" type="Control" parent="." node_paths=PackedStringArray("parent_dialog_controller")]
+[node name="PopupController" type="Control" parent="." unique_id=961178998 node_paths=PackedStringArray("parent_dialog_controller")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,7 +118,7 @@ mouse_filter = 2
 script = ExtResource("10_mbn4m")
 parent_dialog_controller = NodePath("..")
 
-[node name="SpeechDialogBlock_Bot" parent="." instance=ExtResource("3_er26g")]
+[node name="SpeechDialogBlock_Bot" parent="." unique_id=1673560323 instance=ExtResource("3_er26g")]
 custom_minimum_size = Vector2(1120, 180)
 layout_mode = 1
 anchors_preset = 7
@@ -133,7 +133,7 @@ offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="SpeechDialogBlock_Top" parent="." instance=ExtResource("3_er26g")]
+[node name="SpeechDialogBlock_Top" parent="." unique_id=894476252 instance=ExtResource("3_er26g")]
 custom_minimum_size = Vector2(1120, 180)
 layout_mode = 1
 anchors_preset = -1
@@ -145,7 +145,8 @@ offset_right = 560.0
 offset_bottom = 196.0
 grow_horizontal = 2
 
-[node name="AutoButton" type="Control" parent="." node_paths=PackedStringArray("check_box_rect", "button")]
+[node name="AutoButton" type="Control" parent="." unique_id=1164548718 node_paths=PackedStringArray("check_box_rect", "button")]
+visible = false
 layout_mode = 1
 anchor_top = 0.7
 anchor_bottom = 0.7
@@ -160,7 +161,7 @@ checked_texture = ExtResource("8_1tqry")
 unchecked_texture = ExtResource("9_imyb2")
 button = NodePath("Button")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="AutoButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="AutoButton" unique_id=352884875]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -173,7 +174,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="TextureRect" type="TextureRect" parent="AutoButton"]
+[node name="TextureRect" type="TextureRect" parent="AutoButton" unique_id=138547733]
 layout_mode = 1
 offset_left = 4.0
 offset_top = 4.0
@@ -181,7 +182,7 @@ offset_right = 44.0
 offset_bottom = 44.0
 texture = ExtResource("8_1tqry")
 
-[node name="Label" type="Label" parent="AutoButton"]
+[node name="Label" type="Label" parent="AutoButton" unique_id=593855792]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -194,7 +195,7 @@ text = "Auto "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="AutoButton"]
+[node name="Button" type="Button" parent="AutoButton" unique_id=662438386]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -203,7 +204,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SkipButton" type="Control" parent="." node_paths=PackedStringArray("button")]
+[node name="SkipButton" type="Control" parent="." unique_id=177846140 node_paths=PackedStringArray("button")]
+visible = false
 layout_mode = 1
 anchor_top = 0.7
 anchor_bottom = 0.7
@@ -216,7 +218,7 @@ grow_vertical = 2
 script = ExtResource("9_dcgg0")
 button = NodePath("Button")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="SkipButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="SkipButton" unique_id=1168440999]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,7 +231,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="SkipButton"]
+[node name="Label" type="Label" parent="SkipButton" unique_id=1503778043]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -242,7 +244,7 @@ text = "Skip"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="SkipButton"]
+[node name="Button" type="Button" parent="SkipButton" unique_id=1908619218]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -251,7 +253,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NextButton" type="Control" parent="." node_paths=PackedStringArray("button")]
+[node name="NextButton" type="Control" parent="." unique_id=1916178846 node_paths=PackedStringArray("button")]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -267,7 +269,7 @@ grow_vertical = 0
 script = ExtResource("9_dcgg0")
 button = NodePath("Button")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="NextButton"]
+[node name="NinePatchRect" type="NinePatchRect" parent="NextButton" unique_id=1468568823]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -280,7 +282,7 @@ patch_margin_top = 12
 patch_margin_right = 12
 patch_margin_bottom = 12
 
-[node name="Label" type="Label" parent="NextButton"]
+[node name="Label" type="Label" parent="NextButton" unique_id=615891562]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -293,7 +295,7 @@ text = "Next"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="NextButton"]
+[node name="TextureRect" type="TextureRect" parent="NextButton" unique_id=824357657]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = -1
@@ -308,7 +310,7 @@ grow_vertical = 2
 texture = ExtResource("11_34lhx")
 expand_mode = 1
 
-[node name="Button" type="Button" parent="NextButton"]
+[node name="Button" type="Button" parent="NextButton" unique_id=9844681]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -317,13 +319,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="NextButton"]
-libraries = {
-"": SubResource("AnimationLibrary_15ib3")
-}
-autoplay = "RESET"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NextButton" unique_id=505658416]
+libraries/ = SubResource("AnimationLibrary_15ib3")
+autoplay = &"RESET"
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1491821889]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_right = 10.0

@@ -192,6 +192,11 @@ func add_no_scroll_node(node):
 	if not no_scroll_nodes.has(node):
 		no_scroll_nodes.append(node)
 
+## Add a node to ignore scrolling if mouse is inside node 
+func remove_no_scroll_node(node):
+	if no_scroll_nodes.has(node):
+		no_scroll_nodes.erase(node)
+
 func _input(_event: InputEvent) -> void:
 	if freeze or is_auto_panning:
 		return

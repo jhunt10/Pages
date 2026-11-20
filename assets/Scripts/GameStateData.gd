@@ -114,14 +114,8 @@ func are_enemies(main_actor, other_actor)->bool:
 		printerr("CombatScene.are_enemies: Failed to find TeamData with key '%s' for Actor: %s" % [other_actor.TeamKey, other_actor.Id])
 		return false
 	
-	print("---------------------------------------------------")
-	print("EnemyCheck: %s & %s " % [main_actor.Id, other_actor.Id])
-	print("EnemyCheck: %s & %s " % [main_actor.TeamKey, other_actor.TeamKey])
 	if main_team_data.get("Enemies", []).has(other_actor.TeamKey):
-		
-		print("- TRUE\n---------------------------------------------------")
 		return true
-	print("- false\n---------------------------------------------------")
 	return false
 
 func are_allies(main_actor, other_actor)->bool:

@@ -1890,14 +1890,14 @@ is_player = true
 map_coor = Vector2i(10, 11)
 
 [node name="SpwanNode_Chest" type="Sprite2D" parent="PhaseController/InitEnemySpawnMap" unique_id=639539950]
-position = Vector2(560, 496)
+position = Vector2(176, 208)
 texture = ExtResource("22_3fcs5")
 script = ExtResource("17_hbjn4")
 spawn_actor_key = "ChestActor"
 spawn_actor_id = "CrossRoadChest"
 team_key = "Decor"
 facing = 2
-map_coor = Vector2i(17, 15)
+map_coor = Vector2i(5, 6)
 
 [node name="CptPhaseMap" type="TileMapLayer" parent="PhaseController" unique_id=1046494206]
 tile_set = SubResource("TileSet_o1yif")

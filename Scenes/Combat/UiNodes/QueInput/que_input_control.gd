@@ -25,6 +25,7 @@ signal page_selection_closed
 @export var top_start_button:QueInput_StartButton
 @export var slide_speed:float = 100
 @export var input_buttons_container:GridContainer
+@export var input_buttons_scroll_container:ScrollContainer
 
 @export var page_selection_container:Container
 @export var page_selection_container_cancel_button:Button
@@ -62,6 +63,8 @@ func _ready() -> void:
 	page_selection_container_cancel_button.pressed.connect(_on_page_selection_cancle_pressed)
 	page_selection_container_close_button.pressed.connect(_on_page_selection_cancle_pressed)
 	tab_bar.tab_changed.connect(on_tab_selected)
+	page_button_prefab.hide()
+	CombatRootControl.Instance.camera.add_no_scroll_node(input_buttons_scroll_container)
 	
 
 func _fill_que_with_wait():
@@ -168,15 +171,15 @@ func _build_buttons():
 		_page_buttons.clear()
 	var index = 0
 	var known_keys = []
-	# If Carrier with passengers, add deploy page
+	# If Carrier with passengers, add Deploy Action Pageage
 	if _actor is CarrierActor:
 		if _actor.list_carried_actor_ids().size() > 0:
 			var action = ItemLibrary.get_item("Deploy_ActionPage")
 			_create_new_button(index, action)
 			index += 1
-	# If not player 1, add merge page
+	# If not player 1, add Merge Action Page
 	var player_list = StoryState.list_party_actors_ids()
-	if player_list[0] != _actor.Id:
+	if player_list.has(_actor.Id) and player_list[0] != _actor.Id:
 		var action = ItemLibrary.get_item("Merge_ActionPage")
 		_create_new_button(index, action)
 		index += 1
@@ -185,6 +188,7 @@ func _build_buttons():
 		var action_key = action.ItemKey
 		var action_id = action.Id
 		var action_owner = action.get_holding_actor()
+		# Already seen
 		if _page_buttons.keys().has(action_id):
 			continue
 		# Limit to actions with owner matching filter
@@ -192,19 +196,44 @@ func _build_buttons():
 			continue 
 		# Check actions provided by carried actor
 		if _actor.Id != action_owner.Id:
+			# Don't share weapon attacks
+			if action.get_tags().has("WpnAtk"):
+				continue
+			# Skip if carried actor is qued to deploy
 			if action_owner.Que.is_qued_for_deploy():
 				continue
+			# Skip if carried actor is qued to transfer
 			if action_owner.Que.is_qued_for_transfer():
 				if action_owner.Que.is_tansfering_away_from(_actor.Id):
 					continue
-		
+		# Skip actions we've seen and aren't duplicated
 		if known_keys.has(action_key) and not action.is_duplicated_when_merged():
 			continue
-		known_keys.append(action_key)
+		
 		
 		_create_new_button(index, action)
+		known_keys.append(action_key)
 		index += 1
-	input_buttons_container.columns = min(MAX_INPUT_BUTTON_WIDTH, index)
+	var visible_button_count = index
+	var overlap = visible_button_count - MAX_INPUT_BUTTON_WIDTH
+	# Button count fits in one row
+	if visible_button_count <= MAX_INPUT_BUTTON_WIDTH:
+		input_buttons_container.columns = visible_button_count
+		input_buttons_scroll_container.custom_minimum_size.y = 64
+		input_buttons_scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	
+	elif overlap >= 1 and overlap < 3:
+		input_buttons_container.columns = visible_button_count - 4
+		input_buttons_scroll_container.custom_minimum_size.y = 128 + input_buttons_container.get_theme_constant("h_separation")
+		input_buttons_scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+		
+	# Buttons require two rows and a scroll bar
+	else:
+		input_buttons_container.columns = MAX_INPUT_BUTTON_WIDTH
+		input_buttons_scroll_container.custom_minimum_size.y = 128 + input_buttons_container.get_theme_constant("h_separation")
+		input_buttons_scroll_container.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+			
+		
 	_on_que_change()
 
 func _create_new_button(index, action)->QueInputButtonControl:

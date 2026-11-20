@@ -107,20 +107,24 @@ func start_new_story():
 			_party_actor_ids.append(player_id)
 			set_unlocked_skills_for_actor(_new_player, {})
 			add_encounter_with_actor(_new_player)
+	# Add Dev Win
+	var dev_win_page = ItemLibrary.get_static_inst_of_item("Dev_KillAll")
+	if dev_win_page :
+		PlayerInventory.add_item(dev_win_page, 1)
 	# Add all pages
-	var has_pages = []
-	for actor:BaseActor in list_party_actors():
-		has_pages.append_array(actor.pages.list_page_keys())
-	for item_key:String in ItemLibrary.list_all_item_keys():
-		if has_pages.has(item_key):
-			continue
-		if not not item_key.begins_with("#"):
-			continue
-		var item = ItemLibrary.get_static_inst_of_item(item_key)
-		if item is BasePageItem:
-			if item is BasePageItem:
-				if (item.get_tags().has("_Dev_Action")):
-					PlayerInventory.add_item(item, 1)
+	#var has_pages = []
+	#for actor:BaseActor in list_party_actors():
+		#has_pages.append_array(actor.pages.list_page_keys())
+	#for item_key:String in ItemLibrary.list_all_item_keys():
+		#if has_pages.has(item_key):
+			#continue
+		#if not not item_key.begins_with("#"):
+			#continue
+		#var item = ItemLibrary.get_static_inst_of_item(item_key)
+		#if item is BasePageItem:
+			#if item is BasePageItem:
+				#if (item.get_tags().has("_Dev_Action")):
+					#PlayerInventory.add_item(item, 1)
 	
 	
 	
@@ -223,6 +227,8 @@ func set_unlocked_skills_for_actor(actor:BaseActor, setting_skills:Dictionary):
 		y_index+= 1
 		for node_data in row:
 			x_index+= 1
+			if node_data.get("Spacer", false):
+				continue
 			var skill_node_key = node_data.get("SkillNodeKey")
 			if !skill_node_key:
 				printerr("StoryState.set_unlocked_skills_for_actor: Miss SkillNodeKey in Skill Tree for %s at (%s, %s)" %[actor.Id, x_index, y_index])
